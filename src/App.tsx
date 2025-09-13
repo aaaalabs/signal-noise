@@ -7,8 +7,14 @@ import TaskGrid from './components/TaskGrid';
 import Analytics from './components/Analytics';
 import PremiumBanner from './components/PremiumBanner';
 import AICoach from './components/AICoach';
+import Onboarding from './components/Onboarding';
+import AchievementGlow from './components/AchievementGlow';
+import PatternWhisper from './components/PatternWhisper';
+import StreakIndicator from './components/StreakIndicator';
+import { checkAchievements } from './utils/achievements';
 
 const DATA_KEY = 'signal_noise_data';
+const ONBOARDING_KEY = 'signal_noise_onboarded';
 
 const initialData: AppData = {
   tasks: [],
@@ -25,15 +31,33 @@ const initialData: AppData = {
 function App() {
   const [data, setData] = useState<AppData>(initialData);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [showOnboarding, setShowOnboarding] = useState(false);
+  const [achievementGlow, setAchievementGlow] = useState(false);
+  const [whisperMessage, setWhisperMessage] = useState('');
+  const [showWhisper, setShowWhisper] = useState(false);
+  const [hasAchievement, setHasAchievement] = useState(false);
 
   // Load data from localStorage on mount
   useEffect(() => {
+    // Check onboarding first
+    const hasOnboarded = localStorage.getItem(ONBOARDING_KEY);
+    if (!hasOnboarded) {
+      setShowOnboarding(true);
+      return;
+    }
+
     const stored = localStorage.getItem(DATA_KEY);
     const userName = localStorage.getItem('userFirstName');
 
     if (stored) {
       try {
         const parsedData = JSON.parse(stored);
+
+        // Migrate old data structure if needed
+        if (!parsedData.badges) parsedData.badges = [];
+        if (!parsedData.patterns) parsedData.patterns = {};
+        if (!parsedData.settings) parsedData.settings = { targetRatio: 80, notifications: false, firstName: '' };
+
         // Merge saved name if not already present
         if (userName && !parsedData.settings.firstName) {
           parsedData.settings.firstName = userName;
@@ -59,6 +83,33 @@ function App() {
     }
   }, [data, isLoaded]);
 
+  const handleOnboardingComplete = () => {
+    localStorage.setItem(ONBOARDING_KEY, 'true');
+    setShowOnboarding(false);
+    setIsLoaded(true);
+  };
+
+  const triggerAchievementFeedback = (newBadges: any[]) => {
+    if (newBadges.length > 0) {
+      setAchievementGlow(true);
+      setHasAchievement(true);
+
+      // Show whisper for major achievements
+      const majorAchievements = ['week_warrior', 'month_hero', 'perfect_day'];
+      const majorBadge = newBadges.find(badge => majorAchievements.includes(badge.id));
+
+      if (majorBadge) {
+        setWhisperMessage(majorBadge.name);
+        setShowWhisper(true);
+      }
+
+      // Reset achievement state after animation
+      setTimeout(() => {
+        setHasAchievement(false);
+      }, 3000);
+    }
+  };
+
   const addTask = (text: string, type: 'signal' | 'noise') => {
     const newTask: Task = {
       id: Date.now(),
@@ -68,10 +119,30 @@ function App() {
       completed: false
     };
 
-    setData(prev => ({
-      ...prev,
-      tasks: [newTask, ...prev.tasks]
-    }));
+    setData(prev => {
+      const newData = {
+        ...prev,
+        tasks: [newTask, ...prev.tasks]
+      };
+
+      // Check for achievements
+      const { newBadges } = checkAchievements(newData);
+
+      if (newBadges.length > 0) {
+        // Add new badges
+        newData.badges = [...prev.badges, ...newBadges.map(b => b.id)];
+
+        // Trigger visual feedback
+        triggerAchievementFeedback(newBadges);
+      }
+
+      return newData;
+    });
+
+    // Haptic feedback on mobile
+    if (navigator.vibrate) {
+      navigator.vibrate(10);
+    }
   };
 
   const toggleTask = (id: number) => {
@@ -100,44 +171,71 @@ function App() {
 
   const currentRatio = calculateRatio();
   const todayTasks = getTodayTasks();
+  const { earnedCount } = checkAchievements(data);
 
   return (
-    <div className="container">
-      {/* Header with Ratio */}
-      <header className="header">
-        <RatioDisplay ratio={currentRatio} totalTasks={todayTasks.length} />
-        <div className="ratio-label">{t.ratioLabel}</div>
-      </header>
-
-      {/* Input Section */}
-      <TaskInput onAdd={addTask} />
-
-      {/* Tasks Grid */}
-      <TaskGrid
-        tasks={todayTasks}
-        onToggle={toggleTask}
+    <>
+      {/* Onboarding */}
+      <Onboarding
+        show={showOnboarding}
+        onComplete={handleOnboardingComplete}
       />
 
-      {/* AI Coach */}
-      <AICoach
-        tasks={data.tasks}
-        currentRatio={currentRatio}
-        firstName={data.settings.firstName}
-        onNameUpdate={(name) => setData(prev => ({
-          ...prev,
-          settings: { ...prev.settings, firstName: name }
-        }))}
+      {/* Achievement Glow */}
+      <AchievementGlow trigger={achievementGlow} />
+
+      {/* Pattern Whisper */}
+      <PatternWhisper
+        message={whisperMessage}
+        show={showWhisper}
       />
 
-      {/* Analytics */}
-      <Analytics
-        tasks={data.tasks}
-        history={data.history}
-      />
+      <div className="container">
+        {/* Header with Ratio */}
+        <header className="header">
+          <RatioDisplay
+            ratio={currentRatio}
+            totalTasks={todayTasks.length}
+            data={data}
+            earnedCount={earnedCount}
+            hasAchievement={hasAchievement}
+          />
+          <div className="ratio-label">
+            {t.ratioLabel}
+            <StreakIndicator tasks={data.tasks} />
+          </div>
+        </header>
 
-      {/* Premium Banner */}
-      <PremiumBanner />
-    </div>
+        {/* Input Section */}
+        <TaskInput onAdd={addTask} />
+
+        {/* Tasks Grid */}
+        <TaskGrid
+          tasks={todayTasks}
+          onToggle={toggleTask}
+        />
+
+        {/* AI Coach */}
+        <AICoach
+          tasks={data.tasks}
+          currentRatio={currentRatio}
+          firstName={data.settings.firstName}
+          onNameUpdate={(name) => setData(prev => ({
+            ...prev,
+            settings: { ...prev.settings, firstName: name }
+          }))}
+        />
+
+        {/* Analytics */}
+        <Analytics
+          tasks={data.tasks}
+          history={data.history}
+        />
+
+        {/* Premium Banner */}
+        <PremiumBanner />
+      </div>
+    </>
   );
 }
 

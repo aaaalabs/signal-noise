@@ -1,5 +1,6 @@
 import type { Task, DayRatio } from '../types';
 import { t } from '../i18n/translations';
+import PatternInsights from './PatternInsights';
 
 interface AnalyticsProps {
   tasks: Task[];
@@ -99,6 +100,9 @@ export default function Analytics({ tasks }: AnalyticsProps) {
           />
         ))}
       </div>
+
+      {/* Pattern Insights */}
+      <PatternInsights tasks={tasks} />
     </div>
   );
 }

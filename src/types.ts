@@ -13,6 +13,25 @@ export interface Badge {
   earned: boolean;
 }
 
+export interface BadgeDefinition {
+  id: string;
+  icon: string;
+  name: string;
+  condition: () => boolean;
+}
+
+export interface PatternInsight {
+  type: 'positive' | 'warning' | 'neutral';
+  message: string;
+}
+
+export interface AchievementState {
+  newBadge?: BadgeDefinition;
+  showGlow: boolean;
+  showWhisper: boolean;
+  whisperMessage: string;
+}
+
 export interface DayRatio {
   date: string;
   ratio: number;

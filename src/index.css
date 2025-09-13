@@ -398,6 +398,128 @@ body {
     }
 }
 
+/* Achievement System */
+.achievement-dots {
+    display: flex;
+    gap: 6px;
+    padding: 8px;
+    cursor: help;
+    opacity: 0;
+    transition: opacity 0.5s;
+    position: relative;
+}
+
+.header:hover .achievement-dots,
+.achievement-dots.show {
+    opacity: 1;
+}
+
+.achievement-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #222;
+    transition: all 0.3s;
+}
+
+.achievement-dot.earned {
+    background: #444;
+}
+
+.achievement-dot.recent {
+    background: var(--signal);
+    animation: dotPulse 2s;
+}
+
+.achievement-tooltip {
+    position: absolute;
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px 12px;
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid #333;
+    border-radius: 6px;
+    font-size: 11px;
+    color: #999;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    z-index: 100;
+}
+
+.achievement-tooltip.show {
+    opacity: 1;
+}
+
+/* Streak System */
+.streak-text {
+    color: #444;
+    transition: color 0.5s;
+}
+
+.streak-text.active {
+    color: #666;
+}
+
+.streak-text.milestone {
+    color: var(--signal);
+}
+
+/* Progress Ring Updates */
+.ratio-display.has-achievement {
+    animation: subtleGlow 3s ease-out;
+}
+
+/* Pattern Insights */
+.pattern-insights {
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.pattern-message {
+    color: #aaa;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.pattern-message strong {
+    color: var(--signal);
+}
+
+.insight-positive strong {
+    color: var(--signal);
+}
+
+.insight-warning strong {
+    color: #ff4444;
+}
+
+.insight-neutral strong {
+    color: #aaa;
+}
+
+/* Updated Task Completed State */
+.task-item.completed {
+    opacity: 0.3;
+}
+
+.noise-item {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    color: #666;
+    opacity: 0.5;
+}
+
+/* Remove line-through from noise items */
+.noise-item {
+    text-decoration: none;
+}
+
 /* Animations */
 @keyframes slideIn {
     from {
@@ -407,5 +529,51 @@ body {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@keyframes dotPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 1;
+    }
+}
+
+@keyframes achievementPulse {
+    0% {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scaleX(1);
+    }
+}
+
+@keyframes subtleGlow {
+    0%, 100% {
+        text-shadow: 0 0 0 transparent;
+    }
+    50% {
+        text-shadow: 0 0 30px rgba(0,255,136,0.3);
+    }
+}
+
+@keyframes streakPulse {
+    0%, 100% {
+        color: var(--signal);
+        transform: scale(1);
+    }
+    50% {
+        color: var(--signal);
+        transform: scale(1.1);
     }
 }

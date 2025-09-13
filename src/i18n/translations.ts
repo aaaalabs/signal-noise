@@ -48,6 +48,15 @@ const translations = {
 
     // Header
     ratioLabel: "Signal Ratio",
+
+    // Achievements
+    achievementLocked: "Gesperrt",
+    achievementMilestones: "Meilensteine",
+
+    // Onboarding
+    onboardingTitle: "Signal",
+    onboardingText: "80% deiner Zeit für das, was wirklich zählt.<br>20% für den Rest.",
+    onboardingStart: "Start",
   },
   en: {
     // Input & Buttons
@@ -87,6 +96,15 @@ const translations = {
 
     // Header
     ratioLabel: "Signal Ratio",
+
+    // Achievements
+    achievementLocked: "Locked",
+    achievementMilestones: "milestones",
+
+    // Onboarding
+    onboardingTitle: "Signal",
+    onboardingText: "80% of your time for what really matters.<br>20% for the rest.",
+    onboardingStart: "Start",
   }
 };
 
