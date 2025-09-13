@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from '../contexts/LanguageContext';
 
 interface FoundationModalProps {
   show: boolean;
@@ -21,6 +22,7 @@ interface UserStatus {
 }
 
 export default function FoundationModal({ show, onClose }: FoundationModalProps) {
+  const t = useTranslation();
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [isValidEmail, setIsValidEmail] = useState(true);
@@ -243,7 +245,7 @@ export default function FoundationModal({ show, onClose }: FoundationModalProps)
           onClick={(e) => e.stopPropagation()}
         >
           <div style={{ fontSize: '14px', color: '#999', fontWeight: 300 }}>
-            Loading...
+            {t.loading}
           </div>
         </div>
       </div>
@@ -298,20 +300,20 @@ export default function FoundationModal({ show, onClose }: FoundationModalProps)
               fontWeight: 300
             }}
           >
-            Focus on what matters
+            {t.foundationTagline}
           </div>
         </div>
 
         {/* Features - Minimal */}
         <div style={{ marginBottom: '32px' }}>
           <div style={{ fontSize: '14px', color: '#ccc', fontWeight: 300, marginBottom: '8px' }}>
-            AI Coach included
+            {t.foundationFeature1}
           </div>
           <div style={{ fontSize: '14px', color: '#ccc', fontWeight: 300, marginBottom: '8px' }}>
-            Lifetime updates
+            {t.foundationFeature2}
           </div>
           <div style={{ fontSize: '14px', color: '#ccc', fontWeight: 300 }}>
-            No subscription
+            {t.foundationFeature3}
           </div>
         </div>
 
@@ -337,7 +339,7 @@ export default function FoundationModal({ show, onClose }: FoundationModalProps)
                 letterSpacing: '0.5px'
               }}
             >
-              {stats.isAvailable ? 'Foundation Access' : 'Early Adopter'}
+              {stats.isAvailable ? t.foundationAccess : t.earlyAdopter}
             </div>
           </div>
         )}
@@ -347,7 +349,7 @@ export default function FoundationModal({ show, onClose }: FoundationModalProps)
           <div style={{ position: 'relative' }}>
             <input
               type="email"
-              placeholder="your@email.com"
+              placeholder={t.emailPlaceholder}
               value={email}
               onChange={handleEmailChange}
               style={{
@@ -393,10 +395,10 @@ export default function FoundationModal({ show, onClose }: FoundationModalProps)
               animation: 'fadeIn 0.3s ease forwards'
             }}>
               {userStatus.exists && userStatus.isActive
-                ? `Welcome back, ${userStatus.tier === 'foundation' ? 'Foundation Member' : 'Early Adopter'}!`
+                ? `${t.welcomeBack}, ${userStatus.tier === 'foundation' ? t.foundationMember : t.earlyAdopter}!`
                 : userStatus.exists
-                ? 'Account found but inactive'
-                : 'New member - welcome!'}
+                ? t.accountInactive
+                : t.newMember}
             </div>
           )}
 
@@ -404,7 +406,7 @@ export default function FoundationModal({ show, onClose }: FoundationModalProps)
           {!isLoginMode && (!userStatus?.exists || !userStatus.isActive) && !magicLinkSent && (
             <input
               type="text"
-              placeholder="First name (optional)"
+              placeholder={t.firstNamePlaceholder}
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               style={{
@@ -438,7 +440,7 @@ export default function FoundationModal({ show, onClose }: FoundationModalProps)
               marginBottom: '8px',
               fontWeight: 300
             }}>
-              Recovery link sent!
+              {t.recoveryLinkSent}
             </div>
             <div style={{
               fontSize: '12px',
@@ -446,7 +448,7 @@ export default function FoundationModal({ show, onClose }: FoundationModalProps)
               fontWeight: 300,
               lineHeight: 1.4
             }}>
-              Check your email for the access link.
+              {t.checkEmail}
             </div>
           </div>
         ) : userStatus?.exists && userStatus.isActive ? (
@@ -469,7 +471,7 @@ export default function FoundationModal({ show, onClose }: FoundationModalProps)
               marginBottom: '20px'
             }}
           >
-            {loading ? 'Sending...' : 'Send access link'}
+            {loading ? t.sending : t.sendAccessLink}
           </button>
         ) : (
           // Purchase/Login button
@@ -491,7 +493,7 @@ export default function FoundationModal({ show, onClose }: FoundationModalProps)
               marginBottom: '20px'
             }}
           >
-            {loading ? 'Processing...' : isLoginMode ? 'Access your account' : 'Continue with purchase'}
+            {loading ? t.processing : isLoginMode ? t.accessAccount : t.continuePurchase}
           </button>
         )}
 
@@ -500,7 +502,7 @@ export default function FoundationModal({ show, onClose }: FoundationModalProps)
           {stats.isAvailable ? (
             <div>
               <div style={{ marginBottom: '8px' }}>
-                {stats.foundationMembers} of {stats.totalSpots} Foundation members
+                {stats.foundationMembers} of {stats.totalSpots} {t.foundationMembers}
               </div>
               <div
                 style={{
@@ -521,14 +523,14 @@ export default function FoundationModal({ show, onClose }: FoundationModalProps)
               </div>
             </div>
           ) : (
-            <div>Foundation tier complete - {stats.foundationMembers} members joined</div>
+            <div>{t.foundationComplete.replace('{count}', stats.foundationMembers.toString())}</div>
           )}
         </div>
 
         {/* Timeline info */}
         {stats.isAvailable && (
           <div style={{ fontSize: '10px', color: '#444', fontWeight: 300, marginTop: '12px' }}>
-            Foundation pricing available through January
+            {t.foundationTimeline}
           </div>
         )}
 
@@ -545,7 +547,7 @@ export default function FoundationModal({ show, onClose }: FoundationModalProps)
           onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.4)'}
           onClick={() => setIsLoginMode(!isLoginMode)}
         >
-          {isLoginMode ? 'New member? →' : 'Already a member? →'}
+          {isLoginMode ? t.newMemberToggle : t.alreadyMember}
         </div>
 
         <style>{`
