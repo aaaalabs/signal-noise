@@ -14,12 +14,12 @@ export default function Onboarding({ show, onComplete }: OnboardingProps) {
       style={{
         position: 'fixed',
         inset: 0,
-        background: 'rgba(0,0,0,0.9),',
+        background: 'rgba(0,0,0,0.95)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         zIndex: 1000,
-        backdropFilter: 'blur(10px)'
+        transition: 'opacity 0.4s ease-out'
       }}
     >
       <div
