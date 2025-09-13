@@ -235,63 +235,83 @@ export default function Footer() {
   return (
     <>
       <footer style={{
-        padding: '40px 20px 20px',
+        padding: '30px 20px 16px',
         textAlign: 'center',
-        borderTop: '1px solid #222',
-        marginTop: '60px'
+        marginTop: '40px'
       }}>
         <div style={{
           display: 'flex',
-          justifyContent: 'center',
-          gap: '24px',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '12px',
           fontSize: '12px',
           color: '#666'
         }}>
-          <button
-            onClick={() => setShowLegal(true)}
-            style={{
-              background: 'none',
-              border: 'none',
-              color: '#666',
-              fontSize: '12px',
-              cursor: 'pointer',
-              transition: 'color 0.2s'
-            }}
-            onMouseEnter={(e) => (e.target as HTMLButtonElement).style.color = '#999'}
-            onMouseLeave={(e) => (e.target as HTMLButtonElement).style.color = '#666'}
-          >
-            Legal
-          </button>
-          <button
-            onClick={() => setShowTerms(true)}
-            style={{
-              background: 'none',
-              border: 'none',
-              color: '#666',
-              fontSize: '12px',
-              cursor: 'pointer',
-              transition: 'color 0.2s'
-            }}
-            onMouseEnter={(e) => (e.target as HTMLButtonElement).style.color = '#999'}
-            onMouseLeave={(e) => (e.target as HTMLButtonElement).style.color = '#666'}
-          >
-            Terms
-          </button>
-          <button
-            onClick={() => setShowPrivacy(true)}
-            style={{
-              background: 'none',
-              border: 'none',
-              color: '#666',
-              fontSize: '12px',
-              cursor: 'pointer',
-              transition: 'color 0.2s'
-            }}
-            onMouseEnter={(e) => (e.target as HTMLButtonElement).style.color = '#999'}
-            onMouseLeave={(e) => (e.target as HTMLButtonElement).style.color = '#666'}
-          >
-            Privacy
-          </button>
+          {/* Legal Links */}
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '16px'
+          }}>
+            <button
+              onClick={() => setShowLegal(true)}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: '#666',
+                fontSize: '12px',
+                cursor: 'pointer',
+                transition: 'color 0.2s'
+              }}
+              onMouseEnter={(e) => (e.target as HTMLButtonElement).style.color = '#999'}
+              onMouseLeave={(e) => (e.target as HTMLButtonElement).style.color = '#666'}
+            >
+              Legal
+            </button>
+            <button
+              onClick={() => setShowTerms(true)}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: '#666',
+                fontSize: '12px',
+                cursor: 'pointer',
+                transition: 'color 0.2s'
+              }}
+              onMouseEnter={(e) => (e.target as HTMLButtonElement).style.color = '#999'}
+              onMouseLeave={(e) => (e.target as HTMLButtonElement).style.color = '#666'}
+            >
+              Terms
+            </button>
+            <button
+              onClick={() => setShowPrivacy(true)}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: '#666',
+                fontSize: '12px',
+                cursor: 'pointer',
+                transition: 'color 0.2s'
+              }}
+              onMouseEnter={(e) => (e.target as HTMLButtonElement).style.color = '#999'}
+              onMouseLeave={(e) => (e.target as HTMLButtonElement).style.color = '#666'}
+            >
+              Privacy
+            </button>
+          </div>
+
+          {/* Copyright & Made with Love */}
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '4px',
+            fontSize: '11px',
+            color: '#555'
+          }}>
+            <div>(c) 2025 libralab.ai</div>
+            <div>made with ♥ in austria</div>
+          </div>
         </div>
       </footer>
 
