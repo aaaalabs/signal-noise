@@ -1,5 +1,5 @@
 import { Redis } from '@upstash/redis';
-import { getUser, setUser, incrementFoundationCount } from './redis-helper.js';
+import { getUser, setUser, incrementFoundation } from './redis-helper.js';
 import { sendWelcomeEmail } from './email-helper.js';
 import Stripe from 'stripe';
 
@@ -68,7 +68,7 @@ export default async function handler(req, res) {
 
     // Increment foundation counter if foundation tier
     if (tier === 'foundation') {
-      await incrementFoundationCount(redis);
+      await incrementFoundation(redis);
     }
 
     // Send welcome email
