@@ -154,7 +154,7 @@ export default function InvoicePage({ invoiceId }: InvoicePageProps) {
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif',
       padding: '60px 40px'
     }}>
-      <div style={{
+      <div className="invoice-container" style={{
         maxWidth: '720px',
         margin: '0 auto',
         position: 'relative'
@@ -262,7 +262,7 @@ export default function InvoicePage({ invoiceId }: InvoicePageProps) {
         </div>
 
         {/* Header with Brand */}
-        <div style={{
+        <div className="invoice-header" style={{
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'flex-start',
@@ -310,7 +310,7 @@ export default function InvoicePage({ invoiceId }: InvoicePageProps) {
             }}>
               Invoice
             </div>
-            <div style={{
+            <div className="invoice-number" style={{
               fontSize: '18px',
               fontWeight: 300,
               color: '#00ff88',
@@ -322,7 +322,7 @@ export default function InvoicePage({ invoiceId }: InvoicePageProps) {
         </div>
 
         {/* Invoice Details Grid */}
-        <div style={{
+        <div className="invoice-details" style={{
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',
           gap: '60px',
@@ -455,7 +455,7 @@ export default function InvoicePage({ invoiceId }: InvoicePageProps) {
         </div>
 
         {/* Service Description */}
-        <div style={{
+        <div className="service-description" style={{
           marginBottom: '60px',
           padding: '40px 0',
           borderTop: '1px solid #111',
@@ -513,7 +513,7 @@ export default function InvoicePage({ invoiceId }: InvoicePageProps) {
         </div>
 
         {/* Payment Status */}
-        <div style={{
+        <div className="payment-status" style={{
           padding: '24px',
           border: '1px solid #00ff88',
           borderRadius: '8px',
@@ -521,7 +521,7 @@ export default function InvoicePage({ invoiceId }: InvoicePageProps) {
           marginBottom: '80px',
           background: 'rgba(0, 255, 136, 0.05)'
         }}>
-          <div style={{
+          <div className="paid-status" style={{
             color: '#00ff88',
             fontSize: '14px',
             fontWeight: 500,
@@ -539,7 +539,7 @@ export default function InvoicePage({ invoiceId }: InvoicePageProps) {
         </div>
 
         {/* Footer */}
-        <div style={{
+        <div className="invoice-footer" style={{
           fontSize: '11px',
           color: '#444',
           textAlign: 'center',
@@ -561,17 +561,101 @@ export default function InvoicePage({ invoiceId }: InvoicePageProps) {
       <style>
         {`
           @media print {
-            body { margin: 0; padding: 0; background: white !important; color: black !important; }
-            * { background: white !important; color: black !important; }
-            svg path { fill: #00ff88 !important; stroke: #00ff88 !important; }
-            div[style*="background: rgba(0, 255, 136, 0.05)"] {
-              background: #f5f5f5 !important;
-              border-color: #00ff88 !important;
+            @page {
+              size: A4;
+              margin: 0.5in;
             }
-            div[style*="color: #00ff88"] { color: #00ff88 !important; }
-            div[style*="filter: drop-shadow"] { filter: none !important; }
-            button { display: none !important; }
-            input, textarea { border: none !important; background: white !important; padding: 0 !important; }
+
+            body {
+              margin: 0;
+              padding: 0;
+              background: white !important;
+              color: black !important;
+              font-size: 12px;
+              line-height: 1.4;
+            }
+
+            * {
+              background: white !important;
+              color: black !important;
+              -webkit-print-color-adjust: exact;
+              print-color-adjust: exact;
+            }
+
+            /* Keep Signal/Noise branding color */
+            div[style*="color: #00ff88"],
+            .invoice-number,
+            .paid-status {
+              color: #00ff88 !important;
+            }
+
+            /* Logo styling for print */
+            svg {
+              width: 32px !important;
+              height: 32px !important;
+            }
+
+            svg path {
+              fill: #00ff88 !important;
+              stroke: #00ff88 !important;
+            }
+
+            /* Payment status box */
+            div[style*="background: rgba(0, 255, 136, 0.05)"] {
+              background: #f8f8f8 !important;
+              border: 1px solid #00ff88 !important;
+              page-break-inside: avoid;
+            }
+
+            /* Hide interactive elements */
+            button,
+            div[style*="position: absolute"] {
+              display: none !important;
+            }
+
+            /* Form elements for print */
+            input, textarea {
+              border: none !important;
+              background: white !important;
+              padding: 0 !important;
+              box-shadow: none !important;
+              outline: none !important;
+            }
+
+            /* Prevent page breaks in key sections */
+            .invoice-header,
+            .invoice-details,
+            .service-description,
+            .payment-status {
+              page-break-inside: avoid;
+            }
+
+            /* Compact spacing for print */
+            .invoice-container {
+              padding: 20px !important;
+              max-width: 100% !important;
+            }
+
+            /* Reduce margins for print */
+            div[style*="marginBottom: '80px'"] {
+              margin-bottom: 40px !important;
+            }
+
+            div[style*="marginBottom: '60px'"] {
+              margin-bottom: 30px !important;
+            }
+
+            /* Footer adjustments */
+            .invoice-footer {
+              font-size: 10px !important;
+              margin-top: 40px !important;
+            }
+
+            /* Drop shadows removal */
+            * {
+              filter: none !important;
+              box-shadow: none !important;
+            }
           }
         `}
       </style>
