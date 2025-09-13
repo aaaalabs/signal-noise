@@ -75,6 +75,11 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
 
   // Check if user has enough data for meaningful coaching
   const hasEnoughDataForCoaching = () => {
+    // Premium users always see the coach button
+    if (isPremium) {
+      return true;
+    }
+
     // Beta testing override
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('beta') === 'streak') {
