@@ -14,7 +14,7 @@ export default function Onboarding({ show, onComplete }: OnboardingProps) {
       style={{
         position: 'fixed',
         inset: 0,
-        background: 'rgba(0,0,0,0.95)',
+        background: 'rgba(0,0,0,0.9),',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -26,16 +26,18 @@ export default function Onboarding({ show, onComplete }: OnboardingProps) {
         className="onboarding-content"
         style={{
           maxWidth: '400px',
-          padding: '40px',
+          padding: '60px',
           textAlign: 'center'
         }}
       >
         <h1
           style={{
             fontSize: '48px',
-            fontWeight: 100,
-            marginBottom: '20px',
-            color: 'var(--signal)'
+            fontWeight: 200,
+            letterSpacing: '0.5px',
+            lineHeight: 1.4,
+            marginBottom: '30px',
+            color: '#00e68c'
           }}
         >
           {t.onboardingTitle}
@@ -43,10 +45,10 @@ export default function Onboarding({ show, onComplete }: OnboardingProps) {
 
         <p
           style={{
-            fontSize: '18px',
-            lineHeight: 1.6,
-            color: '#999',
-            marginBottom: '30px'
+            fontSize: '16px',
+            lineHeight: 1.4,
+            color: '#a8a8a8',
+            marginBottom: '40px'
           }}
           dangerouslySetInnerHTML={{ __html: t.onboardingText }}
         />
@@ -54,21 +56,22 @@ export default function Onboarding({ show, onComplete }: OnboardingProps) {
         <button
           onClick={onComplete}
           style={{
-            background: 'var(--signal)',
-            color: '#000',
-            padding: '16px 32px',
-            border: 'none',
-            borderRadius: '8px',
-            fontSize: '16px',
-            fontWeight: 600,
+            background: 'transparent',
+            color: '#00e68c',
+            padding: '14px 28px',
+            border: '1px solid #00e68c',
+            borderRadius: '2px',
+            fontSize: '14px',
+            fontWeight: 400,
             cursor: 'pointer',
-            transition: 'all 0.2s'
+            transition: 'opacity 0.2s',
+            letterSpacing: '0.3px'
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'scale(1.05)';
+            e.currentTarget.style.opacity = '0.8';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.transform = 'scale(1)';
+            e.currentTarget.style.opacity = '1';
           }}
         >
           {t.onboardingStart}

@@ -56,7 +56,7 @@ const translations = {
     // Onboarding
     onboardingTitle: "Signal",
     onboardingText: "80% deiner Zeit für das, <br>was wirklich zählt.<br>20% für den Rest.",
-    onboardingStart: "Start",
+    onboardingStart: "Begin",
 
     // Premium Modal
     premiumModalTitle: "Dein Coach",
@@ -112,7 +112,7 @@ const translations = {
     // Onboarding
     onboardingTitle: "Signal",
     onboardingText: "80% of your time for what really matters.<br>20% for the rest.",
-    onboardingStart: "Start",
+    onboardingStart: "Begin",
 
     // Premium Modal
     premiumModalTitle: "Your Coach",
