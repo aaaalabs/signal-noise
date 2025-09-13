@@ -37,8 +37,6 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
   const [showFoundationModal, setShowFoundationModal] = useState(false);
   const [showNameModal, setShowNameModal] = useState(false);
   const [isPremium, setIsPremium] = useState(false);
-  const [activationEmail, setActivationEmail] = useState('');
-  const [activationLoading, setActivationLoading] = useState(false);
 
   // Check premium status on mount and listen for changes
   useEffect(() => {
@@ -203,52 +201,6 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
     }
   };
 
-  const handleActivatePremium = async () => {
-    if (!activationEmail) return;
-
-    setActivationLoading(true);
-    try {
-      const response = await fetch('/api/activate-premium', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email: activationEmail }),
-      });
-
-      const result = await response.json();
-
-      if (result.isPremium) {
-        // Store premium status locally
-        localStorage.setItem('premiumStatus', JSON.stringify({
-          isActive: true,
-          email: result.email,
-          activatedAt: result.activatedAt,
-          subscriptionId: result.subscriptionId || '',
-        }));
-        localStorage.setItem('premiumActive', 'true');
-
-        // Update first name if available
-        if (result.firstName && result.firstName !== firstName) {
-          onNameUpdate(result.firstName);
-        }
-
-        // Update UI
-        setIsPremium(true);
-        setActivationEmail('');
-
-        // Show success message (could add a toast here)
-        console.log('✅ Premium activated successfully');
-      } else {
-        // Show error message (could add a toast here)
-        console.log('❌ Email not found or not premium');
-      }
-    } catch (error) {
-      console.error('Activation error:', error);
-    } finally {
-      setActivationLoading(false);
-    }
-  };
 
   return (
     <div className="ai-coach">
@@ -293,87 +245,44 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
               {t.aiCoachBtn}
             </button>
           ) : (
-            // Non-premium: Show email activation OR foundation access
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-              <div style={{
+            // Non-premium: Show coach button that triggers foundation modal
+            <button
+              onClick={() => setShowFoundationModal(true)}
+              className="ai-coach-button"
+              style={{
                 display: 'flex',
-                gap: '6px',
                 alignItems: 'center',
-                fontSize: '12px'
-              }}>
-                <input
-                  type="email"
-                  value={activationEmail}
-                  onChange={(e) => setActivationEmail(e.target.value)}
-                  placeholder="Already premium? Enter email"
-                  style={{
-                    flex: 1,
-                    padding: '6px 8px',
-                    fontSize: '12px',
-                    backgroundColor: 'rgba(255,255,255,0.1)',
-                    border: '1px solid rgba(255,255,255,0.2)',
-                    borderRadius: '4px',
-                    color: '#fff',
-                    outline: 'none'
-                  }}
-                  onKeyPress={(e) => e.key === 'Enter' && handleActivatePremium()}
-                />
-                <button
-                  onClick={handleActivatePremium}
-                  disabled={!activationEmail || activationLoading}
-                  style={{
-                    padding: '6px 10px',
-                    fontSize: '12px',
-                    backgroundColor: activationLoading ? '#444' : 'var(--signal)',
-                    color: '#000',
-                    border: 'none',
-                    borderRadius: '4px',
-                    cursor: activationLoading ? 'wait' : 'pointer',
-                    fontWeight: '500'
-                  }}
-                >
-                  {activationLoading ? '...' : 'Activate'}
-                </button>
-              </div>
-
-              <button
-                onClick={() => setShowFoundationModal(true)}
-                className="ai-coach-button"
+                gap: '8px',
+                justifyContent: 'center',
+                opacity: 0.7
+              }}
+            >
+              <div
                 style={{
+                  width: '16px',
+                  height: '16px',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '8px',
-                  justifyContent: 'center',
-                  opacity: 0.7
+                  justifyContent: 'center'
                 }}
               >
-                <div
-                  style={{
-                    width: '16px',
-                    height: '16px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#666"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#666"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                    <circle cx="12" cy="7" r="4"/>
-                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                  </svg>
-                </div>
-                €29 FOUNDATION ACCESS
-              </button>
-            </div>
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                  <circle cx="12" cy="7" r="4"/>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+              </div>
+              {t.premiumModalTitle}
+            </button>
           )}
         </div>
       )}
