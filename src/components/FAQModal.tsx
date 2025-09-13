@@ -58,7 +58,11 @@ export default function FAQModal({ show, onClose }: FAQModalProps) {
     },
     {
       question: "Foundation vs Early Adopter pricing?",
-      answer: "Foundation Members (first 100 users): €29 lifetime access. After that: €49 Early Adopter pricing. Both include AI Coach, lifetime updates, and no subscription."
+      answer: "Foundation Members (first 100 users): €29 lifetime access. After that: €49 Early Adopter pricing. Both include AI Coach, lifetime updates, and no subscription. The Foundation tier is designed for power users who discover quality tools early - a limited opportunity that won't return."
+    },
+    {
+      question: "When does the AI Coach become available?",
+      answer: "The AI Coach appears automatically once you have enough activity data for meaningful insights: 3+ day streak, or 7+ days with tasks, or 20+ total tasks. This ensures the AI has patterns to analyze and can provide valuable coaching rather than generic advice."
     }
   ];
 
