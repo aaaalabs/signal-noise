@@ -178,6 +178,13 @@ async function handleCheckoutCompleted(session) {
   const invoiceToken = await generateInvoiceToken(invoiceNumber, customer_email);
   await setInvoiceToken(redis, invoiceToken, invoiceNumber);
 
+  // Add invoice reference to user record for easy retrieval
+  await setUser(redis, customer_email, {
+    invoice_number: invoiceNumber,
+    invoice_token: invoiceToken,
+    invoice_date: invoiceDate
+  });
+
   console.log(`Premium access granted for ${customer_email} (${paymentType}, ${tier})`);
   console.log(`Invoice ${invoiceNumber} generated for payment ${session.id}`);
   console.log(`Secure invoice token generated: ${invoiceToken.substring(0, 8)}...`);

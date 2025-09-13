@@ -98,3 +98,16 @@ export async function getInvoiceByToken(redis, token) {
   if (!invoiceNumber) return null;
   return await getInvoice(redis, invoiceNumber);
 }
+
+// Get user's invoice directly from their email
+export async function getUserInvoice(redis, email) {
+  const user = await getUser(redis, email);
+  if (!user || !user.invoice_number) return null;
+  return await getInvoice(redis, user.invoice_number);
+}
+
+// Get user's secure invoice token
+export async function getUserInvoiceToken(redis, email) {
+  const user = await getUser(redis, email);
+  return user?.invoice_token || null;
+}
