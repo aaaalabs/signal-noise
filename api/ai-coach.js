@@ -88,7 +88,7 @@ export default async function handler(req, res) {
 // Verify premium access using Redis
 async function verifyPremiumAccess(email, accessToken) {
   try {
-    const userKey = `user:${email}`;
+    const userKey = `sn:u:${email}`;
     const userData = await redis.hgetall(userKey);
 
     if (!userData) {
