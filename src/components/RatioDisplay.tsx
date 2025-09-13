@@ -20,7 +20,7 @@ export default function RatioDisplay({ ratio, totalTasks, data, earnedCount, has
   const displayText = totalTasks > 0 ? `${ratio}%` : '—';
 
   // Calculate progress ring
-  const circumference = 879; // 2 * PI * 140
+  const circumference = 1131; // 2 * PI * 180
   const progress = totalTasks > 0 ? ratio : 0;
   const strokeDashoffset = circumference - (progress / 100) * circumference;
 
@@ -29,8 +29,8 @@ export default function RatioDisplay({ ratio, totalTasks, data, earnedCount, has
       {/* Progress Ring Background */}
       <svg
         className="progress-ring"
-        width="280"
-        height="280"
+        width="360"
+        height="360"
         style={{
           position: 'absolute',
           top: '50%',
@@ -42,9 +42,9 @@ export default function RatioDisplay({ ratio, totalTasks, data, earnedCount, has
       >
         <circle
           className="progress-ring-circle"
-          cx="140"
-          cy="140"
-          r="140"
+          cx="180"
+          cy="180"
+          r="180"
           fill="none"
           stroke="rgba(0, 255, 136, 0.05)"
           strokeWidth="1"
