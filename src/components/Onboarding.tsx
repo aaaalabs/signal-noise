@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { t } from '../i18n/translations';
 
 interface OnboardingProps {
@@ -6,6 +7,18 @@ interface OnboardingProps {
 }
 
 export default function Onboarding({ show, onComplete }: OnboardingProps) {
+  useEffect(() => {
+    if (show) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [show]);
+
   if (!show) return null;
 
   return (
