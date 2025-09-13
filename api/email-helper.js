@@ -3,80 +3,295 @@
 
 import { Resend } from 'resend';
 
-// Initialize Resend client
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 // Signal/Noise sender configuration
 const SENDER_EMAIL = 'noreply@my.signal-noise.app';
 const SENDER_NAME = 'Signal/Noise';
 const FROM_ADDRESS = `${SENDER_NAME} <${SENDER_EMAIL}>`;
 
-export interface EmailResult {
-  success: boolean;
-  messageId?: string;
-  error?: string;
-}
+// EmailResult interface:
+// {
+//   success: boolean;
+//   messageId?: string;
+//   error?: string;
+// }
 
 /**
  * Send magic link for premium access recovery
  */
 export const sendMagicLink = async (
-  userEmail: string,
-  verifyUrl: string,
-  tierName: string = 'Premium Member'
-): Promise<EmailResult> => {
+  userEmail,
+  verifyUrl,
+  tierName = 'Premium Member'
+) => {
   try {
-    console.log(`📧 Sending magic link to ${userEmail}`);
+    console.log(`Sending magic link to ${userEmail}`);
+
+    // Initialize Resend client
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     const html = `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-        <div style="text-align: center; margin-bottom: 30px;">
-          <h1 style="color: #00ff88; margin: 0; font-size: 28px;">🎯 Signal/Noise</h1>
-          <p style="color: #666; margin: 5px 0 0 0;">Premium Access Recovery</p>
-        </div>
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+          * { margin: 0; padding: 0; box-sizing: border-box; }
+          body, table, td { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+          table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+          img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
 
-        <div style="background: #f8fafc; border-radius: 8px; padding: 20px; margin: 20px 0;">
-          <h2 style="color: #1f2937; margin: 0 0 15px 0; font-size: 20px;">Hi there!</h2>
+          body {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif !important;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            width: 100% !important;
+            min-width: 100%;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+          }
 
-          <p style="color: #374151; margin: 0 0 20px 0; line-height: 1.5;">
-            We received a request to restore your premium access. Click the button below to securely log back into your account:
-          </p>
+          .email-container {
+            max-width: 560px;
+            margin: 40px auto;
+            background-color: #000000;
+            color: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+          }
 
-          <div style="text-align: center; margin: 30px 0;">
-            <a href="${verifyUrl}"
-               style="display: inline-block; background: #00ff88; color: #000;
-                      padding: 14px 28px; text-decoration: none; border-radius: 6px;
-                      font-weight: bold; font-size: 16px;">
-              Restore Premium Access →
-            </a>
+          .header {
+            text-align: center;
+            padding: 50px 30px 40px;
+            background: radial-gradient(circle at center, rgba(0, 255, 136, 0.02) 0%, transparent 70%);
+          }
+
+          .brand-icon {
+            font-size: 24px;
+            margin-bottom: 16px;
+            filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.5));
+          }
+
+          .brand-title {
+            font-size: 28px;
+            font-weight: 200;
+            letter-spacing: -0.5px;
+            margin: 0;
+            color: #ffffff;
+          }
+
+          .brand-subtitle {
+            font-size: 13px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #666666;
+            margin: 6px 0 0 0;
+          }
+
+          .content {
+            padding: 0 30px 20px;
+            background-color: #000000;
+          }
+
+          .content-card {
+            background: linear-gradient(145deg, #0a0a0a 0%, #050505 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+          }
+
+          .content-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.5), transparent);
+          }
+
+          .greeting {
+            font-size: 18px;
+            font-weight: 400;
+            color: #ffffff;
+            margin: 0 0 24px 0;
+            letter-spacing: -0.2px;
+          }
+
+          .message {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #cccccc;
+            margin: 0 0 36px 0;
+          }
+
+          .button-container {
+            text-align: center;
+            margin: 36px 0;
+          }
+
+          .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #00ff88 0%, #00dd77 100%);
+            color: #000000 !important;
+            padding: 18px 36px;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 500;
+            font-size: 15px;
+            letter-spacing: 0.3px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            box-shadow: 0 8px 24px rgba(0, 255, 136, 0.25), 0 0 0 1px rgba(0, 255, 136, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+          }
+
+          .info-section {
+            background: rgba(0, 255, 136, 0.03);
+            border: 1px solid rgba(0, 255, 136, 0.15);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+            position: relative;
+          }
+
+          .info-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #00ff88, transparent);
+            border-radius: 2px;
+          }
+
+          .info-label {
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #00ff88;
+            margin: 0 0 8px 0;
+          }
+
+          .info-content {
+            font-size: 14px;
+            color: #cccccc;
+            margin: 0;
+            line-height: 1.6;
+          }
+
+          .info-tier {
+            font-weight: 600;
+            color: #ffffff;
+          }
+
+          .footer {
+            padding: 40px 30px 30px;
+            text-align: center;
+            background-color: #000000;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 20px;
+          }
+
+          .footer-text {
+            font-size: 12px;
+            color: #666666;
+            margin: 0 0 16px 0;
+            line-height: 1.6;
+          }
+
+          .footer-brand {
+            font-size: 11px;
+            color: #999999;
+            margin: 0;
+            letter-spacing: 0.5px;
+          }
+
+          .footer-link {
+            color: #00ff88;
+            text-decoration: none;
+            font-weight: 400;
+          }
+
+          @media only screen and (max-width: 600px) {
+            .email-container { margin: 20px auto; border-radius: 12px; }
+            .header { padding: 40px 20px 30px; }
+            .brand-title { font-size: 24px; }
+            .content { padding: 0 20px 20px; }
+            .content-card { padding: 30px 24px; }
+            .greeting { font-size: 17px; }
+            .message { font-size: 14px; }
+            .cta-button { padding: 16px 28px; font-size: 14px; }
+            .footer { padding: 30px 20px 24px; }
+          }
+
+          @media (prefers-color-scheme: dark) {
+            .email-container { background-color: #000000 !important; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.08) !important; }
+            body { background-color: #000000 !important; color: #ffffff !important; }
+          }
+        </style>
+      </head>
+      <body>
+        <div class="email-container">
+          <div class="header">
+            <div class="brand-icon">
+              <svg width="32" height="32" viewBox="0 0 554 558" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 557V1H553V317.562L312.41 557H1Z" fill="#00ff88" stroke="#00ff88"/>
+              </svg>
+            </div>
+            <h1 class="brand-title">Signal/Noise</h1>
+            <p class="brand-subtitle">Premium Access Recovery</p>
           </div>
 
-          <div style="background: #e0f2fe; border-radius: 6px; padding: 15px; margin: 20px 0;">
-            <p style="margin: 0; color: #0369a1; font-size: 14px;">
-              <strong>Your tier:</strong> ${tierName}<br>
-              <strong>Expires:</strong> This link expires in 15 minutes and can only be used once.
+          <div class="content">
+            <div class="content-card">
+              <h2 class="greeting">Hi there!</h2>
+              <p class="message">
+                We received a request to restore your premium access. Use the secure link below to log back into your account and continue your focus journey.
+              </p>
+
+              <div class="button-container">
+                <a href="${verifyUrl}" class="cta-button">
+                  Restore Premium Access
+                </a>
+              </div>
+
+              <div class="info-section">
+                <div class="info-label">Access Details</div>
+                <div class="info-content">
+                  <span class="info-tier">${tierName}</span> • Secure link expires in 15 minutes
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="footer">
+            <p class="footer-text">
+              If you didn't request this, simply ignore this email.<br>
+              No changes will be made to your account.
+            </p>
+            <p class="footer-brand">
+              Signal/Noise<br>
+              <a href="https://signal-noise.app" class="footer-link">signal-noise.app</a>
             </p>
           </div>
         </div>
-
-        <div style="border-top: 1px solid #e5e7eb; padding-top: 20px; margin-top: 30px;">
-          <p style="color: #6b7280; font-size: 12px; margin: 0; text-align: center;">
-            If you didn't request this email, you can safely ignore it.<br>
-            This link will expire automatically and no changes will be made to your account.
-          </p>
-        </div>
-
-        <div style="text-align: center; margin-top: 20px;">
-          <p style="color: #9ca3af; font-size: 11px; margin: 0;">
-            Signal/Noise - Focus on what matters<br>
-            <a href="https://signal-noise.app" style="color: #00ff88;">signal-noise.app</a>
-          </p>
-        </div>
-      </div>
+      </body>
+      </html>
     `;
 
     const text = `
-🎯 Signal/Noise - Premium Access Recovery
+Signal/Noise - Premium Access Recovery
 
 Hi there!
 
@@ -99,7 +314,7 @@ https://signal-noise.app
     const response = await resend.emails.send({
       from: FROM_ADDRESS,
       to: userEmail,
-      subject: '🎯 Signal/Noise Premium Access Recovery',
+      subject: 'Signal/Noise Premium Access Recovery',
       html,
       text,
       tags: [
@@ -109,21 +324,21 @@ https://signal-noise.app
     });
 
     if (response.error) {
-      console.error('❌ Resend magic link error:', response.error);
+      console.error('Resend magic link error:', response.error);
       return {
         success: false,
         error: response.error.message
       };
     }
 
-    console.log(`✅ Magic link sent: ${response.data?.id}`);
+    console.log(`Magic link sent: ${response.data?.id}`);
     return {
       success: true,
       messageId: response.data?.id
     };
 
   } catch (error) {
-    console.error('❌ Failed to send magic link:', error);
+    console.error('Failed to send magic link:', error);
     return {
       success: false,
       error: error.message || 'Unknown email sending error'
@@ -135,80 +350,406 @@ https://signal-noise.app
  * Send welcome email after successful payment
  */
 export const sendWelcomeEmail = async (
-  userEmail: string,
-  firstName: string,
-  tierName: string = 'Premium Member'
-): Promise<EmailResult> => {
+  userEmail,
+  firstName,
+  tierName = 'Premium Member'
+) => {
   try {
-    console.log(`📧 Sending welcome email to ${userEmail}`);
+    console.log(`Sending welcome email to ${userEmail}`);
+
+    // Initialize Resend client
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     const html = `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-        <div style="text-align: center; margin-bottom: 30px;">
-          <h1 style="color: #00ff88; margin: 0; font-size: 28px;">🎯 Signal/Noise</h1>
-          <p style="color: #666; margin: 5px 0 0 0;">Welcome to Premium!</p>
-        </div>
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+          * { margin: 0; padding: 0; box-sizing: border-box; }
+          body, table, td { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+          table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+          img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
 
-        <div style="background: #f0f9ff; border-radius: 8px; padding: 20px; margin: 20px 0;">
-          <h2 style="color: #1f2937; margin: 0 0 15px 0; font-size: 20px;">Hi ${firstName || 'there'}!</h2>
+          body {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif !important;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            width: 100% !important;
+            min-width: 100%;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+          }
 
-          <p style="color: #374151; margin: 0 0 20px 0; line-height: 1.5;">
-            Welcome to Signal/Noise Premium! Your AI Coach is now ready to help you achieve peak productivity.
-          </p>
+          .email-container {
+            max-width: 560px;
+            margin: 40px auto;
+            background-color: #000000;
+            color: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+          }
 
-          <div style="background: #dcfce7; border-radius: 6px; padding: 15px; margin: 20px 0;">
-            <h3 style="color: #166534; margin: 0 0 10px 0; font-size: 16px;">🌟 ${tierName} Activated!</h3>
-            <p style="margin: 0; color: #166534; font-size: 14px;">
-              You now have unlimited access to all premium features, forever. No recurring charges, no expiration.
+          .header {
+            text-align: center;
+            padding: 50px 30px 40px;
+            background: radial-gradient(ellipse at center, rgba(0, 255, 136, 0.08) 0%, rgba(0, 255, 136, 0.02) 40%, transparent 70%);
+          }
+
+          .brand-icon {
+            font-size: 32px;
+            margin-bottom: 16px;
+            filter: drop-shadow(0 0 12px rgba(0, 255, 136, 0.6));
+          }
+
+          .brand-title {
+            font-size: 28px;
+            font-weight: 200;
+            letter-spacing: -0.5px;
+            margin: 0;
+            color: #ffffff;
+          }
+
+          .brand-subtitle {
+            font-size: 13px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #00ff88;
+            margin: 6px 0 0 0;
+          }
+
+          .content {
+            padding: 0 30px 20px;
+            background-color: #000000;
+          }
+
+          .content-card {
+            background: linear-gradient(145deg, #0a0a0a 0%, #050505 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+          }
+
+          .content-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.5), transparent);
+          }
+
+          .greeting {
+            font-size: 18px;
+            font-weight: 400;
+            color: #ffffff;
+            margin: 0 0 24px 0;
+            letter-spacing: -0.2px;
+          }
+
+          .message {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #cccccc;
+            margin: 0 0 32px 0;
+          }
+
+          .activation-card {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1) 0%, rgba(0, 255, 136, 0.05) 100%);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 32px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+          }
+
+          .activation-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ff88, transparent);
+          }
+
+          .activation-icon {
+            font-size: 24px;
+            margin-bottom: 12px;
+            filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.5));
+          }
+
+          .activation-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: #00ff88;
+            margin: 0 0 8px 0;
+            letter-spacing: -0.2px;
+          }
+
+          .activation-text {
+            font-size: 14px;
+            color: #cccccc;
+            margin: 0;
+            line-height: 1.6;
+          }
+
+          .features-section {
+            margin: 36px 0;
+          }
+
+          .features-title {
+            font-size: 15px;
+            font-weight: 500;
+            color: #ffffff;
+            margin: 0 0 24px 0;
+            letter-spacing: -0.1px;
+          }
+
+          .features-grid {
+            display: grid;
+            gap: 16px;
+          }
+
+          .feature-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+          }
+
+          .feature-icon {
+            color: #00ff88;
+            margin-right: 16px;
+            font-size: 16px;
+            line-height: 1.5;
+            flex-shrink: 0;
+            margin-top: 2px;
+          }
+
+          .feature-content {
+            flex: 1;
+          }
+
+          .feature-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: #ffffff;
+            margin: 0 0 4px 0;
+            line-height: 1.4;
+          }
+
+          .feature-description {
+            font-size: 13px;
+            color: #999999;
+            margin: 0;
+            line-height: 1.5;
+          }
+
+          .button-container {
+            text-align: center;
+            margin: 40px 0 0;
+          }
+
+          .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #00ff88 0%, #00dd77 100%);
+            color: #000000 !important;
+            padding: 18px 36px;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 500;
+            font-size: 15px;
+            letter-spacing: 0.3px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            box-shadow: 0 8px 24px rgba(0, 255, 136, 0.25), 0 0 0 1px rgba(0, 255, 136, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+          }
+
+          .footer {
+            padding: 40px 30px 30px;
+            text-align: center;
+            background-color: #000000;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 20px;
+          }
+
+          .footer-brand {
+            font-size: 11px;
+            color: #999999;
+            margin: 0;
+            letter-spacing: 0.5px;
+          }
+
+          .footer-link {
+            color: #00ff88;
+            text-decoration: none;
+            font-weight: 400;
+          }
+
+          @media only screen and (max-width: 600px) {
+            .email-container { margin: 20px auto; border-radius: 12px; }
+            .header { padding: 40px 20px 30px; }
+            .brand-title { font-size: 24px; }
+            .content { padding: 0 20px 20px; }
+            .content-card { padding: 30px 24px; }
+            .activation-card { padding: 24px; }
+            .greeting { font-size: 17px; }
+            .message { font-size: 14px; }
+            .feature-item { padding: 14px 16px; }
+            .cta-button { padding: 16px 28px; font-size: 14px; }
+            .footer { padding: 30px 20px 24px; }
+          }
+
+          @media (prefers-color-scheme: dark) {
+            .email-container { background-color: #000000 !important; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.08) !important; }
+            body { background-color: #000000 !important; color: #ffffff !important; }
+          }
+        </style>
+      </head>
+      <body>
+        <div class="email-container">
+          <div class="header">
+            <div class="brand-icon">
+              <svg width="32" height="32" viewBox="0 0 554 558" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 557V1H553V317.562L312.41 557H1Z" fill="#00ff88" stroke="#00ff88"/>
+              </svg>
+            </div>
+            <h1 class="brand-title">Signal/Noise</h1>
+            <p class="brand-subtitle">Welcome to Premium!</p>
+          </div>
+
+          <div class="content">
+            <div class="content-card">
+              <h2 class="greeting">Hi ${firstName || 'there'}!</h2>
+              <p class="message">
+                Welcome to Signal/Noise Premium! Your AI Coach is now ready to help you achieve peak productivity and focus on what truly matters.
+              </p>
+
+              <div class="activation-card">
+                <div class="activation-icon">
+                  <svg width="20" height="20" viewBox="0 0 554 558" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 557V1H553V317.562L312.41 557H1Z" fill="#00ff88" stroke="#00ff88"/>
+                  </svg>
+                </div>
+                <div class="activation-title">${tierName} Activated</div>
+                <p class="activation-text">
+                  Unlimited access to all premium features, forever. No recurring charges, no expiration.
+                </p>
+              </div>
+
+              <div class="features-section">
+                <h3 class="features-title">Your Premium Features</h3>
+                <div class="features-grid">
+                  <div class="feature-item">
+                    <span class="feature-icon">
+                      <svg width="16" height="16" viewBox="0 0 554 558" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 557V1H553V317.562L312.41 557H1Z" fill="#00ff88" stroke="#00ff88"/>
+                      </svg>
+                    </span>
+                    <div class="feature-content">
+                      <div class="feature-title">Personal AI Coach</div>
+                      <div class="feature-description">Powered by Groq for instant insights</div>
+                    </div>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-icon">
+                      <svg width="16" height="16" viewBox="0 0 554 558" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 557V1H553V317.562L312.41 557H1Z" fill="#00ff88" stroke="#00ff88"/>
+                      </svg>
+                    </span>
+                    <div class="feature-content">
+                      <div class="feature-title">Pattern Recognition</div>
+                      <div class="feature-description">Advanced behavioral analysis</div>
+                    </div>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-icon">
+                      <svg width="16" height="16" viewBox="0 0 554 558" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 557V1H553V317.562L312.41 557H1Z" fill="#00ff88" stroke="#00ff88"/>
+                      </svg>
+                    </span>
+                    <div class="feature-content">
+                      <div class="feature-title">Smart Check-ins</div>
+                      <div class="feature-description">Daily insights and weekly reports</div>
+                    </div>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-icon">
+                      <svg width="16" height="16" viewBox="0 0 554 558" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 557V1H553V317.562L312.41 557H1Z" fill="#00ff88" stroke="#00ff88"/>
+                      </svg>
+                    </span>
+                    <div class="feature-content">
+                      <div class="feature-title">Real-time Interventions</div>
+                      <div class="feature-description">Instant productivity guidance</div>
+                    </div>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-icon">
+                      <svg width="16" height="16" viewBox="0 0 554 558" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 557V1H553V317.562L312.41 557H1Z" fill="#00ff88" stroke="#00ff88"/>
+                      </svg>
+                    </span>
+                    <div class="feature-content">
+                      <div class="feature-title">Future Features</div>
+                      <div class="feature-description">All upcoming premium capabilities</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="button-container">
+                <a href="https://signal-noise.app" class="cta-button">
+                  Start Using AI Coach
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="footer">
+            <p class="footer-brand">
+              Signal/Noise<br>
+              <a href="https://signal-noise.app" class="footer-link">signal-noise.app</a>
             </p>
           </div>
-
-          <div style="margin: 20px 0;">
-            <h3 style="color: #1f2937; margin: 0 0 10px 0; font-size: 16px;">Your Premium Features:</h3>
-            <ul style="color: #374151; margin: 0; padding-left: 20px;">
-              <li>✨ Personal AI Coach powered by Groq</li>
-              <li>📊 Advanced pattern recognition</li>
-              <li>🎯 Daily check-ins and weekly reports</li>
-              <li>⚡ Real-time productivity interventions</li>
-              <li>🚀 All future premium features</li>
-            </ul>
-          </div>
-
-          <div style="text-align: center; margin: 30px 0;">
-            <a href="https://signal-noise.app"
-               style="display: inline-block; background: #00ff88; color: #000;
-                      padding: 14px 28px; text-decoration: none; border-radius: 6px;
-                      font-weight: bold; font-size: 16px;">
-              Start Using AI Coach →
-            </a>
-          </div>
         </div>
-
-        <div style="text-align: center; margin-top: 20px;">
-          <p style="color: #9ca3af; font-size: 11px; margin: 0;">
-            Signal/Noise - Focus on what matters<br>
-            <a href="https://signal-noise.app" style="color: #00ff88;">signal-noise.app</a>
-          </p>
-        </div>
-      </div>
+      </body>
+      </html>
     `;
 
     const text = `
-🎯 Signal/Noise - Welcome to Premium!
+Signal/Noise - Welcome to Premium!
 
 Hi ${firstName || 'there'}!
 
 Welcome to Signal/Noise Premium! Your AI Coach is now ready to help you achieve peak productivity.
 
-🌟 ${tierName} Activated!
+${tierName} Activated!
 You now have unlimited access to all premium features, forever.
 
 Your Premium Features:
-✨ Personal AI Coach powered by Groq
-📊 Advanced pattern recognition
-🎯 Daily check-ins and weekly reports
-⚡ Real-time productivity interventions
-🚀 All future premium features
+Personal AI Coach powered by Groq
+Advanced pattern recognition
+Daily check-ins and weekly reports
+Real-time productivity interventions
+All future premium features
 
 Start using: https://signal-noise.app
 
@@ -220,7 +761,7 @@ https://signal-noise.app
     const response = await resend.emails.send({
       from: FROM_ADDRESS,
       to: userEmail,
-      subject: '🎯 Welcome to Signal/Noise Premium!',
+      subject: 'Welcome to Signal/Noise Premium!',
       html,
       text,
       tags: [
@@ -230,21 +771,21 @@ https://signal-noise.app
     });
 
     if (response.error) {
-      console.error('❌ Resend welcome email error:', response.error);
+      console.error('Resend welcome email error:', response.error);
       return {
         success: false,
         error: response.error.message
       };
     }
 
-    console.log(`✅ Welcome email sent: ${response.data?.id}`);
+    console.log(`Welcome email sent: ${response.data?.id}`);
     return {
       success: true,
       messageId: response.data?.id
     };
 
   } catch (error) {
-    console.error('❌ Failed to send welcome email:', error);
+    console.error('Failed to send welcome email:', error);
     return {
       success: false,
       error: error.message || 'Unknown email sending error'

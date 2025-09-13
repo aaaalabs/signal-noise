@@ -1,66 +1,74 @@
 import { Redis } from '@upstash/redis';
-import { randomBytes } from 'crypto';
+import { getUser, verifyMagicToken } from './redis-helper.js';
 
 const redis = new Redis({
-  url: process.env.UPSTASH_REDIS_REST_URL,
-  token: process.env.UPSTASH_REDIS_REST_TOKEN,
+  url: process.env.KV_REST_API_URL,
+  token: process.env.KV_REST_API_TOKEN
 });
 
 export default async function handler(req, res) {
-  if (req.method !== 'POST') {
+  if (req.method !== 'GET') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
+  const { token } = req.query;
+
+  if (!token || !token.trim()) {
+    return res.status(400).json({ error: 'Token is required' });
+  }
+
   try {
-    const { token } = req.body;
+    // Verify token and get associated email
+    const userEmail = await verifyMagicToken(redis, token.trim());
 
-    if (!token || !token.startsWith('ml_')) {
-      return res.status(400).json({ error: 'Invalid magic link token' });
-    }
-
-    // Get email from magic link
-    const magicLinkKey = `magic_link:${token}`;
-    const email = await redis.get(magicLinkKey);
-
-    if (!email) {
-      return res.status(401).json({
-        error: 'Magic link expired or invalid. Please request a new one.'
+    if (!userEmail) {
+      return res.status(404).json({
+        error: 'Invalid or expired token',
+        message: 'This magic link has expired or been used already'
       });
     }
 
-    // Delete used magic link
-    await redis.del(magicLinkKey);
+    // Get current user data to return to frontend
+    const userData = await getUser(redis, userEmail);
 
-    // Get user data
-    const userKey = `user:${email}`;
-    const userData = await redis.hgetall(userKey);
+    if (!userData || Object.keys(userData).length === 0) {
+      return res.status(404).json({
+        error: 'User not found',
+        message: 'Premium account no longer exists'
+      });
+    }
 
-    if (!userData || userData.status !== 'active') {
+    // Verify user still has active premium status
+    if (userData.status !== 'active') {
       return res.status(403).json({
-        error: 'Premium access not active'
+        error: 'Premium account is not active',
+        status: userData.status || 'unknown',
+        message: 'Your premium access has been suspended or expired'
       });
     }
 
-    // Generate new access token for this session
-    const accessToken = 'snk_' + randomBytes(32).toString('hex');
+    console.log(`Magic link verified for ${userEmail} (${userData.tier})`);
 
-    // Update user with new access token
-    await redis.hset(userKey, {
-      access_token: accessToken,
-      last_login: Date.now().toString()
-    });
-
+    // Return user data for frontend to restore localStorage
     return res.status(200).json({
-      email: userData.email,
-      firstName: userData.first_name || '',
-      accessToken: accessToken,
-      paymentType: userData.payment_type,
-      expiresAt: userData.expires_at === '0' ? null : parseInt(userData.expires_at),
-      message: 'Successfully authenticated'
+      success: true,
+      message: 'Premium access verified successfully',
+      user: {
+        email: userEmail,
+        tier: userData.tier,
+        firstName: userData.first_name || '',
+        status: userData.status,
+        paymentType: userData.payment_type || 'lifetime',
+        purchaseDate: userData.created_at || userData.purchase_date,
+        accessToken: userData.access_token
+      }
     });
 
   } catch (error) {
     console.error('Magic link verification error:', error);
-    return res.status(500).json({ error: 'Verification failed' });
+    return res.status(500).json({
+      error: 'Internal server error',
+      message: 'Failed to verify magic link'
+    });
   }
 }

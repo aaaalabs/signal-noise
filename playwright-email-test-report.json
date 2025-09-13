@@ -1,0 +1,254 @@
+{
+  "timestamp": "2025-09-13T09:49:21.149Z",
+  "summary": {
+    "totalTests": 6,
+    "passed": 6,
+    "failed": 0,
+    "averageScore": 89,
+    "templates": 2,
+    "viewports": 3
+  },
+  "templates": {
+    "magic-link": {
+      "scores": [
+        89,
+        89,
+        89
+      ],
+      "average": 89
+    },
+    "welcome-email": {
+      "scores": [
+        89,
+        89,
+        89
+      ],
+      "average": 89
+    }
+  },
+  "viewports": {
+    "mobile": {
+      "scores": [
+        89,
+        89
+      ],
+      "average": 89
+    },
+    "tablet": {
+      "scores": [
+        89,
+        89
+      ],
+      "average": 89
+    },
+    "desktop": {
+      "scores": [
+        89,
+        89
+      ],
+      "average": 89
+    }
+  },
+  "designValidation": {
+    "darkThemeConsistency": true,
+    "signalGreenAccuracy": true,
+    "brandIconPresent": true,
+    "responsiveDesign": true,
+    "emailCompatibility": false
+  },
+  "recommendations": [],
+  "results": [
+    {
+      "designValidation": {
+        "hasSignalGreen": true,
+        "signalGreenAccuracy": true,
+        "darkTheme": true,
+        "brandIcon": true,
+        "properTypography": true,
+        "buttonPresent": true,
+        "buttonStyling": true,
+        "responsiveDesign": true,
+        "emailCompatibility": false
+      },
+      "measurements": {
+        "containerWidth": 560,
+        "brandIconSize": "24px",
+        "buttonPadding": "16px 28px",
+        "fontSize": "24px"
+      },
+      "colorAnalysis": {
+        "backgroundColor": "rgb(0, 0, 0)",
+        "primaryText": "rgb(255, 255, 255)",
+        "brandColor": "rgb(102, 102, 102)",
+        "buttonColor": "rgba(0, 0, 0, 0)"
+      },
+      "errors": [],
+      "testScore": 89,
+      "passedTests": 8,
+      "totalTests": 9,
+      "screenshot": "/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/email-template-screenshots/magic-link_mobile.png",
+      "viewport": "mobile",
+      "template": "magic-link"
+    },
+    {
+      "designValidation": {
+        "hasSignalGreen": true,
+        "signalGreenAccuracy": true,
+        "darkTheme": true,
+        "brandIcon": true,
+        "properTypography": true,
+        "buttonPresent": true,
+        "buttonStyling": true,
+        "responsiveDesign": true,
+        "emailCompatibility": false
+      },
+      "measurements": {
+        "containerWidth": 560,
+        "brandIconSize": "24px",
+        "buttonPadding": "18px 36px",
+        "fontSize": "28px"
+      },
+      "colorAnalysis": {
+        "backgroundColor": "rgb(0, 0, 0)",
+        "primaryText": "rgb(255, 255, 255)",
+        "brandColor": "rgb(102, 102, 102)",
+        "buttonColor": "rgba(0, 0, 0, 0)"
+      },
+      "errors": [],
+      "testScore": 89,
+      "passedTests": 8,
+      "totalTests": 9,
+      "screenshot": "/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/email-template-screenshots/magic-link_tablet.png",
+      "viewport": "tablet",
+      "template": "magic-link"
+    },
+    {
+      "designValidation": {
+        "hasSignalGreen": true,
+        "signalGreenAccuracy": true,
+        "darkTheme": true,
+        "brandIcon": true,
+        "properTypography": true,
+        "buttonPresent": true,
+        "buttonStyling": true,
+        "responsiveDesign": true,
+        "emailCompatibility": false
+      },
+      "measurements": {
+        "containerWidth": 560,
+        "brandIconSize": "24px",
+        "buttonPadding": "18px 36px",
+        "fontSize": "28px"
+      },
+      "colorAnalysis": {
+        "backgroundColor": "rgb(0, 0, 0)",
+        "primaryText": "rgb(255, 255, 255)",
+        "brandColor": "rgb(102, 102, 102)",
+        "buttonColor": "rgba(0, 0, 0, 0)"
+      },
+      "errors": [],
+      "testScore": 89,
+      "passedTests": 8,
+      "totalTests": 9,
+      "screenshot": "/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/email-template-screenshots/magic-link_desktop.png",
+      "viewport": "desktop",
+      "template": "magic-link"
+    },
+    {
+      "designValidation": {
+        "hasSignalGreen": true,
+        "signalGreenAccuracy": true,
+        "darkTheme": true,
+        "brandIcon": true,
+        "properTypography": true,
+        "buttonPresent": true,
+        "buttonStyling": true,
+        "responsiveDesign": true,
+        "emailCompatibility": false
+      },
+      "measurements": {
+        "containerWidth": 560,
+        "brandIconSize": "32px",
+        "buttonPadding": "16px 28px",
+        "fontSize": "24px"
+      },
+      "colorAnalysis": {
+        "backgroundColor": "rgb(0, 0, 0)",
+        "primaryText": "rgb(255, 255, 255)",
+        "brandColor": "rgb(0, 255, 136)",
+        "buttonColor": "rgba(0, 0, 0, 0)"
+      },
+      "errors": [],
+      "testScore": 89,
+      "passedTests": 8,
+      "totalTests": 9,
+      "screenshot": "/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/email-template-screenshots/welcome-email_mobile.png",
+      "viewport": "mobile",
+      "template": "welcome-email"
+    },
+    {
+      "designValidation": {
+        "hasSignalGreen": true,
+        "signalGreenAccuracy": true,
+        "darkTheme": true,
+        "brandIcon": true,
+        "properTypography": true,
+        "buttonPresent": true,
+        "buttonStyling": true,
+        "responsiveDesign": true,
+        "emailCompatibility": false
+      },
+      "measurements": {
+        "containerWidth": 560,
+        "brandIconSize": "32px",
+        "buttonPadding": "18px 36px",
+        "fontSize": "28px"
+      },
+      "colorAnalysis": {
+        "backgroundColor": "rgb(0, 0, 0)",
+        "primaryText": "rgb(255, 255, 255)",
+        "brandColor": "rgb(0, 255, 136)",
+        "buttonColor": "rgba(0, 0, 0, 0)"
+      },
+      "errors": [],
+      "testScore": 89,
+      "passedTests": 8,
+      "totalTests": 9,
+      "screenshot": "/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/email-template-screenshots/welcome-email_tablet.png",
+      "viewport": "tablet",
+      "template": "welcome-email"
+    },
+    {
+      "designValidation": {
+        "hasSignalGreen": true,
+        "signalGreenAccuracy": true,
+        "darkTheme": true,
+        "brandIcon": true,
+        "properTypography": true,
+        "buttonPresent": true,
+        "buttonStyling": true,
+        "responsiveDesign": true,
+        "emailCompatibility": false
+      },
+      "measurements": {
+        "containerWidth": 560,
+        "brandIconSize": "32px",
+        "buttonPadding": "18px 36px",
+        "fontSize": "28px"
+      },
+      "colorAnalysis": {
+        "backgroundColor": "rgb(0, 0, 0)",
+        "primaryText": "rgb(255, 255, 255)",
+        "brandColor": "rgb(0, 255, 136)",
+        "buttonColor": "rgba(0, 0, 0, 0)"
+      },
+      "errors": [],
+      "testScore": 89,
+      "passedTests": 8,
+      "totalTests": 9,
+      "screenshot": "/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/email-template-screenshots/welcome-email_desktop.png",
+      "viewport": "desktop",
+      "template": "welcome-email"
+    }
+  ]
+}

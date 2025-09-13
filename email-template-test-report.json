@@ -1,0 +1,208 @@
+{
+  "timestamp": "2025-09-13T09:33:10.612Z",
+  "summary": {
+    "totalTests": 18,
+    "passed": 18,
+    "failed": 0
+  },
+  "results": [
+    {
+      "template": "magic-link-v1",
+      "type": "Magic Link",
+      "viewport": "mobile",
+      "hasSignalGreen": true,
+      "hasProperContrast": true,
+      "hasResponsiveText": true,
+      "buttonClickable": true,
+      "darkTheme": true,
+      "errors": []
+    },
+    {
+      "template": "magic-link-v1",
+      "type": "Magic Link",
+      "viewport": "tablet",
+      "hasSignalGreen": true,
+      "hasProperContrast": true,
+      "hasResponsiveText": true,
+      "buttonClickable": true,
+      "darkTheme": true,
+      "errors": []
+    },
+    {
+      "template": "magic-link-v1",
+      "type": "Magic Link",
+      "viewport": "desktop",
+      "hasSignalGreen": true,
+      "hasProperContrast": true,
+      "hasResponsiveText": true,
+      "buttonClickable": true,
+      "darkTheme": true,
+      "errors": []
+    },
+    {
+      "template": "magic-link-v2",
+      "type": "Magic Link",
+      "viewport": "mobile",
+      "hasSignalGreen": true,
+      "hasProperContrast": true,
+      "hasResponsiveText": true,
+      "buttonClickable": true,
+      "darkTheme": true,
+      "errors": []
+    },
+    {
+      "template": "magic-link-v2",
+      "type": "Magic Link",
+      "viewport": "tablet",
+      "hasSignalGreen": true,
+      "hasProperContrast": true,
+      "hasResponsiveText": true,
+      "buttonClickable": true,
+      "darkTheme": true,
+      "errors": []
+    },
+    {
+      "template": "magic-link-v2",
+      "type": "Magic Link",
+      "viewport": "desktop",
+      "hasSignalGreen": true,
+      "hasProperContrast": true,
+      "hasResponsiveText": true,
+      "buttonClickable": true,
+      "darkTheme": true,
+      "errors": []
+    },
+    {
+      "template": "magic-link-v3",
+      "type": "Magic Link",
+      "viewport": "mobile",
+      "hasSignalGreen": true,
+      "hasProperContrast": true,
+      "hasResponsiveText": true,
+      "buttonClickable": true,
+      "darkTheme": true,
+      "errors": []
+    },
+    {
+      "template": "magic-link-v3",
+      "type": "Magic Link",
+      "viewport": "tablet",
+      "hasSignalGreen": true,
+      "hasProperContrast": true,
+      "hasResponsiveText": true,
+      "buttonClickable": true,
+      "darkTheme": true,
+      "errors": []
+    },
+    {
+      "template": "magic-link-v3",
+      "type": "Magic Link",
+      "viewport": "desktop",
+      "hasSignalGreen": true,
+      "hasProperContrast": true,
+      "hasResponsiveText": true,
+      "buttonClickable": true,
+      "darkTheme": true,
+      "errors": []
+    },
+    {
+      "template": "welcome-v1",
+      "type": "Welcome",
+      "viewport": "mobile",
+      "hasSignalGreen": true,
+      "hasProperContrast": true,
+      "hasResponsiveText": true,
+      "buttonClickable": true,
+      "darkTheme": true,
+      "errors": []
+    },
+    {
+      "template": "welcome-v1",
+      "type": "Welcome",
+      "viewport": "tablet",
+      "hasSignalGreen": true,
+      "hasProperContrast": true,
+      "hasResponsiveText": true,
+      "buttonClickable": true,
+      "darkTheme": true,
+      "errors": []
+    },
+    {
+      "template": "welcome-v1",
+      "type": "Welcome",
+      "viewport": "desktop",
+      "hasSignalGreen": true,
+      "hasProperContrast": true,
+      "hasResponsiveText": true,
+      "buttonClickable": true,
+      "darkTheme": true,
+      "errors": []
+    },
+    {
+      "template": "welcome-v2",
+      "type": "Welcome",
+      "viewport": "mobile",
+      "hasSignalGreen": true,
+      "hasProperContrast": true,
+      "hasResponsiveText": true,
+      "buttonClickable": true,
+      "darkTheme": true,
+      "errors": []
+    },
+    {
+      "template": "welcome-v2",
+      "type": "Welcome",
+      "viewport": "tablet",
+      "hasSignalGreen": true,
+      "hasProperContrast": true,
+      "hasResponsiveText": true,
+      "buttonClickable": true,
+      "darkTheme": true,
+      "errors": []
+    },
+    {
+      "template": "welcome-v2",
+      "type": "Welcome",
+      "viewport": "desktop",
+      "hasSignalGreen": true,
+      "hasProperContrast": true,
+      "hasResponsiveText": true,
+      "buttonClickable": true,
+      "darkTheme": true,
+      "errors": []
+    },
+    {
+      "template": "welcome-v3",
+      "type": "Welcome",
+      "viewport": "mobile",
+      "hasSignalGreen": true,
+      "hasProperContrast": true,
+      "hasResponsiveText": true,
+      "buttonClickable": true,
+      "darkTheme": true,
+      "errors": []
+    },
+    {
+      "template": "welcome-v3",
+      "type": "Welcome",
+      "viewport": "tablet",
+      "hasSignalGreen": true,
+      "hasProperContrast": true,
+      "hasResponsiveText": true,
+      "buttonClickable": true,
+      "darkTheme": true,
+      "errors": []
+    },
+    {
+      "template": "welcome-v3",
+      "type": "Welcome",
+      "viewport": "desktop",
+      "hasSignalGreen": true,
+      "hasProperContrast": true,
+      "hasResponsiveText": true,
+      "buttonClickable": true,
+      "darkTheme": true,
+      "errors": []
+    }
+  ]
+}
