@@ -55,8 +55,16 @@ const translations = {
 
     // Onboarding
     onboardingTitle: "Signal",
-    onboardingText: "80% deiner Zeit für das, was wirklich zählt.<br>20% für den Rest.",
+    onboardingText: "80% deiner Zeit für das, <br>was wirklich zählt.<br>20% für den Rest.",
     onboardingStart: "Start",
+
+    // Premium Modal
+    premiumModalTitle: "Dein Coach",
+    premiumModalDesc: "Persönliches Coaching mit echten Erkenntnissen aus deinen Daten. €9/Monat.",
+    emailPlaceholder: "deine@email.com",
+    emailError: "Bitte gib eine gültige E-Mail-Adresse ein",
+    cancelBtn: "Abbrechen",
+    upgradeBtn: "Upgrade",
   },
   en: {
     // Input & Buttons
@@ -105,6 +113,14 @@ const translations = {
     onboardingTitle: "Signal",
     onboardingText: "80% of your time for what really matters.<br>20% for the rest.",
     onboardingStart: "Start",
+
+    // Premium Modal
+    premiumModalTitle: "Your Coach",
+    premiumModalDesc: "Personal coaching with real insights from your data. €9/month.",
+    emailPlaceholder: "your@email.com",
+    emailError: "Please enter a valid email address",
+    cancelBtn: "Cancel",
+    upgradeBtn: "Upgrade",
   }
 };
 

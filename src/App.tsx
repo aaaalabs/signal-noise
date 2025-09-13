@@ -5,13 +5,13 @@ import RatioDisplay from './components/RatioDisplay';
 import TaskInput from './components/TaskInput';
 import TaskGrid from './components/TaskGrid';
 import Analytics from './components/Analytics';
-import PremiumBanner from './components/PremiumBanner';
 import AICoach from './components/AICoach';
 import Onboarding from './components/Onboarding';
 import AchievementGlow from './components/AchievementGlow';
 import PatternWhisper from './components/PatternWhisper';
 import StreakIndicator from './components/StreakIndicator';
 import { checkAchievements } from './utils/achievements';
+import { handleStripeReturn } from './services/premiumService';
 
 const DATA_KEY = 'signal_noise_data';
 const ONBOARDING_KEY = 'signal_noise_onboarded';
@@ -39,6 +39,13 @@ function App() {
 
   // Load data from localStorage on mount
   useEffect(() => {
+    // Check for Stripe return and activate premium if successful
+    const premiumActivated = handleStripeReturn();
+    if (premiumActivated) {
+      setWhisperMessage('Premium activated!');
+      setShowWhisper(true);
+    }
+
     // Check onboarding first
     const hasOnboarded = localStorage.getItem(ONBOARDING_KEY);
     if (!hasOnboarded) {
@@ -220,6 +227,7 @@ function App() {
           tasks={data.tasks}
           currentRatio={currentRatio}
           firstName={data.settings.firstName}
+          data={data}
           onNameUpdate={(name) => setData(prev => ({
             ...prev,
             settings: { ...prev.settings, firstName: name }
@@ -231,9 +239,6 @@ function App() {
           tasks={data.tasks}
           history={data.history}
         />
-
-        {/* Premium Banner */}
-        <PremiumBanner />
       </div>
     </>
   );

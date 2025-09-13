@@ -3,18 +3,49 @@ import { getCoachAdvice } from '../services/groqService';
 import type { CoachResponse } from '../services/groqService';
 import type { Task, CoachPayload } from '../types';
 import { t } from '../i18n/translations';
+import { calculateStreak, getAverageRatio } from '../utils/achievements';
+import {
+  getBestProductiveHour,
+  getWeeklyTrend,
+  getWorstDayOfWeek,
+  getHourlyDistribution,
+  getWeeklyPattern,
+  getConsistencyScore,
+  calculateDailyRatios
+} from '../utils/patternAnalysis';
+import PremiumModal from './PremiumModal';
+import { checkPremiumStatus } from '../services/premiumService';
+
+import type { AppData } from '../types';
 
 interface AICoachProps {
   tasks: Task[];
   currentRatio: number;
   firstName?: string;
   onNameUpdate: (name: string) => void;
+  data: AppData;
 }
 
-export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate }: AICoachProps) {
+export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, data }: AICoachProps) {
   const [coachResponse, setCoachResponse] = useState<CoachResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [showCoach, setShowCoach] = useState(false);
+  const [showPremiumModal, setShowPremiumModal] = useState(false);
+
+  // Check if user has premium access using premium service
+  const premiumStatus = checkPremiumStatus();
+  const isPremium = premiumStatus.isActive;
+
+  const handleCoachClick = () => {
+    // If not premium, show upgrade modal
+    if (!isPremium) {
+      setShowPremiumModal(true);
+      return;
+    }
+
+    // If premium, proceed with coaching
+    getCoachingAdvice();
+  };
 
   const getCoachingAdvice = async () => {
     let userName = firstName || localStorage.getItem('userFirstName');
@@ -34,7 +65,47 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate }
     setShowCoach(true);
 
     try {
-      // Generate coaching payload (simplified)
+      // Calculate real metrics and patterns
+      const currentStreak = calculateStreak(tasks);
+      const averageRatio7Days = getAverageRatio(tasks, 7);
+      const averageRatio30Days = getAverageRatio(tasks, 30);
+      const bestHour = getBestProductiveHour(tasks);
+      const weeklyTrend = getWeeklyTrend(tasks);
+      const worstDay = getWorstDayOfWeek(tasks);
+      const hourlyDistribution = getHourlyDistribution(tasks);
+      const weeklyPattern = getWeeklyPattern(tasks);
+      const consistencyScore = getConsistencyScore(tasks);
+      const dailyRatios = calculateDailyRatios(tasks, 30).map((ratio, index) => {
+        const date = new Date();
+        date.setDate(date.getDate() - (29 - index));
+        return {
+          date: date.toISOString(),
+          ratio,
+          taskCount: tasks.filter(t =>
+            new Date(t.timestamp).toDateString() === date.toDateString()
+          ).length
+        };
+      });
+
+      // Count perfect days (100% signal ratio)
+      const perfectDays = dailyRatios.filter(d => d.ratio === 100 && d.taskCount > 0).length;
+
+      // Calculate longest streak
+      const longestStreak = Math.max(currentStreak,
+        dailyRatios.reduce((maxStreak, _, index) => {
+          let streak = 0;
+          for (let i = index; i < dailyRatios.length; i++) {
+            if (dailyRatios[i].ratio >= 80 && dailyRatios[i].taskCount > 0) {
+              streak++;
+            } else {
+              break;
+            }
+          }
+          return Math.max(maxStreak, streak);
+        }, 0)
+      );
+
+      // Generate coaching payload with REAL data
       const payload: CoachPayload = {
         firstName: userName,
         timestamp: new Date().toISOString(),
@@ -48,21 +119,21 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate }
           lastInteraction: new Date().toISOString()
         },
         metrics: {
-          currentStreak: 0, // Simplified
-          longestStreak: 0, // Simplified
-          averageRatio7Days: currentRatio,
-          averageRatio30Days: currentRatio,
+          currentStreak,
+          longestStreak,
+          averageRatio7Days,
+          averageRatio30Days,
           totalDecisions: tasks.length,
-          perfectDays: 0,
-          badges: []
+          perfectDays,
+          badges: data.badges
         },
         patterns: {
-          bestHour: 9,
-          worstDay: 'Mo',
-          hourlyDistribution: Array(24).fill(0),
-          weeklyPattern: Array(7).fill(null).map(() => ({ signal: 0, noise: 0 })),
-          trendDirection: 'stable',
-          consistencyScore: 75
+          bestHour: bestHour || 9,
+          worstDay: worstDay?.day || (weeklyTrend.direction === 'declining' ? 'Mo' : 'Fr'),
+          hourlyDistribution,
+          weeklyPattern,
+          trendDirection: weeklyTrend.direction,
+          consistencyScore
         },
         history: {
           recentTasks: tasks.slice(0, 10).map(t => ({
@@ -70,7 +141,7 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate }
             type: t.type,
             timestamp: t.timestamp
           })),
-          dailyRatios: []
+          dailyRatios
         }
       };
 
@@ -98,18 +169,45 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate }
 
   return (
     <div className="ai-coach">
+      {/* Premium Modal */}
+      <PremiumModal
+        show={showPremiumModal}
+        onClose={() => setShowPremiumModal(false)}
+      />
+
       {!showCoach && (
         <button
-          onClick={getCoachingAdvice}
+          onClick={handleCoachClick}
           className="ai-coach-button"
-          style={{ display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'center' }}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            justifyContent: 'center',
+            opacity: isPremium ? 1 : 0.7
+          }}
         >
-          <img
-            src="/sn-icon-grey.svg"
-            alt="AI Coach"
-            style={{ width: '16px', height: '16px' }}
-          />
-          {t.aiCoachBtn}
+          {isPremium ? (
+            <img
+              src="/sn-icon-grey.svg"
+              alt="AI Coach"
+              style={{ width: '16px', height: '16px' }}
+            />
+          ) : (
+            <div
+              style={{
+                width: '16px',
+                height: '16px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '12px'
+              }}
+            >
+              🔒
+            </div>
+          )}
+          {isPremium ? t.aiCoachBtn : (t.premiumModalTitle || 'Unlock Coach')}
         </button>
       )}
 
