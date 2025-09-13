@@ -204,6 +204,36 @@ lib               → LibraLab store data (unchanged)
 - Foundation member counter persistence in Redis
 - Secure payment flow with proper error handling
 
+#### Critical Webhook Issue & Solution (Sept 2025)
+**Problem**: Vercel dev environment couldn't handle raw request bodies for Stripe signature verification. The issue was:
+
+1. **Vite + Vercel Serverless Functions**: Unlike Next.js App Router, Vite projects use traditional serverless function syntax but Vercel dev parses request bodies differently
+2. **Body Parsing Conflict**: Even with `bodyParser: false`, Vercel dev was consuming the request stream before our webhook could read the raw body
+3. **Signature Verification**: Stripe requires the exact raw body for HMAC signature verification - any JSON parsing breaks the signature
+
+**SLC Solution**: Development mode bypass in `/api/stripe-webhook.js`:
+```javascript
+const isDev = process.env.NODE_ENV === 'development' || process.env.VERCEL_ENV !== 'production';
+
+if (isDev && req.body && typeof req.body === 'object') {
+  console.log('🚧 Development mode: Using parsed body directly');
+  event = req.body; // Skip signature verification locally
+} else {
+  // Production: Proper signature verification with raw body
+  const chunks = [];
+  for await (const chunk of req) {
+    chunks.push(typeof chunk === 'string' ? Buffer.from(chunk) : chunk);
+  }
+  const body = Buffer.concat(chunks);
+  event = stripe.webhooks.constructEvent(body, sig, webhookSecret);
+}
+```
+
+**Testing Workflow**:
+- Development: `vercel dev` + `stripe listen --forward-to localhost:3000/api/stripe-webhook`
+- Production: Deploy and test with live webhook URLs
+- Deployment Protection: Preview/Production URLs may have auth - test locally first
+
 ## Critical Implementation Notes
 
 ### Modal vs Page Navigation

@@ -11,6 +11,7 @@ import AchievementGlow from './components/AchievementGlow';
 import PatternWhisper from './components/PatternWhisper';
 import StreakIndicator from './components/StreakIndicator';
 import SuccessPage from './components/SuccessPage';
+import SuccessModal from './components/SuccessModal';
 import Footer from './components/Footer';
 import BrandIcon from './components/BrandIcon';
 import { checkAchievements } from './utils/achievements';
@@ -40,12 +41,21 @@ function App() {
   const [showWhisper, setShowWhisper] = useState(false);
   const [hasAchievement, setHasAchievement] = useState(false);
   const [showSuccessPage, setShowSuccessPage] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   // Load data from localStorage on mount
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
 
-    // Check for success page
+    // Check for payment success - show modal instead of separate page
+    if (urlParams.get('payment') === 'success' && urlParams.get('session_id')) {
+      setShowSuccessModal(true);
+      // Clean URL after showing modal
+      window.history.replaceState({}, '', window.location.pathname);
+      return;
+    }
+
+    // Fallback: Check for success page (old URLs)
     if (urlParams.get('session_id')) {
       setShowSuccessPage(true);
       return;
@@ -221,6 +231,12 @@ function App() {
       <PatternWhisper
         message={whisperMessage}
         show={showWhisper}
+      />
+
+      {/* Success Modal */}
+      <SuccessModal
+        show={showSuccessModal}
+        onClose={() => setShowSuccessModal(false)}
       />
 
       <div className="container" style={{ position: 'relative' }}>

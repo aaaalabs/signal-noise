@@ -30,36 +30,87 @@ export default function SuccessPage({ onContinue }: SuccessPageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white flex items-center justify-center">
-      <div className="max-w-md mx-auto p-8 text-center">
+    <div
+      style={{
+        minHeight: '100vh',
+        backgroundColor: '#000',
+        color: '#fff',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif'
+      }}
+    >
+      <div
+        style={{
+          maxWidth: '28rem',
+          margin: '0 auto',
+          padding: '2rem',
+          textAlign: 'center'
+        }}
+      >
         {/* Simple success indicator */}
-        <div className="mb-8">
-          <div className="text-6xl font-thin mb-4">✓</div>
-          <h1 className="text-2xl font-light mb-2">Welcome to Signal/Noise</h1>
-          <div className="text-sm text-gray-400 font-light">
+        <div style={{ marginBottom: '2rem' }}>
+          <div style={{
+            fontSize: '4rem',
+            fontWeight: '100',
+            marginBottom: '1rem',
+            color: '#00ff88'
+          }}>✓</div>
+          <h1 style={{
+            fontSize: '1.5rem',
+            fontWeight: '300',
+            marginBottom: '0.5rem'
+          }}>Welcome to Signal/Noise</h1>
+          <div style={{
+            fontSize: '0.875rem',
+            color: '#9ca3af',
+            fontWeight: '300'
+          }}>
             Premium access activated
           </div>
         </div>
 
         {/* Simple instructions */}
-        <div className="space-y-4 mb-8 text-sm text-gray-400 font-light">
-          <div>Check your email for access instructions</div>
-          <div>Your AI Coach is ready</div>
+        <div style={{
+          marginBottom: '2rem',
+          fontSize: '0.875rem',
+          color: '#9ca3af',
+          fontWeight: '300'
+        }}>
+          <div style={{ marginBottom: '1rem' }}>Check your email for access instructions</div>
+          <div style={{ marginBottom: '1rem' }}>Your AI Coach is ready</div>
           <div>All features unlocked</div>
         </div>
 
         {/* Continue button */}
         <button
           onClick={onContinue}
-          className="w-full border border-gray-800 py-3 text-sm font-light
-                     hover:bg-gray-900 transition-colors duration-300"
+          style={{
+            width: '100%',
+            border: '1px solid #374151',
+            padding: '0.75rem',
+            fontSize: '0.875rem',
+            fontWeight: '300',
+            backgroundColor: 'transparent',
+            color: '#fff',
+            cursor: 'pointer',
+            transition: 'background-color 0.3s ease'
+          }}
+          onMouseOver={(e) => (e.target as HTMLElement).style.backgroundColor = '#111827'}
+          onMouseOut={(e) => (e.target as HTMLElement).style.backgroundColor = 'transparent'}
         >
           Start using Signal/Noise
         </button>
 
         {/* Subtle foundation badge if applicable */}
         {sessionDetails?.tier === 'foundation' && (
-          <div className="mt-6 text-xs text-gray-600 font-light">
+          <div style={{
+            marginTop: '1.5rem',
+            fontSize: '0.75rem',
+            color: '#6b7280',
+            fontWeight: '300'
+          }}>
             Foundation Member
           </div>
         )}

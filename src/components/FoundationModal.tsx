@@ -119,12 +119,7 @@ export default function FoundationModal({ show, onClose }: FoundationModalProps)
       console.error('Purchase error:', error);
       setLoading(false);
 
-      // Dev environment - show what would happen
-      if (window.location.hostname === 'localhost') {
-        alert(`DEV MODE: Would redirect to Stripe checkout for ${email} - €${stats?.currentPrice || 29} Foundation`);
-        return;
-      }
-
+      // Allow real Stripe testing in localhost with sandbox keys
       alert('Failed to start purchase. Please try again.');
     }
   };

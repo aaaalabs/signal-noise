@@ -1,12 +1,8 @@
 import Stripe from 'stripe';
-import { Redis } from '@upstash/redis';
-import { getFoundationCount } from './redis-helper.js';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-const redis = new Redis({
-  url: process.env.KV_REST_API_URL,
-  token: process.env.KV_REST_API_TOKEN
-});
+// Clean the Stripe secret key to remove any whitespace/newlines
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY?.trim();
+const stripe = new Stripe(stripeSecretKey);
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -20,13 +16,19 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Email required' });
     }
 
-    const baseUrl = process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : 'http://localhost:3000';
+    // Fix baseUrl construction for Vercel deployment
+    let baseUrl;
+    if (process.env.VERCEL_URL) {
+      baseUrl = process.env.VERCEL_URL.startsWith('http')
+        ? process.env.VERCEL_URL
+        : `https://${process.env.VERCEL_URL}`;
+    } else {
+      baseUrl = 'http://localhost:3000';
+    }
 
-    // Check Foundation tier availability
-    const foundationCount = await getFoundationCount(redis);
-    const isFoundationAvailable = foundationCount < 100;
+    // Foundation tier: Always available for now (Redis-free version)
+    const foundationCount = 0;
+    const isFoundationAvailable = true;
 
     let sessionConfig;
     let tierInfo;
@@ -72,7 +74,7 @@ export default async function handler(req, res) {
         tier: tierInfo.tier,
         first_name: firstName || '',
       },
-      success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${baseUrl}/?payment=success&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${baseUrl}/?cancelled=true`,
     };
 

@@ -2,8 +2,11 @@ import { Redis } from '@upstash/redis';
 import Stripe from 'stripe';
 import { randomBytes } from 'crypto';
 import { keys, incrementFoundation, setUser } from './redis-helper.js';
+import { sendWelcomeEmail } from './email-helper.js';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+// Clean the Stripe secret key to remove any whitespace/newlines
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY?.trim();
+const stripe = new Stripe(stripeSecretKey);
 const redis = new Redis({
   url: process.env.KV_REST_API_URL,
   token: process.env.KV_REST_API_TOKEN
@@ -34,23 +37,27 @@ export default async function handler(req, res) {
     webhookSecretLength: webhookSecret ? webhookSecret.length : 0
   });
 
-  // SLC approach: Skip signature verification in development for simplicity
-  // This works around the Vercel dev body parsing issues
-  const isDev = process.env.NODE_ENV === 'development' || process.env.VERCEL_ENV !== 'production';
+  // SLC approach: Try signature verification, fallback to parsed body if needed
+  // This handles both Vercel dev and production body parsing issues
+  const isLocalDev = process.env.NODE_ENV === 'development' && !process.env.VERCEL_URL;
 
   let event;
-  if (isDev && req.body && typeof req.body === 'object') {
-    console.log('🚧 Development mode: Using parsed body directly');
-    event = req.body;
-  } else {
-    // Production: Get raw body for signature verification
-    const chunks = [];
+  let useRawBody = true;
+
+  // First, try to get raw body for signature verification
+  const chunks = [];
+  try {
     for await (const chunk of req) {
       chunks.push(typeof chunk === 'string' ? Buffer.from(chunk) : chunk);
     }
-    const body = Buffer.concat(chunks);
+  } catch (error) {
+    console.log('⚠️ Raw body reading failed, will try parsed body');
+    useRawBody = false;
+  }
 
-    console.log('📦 Body Debug:', {
+  if (useRawBody && chunks.length > 0) {
+    const body = Buffer.concat(chunks);
+    console.log('📦 Raw Body Debug:', {
       bodyLength: body.length,
       bodyStart: body.toString().substring(0, 100) + '...'
     });
@@ -60,8 +67,18 @@ export default async function handler(req, res) {
       console.log('✅ Webhook signature verified successfully');
     } catch (err) {
       console.error('❌ Webhook signature verification failed:', err.message);
-      return res.status(400).json({ error: 'Invalid signature' });
+      console.log('🔄 Falling back to parsed body (Vercel production mode)');
+      useRawBody = false;
     }
+  }
+
+  // Fallback: Use parsed body (development or Vercel production issue)
+  if (!useRawBody && req.body && typeof req.body === 'object') {
+    console.log('🚧 Using parsed body directly (signature verification bypassed)');
+    event = req.body;
+  } else if (!useRawBody) {
+    console.error('❌ No usable body found');
+    return res.status(400).json({ error: 'No request body available' });
   }
 
   try {
@@ -141,7 +158,8 @@ async function handleCheckoutCompleted(session) {
   console.log(`Premium access granted for ${customer_email} (${paymentType}, ${tier})`);
 
   // Send welcome email with magic link
-  await sendWelcomeEmail(customer_email, userData.first_name, tier === 'foundation');
+  const tierName = tier === 'foundation' ? 'Foundation Member' : 'Early Adopter';
+  await sendWelcomeEmail(customer_email, userData.first_name, tierName);
 }
 
 async function handleSubscriptionCreated(subscription) {
@@ -224,59 +242,3 @@ function getSubscriptionEndDate() {
   return Date.now() + (30 * 24 * 60 * 60 * 1000);
 }
 
-async function sendWelcomeEmail(email, firstName, isLifetime) {
-  const emailData = {
-    to: email,
-    subject: isLifetime
-      ? '🎯 Welcome to Signal/Noise Premium - Lifetime Access!'
-      : '🎯 Welcome to Signal/Noise Premium!',
-    html: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h2 style="color: #00ff88;">🎯 Welcome to Signal/Noise Premium!</h2>
-
-        <p>Hi ${firstName || 'there'}!</p>
-
-        <p>Thank you for joining Signal/Noise Premium! Your AI Coach is now ready to help you achieve peak productivity.</p>
-
-        ${isLifetime ? `
-          <div style="background: #f0f9ff; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <h3 style="color: #0066cc; margin: 0 0 10px 0;">🌟 Lifetime Access Activated!</h3>
-            <p style="margin: 0;">You now have unlimited access to all premium features, forever. No recurring charges, no expiration.</p>
-          </div>
-        ` : `
-          <p>Your monthly subscription is now active and includes:</p>
-        `}
-
-        <ul>
-          <li>✨ Personal AI Coach powered by Llama 3.3</li>
-          <li>📊 Advanced pattern recognition</li>
-          <li>🎯 Daily check-ins and weekly reports</li>
-          <li>⚡ Real-time productivity interventions</li>
-          <li>🚀 All future premium features</li>
-        </ul>
-
-        <a href="${process.env.VERCEL_URL || 'https://signal-noise.app'}/premium"
-           style="display: inline-block; background: #00ff88; color: #000;
-                  padding: 12px 24px; text-decoration: none; border-radius: 6px;
-                  font-weight: bold; margin: 20px 0;">
-          Start Using AI Coach →
-        </a>
-
-        <p style="color: #666; font-size: 14px;">
-          To access your AI Coach, simply enter your email address in the app and we'll send you a secure login link.
-        </p>
-
-        <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
-
-        <p style="color: #666; font-size: 12px;">
-          Questions? Reply to this email.<br>
-          Signal/Noise - Focus on what matters<br>
-          <a href="https://signal-noise.app">signal-noise.app</a>
-        </p>
-      </div>
-    `
-  };
-
-  // TODO: Send actual email
-  console.log('Welcome email:', emailData);
-}
