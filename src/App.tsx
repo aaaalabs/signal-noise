@@ -18,7 +18,7 @@ import BrandIcon from './components/BrandIcon';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { checkAchievements } from './utils/achievements';
-import { handleStripeReturn } from './services/premiumService';
+import { handleStripeReturn, activatePremiumForDev } from './services/premiumService';
 
 const DATA_KEY = 'signal_noise_data';
 const ONBOARDING_KEY = 'signal_noise_onboarded';
@@ -94,6 +94,11 @@ function AppContent() {
     if (premiumActivated) {
       setWhisperMessage('Premium activated!');
       setShowWhisper(true);
+    }
+
+    // Development: Auto-activate premium for testing
+    if (import.meta.env.DEV) {
+      activatePremiumForDev();
     }
 
     // Check onboarding first

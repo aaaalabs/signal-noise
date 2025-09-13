@@ -34,7 +34,7 @@ export default function FAQModal({ show, onClose }: FAQModalProps) {
     },
     {
       question: "How do I delete tasks?",
-      answer: "Long-press any task for a moment to reveal the delete option. This gesture keeps your interface clean while giving you full control. Works on both touch devices and desktop with mouse."
+      answer: "Long-press any task for a moment to reveal the delete option, then tap again to start a 3-second countdown. You can tap once more during the countdown to cancel deletion. The visual progress bar fills from right to left, giving you full control without accidental deletions."
     },
     {
       question: "What keyboard shortcuts are available?",

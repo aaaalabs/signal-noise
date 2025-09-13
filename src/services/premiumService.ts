@@ -28,6 +28,13 @@ export function checkPremiumStatus(): PremiumStatus {
   }
 }
 
+// Development helper - activate premium for testing
+export function activatePremiumForDev(): void {
+  const devEmail = 'dev@signal-noise.test';
+  activatePremium(devEmail, 'dev-subscription-test');
+  console.log('🚧 Development: Premium activated for testing');
+}
+
 // Activate premium features (called after successful payment)
 export function activatePremium(email: string, subscriptionId?: string): void {
   const premiumStatus: PremiumStatus = {

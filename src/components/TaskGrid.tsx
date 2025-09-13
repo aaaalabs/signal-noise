@@ -14,6 +14,8 @@ function TaskItem({ task, onToggle, onDelete }: { task: Task; onToggle: (id: num
   const [isPressed, setIsPressed] = useState(false);
   const [pressTimer, setPressTimer] = useState<number | null>(null);
   const [showDelete, setShowDelete] = useState(false);
+  const [deleteCountdown, setDeleteCountdown] = useState<number | null>(null);
+  const [countdownTimer, setCountdownTimer] = useState<number | null>(null);
 
   const formatTaskTime = (timestamp: string): string => {
     const date = new Date(timestamp);
@@ -43,12 +45,15 @@ function TaskItem({ task, onToggle, onDelete }: { task: Task; onToggle: (id: num
       clearTimeout(pressTimer);
       setPressTimer(null);
     }
-    if (showDelete) {
-      handleDelete();
+    if (showDelete && !deleteCountdown) {
+      // Start 3-second countdown
+      startDeleteCountdown();
+    } else if (deleteCountdown) {
+      // Cancel deletion if countdown is active
+      cancelDeleteCountdown();
     } else {
       onToggle(task.id);
     }
-    setShowDelete(false);
   };
 
   const handlePressCancel = () => {
@@ -58,11 +63,35 @@ function TaskItem({ task, onToggle, onDelete }: { task: Task; onToggle: (id: num
       clearTimeout(pressTimer);
       setPressTimer(null);
     }
+    cancelDeleteCountdown();
   };
 
-  const handleDelete = () => {
-    onDelete(task.id);
+  const startDeleteCountdown = () => {
+    setDeleteCountdown(3);
+    const timer = setInterval(() => {
+      setDeleteCountdown(prev => {
+        if (prev === null || prev <= 1) {
+          clearInterval(timer);
+          setCountdownTimer(null);
+          // Execute deletion
+          onDelete(task.id);
+          return null;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    setCountdownTimer(timer);
   };
+
+  const cancelDeleteCountdown = () => {
+    if (countdownTimer) {
+      clearInterval(countdownTimer);
+      setCountdownTimer(null);
+    }
+    setDeleteCountdown(null);
+    setShowDelete(false);
+  };
+
 
   return (
     <div
@@ -72,36 +101,40 @@ function TaskItem({ task, onToggle, onDelete }: { task: Task; onToggle: (id: num
       onTouchStart={handlePressStart}
       onTouchEnd={handlePressEnd}
       onTouchCancel={handlePressCancel}
-      className={`task-item ${task.type}-item ${task.completed ? 'completed' : ''} ${isPressed ? 'pressing' : ''} ${showDelete ? 'delete-mode' : ''}`}
+      className={`task-item ${task.type}-item ${task.completed ? 'completed' : ''} ${isPressed ? 'pressing' : ''} ${showDelete ? 'delete-mode' : ''} ${deleteCountdown ? 'countdown-active' : ''}`}
       style={{
         opacity: task.completed ? 0.3 : 1,
         transform: isPressed ? 'scale(0.98)' : 'scale(1)',
         transition: 'all 0.2s ease',
-        cursor: showDelete ? 'pointer' : 'default',
+        cursor: showDelete || deleteCountdown ? 'pointer' : 'default',
         position: 'relative',
         userSelect: 'none',
-        WebkitUserSelect: 'none'
+        WebkitUserSelect: 'none',
+        ...(showDelete || deleteCountdown ? {
+          border: '2px solid #ff3b30',
+          backgroundColor: 'rgba(255, 59, 48, 0.05)',
+          borderRadius: '8px'
+        } : {}),
+        overflow: 'hidden'
       }}
     >
-      <div className="task-text">{task.text}</div>
-      <div className="task-time">{formatTaskTime(task.timestamp)}</div>
-      {showDelete && (
+      {/* Visual countdown indicator */}
+      {deleteCountdown && (
         <div
-          className="delete-indicator"
           style={{
             position: 'absolute',
-            right: '8px',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            color: '#ff3b30',
-            fontSize: '18px',
-            fontWeight: 'bold',
-            animation: 'fadeIn 0.2s ease'
+            top: 0,
+            right: 0,
+            height: '100%',
+            width: `${((4 - deleteCountdown) / 3) * 100}%`,
+            backgroundColor: 'rgba(255, 59, 48, 0.2)',
+            transition: 'width 1s linear',
+            zIndex: 0
           }}
-        >
-          ×
-        </div>
+        />
       )}
+      <div className="task-text" style={{ position: 'relative', zIndex: 1 }}>{task.text}</div>
+      <div className="task-time" style={{ position: 'relative', zIndex: 1 }}>{formatTaskTime(task.timestamp)}</div>
     </div>
   );
 }
@@ -155,17 +188,6 @@ export default function TaskGrid({ tasks, onToggle, onDelete }: TaskGridProps) {
       <style>{`
         .task-item.pressing {
           opacity: 0.8;
-        }
-
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(-50%) scale(0.8);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(-50%) scale(1);
-          }
         }
       `}</style>
     </>
