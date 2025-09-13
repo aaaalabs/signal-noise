@@ -16,9 +16,10 @@ import InvoicePage from './components/InvoicePage';
 import Footer from './components/Footer';
 import BrandIcon from './components/BrandIcon';
 import LanguageSwitcher from './components/LanguageSwitcher';
+import DebugPremium from './components/DebugPremium';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { checkAchievements } from './utils/achievements';
-import { handleStripeReturn } from './services/premiumService';
+import { handleStripeReturn, syncPremiumStatus } from './services/premiumService';
 import { startAutoSync, restoreData } from './services/syncService';
 
 const DATA_KEY = 'signal_noise_data';
@@ -145,6 +146,23 @@ function AppContent() {
         settings: { ...prev.settings, firstName: userName }
       }));
     }
+
+    // Check premium status from server for existing users
+    const storedEmail = localStorage.getItem('premiumEmail') ||
+                       JSON.parse(localStorage.getItem('premiumStatus') || '{}').email;
+
+    if (storedEmail) {
+      // Sync premium status with server
+      syncPremiumStatus(storedEmail).then((status) => {
+        if (status.isActive) {
+          console.log('✅ Premium status confirmed from server');
+          startAutoSync();
+        }
+      }).catch(() => {
+        console.log('⚠️ Premium status check failed, using local status');
+      });
+    }
+
     setIsLoaded(true);
   }, []);
 
@@ -312,6 +330,9 @@ function AppContent() {
 
         {/* Language Switcher - Ultra-minimal toggle */}
         <LanguageSwitcher />
+
+        {/* Debug Premium (Development only) */}
+        <DebugPremium />
 
         {/* Header with Ratio */}
         <header className="header">
