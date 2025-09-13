@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import AboutModal from './AboutModal';
 
 // Legal modals
 const LegalModal = ({ show, onClose, title, children }: {
@@ -231,6 +232,7 @@ export default function Footer() {
   const [showLegal, setShowLegal] = useState(false);
   const [showTerms, setShowTerms] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
+  const [showAbout, setShowAbout] = useState(false);
 
   return (
     <>
@@ -253,6 +255,21 @@ export default function Footer() {
             justifyContent: 'center',
             gap: '16px'
           }}>
+            <button
+              onClick={() => setShowAbout(true)}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: '#666',
+                fontSize: '12px',
+                cursor: 'pointer',
+                transition: 'color 0.2s'
+              }}
+              onMouseEnter={(e) => (e.target as HTMLButtonElement).style.color = '#999'}
+              onMouseLeave={(e) => (e.target as HTMLButtonElement).style.color = '#666'}
+            >
+              About
+            </button>
             <button
               onClick={() => setShowLegal(true)}
               style={{
@@ -330,6 +347,9 @@ export default function Footer() {
           </div>
         </div>
       </footer>
+
+      {/* About Modal */}
+      <AboutModal show={showAbout} onClose={() => setShowAbout(false)} />
 
       {/* Legal Modals */}
       <LegalModal show={showLegal} onClose={() => setShowLegal(false)} title="Legal / Impressum">
