@@ -29,6 +29,7 @@ export default function FoundationModal({ show, onClose }: FoundationModalProps)
   const [userStatus, setUserStatus] = useState<UserStatus | null>(null);
   const [checkingUser, setCheckingUser] = useState(false);
   const [magicLinkSent, setMagicLinkSent] = useState(false);
+  const [isLoginMode, setIsLoginMode] = useState(false);
 
   useEffect(() => {
     if (show) {
@@ -314,30 +315,32 @@ export default function FoundationModal({ show, onClose }: FoundationModalProps)
           </div>
         </div>
 
-        {/* Pricing */}
-        <div style={{ marginBottom: '32px' }}>
-          <div
-            style={{
-              fontSize: '32px',
-              fontWeight: 100,
-              color: '#fff',
-              marginBottom: '4px'
-            }}
-          >
-            €{stats.currentPrice}
+        {/* Pricing - Only show in purchase mode */}
+        {!isLoginMode && (
+          <div style={{ marginBottom: '32px' }}>
+            <div
+              style={{
+                fontSize: '32px',
+                fontWeight: 100,
+                color: '#fff',
+                marginBottom: '4px'
+              }}
+            >
+              €{stats.currentPrice}
+            </div>
+            <div
+              style={{
+                fontSize: '12px',
+                color: '#666',
+                fontWeight: 300,
+                textTransform: 'uppercase',
+                letterSpacing: '0.5px'
+              }}
+            >
+              {stats.isAvailable ? 'Foundation Access' : 'Early Adopter'}
+            </div>
           </div>
-          <div
-            style={{
-              fontSize: '12px',
-              color: '#666',
-              fontWeight: 300,
-              textTransform: 'uppercase',
-              letterSpacing: '0.5px'
-            }}
-          >
-            {stats.isAvailable ? 'Foundation Access' : 'Early Adopter'}
-          </div>
-        </div>
+        )}
 
         {/* Form */}
         <div style={{ marginBottom: '24px' }}>
@@ -397,8 +400,8 @@ export default function FoundationModal({ show, onClose }: FoundationModalProps)
             </div>
           )}
 
-          {/* First name input - only show for new users or if magic link not sent */}
-          {(!userStatus?.exists || !userStatus.isActive) && !magicLinkSent && (
+          {/* First name input - only show in purchase mode and for new users */}
+          {!isLoginMode && (!userStatus?.exists || !userStatus.isActive) && !magicLinkSent && (
             <input
               type="text"
               placeholder="First name (optional)"
@@ -488,7 +491,7 @@ export default function FoundationModal({ show, onClose }: FoundationModalProps)
               marginBottom: '20px'
             }}
           >
-            {loading ? 'Processing...' : 'Continue with purchase'}
+            {loading ? 'Processing...' : isLoginMode ? 'Access your account' : 'Continue with purchase'}
           </button>
         )}
 
@@ -528,6 +531,22 @@ export default function FoundationModal({ show, onClose }: FoundationModalProps)
             Foundation pricing available through January
           </div>
         )}
+
+        {/* Ultra-minimal login toggle */}
+        <div
+          style={{
+            fontSize: '12px',
+            color: 'rgba(255,255,255,0.4)',
+            marginTop: '8px',
+            cursor: 'pointer',
+            transition: 'color 0.2s'
+          }}
+          onMouseEnter={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.7)'}
+          onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.4)'}
+          onClick={() => setIsLoginMode(!isLoginMode)}
+        >
+          {isLoginMode ? 'New member? →' : 'Already a member? →'}
+        </div>
 
         <style>{`
           @keyframes fadeIn {
