@@ -6,7 +6,27 @@ const detectLanguage = (): 'de' | 'en' => {
   return hasGerman ? 'de' : 'en';
 };
 
-export const currentLang = detectLanguage();
+// Get language from localStorage or fallback to browser detection
+const getStoredLanguage = (): 'de' | 'en' => {
+  try {
+    const stored = localStorage.getItem('signal_noise_language') as 'de' | 'en' | null;
+    return stored || detectLanguage();
+  } catch {
+    return detectLanguage();
+  }
+};
+
+export let currentLang = getStoredLanguage();
+
+// Function to change language at runtime
+export const setLanguage = (lang: 'de' | 'en') => {
+  currentLang = lang;
+  try {
+    localStorage.setItem('signal_noise_language', lang);
+  } catch {
+    // Ignore localStorage errors
+  }
+};
 
 // Übersetzungen für alle UI-Texte
 const translations = {
@@ -124,12 +144,16 @@ const translations = {
   }
 };
 
-// Export selected translations
+// Get current translations
+export const getTranslations = () => translations[currentLang];
+
+// Export selected translations (legacy compatibility)
 export const t = translations[currentLang];
 
 // Helper function for time formatting with placeholders
-export const formatTime = (key: keyof typeof t, replacements?: Record<string, string | number>): string => {
-  let text = t[key] as string;
+export const formatTime = (key: string, replacements?: Record<string, string | number>): string => {
+  const currentTranslations = getTranslations();
+  let text = (currentTranslations as any)[key] as string;
 
   if (replacements) {
     Object.entries(replacements).forEach(([placeholder, value]) => {

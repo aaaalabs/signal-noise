@@ -23,7 +23,15 @@ export const config = {
 }
 
 export default async function handler(req, res) {
+  console.log('🎯 Webhook endpoint hit!', {
+    method: req.method,
+    url: req.url,
+    headers: Object.keys(req.headers),
+    timestamp: new Date().toISOString()
+  });
+
   if (req.method !== 'POST') {
+    console.log('❌ Method not allowed:', req.method);
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
@@ -47,11 +55,15 @@ export default async function handler(req, res) {
   // First, try to get raw body for signature verification
   const chunks = [];
   try {
+    console.log('📥 Attempting to read raw body from request stream');
     for await (const chunk of req) {
       chunks.push(typeof chunk === 'string' ? Buffer.from(chunk) : chunk);
+      console.log('📥 Received chunk:', chunk.length, 'bytes');
     }
+    console.log('📥 Total chunks received:', chunks.length);
   } catch (error) {
-    console.log('⚠️ Raw body reading failed, will try parsed body');
+    console.log('⚠️ Raw body reading failed:', error.message);
+    console.log('🔄 Will try parsed body fallback');
     useRawBody = false;
   }
 
@@ -70,63 +82,113 @@ export default async function handler(req, res) {
       console.log('🔄 Falling back to parsed body (Vercel production mode)');
       useRawBody = false;
     }
+  } else if (useRawBody && chunks.length === 0) {
+    console.log('⚠️ No raw body chunks received, switching to parsed body mode');
+    useRawBody = false;
   }
 
   // Fallback: Use parsed body (development or Vercel production issue)
-  if (!useRawBody && req.body && typeof req.body === 'object') {
-    console.log('🚧 Using parsed body directly (signature verification bypassed)');
-    event = req.body;
-  } else if (!useRawBody) {
-    console.error('❌ No usable body found');
-    return res.status(400).json({ error: 'No request body available' });
+  if (!useRawBody) {
+    console.log('🔍 Checking req.body for fallback:', {
+      bodyExists: !!req.body,
+      bodyType: typeof req.body,
+      bodyKeys: req.body ? Object.keys(req.body) : [],
+      bodyString: req.body ? JSON.stringify(req.body).substring(0, 200) : 'null'
+    });
+
+    if (req.body && typeof req.body === 'object') {
+      console.log('🚧 Using parsed body directly (signature verification bypassed)');
+      event = req.body;
+    } else {
+      console.error('❌ No usable body found - neither raw nor parsed body available');
+      return res.status(400).json({ error: 'No request body available' });
+    }
   }
 
+  // Additional validation: ensure event object exists
+  if (!event) {
+    console.error('❌ Event object is null/undefined after processing');
+    return res.status(400).json({ error: 'Invalid event data' });
+  }
+
+  console.log('✅ Event processed successfully:', {
+    eventType: event.type || 'unknown',
+    eventId: event.id || 'unknown',
+    hasData: !!event.data,
+    hasObject: !!(event.data && event.data.object)
+  });
+
   try {
+    console.log('📨 Processing event:', {
+      type: event.type,
+      id: event.id || 'no-id',
+      created: event.created || 'no-timestamp'
+    });
+
     switch (event.type) {
       case 'checkout.session.completed':
+        console.log('🛒 Processing checkout.session.completed event');
         await handleCheckoutCompleted(event.data.object);
         break;
 
       case 'customer.subscription.created':
+        console.log('📝 Processing customer.subscription.created event');
         await handleSubscriptionCreated(event.data.object);
         break;
 
       case 'customer.subscription.updated':
+        console.log('✏️ Processing customer.subscription.updated event');
         await handleSubscriptionUpdated(event.data.object);
         break;
 
       case 'customer.subscription.deleted':
+        console.log('🗑️ Processing customer.subscription.deleted event');
         await handleSubscriptionDeleted(event.data.object);
         break;
 
       case 'invoice.payment_succeeded':
+        console.log('💰 Processing invoice.payment_succeeded event');
         await handlePaymentSucceeded(event.data.object);
         break;
 
       case 'invoice.payment_failed':
+        console.log('⚠️ Processing invoice.payment_failed event');
         await handlePaymentFailed(event.data.object);
         break;
 
       default:
-        console.log(`Unhandled event type: ${event.type}`);
+        console.log(`❓ Unhandled event type: ${event.type}`);
     }
 
+    console.log('✅ Webhook processing completed successfully');
     return res.status(200).json({ received: true });
 
   } catch (error) {
-    console.error('Webhook handler error:', error);
+    console.error('💥 Webhook handler error:', error);
+    console.error('Error stack:', error.stack);
     return res.status(500).json({ error: 'Webhook processing failed' });
   }
 }
 
 async function handleCheckoutCompleted(session) {
+  console.log('🚀 handleCheckoutCompleted called with session ID:', session.id);
+
   const { customer_email, customer, metadata, amount_total, mode } = session;
 
+  console.log('📧 Session Data:', {
+    customer_email,
+    customer,
+    metadata,
+    amount_total,
+    mode
+  });
+
   if (!customer_email) {
-    console.error('No customer email in checkout session');
+    console.error('❌ No customer email in checkout session');
     return;
   }
 
+  console.log('🔑 Generating access token for user:', customer_email);
   const accessToken = 'snk_' + randomBytes(32).toString('hex');
 
   // Determine payment type and tier
@@ -134,8 +196,16 @@ async function handleCheckoutCompleted(session) {
   const paymentType = isLifetime ? 'lifetime' : 'subscription';
   const tier = metadata?.tier || 'early_adopter';
 
+  console.log('💳 Payment Info:', {
+    isLifetime,
+    paymentType,
+    tier,
+    amount: amount_total / 100
+  });
+
   // Increment Foundation counter if Foundation member
   if (tier === 'foundation') {
+    console.log('🏛️ Incrementing Foundation counter');
     await incrementFoundation(redis);
   }
 
@@ -153,12 +223,38 @@ async function handleCheckoutCompleted(session) {
     last_payment: Date.now().toString()
   };
 
-  await setUser(redis, customer_email, userData);
+  console.log('👤 User data to store:', userData);
+
+  try {
+    console.log('💾 Attempting to store user in Redis with key: sn:u:' + customer_email);
+    await setUser(redis, customer_email, userData);
+    console.log('✅ User successfully stored in Redis');
+
+    // Verify the user was stored by reading it back
+    const storedUser = await redis.hgetall(`sn:u:${customer_email}`);
+    console.log('🔍 Verification - User stored in Redis:', storedUser);
+
+  } catch (error) {
+    console.error('❌ Failed to store user in Redis:', error);
+    console.error('Error details:', {
+      message: error.message,
+      stack: error.stack,
+      email: customer_email
+    });
+    throw error; // Re-throw to trigger webhook failure
+  }
 
   // Generate invoice number and store invoice data
+  console.log('📄 Generating invoice for payment');
   const invoiceNumber = await generateInvoiceNumber(redis);
   const invoiceDate = new Date().toLocaleDateString('en-US');
   const paymentDate = new Date().toLocaleDateString('en-US');
+
+  console.log('📄 Invoice details:', {
+    invoiceNumber,
+    invoiceDate,
+    paymentDate
+  });
 
   const invoiceData = {
     invoiceNumber: invoiceNumber,
@@ -172,26 +268,51 @@ async function handleCheckoutCompleted(session) {
     sessionId: session.id
   };
 
-  await setInvoice(redis, invoiceNumber, invoiceData);
+  try {
+    console.log('💾 Storing invoice in Redis');
+    await setInvoice(redis, invoiceNumber, invoiceData);
+    console.log('✅ Invoice stored successfully');
+  } catch (error) {
+    console.error('❌ Failed to store invoice:', error);
+    throw error;
+  }
 
   // Generate and store secure invoice token for GDPR compliance
-  const invoiceToken = await generateInvoiceToken(invoiceNumber, customer_email);
-  await setInvoiceToken(redis, invoiceToken, invoiceNumber);
+  try {
+    console.log('🔐 Generating secure invoice token');
+    const invoiceToken = await generateInvoiceToken(invoiceNumber, customer_email);
+    console.log('💾 Storing invoice token in Redis');
+    await setInvoiceToken(redis, invoiceToken, invoiceNumber);
+    console.log('✅ Invoice token stored successfully');
 
-  // Add invoice reference to user record for easy retrieval
-  await setUser(redis, customer_email, {
-    invoice_number: invoiceNumber,
-    invoice_token: invoiceToken,
-    invoice_date: invoiceDate
-  });
+    // Add invoice reference to user record for easy retrieval
+    console.log('🔄 Updating user record with invoice info');
+    await setUser(redis, customer_email, {
+      invoice_number: invoiceNumber,
+      invoice_token: invoiceToken,
+      invoice_date: invoiceDate
+    });
+    console.log('✅ User record updated with invoice info');
 
-  console.log(`Premium access granted for ${customer_email} (${paymentType}, ${tier})`);
-  console.log(`Invoice ${invoiceNumber} generated for payment ${session.id}`);
-  console.log(`Secure invoice token generated: ${invoiceToken.substring(0, 8)}...`);
+    console.log(`🎉 Premium access granted for ${customer_email} (${paymentType}, ${tier})`);
+    console.log(`📄 Invoice ${invoiceNumber} generated for payment ${session.id}`);
+    console.log(`🔐 Secure invoice token generated: ${invoiceToken.substring(0, 8)}...`);
 
-  // Send welcome email with secure invoice link
-  const tierName = tier === 'foundation' ? 'Foundation Member' : 'Early Adopter';
-  await sendWelcomeEmail(customer_email, userData.first_name, tierName, invoiceNumber, invoiceToken);
+    // Send welcome email with secure invoice link
+    try {
+      console.log('📧 Sending welcome email');
+      const tierName = tier === 'foundation' ? 'Foundation Member' : 'Early Adopter';
+      await sendWelcomeEmail(customer_email, userData.first_name, tierName, invoiceNumber, invoiceToken);
+      console.log('✅ Welcome email sent successfully');
+    } catch (error) {
+      console.error('❌ Failed to send welcome email:', error);
+      // Don't throw - email failure shouldn't fail the entire webhook
+    }
+
+  } catch (error) {
+    console.error('❌ Failed to process invoice/token:', error);
+    throw error;
+  }
 }
 
 async function handleSubscriptionCreated(subscription) {

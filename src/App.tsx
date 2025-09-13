@@ -15,6 +15,8 @@ import SuccessModal from './components/SuccessModal';
 import InvoicePage from './components/InvoicePage';
 import Footer from './components/Footer';
 import BrandIcon from './components/BrandIcon';
+import LanguageSwitcher from './components/LanguageSwitcher';
+import { LanguageProvider } from './contexts/LanguageContext';
 import { checkAchievements } from './utils/achievements';
 import { handleStripeReturn } from './services/premiumService';
 
@@ -247,7 +249,7 @@ function App() {
 
 
   return (
-    <>
+    <LanguageProvider>
       {/* Onboarding */}
       <Onboarding
         show={showOnboarding}
@@ -273,6 +275,9 @@ function App() {
       <div className="container" style={{ position: 'relative' }}>
         {/* Brand Icon - Subtle Watermark */}
         <BrandIcon />
+
+        {/* Language Switcher - Ultra-minimal toggle */}
+        <LanguageSwitcher />
 
         {/* Header with Ratio */}
         <header className="header">
@@ -319,7 +324,7 @@ function App() {
         {/* Footer */}
         <Footer />
       </div>
-    </>
+    </LanguageProvider>
   );
 }
 
