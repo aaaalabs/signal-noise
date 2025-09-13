@@ -1,9 +1,5 @@
 {
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
-  ],
-  "env": {
-    "VITE_GROQ_API_KEY": "@groq_api_key",
-    "VITE_STRIPE_PUBLISHABLE_KEY": "@stripe_publishable_key"
-  }
+  ]
 }

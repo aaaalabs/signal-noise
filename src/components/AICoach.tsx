@@ -161,8 +161,8 @@ export default function AICoach({ tasks, currentRatio, firstName }: AICoachProps
                   cursor: 'pointer',
                   transition: 'color 0.2s'
                 }}
-                onMouseEnter={(e) => e.target.style.color = '#999'}
-                onMouseLeave={(e) => e.target.style.color = '#666'}
+                onMouseEnter={(e) => (e.target as HTMLButtonElement).style.color = '#999'}
+                onMouseLeave={(e) => (e.target as HTMLButtonElement).style.color = '#666'}
               >
                 Schließen
               </button>
@@ -171,7 +171,7 @@ export default function AICoach({ tasks, currentRatio, firstName }: AICoachProps
         </div>
       )}
 
-      <style jsx>{`
+      <style>{`
         @keyframes spin {
           0% { transform: rotate(0deg); }
           100% { transform: rotate(360deg); }
