@@ -8,7 +8,9 @@ export const keys = {
   fcount: () => `${PREFIX}fcount`,
   user: (email) => `${PREFIX}u:${email}`,
   core: () => `${PREFIX}core`,
-  magic: (token) => `${PREFIX}magic:${token}`
+  magic: (token) => `${PREFIX}magic:${token}`,
+  invoice: (invoiceNumber) => `${PREFIX}invoice:${invoiceNumber}`,
+  invoiceSeq: () => `${PREFIX}ivnr`
 };
 
 // Foundation counter operations
@@ -62,4 +64,18 @@ export async function verifyMagicToken(redis, token) {
 
 export async function deleteMagicToken(redis, token) {
   return await redis.del(keys.magic(token));
+}
+
+// Invoice operations
+export async function generateInvoiceNumber(redis) {
+  const sequence = await redis.incr(keys.invoiceSeq());
+  return `A${sequence.toString().padStart(8, '0')}`;
+}
+
+export async function getInvoice(redis, invoiceNumber) {
+  return await redis.hgetall(keys.invoice(invoiceNumber));
+}
+
+export async function setInvoice(redis, invoiceNumber, data) {
+  return await redis.hset(keys.invoice(invoiceNumber), data);
 }

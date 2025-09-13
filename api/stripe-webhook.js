@@ -1,7 +1,7 @@
 import { Redis } from '@upstash/redis';
 import Stripe from 'stripe';
 import { randomBytes } from 'crypto';
-import { keys, incrementFoundation, setUser } from './redis-helper.js';
+import { keys, incrementFoundation, setUser, generateInvoiceNumber, setInvoice } from './redis-helper.js';
 import { sendWelcomeEmail } from './email-helper.js';
 
 // Clean the Stripe secret key to remove any whitespace/newlines
@@ -155,7 +155,27 @@ async function handleCheckoutCompleted(session) {
 
   await setUser(redis, customer_email, userData);
 
+  // Generate invoice number and store invoice data
+  const invoiceNumber = await generateInvoiceNumber(redis);
+  const invoiceDate = new Date().toLocaleDateString('en-US');
+  const paymentDate = new Date().toLocaleDateString('en-US');
+
+  const invoiceData = {
+    invoiceNumber: invoiceNumber,
+    customerEmail: customer_email,
+    customerName: userData.first_name || customer_email,
+    tier: tier,
+    amount: (amount_total / 100).toString(),
+    invoiceDate: invoiceDate,
+    paymentDate: paymentDate,
+    paymentMethod: 'Stripe Payment',
+    sessionId: session.id
+  };
+
+  await setInvoice(redis, invoiceNumber, invoiceData);
+
   console.log(`Premium access granted for ${customer_email} (${paymentType}, ${tier})`);
+  console.log(`Invoice ${invoiceNumber} generated for payment ${session.id}`);
 
   // Send welcome email with magic link
   const tierName = tier === 'foundation' ? 'Foundation Member' : 'Early Adopter';

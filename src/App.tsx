@@ -12,6 +12,7 @@ import PatternWhisper from './components/PatternWhisper';
 import StreakIndicator from './components/StreakIndicator';
 import SuccessPage from './components/SuccessPage';
 import SuccessModal from './components/SuccessModal';
+import InvoicePage from './components/InvoicePage';
 import Footer from './components/Footer';
 import BrandIcon from './components/BrandIcon';
 import { checkAchievements } from './utils/achievements';
@@ -42,10 +43,21 @@ function App() {
   const [hasAchievement, setHasAchievement] = useState(false);
   const [showSuccessPage, setShowSuccessPage] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showInvoicePage, setShowInvoicePage] = useState(false);
+  const [invoiceId, setInvoiceId] = useState<string>('');
 
   // Load data from localStorage on mount
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
+
+    // Check for invoice page route (/invoice/A00000001)
+    const pathname = window.location.pathname;
+    const invoiceMatch = pathname.match(/^\/invoice\/([A-Z]\d{8})$/);
+    if (invoiceMatch) {
+      setInvoiceId(invoiceMatch[1]);
+      setShowInvoicePage(true);
+      return;
+    }
 
     // Check for payment success - show modal instead of separate page
     if (urlParams.get('payment') === 'success' && urlParams.get('session_id')) {
@@ -201,6 +213,11 @@ function App() {
   const currentRatio = calculateRatio();
   const todayTasks = getTodayTasks();
   const { earnedCount } = checkAchievements(data);
+
+  // Show Invoice Page if navigated to invoice route
+  if (showInvoicePage) {
+    return <InvoicePage invoiceId={invoiceId} />;
+  }
 
   // Show Success Page if coming from Stripe
   if (showSuccessPage) {
