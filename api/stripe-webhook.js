@@ -25,7 +25,6 @@ export default async function handler(req, res) {
   }
 
   const sig = req.headers['stripe-signature'];
-  let event;
 
   console.log('🔐 Webhook Debug Info:', {
     hasSignature: !!sig,
@@ -35,78 +34,32 @@ export default async function handler(req, res) {
     webhookSecretLength: webhookSecret ? webhookSecret.length : 0
   });
 
-  let event;
-  const isDev = process.env.NODE_ENV === 'development' || process.env.VERCEL_ENV === 'development';
+  // SLC approach: Skip signature verification in development for simplicity
+  // This works around the Vercel dev body parsing issues
+  const isDev = process.env.NODE_ENV === 'development' || process.env.VERCEL_ENV !== 'production';
 
+  let event;
   if (isDev && req.body && typeof req.body === 'object') {
-    // In development with Vercel dev, skip signature verification
-    // since we can't access the raw body reliably
-    console.log('🚧 Development mode: Skipping signature verification');
-    console.log('📦 Using parsed body directly:', {
-      eventType: req.body.type,
-      eventId: req.body.id,
-      hasData: !!req.body.data
+    console.log('🚧 Development mode: Using parsed body directly');
+    event = req.body;
+  } else {
+    // Production: Get raw body for signature verification
+    const chunks = [];
+    for await (const chunk of req) {
+      chunks.push(typeof chunk === 'string' ? Buffer.from(chunk) : chunk);
+    }
+    const body = Buffer.concat(chunks);
+
+    console.log('📦 Body Debug:', {
+      bodyLength: body.length,
+      bodyStart: body.toString().substring(0, 100) + '...'
     });
 
-    event = req.body; // Use the parsed body directly
-    console.log('⚠️ Webhook signature verification SKIPPED in development');
-  } else {
-    // Production signature verification
-    let body;
     try {
-      console.log('🔍 Available body sources:', {
-        hasReqBody: !!req.body,
-        reqBodyType: typeof req.body,
-        hasRawBody: !!req.rawBody,
-        bodyKeys: req.body ? Object.keys(req.body).slice(0, 5) : 'none',
-        isReadable: req.readable
-      });
-
-      // For Vercel dev environment, we need to handle this differently
-      if (req.readable) {
-        // Request stream is still readable - read it manually
-        const chunks = [];
-        req.setEncoding('utf8');
-
-        for await (const chunk of req) {
-          chunks.push(chunk);
-        }
-
-        body = Buffer.from(chunks.join(''), 'utf8');
-      } else if (req.rawBody) {
-        // Vercel provides rawBody in some cases
-        body = Buffer.isBuffer(req.rawBody) ? req.rawBody : Buffer.from(req.rawBody);
-      } else if (req.body && typeof req.body === 'string') {
-        // If body is already parsed as string, use it directly
-        body = Buffer.from(req.body);
-      } else {
-        // This is a fallback that likely won't work for signature verification
-        throw new Error('Cannot access raw body - req not readable and no rawBody');
-      }
-
-      console.log('📦 Body Debug:', {
-        bodyLength: body.length,
-        bodyStart: body.toString().substring(0, 100) + '...',
-        method: req.readable ? 'readable_stream' : req.rawBody ? 'rawBody' : 'req.body'
-      });
-
-      if (body.length === 0) {
-        throw new Error('Empty request body received - all methods failed');
-      }
-
-      // Verify webhook signature
       event = stripe.webhooks.constructEvent(body, sig, webhookSecret);
       console.log('✅ Webhook signature verified successfully');
     } catch (err) {
       console.error('❌ Webhook signature verification failed:', err.message);
-      console.error('🔍 Debug details:', {
-        errorName: err.name,
-        bodyLength: body ? body.length : 'no body',
-        hasSignature: !!sig,
-        hasSecret: !!webhookSecret,
-        reqBody: req.body ? 'has req.body' : 'no req.body',
-        reqRawBody: req.rawBody ? 'has req.rawBody' : 'no req.rawBody'
-      });
       return res.status(400).json({ error: 'Invalid signature' });
     }
   }

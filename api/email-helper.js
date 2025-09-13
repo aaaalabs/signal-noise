@@ -4,7 +4,7 @@
 import { Resend } from 'resend';
 
 // Signal/Noise sender configuration
-const SENDER_EMAIL = 'noreply@my.signal-noise.app';
+const SENDER_EMAIL = 'noreply@signal-noise.app';
 const SENDER_NAME = 'Signal/Noise';
 const FROM_ADDRESS = `${SENDER_NAME} <${SENDER_EMAIL}>`;
 
