@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { getCoachAdvice } from '../services/groqService';
 import type { CoachResponse } from '../services/groqService';
 import type { Task, CoachPayload } from '../types';
@@ -36,10 +36,35 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
   const [showPremiumModal, setShowPremiumModal] = useState(false);
   const [showFoundationModal, setShowFoundationModal] = useState(false);
   const [showNameModal, setShowNameModal] = useState(false);
+  const [isPremium, setIsPremium] = useState(false);
 
-  // Check if user has premium access using premium service
-  const premiumStatus = checkPremiumStatus();
-  const isPremium = premiumStatus.isActive;
+  // Check premium status on mount and listen for changes
+  useEffect(() => {
+    const checkPremium = () => {
+      const premiumStatus = checkPremiumStatus();
+      setIsPremium(premiumStatus.isActive);
+    };
+
+    // Initial check
+    checkPremium();
+
+    // Listen for storage changes (when SuccessModal activates premium)
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === 'premiumStatus' || e.key === 'premiumActive') {
+        checkPremium();
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    // Also check periodically in case storage event doesn't fire
+    const interval = setInterval(checkPremium, 1000);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      clearInterval(interval);
+    };
+  }, []);
 
   const handleCoachClick = () => {
     // If not premium, show Foundation modal
