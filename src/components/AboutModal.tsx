@@ -193,22 +193,13 @@ export default function AboutModal({ show, onClose }: AboutModalProps) {
                 {isGerman ? 'Binäre Entscheidung: Jede Aufgabe ist entweder Signal oder Noise' : 'Binary Decision: Each task is either Signal or Noise'}
               </li>
               <li style={{ marginBottom: '0.5rem' }}>
-                {isGerman ? 'Live Ratio-Anzeige: Sieh sofort dein aktuelles Signal-zu-Noise-Verhältnis' : 'Live Ratio Display: See your current Signal-to-Noise ratio instantly'}
+                {isGerman ? 'Live Ratio-Anzeige: Sofortige Produktivitätsmessung' : 'Live Ratio Display: Instant productivity measurement'}
               </li>
               <li style={{ marginBottom: '0.5rem' }}>
-                {isGerman ? '8 Meilensteine: Freischaltbare Achievements für konsistente Nutzung' : '8 Milestones: Unlockable achievements for consistent use'}
+                {isGerman ? '100% Privat: Alle Daten bleiben in deinem Browser' : '100% Private: All data stays in your browser'}
               </li>
               <li style={{ marginBottom: '0.5rem' }}>
-                {isGerman ? '100% Privat: Alle Daten bleiben in deinem Browser (LocalStorage)' : '100% Private: All data stays in your browser (LocalStorage)'}
-              </li>
-              <li style={{ marginBottom: '0.5rem' }}>
-                {isGerman ? 'Premium Sync: Verschlüsselte Datensynchronisation über Geräte' : 'Premium Sync: Encrypted data synchronization across devices'}
-              </li>
-              <li style={{ marginBottom: '0.5rem' }}>
-                {isGerman ? 'Daten Export: Cmd+E für sofortigen JSON-Export deiner Daten' : 'Data Export: Cmd+E for instant JSON export of your data'}
-              </li>
-              <li style={{ marginBottom: '0.5rem' }}>
-                {isGerman ? 'Offline-fähig: Funktioniert ohne Internetverbindung (PWA)' : 'Offline Capable: Works without internet connection (PWA)'}
+                {isGerman ? 'Offline-fähig: Funktioniert ohne Internetverbindung' : 'Offline Capable: Works without internet connection'}
               </li>
             </ul>
           </div>
