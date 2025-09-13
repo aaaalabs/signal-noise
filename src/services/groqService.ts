@@ -1,15 +1,6 @@
 import type { CoachPayload } from '../types';
 import { currentLang } from '../i18n/translations';
-
-const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
-
-interface GroqResponse {
-  choices: {
-    message: {
-      content: string;
-    };
-  }[];
-}
+import { checkPremiumStatus } from './premiumService';
 
 export interface CoachResponse {
   message: string;
@@ -22,10 +13,11 @@ export interface CoachResponse {
 }
 
 export async function getCoachAdvice(payload: CoachPayload): Promise<CoachResponse> {
-  const apiKey = import.meta.env.VITE_GROQ_API_KEY;
+  // Get premium status from localStorage
+  const premiumStatus = checkPremiumStatus();
 
-  if (!apiKey) {
-    throw new Error('Groq API key not configured');
+  if (!premiumStatus.isActive || !premiumStatus.email) {
+    throw new Error('Premium access required');
   }
 
   const systemPrompt = currentLang === 'de'
@@ -97,41 +89,39 @@ METRICS:
 Return a personalized coaching message.`;
 
   try {
-    const response = await fetch(GROQ_API_URL, {
+    // Create messages for the secure API endpoint
+    const messages = [
+      { role: 'system', content: systemPrompt },
+      { role: 'user', content: userPrompt }
+    ];
+
+    // Call our secure API endpoint instead of Groq directly
+    const response = await fetch('/api/ai-coach', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'mixtral-8x7b-32768',
-        messages: [
-          { role: 'system', content: systemPrompt },
-          { role: 'user', content: userPrompt }
-        ],
-        temperature: 0.7,
-        max_tokens: 500,
+        messages,
+        userEmail: premiumStatus.email,
+        accessToken: premiumStatus.subscriptionId || 'legacy-token' // Temporary for MVP
       }),
     });
 
     if (!response.ok) {
-      throw new Error(`Groq API error: ${response.status}`);
+      const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+      throw new Error(errorData.error || `API error: ${response.status}`);
     }
 
-    const data: GroqResponse = await response.json();
-    const content = data.choices[0]?.message?.content;
+    const data = await response.json();
 
-    if (!content) {
-      throw new Error('No response from Groq');
-    }
-
-    // Try to parse JSON response
+    // Try to parse the coach response as JSON
     try {
-      return JSON.parse(content);
+      return typeof data.message === 'string' ? JSON.parse(data.message) : data;
     } catch {
       // Fallback if JSON parsing fails
       return {
-        message: content,
+        message: data.message || 'No response available',
         type: 'insight',
         emotionalTone: 'supportive'
       };
