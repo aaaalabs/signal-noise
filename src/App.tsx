@@ -35,7 +35,7 @@ const initialData: AppData = {
   }
 };
 
-function App() {
+function AppContent() {
   const t = useTranslation();
   const [data, setData] = useState<AppData>(initialData);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -250,7 +250,7 @@ function App() {
 
 
   return (
-    <LanguageProvider>
+    <>
       {/* Onboarding */}
       <Onboarding
         show={showOnboarding}
@@ -325,6 +325,15 @@ function App() {
         {/* Footer */}
         <Footer />
       </div>
+    </>
+  );
+}
+
+// Main App component that provides the LanguageProvider
+function App() {
+  return (
+    <LanguageProvider>
+      <AppContent />
     </LanguageProvider>
   );
 }
