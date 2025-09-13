@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { t } from '../i18n/translations';
+import { useTranslation } from '../contexts/LanguageContext';
 
 interface OnboardingProps {
   show: boolean;
@@ -7,6 +7,8 @@ interface OnboardingProps {
 }
 
 export default function Onboarding({ show, onComplete }: OnboardingProps) {
+  const t = useTranslation();
+
   useEffect(() => {
     if (show) {
       document.body.style.overflow = 'hidden';

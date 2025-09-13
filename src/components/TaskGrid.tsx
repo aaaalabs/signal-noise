@@ -1,5 +1,6 @@
 import type { Task } from '../types';
-import { t, formatTime } from '../i18n/translations';
+import { useTranslation } from '../contexts/LanguageContext';
+import { formatTime } from '../i18n/translations';
 
 interface TaskGridProps {
   tasks: Task[];
@@ -7,6 +8,8 @@ interface TaskGridProps {
 }
 
 function TaskItem({ task, onToggle }: { task: Task; onToggle: (id: number) => void }) {
+  const t = useTranslation();
+
   const formatTaskTime = (timestamp: string): string => {
     const date = new Date(timestamp);
     const now = new Date();
@@ -32,6 +35,7 @@ function TaskItem({ task, onToggle }: { task: Task; onToggle: (id: number) => vo
 }
 
 export default function TaskGrid({ tasks, onToggle }: TaskGridProps) {
+  const t = useTranslation();
   const signalTasks = tasks.filter(task => task.type === 'signal');
   const noiseTasks = tasks.filter(task => task.type === 'noise');
 

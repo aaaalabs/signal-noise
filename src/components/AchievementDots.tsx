@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { AppData } from '../types';
 import { createBadgeDefinitions } from '../utils/achievements';
-import { t } from '../i18n/translations';
+import { useTranslation } from '../contexts/LanguageContext';
 
 interface AchievementDotsProps {
   data: AppData;
@@ -9,6 +9,7 @@ interface AchievementDotsProps {
 }
 
 export default function AchievementDots({ data, earnedCount }: AchievementDotsProps) {
+  const t = useTranslation();
   const [showTooltip, setShowTooltip] = useState(false);
   const badgeDefinitions = createBadgeDefinitions(data);
   const totalBadges = badgeDefinitions.length;

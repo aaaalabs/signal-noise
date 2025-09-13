@@ -1,5 +1,5 @@
 import type { Task, DayRatio } from '../types';
-import { t } from '../i18n/translations';
+import { useTranslation } from '../contexts/LanguageContext';
 import PatternInsights from './PatternInsights';
 
 interface AnalyticsProps {
@@ -8,6 +8,7 @@ interface AnalyticsProps {
 }
 
 export default function Analytics({ tasks }: AnalyticsProps) {
+  const t = useTranslation();
   const calculateDailyRatios = (): number[] => {
     const ratios: number[] = [];
     for (let i = 29; i >= 0; i--) {

@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { t } from '../i18n/translations';
+import { useTranslation } from '../contexts/LanguageContext';
 
 interface TaskInputProps {
   onAdd: (text: string, type: 'signal' | 'noise') => void;
 }
 
 export default function TaskInput({ onAdd }: TaskInputProps) {
+  const t = useTranslation();
   const [inputValue, setInputValue] = useState('');
   const [showButtons, setShowButtons] = useState(false);
   const [selectedType, setSelectedType] = useState<'signal' | 'noise'>('signal'); // Default to Signal (matches visual hierarchy)

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { getCoachAdvice } from '../services/groqService';
 import type { CoachResponse } from '../services/groqService';
 import type { Task, CoachPayload } from '../types';
-import { t } from '../i18n/translations';
+import { useTranslation } from '../contexts/LanguageContext';
 import { calculateStreak, getAverageRatio } from '../utils/achievements';
 import {
   getBestProductiveHour,
@@ -28,6 +28,7 @@ interface AICoachProps {
 }
 
 export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, data }: AICoachProps) {
+  const t = useTranslation();
   const [coachResponse, setCoachResponse] = useState<CoachResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [showCoach, setShowCoach] = useState(false);

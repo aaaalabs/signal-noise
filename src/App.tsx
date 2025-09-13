@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import type { Task, AppData } from './types';
-import { t } from './i18n/translations';
+import { useTranslation } from './contexts/LanguageContext';
 import RatioDisplay from './components/RatioDisplay';
 import TaskInput from './components/TaskInput';
 import TaskGrid from './components/TaskGrid';
@@ -36,6 +36,7 @@ const initialData: AppData = {
 };
 
 function App() {
+  const t = useTranslation();
   const [data, setData] = useState<AppData>(initialData);
   const [isLoaded, setIsLoaded] = useState(false);
   const [showOnboarding, setShowOnboarding] = useState(false);

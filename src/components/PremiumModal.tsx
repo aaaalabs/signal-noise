@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { t } from '../i18n/translations';
+import { useTranslation } from '../contexts/LanguageContext';
 
 interface PremiumModalProps {
   show: boolean;
@@ -7,6 +7,7 @@ interface PremiumModalProps {
 }
 
 export default function PremiumModal({ show, onClose }: PremiumModalProps) {
+  const t = useTranslation();
   const [email, setEmail] = useState('');
   const [isValidEmail, setIsValidEmail] = useState(true);
 

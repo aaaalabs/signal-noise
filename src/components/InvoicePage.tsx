@@ -270,8 +270,8 @@ export default function InvoicePage({ invoiceId, token }: InvoicePageProps) {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'flex-start',
-          marginBottom: '80px',
-          paddingBottom: '40px',
+          marginBottom: '60px',
+          paddingBottom: '30px',
           borderBottom: '1px solid #111'
         }}>
           <div>
@@ -329,8 +329,8 @@ export default function InvoicePage({ invoiceId, token }: InvoicePageProps) {
         <div className="invoice-details" style={{
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',
-          gap: '60px',
-          marginBottom: '80px'
+          gap: '50px',
+          marginBottom: '50px'
         }}>
           {/* Billing Details */}
           <div>
@@ -460,8 +460,8 @@ export default function InvoicePage({ invoiceId, token }: InvoicePageProps) {
 
         {/* Service Description */}
         <div className="service-description" style={{
-          marginBottom: '60px',
-          padding: '40px 0',
+          marginBottom: '40px',
+          padding: '30px 0',
           borderTop: '1px solid #111',
           borderBottom: '1px solid #111'
         }}>
@@ -492,7 +492,7 @@ export default function InvoicePage({ invoiceId, token }: InvoicePageProps) {
         <div style={{
           display: 'flex',
           justifyContent: 'flex-end',
-          marginBottom: '60px'
+          marginBottom: '40px'
         }}>
           <div style={{
             textAlign: 'right'
@@ -518,11 +518,11 @@ export default function InvoicePage({ invoiceId, token }: InvoicePageProps) {
 
         {/* Payment Status */}
         <div className="payment-status" style={{
-          padding: '24px',
+          padding: '20px',
           border: '1px solid #00ff88',
           borderRadius: '8px',
           textAlign: 'center',
-          marginBottom: '80px',
+          marginBottom: '40px',
           background: 'rgba(0, 255, 136, 0.05)'
         }}>
           <div className="paid-status" style={{
@@ -567,98 +567,266 @@ export default function InvoicePage({ invoiceId, token }: InvoicePageProps) {
           @media print {
             @page {
               size: A4;
-              margin: 0.5in;
+              margin: 0.75in 1in;
+            }
+
+            * {
+              box-sizing: border-box;
             }
 
             body {
               margin: 0;
               padding: 0;
               background: white !important;
-              color: black !important;
-              font-size: 12px;
-              line-height: 1.4;
+              color: #000 !important;
+              font-size: 11pt;
+              line-height: 1.3;
+              font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
             }
 
+            /* Reset all backgrounds and colors for print */
             * {
               background: white !important;
-              color: black !important;
+              color: #000 !important;
               -webkit-print-color-adjust: exact;
               print-color-adjust: exact;
             }
 
-            /* Keep Signal/Noise branding color */
+            /* Keep Signal/Noise branding elements - make them bold black for print */
             div[style*="color: #00ff88"],
             .invoice-number,
             .paid-status {
-              color: #00ff88 !important;
+              color: #000 !important;
+              font-weight: 700 !important;
             }
 
-            /* Logo styling for print */
+            /* Convert all green borders to black for print */
+            div[style*="border: '1px solid #00ff88'"],
+            div[style*="border: 1px solid #00ff88"],
+            .payment-status {
+              border-color: #000 !important;
+              background: #f9f9f9 !important;
+            }
+
+            /* Convert green button borders to black */
+            button[style*="border: '1px solid #00ff88'"],
+            button[style*="border: 1px solid #00ff88"] {
+              border-color: #000 !important;
+              color: #000 !important;
+            }
+
+            /* Ensure SVG logo prints as black */
+            svg path[fill="#00ff88"],
+            svg path[stroke="#00ff88"] {
+              fill: #000 !important;
+              stroke: #000 !important;
+            }
+
+            /* Logo - make it print-friendly */
             svg {
-              width: 32px !important;
-              height: 32px !important;
+              width: 28pt !important;
+              height: 28pt !important;
+              margin-bottom: 8pt !important;
             }
 
             svg path {
-              fill: #00ff88 !important;
-              stroke: #00ff88 !important;
+              fill: #000 !important;
+              stroke: #000 !important;
+              stroke-width: 2 !important;
+            }
+
+            /* Container adjustments */
+            .invoice-container {
+              padding: 0 !important;
+              max-width: 100% !important;
+              margin: 0 !important;
+            }
+
+            /* Header optimizations */
+            .invoice-header {
+              margin-bottom: 20pt !important;
+              padding-bottom: 16pt !important;
+              border-bottom: 1pt solid #ccc !important;
+            }
+
+            /* Brand section */
+            .invoice-header > div:first-child {
+              margin-bottom: 0 !important;
+            }
+
+            .invoice-header div[style*="fontSize: '28px'"] {
+              font-size: 18pt !important;
+              font-weight: 500 !important;
+              margin-bottom: 4pt !important;
+              letter-spacing: -0.5pt !important;
+            }
+
+            .invoice-header div[style*="fontSize: '13px'"] {
+              font-size: 8pt !important;
+              color: #666 !important;
+              text-transform: uppercase !important;
+              letter-spacing: 0.5pt !important;
+            }
+
+            /* Invoice title and number */
+            .invoice-header div[style*="fontSize: '48px'"] {
+              font-size: 24pt !important;
+              font-weight: 300 !important;
+              margin-bottom: 4pt !important;
+            }
+
+            .invoice-number {
+              font-size: 12pt !important;
+              font-family: "SF Mono", Monaco, "Consolas", monospace !important;
+              font-weight: 500 !important;
+            }
+
+            /* Grid layout adjustments */
+            .invoice-details {
+              grid-template-columns: 1fr 1fr !important;
+              gap: 30pt !important;
+              margin-bottom: 20pt !important;
+            }
+
+            /* Section headers */
+            div[style*="textTransform: 'uppercase'"][style*="fontSize: '12px'"] {
+              font-size: 9pt !important;
+              font-weight: 600 !important;
+              color: #333 !important;
+              margin-bottom: 12pt !important;
+              letter-spacing: 0.5pt !important;
+            }
+
+            /* Customer details */
+            div[style*="fontSize: '16px'"][style*="fontWeight: 400"] {
+              font-size: 11pt !important;
+              font-weight: 500 !important;
+              margin-bottom: 6pt !important;
+            }
+
+            div[style*="fontSize: '14px'"][style*="color: '#ccc'"],
+            div[style*="fontSize: '14px'"][style*="color: '#999'"] {
+              font-size: 10pt !important;
+              color: #666 !important;
+              margin-bottom: 4pt !important;
+            }
+
+            /* Service description */
+            .service-description {
+              margin-bottom: 16pt !important;
+              padding: 12pt 0 !important;
+              border-top: 1pt solid #ccc !important;
+              border-bottom: 1pt solid #ccc !important;
+            }
+
+            .service-description div[style*="fontSize: '16px'"] {
+              font-size: 11pt !important;
+              font-weight: 500 !important;
+            }
+
+            .service-description div[style*="fontSize: '14px'"] {
+              font-size: 9pt !important;
+              color: #666 !important;
+            }
+
+            .service-description div[style*="fontSize: '24px'"] {
+              font-size: 14pt !important;
+              font-weight: 500 !important;
+              font-family: "SF Mono", Monaco, "Consolas", monospace !important;
+            }
+
+            /* Total section */
+            div[style*="fontSize: '36px'"] {
+              font-size: 20pt !important;
+              font-weight: 400 !important;
+              font-family: "SF Mono", Monaco, "Consolas", monospace !important;
             }
 
             /* Payment status box */
-            div[style*="background: rgba(0, 255, 136, 0.05)"] {
-              background: #f8f8f8 !important;
-              border: 1px solid #00ff88 !important;
+            .payment-status {
+              background: #f9f9f9 !important;
+              border: 1.5pt solid #000 !important;
+              border-radius: 6pt !important;
+              padding: 10pt !important;
+              margin-bottom: 16pt !important;
               page-break-inside: avoid;
             }
 
-            /* Hide interactive elements */
+            .paid-status {
+              font-size: 11pt !important;
+              font-weight: 700 !important;
+              margin-bottom: 4pt !important;
+              letter-spacing: 1pt !important;
+            }
+
+            .payment-status div[style*="fontSize: '12px'"] {
+              font-size: 9pt !important;
+              color: #666 !important;
+            }
+
+            /* Footer */
+            .invoice-footer {
+              font-size: 8pt !important;
+              color: #666 !important;
+              text-align: center !important;
+              line-height: 1.4 !important;
+              margin-top: 16pt !important;
+              padding-top: 12pt !important;
+              border-top: 0.5pt solid #ddd !important;
+            }
+
+            .invoice-footer div:first-child {
+              font-weight: 500 !important;
+              margin-bottom: 8pt !important;
+            }
+
+            /* Hide all interactive elements */
             button,
-            div[style*="position: absolute"] {
+            div[style*="position: absolute"],
+            input,
+            textarea {
               display: none !important;
             }
 
-            /* Form elements for print */
-            input, textarea {
-              border: none !important;
-              background: white !important;
-              padding: 0 !important;
-              box-shadow: none !important;
-              outline: none !important;
+            /* Show static content for inputs when editing */
+            .print-static {
+              display: block !important;
             }
 
-            /* Prevent page breaks in key sections */
+            /* Page break controls */
             .invoice-header,
             .invoice-details,
-            .service-description,
-            .payment-status {
+            .service-description {
               page-break-inside: avoid;
             }
 
-            /* Compact spacing for print */
-            .invoice-container {
-              padding: 20px !important;
-              max-width: 100% !important;
+            .payment-status {
+              page-break-before: avoid;
+              page-break-inside: avoid;
             }
 
-            /* Reduce margins for print */
-            div[style*="marginBottom: '80px'"] {
-              margin-bottom: 40px !important;
-            }
-
-            div[style*="marginBottom: '60px'"] {
-              margin-bottom: 30px !important;
-            }
-
-            /* Footer adjustments */
             .invoice-footer {
-              font-size: 10px !important;
-              margin-top: 40px !important;
+              page-break-before: avoid;
             }
 
-            /* Drop shadows removal */
+            /* Ensure proper spacing */
             * {
               filter: none !important;
               box-shadow: none !important;
+              text-shadow: none !important;
+            }
+
+            /* Improve text rendering */
+            * {
+              -webkit-font-smoothing: auto !important;
+              -moz-osx-font-smoothing: auto !important;
+            }
+          }
+
+          /* Screen-only styles */
+          @media screen {
+            .print-static {
+              display: none;
             }
           }
         `}

@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import type { Task } from '../types';
 import { getStreakData } from '../utils/achievements';
-import { currentLang } from '../i18n/translations';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface StreakIndicatorProps {
   tasks: Task[];
 }
 
 export default function StreakIndicator({ tasks }: StreakIndicatorProps) {
+  const { currentLanguage } = useLanguage();
   const [showMilestone, setShowMilestone] = useState(false);
   const { streak, isMilestone } = getStreakData(tasks);
 
@@ -25,7 +26,7 @@ export default function StreakIndicator({ tasks }: StreakIndicatorProps) {
     return null;
   }
 
-  const dayText = currentLang === 'de' ? 'Tag' : 'Day';
+  const dayText = currentLanguage === 'de' ? 'Tag' : 'Day';
 
   return (
     <span
