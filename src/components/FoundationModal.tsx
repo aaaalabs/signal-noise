@@ -110,6 +110,9 @@ export default function FoundationModal({ show, onClose }: FoundationModalProps)
       const data = await response.json();
 
       if (data.url) {
+        // Store email for premium activation after payment success
+        localStorage.setItem('purchaseEmail', email.trim());
+
         // Redirect to Stripe Checkout
         window.location.href = data.url;
       } else {

@@ -1,9 +1,55 @@
+import { useEffect, useState } from 'react';
+import { activatePremium } from '../services/premiumService';
+
 interface SuccessModalProps {
   show: boolean;
   onClose: () => void;
+  sessionId?: string;
 }
 
-export default function SuccessModal({ show, onClose }: SuccessModalProps) {
+export default function SuccessModal({ show, onClose, sessionId }: SuccessModalProps) {
+  const [sessionData, setSessionData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (show && sessionId) {
+      fetchSessionData();
+    }
+  }, [show, sessionId]);
+
+  const fetchSessionData = async () => {
+    try {
+      const response = await fetch(`/api/get-session?session_id=${sessionId}`);
+      if (response.ok) {
+        const data = await response.json();
+        setSessionData(data);
+      } else {
+        console.warn('Failed to fetch session data, using localStorage fallback');
+      }
+    } catch (error) {
+      console.warn('Session fetch error, using localStorage fallback:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleClose = () => {
+    // Get email from session data (most reliable) or localStorage fallback
+    const email = sessionData?.email || localStorage.getItem('purchaseEmail');
+
+    if (email) {
+      // Activate premium in localStorage
+      activatePremium(email, sessionId);
+
+      // Clean up stored email
+      localStorage.removeItem('purchaseEmail');
+
+      console.log('Premium activated for:', email);
+    }
+
+    onClose();
+  };
+
   if (!show) return null;
 
   return (
@@ -72,7 +118,8 @@ export default function SuccessModal({ show, onClose }: SuccessModalProps) {
 
         {/* Continue button */}
         <button
-          onClick={onClose}
+          onClick={handleClose}
+          disabled={loading}
           style={{
             width: '100%',
             padding: '12px 24px',
@@ -86,7 +133,7 @@ export default function SuccessModal({ show, onClose }: SuccessModalProps) {
             transition: 'all 0.2s ease'
           }}
         >
-          Continue
+          {loading ? 'Loading...' : 'Continue'}
         </button>
       </div>
     </div>

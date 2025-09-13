@@ -43,6 +43,7 @@ function App() {
   const [hasAchievement, setHasAchievement] = useState(false);
   const [showSuccessPage, setShowSuccessPage] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [paymentSessionId, setPaymentSessionId] = useState<string>('');
   const [showInvoicePage, setShowInvoicePage] = useState(false);
   const [invoiceId, setInvoiceId] = useState<string>('');
   const [invoiceToken, setInvoiceToken] = useState<string>('');
@@ -70,7 +71,9 @@ function App() {
     }
 
     // Check for payment success - show modal instead of separate page
-    if (urlParams.get('payment') === 'success' && urlParams.get('session_id')) {
+    const sessionId = urlParams.get('session_id');
+    if (urlParams.get('payment') === 'success' && sessionId) {
+      setPaymentSessionId(sessionId);
       setShowSuccessModal(true);
       // Clean URL after showing modal
       window.history.replaceState({}, '', window.location.pathname);
@@ -264,6 +267,7 @@ function App() {
       <SuccessModal
         show={showSuccessModal}
         onClose={() => setShowSuccessModal(false)}
+        sessionId={paymentSessionId}
       />
 
       <div className="container" style={{ position: 'relative' }}>
