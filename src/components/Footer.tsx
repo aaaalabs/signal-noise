@@ -309,7 +309,23 @@ export default function Footer() {
             fontSize: '11px',
             color: '#555'
           }}>
-            <div>(c) 2025 libralab.ai</div>
+            <div>
+              (c) 2025{' '}
+              <a
+                href="https://libralab.ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  color: '#555',
+                  textDecoration: 'none',
+                  transition: 'color 0.2s'
+                }}
+                onMouseEnter={(e) => (e.target as HTMLAnchorElement).style.color = '#888'}
+                onMouseLeave={(e) => (e.target as HTMLAnchorElement).style.color = '#555'}
+              >
+                libralab.ai
+              </a>
+            </div>
             <div>made with ♥ in austria</div>
           </div>
         </div>
