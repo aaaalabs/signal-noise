@@ -10,6 +10,8 @@ import Onboarding from './components/Onboarding';
 import AchievementGlow from './components/AchievementGlow';
 import PatternWhisper from './components/PatternWhisper';
 import StreakIndicator from './components/StreakIndicator';
+import PremiumLanding from './components/PremiumLanding';
+import SuccessPage from './components/SuccessPage';
 import { checkAchievements } from './utils/achievements';
 import { handleStripeReturn } from './services/premiumService';
 
@@ -36,9 +38,27 @@ function App() {
   const [whisperMessage, setWhisperMessage] = useState('');
   const [showWhisper, setShowWhisper] = useState(false);
   const [hasAchievement, setHasAchievement] = useState(false);
+  const [showPremiumLanding, setShowPremiumLanding] = useState(false);
+  const [showSuccessPage, setShowSuccessPage] = useState(false);
 
   // Load data from localStorage on mount
   useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+
+    // Check for success page
+    if (urlParams.get('session_id')) {
+      setShowSuccessPage(true);
+      return;
+    }
+
+    // Check for premium landing request
+    if (urlParams.get('premium') === 'true') {
+      setShowPremiumLanding(true);
+      // Clean URL
+      window.history.replaceState({}, '', window.location.pathname);
+      return;
+    }
+
     // Check for Stripe return and activate premium if successful
     const premiumActivated = handleStripeReturn();
     if (premiumActivated) {
@@ -179,6 +199,28 @@ function App() {
   const currentRatio = calculateRatio();
   const todayTasks = getTodayTasks();
   const { earnedCount } = checkAchievements(data);
+
+  // Show Success Page if coming from Stripe
+  if (showSuccessPage) {
+    return (
+      <SuccessPage
+        onContinue={() => {
+          setShowSuccessPage(false);
+          // Clean URL
+          window.history.replaceState({}, '', window.location.pathname);
+        }}
+      />
+    );
+  }
+
+  // Show Premium Landing if requested
+  if (showPremiumLanding) {
+    return (
+      <PremiumLanding
+        onBack={() => setShowPremiumLanding(false)}
+      />
+    );
+  }
 
   return (
     <>

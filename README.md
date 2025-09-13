@@ -1,18 +1,34 @@
-# Signal/Noise - Focus on What Matters
+# Signal/Noise
 
-## 🎯 What is Signal/Noise?
+A Jony Ive-inspired productivity app for mindful decision making. Transform your daily tasks into clear signals vs. noise decisions with beautiful, honest design.
 
-Signal/Noise is a minimalistic productivity app based on a simple principle: **80% of your time should be spent on important tasks (Signal), only 20% on distractions (Noise).**
+## ✨ Features
 
-The app runs 100% in your browser - no registration, no cloud, no data sharing. Your productivity data remains completely private on your device.
+- **Mindful Productivity**: Categorize tasks as Signal (important) or Noise (distractions)
+- **Visual Selection**: Honest UX where visual prominence matches behavior
+- **Achievement System**: 8 badges to motivate consistent good decisions
+- **Pattern Analysis**: AI insights into your productivity patterns
+- **Streak Tracking**: Build momentum with daily consistency
+- **Multilingual**: Automatic DE/EN detection based on browser settings
+- **PWA Ready**: Install as native app with offline support
 
-## 💡 The Philosophy
+## 🎯 Philosophy
 
-Inspired by Steve Jobs' productivity method: He defined "Signal" as the 3-5 most critical tasks that must be completed in the next 18 hours. Everything else is "Noise" - distraction from what truly matters.
+Following **SLC principles** (Simple, Loveable, Complete):
+- **Simple**: Clean, minimal interface inspired by Jony Ive's design philosophy
+- **Loveable**: Delightful micro-interactions and thoughtful UX
+- **Complete**: Full-featured productivity system with AI coaching
 
-**The Problem:** Most people spend 80% of their time on unimportant tasks and only 20% on what really counts.
+## 💡 Key UX Innovation
 
-**The Solution:** Signal/Noise makes this distribution visible and helps you reverse it.
+The app solves a common UX problem: **Enter key behavior now matches visual selection**. When "Signal" appears prominent, pressing Enter correctly selects Signal instead of defaulting to the wrong option.
+
+### Smart Input Controls
+- **Enter**: Confirms visually selected type
+- **Tab**: Switches between Signal/Noise
+- **Arrow Keys**: Direct selection
+- **Shift+Enter**: Power user shortcut for opposite selection
+- **Mouse Hover**: Updates selection state
 
 ## ✨ Features (Free & Forever)
 
@@ -124,11 +140,34 @@ The optional AI Coach (powered by Groq) acts as your personal accountability par
 4. **Decide:** Signal (S) or Noise (N)?
 5. **Watch your ratio** - aim for 80% Signal
 
-### Keyboard Shortcuts
-- `S` - Mark as Signal
-- `N` - Mark as Noise
-- `Enter` - Add new task
-- `Space` - Show/hide details
+## 🚀 Quick Start
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+```
+
+## 🏗 Tech Stack
+
+- **React 18** with TypeScript
+- **Vite** for fast development
+- **PWA** with service worker
+- **LocalStorage** for client-side persistence
+- **Groq AI** for coaching insights (premium)
+- **Stripe** for premium subscriptions
+
+## 🎨 Design System
+
+- **Colors**: Signal Green (`#00ff88`), Noise Gray (`#666`), Dark Background (`#000`)
+- **Typography**: Apple system fonts with careful hierarchy
+- **Interactions**: Subtle animations with haptic feedback
+- **Responsive**: Mobile-first design with desktop enhancements
 
 ### Best Practices
 1. **Morning Ritual:** Start each day with 3 Signal tasks
@@ -255,44 +294,84 @@ src/
 
 ## 💬 Support & Contact
 
-**Email:** support@signal-noise.app
-**Website:** signal-noise.app
-**GitHub:** github.com/signal-noise/app
+## 🤖 AI Coaching (Premium)
 
-## 📜 License & Credits
+Get personalized insights based on your actual data:
+- Pattern recognition in your decisions
+- Best productive hours analysis
+- Weekly trend analysis
+- Consistency scoring
+- Actionable recommendations
 
-**License:** MIT (Open Source)
-**Developed by:** Libra Innovation FlexCo
-**Inspired by:** Steve Jobs, Paul Graham, Jony Ive
-**AI Partner:** Groq (for Premium features)
+## 📱 Installation
+
+### As PWA
+1. Visit the app in your browser
+2. Look for "Install" or "Add to Home Screen"
+3. Enjoy native app experience
+
+### Development
+```bash
+git clone https://github.com/aaaalabs/signal-noise.git
+cd signal-noise
+npm install
+npm run dev
+```
+
+## 🌍 Deployment
+
+Optimized for **Vercel** with zero configuration:
+
+```bash
+npm run build
+# Deploy dist/ folder to any static host
+```
+
+## 🔐 Privacy
+
+- **Local First**: All data stored in browser localStorage
+- **No Tracking**: No analytics or third-party scripts
+- **Premium Only**: AI features require opt-in subscription
+- **Secure**: No sensitive data logged or transmitted
+
+## 🏆 Achievement System
+
+Unlock 8 carefully designed badges:
+- **First Steps**: Complete your first decision
+- **Week Warrior**: 7-day streak
+- **Month Hero**: 30-day streak
+- **Perfect Day**: 100% signal ratio
+- **Decision Master**: 100 total decisions
+- **Consistency King**: High consistency score
+- **Signal Surfer**: 500 signal tasks
+- **Zen Master**: Ultimate achievement
+
+## 🎯 Roadmap
+
+- [ ] Team collaboration features
+- [ ] Advanced pattern visualization
+- [ ] Integration with calendar apps
+- [ ] Custom achievement goals
+- [ ] Export/import functionality
+
+## 🤝 Contributing
+
+This is a focused, opinionated productivity tool. Contributions welcome for:
+- Bug fixes
+- Performance improvements
+- Accessibility enhancements
+- Translation improvements
+
+## 📄 License
+
+MIT License - See LICENSE file for details
+
+## 🙏 Inspiration
+
+Designed with deep respect for Jony Ive's principles of honest, simple, and beautiful product design. Every interaction is intentional and meaningful.
 
 ---
 
-*"Focusing is about saying no." - Steve Jobs*
+*"Simplicity is the ultimate sophistication"* - Leonardo da Vinci
 
-**Signal/Noise makes this "no" easier. Every day. One decision at a time.**
-
----
-
-## FAQ
-
-**Q: Why are there no team features?**
-A: Signal/Noise is intentionally personal. Productivity is not a competition. It's about you vs. yesterday, not you vs. others.
-
-**Q: Where is my data stored?**
-A: Exclusively in your browser (LocalStorage). We have no server, no cloud, no access.
-
-**Q: What does the AI Coach see?**
-A: Only your first name and anonymized patterns (e.g., "User is more productive in the morning"). No tasks, no details.
-
-**Q: Can I use the app offline?**
-A: Yes! As a PWA it works completely offline. Only the AI Coach needs internet.
-
-**Q: Why only 80% Signal as goal?**
-A: 100% is not sustainable. 80% leaves room for the unexpected and prevents burnout.
-
----
-
-**Start now. No account. No excuses.**
-
-[**→ Open App**](https://signal-noise.app)
+Made with ❤️ for mindful productivity

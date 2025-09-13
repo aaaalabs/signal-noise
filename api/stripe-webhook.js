@@ -75,14 +75,21 @@ async function handleCheckoutCompleted(session) {
   const userKey = `user:${customer_email}`;
   const accessToken = 'snk_' + randomBytes(32).toString('hex');
 
-  // Determine payment type
+  // Determine payment type and tier
   const isLifetime = metadata?.payment_type === 'lifetime' || mode === 'payment';
   const paymentType = isLifetime ? 'lifetime' : 'subscription';
+  const tier = metadata?.tier || 'early_adopter';
+
+  // Increment Foundation counter if Foundation member
+  if (tier === 'foundation') {
+    await redis.incr('foundation_members_count');
+  }
 
   const userData = {
     email: customer_email,
     access_token: accessToken,
     payment_type: paymentType,
+    tier: tier,
     status: 'active',
     created_at: Date.now().toString(),
     expires_at: isLifetime ? '0' : getSubscriptionEndDate().toString(),
@@ -94,10 +101,10 @@ async function handleCheckoutCompleted(session) {
 
   await redis.hset(userKey, userData);
 
-  console.log(`Premium access granted for ${customer_email} (${paymentType})`);
+  console.log(`Premium access granted for ${customer_email} (${paymentType}, ${tier})`);
 
   // Send welcome email with magic link
-  await sendWelcomeEmail(customer_email, userData.first_name, isLifetime);
+  await sendWelcomeEmail(customer_email, userData.first_name, tier === 'foundation');
 }
 
 async function handleSubscriptionCreated(subscription) {

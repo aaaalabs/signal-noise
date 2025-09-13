@@ -1,6 +1,11 @@
 import Stripe from 'stripe';
+import { Redis } from '@upstash/redis';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const redis = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN,
+});
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -8,7 +13,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { email, firstName, paymentType = 'lifetime' } = req.body;
+    const { email, firstName, paymentType = 'foundation' } = req.body;
 
     if (!email) {
       return res.status(400).json({ error: 'Email required' });
@@ -18,72 +23,66 @@ export default async function handler(req, res) {
       ? `https://${process.env.VERCEL_URL}`
       : 'http://localhost:3000';
 
-    let sessionConfig;
+    // Check Foundation tier availability
+    const foundationCount = await redis.get('foundation_members_count') || 0;
+    const isFoundationAvailable = parseInt(foundationCount) < 100;
 
-    if (paymentType === 'lifetime') {
-      // One-time payment for lifetime access
-      sessionConfig = {
-        payment_method_types: ['card'],
-        mode: 'payment',
-        customer_email: email,
-        line_items: [
-          {
-            price_data: {
-              currency: 'eur',
-              product_data: {
-                name: 'Signal/Noise Premium - Lifetime Access',
-                description: 'One-time payment for lifetime access to AI Coach and all premium features',
-                images: [`${baseUrl}/android-launchericon-512-512.png`],
-              },
-              unit_amount: 4900, // €49.00 in cents
-            },
-            quantity: 1,
-          },
-        ],
-        metadata: {
-          payment_type: 'lifetime',
-          first_name: firstName || '',
-        },
-        success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${baseUrl}/pricing?cancelled=true`,
+    let sessionConfig;
+    let tierInfo;
+
+    if (paymentType === 'foundation' && isFoundationAvailable) {
+      // Foundation tier: €29
+      tierInfo = {
+        name: 'Signal/Noise - Foundation Access',
+        description: 'Foundation member - lifetime access to AI Coach and all features',
+        amount: 2900, // €29.00 in cents
+        tier: 'foundation'
       };
     } else {
-      // Subscription
-      sessionConfig = {
-        payment_method_types: ['card'],
-        mode: 'subscription',
-        customer_email: email,
-        line_items: [
-          {
-            price_data: {
-              currency: 'eur',
-              product_data: {
-                name: 'Signal/Noise Premium - Monthly',
-                description: 'Monthly subscription to AI Coach and premium features',
-                images: [`${baseUrl}/android-launchericon-512-512.png`],
-              },
-              unit_amount: 900, // €9.00 in cents
-              recurring: {
-                interval: 'month',
-              },
-            },
-            quantity: 1,
-          },
-        ],
-        metadata: {
-          payment_type: 'subscription',
-          first_name: firstName || '',
-        },
-        success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${baseUrl}/pricing?cancelled=true`,
+      // Early Adopter tier: €49
+      tierInfo = {
+        name: 'Signal/Noise - Early Adopter',
+        description: 'Early adopter - lifetime access to AI Coach and all features',
+        amount: 4900, // €49.00 in cents
+        tier: 'early_adopter'
       };
     }
+
+    sessionConfig = {
+      payment_method_types: ['card'],
+      mode: 'payment',
+      customer_email: email,
+      line_items: [
+        {
+          price_data: {
+            currency: 'eur',
+            product_data: {
+              name: tierInfo.name,
+              description: tierInfo.description,
+              images: [`${baseUrl}/android-launchericon-512-512.png`],
+            },
+            unit_amount: tierInfo.amount,
+          },
+          quantity: 1,
+        },
+      ],
+      metadata: {
+        payment_type: 'lifetime',
+        tier: tierInfo.tier,
+        first_name: firstName || '',
+      },
+      success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${baseUrl}/?cancelled=true`,
+    };
 
     const session = await stripe.checkout.sessions.create(sessionConfig);
 
     return res.status(200).json({
       sessionId: session.id,
-      url: session.url
+      url: session.url,
+      tier: tierInfo.tier,
+      price: tierInfo.amount / 100,
+      foundationSpotsLeft: isFoundationAvailable ? 100 - parseInt(foundationCount) : 0
     });
 
   } catch (error) {
