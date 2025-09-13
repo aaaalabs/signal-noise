@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Signal/Noise Premium</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Email client compatibility */
+        body, table, td {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+
+        table, td {
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
+
+        img {
+            -ms-interpolation-mode: bicubic;
+            border: 0;
+            height: auto;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
+        }
+
+        /* Signal/Noise Ultra-Minimal Design System */
+        :root {
+            --signal: #00ff88;
+            --signal-dim: rgba(0, 255, 136, 0.7);
+            --signal-glow: rgba(0, 255, 136, 0.2);
+            --bg: #000000;
+            --surface: #0a0a0a;
+            --text: #ffffff;
+            --text-dim: #cccccc;
+            --text-subtle: #999999;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Minimal dark theme */
+        body {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif !important;
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            width: 100% !important;
+            min-width: 100%;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Ultra-minimal container */
+        .email-container {
+            max-width: 480px;
+            margin: 60px auto;
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        /* Minimal header */
+        .header {
+            text-align: center;
+            padding: 0 20px 60px;
+            background-color: #000000;
+        }
+
+        .brand {
+            font-size: 20px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin: 0;
+            color: #ffffff;
+        }
+
+        .brand-signal {
+            color: #00ff88;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+        }
+
+        /* Pure content */
+        .content {
+            padding: 0 20px;
+            background-color: #000000;
+        }
+
+        .greeting {
+            font-size: 16px;
+            font-weight: 400;
+            color: #cccccc;
+            margin: 0 0 40px 0;
+        }
+
+        .message {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #ffffff;
+            margin: 0 0 50px 0;
+            font-weight: 300;
+        }
+
+        /* Activation status */
+        .status {
+            text-align: center;
+            margin: 50px 0;
+            padding: 40px;
+            border-top: 1px solid rgba(0, 255, 136, 0.2);
+            border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+        }
+
+        .status-icon {
+            font-size: 24px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.5));
+        }
+
+        .status-title {
+            font-size: 18px;
+            font-weight: 300;
+            color: #00ff88;
+            margin: 0 0 10px 0;
+            letter-spacing: 1px;
+        }
+
+        .status-text {
+            font-size: 14px;
+            color: #cccccc;
+            margin: 0;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* Essential features */
+        .features {
+            margin: 50px 0;
+        }
+
+        .features-title {
+            font-size: 14px;
+            font-weight: 400;
+            color: #999999;
+            margin: 0 0 30px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .feature-item {
+            margin: 20px 0;
+            text-align: center;
+            color: #cccccc;
+            font-size: 15px;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        .feature-highlight {
+            color: #00ff88;
+            font-weight: 400;
+        }
+
+        /* Minimal button */
+        .button-container {
+            text-align: center;
+            margin: 60px 0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #00ff88;
+            color: #000000 !important;
+            padding: 20px 40px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 400;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 25px rgba(0, 255, 136, 0.4);
+        }
+
+        /* Invisible footer */
+        .footer {
+            padding: 60px 20px 40px;
+            text-align: center;
+            background-color: #000000;
+        }
+
+        .footer-brand {
+            font-size: 10px;
+            color: #999999;
+            margin: 0;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .footer-link {
+            color: #999999;
+            text-decoration: none;
+        }
+
+        .footer-link:hover {
+            color: #00ff88;
+        }
+
+        /* Responsive minimal */
+        @media only screen and (max-width: 600px) {
+            .email-container {
+                margin: 40px auto;
+            }
+
+            .header {
+                padding: 0 15px 50px;
+            }
+
+            .content {
+                padding: 0 15px;
+            }
+
+            .status {
+                padding: 30px 25px;
+            }
+
+            .cta-button {
+                padding: 18px 32px;
+                font-size: 15px;
+            }
+
+            .footer {
+                padding: 50px 15px 30px;
+            }
+        }
+
+        /* Pure dark mode */
+        @media (prefers-color-scheme: dark) {
+            .email-container {
+                background-color: #000000 !important;
+            }
+
+            body {
+                background-color: #000000 !important;
+                color: #ffffff !important;
+            }
+        }
+
+        /* Minimal Outlook */
+        <!--[if mso]>
+        <style type="text/css">
+            .cta-button {
+                padding: 20px 40px !important;
+            }
+            .feature-item {
+                display: block !important;
+            }
+        </style>
+        <![endif]-->
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Minimal brand -->
+        <div class="header">
+            <h1 class="brand"><span class="brand-signal">Signal</span>/Noise</h1>
+        </div>
+
+        <!-- Pure content -->
+        <div class="content">
+            <p class="greeting">Hi {{FIRST_NAME}}!</p>
+
+            <p class="message">
+                Welcome to Signal/Noise Premium. Your AI Coach is ready to help you focus on what truly matters.
+            </p>
+
+            <div class="status">
+                <div class="status-icon">🌟</div>
+                <div class="status-title">{{TIER_NAME}} Active</div>
+                <p class="status-text">
+                    Unlimited access to all premium features, forever.
+                </p>
+            </div>
+
+            <div class="features">
+                <h3 class="features-title">Premium Features</h3>
+                <ul class="feature-list">
+                    <li class="feature-item"><span class="feature-highlight">AI Coach</span> powered by Groq</li>
+                    <li class="feature-item"><span class="feature-highlight">Pattern Recognition</span> for deep insights</li>
+                    <li class="feature-item"><span class="feature-highlight">Smart Check-ins</span> and reports</li>
+                    <li class="feature-item"><span class="feature-highlight">Real-time Guidance</span> for focus</li>
+                    <li class="feature-item"><span class="feature-highlight">Future Features</span> included</li>
+                </ul>
+            </div>
+
+            <div class="button-container">
+                <a href="https://signal-noise.app" class="cta-button">
+                    Start Coaching
+                </a>
+            </div>
+        </div>
+
+        <!-- Invisible footer -->
+        <div class="footer">
+            <p class="footer-brand">
+                <a href="https://signal-noise.app" class="footer-link">signal-noise.app</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

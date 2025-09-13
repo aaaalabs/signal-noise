@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signal/Noise Premium Access Recovery</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Email client compatibility */
+        body, table, td {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+
+        table, td {
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
+
+        img {
+            -ms-interpolation-mode: bicubic;
+            border: 0;
+            height: auto;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
+        }
+
+        /* Signal/Noise Ultra-Minimal Design System */
+        :root {
+            --signal: #00ff88;
+            --signal-dim: rgba(0, 255, 136, 0.7);
+            --signal-glow: rgba(0, 255, 136, 0.2);
+            --bg: #000000;
+            --surface: #0a0a0a;
+            --text: #ffffff;
+            --text-dim: #cccccc;
+            --text-subtle: #999999;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Minimal dark theme */
+        body {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif !important;
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            width: 100% !important;
+            min-width: 100%;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Ultra-minimal container */
+        .email-container {
+            max-width: 480px;
+            margin: 60px auto;
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        /* Minimal header */
+        .header {
+            text-align: center;
+            padding: 0 20px 60px;
+            background-color: #000000;
+        }
+
+        .brand {
+            font-size: 20px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin: 0;
+            color: #ffffff;
+        }
+
+        .brand-signal {
+            color: #00ff88;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+        }
+
+        /* Pure content */
+        .content {
+            padding: 0 20px;
+            background-color: #000000;
+        }
+
+        .greeting {
+            font-size: 16px;
+            font-weight: 400;
+            color: #cccccc;
+            margin: 0 0 40px 0;
+        }
+
+        .message {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #ffffff;
+            margin: 0 0 50px 0;
+            font-weight: 300;
+        }
+
+        /* Minimal button */
+        .button-container {
+            text-align: center;
+            margin: 50px 0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #00ff88;
+            color: #000000 !important;
+            padding: 20px 40px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 400;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 25px rgba(0, 255, 136, 0.4);
+        }
+
+        /* Subtle info */
+        .info {
+            text-align: center;
+            margin: 50px 0;
+            padding: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .info-text {
+            font-size: 14px;
+            color: #999999;
+            margin: 0;
+            line-height: 1.7;
+        }
+
+        .info-highlight {
+            color: #00ff88;
+            font-weight: 400;
+        }
+
+        /* Invisible footer */
+        .footer {
+            padding: 60px 20px 40px;
+            text-align: center;
+            background-color: #000000;
+        }
+
+        .footer-text {
+            font-size: 12px;
+            color: #666666;
+            margin: 0 0 20px 0;
+            line-height: 1.7;
+        }
+
+        .footer-brand {
+            font-size: 10px;
+            color: #999999;
+            margin: 0;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .footer-link {
+            color: #999999;
+            text-decoration: none;
+        }
+
+        .footer-link:hover {
+            color: #00ff88;
+        }
+
+        /* Responsive minimal */
+        @media only screen and (max-width: 600px) {
+            .email-container {
+                margin: 40px auto;
+            }
+
+            .header {
+                padding: 0 15px 50px;
+            }
+
+            .content {
+                padding: 0 15px;
+            }
+
+            .cta-button {
+                padding: 18px 32px;
+                font-size: 15px;
+            }
+
+            .info {
+                padding: 25px 20px;
+            }
+
+            .footer {
+                padding: 50px 15px 30px;
+            }
+        }
+
+        /* Pure dark mode */
+        @media (prefers-color-scheme: dark) {
+            .email-container {
+                background-color: #000000 !important;
+            }
+
+            body {
+                background-color: #000000 !important;
+                color: #ffffff !important;
+            }
+        }
+
+        /* Minimal Outlook */
+        <!--[if mso]>
+        <style type="text/css">
+            .cta-button {
+                padding: 20px 40px !important;
+            }
+        </style>
+        <![endif]-->
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Minimal brand -->
+        <div class="header">
+            <h1 class="brand"><span class="brand-signal">Signal</span>/Noise</h1>
+        </div>
+
+        <!-- Pure content -->
+        <div class="content">
+            <p class="greeting">Hi there!</p>
+
+            <p class="message">
+                We received a request to restore your premium access.
+            </p>
+
+            <div class="button-container">
+                <a href="{{VERIFY_URL}}" class="cta-button">
+                    Restore Access
+                </a>
+            </div>
+
+            <div class="info">
+                <p class="info-text">
+                    <span class="info-highlight">{{TIER_NAME}}</span><br>
+                    Secure link expires in 15 minutes
+                </p>
+            </div>
+        </div>
+
+        <!-- Invisible footer -->
+        <div class="footer">
+            <p class="footer-text">
+                If you didn't request this, simply ignore this email.<br>
+                No changes will be made to your account.
+            </p>
+
+            <p class="footer-brand">
+                <a href="https://signal-noise.app" class="footer-link">signal-noise.app</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

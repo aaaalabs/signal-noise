@@ -7,7 +7,8 @@ const PREFIX = 'sn:';
 export const keys = {
   fcount: () => `${PREFIX}fcount`,
   user: (email) => `${PREFIX}u:${email}`,
-  core: () => `${PREFIX}core`
+  core: () => `${PREFIX}core`,
+  magic: (token) => `${PREFIX}magic:${token}`
 };
 
 // Foundation counter operations
@@ -41,4 +42,24 @@ export async function getCore(redis) {
 
 export async function setCore(redis, data) {
   return await redis.set(keys.core(), data);
+}
+
+// Magic link operations
+export async function createMagicToken(redis, email, token, expiryMinutes = 15) {
+  const expirySeconds = expiryMinutes * 60;
+  return await redis.setex(keys.magic(token), expirySeconds, email);
+}
+
+export async function verifyMagicToken(redis, token) {
+  const email = await redis.get(keys.magic(token));
+  if (email) {
+    // Delete token after use (one-time use)
+    await redis.del(keys.magic(token));
+    return email;
+  }
+  return null;
+}
+
+export async function deleteMagicToken(redis, token) {
+  return await redis.del(keys.magic(token));
 }

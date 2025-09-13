@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Signal/Noise Premium</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Email client compatibility */
+        body, table, td {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+
+        table, td {
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
+
+        img {
+            -ms-interpolation-mode: bicubic;
+            border: 0;
+            height: auto;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
+        }
+
+        /* Signal/Noise Design System Variables */
+        :root {
+            --signal: #00ff88;
+            --noise: #666;
+            --bg: #000;
+            --surface: #0a0a0a;
+            --border: #222;
+            --text-primary: #ffffff;
+            --text-secondary: #999;
+            --text-tertiary: #666;
+        }
+
+        /* Dark theme email styles */
+        body {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif !important;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            width: 100% !important;
+            min-width: 100%;
+        }
+
+        /* Container */
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 40px 20px 30px;
+            background-color: #000000;
+        }
+
+        .brand-title {
+            font-size: 32px;
+            font-weight: 100;
+            letter-spacing: -1px;
+            margin: 0;
+            color: #00ff88;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+        }
+
+        .brand-subtitle {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #666;
+            margin: 8px 0 0 0;
+        }
+
+        /* Main content */
+        .content {
+            padding: 0 20px;
+            background-color: #000000;
+        }
+
+        .content-card {
+            background-color: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 20px 0;
+        }
+
+        .greeting {
+            font-size: 20px;
+            font-weight: 500;
+            color: #ffffff;
+            margin: 0 0 20px 0;
+        }
+
+        .message {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #cccccc;
+            margin: 0 0 30px 0;
+        }
+
+        /* Success card */
+        .success-card {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1) 0%, rgba(0, 255, 136, 0.05) 100%);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+            text-align: center;
+        }
+
+        .success-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #00ff88;
+            margin: 0 0 8px 0;
+        }
+
+        .success-text {
+            font-size: 14px;
+            color: #cccccc;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Features list */
+        .features-section {
+            margin: 30px 0;
+        }
+
+        .features-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 0 0 16px 0;
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin: 12px 0;
+            padding: 0;
+        }
+
+        .feature-icon {
+            color: #00ff88;
+            margin-right: 12px;
+            font-size: 16px;
+            line-height: 1.5;
+            flex-shrink: 0;
+        }
+
+        .feature-text {
+            color: #cccccc;
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* Button */
+        .button-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #00ff88;
+            color: #000000 !important;
+            padding: 16px 32px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border: none;
+            box-shadow: 0 0 0 1px #00ff88, 0 0 20px rgba(0, 255, 136, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 0 0 1px #00ff88, 0 0 30px rgba(0, 255, 136, 0.4);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 30px 20px;
+            text-align: center;
+            border-top: 1px solid #222;
+            margin-top: 40px;
+            background-color: #000000;
+        }
+
+        .footer-text {
+            font-size: 12px;
+            color: #666;
+            margin: 0 0 10px 0;
+            line-height: 1.5;
+        }
+
+        .footer-brand {
+            font-size: 11px;
+            color: #999;
+            margin: 0;
+        }
+
+        .footer-link {
+            color: #00ff88;
+            text-decoration: none;
+        }
+
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Mobile responsive */
+        @media only screen and (max-width: 600px) {
+            .email-container {
+                width: 100% !important;
+            }
+
+            .header {
+                padding: 30px 15px 20px;
+            }
+
+            .brand-title {
+                font-size: 28px;
+            }
+
+            .content {
+                padding: 0 15px;
+            }
+
+            .content-card {
+                padding: 20px;
+            }
+
+            .success-card {
+                padding: 20px;
+            }
+
+            .greeting {
+                font-size: 18px;
+            }
+
+            .message {
+                font-size: 15px;
+            }
+
+            .cta-button {
+                padding: 14px 24px;
+                font-size: 15px;
+            }
+
+            .feature-item {
+                margin: 10px 0;
+            }
+        }
+
+        /* Dark mode support for email clients */
+        @media (prefers-color-scheme: dark) {
+            .email-container {
+                background-color: #000000 !important;
+            }
+
+            body {
+                background-color: #000000 !important;
+                color: #ffffff !important;
+            }
+        }
+
+        /* Outlook specific fixes */
+        <!--[if mso]>
+        <style type="text/css">
+            .cta-button {
+                border: none !important;
+                padding: 16px 32px !important;
+            }
+            .feature-item {
+                display: block !important;
+            }
+        </style>
+        <![endif]-->
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Header -->
+        <div class="header">
+            <h1 class="brand-title">🎯 Signal/Noise</h1>
+            <p class="brand-subtitle">Welcome to Premium!</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+            <div class="content-card">
+                <h2 class="greeting">Hi {{FIRST_NAME}}!</h2>
+
+                <p class="message">
+                    Welcome to Signal/Noise Premium! Your AI Coach is now ready to help you achieve peak productivity and focus on what truly matters.
+                </p>
+
+                <div class="success-card">
+                    <div class="success-title">🌟 {{TIER_NAME}} Activated!</div>
+                    <p class="success-text">
+                        You now have unlimited access to all premium features, forever. No recurring charges, no expiration.
+                    </p>
+                </div>
+
+                <div class="features-section">
+                    <h3 class="features-title">Your Premium Features:</h3>
+                    <ul class="features-list">
+                        <li class="feature-item">
+                            <span class="feature-icon">✨</span>
+                            <span class="feature-text">Personal AI Coach powered by Groq</span>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">📊</span>
+                            <span class="feature-text">Advanced pattern recognition</span>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">🎯</span>
+                            <span class="feature-text">Daily check-ins and weekly reports</span>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">⚡</span>
+                            <span class="feature-text">Real-time productivity interventions</span>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">🚀</span>
+                            <span class="feature-text">All future premium features</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="button-container">
+                    <a href="https://signal-noise.app" class="cta-button">
+                        Start Using AI Coach →
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p class="footer-brand">
+                Signal/Noise - Focus on what matters<br>
+                <a href="https://signal-noise.app" class="footer-link">signal-noise.app</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
