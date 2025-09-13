@@ -17,42 +17,22 @@ export default async function handler(req, res) {
   }
 
   try {
-    const key = `sn:u:${email}`;
+    // Check if user exists in KV store (data stored as Redis hash)
+    const userData = await redis.hgetall(`sn:u:${email}`);
 
-    // First, check what type of data is stored
-    console.log('🔍 Checking key type for:', key);
-
-    // Data is stored as a Redis hash, use hgetall to retrieve
-    const userData = await redis.hgetall(key);
-    console.log('✅ Retrieved user data as hash:', userData);
-
-    // Check if userData exists and has data (hgetall returns {} if no data)
     if (!userData || Object.keys(userData).length === 0) {
-      console.log('❌ No userData found for:', email);
       return res.json({ isActive: false });
     }
 
-    // Debug: Log what we found
-    console.log('🔍 Raw userData from KV:', JSON.stringify(userData, null, 2));
-    console.log('🔍 userData.status:', userData.status);
-    console.log('🔍 userData.payment_type:', userData.payment_type);
-
-    // Check if payment is valid (either 'active' or 'lifetime')
+    // Check if payment is valid (either 'active' status or 'lifetime' payment type)
     const isActive = userData.status === 'active' || userData.payment_type === 'lifetime';
-
-    console.log('✅ Premium status check for:', email, '- Active:', isActive);
 
     return res.json({
       isActive,
       email: userData.email,
       subscriptionId: userData.access_token,
       paymentType: userData.payment_type,
-      activatedAt: userData.created_at ? new Date(parseInt(userData.created_at)).toISOString() : null,
-      debug: {
-        rawUserData: userData,
-        statusCheck: userData.status === 'active',
-        paymentTypeCheck: userData.payment_type === 'lifetime'
-      }
+      activatedAt: userData.created_at ? new Date(parseInt(userData.created_at)).toISOString() : null
     });
 
   } catch (error) {
