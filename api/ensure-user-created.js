@@ -27,10 +27,11 @@ export default async function handler(req, res) {
     // Check if user already exists
     const existingUser = await getUser(redis, email);
     if (existingUser && Object.keys(existingUser).length > 0) {
-      console.log(`User ${email} already exists, skipping creation`);
+      console.log(`✅ User ${email} already exists (webhook succeeded), skipping backup creation`);
       return res.status(200).json({
-        message: 'User already exists',
-        alreadyExists: true
+        message: 'User already exists - webhook succeeded',
+        alreadyExists: true,
+        source: 'webhook'
       });
     }
 

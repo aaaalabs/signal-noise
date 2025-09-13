@@ -44,9 +44,14 @@ export default function SuccessModal({ show, onClose, sessionId }: SuccessModalP
 
       // BACKUP: Ensure user is created on server if webhook missed
       try {
-        await ensureUserCreated(email, sessionId);
+        const result = await ensureUserCreated(email, sessionId);
+        if (result.alreadyExists) {
+          console.log('✅ Webhook succeeded - user already exists');
+        } else {
+          console.log('🔄 Backup created user (webhook missed)');
+        }
       } catch (error) {
-        console.warn('Backup user creation failed (might already exist):', error);
+        console.warn('Backup user creation failed:', error);
       }
 
       // Clean up stored email
