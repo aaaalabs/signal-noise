@@ -15,6 +15,7 @@ import {
 } from '../utils/patternAnalysis';
 import PremiumModal from './PremiumModal';
 import FoundationModal from './FoundationModal';
+import FirstNameModal from './FirstNameModal';
 import { checkPremiumStatus } from '../services/premiumService';
 
 import type { AppData } from '../types';
@@ -34,6 +35,7 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
   const [showCoach, setShowCoach] = useState(false);
   const [showPremiumModal, setShowPremiumModal] = useState(false);
   const [showFoundationModal, setShowFoundationModal] = useState(false);
+  const [showNameModal, setShowNameModal] = useState(false);
 
   // Check if user has premium access using premium service
   const premiumStatus = checkPremiumStatus();
@@ -50,18 +52,22 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
     getCoachingAdvice();
   };
 
+  const handleNameSave = (name: string) => {
+    // Save to localStorage AND update app state
+    localStorage.setItem('userFirstName', name);
+    onNameUpdate(name);
+
+    // Now proceed with coaching advice
+    getCoachingAdvice();
+  };
+
   const getCoachingAdvice = async () => {
     let userName = firstName || localStorage.getItem('userFirstName');
 
     if (!userName) {
-      // Prompt for first name with translated text
-      const name = prompt(t.namePrompt);
-      if (!name) return;
-
-      // Save to localStorage AND update app state
-      localStorage.setItem('userFirstName', name);
-      onNameUpdate(name);
-      userName = name;
+      // Show name modal instead of prompt
+      setShowNameModal(true);
+      return;
     }
 
     setIsLoading(true);
@@ -184,6 +190,13 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
         onClose={() => setShowFoundationModal(false)}
       />
 
+      {/* First Name Modal */}
+      <FirstNameModal
+        show={showNameModal}
+        onClose={() => setShowNameModal(false)}
+        onSave={handleNameSave}
+      />
+
       {!showCoach && (
         <button
           onClick={handleCoachClick}
@@ -198,7 +211,7 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
         >
           {isPremium ? (
             <img
-              src="/sn-icon-grey.svg"
+              src="/sn-icon_grey.svg"
               alt="AI Coach"
               style={{ width: '16px', height: '16px' }}
             />
