@@ -5,19 +5,19 @@ const PREFIX = 'sn:';
 
 // Key generators - ultra simple
 export const keys = {
-  foundation: () => `${PREFIX}f`,
+  fcount: () => `${PREFIX}fcount`,
   user: (email) => `${PREFIX}u:${email}`,
-  stats: () => `${PREFIX}s`
+  core: () => `${PREFIX}core`
 };
 
 // Foundation counter operations
 export async function getFoundationCount(redis) {
-  const count = await redis.get(keys.foundation());
+  const count = await redis.get(keys.fcount());
   return parseInt(count) || 0;
 }
 
 export async function incrementFoundation(redis) {
-  return await redis.incr(keys.foundation());
+  return await redis.incr(keys.fcount());
 }
 
 // User operations
@@ -34,11 +34,11 @@ export async function userExists(redis, email) {
   return result === 1;
 }
 
-// Stats operations
-export async function getStats(redis) {
-  return await redis.get(keys.stats());
+// Core stats operations
+export async function getCore(redis) {
+  return await redis.get(keys.core());
 }
 
-export async function setStats(redis, data) {
-  return await redis.set(keys.stats(), data);
+export async function setCore(redis, data) {
+  return await redis.set(keys.core(), data);
 }

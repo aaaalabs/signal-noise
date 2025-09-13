@@ -21,16 +21,16 @@ async function migrate() {
     const oldCount = await redis.get('foundation_members_count');
     if (oldCount !== null) {
       console.log(`Found old counter: ${oldCount}`);
-      await redis.set(keys.foundation(), oldCount);
-      console.log(`✅ Migrated to ${keys.foundation()}: ${oldCount}`);
+      await redis.set(keys.fcount(), oldCount);
+      console.log(`✅ Migrated to ${keys.fcount()}: ${oldCount}`);
 
       // Keep old key for 7 days as backup
       console.log('📦 Keeping old key as backup for 7 days');
     } else {
       console.log('No old foundation counter found');
       // Initialize new counter
-      await redis.set(keys.foundation(), 0);
-      console.log(`✅ Initialized ${keys.foundation()}: 0`);
+      await redis.set(keys.fcount(), 0);
+      console.log(`✅ Initialized ${keys.fcount()}: 0`);
     }
 
     // 2. Migrate user data
@@ -74,25 +74,25 @@ async function migrate() {
       lastMigration: new Date().toISOString(),
       version: '1.0.0',
       migratedUsers: migratedUsers,
-      foundationMembers: await redis.get(keys.foundation())
+      foundationMembers: await redis.get(keys.fcount())
     };
-    await redis.set(keys.stats(), JSON.stringify(statsData));
-    console.log(`✅ Stats initialized at ${keys.stats()}`);
+    await redis.set(keys.core(), JSON.stringify(statsData));
+    console.log(`✅ Core stats initialized at ${keys.core()}`);
 
     // 4. Verification
     console.log('\n🔍 Verifying migration...');
-    const newCount = await redis.get(keys.foundation());
-    const newStats = await redis.get(keys.stats());
+    const newCount = await redis.get(keys.fcount());
+    const newCore = await redis.get(keys.core());
 
     console.log(`Foundation count: ${newCount}`);
     console.log(`Migrated users: ${migratedUsers}`);
-    console.log(`Stats: ${newStats}`);
+    console.log(`Core stats: ${newCore}`);
 
     console.log('\n🎉 Migration completed successfully!');
     console.log('\n📋 Summary:');
     console.log(`├── Foundation counter: ${oldCount || 0} → ${newCount}`);
     console.log(`├── Users migrated: ${migratedUsers}`);
-    console.log(`└── New keys created: ${keys.foundation()}, ${keys.stats()}, ${migratedUsers} user keys`);
+    console.log(`└── New keys created: ${keys.fcount()}, ${keys.core()}, ${migratedUsers} user keys`);
 
     console.log('\n⚠️  Old keys preserved as backup for 7 days');
     console.log('💡 Test the application, then run cleanup script if everything works');
@@ -120,13 +120,13 @@ async function cleanup() {
 async function status() {
   console.log('📊 Current Redis Status:\n');
 
-  const foundationCount = await redis.get(keys.foundation());
-  const stats = await redis.get(keys.stats());
+  const foundationCount = await redis.get(keys.fcount());
+  const coreStats = await redis.get(keys.core());
   const userKeys = await redis.keys(keys.user('*'));
 
   console.log(`Foundation count: ${foundationCount || 'Not set'}`);
   console.log(`Active users: ${userKeys.length}`);
-  console.log(`Stats: ${stats || 'Not set'}`);
+  console.log(`Core stats: ${coreStats || 'Not set'}`);
 
   // Check for old keys
   const oldCount = await redis.get('foundation_members_count');

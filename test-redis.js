@@ -96,7 +96,7 @@ async function resetTestData() {
 
   try {
     // Reset Foundation counter to 0
-    await redis.set(keys.foundation(), 0);
+    await redis.set(keys.fcount(), 0);
 
     // Remove test user
     await redis.del(keys.user('test@example.com'));

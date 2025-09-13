@@ -114,6 +114,11 @@ npm run build            # Production build
 npm run preview          # Preview production build
 npm run lint             # ESLint checking
 npm run typecheck        # TypeScript validation
+npm run test:redis       # Test Redis operations
+npm run test:stripe      # Test Stripe API logic
+npm run test:webhook     # Test webhook processing
+npm run test:scenarios   # Comprehensive scenario tests
+npm run test:all         # Run Redis + Stripe tests
 ```
 
 ### Environment Variables
@@ -143,11 +148,27 @@ All UI changes must follow these principles:
 
 ## Data Management
 
-### LocalStorage Schema
+### LocalStorage Schema (Frontend)
 - **Key**: 'signal_noise_data'
 - **Migration**: Handle backwards compatibility for existing users
 - **Backup**: Automatic data persistence on state changes
 - **Privacy**: No cloud storage, everything client-side
+
+### Redis Namespace (Backend)
+**SLC Structure** for clean LibraLab project separation:
+```
+sn:fcount         → Foundation counter (Signal/Noise members)
+sn:u:{email}      → User premium data (Hash format)
+sn:core           → Core stats/metadata (JSON)
+lib               → LibraLab store data (unchanged)
+```
+
+**Helper Functions** (`api/redis-helper.js`):
+- `getFoundationCount(redis)` → Get current Foundation members
+- `incrementFoundation(redis)` → Add new Foundation member
+- `getUser(redis, email)` → Get user premium status
+- `setUser(redis, email, data)` → Store user data
+- `getCore(redis)` / `setCore(redis, data)` → Core stats management
 
 ### Achievement System
 - 8 progressive badges for user engagement
