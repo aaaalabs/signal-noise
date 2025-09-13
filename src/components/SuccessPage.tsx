@@ -23,6 +23,7 @@ export default function SuccessPage({ onContinue }: SuccessPageProps) {
       // In a real implementation, you'd call your backend to get session details
       // For now, just show a success message
       setSessionDetails({ tier: 'foundation', amount: 29 });
+      console.log('Session ID:', sessionId); // Temporary to avoid unused warning
     } catch (error) {
       console.error('Failed to fetch session details:', error);
     }

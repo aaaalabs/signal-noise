@@ -14,6 +14,7 @@ import {
   calculateDailyRatios
 } from '../utils/patternAnalysis';
 import PremiumModal from './PremiumModal';
+import FoundationModal from './FoundationModal';
 import { checkPremiumStatus } from '../services/premiumService';
 
 import type { AppData } from '../types';
@@ -31,15 +32,16 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
   const [isLoading, setIsLoading] = useState(false);
   const [showCoach, setShowCoach] = useState(false);
   const [showPremiumModal, setShowPremiumModal] = useState(false);
+  const [showFoundationModal, setShowFoundationModal] = useState(false);
 
   // Check if user has premium access using premium service
   const premiumStatus = checkPremiumStatus();
   const isPremium = premiumStatus.isActive;
 
   const handleCoachClick = () => {
-    // If not premium, show upgrade modal
+    // If not premium, show Foundation modal
     if (!isPremium) {
-      setShowPremiumModal(true);
+      setShowFoundationModal(true);
       return;
     }
 
@@ -173,6 +175,12 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
       <PremiumModal
         show={showPremiumModal}
         onClose={() => setShowPremiumModal(false)}
+      />
+
+      {/* Foundation Modal */}
+      <FoundationModal
+        show={showFoundationModal}
+        onClose={() => setShowFoundationModal(false)}
       />
 
       {!showCoach && (
