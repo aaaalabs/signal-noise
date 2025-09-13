@@ -41,6 +41,13 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
   // Check premium status on mount and listen for changes
   useEffect(() => {
     const checkPremium = () => {
+      // Beta testing override for premium
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('beta') === 'premium2027!') {
+        setIsPremium(true);
+        return;
+      }
+
       const premiumStatus = checkPremiumStatus();
       setIsPremium(premiumStatus.isActive);
     };
@@ -68,6 +75,12 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
 
   // Check if user has enough data for meaningful coaching
   const hasEnoughDataForCoaching = () => {
+    // Beta testing override
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('beta') === 'streak') {
+      return true;
+    }
+
     const currentStreak = calculateStreak(tasks);
     const totalTasks = tasks.length;
     const daysWithTasks = new Set(tasks.map(t => new Date(t.timestamp).toDateString())).size;
