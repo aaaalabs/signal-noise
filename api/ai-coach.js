@@ -29,16 +29,17 @@ export default async function handler(req, res) {
     // Verify premium access
     const isDev = process.env.NODE_ENV === 'development' || process.env.VERCEL_ENV !== 'production';
     const isDevUser = userEmail === 'dev@signal-noise.test';
+    const isBetaUser = userEmail === 'beta@signal-noise.test';
 
-    const isPremium = (isDev && isDevUser) || await verifyPremiumAccess(userEmail, accessToken);
+    const isPremium = (isDev && (isDevUser || isBetaUser)) || await verifyPremiumAccess(userEmail, accessToken);
     if (!isPremium) {
       return res.status(403).json({
         error: 'Premium access required. Upgrade to use AI Coach.'
       });
     }
 
-    // Check rate limit (skip for dev user)
-    const isAllowed = (isDev && isDevUser) || await checkRateLimit(userEmail);
+    // Check rate limit (skip for dev/beta users)
+    const isAllowed = (isDev && (isDevUser || isBetaUser)) || await checkRateLimit(userEmail);
     if (!isAllowed) {
       return res.status(429).json({
         error: 'Rate limit exceeded. Premium users get 10 requests per hour.'

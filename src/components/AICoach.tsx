@@ -16,7 +16,7 @@ import {
 import PremiumModal from './PremiumModal';
 import FoundationModal from './FoundationModal';
 import FirstNameModal from './FirstNameModal';
-import { checkPremiumStatus } from '../services/premiumService';
+import { checkPremiumStatus, activatePremium } from '../services/premiumService';
 
 import type { AppData } from '../types';
 
@@ -44,7 +44,11 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
       // Beta testing override for premium
       const urlParams = new URLSearchParams(window.location.search);
       if (urlParams.get('beta') === 'premium2027!') {
+        // Create actual premium credentials for beta users
+        const betaEmail = 'beta@signal-noise.test';
+        activatePremium(betaEmail, 'beta-subscription-2027');
         setIsPremium(true);
+        console.log('🚀 Beta premium activated for testing');
         return;
       }
 
