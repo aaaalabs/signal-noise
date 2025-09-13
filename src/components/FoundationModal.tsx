@@ -37,6 +37,21 @@ export default function FoundationModal({ show, onClose }: FoundationModalProps)
   }, [show]);
 
   const fetchFoundationStats = async () => {
+    // Simple: Development = preview mode, Production = live data
+    if (window.location.hostname === 'localhost') {
+      // Preview mode: Show what the UI looks like with realistic data
+      setStats({
+        foundationMembers: 12,
+        spotsLeft: 88,
+        totalSpots: 100,
+        isAvailable: true,
+        currentTier: 'foundation',
+        currentPrice: 29
+      });
+      return;
+    }
+
+    // Production: Real Redis data
     const response = await fetch('/api/foundation-stats');
     if (!response.ok) {
       throw new Error(`Foundation stats API failed: HTTP ${response.status}`);
