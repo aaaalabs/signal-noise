@@ -446,7 +446,7 @@ body {
 
 .achievement-tooltip {
     position: absolute;
-    top: -60px;
+    top: 100%;
     left: 50%;
     transform: translateX(-50%);
     padding: 8px 12px;
@@ -459,7 +459,7 @@ body {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.2s;
-    z-index: 100;
+    z-index: 1000;
 }
 
 .achievement-tooltip.show {
