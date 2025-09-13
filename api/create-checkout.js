@@ -16,15 +16,8 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Email required' });
     }
 
-    // Fix baseUrl construction for Vercel deployment
-    let baseUrl;
-    if (process.env.VERCEL_URL) {
-      baseUrl = process.env.VERCEL_URL.startsWith('http')
-        ? process.env.VERCEL_URL
-        : `https://${process.env.VERCEL_URL}`;
-    } else {
-      baseUrl = 'http://localhost:3000';
-    }
+    // Always use production URL for Stripe redirects
+    const baseUrl = 'https://signal-noise.app';
 
     // Foundation tier: Always available for now (Redis-free version)
     const foundationCount = 0;
