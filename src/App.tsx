@@ -16,11 +16,9 @@ import InvoicePage from './components/InvoicePage';
 import Footer from './components/Footer';
 import BrandIcon from './components/BrandIcon';
 import LanguageSwitcher from './components/LanguageSwitcher';
-import DebugPremium from './components/DebugPremium';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { checkAchievements } from './utils/achievements';
-import { handleStripeReturn, syncPremiumStatus } from './services/premiumService';
-import { startAutoSync, restoreData } from './services/syncService';
+import { handleStripeReturn } from './services/premiumService';
 
 const DATA_KEY = 'signal_noise_data';
 const ONBOARDING_KEY = 'signal_noise_onboarded';
@@ -96,20 +94,6 @@ function AppContent() {
     if (premiumActivated) {
       setWhisperMessage('Premium activated!');
       setShowWhisper(true);
-
-      // Start auto-sync for premium users
-      startAutoSync();
-
-      // Try to restore data from server (if available)
-      restoreData().then((restored) => {
-        if (restored) {
-          // Reload data if server data was newer
-          const updatedData = localStorage.getItem(DATA_KEY);
-          if (updatedData) {
-            setData(JSON.parse(updatedData));
-          }
-        }
-      });
     }
 
     // Check onboarding first
@@ -147,21 +131,6 @@ function AppContent() {
       }));
     }
 
-    // Check premium status from server for existing users
-    const storedEmail = localStorage.getItem('premiumEmail') ||
-                       JSON.parse(localStorage.getItem('premiumStatus') || '{}').email;
-
-    if (storedEmail) {
-      // Sync premium status with server
-      syncPremiumStatus(storedEmail).then((status) => {
-        if (status.isActive) {
-          console.log('✅ Premium status confirmed from server');
-          startAutoSync();
-        }
-      }).catch(() => {
-        console.log('⚠️ Premium status check failed, using local status');
-      });
-    }
 
     setIsLoaded(true);
   }, []);
@@ -331,8 +300,6 @@ function AppContent() {
         {/* Language Switcher - Ultra-minimal toggle */}
         <LanguageSwitcher />
 
-        {/* Debug Premium (Development only) */}
-        <DebugPremium />
 
         {/* Header with Ratio */}
         <header className="header">
