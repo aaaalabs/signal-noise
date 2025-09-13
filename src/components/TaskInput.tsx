@@ -8,6 +8,7 @@ interface TaskInputProps {
 export default function TaskInput({ onAdd }: TaskInputProps) {
   const [inputValue, setInputValue] = useState('');
   const [showButtons, setShowButtons] = useState(false);
+  const [selectedType, setSelectedType] = useState<'signal' | 'noise'>('signal'); // Default to Signal (matches visual hierarchy)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -24,12 +25,32 @@ export default function TaskInput({ onAdd }: TaskInputProps) {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && inputValue.trim()) {
-      // Auto-classify based on keywords
-      const text = inputValue.toLowerCase();
-      const signalKeywords = ['wichtig', 'deadline', 'kunde', 'projekt', 'launch', 'meeting'];
-      const isSignal = signalKeywords.some(keyword => text.includes(keyword));
-      handleAddTask(isSignal ? 'signal' : 'noise');
+    if (e.key === 'Tab' && showButtons) {
+      // Switch selection between Signal and Noise
+      e.preventDefault();
+      setSelectedType(prev => prev === 'signal' ? 'noise' : 'signal');
+
+      // Haptic feedback on mobile
+      if (navigator.vibrate) {
+        navigator.vibrate(5);
+      }
+    } else if (e.key === 'ArrowLeft' && showButtons) {
+      // Navigate to Signal
+      e.preventDefault();
+      setSelectedType('signal');
+    } else if (e.key === 'ArrowRight' && showButtons) {
+      // Navigate to Noise
+      e.preventDefault();
+      setSelectedType('noise');
+    } else if (e.key === 'Enter' && inputValue.trim()) {
+      // Honest behavior: Enter confirms the currently selected type
+      if (e.shiftKey) {
+        // Shift+Enter forces opposite (power user feature)
+        handleAddTask(selectedType === 'signal' ? 'noise' : 'signal');
+      } else {
+        // Normal Enter confirms selection
+        handleAddTask(selectedType);
+      }
     }
   };
 
@@ -50,13 +71,15 @@ export default function TaskInput({ onAdd }: TaskInputProps) {
       <div className={`decision-buttons ${showButtons ? 'active' : ''}`}>
         <button
           onClick={() => handleAddTask('signal')}
-          className="btn btn-signal"
+          onMouseEnter={() => setSelectedType('signal')}
+          className={`btn btn-signal ${selectedType === 'signal' ? 'selected' : ''}`}
         >
           {t.signalBtn}
         </button>
         <button
           onClick={() => handleAddTask('noise')}
-          className="btn btn-noise"
+          onMouseEnter={() => setSelectedType('noise')}
+          className={`btn btn-noise ${selectedType === 'noise' ? 'selected' : ''}`}
         >
           {t.noiseBtn}
         </button>

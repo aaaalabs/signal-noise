@@ -137,6 +137,12 @@ body {
     transform: scale(1.02);
 }
 
+.btn-signal.selected {
+    background: rgba(0, 255, 136, 0.1);
+    box-shadow: 0 0 0 1px var(--signal);
+    transform: scale(1.01);
+}
+
 .btn-noise {
     color: var(--noise);
     border-color: #333;
@@ -145,6 +151,13 @@ body {
 .btn-noise:hover {
     background: #222;
     transform: scale(1.02);
+}
+
+.btn-noise.selected {
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 0 1px #666;
+    color: #888;
+    transform: scale(1.01);
 }
 
 /* Tasks Display */
