@@ -37,19 +37,6 @@ export default function FoundationModal({ show, onClose }: FoundationModalProps)
   }, [show]);
 
   const fetchFoundationStats = async () => {
-    // In dev mode, skip API and use fallback immediately
-    if (window.location.hostname === 'localhost') {
-      setStats({
-        foundationMembers: 0,
-        spotsLeft: 100,
-        totalSpots: 100,
-        isAvailable: true,
-        currentTier: 'foundation',
-        currentPrice: 29
-      });
-      return;
-    }
-
     try {
       const response = await fetch('/api/foundation-stats');
       if (!response.ok) {
@@ -59,7 +46,7 @@ export default function FoundationModal({ show, onClose }: FoundationModalProps)
       setStats(data);
     } catch (error) {
       console.error('Failed to fetch foundation stats:', error);
-      // Production fallback
+      // Fallback for any environment when API fails
       setStats({
         foundationMembers: 0,
         spotsLeft: 100,
