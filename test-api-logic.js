@@ -2,6 +2,7 @@
 import Stripe from 'stripe';
 import { Redis } from '@upstash/redis';
 import { config } from 'dotenv';
+import { getFoundationCount, incrementFoundation, setUser } from './api/redis-helper.js';
 
 // Load environment variables
 config({ path: '.env.local' });
@@ -17,7 +18,7 @@ async function testFoundationLogic() {
 
   try {
     // Get current Foundation member count
-    const foundationCount = await redis.get('foundation_members_count') || 0;
+    const foundationCount = await getFoundationCount(redis);
     console.log('Current Foundation members:', foundationCount);
 
     // Test Foundation availability logic
@@ -107,12 +108,12 @@ async function testWebhookLogic(sessionId, tierInfo) {
     const firstName = 'Thomas';
 
     // Get current count before increment
-    const beforeCount = await redis.get('foundation_members_count') || 0;
+    const beforeCount = await getFoundationCount(redis);
     console.log('Before webhook - Foundation members:', beforeCount);
 
     // Simulate incrementing Foundation counter (only for foundation tier)
     if (tierInfo.tier === 'foundation') {
-      const afterCount = await redis.incr('foundation_members_count');
+      const afterCount = await incrementFoundation(redis);
       console.log('After webhook - Foundation members:', afterCount);
     }
 
@@ -126,7 +127,7 @@ async function testWebhookLogic(sessionId, tierInfo) {
       paymentStatus: 'completed'
     };
 
-    await redis.set(`user:${email}`, userData);
+    await setUser(redis, email, userData);
     console.log('✅ User data stored:', userData);
 
     return userData;

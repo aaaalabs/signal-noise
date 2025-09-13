@@ -1,6 +1,7 @@
 // Test script for Upstash Redis Foundation member functionality
 import { Redis } from '@upstash/redis';
 import { config } from 'dotenv';
+import { keys, getFoundationCount, incrementFoundation, setUser, getUser } from './api/redis-helper.js';
 
 // Load environment variables
 config({ path: '.env.local' });
@@ -15,17 +16,17 @@ async function testFoundationStats() {
 
   try {
     // Get current Foundation member count
-    const currentCount = await redis.get('foundation_members_count') || 0;
+    const currentCount = await getFoundationCount(redis);
     console.log('Current Foundation members:', currentCount);
 
     // Test stats calculation
     const stats = {
-      foundationMembers: parseInt(currentCount),
-      spotsLeft: Math.max(0, 100 - parseInt(currentCount)),
+      foundationMembers: currentCount,
+      spotsLeft: Math.max(0, 100 - currentCount),
       totalSpots: 100,
-      isAvailable: parseInt(currentCount) < 100,
-      currentTier: parseInt(currentCount) < 100 ? 'foundation' : 'early_adopter',
-      currentPrice: parseInt(currentCount) < 100 ? 29 : 49
+      isAvailable: currentCount < 100,
+      currentTier: currentCount < 100 ? 'foundation' : 'early_adopter',
+      currentPrice: currentCount < 100 ? 29 : 49
     };
 
     console.log('Foundation Stats:', JSON.stringify(stats, null, 2));
@@ -41,11 +42,11 @@ async function simulateFoundationPurchase(email = 'test@example.com') {
 
   try {
     // Get current count
-    const currentCount = await redis.get('foundation_members_count') || 0;
+    const currentCount = await getFoundationCount(redis);
     console.log('Before purchase - Foundation members:', currentCount);
 
     // Simulate successful payment (increment counter)
-    const newCount = await redis.incr('foundation_members_count');
+    const newCount = await incrementFoundation(redis);
     console.log('After purchase - Foundation members:', newCount);
 
     // Store user data (simulating webhook)
@@ -57,7 +58,7 @@ async function simulateFoundationPurchase(email = 'test@example.com') {
       paymentStatus: 'completed'
     };
 
-    await redis.set(`user:${email}`, userData);
+    await setUser(redis, email, userData);
     console.log('User data stored:', userData);
 
     return { newCount, userData };
@@ -71,8 +72,8 @@ async function checkUserPremiumStatus(email = 'test@example.com') {
   console.log('👤 Checking premium status for:', email);
 
   try {
-    const userData = await redis.get(`user:${email}`);
-    if (userData) {
+    const userData = await getUser(redis, email);
+    if (userData && Object.keys(userData).length > 0) {
       // userData is already parsed by Upstash Redis
       console.log('User premium status:', userData);
       return {
@@ -95,10 +96,10 @@ async function resetTestData() {
 
   try {
     // Reset Foundation counter to 0
-    await redis.set('foundation_members_count', 0);
+    await redis.set(keys.foundation(), 0);
 
     // Remove test user
-    await redis.del('user:test@example.com');
+    await redis.del(keys.user('test@example.com'));
 
     console.log('✅ Test data reset');
   } catch (error) {

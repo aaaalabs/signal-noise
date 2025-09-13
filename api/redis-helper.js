@@ -1,0 +1,44 @@
+// SLC Redis Helper for Signal/Noise
+// Simple, clean key management for LibraLab projects
+
+const PREFIX = 'sn:';
+
+// Key generators - ultra simple
+export const keys = {
+  foundation: () => `${PREFIX}f`,
+  user: (email) => `${PREFIX}u:${email}`,
+  stats: () => `${PREFIX}s`
+};
+
+// Foundation counter operations
+export async function getFoundationCount(redis) {
+  const count = await redis.get(keys.foundation());
+  return parseInt(count) || 0;
+}
+
+export async function incrementFoundation(redis) {
+  return await redis.incr(keys.foundation());
+}
+
+// User operations
+export async function getUser(redis, email) {
+  return await redis.hgetall(keys.user(email));
+}
+
+export async function setUser(redis, email, data) {
+  return await redis.hset(keys.user(email), data);
+}
+
+export async function userExists(redis, email) {
+  const result = await redis.exists(keys.user(email));
+  return result === 1;
+}
+
+// Stats operations
+export async function getStats(redis) {
+  return await redis.get(keys.stats());
+}
+
+export async function setStats(redis, data) {
+  return await redis.set(keys.stats(), data);
+}

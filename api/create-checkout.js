@@ -1,5 +1,6 @@
 import Stripe from 'stripe';
 import { Redis } from '@upstash/redis';
+import { getFoundationCount } from './redis-helper.js';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const redis = new Redis({
@@ -24,8 +25,8 @@ export default async function handler(req, res) {
       : 'http://localhost:3000';
 
     // Check Foundation tier availability
-    const foundationCount = await redis.get('foundation_members_count') || 0;
-    const isFoundationAvailable = parseInt(foundationCount) < 100;
+    const foundationCount = await getFoundationCount(redis);
+    const isFoundationAvailable = foundationCount < 100;
 
     let sessionConfig;
     let tierInfo;

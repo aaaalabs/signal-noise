@@ -1,6 +1,7 @@
 import { Redis } from '@upstash/redis';
 import Stripe from 'stripe';
 import { randomBytes } from 'crypto';
+import { keys, incrementFoundation, setUser } from './redis-helper.js';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const redis = new Redis({
@@ -72,7 +73,6 @@ async function handleCheckoutCompleted(session) {
     return;
   }
 
-  const userKey = `user:${customer_email}`;
   const accessToken = 'snk_' + randomBytes(32).toString('hex');
 
   // Determine payment type and tier
@@ -82,7 +82,7 @@ async function handleCheckoutCompleted(session) {
 
   // Increment Foundation counter if Foundation member
   if (tier === 'foundation') {
-    await redis.incr('foundation_members_count');
+    await incrementFoundation(redis);
   }
 
   const userData = {
@@ -99,7 +99,7 @@ async function handleCheckoutCompleted(session) {
     last_payment: Date.now().toString()
   };
 
-  await redis.hset(userKey, userData);
+  await setUser(redis, customer_email, userData);
 
   console.log(`Premium access granted for ${customer_email} (${paymentType}, ${tier})`);
 
@@ -109,14 +109,15 @@ async function handleCheckoutCompleted(session) {
 
 async function handleSubscriptionCreated(subscription) {
   const customer = await stripe.customers.retrieve(subscription.customer);
-  const userKey = `user:${customer.email}`;
 
-  await redis.hset(userKey, {
+  const updateData = {
     stripe_subscription_id: subscription.id,
     subscription_status: subscription.status,
     current_period_end: (subscription.current_period_end * 1000).toString(),
     expires_at: (subscription.current_period_end * 1000).toString()
-  });
+  };
+
+  await setUser(redis, customer.email, updateData);
 
   console.log(`Subscription created for ${customer.email}`);
 }

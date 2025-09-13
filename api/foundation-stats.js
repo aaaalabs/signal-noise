@@ -1,4 +1,5 @@
 import { Redis } from '@upstash/redis';
+import { getFoundationCount } from './redis-helper.js';
 
 const redis = new Redis({
   url: process.env.UPSTASH_REDIS_REST_URL,
@@ -11,12 +12,12 @@ export default async function handler(req, res) {
   }
 
   try {
-    const foundationCount = await redis.get('foundation_members_count') || 0;
-    const spotsLeft = Math.max(0, 100 - parseInt(foundationCount));
+    const foundationCount = await getFoundationCount(redis);
+    const spotsLeft = Math.max(0, 100 - foundationCount);
     const isAvailable = spotsLeft > 0;
 
     return res.status(200).json({
-      foundationMembers: parseInt(foundationCount),
+      foundationMembers: foundationCount,
       spotsLeft: spotsLeft,
       totalSpots: 100,
       isAvailable: isAvailable,
