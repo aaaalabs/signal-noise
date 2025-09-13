@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { t } from '../i18n/translations';
+import { currentLang } from '../i18n/translations';
 
 interface AboutModalProps {
   show: boolean;
@@ -25,7 +25,7 @@ export default function AboutModal({ show, onClose }: AboutModalProps) {
 
   if (!show) return null;
 
-  const isGerman = t.language === 'de';
+  const isGerman = currentLang === 'de';
 
   return (
     <div

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 interface InvoiceData {
   invoiceNumber: string;
@@ -170,8 +170,7 @@ export default function InvoicePage({ invoiceId, token }: InvoicePageProps) {
           top: '-40px',
           right: '0',
           display: 'flex',
-          gap: '8px',
-          '@media print': { display: 'none' }
+          gap: '8px'
         }}>
           {isEditing ? (
             <>
