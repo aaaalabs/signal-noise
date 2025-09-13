@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useTranslation } from '../contexts/LanguageContext';
 
 interface FAQModalProps {
   show: boolean;
@@ -12,7 +11,6 @@ interface FAQItem {
 }
 
 export default function FAQModal({ show, onClose }: FAQModalProps) {
-  const t = useTranslation();
   const [openItems, setOpenItems] = useState<number[]>([]);
 
   if (!show) return null;

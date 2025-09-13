@@ -2,7 +2,7 @@ import { checkPremiumStatus } from './premiumService';
 
 interface SyncIndicatorState {
   element: HTMLElement | null;
-  timeout: NodeJS.Timeout | null;
+  timeout: number | null;
 }
 
 let syncState: SyncIndicatorState = {
@@ -153,7 +153,7 @@ export async function restoreData(): Promise<boolean> {
 }
 
 // Start automatic sync (every 5 minutes if data changed)
-let syncInterval: NodeJS.Timeout | null = null;
+let syncInterval: number | null = null;
 let lastDataHash: string | null = null;
 
 export function startAutoSync() {
