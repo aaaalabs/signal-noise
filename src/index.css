@@ -446,7 +446,7 @@ body {
 
 .achievement-tooltip {
     position: absolute;
-    bottom: -60px;
+    top: -60px;
     left: 50%;
     transform: translateX(-50%);
     padding: 8px 12px;
