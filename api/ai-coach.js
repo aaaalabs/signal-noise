@@ -31,15 +31,16 @@ export default async function handler(req, res) {
     const isDevUser = userEmail === 'dev@signal-noise.test';
     const isBetaUser = userEmail === 'beta@signal-noise.test';
 
-    const isPremium = (isDev && (isDevUser || isBetaUser)) || await verifyPremiumAccess(userEmail, accessToken);
+    // Allow beta users in both dev and production for testing
+    const isPremium = (isDev && isDevUser) || isBetaUser || await verifyPremiumAccess(userEmail, accessToken);
     if (!isPremium) {
       return res.status(403).json({
         error: 'Premium access required. Upgrade to use AI Coach.'
       });
     }
 
-    // Check rate limit (skip for dev/beta users)
-    const isAllowed = (isDev && (isDevUser || isBetaUser)) || await checkRateLimit(userEmail);
+    // Check rate limit (skip for dev users and beta users everywhere)
+    const isAllowed = (isDev && isDevUser) || isBetaUser || await checkRateLimit(userEmail);
     if (!isAllowed) {
       return res.status(429).json({
         error: 'Rate limit exceeded. Premium users get 10 requests per hour.'
