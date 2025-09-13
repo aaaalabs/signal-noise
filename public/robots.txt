@@ -1,0 +1,19 @@
+# Signal/Noise - Productivity App Robots.txt
+# https://signal-noise.app
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://signal-noise.app/sitemap.xml
+
+# Block access to sensitive areas (if any)
+Disallow: /api/
+Disallow: /*.json$
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Additional sitemaps (if you add more in the future)
+# Sitemap: https://signal-noise.app/sitemap-blog.xml
+# Sitemap: https://signal-noise.app/sitemap-features.xml

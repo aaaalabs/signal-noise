@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Main App -->
+  <url>
+    <loc>https://signal-noise.app/</loc>
+    <lastmod>2025-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://signal-noise.app/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://signal-noise.app/" />
+  </url>
+
+  <!-- Success Page (for completed purchases) -->
+  <url>
+    <loc>https://signal-noise.app/success</loc>
+    <lastmod>2025-01-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <!-- Invoice Routes (dynamic but crawlable pattern) -->
+  <url>
+    <loc>https://signal-noise.app/invoice/</loc>
+    <lastmod>2025-01-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.2</priority>
+  </url>
+
+  <!-- Alternative URL patterns (if accessed directly) -->
+  <url>
+    <loc>https://signal-noise.app/app</loc>
+    <lastmod>2025-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- API Documentation (if public) -->
+  <url>
+    <loc>https://signal-noise.app/docs</loc>
+    <lastmod>2025-01-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+</urlset>

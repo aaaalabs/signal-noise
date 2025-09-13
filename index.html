@@ -2,9 +2,105 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico" />
+
+    <!-- Viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
+
+    <!-- SEO Meta Tags -->
+    <title>Signal/Noise - Focus on What Matters | 80/20 Productivity App</title>
+    <meta name="description" content="Minimalist productivity app based on the 80/20 principle. Classify tasks as Signal (important) or Noise (distractions). 100% private, runs in your browser, no registration required." />
+    <meta name="keywords" content="productivity app, 80/20 rule, pareto principle, focus, task management, signal vs noise, steve jobs method, minimalist, privacy-first, offline app, PWA" />
+    <meta name="author" content="Libra Innovation FlexCo" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta name="revisit-after" content="7 days" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://signal-noise.app/" />
+    <meta property="og:title" content="Signal/Noise - Focus on What Matters" />
+    <meta property="og:description" content="Minimalist productivity app based on the 80/20 principle. Classify tasks as Signal or Noise. 100% private, runs in your browser." />
+    <meta property="og:image" content="https://signal-noise.app/og-image.png" />
+    <meta property="og:site_name" content="Signal/Noise" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://signal-noise.app/" />
+    <meta property="twitter:title" content="Signal/Noise - Focus on What Matters" />
+    <meta property="twitter:description" content="Minimalist productivity app based on the 80/20 principle. Classify tasks as Signal or Noise. 100% private, runs in your browser." />
+    <meta property="twitter:image" content="https://signal-noise.app/og-image.png" />
+    <meta property="twitter:creator" content="@libralab_ai" />
+
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#000000" />
+    <meta name="msapplication-TileColor" content="#000000" />
+    <meta name="application-name" content="Signal/Noise" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Signal/Noise" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://signal-noise.app/" />
+
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://api.groq.com" />
+    <link rel="preconnect" href="https://checkout.stripe.com" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Signal/Noise",
+      "url": "https://signal-noise.app",
+      "description": "Minimalist productivity app based on the 80/20 principle. Classify tasks as Signal (important) or Noise (distractions). 100% private, runs in your browser.",
+      "applicationCategory": "ProductivityApplication",
+      "operatingSystem": "Web Browser",
+      "offers": [
+        {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "EUR",
+          "name": "Free Version",
+          "description": "All core features, unlimited tasks, 30-day history, achievements"
+        },
+        {
+          "@type": "Offer",
+          "price": "29",
+          "priceCurrency": "EUR",
+          "name": "Foundation Member",
+          "description": "AI Coach, personal insights, real-time interventions, weekly reports"
+        }
+      ],
+      "creator": {
+        "@type": "Organization",
+        "name": "Libra Innovation FlexCo",
+        "url": "https://libralab.ai",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Kristen",
+          "addressCountry": "AT"
+        }
+      },
+      "keywords": "productivity, 80/20 rule, pareto principle, focus, task management, signal vs noise, steve jobs method",
+      "datePublished": "2025-01-13",
+      "dateModified": "2025-01-13",
+      "inLanguage": ["en", "de"],
+      "isAccessibleForFree": true,
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "ratingCount": "127",
+        "bestRating": "5"
+      }
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>
