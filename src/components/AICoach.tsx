@@ -66,6 +66,16 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
     };
   }, []);
 
+  // Check if user has enough data for meaningful coaching
+  const hasEnoughDataForCoaching = () => {
+    const currentStreak = calculateStreak(tasks);
+    const totalTasks = tasks.length;
+    const daysWithTasks = new Set(tasks.map(t => new Date(t.timestamp).toDateString())).size;
+
+    // Require at least 3 days of streak OR 7+ days with tasks OR 20+ total tasks
+    return currentStreak >= 3 || daysWithTasks >= 7 || totalTasks >= 20;
+  };
+
   const handleCoachClick = () => {
     // If not premium, show Foundation modal
     if (!isPremium) {
@@ -223,7 +233,7 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
         onSave={handleNameSave}
       />
 
-      {!showCoach && (
+      {!showCoach && hasEnoughDataForCoaching() && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           {isPremium ? (
             // Premium user: Show AI Coach button
