@@ -1,4 +1,5 @@
 import { loadStripe } from '@stripe/stripe-js';
+import { t } from '../i18n/translations';
 
 export default function PremiumBanner() {
   const handleUpgrade = async () => {
@@ -32,15 +33,15 @@ export default function PremiumBanner() {
 
   return (
     <div className="premium-banner">
-      <div className="premium-title">Groq Intelligence</div>
+      <div className="premium-title">{t.premiumTitle}</div>
       <div className="premium-features">
-        KI-Analyse • Persönliche Patterns • Team-Vergleich
+        {t.premiumFeatures}
       </div>
       <button
         onClick={handleUpgrade}
         className="premium-cta"
       >
-        7 Tage kostenlos testen
+        {t.premiumCta}
       </button>
     </div>
   );

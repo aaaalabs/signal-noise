@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import type { Task, AppData } from './types';
+import { t } from './i18n/translations';
 import RatioDisplay from './components/RatioDisplay';
 import TaskInput from './components/TaskInput';
 import TaskGrid from './components/TaskGrid';
@@ -28,12 +29,25 @@ function App() {
   // Load data from localStorage on mount
   useEffect(() => {
     const stored = localStorage.getItem(DATA_KEY);
+    const userName = localStorage.getItem('userFirstName');
+
     if (stored) {
       try {
-        setData(JSON.parse(stored));
+        const parsedData = JSON.parse(stored);
+        // Merge saved name if not already present
+        if (userName && !parsedData.settings.firstName) {
+          parsedData.settings.firstName = userName;
+        }
+        setData(parsedData);
       } catch (error) {
         console.error('Failed to load stored data:', error);
       }
+    } else if (userName) {
+      // Even for new users, keep saved name
+      setData(prev => ({
+        ...prev,
+        settings: { ...prev.settings, firstName: userName }
+      }));
     }
     setIsLoaded(true);
   }, []);
@@ -92,7 +106,7 @@ function App() {
       {/* Header with Ratio */}
       <header className="header">
         <RatioDisplay ratio={currentRatio} totalTasks={todayTasks.length} />
-        <div className="ratio-label">Signal Ratio</div>
+        <div className="ratio-label">{t.ratioLabel}</div>
       </header>
 
       {/* Input Section */}
@@ -109,6 +123,10 @@ function App() {
         tasks={data.tasks}
         currentRatio={currentRatio}
         firstName={data.settings.firstName}
+        onNameUpdate={(name) => setData(prev => ({
+          ...prev,
+          settings: { ...prev.settings, firstName: name }
+        }))}
       />
 
       {/* Analytics */}

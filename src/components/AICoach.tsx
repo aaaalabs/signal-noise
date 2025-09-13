@@ -2,24 +2,32 @@ import { useState } from 'react';
 import { getCoachAdvice } from '../services/groqService';
 import type { CoachResponse } from '../services/groqService';
 import type { Task, CoachPayload } from '../types';
+import { t } from '../i18n/translations';
 
 interface AICoachProps {
   tasks: Task[];
   currentRatio: number;
   firstName?: string;
+  onNameUpdate: (name: string) => void;
 }
 
-export default function AICoach({ tasks, currentRatio, firstName }: AICoachProps) {
+export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate }: AICoachProps) {
   const [coachResponse, setCoachResponse] = useState<CoachResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [showCoach, setShowCoach] = useState(false);
 
   const getCoachingAdvice = async () => {
-    if (!firstName) {
-      // Prompt for first name if not set
-      const name = prompt('Wie heißt du? (Für persönliche Ansprache)');
+    let userName = firstName || localStorage.getItem('userFirstName');
+
+    if (!userName) {
+      // Prompt for first name with translated text
+      const name = prompt(t.namePrompt);
       if (!name) return;
-      // In a real app, you'd save this to localStorage/state
+
+      // Save to localStorage AND update app state
+      localStorage.setItem('userFirstName', name);
+      onNameUpdate(name);
+      userName = name;
     }
 
     setIsLoading(true);
@@ -28,7 +36,7 @@ export default function AICoach({ tasks, currentRatio, firstName }: AICoachProps
     try {
       // Generate coaching payload (simplified)
       const payload: CoachPayload = {
-        firstName: firstName || 'Du',
+        firstName: userName,
         timestamp: new Date().toISOString(),
         timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
         context: {
@@ -71,7 +79,7 @@ export default function AICoach({ tasks, currentRatio, firstName }: AICoachProps
     } catch (error) {
       console.error('Coaching error:', error);
       setCoachResponse({
-        message: 'Coaching temporär nicht verfügbar. Fokussiere dich auf deine wichtigsten 3 Aufgaben!',
+        message: t.coachUnavailable,
         type: 'insight',
         emotionalTone: 'supportive'
       });
@@ -101,7 +109,7 @@ export default function AICoach({ tasks, currentRatio, firstName }: AICoachProps
             alt="AI Coach"
             style={{ width: '16px', height: '16px' }}
           />
-          AI Coach fragen
+          {t.aiCoachBtn}
         </button>
       )}
 
@@ -117,7 +125,7 @@ export default function AICoach({ tasks, currentRatio, firstName }: AICoachProps
                 borderRadius: '50%',
                 animation: 'spin 1s linear infinite'
               }} />
-              <span style={{ color: '#999' }}>AI Coach analysiert deine Patterns...</span>
+              <span style={{ color: '#999' }}>{t.coachLoading}</span>
             </div>
           ) : coachResponse ? (
             <div>
@@ -134,7 +142,7 @@ export default function AICoach({ tasks, currentRatio, firstName }: AICoachProps
                     letterSpacing: '1px',
                     marginBottom: '8px'
                   }}>
-                    Empfehlungen:
+                    {t.coachRecommendations}
                   </div>
                   {coachResponse.suggestions.map((suggestion, index) => (
                     <div key={index} style={{
@@ -164,7 +172,7 @@ export default function AICoach({ tasks, currentRatio, firstName }: AICoachProps
                 onMouseEnter={(e) => (e.target as HTMLButtonElement).style.color = '#999'}
                 onMouseLeave={(e) => (e.target as HTMLButtonElement).style.color = '#666'}
               >
-                Schließen
+                {t.coachClose}
               </button>
             </div>
           ) : null}

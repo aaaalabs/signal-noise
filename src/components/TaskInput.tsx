@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { t } from '../i18n/translations';
 
 interface TaskInputProps {
   onAdd: (text: string, type: 'signal' | 'noise') => void;
@@ -40,7 +41,7 @@ export default function TaskInput({ onAdd }: TaskInputProps) {
           value={inputValue}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
-          placeholder="Was steht an?"
+          placeholder={t.inputPlaceholder}
           className="task-input"
           autoComplete="off"
         />
@@ -51,13 +52,13 @@ export default function TaskInput({ onAdd }: TaskInputProps) {
           onClick={() => handleAddTask('signal')}
           className="btn btn-signal"
         >
-          Signal ✓
+          {t.signalBtn}
         </button>
         <button
           onClick={() => handleAddTask('noise')}
           className="btn btn-noise"
         >
-          Noise ✗
+          {t.noiseBtn}
         </button>
       </div>
     </div>

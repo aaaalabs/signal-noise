@@ -1,4 +1,5 @@
 import type { CoachPayload } from '../types';
+import { currentLang } from '../i18n/translations';
 
 const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
 
@@ -27,7 +28,8 @@ export async function getCoachAdvice(payload: CoachPayload): Promise<CoachRespon
     throw new Error('Groq API key not configured');
   }
 
-  const systemPrompt = `Du bist ein persönlicher Productivity Coach für die Signal/Noise App. Deine Aufgabe ist es, Nutzer dabei zu unterstützen, ihr optimales Signal-zu-Noise-Verhältnis von 80:20 zu erreichen.
+  const systemPrompt = currentLang === 'de'
+    ? `Du bist ein persönlicher Productivity Coach für die Signal/Noise App. Deine Aufgabe ist es, Nutzer dabei zu unterstützen, ihr optimales Signal-zu-Noise-Verhältnis von 80:20 zu erreichen.
 
 WICHTIGE CHARAKTERISTIKA:
 - Du sprichst den Nutzer IMMER mit Vornamen an
@@ -44,9 +46,28 @@ Gib deine Antwort als JSON zurück mit:
   "type": "motivation|warning|celebration|insight|challenge",
   "suggestions": [{"action": "Konkrete Handlung", "reasoning": "Kurze Begründung"}],
   "emotionalTone": "encouraging|challenging|celebratory|supportive|direct"
+}`
+    : `You are a personal productivity coach for the Signal/Noise app. Your task is to help users achieve their optimal Signal-to-Noise ratio of 80:20.
+
+IMPORTANT CHARACTERISTICS:
+- ALWAYS address the user by their first name
+- Be motivating but honest
+- Give concrete, actionable advice
+- Recognize patterns and address them directly
+- Maximum 3 sentences per main message
+- Focus on the "Why" not the "What"
+
+RESPONSE FORMAT:
+Return your response as JSON with:
+{
+  "message": "Main message (max 3 sentences)",
+  "type": "motivation|warning|celebration|insight|challenge",
+  "suggestions": [{"action": "Concrete action", "reasoning": "Brief reasoning"}],
+  "emotionalTone": "encouraging|challenging|celebratory|supportive|direct"
 }`;
 
-  const userPrompt = `Analysiere diese Produktivitätsdaten für ${payload.firstName}:
+  const userPrompt = currentLang === 'de'
+    ? `Analysiere diese Produktivitätsdaten für ${payload.firstName}:
 
 KONTEXT:
 - Aktuelles Ratio: ${payload.context.currentRatio}%
@@ -59,7 +80,21 @@ METRIKEN:
 - Trend: ${payload.patterns.trendDirection}
 - Beste Stunde: ${payload.patterns.bestHour} Uhr
 
-Gib eine personalisierte Coach-Nachricht zurück.`;
+Gib eine personalisierte Coach-Nachricht zurück.`
+    : `Analyze these productivity data for ${payload.firstName}:
+
+CONTEXT:
+- Current Ratio: ${payload.context.currentRatio}%
+- Today's Tasks: ${payload.context.todayTasks}
+- Trigger: ${payload.context.triggerType}
+
+METRICS:
+- Streak: ${payload.metrics.currentStreak} days
+- 7-day Average: ${payload.metrics.averageRatio7Days}%
+- Trend: ${payload.patterns.trendDirection}
+- Best Hour: ${payload.patterns.bestHour} o'clock
+
+Return a personalized coaching message.`;
 
   try {
     const response = await fetch(GROQ_API_URL, {
@@ -108,19 +143,25 @@ Gib eine personalisierte Coach-Nachricht zurück.`;
     const ratio = payload.context.currentRatio;
     if (ratio >= 80) {
       return {
-        message: `Stark, ${payload.firstName}! Du hältst deinen Fokus bei ${ratio}%. Weiter so!`,
+        message: currentLang === 'de'
+          ? `Stark, ${payload.firstName}! Du hältst deinen Fokus bei ${ratio}%. Weiter so!`
+          : `Great, ${payload.firstName}! You're keeping your focus at ${ratio}%. Keep it up!`,
         type: 'celebration',
         emotionalTone: 'celebratory'
       };
     } else if (ratio >= 60) {
       return {
-        message: `${payload.firstName}, ${ratio}% ist solid. Lass uns das auf 80% bringen!`,
+        message: currentLang === 'de'
+          ? `${payload.firstName}, ${ratio}% ist solid. Lass uns das auf 80% bringen!`
+          : `${payload.firstName}, ${ratio}% is solid. Let's get that to 80%!`,
         type: 'motivation',
         emotionalTone: 'encouraging'
       };
     } else {
       return {
-        message: `Hey ${payload.firstName}, Zeit für einen Reset! Was ist JETZT wirklich wichtig?`,
+        message: currentLang === 'de'
+          ? `Hey ${payload.firstName}, Zeit für einen Reset! Was ist JETZT wirklich wichtig?`
+          : `Hey ${payload.firstName}, time for a reset! What's REALLY important right now?`,
         type: 'warning',
         emotionalTone: 'direct'
       };

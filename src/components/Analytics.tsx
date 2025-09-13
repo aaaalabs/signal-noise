@@ -1,4 +1,5 @@
 import type { Task, DayRatio } from '../types';
+import { t } from '../i18n/translations';
 
 interface AnalyticsProps {
   tasks: Task[];
@@ -67,22 +68,22 @@ export default function Analytics({ tasks }: AnalyticsProps) {
 
   return (
     <div className="analytics">
-      <h2>30-Tage Überblick</h2>
+      <h2>{t.analyticsTitle}</h2>
 
       <div className="stat-grid">
         <div className="stat">
           <div className="stat-value">
             {avgRatio > 0 ? `${avgRatio}%` : '—'}
           </div>
-          <div className="stat-label">Ø Ratio</div>
+          <div className="stat-label">{t.avgRatio}</div>
         </div>
         <div className="stat">
           <div className="stat-value">{recentTasks.length}</div>
-          <div className="stat-label">Tasks Total</div>
+          <div className="stat-label">{t.tasksTotal}</div>
         </div>
         <div className="stat">
           <div className="stat-value">{calculateStreak()}</div>
-          <div className="stat-label">Tage Streak</div>
+          <div className="stat-label">{t.dayStreak}</div>
         </div>
       </div>
 
