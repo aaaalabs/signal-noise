@@ -37,25 +37,12 @@ export default function FoundationModal({ show, onClose }: FoundationModalProps)
   }, [show]);
 
   const fetchFoundationStats = async () => {
-    try {
-      const response = await fetch('/api/foundation-stats');
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-      const data = await response.json();
-      setStats(data);
-    } catch (error) {
-      console.error('Failed to fetch foundation stats:', error);
-      // Fallback for any environment when API fails
-      setStats({
-        foundationMembers: 0,
-        spotsLeft: 100,
-        totalSpots: 100,
-        isAvailable: true,
-        currentTier: 'foundation',
-        currentPrice: 29
-      });
+    const response = await fetch('/api/foundation-stats');
+    if (!response.ok) {
+      throw new Error(`Foundation stats API failed: HTTP ${response.status}`);
     }
+    const data = await response.json();
+    setStats(data);
   };
 
   const checkUserStatus = async (emailAddress: string): Promise<UserStatus | null> => {
