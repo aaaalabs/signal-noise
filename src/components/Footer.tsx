@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import AboutModal from './AboutModal';
+import FAQModal from './FAQModal';
 
 // Legal modals
 const LegalModal = ({ show, onClose, title, children }: {
@@ -183,6 +184,8 @@ const PrivacyContent = () => (
       </h3>
       <div style={{ lineHeight: 1.8 }}>
         <p>Signal/Noise ist privacy-by-design konzipiert. Ihre Produktivitätsdaten bleiben vollständig in Ihrem Browser (LocalStorage).</p>
+        <p><strong>Premium Sync:</strong> Mit Premium werden Ihre Daten zusätzlich verschlüsselt über HTTPS/TLS synchronisiert,
+        damit Sie sie auf mehreren Geräten nutzen können. Dabei wird Ihre E-Mail zu einem anonymen Hash umgewandelt.</p>
       </div>
     </section>
 
@@ -192,7 +195,8 @@ const PrivacyContent = () => (
       </h3>
       <div style={{ lineHeight: 1.8 }}>
         <p>Wir sammeln keine persönlichen Daten, keine Nutzungsstatistiken und verwenden keine Tracking-Cookies.</p>
-        <p>Ihre Tasks und Produktivitätsmuster verlassen niemals Ihr Gerät.</p>
+        <p><strong>Kostenlos:</strong> Ihre Tasks und Produktivitätsmuster verlassen niemals Ihr Gerät.</p>
+        <p><strong>Premium:</strong> Nur bei aktiviertem Premium-Sync werden verschlüsselte Daten temporär zur Synchronisation gespeichert.</p>
       </div>
     </section>
 
@@ -203,6 +207,17 @@ const PrivacyContent = () => (
       <div style={{ lineHeight: 1.8 }}>
         <p>Für AI-Coach Funktionen wird nur Ihr Vorname und anonymisierte Nutzungsmuster an Groq AI übertragen.</p>
         <p>Keine konkreten Tasks oder persönlichen Inhalte werden geteilt.</p>
+      </div>
+    </section>
+
+    <section style={{ marginBottom: '32px' }}>
+      <h3 style={{ fontSize: '18px', fontWeight: 500, marginBottom: '16px', color: '#fff' }}>
+        Datenexport & Sync-Technologie
+      </h3>
+      <div style={{ lineHeight: 1.8 }}>
+        <p><strong>Export:</strong> Sie können Ihre Daten jederzeit via Cmd+E als JSON-Datei exportieren.</p>
+        <p><strong>Sync-Sicherheit:</strong> Premium-Sync nutzt Vercel KV (Redis) mit 1-Jahr-Aufbewahrung und automatischer Löschung.</p>
+        <p><strong>Verschlüsselung:</strong> Datenübertragung erfolgt ausschließlich über HTTPS/TLS-verschlüsselte Verbindungen.</p>
       </div>
     </section>
 
@@ -233,6 +248,7 @@ export default function Footer() {
   const [showTerms, setShowTerms] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
+  const [showFAQ, setShowFAQ] = useState(false);
 
   return (
     <>
@@ -269,6 +285,21 @@ export default function Footer() {
               onMouseLeave={(e) => (e.target as HTMLButtonElement).style.color = '#666'}
             >
               About
+            </button>
+            <button
+              onClick={() => setShowFAQ(true)}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: '#666',
+                fontSize: '12px',
+                cursor: 'pointer',
+                transition: 'color 0.2s'
+              }}
+              onMouseEnter={(e) => (e.target as HTMLButtonElement).style.color = '#999'}
+              onMouseLeave={(e) => (e.target as HTMLButtonElement).style.color = '#666'}
+            >
+              FAQ
             </button>
             <button
               onClick={() => setShowLegal(true)}
@@ -350,6 +381,9 @@ export default function Footer() {
 
       {/* About Modal */}
       <AboutModal show={showAbout} onClose={() => setShowAbout(false)} />
+
+      {/* FAQ Modal */}
+      <FAQModal show={showFAQ} onClose={() => setShowFAQ(false)} />
 
       {/* Legal Modals */}
       <LegalModal show={showLegal} onClose={() => setShowLegal(false)} title="Legal / Impressum">
