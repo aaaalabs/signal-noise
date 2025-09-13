@@ -188,6 +188,12 @@ async function handleCheckoutCompleted(session) {
     return;
   }
 
+  // Skip test emails to avoid database pollution
+  if (customer_email.includes('@example.com') || customer_email.includes('test@')) {
+    console.log(`🚫 Skipping test email in webhook: ${customer_email}`);
+    return;
+  }
+
   console.log('🔑 Generating access token for user:', customer_email);
   const accessToken = 'snk_' + randomBytes(32).toString('hex');
 

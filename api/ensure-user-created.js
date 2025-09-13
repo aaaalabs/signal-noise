@@ -21,6 +21,15 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Email and sessionId required' });
   }
 
+  // Skip test emails to avoid database pollution
+  if (email.includes('@example.com') || email.includes('test@')) {
+    console.log(`🚫 Skipping test email: ${email}`);
+    return res.status(200).json({
+      message: 'Test email skipped',
+      testEmail: true
+    });
+  }
+
   try {
     console.log(`Backup user creation for ${email} (${source})`);
 
