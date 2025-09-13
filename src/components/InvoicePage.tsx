@@ -4,6 +4,8 @@ interface InvoiceData {
   invoiceNumber: string;
   customerEmail: string;
   customerName: string;
+  customerCompany?: string;
+  customerAddress?: string;
   tier: string;
   amount: string;
   invoiceDate: string;
@@ -19,6 +21,16 @@ export default function InvoicePage({ invoiceId }: InvoicePageProps) {
   const [invoice, setInvoice] = useState<InvoiceData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editData, setEditData] = useState<{
+    customerName: string;
+    customerCompany: string;
+    customerAddress: string;
+  }>({
+    customerName: '',
+    customerCompany: '',
+    customerAddress: ''
+  });
 
   useEffect(() => {
     const fetchInvoice = async () => {
@@ -28,7 +40,21 @@ export default function InvoicePage({ invoiceId }: InvoicePageProps) {
           throw new Error('Invoice not found');
         }
         const data = await response.json();
+
+        // Check for localStorage overrides
+        const storageKey = `invoice_${invoiceId}`;
+        const localData = localStorage.getItem(storageKey);
+        if (localData) {
+          const overrides = JSON.parse(localData);
+          Object.assign(data, overrides);
+        }
+
         setInvoice(data);
+        setEditData({
+          customerName: data.customerName || '',
+          customerCompany: data.customerCompany || '',
+          customerAddress: data.customerAddress || ''
+        });
       } catch (error) {
         setError(error instanceof Error ? error.message : 'Failed to load invoice');
       } finally {
@@ -84,6 +110,42 @@ export default function InvoicePage({ invoiceId }: InvoicePageProps) {
     window.print();
   };
 
+  const handleEdit = () => {
+    setIsEditing(true);
+  };
+
+  const handleSave = () => {
+    if (!invoice) return;
+
+    const storageKey = `invoice_${invoiceId}`;
+    const overrides = {
+      customerName: editData.customerName,
+      customerCompany: editData.customerCompany,
+      customerAddress: editData.customerAddress
+    };
+
+    localStorage.setItem(storageKey, JSON.stringify(overrides));
+
+    setInvoice({
+      ...invoice,
+      ...overrides
+    });
+
+    setIsEditing(false);
+  };
+
+  const handleCancel = () => {
+    if (!invoice) return;
+
+    setEditData({
+      customerName: invoice.customerName || '',
+      customerCompany: invoice.customerCompany || '',
+      customerAddress: invoice.customerAddress || ''
+    });
+
+    setIsEditing(false);
+  };
+
   return (
     <div style={{
       minHeight: '100vh',
@@ -97,38 +159,106 @@ export default function InvoicePage({ invoiceId }: InvoicePageProps) {
         margin: '0 auto',
         position: 'relative'
       }}>
-        {/* Print Button - Hidden in print */}
+        {/* Action Buttons - Hidden in print */}
         <div style={{
           position: 'absolute',
           top: '-40px',
           right: '0',
+          display: 'flex',
+          gap: '8px',
           '@media print': { display: 'none' }
         }}>
-          <button
-            onClick={handlePrint}
-            style={{
-              background: 'transparent',
-              border: '1px solid #333',
-              color: '#666',
-              padding: '8px 16px',
-              fontSize: '12px',
-              fontWeight: 400,
-              cursor: 'pointer',
-              borderRadius: '4px',
-              fontFamily: 'inherit',
-              transition: 'all 0.2s ease'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = '#666';
-              e.currentTarget.style.color = '#fff';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = '#333';
-              e.currentTarget.style.color = '#666';
-            }}
-          >
-            Print
-          </button>
+          {isEditing ? (
+            <>
+              <button
+                onClick={handleSave}
+                style={{
+                  background: 'transparent',
+                  border: '1px solid #00ff88',
+                  color: '#00ff88',
+                  padding: '8px 16px',
+                  fontSize: '12px',
+                  fontWeight: 400,
+                  cursor: 'pointer',
+                  borderRadius: '4px',
+                  fontFamily: 'inherit',
+                  transition: 'all 0.2s ease'
+                }}
+              >
+                Save
+              </button>
+              <button
+                onClick={handleCancel}
+                style={{
+                  background: 'transparent',
+                  border: '1px solid #333',
+                  color: '#666',
+                  padding: '8px 16px',
+                  fontSize: '12px',
+                  fontWeight: 400,
+                  cursor: 'pointer',
+                  borderRadius: '4px',
+                  fontFamily: 'inherit',
+                  transition: 'all 0.2s ease'
+                }}
+              >
+                Cancel
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                onClick={handleEdit}
+                style={{
+                  background: 'transparent',
+                  border: '1px solid #333',
+                  color: '#666',
+                  padding: '8px 16px',
+                  fontSize: '12px',
+                  fontWeight: 400,
+                  cursor: 'pointer',
+                  borderRadius: '4px',
+                  fontFamily: 'inherit',
+                  transition: 'all 0.2s ease'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = '#666';
+                  e.currentTarget.style.color = '#fff';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = '#333';
+                  e.currentTarget.style.color = '#666';
+                }}
+              >
+                Edit
+              </button>
+              <button
+                onClick={handlePrint}
+                style={{
+                  background: 'transparent',
+                  border: '1px solid #333',
+                  color: '#666',
+                  padding: '8px 16px',
+                  fontSize: '12px',
+                  fontWeight: 400,
+                  cursor: 'pointer',
+                  borderRadius: '4px',
+                  fontFamily: 'inherit',
+                  transition: 'all 0.2s ease'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = '#666';
+                  e.currentTarget.style.color = '#fff';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = '#333';
+                  e.currentTarget.style.color = '#666';
+                }}
+              >
+                Print
+              </button>
+            </>
+          )}
         </div>
 
         {/* Header with Brand */}
@@ -210,12 +340,91 @@ export default function InvoicePage({ invoiceId }: InvoicePageProps) {
             }}>
               Billed to
             </div>
-            <div style={{ marginBottom: '8px', fontSize: '16px', fontWeight: 400 }}>
-              {invoice.customerName}
-            </div>
-            <div style={{ fontSize: '14px', color: '#999', fontWeight: 300 }}>
-              {invoice.customerEmail}
-            </div>
+
+            {isEditing ? (
+              <div>
+                <input
+                  type="text"
+                  value={editData.customerName}
+                  onChange={(e) => setEditData({...editData, customerName: e.target.value})}
+                  placeholder="Customer Name"
+                  style={{
+                    background: 'transparent',
+                    border: '1px solid #333',
+                    color: '#fff',
+                    fontSize: '16px',
+                    fontWeight: 400,
+                    padding: '8px 12px',
+                    marginBottom: '8px',
+                    width: '100%',
+                    borderRadius: '4px',
+                    fontFamily: 'inherit',
+                    outline: 'none'
+                  }}
+                />
+                <input
+                  type="text"
+                  value={editData.customerCompany}
+                  onChange={(e) => setEditData({...editData, customerCompany: e.target.value})}
+                  placeholder="Company Name (optional)"
+                  style={{
+                    background: 'transparent',
+                    border: '1px solid #333',
+                    color: '#fff',
+                    fontSize: '14px',
+                    fontWeight: 300,
+                    padding: '8px 12px',
+                    marginBottom: '8px',
+                    width: '100%',
+                    borderRadius: '4px',
+                    fontFamily: 'inherit',
+                    outline: 'none'
+                  }}
+                />
+                <textarea
+                  value={editData.customerAddress}
+                  onChange={(e) => setEditData({...editData, customerAddress: e.target.value})}
+                  placeholder="Address (optional)"
+                  rows={3}
+                  style={{
+                    background: 'transparent',
+                    border: '1px solid #333',
+                    color: '#fff',
+                    fontSize: '14px',
+                    fontWeight: 300,
+                    padding: '8px 12px',
+                    marginBottom: '8px',
+                    width: '100%',
+                    borderRadius: '4px',
+                    fontFamily: 'inherit',
+                    outline: 'none',
+                    resize: 'vertical'
+                  }}
+                />
+                <div style={{ fontSize: '14px', color: '#999', fontWeight: 300 }}>
+                  {invoice.customerEmail}
+                </div>
+              </div>
+            ) : (
+              <div>
+                <div style={{ marginBottom: '8px', fontSize: '16px', fontWeight: 400 }}>
+                  {invoice.customerName}
+                </div>
+                {invoice.customerCompany && (
+                  <div style={{ marginBottom: '8px', fontSize: '14px', color: '#ccc', fontWeight: 300 }}>
+                    {invoice.customerCompany}
+                  </div>
+                )}
+                {invoice.customerAddress && (
+                  <div style={{ marginBottom: '8px', fontSize: '14px', color: '#ccc', fontWeight: 300, whiteSpace: 'pre-line' }}>
+                    {invoice.customerAddress}
+                  </div>
+                )}
+                <div style={{ fontSize: '14px', color: '#999', fontWeight: 300 }}>
+                  {invoice.customerEmail}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Invoice Info */}
@@ -361,6 +570,8 @@ export default function InvoicePage({ invoiceId }: InvoicePageProps) {
             }
             div[style*="color: #00ff88"] { color: #00ff88 !important; }
             div[style*="filter: drop-shadow"] { filter: none !important; }
+            button { display: none !important; }
+            input, textarea { border: none !important; background: white !important; padding: 0 !important; }
           }
         `}
       </style>
