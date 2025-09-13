@@ -472,9 +472,9 @@ export default function FoundationModal({ show, onClose }: FoundationModalProps)
             {loading ? 'Sending...' : 'Send access link'}
           </button>
         ) : (
-          // Purchase button for new users
+          // Purchase/Login button
           <button
-            onClick={handlePurchase}
+            onClick={isLoginMode ? () => sendMagicLink(email) : handlePurchase}
             disabled={loading || !email.trim() || !isValidEmail}
             style={{
               width: '100%',
