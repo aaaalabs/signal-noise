@@ -15,15 +15,16 @@ export default async function handler(req, res) {
 
     if (!email || !accessToken) {
       return res.status(400).json({
-        error: 'Email and access token required'
+        error: 'Email and access token required',
+        details: 'Both email and access token must be provided for premium verification'
       });
     }
 
-    // Get user data
-    const userKey = `user:${email}`;
+    // Get user data using the correct key format
+    const userKey = `sn:u:${email}`;
     const userData = await redis.hgetall(userKey);
 
-    if (!userData || !userData.access_token) {
+    if (!userData || Object.keys(userData).length === 0 || !userData.access_token) {
       return res.status(404).json({
         error: 'User not found or no premium access'
       });
@@ -68,7 +69,7 @@ export default async function handler(req, res) {
       });
     }
 
-    // Update last access time
+    // Update last access time (userKey is already sn:u:${email})
     await redis.hset(userKey, {
       last_access: now.toString()
     });
