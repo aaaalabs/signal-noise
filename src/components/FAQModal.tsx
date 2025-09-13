@@ -41,6 +41,10 @@ export default function FAQModal({ show, onClose }: FAQModalProps) {
       answer: "You earn badges for consistency: Early Bird (morning tasks), Comeback (returning after breaks), Perfect Day (optimal ratios), Week Warrior, and Month Hero. Look for subtle glows when you unlock them!"
     },
     {
+      question: "What do the small dots next to my ratio mean?",
+      answer: "The small dots represent your achievement progress. Gray dots are locked milestones, darker dots are earned achievements, and green dots show your most recent unlock. Click them to see your progress (X/8 milestones). They appear only after you've earned your first achievement - a subtle reward system that grows with your consistency."
+    },
+    {
       question: "What are the sync indicators?",
       answer: "Premium users see a small sync indicator (🔒) next to the language switcher when data is protected and synced. It appears subtly during sync operations."
     },
