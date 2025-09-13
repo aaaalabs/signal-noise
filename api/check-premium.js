@@ -22,30 +22,12 @@ export default async function handler(req, res) {
     // First, check what type of data is stored
     console.log('🔍 Checking key type for:', key);
 
-    let userData;
-    try {
-      // Try to get as JSON first
-      userData = await redis.get(key);
-      console.log('✅ Successfully retrieved as JSON:', typeof userData, userData);
-    } catch (jsonError) {
-      console.log('❌ JSON get failed:', jsonError.message);
+    // Data is stored as a Redis hash, use hgetall to retrieve
+    const userData = await redis.hgetall(key);
+    console.log('✅ Retrieved user data as hash:', userData);
 
-      // Try to get as string
-      try {
-        const rawData = await redis.call('GET', key);
-        console.log('🔧 Raw string data:', rawData);
-
-        if (rawData) {
-          userData = JSON.parse(rawData);
-          console.log('✅ Parsed from string:', userData);
-        }
-      } catch (stringError) {
-        console.log('❌ String get also failed:', stringError.message);
-        return res.json({ isActive: false, error: 'Data type mismatch' });
-      }
-    }
-
-    if (!userData) {
+    // Check if userData exists and has data (hgetall returns {} if no data)
+    if (!userData || Object.keys(userData).length === 0) {
       console.log('❌ No userData found for:', email);
       return res.json({ isActive: false });
     }
