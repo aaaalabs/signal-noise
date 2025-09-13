@@ -352,7 +352,8 @@ https://signal-noise.app
 export const sendWelcomeEmail = async (
   userEmail,
   firstName,
-  tierName = 'Premium Member'
+  tierName = 'Premium Member',
+  invoiceNumber = null
 ) => {
   try {
     console.log(`Sending welcome email to ${userEmail}`);
@@ -560,6 +561,82 @@ export const sendWelcomeEmail = async (
             line-height: 1.5;
           }
 
+          .invoice-section {
+            margin: 32px 0;
+            padding: 0;
+          }
+
+          .invoice-card {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+          }
+
+          .invoice-header {
+            padding: 20px 24px;
+            background: rgba(255, 255, 255, 0.02);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+          }
+
+          .invoice-label {
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666666;
+            margin: 0;
+          }
+
+          .invoice-number {
+            font-size: 13px;
+            font-weight: 400;
+            color: #00ff88;
+            margin: 0;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Courier, monospace;
+          }
+
+          .invoice-body {
+            padding: 24px;
+          }
+
+          .invoice-description {
+            font-size: 14px;
+            color: #cccccc;
+            margin: 0 0 20px 0;
+            line-height: 1.6;
+          }
+
+          .invoice-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            color: #ffffff !important;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 0.2px;
+            transition: all 0.3s ease;
+          }
+
+          .invoice-link:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.12);
+            transform: translateY(-1px);
+          }
+
+          .invoice-icon {
+            margin-right: 10px;
+            opacity: 0.8;
+          }
+
           .button-container {
             text-align: center;
             margin: 40px 0 0;
@@ -610,6 +687,9 @@ export const sendWelcomeEmail = async (
             .content { padding: 0 20px 20px; }
             .content-card { padding: 30px 24px; }
             .activation-card { padding: 24px; }
+            .invoice-header { padding: 16px 20px; }
+            .invoice-body { padding: 20px; }
+            .invoice-link { padding: 10px 16px; font-size: 12px; }
             .greeting { font-size: 17px; }
             .message { font-size: 14px; }
             .feature-item { padding: 14px 16px; }
@@ -653,6 +733,33 @@ export const sendWelcomeEmail = async (
                   Unlimited access to all premium features, forever. No recurring charges, no expiration.
                 </p>
               </div>
+
+              ${invoiceNumber ? `
+              <div class="invoice-section">
+                <div class="invoice-card">
+                  <div class="invoice-header">
+                    <div class="invoice-label">Invoice</div>
+                    <div class="invoice-number">${invoiceNumber}</div>
+                  </div>
+                  <div class="invoice-body">
+                    <p class="invoice-description">
+                      Your payment confirmation and receipt are available for download and printing.
+                    </p>
+                    <a href="https://signal-noise.app/invoice/${invoiceNumber}" class="invoice-link">
+                      <span class="invoice-icon">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                          <path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                          <path d="M16 13H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                          <path d="M16 17H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </span>
+                      View Invoice
+                    </a>
+                  </div>
+                </div>
+              </div>
+              ` : ''}
 
               <div class="features-section">
                 <h3 class="features-title">Your Premium Features</h3>
@@ -744,7 +851,10 @@ Welcome to Signal/Noise Premium! Your AI Coach is now ready to help you achieve 
 ${tierName} Activated!
 You now have unlimited access to all premium features, forever.
 
-Your Premium Features:
+${invoiceNumber ? `Invoice ${invoiceNumber}
+Your payment receipt is available at: https://signal-noise.app/invoice/${invoiceNumber}
+
+` : ''}Your Premium Features:
 Personal AI Coach powered by Groq
 Advanced pattern recognition
 Daily check-ins and weekly reports

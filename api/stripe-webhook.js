@@ -177,9 +177,9 @@ async function handleCheckoutCompleted(session) {
   console.log(`Premium access granted for ${customer_email} (${paymentType}, ${tier})`);
   console.log(`Invoice ${invoiceNumber} generated for payment ${session.id}`);
 
-  // Send welcome email with magic link
+  // Send welcome email with invoice link
   const tierName = tier === 'foundation' ? 'Foundation Member' : 'Early Adopter';
-  await sendWelcomeEmail(customer_email, userData.first_name, tierName);
+  await sendWelcomeEmail(customer_email, userData.first_name, tierName, invoiceNumber);
 }
 
 async function handleSubscriptionCreated(subscription) {
