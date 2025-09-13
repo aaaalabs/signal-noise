@@ -7,13 +7,20 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "test:redis": "node test-redis.js",
+    "test:stripe": "node test-api-logic.js",
+    "test:webhook": "node test-stripe-webhook.js",
+    "test:scenarios": "node test-stripe-scenarios.js",
+    "test:all": "npm run test:redis && npm run test:stripe"
   },
   "dependencies": {
     "@stripe/stripe-js": "^7.9.0",
     "@tailwindcss/postcss": "^4.1.13",
     "@upstash/redis": "^1.35.3",
     "autoprefixer": "^10.4.21",
+    "dotenv": "^17.2.2",
     "framer-motion": "^12.23.12",
     "postcss": "^8.5.6",
     "react": "^19.1.1",
