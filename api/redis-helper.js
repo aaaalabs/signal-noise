@@ -79,3 +79,22 @@ export async function getInvoice(redis, invoiceNumber) {
 export async function setInvoice(redis, invoiceNumber, data) {
   return await redis.hset(keys.invoice(invoiceNumber), data);
 }
+
+// Invoice token operations
+export async function generateInvoiceToken(invoiceNumber, customerEmail) {
+  const crypto = await import('crypto');
+  const tokenData = `${invoiceNumber}:${customerEmail}:${Date.now()}`;
+  return crypto.createHash('sha256').update(tokenData).digest('hex').substring(0, 32);
+}
+
+export async function setInvoiceToken(redis, token, invoiceNumber) {
+  const tokenKey = `${PREFIX}itoken:${token}`;
+  return await redis.set(tokenKey, invoiceNumber);
+}
+
+export async function getInvoiceByToken(redis, token) {
+  const tokenKey = `${PREFIX}itoken:${token}`;
+  const invoiceNumber = await redis.get(tokenKey);
+  if (!invoiceNumber) return null;
+  return await getInvoice(redis, invoiceNumber);
+}

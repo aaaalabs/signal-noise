@@ -14,10 +14,11 @@ interface InvoiceData {
 }
 
 interface InvoicePageProps {
-  invoiceId: string;
+  invoiceId?: string;
+  token?: string;
 }
 
-export default function InvoicePage({ invoiceId }: InvoicePageProps) {
+export default function InvoicePage({ invoiceId, token }: InvoicePageProps) {
   const [invoice, setInvoice] = useState<InvoiceData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -35,14 +36,18 @@ export default function InvoicePage({ invoiceId }: InvoicePageProps) {
   useEffect(() => {
     const fetchInvoice = async () => {
       try {
-        const response = await fetch(`/api/invoice?id=${invoiceId}`);
+        // Use secure token API if token is provided, otherwise use direct invoice API
+        const apiUrl = token
+          ? `/api/invoice-secure?token=${token}`
+          : `/api/invoice?id=${invoiceId}`;
+        const response = await fetch(apiUrl);
         if (!response.ok) {
           throw new Error('Invoice not found');
         }
         const data = await response.json();
 
-        // Check for localStorage overrides
-        const storageKey = `invoice_${invoiceId}`;
+        // Check for localStorage overrides (use invoice number from response)
+        const storageKey = `invoice_${data.invoiceNumber}`;
         const localData = localStorage.getItem(storageKey);
         if (localData) {
           const overrides = JSON.parse(localData);
@@ -63,7 +68,7 @@ export default function InvoicePage({ invoiceId }: InvoicePageProps) {
     };
 
     fetchInvoice();
-  }, [invoiceId]);
+  }, [invoiceId, token]);
 
   if (loading) {
     return (
@@ -117,7 +122,7 @@ export default function InvoicePage({ invoiceId }: InvoicePageProps) {
   const handleSave = () => {
     if (!invoice) return;
 
-    const storageKey = `invoice_${invoiceId}`;
+    const storageKey = `invoice_${invoice.invoiceNumber}`;
     const overrides = {
       customerName: editData.customerName,
       customerCompany: editData.customerCompany,

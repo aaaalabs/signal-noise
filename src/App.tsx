@@ -45,16 +45,26 @@ function App() {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showInvoicePage, setShowInvoicePage] = useState(false);
   const [invoiceId, setInvoiceId] = useState<string>('');
+  const [invoiceToken, setInvoiceToken] = useState<string>('');
 
   // Load data from localStorage on mount
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
 
-    // Check for invoice page route (/invoice/A00000001)
+    // Check for invoice page routes
     const pathname = window.location.pathname;
+    // Direct invoice route (/invoice/A00000001)
     const invoiceMatch = pathname.match(/^\/invoice\/([A-Z]\d{8})$/);
     if (invoiceMatch) {
       setInvoiceId(invoiceMatch[1]);
+      setShowInvoicePage(true);
+      return;
+    }
+
+    // Secure token route (/invoice/secure/[token])
+    const secureInvoiceMatch = pathname.match(/^\/invoice\/secure\/([a-f0-9]{32})$/);
+    if (secureInvoiceMatch) {
+      setInvoiceToken(secureInvoiceMatch[1]);
       setShowInvoicePage(true);
       return;
     }
@@ -216,7 +226,7 @@ function App() {
 
   // Show Invoice Page if navigated to invoice route
   if (showInvoicePage) {
-    return <InvoicePage invoiceId={invoiceId} />;
+    return <InvoicePage invoiceId={invoiceId} token={invoiceToken} />;
   }
 
   // Show Success Page if coming from Stripe

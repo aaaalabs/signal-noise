@@ -1,7 +1,7 @@
 import { Redis } from '@upstash/redis';
 import Stripe from 'stripe';
 import { randomBytes } from 'crypto';
-import { keys, incrementFoundation, setUser, generateInvoiceNumber, setInvoice } from './redis-helper.js';
+import { keys, incrementFoundation, setUser, generateInvoiceNumber, setInvoice, generateInvoiceToken, setInvoiceToken } from './redis-helper.js';
 import { sendWelcomeEmail } from './email-helper.js';
 
 // Clean the Stripe secret key to remove any whitespace/newlines
@@ -174,12 +174,17 @@ async function handleCheckoutCompleted(session) {
 
   await setInvoice(redis, invoiceNumber, invoiceData);
 
+  // Generate and store secure invoice token for GDPR compliance
+  const invoiceToken = await generateInvoiceToken(invoiceNumber, customer_email);
+  await setInvoiceToken(redis, invoiceToken, invoiceNumber);
+
   console.log(`Premium access granted for ${customer_email} (${paymentType}, ${tier})`);
   console.log(`Invoice ${invoiceNumber} generated for payment ${session.id}`);
+  console.log(`Secure invoice token generated: ${invoiceToken.substring(0, 8)}...`);
 
-  // Send welcome email with invoice link
+  // Send welcome email with secure invoice link
   const tierName = tier === 'foundation' ? 'Foundation Member' : 'Early Adopter';
-  await sendWelcomeEmail(customer_email, userData.first_name, tierName, invoiceNumber);
+  await sendWelcomeEmail(customer_email, userData.first_name, tierName, invoiceNumber, invoiceToken);
 }
 
 async function handleSubscriptionCreated(subscription) {
