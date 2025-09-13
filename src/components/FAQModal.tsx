@@ -33,6 +33,10 @@ export default function FAQModal({ show, onClose }: FAQModalProps) {
       answer: "Click 'Dein Coach' to access premium AI coaching. The system intelligently detects if you're a new or returning member and shows the appropriate flow."
     },
     {
+      question: "How do I delete tasks?",
+      answer: "Long-press any task for a moment to reveal the delete option. This gesture keeps your interface clean while giving you full control. Works on both touch devices and desktop with mouse."
+    },
+    {
       question: "What keyboard shortcuts are available?",
       answer: "Press Cmd+E (Mac) or Ctrl+E (Windows) to export your data. Use Tab to quickly switch between Signal and Noise when adding tasks - no need to click the buttons!"
     },

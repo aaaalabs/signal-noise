@@ -231,6 +231,13 @@ function AppContent() {
     }));
   };
 
+  const deleteTask = (id: number) => {
+    setData(prev => ({
+      ...prev,
+      tasks: prev.tasks.filter(task => task.id !== id)
+    }));
+  };
+
   const getTodayTasks = (): Task[] => {
     const today = new Date().toDateString();
     return data.tasks.filter(task =>
@@ -323,6 +330,7 @@ function AppContent() {
         <TaskGrid
           tasks={todayTasks}
           onToggle={toggleTask}
+          onDelete={deleteTask}
         />
 
         {/* AI Coach */}
