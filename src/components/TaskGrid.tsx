@@ -12,7 +12,7 @@ interface TaskGridProps {
 function TaskItem({ task, onToggle, onDelete }: { task: Task; onToggle: (id: number) => void; onDelete: (id: number) => void }) {
   const t = useTranslation();
   const [isPressed, setIsPressed] = useState(false);
-  const [pressTimer, setPressTimer] = useState<NodeJS.Timeout | null>(null);
+  const [pressTimer, setPressTimer] = useState<number | null>(null);
   const [showDelete, setShowDelete] = useState(false);
 
   const formatTaskTime = (timestamp: string): string => {
