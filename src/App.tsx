@@ -12,6 +12,7 @@ import PatternWhisper from './components/PatternWhisper';
 import StreakIndicator from './components/StreakIndicator';
 import SuccessPage from './components/SuccessPage';
 import Footer from './components/Footer';
+import BrandIcon from './components/BrandIcon';
 import { checkAchievements } from './utils/achievements';
 import { handleStripeReturn } from './services/premiumService';
 
@@ -222,7 +223,10 @@ function App() {
         show={showWhisper}
       />
 
-      <div className="container">
+      <div className="container" style={{ position: 'relative' }}>
+        {/* Brand Icon - Subtle Watermark */}
+        <BrandIcon />
+
         {/* Header with Ratio */}
         <header className="header">
           <RatioDisplay
