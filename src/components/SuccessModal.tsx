@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { activatePremium } from '../services/premiumService';
+import { startAutoSync, restoreData } from '../services/syncService';
 
 interface SuccessModalProps {
   show: boolean;
@@ -43,6 +44,12 @@ export default function SuccessModal({ show, onClose, sessionId }: SuccessModalP
 
       // Clean up stored email
       localStorage.removeItem('purchaseEmail');
+
+      // Start auto-sync for premium users
+      startAutoSync();
+
+      // Try to restore data from server (if available)
+      restoreData();
 
       console.log('Premium activated for:', email);
     }
@@ -109,10 +116,13 @@ export default function SuccessModal({ show, onClose, sessionId }: SuccessModalP
             AI Coach ready
           </div>
           <div style={{ fontSize: '14px', color: '#ccc', fontWeight: 300, marginBottom: '8px' }}>
-            Confirmation email sent
+            Data sync activated
+          </div>
+          <div style={{ fontSize: '14px', color: '#ccc', fontWeight: 300, marginBottom: '8px' }}>
+            Export with Cmd+E
           </div>
           <div style={{ fontSize: '14px', color: '#ccc', fontWeight: 300 }}>
-            All features unlocked
+            Confirmation email sent
           </div>
         </div>
 

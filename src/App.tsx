@@ -19,6 +19,7 @@ import LanguageSwitcher from './components/LanguageSwitcher';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { checkAchievements } from './utils/achievements';
 import { handleStripeReturn } from './services/premiumService';
+import { startAutoSync, restoreData } from './services/syncService';
 
 const DATA_KEY = 'signal_noise_data';
 const ONBOARDING_KEY = 'signal_noise_onboarded';
@@ -94,6 +95,20 @@ function AppContent() {
     if (premiumActivated) {
       setWhisperMessage('Premium activated!');
       setShowWhisper(true);
+
+      // Start auto-sync for premium users
+      startAutoSync();
+
+      // Try to restore data from server (if available)
+      restoreData().then((restored) => {
+        if (restored) {
+          // Reload data if server data was newer
+          const updatedData = localStorage.getItem(DATA_KEY);
+          if (updatedData) {
+            setData(JSON.parse(updatedData));
+          }
+        }
+      });
     }
 
     // Check onboarding first
@@ -139,6 +154,24 @@ function AppContent() {
       localStorage.setItem(DATA_KEY, JSON.stringify(data));
     }
   }, [data, isLoaded]);
+
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      // Cmd+E for data export
+      if ((event.metaKey || event.ctrlKey) && event.key === 'e') {
+        event.preventDefault();
+
+        // Import exportData function and call it
+        import('./services/syncService').then(({ exportData }) => {
+          exportData();
+        });
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   const handleOnboardingComplete = () => {
     localStorage.setItem(ONBOARDING_KEY, 'true');

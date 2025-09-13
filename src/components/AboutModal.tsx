@@ -100,7 +100,8 @@ export default function AboutModal({ show, onClose }: AboutModalProps) {
                 </p>
                 <p style={{ marginBottom: '1rem' }}>
                   Die App läuft zu 100% in deinem Browser - keine Anmeldung, keine Cloud, keine Datenweitergabe.
-                  Deine Produktivitätsdaten bleiben komplett privat auf deinem Gerät.
+                  Deine Produktivitätsdaten bleiben komplett privat auf deinem Gerät. Mit Premium werden Daten zusätzlich
+                  verschlüsselt synchronisiert, damit du sie auf mehreren Geräten nutzen kannst.
                 </p>
                 <p style={{ marginBottom: '1.5rem' }}>
                   Inspiriert von Steve Jobs' Produktivitätsmethode: Er definierte "Signal" als die 3-5 kritischsten Aufgaben,
@@ -116,7 +117,8 @@ export default function AboutModal({ show, onClose }: AboutModalProps) {
                 </p>
                 <p style={{ marginBottom: '1rem' }}>
                   The app runs 100% in your browser - no registration, no cloud, no data sharing.
-                  Your productivity data stays completely private on your device.
+                  Your productivity data stays completely private on your device. With Premium, data is additionally
+                  encrypted and synced so you can use it across multiple devices.
                 </p>
                 <p style={{ marginBottom: '1.5rem' }}>
                   Inspired by Steve Jobs' productivity method: He defined "Signal" as the 3-5 most critical tasks
@@ -200,6 +202,12 @@ export default function AboutModal({ show, onClose }: AboutModalProps) {
                 {isGerman ? '100% Privat: Alle Daten bleiben in deinem Browser (LocalStorage)' : '100% Private: All data stays in your browser (LocalStorage)'}
               </li>
               <li style={{ marginBottom: '0.5rem' }}>
+                {isGerman ? 'Premium Sync: Verschlüsselte Datensynchronisation über Geräte' : 'Premium Sync: Encrypted data synchronization across devices'}
+              </li>
+              <li style={{ marginBottom: '0.5rem' }}>
+                {isGerman ? 'Daten Export: Cmd+E für sofortigen JSON-Export deiner Daten' : 'Data Export: Cmd+E for instant JSON export of your data'}
+              </li>
+              <li style={{ marginBottom: '0.5rem' }}>
                 {isGerman ? 'Offline-fähig: Funktioniert ohne Internetverbindung (PWA)' : 'Offline Capable: Works without internet connection (PWA)'}
               </li>
             </ul>
@@ -262,9 +270,11 @@ export default function AboutModal({ show, onClose }: AboutModalProps) {
               <div>React 18</div>
               <div>TypeScript</div>
               <div>LocalStorage</div>
+              <div>Vercel KV</div>
               <div>PWA</div>
               <div>Vite</div>
               <div>CSS3</div>
+              <div>TLS Encryption</div>
             </div>
           </div>
 
