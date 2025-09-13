@@ -29,7 +29,7 @@ export default defineConfig({
         name: 'Signal/Noise - Focus on what matters',
         short_name: 'Signal',
         description: 'Minimalistic productivity app based on the 80/20 principle',
-        theme_color: '#00ff88',
+        theme_color: '#000000',
         background_color: '#000000',
         display: 'standalone',
         orientation: 'portrait',
