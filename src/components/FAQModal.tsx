@@ -36,7 +36,7 @@ export default function FAQModal({ show, onClose }: FAQModalProps) {
     },
     {
       question: "What keyboard shortcuts are available?",
-      answer: "Press Cmd+E (Mac) or Ctrl+E (Windows) to export your data. This hidden feature allows you to backup all your tasks and progress."
+      answer: "Press Cmd+E (Mac) or Ctrl+E (Windows) to export your data. Use Tab to quickly switch between Signal and Noise when adding tasks - no need to click the buttons!"
     },
     {
       question: "How does the achievement system work?",
