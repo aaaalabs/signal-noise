@@ -34,13 +34,20 @@ export default function SuccessModal({ show, onClose, sessionId }: SuccessModalP
     }
   };
 
-  const handleClose = () => {
+  const handleClose = async () => {
     // Get email from session data (most reliable) or localStorage fallback
     const email = sessionData?.email || localStorage.getItem('purchaseEmail');
 
-    if (email) {
+    if (email && sessionId) {
       // Activate premium in localStorage
       activatePremium(email, sessionId);
+
+      // BACKUP: Ensure user is created on server if webhook missed
+      try {
+        await ensureUserCreated(email, sessionId);
+      } catch (error) {
+        console.warn('Backup user creation failed (might already exist):', error);
+      }
 
       // Clean up stored email
       localStorage.removeItem('purchaseEmail');
@@ -55,6 +62,27 @@ export default function SuccessModal({ show, onClose, sessionId }: SuccessModalP
     }
 
     onClose();
+  };
+
+  const ensureUserCreated = async (email: string, sessionId: string) => {
+    // Call our backup endpoint that mimics webhook logic
+    const response = await fetch('/api/ensure-user-created', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email,
+        sessionId: sessionId,
+        source: 'success_modal_backup'
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    return response.json();
   };
 
   if (!show) return null;
