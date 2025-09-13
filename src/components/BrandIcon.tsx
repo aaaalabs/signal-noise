@@ -23,8 +23,10 @@ export default function BrandIcon() {
       >
         <path
           d="M1 557V1H553V317.562L312.41 557H1Z"
-          fill="rgba(0, 255, 136, 0.025)"
-          stroke="none"
+          fill="none"
+          stroke="rgba(0, 255, 136, 0.15)"
+          strokeWidth="1"
+          vectorEffect="non-scaling-stroke"
         />
       </svg>
 
