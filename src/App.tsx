@@ -20,7 +20,7 @@ import BrandIcon from './components/BrandIcon';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { checkAchievements } from './utils/achievements';
-import { handleStripeReturn, getSessionData, type SessionData } from './services/premiumService';
+import { handleStripeReturn, getSessionData, clearSession, type SessionData } from './services/premiumService';
 
 const DATA_KEY = 'signal_noise_data';
 const ONBOARDING_KEY = 'signal_noise_onboarded';
@@ -180,6 +180,12 @@ function AppContent() {
       });
 
       if (sessionData && sessionData.sessionToken) {
+        console.log('✅ VALID SESSION FOUND - Setting React state immediately...');
+
+        // Set React state immediately to prevent contradictions
+        setIsPremiumMode(true);
+        setSessionToken(sessionData.sessionToken);
+
         console.log('🔍 Valid session data found, validating with server...');
         try {
           // Validate session with server
@@ -200,15 +206,7 @@ function AppContent() {
             console.log('🔍 Server validation result:', { valid, user });
 
             if (valid) {
-              console.log('✅ Premium session validated - setting React state...');
-              setIsPremiumMode(true);
-              setSessionToken(sessionData.sessionToken);
-
-              console.log('🔍 React state updated:', {
-                isPremiumMode: true,
-                hasSessionToken: true,
-                sessionTokenLength: sessionData.sessionToken.length
-              });
+              console.log('✅ Premium session validated by server');
 
               // Load data from cloud instead of localStorage
               const cloudResponse = await fetch('/api/tasks', {
@@ -240,15 +238,27 @@ function AppContent() {
                 return;
               } else {
                 console.error('❌ Failed to load cloud data:', cloudResponse.status, cloudResponse.statusText);
+                // Keep premium mode active but load local data
+                loadLocalData();
+                return;
               }
             } else {
               console.log('❌ Server returned invalid session');
             }
           } else {
             console.error('❌ Server validation failed:', response.status, response.statusText);
+            // For now, continue with premium mode if localStorage session exists
+            // This handles server errors gracefully
+            console.log('🔄 Server validation failed, using localStorage session...');
+            loadLocalData();
+            return;
           }
         } catch (error) {
           console.error('❌ Premium session check failed:', error);
+          // Continue with premium mode if localStorage session exists
+          console.log('🔄 Validation error, using localStorage session...');
+          loadLocalData();
+          return;
         }
       } else {
         console.log('❌ No valid session data found:', {
@@ -386,36 +396,13 @@ function AppContent() {
   // Save data to localStorage or cloud whenever data changes
   useEffect(() => {
     if (isLoaded) {
-      // Get fresh session data to ensure we have latest state
-      const currentSessionData = getSessionData();
-
-      console.log('🔍 Sync decision check (CRITICAL):', {
+      console.log('🔍 Sync decision check:', {
         isLoaded,
         isPremiumMode,
         hasSessionToken: !!sessionToken,
         sessionTokenLength: sessionToken?.length || 0,
-        sessionTokenPreview: sessionToken?.substring(0, 8) + '...' || 'none',
-        currentSessionExists: !!currentSessionData,
-        currentSessionTokenExists: !!currentSessionData?.sessionToken,
-        currentSessionEmail: currentSessionData?.email?.substring(0, 3) + '...' || 'none',
-        premiumActiveLS: localStorage.getItem('premiumActive'),
-        sessionDataLS: !!localStorage.getItem('sessionData'),
         dataTaskCount: data.tasks?.length || 0
       });
-
-      // Double-check session validity if we have sessionData but no React state
-      if (!isPremiumMode && !sessionToken && currentSessionData?.sessionToken) {
-        console.log('⚠️  CONTRADICTION DETECTED: Session exists in localStorage but not in React state');
-        console.log('🔄 Attempting to restore session state from localStorage...');
-
-        // Try to restore the premium state
-        setIsPremiumMode(true);
-        setSessionToken(currentSessionData.sessionToken);
-
-        // Don't save yet, let the next cycle handle it with correct state
-        console.log('🔄 Session state restored, will sync on next cycle');
-        return;
-      }
 
       if (isPremiumMode && sessionToken) {
         // Save to cloud for premium users
@@ -427,10 +414,7 @@ function AppContent() {
         console.log('💾 USING LOCALSTORAGE SYNC:', {
           taskCount: data.tasks?.length || 0,
           premium: false,
-          reason: !isPremiumMode ? 'not premium mode' : 'no session token',
-          isPremiumMode,
-          hasSessionToken: !!sessionToken,
-          fallbackReason: 'Free user or session invalid'
+          reason: !isPremiumMode ? 'not premium mode' : 'no session token'
         });
       }
     }
@@ -507,6 +491,17 @@ function AppContent() {
     return authState;
   }, [isPremiumMode, sessionToken, isLoaded, data]);
 
+  // Sign out function
+  const handleSignOut = useCallback(() => {
+    console.log('🚪 Signing out...');
+    clearSession();
+    setIsPremiumMode(false);
+    setSessionToken('');
+
+    // Force reload to reinitialize app state
+    window.location.reload();
+  }, []);
+
   // Keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -525,11 +520,19 @@ function AppContent() {
         event.preventDefault();
         verifyAuthState();
       }
+
+      // Cmd+Shift+L for logout/signout
+      if ((event.metaKey || event.ctrlKey) && event.shiftKey && event.key === 'L') {
+        event.preventDefault();
+        if (isPremiumMode) {
+          handleSignOut();
+        }
+      }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [verifyAuthState]);
+  }, [verifyAuthState, handleSignOut, isPremiumMode]);
 
   const handleOnboardingComplete = () => {
     localStorage.setItem(ONBOARDING_KEY, 'true');
