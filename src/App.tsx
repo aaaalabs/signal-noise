@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import type { Task, AppData } from './types';
 import { useTranslation } from './contexts/LanguageContext';
 import RatioDisplay from './components/RatioDisplay';
@@ -41,6 +41,13 @@ function AppContent() {
   const t = useTranslation();
   const [data, setData] = useState<AppData>(initialData);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  // Sync tracking variables
+  const syncTracker = useRef({
+    counter: 0,
+    lastSyncTime: 0,
+    lastDataSize: 0
+  });
   const [isPremiumMode, setIsPremiumMode] = useState(false);
   const [sessionToken, setSessionToken] = useState<string>('');
   const [showOnboarding, setShowOnboarding] = useState(false);
@@ -318,20 +325,33 @@ function AppContent() {
 
   // Helper functions defined before use
   const saveToCloud = useCallback(async (appData: AppData) => {
-    console.log('🔍 saveToCloud called:', {
-      hasSessionToken: !!sessionToken,
+    const startTime = performance.now();
+    const payloadSize = JSON.stringify(appData).length;
+    const payloadSizeKB = (payloadSize / 1024).toFixed(2);
+
+    console.log('🚀 CLOUD SYNC INITIATED', {
+      timestamp: new Date().toISOString(),
+      syncAttempt: syncTracker.current.counter,
+      sessionTokenPresent: !!sessionToken,
       sessionTokenLength: sessionToken?.length || 0,
+      sessionTokenPreview: sessionToken ? sessionToken.substring(0, 8) + '...' : 'none',
       isPremiumMode,
-      taskCount: appData.tasks?.length || 0
+      payloadSize: `${payloadSize} bytes`,
+      payloadSizeKB: `${payloadSizeKB}KB`,
+      taskCount: appData.tasks?.length || 0,
+      historyEntries: appData.history?.length || 0,
+      badgeCount: appData.badges?.length || 0,
+      patternsKeys: appData.patterns ? Object.keys(appData.patterns).length : 0,
+      hasFirstName: !!appData.settings?.firstName
     });
 
     if (!sessionToken) {
-      console.log('❌ saveToCloud: No session token available');
+      console.log('❌ CLOUD SYNC ABORTED: No session token available');
       return;
     }
 
     if (!isPremiumMode) {
-      console.log('❌ saveToCloud: Not in premium mode');
+      console.log('❌ CLOUD SYNC ABORTED: Not in premium mode');
       return;
     }
 
@@ -339,11 +359,21 @@ function AppContent() {
       // Get email from localStorage to avoid infinite loops
       const email = localStorage.getItem('userEmail') || '';
 
-      console.log('🔄 Saving to cloud...', {
+      console.log('📤 SENDING CLOUD SYNC REQUEST', {
+        endpoint: '/api/sync',
+        method: 'POST',
         email: email?.substring(0, 3) + '...' || 'none',
-        taskCount: appData.tasks?.length || 0,
-        firstName: appData.settings.firstName || 'none'
+        fullEmail: email || 'missing',
+        authHeader: `Bearer ${sessionToken.substring(0, 8)}...`,
+        bodyKeys: ['email', 'data', 'firstName'],
+        requestStartTime: Date.now()
       });
+
+      const requestPayload = {
+        email,
+        data: appData,
+        firstName: appData.settings.firstName || ''
+      };
 
       const response = await fetch('/api/sync', {
         method: 'POST',
@@ -351,71 +381,121 @@ function AppContent() {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${sessionToken}`
         },
-        body: JSON.stringify({
-          email,
-          data: appData,
-          firstName: appData.settings.firstName || ''
-        })
+        body: JSON.stringify(requestPayload)
       });
 
-      console.log('🔍 Cloud sync response:', {
+      const responseTime = performance.now() - startTime;
+
+      console.log('📥 CLOUD SYNC RESPONSE RECEIVED', {
         status: response.status,
         statusText: response.statusText,
-        ok: response.ok
+        ok: response.ok,
+        responseTimeMs: `${responseTime.toFixed(2)}ms`,
+        contentType: response.headers.get('content-type'),
+        contentLength: response.headers.get('content-length')
       });
 
       if (response.ok) {
         const result = await response.json();
-        console.log('✅ Cloud sync successful:', {
-          taskCount: appData.tasks?.length || 0,
-          timestamp: result.timestamp,
+        console.log('✅ CLOUD SYNC SUCCESS - REDIS WRITE CONFIRMED', {
+          serverResponse: result,
+          tasksSynced: appData.tasks?.length || 0,
+          dataSizeKB: payloadSizeKB + 'KB',
+          serverTimestamp: result.timestamp,
           premium: result.premium || false,
-          synced: result.synced
+          syncedAt: result.synced,
+          totalResponseTime: `${(performance.now() - startTime).toFixed(2)}ms`,
+          redisOperationSuccess: true
         });
       } else {
-        console.error('❌ Failed to save data to cloud:', {
-          status: response.status,
-          statusText: response.statusText,
-          url: response.url
+        console.error('❌ CLOUD SYNC FAILED - SERVER ERROR', {
+          httpStatus: response.status,
+          httpStatusText: response.statusText,
+          url: response.url,
+          responseTimeMs: `${responseTime.toFixed(2)}ms`,
+          payloadSizeKB: payloadSizeKB + 'KB'
         });
+
+        // Try to get error details from response
+        try {
+          const errorBody = await response.text();
+          console.error('📝 SERVER ERROR DETAILS:', errorBody);
+        } catch (e) {
+          console.error('Could not parse error response:', e);
+        }
 
         // If unauthorized, the session might be expired
         if (response.status === 401 || response.status === 403) {
-          console.log('🔄 Session may be expired, clearing session...');
+          console.log('🔄 Session expired - clearing auth state...');
           localStorage.removeItem('sessionData');
           setIsPremiumMode(false);
           setSessionToken('');
         }
       }
     } catch (error) {
-      console.error('❌ Cloud save error:', error);
+      const totalTime = performance.now() - startTime;
+      console.error('❌ CLOUD SYNC NETWORK ERROR', {
+        error: error instanceof Error ? error.message : 'Unknown error',
+        errorType: error instanceof Error ? error.constructor.name : typeof error,
+        totalTimeMs: `${totalTime.toFixed(2)}ms`,
+        payloadSizeKB: payloadSizeKB + 'KB',
+        timestamp: new Date().toISOString()
+      });
     }
   }, [sessionToken, isPremiumMode]);
 
   // Save data to localStorage or cloud whenever data changes
   useEffect(() => {
-    if (isLoaded) {
-      console.log('🔍 Sync decision check:', {
+    if (isLoaded && data) {
+      const currentTime = Date.now();
+      const dataSize = JSON.stringify(data).length;
+      const dataSizeKB = (dataSize / 1024).toFixed(2);
+      const timeSinceLastSync = syncTracker.current.lastSyncTime ?
+        currentTime - syncTracker.current.lastSyncTime : 0;
+
+      syncTracker.current.counter++;
+
+      console.log('📊 DATA CHANGE DETECTED - SYNC TRIGGER', {
+        trigger: 'useEffect data dependency change',
+        syncCounter: syncTracker.current.counter,
+        timestamp: new Date(currentTime).toISOString(),
+        timeSinceLastSync: timeSinceLastSync ? `${timeSinceLastSync}ms` : 'first sync',
+        dataSize: `${dataSize} bytes`,
+        dataSizeKB: `${dataSizeKB}KB`,
+        dataSizeDelta: syncTracker.current.lastDataSize ?
+          `${dataSize - syncTracker.current.lastDataSize} bytes` : 'initial',
+        taskCount: data?.tasks?.length || 0,
+        hasPatterns: !!data?.patterns && Object.keys(data.patterns).length > 0,
+        hasHistory: !!data?.history && data.history.length > 0,
+        hasSettings: !!data?.settings,
         isLoaded,
         isPremiumMode,
         hasSessionToken: !!sessionToken,
-        sessionTokenLength: sessionToken?.length || 0,
-        dataTaskCount: data.tasks?.length || 0
+        sessionTokenLength: sessionToken?.length || 0
       });
 
       if (isPremiumMode && sessionToken) {
         // Save to cloud for premium users
-        console.log('☁️ USING CLOUD SYNC - Premium user authenticated');
+        console.log('☁️ CLOUD SYNC PATH ACTIVATED - Premium user authenticated', {
+          syncAttempt: syncTracker.current.counter,
+          email: localStorage.getItem('userEmail')?.substring(0, 3) + '...' || 'unknown'
+        });
         saveToCloud(data);
+        syncTracker.current.lastSyncTime = currentTime;
       } else {
         // Save to localStorage for free users
         localStorage.setItem(DATA_KEY, JSON.stringify(data));
-        console.log('💾 USING LOCALSTORAGE SYNC:', {
+        console.log('💾 LOCALSTORAGE SYNC PATH - Free user or no auth', {
+          syncAttempt: syncTracker.current.counter,
           taskCount: data.tasks?.length || 0,
+          dataSizeKB: `${dataSizeKB}KB`,
           premium: false,
           reason: !isPremiumMode ? 'not premium mode' : 'no session token'
         });
+        syncTracker.current.lastSyncTime = currentTime;
       }
+
+      syncTracker.current.lastDataSize = dataSize;
     }
   }, [data, isLoaded, isPremiumMode, sessionToken, saveToCloud]);
 
