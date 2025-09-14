@@ -1,23 +1,15 @@
-import { useState, useEffect } from 'react';
-import { activatePremium } from '../services/premiumService';
+import { useState, useEffect, useCallback } from 'react';
+import { activatePremiumSession, type SessionData } from '../services/premiumService';
 
 interface VerifyMagicLinkProps {
   token: string;
-  onSuccess: () => void;
+  onSuccess: (sessionData?: SessionData) => void;
   onError: () => void;
 }
 
 interface VerificationResult {
   success: boolean;
-  user?: {
-    email: string;
-    tier: string;
-    firstName: string;
-    status: string;
-    paymentType: string;
-    purchaseDate: string;
-    accessToken: string;
-  };
+  session?: SessionData;
   error?: string;
   message?: string;
 }
@@ -27,31 +19,21 @@ export default function VerifyMagicLink({ token, onSuccess, onError }: VerifyMag
   const [error, setError] = useState<string>('');
   const [success, setSuccess] = useState(false);
 
-  useEffect(() => {
-    verifyMagicLink();
-  }, [token]);
-
-  const verifyMagicLink = async () => {
+  const verifyMagicLink = useCallback(async () => {
     try {
-      const response = await fetch(`/api/verify-magic-link?token=${encodeURIComponent(token)}`);
+      const response = await fetch(`/api/auth/verify-magic-link?token=${encodeURIComponent(token)}`);
       const data: VerificationResult = await response.json();
 
-      if (data.success && data.user) {
-        // Store premium access in localStorage
-        activatePremium(data.user.email, data.user.accessToken);
-
-        // Store user info
-        localStorage.setItem('userEmail', data.user.email);
-        if (data.user.firstName) {
-          localStorage.setItem('userFirstName', data.user.firstName);
-        }
+      if (data.success && data.session) {
+        // Store session data using new session management
+        activatePremiumSession(data.session);
 
         setSuccess(true);
         setIsVerifying(false);
 
         // Auto-redirect after 2 seconds
         setTimeout(() => {
-          onSuccess();
+          onSuccess(data.session);
         }, 2000);
       } else {
         throw new Error(data.error || data.message || 'Verification failed');
@@ -66,7 +48,11 @@ export default function VerifyMagicLink({ token, onSuccess, onError }: VerifyMag
         onError();
       }, 3000);
     }
-  };
+  }, [token, onSuccess, onError]);
+
+  useEffect(() => {
+    verifyMagicLink();
+  }, [verifyMagicLink]);
 
   return (
     <div className="container" style={{

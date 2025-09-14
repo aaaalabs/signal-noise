@@ -1,4 +1,4 @@
-// Premium service for managing subscription status
+// Premium service for managing subscription status and sessions
 
 export interface PremiumStatus {
   isActive: boolean;
@@ -7,11 +7,34 @@ export interface PremiumStatus {
   subscriptionId?: string;
 }
 
-// Check if user has premium access
+export interface SessionData {
+  email: string;
+  token: string;
+  sessionToken: string;
+  created: number;
+  lastActive: number;
+  expires: number;
+  firstName: string;
+  tier: string;
+  paymentType: string;
+  syncedFromLocal: string | null;
+}
+
+// Check if user has premium access (legacy)
 export function checkPremiumStatus(): PremiumStatus {
   const premiumData = localStorage.getItem('premiumStatus');
 
   if (!premiumData) {
+    // Also check for new session-based premium
+    const sessionData = getSessionData();
+    if (sessionData && sessionData.expires > Date.now()) {
+      return {
+        isActive: true,
+        email: sessionData.email,
+        activatedAt: new Date(sessionData.created).toISOString(),
+        subscriptionId: sessionData.token
+      };
+    }
     return { isActive: false };
   }
 
@@ -26,6 +49,49 @@ export function checkPremiumStatus(): PremiumStatus {
   } catch {
     return { isActive: false };
   }
+}
+
+// Session management functions
+export function getSessionData(): SessionData | null {
+  const sessionData = localStorage.getItem('sessionData');
+  if (!sessionData) return null;
+
+  try {
+    const session = JSON.parse(sessionData);
+
+    // Check if session is expired
+    if (session.expires < Date.now()) {
+      clearSession();
+      return null;
+    }
+
+    return session;
+  } catch {
+    clearSession();
+    return null;
+  }
+}
+
+export function activatePremiumSession(sessionData: SessionData): void {
+  // Store session data
+  localStorage.setItem('sessionData', JSON.stringify(sessionData));
+
+  // Store user info for app compatibility
+  localStorage.setItem('userEmail', sessionData.email);
+  localStorage.setItem('userFirstName', sessionData.firstName);
+
+  // Legacy support for simple boolean check
+  localStorage.setItem('premiumActive', 'true');
+
+  console.log('✅ Premium session activated:', sessionData.email, sessionData.tier);
+}
+
+export function clearSession(): void {
+  localStorage.removeItem('sessionData');
+  localStorage.removeItem('premiumStatus');
+  localStorage.removeItem('premiumActive');
+  localStorage.removeItem('userEmail');
+  console.log('🚪 Session cleared');
 }
 
 // Development helper - activate premium for testing

@@ -14,9 +14,49 @@ export default async function handler(req, res) {
   // Handle GET request - retrieve user data
   if (req.method === 'GET') {
     const { emailHash } = req.query;
+    const authHeader = req.headers.authorization;
 
+    // For premium users with session tokens
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+      const sessionToken = authHeader.substring(7);
+
+      try {
+        // Find user by session token
+        const userKeys = await redis.keys('sn:u:*');
+        let userData = null;
+
+        for (const userKey of userKeys) {
+          const user = await redis.hgetall(userKey);
+          if (user.session_token === sessionToken) {
+            // Return user's cloud data
+            userData = {
+              data: JSON.parse(user.app_data || '{}'),
+              firstName: user.first_name || '',
+              language: 'en',
+              timestamp: user.last_active,
+              lastSync: new Date().toISOString(),
+              version: '1.0.0'
+            };
+            break;
+          }
+        }
+
+        if (!userData) {
+          return res.status(404).json({ error: 'Session not found' });
+        }
+
+        console.log('✅ Premium data retrieved for session');
+        return res.json(userData);
+
+      } catch (error) {
+        console.error('❌ Premium sync retrieve error:', error);
+        return res.status(500).json({ error: 'Failed to retrieve premium data' });
+      }
+    }
+
+    // Legacy hash-based retrieval for free users
     if (!emailHash) {
-      return res.status(400).json({ error: 'Email hash required' });
+      return res.status(400).json({ error: 'Email hash or authentication required' });
     }
 
     try {
@@ -45,10 +85,58 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Invalid JSON in request body' });
     }
 
+    const authHeader = req.headers.authorization;
+
+    // For premium users with session tokens
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+      const sessionToken = authHeader.substring(7);
+      const { email, data, firstName, syncType } = body;
+
+      if (!email || !sessionToken) {
+        return res.status(400).json({ error: 'Email and session token required for authenticated sync' });
+      }
+
+      try {
+        // Find and update user by session token
+        const userKey = `sn:u:${email}`;
+        const user = await redis.hgetall(userKey);
+
+        if (!user.session_token || user.session_token !== sessionToken) {
+          return res.status(403).json({ error: 'Invalid session token' });
+        }
+
+        // Update user data in Redis
+        await redis.hset(userKey, {
+          app_data: JSON.stringify(data || {}),
+          first_name: firstName || user.first_name || '',
+          last_active: Date.now().toString(),
+          synced_from_local: syncType === 'initial' ? Date.now().toString() : user.synced_from_local || null
+        });
+
+        console.log('✅ Premium data synced for user:', email, {
+          taskCount: data?.tasks?.length || 0,
+          syncType,
+          hasFirstName: !!firstName
+        });
+
+        return res.json({
+          success: true,
+          timestamp: Date.now(),
+          synced: new Date().toISOString(),
+          premium: true
+        });
+
+      } catch (error) {
+        console.error('❌ Premium sync store error:', error);
+        return res.status(500).json({ error: 'Failed to sync premium data' });
+      }
+    }
+
+    // Legacy hash-based sync for free users
     const { emailHash, data, firstName, language, timestamp } = body;
 
     if (!emailHash) {
-      return res.status(400).json({ error: 'Email hash required' });
+      return res.status(400).json({ error: 'Email hash or authentication required' });
     }
 
     try {
@@ -63,7 +151,6 @@ export default async function handler(req, res) {
 
       // Store in Redis with TTL of 1 year (31536000 seconds)
       await redis.setex(`sn:u:sync:${emailHash}`, 31536000, JSON.stringify(syncData));
-
 
       console.log('✅ Data synced for hash:', emailHash.substring(0, 6) + '...', {
         taskCount: data?.tasks?.length || 0,

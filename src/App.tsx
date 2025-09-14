@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import type { Task, AppData } from './types';
 import { useTranslation } from './contexts/LanguageContext';
 import RatioDisplay from './components/RatioDisplay';
@@ -20,7 +20,7 @@ import BrandIcon from './components/BrandIcon';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { checkAchievements } from './utils/achievements';
-import { handleStripeReturn, activatePremiumForDev } from './services/premiumService';
+import { handleStripeReturn, activatePremiumForDev, getSessionData, type SessionData } from './services/premiumService';
 
 const DATA_KEY = 'signal_noise_data';
 const ONBOARDING_KEY = 'signal_noise_onboarded';
@@ -41,6 +41,8 @@ function AppContent() {
   const t = useTranslation();
   const [data, setData] = useState<AppData>(initialData);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isPremiumMode, setIsPremiumMode] = useState(false);
+  const [sessionToken, setSessionToken] = useState<string>('');
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [achievementGlow, setAchievementGlow] = useState(false);
   const [whisperMessage, setWhisperMessage] = useState('');
@@ -111,51 +113,139 @@ function AppContent() {
       localStorage.setItem('dev_premium_initialized', 'true');
     }
 
-    // Check onboarding first
-    const hasOnboarded = localStorage.getItem(ONBOARDING_KEY);
-    if (!hasOnboarded) {
-      setShowOnboarding(true);
-      return;
-    }
+    // Check for premium session first
+    const checkPremiumSession = async () => {
+      const sessionData = getSessionData();
+      if (sessionData && sessionData.sessionToken) {
+        try {
+          // Validate session with server
+          const response = await fetch('/api/auth/validate-session', {
+            headers: {
+              'Authorization': `Bearer ${sessionData.sessionToken}`
+            }
+          });
 
-    const stored = localStorage.getItem(DATA_KEY);
-    const userName = localStorage.getItem('userFirstName');
+          if (response.ok) {
+            const { valid, user } = await response.json();
+            if (valid) {
+              console.log('✅ Premium session validated');
+              setIsPremiumMode(true);
+              setSessionToken(sessionData.sessionToken);
 
-    if (stored) {
-      try {
-        const parsedData = JSON.parse(stored);
+              // Load data from cloud instead of localStorage
+              const cloudResponse = await fetch('/api/tasks', {
+                headers: {
+                  'Authorization': `Bearer ${sessionData.sessionToken}`
+                }
+              });
 
-        // Migrate old data structure if needed
-        if (!parsedData.badges) parsedData.badges = [];
-        if (!parsedData.patterns) parsedData.patterns = {};
-        if (!parsedData.settings) parsedData.settings = { targetRatio: 80, notifications: false, firstName: '' };
+              if (cloudResponse.ok) {
+                const { data: cloudData } = await cloudResponse.json();
+                console.log('✅ Premium data loaded from cloud');
 
-        // Merge saved name if not already present
-        if (userName && !parsedData.settings.firstName) {
-          parsedData.settings.firstName = userName;
+                // Migrate cloud data structure if needed
+                if (!cloudData.badges) cloudData.badges = [];
+                if (!cloudData.patterns) cloudData.patterns = {};
+                if (!cloudData.settings) cloudData.settings = { targetRatio: 80, notifications: false, firstName: user.firstName || '' };
+
+                setData(cloudData);
+                setIsLoaded(true);
+                return;
+              }
+            }
+          }
+
+          console.log('❌ Premium session invalid, falling back to localStorage');
+        } catch (error) {
+          console.error('❌ Premium session check failed:', error);
         }
-        setData(parsedData);
-      } catch (error) {
-        console.error('Failed to load stored data:', error);
       }
-    } else if (userName) {
-      // Even for new users, keep saved name
-      setData(prev => ({
-        ...prev,
-        settings: { ...prev.settings, firstName: userName }
-      }));
-    }
 
+      // Fall back to local storage mode (free users or invalid session)
+      setIsPremiumMode(false);
+      loadLocalData();
+    };
 
-    setIsLoaded(true);
+    const loadLocalData = () => {
+      // Check onboarding first
+      const hasOnboarded = localStorage.getItem(ONBOARDING_KEY);
+      if (!hasOnboarded) {
+        setShowOnboarding(true);
+        return;
+      }
+
+      const stored = localStorage.getItem(DATA_KEY);
+      const userName = localStorage.getItem('userFirstName');
+
+      if (stored) {
+        try {
+          const parsedData = JSON.parse(stored);
+
+          // Migrate old data structure if needed
+          if (!parsedData.badges) parsedData.badges = [];
+          if (!parsedData.patterns) parsedData.patterns = {};
+          if (!parsedData.settings) parsedData.settings = { targetRatio: 80, notifications: false, firstName: '' };
+
+          // Merge saved name if not already present
+          if (userName && !parsedData.settings.firstName) {
+            parsedData.settings.firstName = userName;
+          }
+          setData(parsedData);
+        } catch (error) {
+          console.error('Failed to load stored data:', error);
+        }
+      } else if (userName) {
+        // Even for new users, keep saved name
+        setData(prev => ({
+          ...prev,
+          settings: { ...prev.settings, firstName: userName }
+        }));
+      }
+
+      setIsLoaded(true);
+    };
+
+    checkPremiumSession();
   }, []);
 
-  // Save data to localStorage whenever data changes
+  // Helper functions defined before use
+  const saveToCloud = useCallback(async (appData: AppData) => {
+    if (!sessionToken) return;
+
+    try {
+      const response = await fetch('/api/sync', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${sessionToken}`
+        },
+        body: JSON.stringify({
+          email: localStorage.getItem('userEmail'),
+          data: appData,
+          firstName: appData.settings.firstName
+        })
+      });
+
+      if (!response.ok) {
+        console.error('❌ Failed to save data to cloud');
+      }
+    } catch (error) {
+      console.error('❌ Cloud save error:', error);
+    }
+  }, [sessionToken]);
+
+  // Save data to localStorage or cloud whenever data changes
   useEffect(() => {
     if (isLoaded) {
-      localStorage.setItem(DATA_KEY, JSON.stringify(data));
+      if (isPremiumMode && sessionToken) {
+        // Save to cloud for premium users
+        saveToCloud(data);
+      } else {
+        // Save to localStorage for free users
+        localStorage.setItem(DATA_KEY, JSON.stringify(data));
+      }
     }
-  }, [data, isLoaded]);
+  }, [data, isLoaded, isPremiumMode, sessionToken, saveToCloud]);
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -199,6 +289,51 @@ function AppContent() {
       setTimeout(() => {
         setHasAchievement(false);
       }, 3000);
+    }
+  };
+
+  const handleOneTimeSyncToCloud = async (sessionData: SessionData) => {
+    try {
+      console.log('🔄 Starting one-time sync to cloud storage');
+
+      // Get current localStorage data
+      const localData = localStorage.getItem(DATA_KEY);
+      if (!localData) {
+        console.log('✅ No local data to sync');
+        return;
+      }
+
+      const parsedData = JSON.parse(localData);
+
+      // Sync to cloud using authenticated endpoint
+      const response = await fetch('/api/sync', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${sessionData.sessionToken}`
+        },
+        body: JSON.stringify({
+          email: sessionData.email,
+          data: parsedData,
+          firstName: sessionData.firstName,
+          syncType: 'initial'
+        })
+      });
+
+      if (response.ok) {
+        console.log('✅ One-time sync completed successfully');
+
+        // Clear localStorage since we're now cloud-based
+        localStorage.removeItem(DATA_KEY);
+
+        // Show success message
+        setWhisperMessage('Data synced to cloud!');
+        setShowWhisper(true);
+      } else {
+        console.error('❌ Failed to sync data to cloud');
+      }
+    } catch (error) {
+      console.error('❌ One-time sync error:', error);
     }
   };
 
@@ -280,10 +415,21 @@ function AppContent() {
     return (
       <VerifyMagicLink
         token={verifyToken}
-        onSuccess={() => {
+        onSuccess={(sessionData?: SessionData) => {
           setShowVerifyMagicLink(false);
+
+          // Handle one-time sync for new premium users
+          if (sessionData && !sessionData.syncedFromLocal) {
+            // Trigger one-time sync from localStorage to cloud
+            handleOneTimeSyncToCloud(sessionData);
+          }
+
           // Clean URL and redirect to main app
           window.history.replaceState({}, '', '/');
+
+          // Trigger app reload to show premium features
+          setIsLoaded(false);
+          setTimeout(() => setIsLoaded(true), 100);
         }}
         onError={() => {
           setShowVerifyMagicLink(false);
