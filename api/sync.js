@@ -52,7 +52,7 @@ export default async function handler(req, res) {
                 console.error('🚨 CORRUPTED APP_DATA ON GET:', {
                   userKey,
                   dataType: typeof user.app_data,
-                  dataPreview: user.app_data ? user.app_data.substring(0, 100) : 'null',
+                  dataPreview: user.app_data ? (typeof user.app_data === 'string' ? user.app_data.substring(0, 100) : JSON.stringify(user.app_data).substring(0, 100)) : 'null',
                   error: parseError.message
                 });
                 // Return empty data structure instead of crashing
@@ -182,7 +182,7 @@ export default async function handler(req, res) {
             console.error('🚨 CORRUPTED APP_DATA DETECTED:', {
               userKey,
               dataType: typeof user.app_data,
-              dataPreview: user.app_data.substring(0, 100),
+              dataPreview: user.app_data ? (typeof user.app_data === 'string' ? user.app_data.substring(0, 100) : JSON.stringify(user.app_data).substring(0, 100)) : 'null',
               error: parseError.message
             });
             // Reset corrupted data - prefer empty over corrupted

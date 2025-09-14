@@ -94,7 +94,7 @@ export default async function handler(req, res) {
         userKey: userKey,
         userEmail: user.email,
         dataType: typeof user.app_data,
-        dataPreview: user.app_data ? user.app_data.substring(0, 100) : 'null',
+        dataPreview: user.app_data ? (typeof user.app_data === 'string' ? user.app_data.substring(0, 100) : JSON.stringify(user.app_data).substring(0, 100)) : 'null',
         error: error.message
       });
       appData = { tasks: [], history: [], badges: [], patterns: {}, settings: { targetRatio: 80, notifications: false } };
