@@ -148,6 +148,23 @@ export default async function handler(req, res) {
           return res.status(403).json({ error: 'Invalid session token' });
         }
 
+        // CRITICAL SAFETY CHECK: Prevent overwriting existing data with empty data
+        const existingDataSize = user.app_data ? user.app_data.length : 0;
+        const newTaskCount = data?.tasks?.length || 0;
+        const existingTaskCount = user.app_data ? (JSON.parse(user.app_data || '{}').tasks || []).length : 0;
+
+        // Block sync if trying to overwrite existing tasks with empty data
+        if (existingTaskCount > 0 && newTaskCount === 0) {
+          console.error('🚨 CRITICAL DATA PROTECTION: Blocked attempt to overwrite', existingTaskCount, 'tasks with empty data');
+          return res.status(409).json({
+            error: 'Data protection: Cannot overwrite existing tasks with empty data',
+            protection: 'critical_data_loss_prevention',
+            existingTasks: existingTaskCount,
+            newTasks: newTaskCount,
+            suggestion: 'Use force=true parameter if this is intentional'
+          });
+        }
+
         const newAppData = JSON.stringify(data || {});
         const newDataSize = newAppData.length;
         const newDataSizeKB = (newDataSize / 1024).toFixed(2);
