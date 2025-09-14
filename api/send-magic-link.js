@@ -47,9 +47,17 @@ export default async function handler(req, res) {
     await createMagicToken(redis, userEmail, token, 15);
 
     // Build verification URL
-    const baseUrl = process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : 'http://localhost:5174';
+    // Priority: Custom domain > Vercel URL > Local development
+    let baseUrl;
+    if (process.env.VERCEL_ENV === 'production') {
+      baseUrl = 'https://signal-noise.app';
+    } else if (process.env.VERCEL_URL) {
+      baseUrl = `https://${process.env.VERCEL_URL}`;
+    } else if (process.env.PORT) {
+      baseUrl = `http://localhost:${process.env.PORT}`;
+    } else {
+      baseUrl = 'http://localhost:3000';
+    }
 
     const verifyUrl = `${baseUrl}/verify?token=${token}`;
 

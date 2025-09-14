@@ -10,7 +10,7 @@ export const keys = {
   core: () => `${PREFIX}core`,
   magic: (token) => `${PREFIX}magic:${token}`,
   invoice: (invoiceNumber) => `${PREFIX}invoice:${invoiceNumber}`,
-  invoiceSeq: () => `${PREFIX}ivnr`
+  invoiceSeq: () => `lib:ivnr`
 };
 
 // Foundation counter operations
@@ -68,8 +68,8 @@ export async function deleteMagicToken(redis, token) {
 
 // Invoice operations
 export async function generateInvoiceNumber(redis) {
-  const sequence = await redis.incr(keys.invoiceSeq());
-  return `A${sequence.toString().padStart(8, '0')}`;
+  const sequence = await redis.incr('lib:ivnr');
+  return `A${sequence}`;
 }
 
 export async function getInvoice(redis, invoiceNumber) {

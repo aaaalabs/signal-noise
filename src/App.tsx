@@ -73,8 +73,8 @@ function AppContent() {
     }
 
     // Check for invoice page routes
-    // Direct invoice route (/invoice/A00000001)
-    const invoiceMatch = pathname.match(/^\/invoice\/([A-Z]\d{8})$/);
+    // Direct invoice route (/invoice/A1050)
+    const invoiceMatch = pathname.match(/^\/invoice\/(A\d+)$/);
     if (invoiceMatch) {
       setInvoiceId(invoiceMatch[1]);
       setShowInvoicePage(true);
