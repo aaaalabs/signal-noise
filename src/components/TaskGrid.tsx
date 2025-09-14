@@ -99,22 +99,20 @@ function TaskItem({ task, onTransfer, onDelete }: { task: Task; onTransfer: (id:
   const handleTap = () => {
     const now = performance.now();
 
-    // If more than 1 second since last tap, reset count
-    if (now - lastTapTime.current > 1000) {
-      setTapCount(1);
-    } else {
-      setTapCount(prev => prev + 1);
-    }
+    // Calculate current tap count
+    const currentTapCount = now - lastTapTime.current > 1000 ? 1 : tapCount + 1;
 
+    // Update state
+    setTapCount(currentTapCount);
     lastTapTime.current = now;
 
-    // Visual feedback - subtle pulse
+    // Visual feedback - progressive pulse in destination category color
     setIsPressed(true);
-    setTimeout(() => setIsPressed(false), 100);
+    setTimeout(() => setIsPressed(false), currentTapCount === 1 ? 150 : currentTapCount === 2 ? 200 : 300);
 
-    // Haptic feedback
+    // Progressive haptic feedback
     if (navigator.vibrate) {
-      navigator.vibrate(5);
+      navigator.vibrate(currentTapCount === 1 ? 5 : currentTapCount === 2 ? 8 : 15);
     }
 
     // Clear existing timeout
@@ -123,12 +121,9 @@ function TaskItem({ task, onTransfer, onDelete }: { task: Task; onTransfer: (id:
     }
 
     // Check if third tap within window
-    if (tapCount >= 2) {
+    if (currentTapCount >= 3) {
       // Third tap - trigger transfer
       setIsTransferring(true);
-      if (navigator.vibrate) {
-        navigator.vibrate(15);
-      }
 
       setTimeout(() => {
         onTransfer(task.id);
@@ -177,8 +172,10 @@ function TaskItem({ task, onTransfer, onDelete }: { task: Task; onTransfer: (id:
       className={`task-item ${task.type}-item ${isPressed ? 'pressing' : ''} ${isDeleting ? 'deleting' : ''} ${isTransferring ? 'transferring' : ''}`}
       style={{
         opacity: 1, // Always full opacity - no completed state
-        transform: isPressed ? 'scale(0.95)' : 'scale(1)',
-        transition: isTransferring ? 'all 0.3s ease-out' : 'transform 0.1s ease',
+        transform: isPressed
+          ? `scale(${tapCount === 1 ? 0.98 : tapCount === 2 ? 1.02 : 1.05})`
+          : 'scale(1)',
+        transition: isTransferring ? 'all 0.3s ease-out' : 'transform 0.15s ease',
         cursor: isDeleting ? 'pointer' : 'default',
         position: 'relative',
         userSelect: 'none',
@@ -188,8 +185,16 @@ function TaskItem({ task, onTransfer, onDelete }: { task: Task; onTransfer: (id:
           backgroundColor: 'rgba(255, 59, 48, 0.03)',
           borderRadius: '8px'
         } : isTransferring ? {
-          border: '1px solid var(--signal)',
-          backgroundColor: 'rgba(0, 255, 136, 0.05)',
+          border: `2px solid ${task.type === 'signal' ? 'var(--noise)' : 'var(--signal)'}`,
+          backgroundColor: task.type === 'signal'
+            ? 'rgba(255, 159, 10, 0.08)'
+            : 'rgba(0, 255, 136, 0.08)',
+          borderRadius: '8px'
+        } : isPressed && tapCount > 0 ? {
+          border: `${tapCount === 1 ? '1px' : '2px'} solid ${task.type === 'signal' ? 'var(--noise)' : 'var(--signal)'}`,
+          backgroundColor: task.type === 'signal'
+            ? `rgba(255, 159, 10, ${tapCount === 1 ? 0.03 : 0.06})`
+            : `rgba(0, 255, 136, ${tapCount === 1 ? 0.03 : 0.06})`,
           borderRadius: '8px'
         } : {
           border: '1px solid #222'
@@ -212,6 +217,26 @@ function TaskItem({ task, onTransfer, onDelete }: { task: Task; onTransfer: (id:
           }}
         />
       )}
+
+      {/* Transfer direction indicator - appears on second tap */}
+      {isPressed && tapCount === 2 && (
+        <div
+          style={{
+            position: 'absolute',
+            top: '50%',
+            right: '12px',
+            transform: 'translateY(-50%)',
+            fontSize: '18px',
+            color: task.type === 'signal' ? 'var(--noise)' : 'var(--signal)',
+            fontWeight: 600,
+            zIndex: 2,
+            animation: 'pulseArrow 0.2s ease-out'
+          }}
+        >
+          {task.type === 'signal' ? '→' : '←'}
+        </div>
+      )}
+
       <div className="task-text" style={{ position: 'relative', zIndex: 1 }}>{task.text}</div>
       <div className="task-time" style={{ position: 'relative', zIndex: 1 }}>{formatTaskTime(task.timestamp)}</div>
     </div>
@@ -266,7 +291,22 @@ export default function TaskGrid({ tasks, onTransfer, onDelete }: TaskGridProps)
       </div>
       <style>{`
         .task-item.pressing {
-          opacity: 0.8;
+          opacity: 0.9;
+        }
+
+        @keyframes pulseArrow {
+          0% {
+            opacity: 0;
+            transform: translateY(-50%) scale(0.8);
+          }
+          50% {
+            opacity: 1;
+            transform: translateY(-50%) scale(1.1);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(-50%) scale(1);
+          }
         }
       `}</style>
     </>
