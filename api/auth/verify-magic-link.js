@@ -83,11 +83,12 @@ export default async function handler(req, res) {
       message: 'Successfully authenticated'
     };
 
-    // Cache the success response for 10 seconds (handles duplicate requests)
-    await redis.setex(cacheKey, 10, JSON.stringify(successResponse));
+    // Cache the success response for 3 minutes (handles frontend polling)
+    await redis.setex(cacheKey, 180, JSON.stringify(successResponse));
 
-    // Delete magic token (one-time use) - only after caching success
-    await redis.del(magicKey);
+    // Delay deletion of magic token to allow for frontend polling
+    // Set magic token to expire in 3 minutes instead of deleting immediately
+    await redis.expire(magicKey, 180);
 
     console.log('✅ Magic link verified successfully:', {
       email,
