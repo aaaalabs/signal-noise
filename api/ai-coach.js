@@ -1,5 +1,5 @@
 import { Redis } from '@upstash/redis';
-import { incrementUserUsage } from './redis-helper.js';
+import { incrementUserUsage, checkUserRateLimit } from './redis-helper.js';
 
 // Initialize Redis for premium user verification
 const redis = new Redis({
@@ -41,7 +41,7 @@ export default async function handler(req, res) {
     }
 
     // Check rate limit (skip for dev users and beta users everywhere)
-    const isAllowed = (isDev && isDevUser) || isBetaUser || await checkRateLimit(userEmail);
+    const isAllowed = (isDev && isDevUser) || isBetaUser || await checkUserRateLimit(redis, userEmail, RATE_LIMIT);
     if (!isAllowed) {
       return res.status(429).json({
         error: 'Rate limit exceeded. Premium users get 10 requests per hour.'
@@ -130,30 +130,4 @@ async function verifyPremiumAccess(email, accessToken) {
   }
 }
 
-// Rate limiting using Redis
-async function checkRateLimit(email) {
-  try {
-    const key = `rate_limit:${email}`;
-    const current = await redis.get(key);
-
-    if (!current) {
-      // First request in window
-      await redis.setex(key, RATE_WINDOW, 1);
-      return true;
-    }
-
-    const count = parseInt(current);
-    if (count >= RATE_LIMIT) {
-      return false;
-    }
-
-    // Increment counter
-    await redis.incr(key);
-    return true;
-
-  } catch (error) {
-    console.error('Rate limit error:', error);
-    return true; // Allow on error
-  }
-}
 

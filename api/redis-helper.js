@@ -253,3 +253,60 @@ async function cleanupOldUsageFields(redis, email) {
     console.error('Usage cleanup error:', error);
   }
 }
+
+// Rate limiting operations (consolidated in user hash)
+export async function checkUserRateLimit(redis, email, rateLimitPerHour = 10) {
+  try {
+    const currentHour = new Date().toISOString().substring(0, 13); // YYYY-MM-DDTHH
+    const rateLimitField = `rate_limit_${currentHour.replace(/[-:T]/g, '_')}`; // rate_limit_2024_01_15_14
+
+    const currentCount = await redis.hget(keys.user(email), rateLimitField);
+    const count = parseInt(currentCount) || 0;
+
+    if (count >= rateLimitPerHour) {
+      return false; // Rate limit exceeded
+    }
+
+    // Increment rate limit counter in user hash
+    await redis.hincrby(keys.user(email), rateLimitField, 1);
+
+    // Clean up old rate limit fields occasionally (>24 hours old)
+    if (Math.random() < 0.1) { // 10% chance to run cleanup
+      await cleanupOldRateLimitFields(redis, email);
+    }
+
+    return true;
+  } catch (error) {
+    console.error('Rate limit check error:', error);
+    return true; // Allow on error
+  }
+}
+
+// Clean up rate limit fields older than 24 hours
+async function cleanupOldRateLimitFields(redis, email) {
+  try {
+    const userData = await getUser(redis, email);
+    if (!userData) return;
+
+    const twentyFourHoursAgo = new Date();
+    twentyFourHoursAgo.setHours(twentyFourHoursAgo.getHours() - 24);
+    const cutoffHour = twentyFourHoursAgo.toISOString().substring(0, 13).replace(/[-:T]/g, '_');
+
+    const fieldsToDelete = [];
+    Object.keys(userData).forEach(field => {
+      if (field.startsWith('rate_limit_')) {
+        // Extract hour from field name (rate_limit_2024_01_15_14)
+        const fieldHour = field.substring(11); // Remove 'rate_limit_'
+        if (fieldHour < cutoffHour) {
+          fieldsToDelete.push(field);
+        }
+      }
+    });
+
+    if (fieldsToDelete.length > 0) {
+      await redis.hdel(keys.user(email), ...fieldsToDelete);
+    }
+  } catch (error) {
+    console.error('Rate limit cleanup error:', error);
+  }
+}

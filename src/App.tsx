@@ -50,7 +50,7 @@ function AppContent() {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [paymentSessionId, setPaymentSessionId] = useState<string>('');
   const [showInvoicePage, setShowInvoicePage] = useState(false);
-  const [invoiceId, setInvoiceId] = useState<string>('');
+  const [invoiceId] = useState<string>('');
   const [invoiceToken, setInvoiceToken] = useState<string>('');
   const [showFoundationModal, setShowFoundationModal] = useState(false);
   const [foundationModalLoginMode, setFoundationModalLoginMode] = useState(false);
