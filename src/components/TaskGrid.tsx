@@ -142,7 +142,13 @@ function TaskItem({ task, onTransfer, onDelete }: { task: Task; onTransfer: (id:
   const handlePressStart = (e: React.MouseEvent | React.TouchEvent) => {
     e.preventDefault();
     setIsPressed(true);
-    startDeleteProgress();
+
+    // Delay deletion start to allow quick taps to escape
+    setTimeout(() => {
+      if (isPressed) {
+        startDeleteProgress();
+      }
+    }, 150); // 150ms delay before deletion mode starts
   };
 
   const handlePressEnd = (e: React.MouseEvent | React.TouchEvent) => {
