@@ -24,7 +24,8 @@ export default async function handler(req, res) {
 
     if (cachedResult) {
       console.log('🔄 Returning cached magic link verification result');
-      return res.status(200).json(JSON.parse(cachedResult));
+      // Upstash returns objects directly, no parsing needed
+      return res.status(200).json(cachedResult);
     }
 
     // Get email from magic token
