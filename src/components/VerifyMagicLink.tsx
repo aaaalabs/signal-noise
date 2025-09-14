@@ -36,10 +36,10 @@ export default function VerifyMagicLink({ token, onSuccess, onError }: VerifyMag
         setSuccess(true);
         setIsVerifying(false);
 
-        // Auto-redirect after 2 seconds
+        // Brief delay to show success message, then redirect
         setTimeout(() => {
           onSuccess(data.session);
-        }, 2000);
+        }, 500);
       } else {
         throw new Error(data.error || data.message || 'Verification failed');
       }
@@ -48,10 +48,10 @@ export default function VerifyMagicLink({ token, onSuccess, onError }: VerifyMag
       setError(err instanceof Error ? err.message : 'Verification failed');
       setIsVerifying(false);
 
-      // Auto-redirect to error state after 3 seconds
+      // Redirect to error state after brief delay for user to see message
       setTimeout(() => {
         onError();
-      }, 3000);
+      }, 2000);
     }
   }, [token, onSuccess, onError]);
 
