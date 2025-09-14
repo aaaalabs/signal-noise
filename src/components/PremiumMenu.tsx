@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { AppData } from '../types';
 import { calculateStreak, createBadgeDefinitions, getAverageRatio, getTodayRatio } from '../utils/achievements';
 import { deactivatePremium } from '../services/premiumService';
@@ -19,6 +19,7 @@ export default function PremiumMenu({
   data
 }: PremiumMenuProps) {
   const menuRef = useRef<HTMLDivElement>(null);
+  const [showTooltip, setShowTooltip] = useState<string | null>(null);
 
   if (!data) return null;
 
@@ -52,6 +53,34 @@ export default function PremiumMenu({
         return achievement.condition() ? 100 : 0;
       default:
         return 0;
+    }
+  };
+
+  // Get success criteria text
+  const getSuccessCriteria = (achievementId: string): string => {
+    switch (achievementId) {
+      case 'first_day': return 'Add one task';
+      case 'week_warrior': return 'Daily 80%+ ratio';
+      case 'signal_master': return 'Week average 80%';
+      case 'perfect_day': return '100% ratio today';
+      case 'month_hero': return 'Month-long streak';
+      case 'early_bird': return 'Task before 9am';
+      case 'decision_maker': return 'Reach 100 tasks';
+      case 'comeback': return 'Return after break';
+      default: return '';
+    }
+  };
+
+  // Handle tooltip display with auto-hide
+  const handleTooltipToggle = (achievementId: string) => {
+    if (showTooltip === achievementId) {
+      setShowTooltip(null);
+    } else {
+      setShowTooltip(achievementId);
+      // Auto-hide after 2.5 seconds
+      setTimeout(() => {
+        setShowTooltip(null);
+      }, 2500);
     }
   };
 
@@ -166,28 +195,55 @@ export default function PremiumMenu({
             fontSize: '10px'
           }}>
             {achievementsWithProgress.map(achievement => (
-              <div key={achievement.id} style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                padding: '1px 0'
-              }}>
-                <ProgressBar progress={achievement.progress} />
-                <span style={{
-                  color: '#ccc',
-                  fontWeight: 300,
-                  fontSize: '10px',
-                  flex: 1
-                }}>
-                  {achievement.name}
-                </span>
-                <span style={{
-                  color: '#666',
-                  fontWeight: 300,
-                  fontSize: '9px'
-                }}>
-                  {Math.round(achievement.progress)}%
-                </span>
+              <div key={achievement.id}>
+                <div
+                  onClick={() => handleTooltipToggle(achievement.id)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    padding: '1px 0',
+                    cursor: 'pointer',
+                    transition: 'opacity 0.2s ease'
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLElement).style.opacity = '0.7';
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLElement).style.opacity = '1';
+                  }}
+                >
+                  <ProgressBar progress={achievement.progress} />
+                  <span style={{
+                    color: '#ccc',
+                    fontWeight: 300,
+                    fontSize: '10px',
+                    flex: 1
+                  }}>
+                    {achievement.name}
+                  </span>
+                  <span style={{
+                    color: '#666',
+                    fontWeight: 300,
+                    fontSize: '9px'
+                  }}>
+                    {Math.round(achievement.progress)}%
+                  </span>
+                </div>
+                {showTooltip === achievement.id && (
+                  <div style={{
+                    color: '#999',
+                    fontSize: '9px',
+                    fontWeight: 300,
+                    paddingLeft: '20px',
+                    paddingTop: '2px',
+                    paddingBottom: '2px',
+                    animation: 'tooltipFadeIn 0.2s ease-out',
+                    fontStyle: 'italic'
+                  }}>
+                    {getSuccessCriteria(achievement.id)}
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -272,6 +328,16 @@ export default function PremiumMenu({
           from {
             opacity: 0;
             transform: translateY(-4px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        @keyframes tooltipFadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(-2px);
           }
           to {
             opacity: 1;
