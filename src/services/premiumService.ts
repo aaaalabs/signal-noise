@@ -25,15 +25,22 @@ export function checkPremiumStatus(): PremiumStatus {
   const premiumData = localStorage.getItem('premiumStatus');
 
   if (!premiumData) {
-    // Also check for new session-based premium
-    const sessionData = getSessionData();
-    if (sessionData && sessionData.expires > Date.now()) {
-      return {
-        isActive: true,
-        email: sessionData.email,
-        activatedAt: new Date(sessionData.created).toISOString(),
-        subscriptionId: sessionData.token
-      };
+    // Check session data directly from localStorage WITHOUT calling getSessionData()
+    const rawSessionData = localStorage.getItem('sessionData');
+    if (rawSessionData) {
+      try {
+        const sessionData = JSON.parse(rawSessionData);
+        if (sessionData && sessionData.expires > Date.now()) {
+          return {
+            isActive: true,
+            email: sessionData.email,
+            activatedAt: new Date(sessionData.created).toISOString(),
+            subscriptionId: sessionData.token
+          };
+        }
+      } catch {
+        // Session data corrupted, ignore
+      }
     }
     return { isActive: false };
   }
