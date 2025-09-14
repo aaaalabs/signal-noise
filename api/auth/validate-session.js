@@ -42,6 +42,9 @@ export default async function handler(req, res) {
     let userKey = null;
 
     for (const key of userKeys) {
+      // Skip legacy sync keys - only check user data keys
+      if (key.includes('sn:u:sync:')) continue;
+
       const userData = await redis.hgetall(key);
       if (userData.session_token === sessionToken) {
         user = userData;

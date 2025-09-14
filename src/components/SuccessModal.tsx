@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { activatePremium } from '../services/premiumService';
-import { startAutoSync, restoreData } from '../services/syncService';
+// REMOVED: startAutoSync, restoreData - App.tsx handles all cloud sync
 
 interface SuccessModalProps {
   show: boolean;
@@ -57,11 +57,9 @@ export default function SuccessModal({ show, onClose, sessionId }: SuccessModalP
       // Clean up stored email
       localStorage.removeItem('purchaseEmail');
 
-      // Start auto-sync for premium users
-      startAutoSync();
-
-      // Try to restore data from server (if available)
-      restoreData();
+      // REMOVED: startAutoSync() and restoreData() calls
+      // App.tsx already handles all cloud synchronization correctly
+      // No need for duplicate sync systems
 
       console.log('Premium activated for:', email);
     }
