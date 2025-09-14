@@ -20,7 +20,7 @@ export default async function handler(req, res) {
     }
 
     try {
-      const userData = await redis.get(`sn:sync:${emailHash}`);
+      const userData = await redis.get(`sn:u:sync:${emailHash}`);
 
       if (!userData) {
         return res.status(404).json({ error: 'No data found' });
@@ -62,19 +62,8 @@ export default async function handler(req, res) {
       };
 
       // Store in Redis with TTL of 1 year (31536000 seconds)
-      await redis.setex(`sn:sync:${emailHash}`, 31536000, JSON.stringify(syncData));
+      await redis.setex(`sn:u:sync:${emailHash}`, 31536000, JSON.stringify(syncData));
 
-      // Also store a reverse lookup for customer support
-      if (data && data.tasks && Array.isArray(data.tasks)) {
-        const supportInfo = {
-          emailHash,
-          taskCount: data.tasks.length,
-          lastActive: new Date().toISOString(),
-          premiumStatus: 'active'
-        };
-
-        await redis.setex(`sn:support:${emailHash}`, 31536000, JSON.stringify(supportInfo));
-      }
 
       console.log('✅ Data synced for hash:', emailHash.substring(0, 6) + '...', {
         taskCount: data?.tasks?.length || 0,

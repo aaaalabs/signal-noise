@@ -34,10 +34,9 @@ export default async function handler(req, res) {
     }
 
     // Get user data
-    const userData = await redis.get(`sn:sync:${targetEmailHash}`);
-    const supportInfo = await redis.get(`sn:support:${targetEmailHash}`);
+    const userData = await redis.get(`sn:u:sync:${targetEmailHash}`);
 
-    if (!userData && !supportInfo) {
+    if (!userData) {
       return res.status(404).json({ error: 'No data found for this user' });
     }
 
@@ -45,15 +44,16 @@ export default async function handler(req, res) {
     const response = {
       emailHash: targetEmailHash,
       found: !!userData,
-      supportInfo: supportInfo || null,
-      userData: userData ? {
+      userData: {
         firstName: userData.firstName || '',
         language: userData.language || 'en',
         lastSync: userData.lastSync || null,
         taskCount: userData.data?.tasks?.length || 0,
         hasAchievements: userData.data?.badges?.length > 0 || false,
-        version: userData.version || 'unknown'
-      } : null
+        version: userData.version || 'unknown',
+        lastActive: userData.lastSync || null,
+        premiumStatus: 'active'
+      }
     };
 
     console.log('🔍 Admin lookup for hash:', targetEmailHash.substring(0, 6) + '...', {
