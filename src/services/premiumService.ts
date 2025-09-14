@@ -121,6 +121,13 @@ export function activatePremiumSession(sessionData: SessionData): void {
   window.dispatchEvent(new CustomEvent('premiumSessionUpdated', {
     detail: sessionData
   }));
+
+  // FALLBACK: Reload page after short delay to ensure cloud data is loaded
+  // This ensures React state gets updated even if custom event fails
+  setTimeout(() => {
+    console.log('🔄 Reloading page to sync premium state...');
+    window.location.reload();
+  }, 1000);
 }
 
 export function clearSession(): void {
