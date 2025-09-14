@@ -20,17 +20,31 @@ export default async function handler(req, res) {
   const sessionToken = authHeader.substring(7);
 
   try {
-    // Find user by session token
-    const userKeys = await redis.keys('sn:u:*');
     let userKey = null;
     let user = null;
 
-    for (const key of userKeys) {
-      const userData = await redis.hgetall(key);
-      if (userData.session_token === sessionToken) {
-        userKey = key;
-        user = userData;
-        break;
+    // Handle development sessions
+    if (sessionToken.startsWith('dev-session-token-')) {
+      console.log('🚧 Development session - using mock user data');
+      userKey = 'sn:u:dev@signal-noise.test';
+      user = {
+        email: 'dev@signal-noise.test',
+        first_name: 'Dev User',
+        tier: 'early_adopter',
+        status: 'active',
+        app_data: '{"tasks":[],"history":[],"badges":[],"patterns":{},"settings":{"targetRatio":80,"notifications":false,"firstName":"Dev User"}}'
+      };
+    } else {
+      // Find user by session token in Redis
+      const userKeys = await redis.keys('sn:u:*');
+
+      for (const key of userKeys) {
+        const userData = await redis.hgetall(key);
+        if (userData.session_token === sessionToken) {
+          userKey = key;
+          user = userData;
+          break;
+        }
       }
     }
 
@@ -77,11 +91,15 @@ export default async function handler(req, res) {
       if (!appData.tasks) appData.tasks = [];
       appData.tasks.unshift(newTask);
 
-      // Update user data in Redis
-      await redis.hset(userKey, {
-        app_data: JSON.stringify(appData),
-        last_active: Date.now().toString()
-      });
+      // Update user data in Redis (skip for dev sessions)
+      if (!sessionToken.startsWith('dev-session-token-')) {
+        await redis.hset(userKey, {
+          app_data: JSON.stringify(appData),
+          last_active: Date.now().toString()
+        });
+      } else {
+        console.log('🚧 Development session - skipping Redis save, data saved locally only');
+      }
 
       console.log('✅ Task added for user:', user.email, newTask.type);
       return res.json({
@@ -113,11 +131,15 @@ export default async function handler(req, res) {
         ...updates
       };
 
-      // Update user data in Redis
-      await redis.hset(userKey, {
-        app_data: JSON.stringify(appData),
-        last_active: Date.now().toString()
-      });
+      // Update user data in Redis (skip for dev sessions)
+      if (!sessionToken.startsWith('dev-session-token-')) {
+        await redis.hset(userKey, {
+          app_data: JSON.stringify(appData),
+          last_active: Date.now().toString()
+        });
+      } else {
+        console.log('🚧 Development session - skipping Redis save, data saved locally only');
+      }
 
       console.log('✅ Task updated for user:', user.email, taskId);
       return res.json({
@@ -145,11 +167,15 @@ export default async function handler(req, res) {
         return res.status(404).json({ error: 'Task not found' });
       }
 
-      // Update user data in Redis
-      await redis.hset(userKey, {
-        app_data: JSON.stringify(appData),
-        last_active: Date.now().toString()
-      });
+      // Update user data in Redis (skip for dev sessions)
+      if (!sessionToken.startsWith('dev-session-token-')) {
+        await redis.hset(userKey, {
+          app_data: JSON.stringify(appData),
+          last_active: Date.now().toString()
+        });
+      } else {
+        console.log('🚧 Development session - skipping Redis save, data saved locally only');
+      }
 
       console.log('✅ Task deleted for user:', user.email, taskId);
       return res.json({

@@ -21,23 +21,37 @@ export default async function handler(req, res) {
       const sessionToken = authHeader.substring(7);
 
       try {
-        // Find user by session token
-        const userKeys = await redis.keys('sn:u:*');
         let userData = null;
 
-        for (const userKey of userKeys) {
-          const user = await redis.hgetall(userKey);
-          if (user.session_token === sessionToken) {
-            // Return user's cloud data
-            userData = {
-              data: JSON.parse(user.app_data || '{}'),
-              firstName: user.first_name || '',
-              language: 'en',
-              timestamp: user.last_active,
-              lastSync: new Date().toISOString(),
-              version: '1.0.0'
-            };
-            break;
+        // Handle development sessions
+        if (sessionToken.startsWith('dev-session-token-')) {
+          console.log('🚧 Development session sync - returning empty data');
+          userData = {
+            data: { tasks: [], history: [], badges: [], patterns: {}, settings: { targetRatio: 80, notifications: false, firstName: 'Dev User' } },
+            firstName: 'Dev User',
+            language: 'en',
+            timestamp: Date.now().toString(),
+            lastSync: new Date().toISOString(),
+            version: '1.0.0'
+          };
+        } else {
+          // Find user by session token in Redis
+          const userKeys = await redis.keys('sn:u:*');
+
+          for (const userKey of userKeys) {
+            const user = await redis.hgetall(userKey);
+            if (user.session_token === sessionToken) {
+              // Return user's cloud data
+              userData = {
+                data: JSON.parse(user.app_data || '{}'),
+                firstName: user.first_name || '',
+                language: 'en',
+                timestamp: user.last_active,
+                lastSync: new Date().toISOString(),
+                version: '1.0.0'
+              };
+              break;
+            }
           }
         }
 
@@ -97,7 +111,23 @@ export default async function handler(req, res) {
       }
 
       try {
-        // Find and update user by session token
+        // Handle development sessions
+        if (sessionToken.startsWith('dev-session-token-')) {
+          console.log('🚧 Development session - simulating successful cloud save:', {
+            taskCount: data?.tasks?.length || 0,
+            syncType,
+            hasFirstName: !!firstName
+          });
+
+          return res.json({
+            success: true,
+            timestamp: Date.now(),
+            premium: true,
+            message: 'Development session - data saved to localStorage only'
+          });
+        }
+
+        // Find and update user by session token in Redis
         const userKey = `sn:u:${email}`;
         const user = await redis.hgetall(userKey);
 

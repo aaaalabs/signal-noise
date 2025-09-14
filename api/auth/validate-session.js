@@ -19,7 +19,24 @@ export default async function handler(req, res) {
 
     const sessionToken = authHeader.substring(7);
 
-    // Find user by session token
+    // Handle development sessions
+    if (sessionToken.startsWith('dev-session-token-')) {
+      console.log('🚧 Development session validation for:', sessionToken.substring(0, 20) + '...');
+      return res.status(200).json({
+        valid: true,
+        user: {
+          email: 'dev@signal-noise.test',
+          firstName: 'Dev User',
+          tier: 'early_adopter',
+          paymentType: 'lifetime',
+          lastActive: Date.now(),
+          expires: Date.now() + (30 * 24 * 60 * 60 * 1000),
+          syncedFromLocal: null
+        }
+      });
+    }
+
+    // Find user by session token in Redis
     const userKeys = await redis.keys('sn:u:*');
     let user = null;
     let userKey = null;

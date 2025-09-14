@@ -107,10 +107,25 @@ function AppContent() {
       setShowWhisper(true);
     }
 
-    // Development: Auto-activate premium for testing (only on first visit)
+    // Development: Auto-activate premium for testing with magic link session
     if (import.meta.env.DEV && !localStorage.getItem('dev_premium_initialized')) {
-      activatePremiumForDev();
+      const devSessionData: SessionData = {
+        email: 'dev@signal-noise.test',
+        token: 'dev-token-12345',
+        sessionToken: 'dev-session-token-' + Date.now(),
+        created: Date.now(),
+        lastActive: Date.now(),
+        expires: Date.now() + (30 * 24 * 60 * 60 * 1000),
+        firstName: 'Dev User',
+        tier: 'early_adopter',
+        paymentType: 'lifetime',
+        syncedFromLocal: null
+      };
+
+      localStorage.setItem('sessionData', JSON.stringify(devSessionData));
+      localStorage.setItem('userEmail', devSessionData.email);
       localStorage.setItem('dev_premium_initialized', 'true');
+      console.log('🚧 Development: Premium session created for testing');
     }
 
     // Check for premium session first
