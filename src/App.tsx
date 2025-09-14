@@ -329,7 +329,10 @@ function AppContent() {
         }} />
 
         {/* Language Switcher - Ultra-minimal toggle */}
-        <LanguageSwitcher />
+        <LanguageSwitcher onPremiumClick={() => {
+          setFoundationModalLoginMode(true);
+          setShowFoundationModal(true);
+        }} />
 
 
         {/* Header with Ratio */}

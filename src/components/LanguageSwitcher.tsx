@@ -1,9 +1,15 @@
 import { useLanguage } from '../contexts/LanguageContext';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { initSyncIndicator } from '../services/syncService';
+import { checkPremiumStatus } from '../services/premiumService';
 
-export default function LanguageSwitcher() {
+interface LanguageSwitcherProps {
+  onPremiumClick?: () => void;
+}
+
+export default function LanguageSwitcher({ onPremiumClick }: LanguageSwitcherProps) {
   const { currentLanguage, toggleLanguage } = useLanguage();
+  const [premiumStatus, setPremiumStatus] = useState(() => checkPremiumStatus());
 
   useEffect(() => {
     // Initialize sync indicator reference after component mounts
@@ -12,6 +18,19 @@ export default function LanguageSwitcher() {
     }, 100);
 
     return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    // Check premium status periodically for updates
+    const checkStatus = () => {
+      setPremiumStatus(checkPremiumStatus());
+    };
+
+    // Check immediately and then every 5 seconds
+    checkStatus();
+    const interval = setInterval(checkStatus, 5000);
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -42,6 +61,40 @@ export default function LanguageSwitcher() {
           fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif'
         }}
       />
+
+      {/* Premium Status Indicator */}
+      {premiumStatus.isActive && (
+        <span
+          onClick={onPremiumClick}
+          title={`Premium: ${premiumStatus.email || 'Active'}`}
+          style={{
+            fontSize: '12px',
+            color: 'var(--signal)',
+            opacity: 0.3,
+            cursor: onPremiumClick ? 'pointer' : 'default',
+            userSelect: 'none',
+            fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
+            transition: 'all 0.2s ease',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '12px',
+            height: '14px'
+          }}
+          onMouseEnter={(e) => {
+            (e.target as HTMLElement).style.opacity = '0.6';
+            if (onPremiumClick) {
+              (e.target as HTMLElement).style.transform = 'scale(1.1)';
+            }
+          }}
+          onMouseLeave={(e) => {
+            (e.target as HTMLElement).style.opacity = '0.3';
+            (e.target as HTMLElement).style.transform = 'scale(1)';
+          }}
+        >
+          ●
+        </span>
+      )}
 
       {/* Language Switcher */}
       <div

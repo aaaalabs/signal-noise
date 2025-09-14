@@ -30,7 +30,7 @@ export default function FAQModal({ show, onClose }: FAQModalProps) {
     },
     {
       question: "How do I use Signal/Noise effectively?",
-      answer: "Add tasks and classify them as Signal (important) or Noise (distractions). Use Tab to quickly switch between categories. Long-press tasks to delete them with a 3-second countdown. Press Cmd+E (Mac) or Ctrl+E (Windows) to export your data."
+      answer: "Add tasks and classify them as Signal (important) or Noise (distractions). Use Tab to quickly switch between categories. <strong>Triple-tap any task</strong> to move it between Signal/Noise columns - you'll see progressive visual feedback and arrows showing the destination. <strong>Hold any task for 2.5 seconds</strong> to delete it with a progress bar. Press Cmd+E (Mac) or Ctrl+E (Windows) to export your data."
     },
     {
       question: "How do achievements and progress tracking work?",

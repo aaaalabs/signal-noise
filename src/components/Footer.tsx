@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import AboutModal from './AboutModal';
 import FAQModal from './FAQModal';
+import { checkPremiumStatus } from '../services/premiumService';
 
 // Legal modals
 const LegalModal = ({ show, onClose, title, children }: {
@@ -249,6 +250,20 @@ export default function Footer({ onFoundationClick }: { onFoundationClick?: () =
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
   const [showFAQ, setShowFAQ] = useState(false);
+  const [isPremium, setIsPremium] = useState(false);
+
+  useEffect(() => {
+    // Check premium status on mount and periodically
+    const checkStatus = () => {
+      const status = checkPremiumStatus();
+      setIsPremium(status.isActive);
+    };
+
+    checkStatus();
+    const interval = setInterval(checkStatus, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <>
@@ -348,20 +363,22 @@ export default function Footer({ onFoundationClick }: { onFoundationClick?: () =
             </button>
           </div>
 
-          {/* Foundation Member */}
-          <div
-            style={{
-              fontSize: '11px',
-              color: '#555',
-              cursor: onFoundationClick ? 'pointer' : 'default',
-              transition: 'color 0.2s'
-            }}
-            onClick={onFoundationClick}
-            onMouseEnter={(e) => onFoundationClick && (e.currentTarget.style.color = '#888')}
-            onMouseLeave={(e) => onFoundationClick && (e.currentTarget.style.color = '#555')}
-          >
-            Foundation Member
-          </div>
+          {/* Foundation Member - Only show when not logged in */}
+          {!isPremium && (
+            <div
+              style={{
+                fontSize: '11px',
+                color: '#555',
+                cursor: onFoundationClick ? 'pointer' : 'default',
+                transition: 'color 0.2s'
+              }}
+              onClick={onFoundationClick}
+              onMouseEnter={(e) => onFoundationClick && (e.currentTarget.style.color = '#888')}
+              onMouseLeave={(e) => onFoundationClick && (e.currentTarget.style.color = '#555')}
+            >
+              Foundation Member
+            </div>
+          )}
         </div>
       </footer>
 
