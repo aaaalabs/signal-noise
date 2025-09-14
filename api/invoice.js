@@ -41,6 +41,7 @@ export default async function handler(req, res) {
       paymentIntentId: invoiceData.paymentIntentId,
       type: invoiceData.type,
       domain: invoiceData.domain,
+      invoiceLink: invoiceData.invoiceLink,
       customer: invoiceData.customer,
       dueDate: invoiceData.dueDate,
       items: invoiceData.items,
