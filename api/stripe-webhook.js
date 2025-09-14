@@ -262,7 +262,9 @@ async function handleCheckoutCompleted(session) {
     paymentDate
   });
 
+  // Enhanced invoice data structure matching LibraLab format
   const invoiceData = {
+    // Basic invoice info
     invoiceNumber: invoiceNumber,
     customerEmail: customer_email,
     customerName: userData.first_name || customer_email,
@@ -270,8 +272,42 @@ async function handleCheckoutCompleted(session) {
     amount: (amount_total / 100).toString(),
     invoiceDate: invoiceDate,
     paymentDate: paymentDate,
-    paymentMethod: 'Stripe Payment',
-    sessionId: session.id
+    paymentMethod: 'Stripe (Kreditkarte/SEPA)',
+    sessionId: session.id,
+
+    // LibraLab-compatible extended fields
+    paymentIntentId: session.payment_intent || session.id,
+    type: tier === 'foundation' || tier === 'early_adopter' ? 'signal-noise' : 'unknown',
+
+    // Customer details (expanded)
+    customer: {
+      email: customer_email,
+      name: userData.first_name || 'Signal/Noise User',
+      company: 'Privatperson',
+      address: {
+        country: userData.country || 'Unknown'
+      }
+    },
+
+    // Due dates
+    dueDate: invoiceDate,
+
+    // Items array for compatibility
+    items: [{
+      description: `Signal/Noise Premium: ${tier}`,
+      quantity: 1,
+      templateId: `signal-noise-${tier}`,
+      unitPrice: (amount_total / 100),
+      totalNet: (amount_total / 100),
+      totalGross: (amount_total / 100),
+      vatAmount: 0,
+      vatRate: 0
+    }],
+
+    // Totals
+    subtotal: (amount_total / 100),
+    totalAmount: (amount_total / 100),
+    totalVat: 0
   };
 
   try {

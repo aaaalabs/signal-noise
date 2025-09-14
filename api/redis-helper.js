@@ -9,7 +9,7 @@ export const keys = {
   user: (email) => `${PREFIX}u:${email}`,
   core: () => `${PREFIX}core`,
   magic: (token) => `${PREFIX}magic:${token}`,
-  invoice: (invoiceNumber) => `${PREFIX}invoice:${invoiceNumber}`,
+  invoice: (invoiceNumber) => `lib:invoice:${invoiceNumber}`,
   invoiceSeq: () => `lib:ivnr`
 };
 
@@ -110,4 +110,53 @@ export async function getUserInvoice(redis, email) {
 export async function getUserInvoiceToken(redis, email) {
   const user = await getUser(redis, email);
   return user?.invoice_token || null;
+}
+
+// LibraLab unified invoice aggregation functions
+export async function getAllInvoices(redis) {
+  const pattern = 'lib:invoice:*';
+  const keys = await redis.keys(pattern);
+
+  const invoices = [];
+  for (const key of keys) {
+    const invoiceData = await redis.hgetall(key);
+    if (invoiceData && Object.keys(invoiceData).length > 0) {
+      invoices.push(invoiceData);
+    }
+  }
+
+  return invoices;
+}
+
+export async function getInvoiceStats(redis) {
+  const invoices = await getAllInvoices(redis);
+
+  const stats = {
+    total: invoices.length,
+    byType: {},
+    byCountry: {},
+    totalRevenue: 0,
+    recentInvoices: []
+  };
+
+  invoices.forEach(invoice => {
+    // Count by type
+    const type = invoice.type || 'unknown';
+    stats.byType[type] = (stats.byType[type] || 0) + 1;
+
+    // Count by country
+    const country = invoice.customer?.address?.country || 'Unknown';
+    stats.byCountry[country] = (stats.byCountry[country] || 0) + 1;
+
+    // Add to revenue
+    const amount = parseFloat(invoice.totalAmount || invoice.amount || 0);
+    stats.totalRevenue += amount;
+  });
+
+  // Sort by invoice number (most recent first) and take top 10
+  stats.recentInvoices = invoices
+    .sort((a, b) => (b.invoiceNumber || '').localeCompare(a.invoiceNumber || ''))
+    .slice(0, 10);
+
+  return stats;
 }

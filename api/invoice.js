@@ -25,16 +25,28 @@ export default async function handler(req, res) {
       return res.status(404).json({ error: 'Invoice not found' });
     }
 
-    // Return structured invoice data
+    // Return enhanced invoice data in LibraLab format
     return res.status(200).json({
+      // Basic fields (backwards compatibility)
       invoiceNumber: invoiceData.invoiceNumber,
-      customerEmail: invoiceData.customerEmail,
-      customerName: invoiceData.customerName || invoiceData.customerEmail,
+      customerEmail: invoiceData.customerEmail || invoiceData.customer?.email,
+      customerName: invoiceData.customerName || invoiceData.customer?.name || invoiceData.customerEmail,
       tier: invoiceData.tier,
-      amount: invoiceData.amount,
+      amount: invoiceData.amount || invoiceData.totalAmount,
       invoiceDate: invoiceData.invoiceDate,
       paymentDate: invoiceData.paymentDate,
-      paymentMethod: invoiceData.paymentMethod || 'Stripe Payment'
+      paymentMethod: invoiceData.paymentMethod || 'Stripe Payment',
+
+      // Enhanced LibraLab-compatible fields
+      paymentIntentId: invoiceData.paymentIntentId,
+      type: invoiceData.type,
+      customer: invoiceData.customer,
+      dueDate: invoiceData.dueDate,
+      items: invoiceData.items,
+      subtotal: invoiceData.subtotal,
+      totalAmount: invoiceData.totalAmount,
+      totalVat: invoiceData.totalVat,
+      sessionId: invoiceData.sessionId
     });
 
   } catch (error) {
