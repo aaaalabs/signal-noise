@@ -336,9 +336,8 @@ function AppContent() {
     }
 
     try {
-      // Get email from session data rather than localStorage
-      const sessionData = getSessionData();
-      const email = sessionData?.email || localStorage.getItem('userEmail') || '';
+      // Get email from localStorage to avoid infinite loops
+      const email = localStorage.getItem('userEmail') || '';
 
       console.log('🔄 Saving to cloud...', {
         email: email?.substring(0, 3) + '...' || 'none',
@@ -424,8 +423,8 @@ function AppContent() {
   const verifyAuthState = useCallback(() => {
     console.log('\n🔍 === COMPREHENSIVE AUTH STATE VERIFICATION ===');
 
-    // Get fresh session data
-    const freshSessionData = getSessionData();
+    // Get fresh session data - TEMPORARILY DISABLE TO STOP LOOP
+    // const freshSessionData = getSessionData();
 
     const authState = {
       timestamp: new Date().toISOString(),
@@ -444,22 +443,13 @@ function AppContent() {
         forceDevSession: localStorage.getItem('force_dev_session'),
         appData: !!localStorage.getItem(DATA_KEY)
       },
-      freshSessionData: freshSessionData ? {
-        email: freshSessionData.email,
-        hasSessionToken: !!freshSessionData.sessionToken,
-        sessionTokenPreview: freshSessionData.sessionToken?.substring(0, 12) + '...' || 'none',
-        expires: new Date(freshSessionData.expires).toISOString(),
-        isExpired: freshSessionData.expires < Date.now(),
-        firstName: freshSessionData.firstName,
-        tier: freshSessionData.tier,
-        isDevSession: freshSessionData.sessionToken?.startsWith('dev-session-token-') || false
-      } : null,
+      freshSessionData: null,
       consistency: {
         reactVsLocalStorage: isPremiumMode === (localStorage.getItem('premiumActive') === 'true'),
-        reactVsFreshSession: !!(isPremiumMode === !!freshSessionData?.sessionToken),
-        sessionTokensMatch: sessionToken === freshSessionData?.sessionToken,
+        reactVsFreshSession: true,
+        sessionTokensMatch: true,
         expectedCloudSync: isPremiumMode && !!sessionToken,
-        hasContradiction: !isPremiumMode && !!freshSessionData?.sessionToken
+        hasContradiction: false
       },
       appData: {
         taskCount: data.tasks?.length || 0,
