@@ -2,14 +2,20 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { useEffect, useState } from 'react';
 import { initSyncIndicator } from '../services/syncService';
 import { checkPremiumStatus } from '../services/premiumService';
+import PremiumMenu from './PremiumMenu';
+import type { Task } from '../types';
 
 interface LanguageSwitcherProps {
   onPremiumClick?: () => void;
+  tasks?: Task[];
+  currentRatio?: number;
+  totalTasks?: number;
 }
 
-export default function LanguageSwitcher({ onPremiumClick }: LanguageSwitcherProps) {
+export default function LanguageSwitcher({ onPremiumClick, tasks = [], currentRatio = 0, totalTasks = 0 }: LanguageSwitcherProps) {
   const { currentLanguage, toggleLanguage } = useLanguage();
   const [premiumStatus, setPremiumStatus] = useState(() => checkPremiumStatus());
+  const [showPremiumMenu, setShowPremiumMenu] = useState(false);
 
   useEffect(() => {
     // Initialize sync indicator reference after component mounts
@@ -64,37 +70,47 @@ export default function LanguageSwitcher({ onPremiumClick }: LanguageSwitcherPro
 
       {/* Premium Status Indicator */}
       {premiumStatus.isActive && (
-        <span
-          onClick={onPremiumClick}
-          title={`Premium: ${premiumStatus.email || 'Active'}`}
-          style={{
-            fontSize: '8px',
-            color: 'var(--signal)',
-            opacity: 0.2,
-            cursor: onPremiumClick ? 'pointer' : 'default',
-            userSelect: 'none',
-            fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
-            transition: 'all 0.2s ease',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: '8px',
-            height: '8px',
-            lineHeight: '8px'
-          }}
-          onMouseEnter={(e) => {
-            (e.target as HTMLElement).style.opacity = '0.4';
-            if (onPremiumClick) {
+        <div style={{ position: 'relative' }}>
+          <span
+            onClick={() => setShowPremiumMenu(!showPremiumMenu)}
+            title={`Premium: ${premiumStatus.email || 'Active'}`}
+            style={{
+              fontSize: '8px',
+              color: 'var(--signal)',
+              opacity: showPremiumMenu ? 0.6 : 0.2,
+              cursor: 'pointer',
+              userSelect: 'none',
+              fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
+              transition: 'all 0.2s ease',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '8px',
+              height: '8px',
+              lineHeight: '8px'
+            }}
+            onMouseEnter={(e) => {
+              (e.target as HTMLElement).style.opacity = '0.4';
               (e.target as HTMLElement).style.transform = 'scale(1.2)';
-            }
-          }}
-          onMouseLeave={(e) => {
-            (e.target as HTMLElement).style.opacity = '0.2';
-            (e.target as HTMLElement).style.transform = 'scale(1)';
-          }}
-        >
-          ●
-        </span>
+            }}
+            onMouseLeave={(e) => {
+              (e.target as HTMLElement).style.opacity = showPremiumMenu ? '0.6' : '0.2';
+              (e.target as HTMLElement).style.transform = 'scale(1)';
+            }}
+          >
+            ●
+          </span>
+
+          <PremiumMenu
+            show={showPremiumMenu}
+            onClose={() => setShowPremiumMenu(false)}
+            email={premiumStatus.email || ''}
+            tier={premiumStatus.subscriptionId?.includes('foundation') ? 'foundation' : 'early_adopter'}
+            tasks={tasks}
+            currentRatio={currentRatio}
+            totalTasks={totalTasks}
+          />
+        </div>
       )}
 
       {/* Language Switcher */}

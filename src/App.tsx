@@ -329,10 +329,15 @@ function AppContent() {
         }} />
 
         {/* Language Switcher - Ultra-minimal toggle */}
-        <LanguageSwitcher onPremiumClick={() => {
-          setFoundationModalLoginMode(true);
-          setShowFoundationModal(true);
-        }} />
+        <LanguageSwitcher
+          onPremiumClick={() => {
+            setFoundationModalLoginMode(true);
+            setShowFoundationModal(true);
+          }}
+          tasks={data.tasks}
+          currentRatio={currentRatio}
+          totalTasks={todayTasks.length}
+        />
 
 
         {/* Header with Ratio */}
