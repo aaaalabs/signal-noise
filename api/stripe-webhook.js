@@ -329,6 +329,13 @@ async function handleCheckoutCompleted(session) {
     await setInvoiceToken(redis, invoiceToken, invoiceNumber);
     console.log('✅ Invoice token stored successfully');
 
+    // Add secure link to invoice data
+    const secureLink = `https://signal-noise.app/invoice/secure/${invoiceToken}`;
+    invoiceData.secureLink = secureLink;
+
+    // Update invoice data in Redis with secure link
+    await setInvoice(redis, invoiceNumber, invoiceData);
+
     // Add invoice reference to user record for easy retrieval
     console.log('🔄 Updating user record with invoice info');
     await setUser(redis, customer_email, {

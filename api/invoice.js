@@ -42,6 +42,7 @@ export default async function handler(req, res) {
       type: invoiceData.type,
       domain: invoiceData.domain,
       invoiceLink: invoiceData.invoiceLink,
+      secureLink: invoiceData.secureLink,
       customer: invoiceData.customer,
       dueDate: invoiceData.dueDate,
       items: invoiceData.items,
