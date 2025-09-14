@@ -55,6 +55,15 @@ export default function PremiumMenu({
     }
   };
 
+  // Filter and sort achievements with progress
+  const achievementsWithProgress = achievements
+    .map(achievement => ({
+      ...achievement,
+      progress: getProgress(achievement)
+    }))
+    .filter(achievement => achievement.progress > 0)
+    .sort((a, b) => b.progress - a.progress);
+
   const ProgressBar = ({ progress }: { progress: number }) => {
     const filledBars = Math.floor((progress / 100) * 5);
     return (
@@ -63,8 +72,8 @@ export default function PremiumMenu({
           <div
             key={i}
             style={{
-              width: '3px',
-              height: '3px',
+              width: '4px',
+              height: '4px',
               backgroundColor: i < filledBars ? 'rgba(0, 255, 136, 0.8)' : 'rgba(255, 255, 255, 0.1)',
               borderRadius: '1px'
             }}
@@ -149,33 +158,51 @@ export default function PremiumMenu({
 
       {/* Achievement Progress */}
       <div style={{ marginBottom: '16px' }}>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: '8px',
-          fontSize: '10px'
-        }}>
-          {achievements.map(achievement => {
-            const progress = getProgress(achievement);
-            return (
+        {achievementsWithProgress.length > 0 ? (
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '4px',
+            fontSize: '10px'
+          }}>
+            {achievementsWithProgress.map(achievement => (
               <div key={achievement.id} style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '6px',
-                padding: '2px 0'
+                gap: '8px',
+                padding: '1px 0'
               }}>
-                <ProgressBar progress={progress} />
+                <ProgressBar progress={achievement.progress} />
                 <span style={{
-                  color: progress > 0 ? '#ccc' : '#666',
+                  color: '#ccc',
                   fontWeight: 300,
-                  fontSize: '10px'
+                  fontSize: '10px',
+                  flex: 1
                 }}>
                   {achievement.name}
                 </span>
+                <span style={{
+                  color: '#666',
+                  fontWeight: 300,
+                  fontSize: '9px'
+                }}>
+                  {Math.round(achievement.progress)}%
+                </span>
               </div>
-            );
-          })}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div style={{
+            color: '#666',
+            fontSize: '10px',
+            fontWeight: 300,
+            textAlign: 'center',
+            padding: '12px 0',
+            fontStyle: 'italic'
+          }}>
+            Start your first task to begin
+          </div>
+        )}
       </div>
 
       {/* Actions Section */}
