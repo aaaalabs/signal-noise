@@ -83,6 +83,11 @@ export default async function handler(req, res) {
       invoiceNumber: invoiceNumber,
       customerEmail: email,
       customerName: session.customer_details?.name || 'Signal/Noise Member',
+      tier: tier,
+      amount: (session.amount_total / 100).toString(),
+      invoiceDate: invoiceDate,
+      paymentDate: invoiceDate,
+      paymentMethod: 'Stripe (Kreditkarte/SEPA)',
       date: invoiceDate,
       dueDate: invoiceDate, // Lifetime payment, already paid
 
