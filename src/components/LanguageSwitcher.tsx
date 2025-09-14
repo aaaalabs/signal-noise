@@ -68,9 +68,9 @@ export default function LanguageSwitcher({ onPremiumClick }: LanguageSwitcherPro
           onClick={onPremiumClick}
           title={`Premium: ${premiumStatus.email || 'Active'}`}
           style={{
-            fontSize: '12px',
+            fontSize: '8px',
             color: 'var(--signal)',
-            opacity: 0.3,
+            opacity: 0.2,
             cursor: onPremiumClick ? 'pointer' : 'default',
             userSelect: 'none',
             fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
@@ -78,17 +78,17 @@ export default function LanguageSwitcher({ onPremiumClick }: LanguageSwitcherPro
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            width: '12px',
+            width: '8px',
             height: '14px'
           }}
           onMouseEnter={(e) => {
-            (e.target as HTMLElement).style.opacity = '0.6';
+            (e.target as HTMLElement).style.opacity = '0.4';
             if (onPremiumClick) {
-              (e.target as HTMLElement).style.transform = 'scale(1.1)';
+              (e.target as HTMLElement).style.transform = 'scale(1.2)';
             }
           }}
           onMouseLeave={(e) => {
-            (e.target as HTMLElement).style.opacity = '0.3';
+            (e.target as HTMLElement).style.opacity = '0.2';
             (e.target as HTMLElement).style.transform = 'scale(1)';
           }}
         >
