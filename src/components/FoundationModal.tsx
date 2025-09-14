@@ -71,26 +71,21 @@ export default function FoundationModal({ show, onClose, startInLoginMode = fals
     }
 
     try {
-      // Use the existing verify-access endpoint to check if user exists
-      const response = await fetch('/api/verify-access', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email: emailAddress.trim().toLowerCase() }),
+      // Check if user exists in Redis (just for pricing display)
+      const response = await fetch(`/api/check-premium?email=${encodeURIComponent(emailAddress.trim().toLowerCase())}`, {
+        method: 'GET',
       });
 
       if (response.ok) {
         const data = await response.json();
         return {
-          exists: true,
-          isActive: data.status === 'active',
-          tier: data.tier
+          exists: data.isActive, // User exists if they have active premium
+          isActive: data.isActive,
+          tier: data.paymentType // Use paymentType as tier (early_adopter, foundation, etc.)
         };
-      } else if (response.status === 404) {
-        return { exists: false, isActive: false };
       } else {
-        return null;
+        // For non-200 responses, assume user doesn't exist (new user)
+        return { exists: false, isActive: false };
       }
     } catch (error) {
       console.error('User status check error:', error);
