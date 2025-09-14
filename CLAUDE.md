@@ -266,35 +266,8 @@ if (isDev && req.body && typeof req.body === 'object') {
 - Task categorization insights
 - Behavioral consistency scoring for personalized advice
 
-## Magic Link Authentication Lessons (Sept 2024)
+## Development Insights
 
-### Critical Redirect Timing Issue & Fix
-**Problem**: Magic link verification succeeded but app didn't redirect, leading to 404 errors after cache expiration.
-
-**Root Cause Analysis**:
-1. Backend caches successful verification for 3 minutes (by design for handling duplicate requests)
-2. Frontend waited 2 seconds before redirecting after success
-3. During those 2 seconds, React re-renders/effects triggered additional API calls
-4. Multiple cached responses returned while user waited
-5. After 3 minutes, cache expired → subsequent calls returned 404
-
-**SLC Fix** (`VerifyMagicLink.tsx:40-42`):
-```javascript
-// OLD: 2 second delay allowed duplicate calls
-setTimeout(() => onSuccess(data.session); }, 2000);
-
-// NEW: 500ms - just enough for user feedback, prevents duplicates
-setTimeout(() => onSuccess(data.session); }, 500);
-```
-
-### Key Implementation Details
-- **Backend**: 3-minute cache with `setex(180)` for handling legitimate polling
-- **Frontend**: Immediate redirect after brief success message prevents unnecessary API calls
-- **UX Balance**: 500ms shows success state without frustrating delays
-
-### Debug Pattern Recognition
-- Single success log followed by multiple "cached" responses = timing issue
-- 404s after initial success = cache expiration, not authentication failure
-- Check frontend delay timers when backend caching is involved
+For detailed technical lessons, debugging patterns, and architecture decisions, see [lessons-learned.md](./lessons-learned.md).
 
 This React application represents a complete productivity solution focused on simplicity, user privacy, and effective behavioral change through the 80/20 principle.
