@@ -116,6 +116,11 @@ export function activatePremiumSession(sessionData: SessionData): void {
   localStorage.setItem('premiumActive', 'true');
 
   console.log('✅ Premium session activated:', sessionData.email, sessionData.tier);
+
+  // Dispatch custom event to notify App component about session change
+  window.dispatchEvent(new CustomEvent('premiumSessionUpdated', {
+    detail: sessionData
+  }));
 }
 
 export function clearSession(): void {

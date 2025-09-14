@@ -331,6 +331,18 @@ function AppContent() {
     };
 
     checkPremiumSession();
+
+    // Listen for premium session updates (from magic link login)
+    const handlePremiumSessionUpdate = (event: CustomEvent) => {
+      console.log('🎯 Premium session update detected, reloading session data...', event.detail);
+      checkPremiumSession();
+    };
+
+    window.addEventListener('premiumSessionUpdated', handlePremiumSessionUpdate as EventListener);
+
+    return () => {
+      window.removeEventListener('premiumSessionUpdated', handlePremiumSessionUpdate as EventListener);
+    };
   }, []);
 
   // Helper functions defined before use
