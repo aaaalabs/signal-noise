@@ -278,6 +278,7 @@ async function handleCheckoutCompleted(session) {
     // LibraLab-compatible extended fields
     paymentIntentId: session.payment_intent || session.id,
     type: tier === 'foundation' || tier === 'early_adopter' ? 'signal-noise' : 'unknown',
+    domain: 'signal-noise.app',
 
     // Customer details (expanded)
     customer: {

@@ -40,6 +40,7 @@ export default async function handler(req, res) {
       // Enhanced LibraLab-compatible fields
       paymentIntentId: invoiceData.paymentIntentId,
       type: invoiceData.type,
+      domain: invoiceData.domain,
       customer: invoiceData.customer,
       dueDate: invoiceData.dueDate,
       items: invoiceData.items,

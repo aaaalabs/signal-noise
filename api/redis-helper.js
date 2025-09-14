@@ -134,6 +134,7 @@ export async function getInvoiceStats(redis) {
   const stats = {
     total: invoices.length,
     byType: {},
+    byDomain: {},
     byCountry: {},
     totalRevenue: 0,
     recentInvoices: []
@@ -143,6 +144,10 @@ export async function getInvoiceStats(redis) {
     // Count by type
     const type = invoice.type || 'unknown';
     stats.byType[type] = (stats.byType[type] || 0) + 1;
+
+    // Count by domain
+    const domain = invoice.domain || 'unknown';
+    stats.byDomain[domain] = (stats.byDomain[domain] || 0) + 1;
 
     // Count by country
     const country = invoice.customer?.address?.country || 'Unknown';
