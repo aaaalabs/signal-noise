@@ -166,7 +166,7 @@ export async function syncPremiumStatus(email: string): Promise<PremiumStatus> {
         return { isActive: false };
       }
     }
-  } catch (error) {
+  } catch {
     console.log('Premium sync failed, using local status');
   }
 
