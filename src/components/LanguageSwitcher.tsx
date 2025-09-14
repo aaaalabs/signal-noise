@@ -79,7 +79,8 @@ export default function LanguageSwitcher({ onPremiumClick }: LanguageSwitcherPro
             alignItems: 'center',
             justifyContent: 'center',
             width: '8px',
-            height: '14px'
+            height: '8px',
+            lineHeight: '8px'
           }}
           onMouseEnter={(e) => {
             (e.target as HTMLElement).style.opacity = '0.4';
