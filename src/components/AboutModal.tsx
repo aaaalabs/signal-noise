@@ -281,7 +281,20 @@ export default function AboutModal({ show, onClose }: AboutModalProps) {
               marginBottom: '1rem'
             }}>
               {isGerman ? 'Entwickelt von' : 'Developed by'}{' '}
-              <span style={{ color: '#00ff88' }}>Libra Innovation FlexCo</span>
+              <a
+                href="https://libralab.ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  color: '#00ff88',
+                  textDecoration: 'none',
+                  cursor: 'pointer'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.textDecoration = 'underline'}
+                onMouseLeave={(e) => e.currentTarget.style.textDecoration = 'none'}
+              >
+                Libralab.ai
+              </a>
             </div>
             <div style={{
               color: '#6b7280',

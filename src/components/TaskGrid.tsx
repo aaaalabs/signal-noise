@@ -22,6 +22,7 @@ function TaskItem({ task, onTransfer, onDelete }: { task: Task; onTransfer: (id:
   const hasMilestoneVibrated = useRef(false);
   const tapTimeoutId = useRef<number | null>(null);
   const lastTapTime = useRef<number>(0);
+  const currentPressId = useRef<number>(0);
 
   const formatTaskTime = (timestamp: string): string => {
     const date = new Date(timestamp);
@@ -141,11 +142,16 @@ function TaskItem({ task, onTransfer, onDelete }: { task: Task; onTransfer: (id:
 
   const handlePressStart = (e: React.MouseEvent | React.TouchEvent) => {
     e.preventDefault();
+
+    // Generate unique ID for this specific press
+    const pressId = Date.now();
+    currentPressId.current = pressId;
     setIsPressed(true);
 
     // Delay deletion start to allow quick taps to escape
     setTimeout(() => {
-      if (isPressed) {
+      // Only start deletion if THIS SPECIFIC press is still active
+      if (currentPressId.current === pressId && !isDeleting && !isTransferring) {
         startDeleteProgress();
       }
     }, 150); // 150ms delay before deletion mode starts
@@ -154,17 +160,25 @@ function TaskItem({ task, onTransfer, onDelete }: { task: Task; onTransfer: (id:
   const handlePressEnd = (e: React.MouseEvent | React.TouchEvent) => {
     e.preventDefault();
 
+    // Clear the current press ID to prevent late deletion triggers
+    currentPressId.current = 0;
+
     if (isDeleting && deleteProgress < 100) {
       // Release before completion - cancel deletion
       resetDeleteState();
-    } else if (!isDeleting) {
-      // Quick tap - handle triple-tap logic
+    } else if (!isDeleting && !isTransferring) {
+      // Quick tap - handle triple-tap logic only if not already transferring
       setIsPressed(false);
       handleTap();
+    } else {
+      // Just reset pressed state if transferring
+      setIsPressed(false);
     }
   };
 
   const handlePressCancel = () => {
+    // Clear the current press ID to prevent late deletion triggers
+    currentPressId.current = 0;
     // Mouse leave or touch cancel - stop deletion
     resetDeleteState();
   };
@@ -202,7 +216,7 @@ function TaskItem({ task, onTransfer, onDelete }: { task: Task; onTransfer: (id:
         } : showTapFeedback ? {
           border: `${tapCount === 1 ? '1px' : '2px'} solid ${task.type === 'signal' ? 'var(--noise)' : 'var(--signal)'}`,
           backgroundColor: task.type === 'signal'
-            ? `rgba(255, 159, 10, ${tapCount === 1 ? 0.03 : 0.06})`
+            ? `rgba(102, 102, 102, ${tapCount === 1 ? 0.03 : 0.06})`
             : `rgba(0, 255, 136, ${tapCount === 1 ? 0.03 : 0.06})`,
           borderRadius: '8px'
         } : {
@@ -242,7 +256,12 @@ function TaskItem({ task, onTransfer, onDelete }: { task: Task; onTransfer: (id:
             animation: 'pulseArrow 0.2s ease-out'
           }}
         >
-          {task.type === 'signal' ? '→' : '←'}
+          <span className="arrow-desktop">
+            {task.type === 'signal' ? '→' : '←'}
+          </span>
+          <span className="arrow-mobile">
+            {task.type === 'signal' ? '↓' : '↑'}
+          </span>
         </div>
       )}
 
@@ -301,6 +320,24 @@ export default function TaskGrid({ tasks, onTransfer, onDelete }: TaskGridProps)
       <style>{`
         .task-item.pressing {
           opacity: 0.9;
+        }
+
+        /* Desktop arrows (horizontal) */
+        .arrow-desktop {
+          display: inline;
+        }
+        .arrow-mobile {
+          display: none;
+        }
+
+        /* Mobile arrows (vertical) */
+        @media (max-width: 600px) {
+          .arrow-desktop {
+            display: none;
+          }
+          .arrow-mobile {
+            display: inline;
+          }
         }
 
         @keyframes pulseArrow {
