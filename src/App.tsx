@@ -116,6 +116,11 @@ function AppContent() {
     // Check for premium session first
     const checkPremiumSession = async () => {
       const sessionData = getSessionData();
+      console.log('🔍 Checking premium session:', {
+        hasSessionData: !!sessionData,
+        sessionToken: sessionData?.sessionToken?.substring(0, 8) + '...' || 'none'
+      });
+
       if (sessionData && sessionData.sessionToken) {
         try {
           // Validate session with server
@@ -248,15 +253,23 @@ function AppContent() {
   // Save data to localStorage or cloud whenever data changes
   useEffect(() => {
     if (isLoaded) {
+      console.log('🔍 Sync decision check:', {
+        isPremiumMode,
+        hasSessionToken: !!sessionToken,
+        sessionTokenLength: sessionToken?.length || 0
+      });
+
       if (isPremiumMode && sessionToken) {
         // Save to cloud for premium users
+        console.log('☁️ Using cloud sync...');
         saveToCloud(data);
       } else {
         // Save to localStorage for free users
         localStorage.setItem(DATA_KEY, JSON.stringify(data));
         console.log('💾 LocalStorage sync successful:', {
           taskCount: data.tasks?.length || 0,
-          premium: false
+          premium: false,
+          reason: !isPremiumMode ? 'not premium' : 'no session token'
         });
       }
     }
