@@ -1,4 +1,5 @@
 import { Redis } from '@upstash/redis';
+import { getUserUsage } from './redis-helper.js';
 
 const redis = new Redis({
   url: process.env.KV_REST_API_URL,
@@ -74,10 +75,8 @@ export default async function handler(req, res) {
       last_access: now.toString()
     });
 
-    // Get usage stats for today
-    const today = new Date().toISOString().split('T')[0];
-    const usageKey = `usage:${email}:${today}`;
-    const todayUsage = await redis.get(usageKey) || '0';
+    // Get usage stats for today (from user hash)
+    const todayUsage = await getUserUsage(redis, email);
 
     return res.status(200).json({
       valid: true,
@@ -88,7 +87,7 @@ export default async function handler(req, res) {
       expiresAt: expiryInfo,
       createdAt: userData.created_at ? new Date(parseInt(userData.created_at)).toISOString() : null,
       lastAccess: userData.last_access ? new Date(parseInt(userData.last_access)).toISOString() : null,
-      todayUsage: parseInt(todayUsage),
+      todayUsage: todayUsage,
       limits: {
         requestsPerHour: 10,
         maxTokensPerRequest: 300

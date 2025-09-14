@@ -25,17 +25,8 @@ export default async function handler(req, res) {
       return res.status(404).json({ error: 'Invoice not found' });
     }
 
-    // Return structured invoice data
-    return res.status(200).json({
-      invoiceNumber: invoiceData.invoiceNumber,
-      customerEmail: invoiceData.customerEmail,
-      customerName: invoiceData.customerName || invoiceData.customerEmail,
-      tier: invoiceData.tier,
-      amount: invoiceData.amount,
-      invoiceDate: invoiceData.invoiceDate,
-      paymentDate: invoiceData.paymentDate,
-      paymentMethod: invoiceData.paymentMethod || 'Stripe Payment'
-    });
+    // Return LibraLab-compatible invoice data (all fields)
+    return res.status(200).json(invoiceData);
 
   } catch (error) {
     console.error('Secure Invoice API error:', error);

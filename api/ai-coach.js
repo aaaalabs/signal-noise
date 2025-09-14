@@ -1,4 +1,5 @@
 import { Redis } from '@upstash/redis';
+import { incrementUserUsage } from './redis-helper.js';
 
 // Initialize Redis for premium user verification
 const redis = new Redis({
@@ -74,8 +75,8 @@ export default async function handler(req, res) {
 
     const data = await groqResponse.json();
 
-    // Log usage for monitoring
-    await logUsage(userEmail);
+    // Log usage for monitoring (in user hash)
+    await incrementUserUsage(redis, userEmail);
 
     return res.status(200).json({
       message: data.choices[0]?.message?.content || 'No response generated',
@@ -156,14 +157,3 @@ async function checkRateLimit(email) {
   }
 }
 
-// Log usage for analytics
-async function logUsage(email) {
-  try {
-    const timestamp = Date.now();
-    const logKey = `usage:${email}:${new Date().toISOString().split('T')[0]}`;
-    await redis.incr(logKey);
-    await redis.expire(logKey, 86400 * 30); // 30 days
-  } catch (error) {
-    console.error('Usage logging error:', error);
-  }
-}

@@ -279,7 +279,7 @@ async function handleCheckoutCompleted(session) {
     paymentIntentId: session.payment_intent || session.id,
     type: tier === 'foundation' || tier === 'early_adopter' ? 'signal-noise' : 'unknown',
     domain: 'signal-noise.app',
-    invoiceLink: `https://signal-noise.app/invoice/${invoiceNumber}`,
+    // invoiceLink will be set to secure link after token generation
 
     // Customer details (expanded)
     customer: {
@@ -312,29 +312,21 @@ async function handleCheckoutCompleted(session) {
     totalVat: 0
   };
 
-  try {
-    console.log('💾 Storing invoice in Redis');
-    await setInvoice(redis, invoiceNumber, invoiceData);
-    console.log('✅ Invoice stored successfully');
-  } catch (error) {
-    console.error('❌ Failed to store invoice:', error);
-    throw error;
-  }
-
   // Generate and store secure invoice token for GDPR compliance
   try {
     console.log('🔐 Generating secure invoice token');
     const invoiceToken = await generateInvoiceToken(invoiceNumber, customer_email);
-    console.log('💾 Storing invoice token in Redis');
-    await setInvoiceToken(redis, invoiceToken, invoiceNumber);
-    console.log('✅ Invoice token stored successfully');
+    console.log('✅ Invoice token generated successfully');
 
-    // Add secure link to invoice data
+    // Add secure links to invoice data (invoiceLink = secureLink for security)
     const secureLink = `https://signal-noise.app/invoice/secure/${invoiceToken}`;
     invoiceData.secureLink = secureLink;
+    invoiceData.invoiceLink = secureLink; // Only provide secure access
 
-    // Update invoice data in Redis with secure link
-    await setInvoice(redis, invoiceNumber, invoiceData);
+    // Store invoice with token embedded in key structure
+    console.log('💾 Storing invoice with embedded token in Redis');
+    await setInvoice(redis, invoiceNumber, invoiceData, invoiceToken);
+    console.log('✅ Invoice stored with embedded token successfully');
 
     // Add invoice reference to user record for easy retrieval
     console.log('🔄 Updating user record with invoice info');

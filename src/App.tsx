@@ -72,14 +72,7 @@ function AppContent() {
       }
     }
 
-    // Check for invoice page routes
-    // Direct invoice route (/invoice/A1050)
-    const invoiceMatch = pathname.match(/^\/invoice\/(A\d+)$/);
-    if (invoiceMatch) {
-      setInvoiceId(invoiceMatch[1]);
-      setShowInvoicePage(true);
-      return;
-    }
+    // Check for invoice page routes (secure access only)
 
     // Secure token route (/invoice/secure/[token])
     const secureInvoiceMatch = pathname.match(/^\/invoice\/secure\/([a-f0-9]{32})$/);

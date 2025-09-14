@@ -9,7 +9,7 @@ export const keys = {
   user: (email) => `${PREFIX}u:${email}`,
   core: () => `${PREFIX}core`,
   magic: (token) => `${PREFIX}magic:${token}`,
-  invoice: (invoiceNumber) => `lib:invoice:${invoiceNumber}`,
+  invoice: (invoiceNumber, token) => token ? `lib:invoice:${invoiceNumber}:${token}` : `lib:invoice:${invoiceNumber}`,
   invoiceSeq: () => `lib:ivnr`
 };
 
@@ -73,11 +73,26 @@ export async function generateInvoiceNumber(redis) {
 }
 
 export async function getInvoice(redis, invoiceNumber) {
-  return await redis.hgetall(keys.invoice(invoiceNumber));
+  // First try legacy format (without token)
+  const legacyData = await redis.hgetall(keys.invoice(invoiceNumber));
+  if (legacyData && Object.keys(legacyData).length > 0) {
+    return legacyData;
+  }
+
+  // If not found, search for token-embedded format
+  const pattern = `lib:invoice:${invoiceNumber}:*`;
+  const keys = await redis.keys(pattern);
+  if (keys.length > 0) {
+    return await redis.hgetall(keys[0]);
+  }
+
+  // No invoice found
+  return null;
 }
 
-export async function setInvoice(redis, invoiceNumber, data) {
-  return await redis.hset(keys.invoice(invoiceNumber), data);
+export async function setInvoice(redis, invoiceNumber, data, token = null) {
+  const key = token ? keys.invoice(invoiceNumber, token) : keys.invoice(invoiceNumber);
+  return await redis.hset(key, data);
 }
 
 // Invoice token operations
@@ -87,23 +102,33 @@ export async function generateInvoiceToken(invoiceNumber, customerEmail) {
   return crypto.createHash('sha256').update(tokenData).digest('hex').substring(0, 32);
 }
 
-export async function setInvoiceToken(redis, token, invoiceNumber) {
-  const tokenKey = `${PREFIX}itoken:${token}`;
-  return await redis.set(tokenKey, invoiceNumber);
-}
-
 export async function getInvoiceByToken(redis, token) {
-  const tokenKey = `${PREFIX}itoken:${token}`;
-  const invoiceNumber = await redis.get(tokenKey);
-  if (!invoiceNumber) return null;
-  return await getInvoice(redis, invoiceNumber);
+  // Search for invoice with this token in key structure
+  const pattern = `lib:invoice:*:${token}`;
+  const keys = await redis.keys(pattern);
+  if (keys.length === 0) return null;
+
+  // Extract invoice number from key: lib:invoice:A123:token -> A123
+  const invoiceNumber = keys[0].split(':')[2];
+  return await redis.hgetall(keys[0]);
 }
 
 // Get user's invoice directly from their email
 export async function getUserInvoice(redis, email) {
   const user = await getUser(redis, email);
-  if (!user || !user.invoice_number) return null;
-  return await getInvoice(redis, user.invoice_number);
+  if (!user) return null;
+
+  // Prioritize token-based retrieval for security
+  if (user.invoice_token) {
+    return await getInvoiceByToken(redis, user.invoice_token);
+  }
+
+  // Fallback to invoice number lookup (for backward compatibility)
+  if (user.invoice_number) {
+    return await getInvoice(redis, user.invoice_number);
+  }
+
+  return null;
 }
 
 // Get user's secure invoice token
@@ -164,4 +189,67 @@ export async function getInvoiceStats(redis) {
     .slice(0, 10);
 
   return stats;
+}
+
+// Usage tracking operations (in user hash)
+export async function incrementUserUsage(redis, email, date = null) {
+  const usageDate = date || new Date().toISOString().split('T')[0];
+  const usageField = `usage_${usageDate.replace(/-/g, '_')}`;
+
+  try {
+    // Increment daily usage in user hash
+    await redis.hincrby(keys.user(email), usageField, 1);
+
+    // Also increment total usage counter
+    await redis.hincrby(keys.user(email), 'usage_total', 1);
+
+    // Cleanup old usage fields (>30 days) - run occasionally
+    if (Math.random() < 0.1) { // 10% chance to run cleanup
+      await cleanupOldUsageFields(redis, email);
+    }
+  } catch (error) {
+    console.error('Usage increment error:', error);
+  }
+}
+
+export async function getUserUsage(redis, email, date = null) {
+  const usageDate = date || new Date().toISOString().split('T')[0];
+  const usageField = `usage_${usageDate.replace(/-/g, '_')}`;
+
+  try {
+    const usage = await redis.hget(keys.user(email), usageField);
+    return parseInt(usage) || 0;
+  } catch (error) {
+    console.error('Usage retrieval error:', error);
+    return 0;
+  }
+}
+
+// Clean up usage fields older than 30 days
+async function cleanupOldUsageFields(redis, email) {
+  try {
+    const userData = await getUser(redis, email);
+    if (!userData) return;
+
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+    const cutoffDate = thirtyDaysAgo.toISOString().split('T')[0].replace(/-/g, '_');
+
+    const fieldsToDelete = [];
+    Object.keys(userData).forEach(field => {
+      if (field.startsWith('usage_') && field !== 'usage_total') {
+        // Extract date from field name (usage_2024_01_15)
+        const fieldDate = field.substring(6); // Remove 'usage_'
+        if (fieldDate < cutoffDate) {
+          fieldsToDelete.push(field);
+        }
+      }
+    });
+
+    if (fieldsToDelete.length > 0) {
+      await redis.hdel(keys.user(email), ...fieldsToDelete);
+    }
+  } catch (error) {
+    console.error('Usage cleanup error:', error);
+  }
 }
