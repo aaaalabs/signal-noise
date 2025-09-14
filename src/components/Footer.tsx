@@ -348,43 +348,19 @@ export default function Footer({ onFoundationClick }: { onFoundationClick?: () =
             </button>
           </div>
 
-          {/* Copyright & Made with Love */}
-          <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '4px',
-            fontSize: '11px',
-            color: '#555'
-          }}>
-            <div>
-              (c) 2025{' '}
-              <a
-                href="https://libralab.ai"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  color: '#555',
-                  textDecoration: 'none',
-                  transition: 'color 0.2s'
-                }}
-                onMouseEnter={(e) => (e.target as HTMLAnchorElement).style.color = '#888'}
-                onMouseLeave={(e) => (e.target as HTMLAnchorElement).style.color = '#555'}
-              >
-                libralab.ai
-              </a>
-            </div>
-            <div
-              style={{
-                cursor: onFoundationClick ? 'pointer' : 'default',
-                transition: 'color 0.2s'
-              }}
-              onClick={onFoundationClick}
-              onMouseEnter={(e) => onFoundationClick && (e.currentTarget.style.color = '#888')}
-              onMouseLeave={(e) => onFoundationClick && (e.currentTarget.style.color = '#555')}
-            >
-              Foundation Member • libralab.ai
-            </div>
+          {/* Foundation Member */}
+          <div
+            style={{
+              fontSize: '11px',
+              color: '#555',
+              cursor: onFoundationClick ? 'pointer' : 'default',
+              transition: 'color 0.2s'
+            }}
+            onClick={onFoundationClick}
+            onMouseEnter={(e) => onFoundationClick && (e.currentTarget.style.color = '#888')}
+            onMouseLeave={(e) => onFoundationClick && (e.currentTarget.style.color = '#555')}
+          >
+            Foundation Member
           </div>
         </div>
       </footer>
