@@ -1,7 +1,7 @@
 import { Redis } from '@upstash/redis';
 import Stripe from 'stripe';
 import { randomBytes } from 'crypto';
-import { keys, incrementFoundation, setUser, generateInvoiceNumber, setInvoice, generateInvoiceToken, setInvoiceToken } from './redis-helper.js';
+import { keys, incrementFoundation, setUser, generateInvoiceNumber, setInvoice, generateInvoiceToken } from './redis-helper.js';
 import { sendWelcomeEmail } from './email-helper.js';
 
 // Clean the Stripe secret key to remove any whitespace/newlines

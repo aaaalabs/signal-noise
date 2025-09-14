@@ -1,5 +1,5 @@
 import { Redis } from '@upstash/redis';
-import { getUser, setUser, incrementFoundation } from './redis-helper.js';
+import { getUser, setUser, incrementFoundation, generateInvoiceNumber, setInvoice, generateInvoiceToken } from './redis-helper.js';
 import { sendWelcomeEmail } from './email-helper.js';
 import Stripe from 'stripe';
 
@@ -71,9 +71,52 @@ export default async function handler(req, res) {
       await incrementFoundation(redis);
     }
 
-    // Send welcome email
+    // Generate invoice for this payment
+    const invoiceNumber = await generateInvoiceNumber(redis);
+    const invoiceDate = new Date().toLocaleDateString('en-US');
+
+    // Generate secure invoice token
+    const invoiceToken = await generateInvoiceToken(invoiceNumber, email);
+
+    // Create invoice data structure
+    const invoiceData = {
+      invoiceNumber: invoiceNumber,
+      customerEmail: email,
+      customerName: session.customer_details?.name || 'Signal/Noise Member',
+      date: invoiceDate,
+      dueDate: invoiceDate, // Lifetime payment, already paid
+
+      items: [{
+        description: tier === 'foundation' ? 'Signal/Noise Foundation Member Access' : 'Signal/Noise Early Adopter Access',
+        quantity: 1,
+        unitPrice: (session.amount_total / 100),
+        totalPrice: (session.amount_total / 100),
+        vatRate: 0
+      }],
+
+      subtotal: (session.amount_total / 100),
+      totalAmount: (session.amount_total / 100),
+      totalVat: 0,
+
+      // Add secure link
+      secureLink: `https://signal-noise.app/invoice/secure/${invoiceToken}`,
+      invoiceLink: `https://signal-noise.app/invoice/secure/${invoiceToken}`
+    };
+
+    // Store invoice in Redis
+    await setInvoice(redis, invoiceNumber, invoiceData, invoiceToken);
+
+    // Update user record with invoice info
+    await setUser(redis, email, {
+      invoice_number: invoiceNumber,
+      invoice_token: invoiceToken,
+      invoice_date: invoiceDate
+    });
+
+    // Send welcome email with invoice details
     const firstName = session.customer_details?.name?.split(' ')[0] || 'Member';
-    const emailResult = await sendWelcomeEmail(email, firstName, tier);
+    const tierName = tier === 'foundation' ? 'Foundation Member' : 'Early Adopter';
+    const emailResult = await sendWelcomeEmail(email, firstName, tierName, invoiceNumber, invoiceToken);
 
     console.log(`✅ Backup user creation successful for ${email} (${tier})`);
 
