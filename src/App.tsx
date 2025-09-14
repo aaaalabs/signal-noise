@@ -74,9 +74,9 @@ function AppContent() {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
 
-    // Check for magic link verification (/verify?token=...)
+    // Check for magic link verification (/auth/verify?token=... or legacy /verify?token=...)
     const pathname = window.location.pathname;
-    if (pathname === '/verify') {
+    if (pathname === '/auth/verify' || pathname === '/verify') {
       const token = urlParams.get('token');
       if (token) {
         setVerifyToken(token);

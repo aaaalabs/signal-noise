@@ -59,7 +59,7 @@ export default async function handler(req, res) {
       baseUrl = 'http://localhost:3000';
     }
 
-    const verifyUrl = `${baseUrl}/verify?token=${token}`;
+    const verifyUrl = `${baseUrl}/auth/verify?token=${token}`;
 
     // Determine tier name for email
     const tierName = userData.tier === 'foundation'
