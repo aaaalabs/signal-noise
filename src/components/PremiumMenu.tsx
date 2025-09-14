@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import type { AppData } from '../types';
 import { calculateStreak, createBadgeDefinitions, getAverageRatio, getTodayRatio } from '../utils/achievements';
-import { deactivatePremium } from '../services/premiumService';
 import { useTranslation } from '../contexts/LanguageContext';
 
 interface PremiumMenuProps {
