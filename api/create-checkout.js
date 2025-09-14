@@ -16,8 +16,15 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Email required' });
     }
 
-    // Always use production URL for Stripe redirects
-    const baseUrl = 'https://signal-noise.app';
+    // Get the origin from request headers and validate it
+    const origin = req.headers.origin || req.headers.referer || 'https://signal-noise.app';
+    const baseUrl = new URL(origin).origin;
+
+    // Validate it's a trusted domain
+    const isValidDomain = baseUrl.includes('signal-noise.app') || baseUrl.includes('vercel.app');
+    if (!isValidDomain) {
+      return res.status(400).json({ error: 'Invalid origin' });
+    }
 
     // Foundation tier: Always available for now (Redis-free version)
     const foundationCount = 0;

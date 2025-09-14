@@ -176,6 +176,7 @@ export default function FoundationModal({ show, onClose }: FoundationModalProps)
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Origin': window.location.origin
         },
         body: JSON.stringify({
           email: email.trim(),
