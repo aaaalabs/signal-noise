@@ -18,6 +18,15 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Magic link token required' });
     }
 
+    // Check for cached verification result first (handles duplicate requests)
+    const cacheKey = `sn:magic:verified:${token}`;
+    const cachedResult = await redis.get(cacheKey);
+
+    if (cachedResult) {
+      console.log('🔄 Returning cached magic link verification result');
+      return res.status(200).json(JSON.parse(cachedResult));
+    }
+
     // Get email from magic token
     const magicKey = `sn:magic:${token}`;
     const email = await redis.get(magicKey);
@@ -28,9 +37,6 @@ export default async function handler(req, res) {
         message: 'Magic links expire after 15 minutes. Please request a new one.'
       });
     }
-
-    // Delete magic token (one-time use)
-    await redis.del(magicKey);
 
     // Get user data
     const userKey = `sn:u:${email}`;
@@ -69,17 +75,26 @@ export default async function handler(req, res) {
       syncedFromLocal: userData.synced_from_local || null
     };
 
+    // Prepare success response
+    const successResponse = {
+      success: true,
+      session: sessionData,
+      message: 'Successfully authenticated'
+    };
+
+    // Cache the success response for 10 seconds (handles duplicate requests)
+    await redis.setex(cacheKey, 10, JSON.stringify(successResponse));
+
+    // Delete magic token (one-time use) - only after caching success
+    await redis.del(magicKey);
+
     console.log('✅ Magic link verified successfully:', {
       email,
       tier: userData.tier,
       sessionToken: sessionToken.substring(0, 8) + '...'
     });
 
-    return res.status(200).json({
-      success: true,
-      session: sessionData,
-      message: 'Successfully authenticated'
-    });
+    return res.status(200).json(successResponse);
 
   } catch (error) {
     console.error('❌ Magic link verification error:', error);
