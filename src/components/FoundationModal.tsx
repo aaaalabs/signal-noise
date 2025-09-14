@@ -283,7 +283,7 @@ export default function FoundationModal({ show, onClose, startInLoginMode = fals
         onKeyDown={handleKeyDown}
       >
         {/* Main Value Proposition */}
-        <div style={{ marginBottom: '24px' }}>
+        <div style={{ marginBottom: isLoginMode ? '32px' : '24px' }}>
           <div
             style={{
               fontSize: '48px',
@@ -296,29 +296,33 @@ export default function FoundationModal({ show, onClose, startInLoginMode = fals
           >
             80/20
           </div>
-          <div
-            style={{
-              fontSize: '14px',
-              color: '#999',
-              fontWeight: 300
-            }}
-          >
-            {t.foundationTagline}
-          </div>
+          {!isLoginMode && (
+            <div
+              style={{
+                fontSize: '14px',
+                color: '#999',
+                fontWeight: 300
+              }}
+            >
+              {t.foundationTagline}
+            </div>
+          )}
         </div>
 
-        {/* Features - Minimal */}
-        <div style={{ marginBottom: '32px' }}>
-          <div style={{ fontSize: '14px', color: '#ccc', fontWeight: 300, marginBottom: '8px' }}>
-            {t.foundationFeature1}
+        {/* Features - Only show in purchase mode */}
+        {!isLoginMode && (
+          <div style={{ marginBottom: '32px' }}>
+            <div style={{ fontSize: '14px', color: '#ccc', fontWeight: 300, marginBottom: '8px' }}>
+              {t.foundationFeature1}
+            </div>
+            <div style={{ fontSize: '14px', color: '#ccc', fontWeight: 300, marginBottom: '8px' }}>
+              {t.foundationFeature2}
+            </div>
+            <div style={{ fontSize: '14px', color: '#ccc', fontWeight: 300 }}>
+              {t.foundationFeature3}
+            </div>
           </div>
-          <div style={{ fontSize: '14px', color: '#ccc', fontWeight: 300, marginBottom: '8px' }}>
-            {t.foundationFeature2}
-          </div>
-          <div style={{ fontSize: '14px', color: '#ccc', fontWeight: 300 }}>
-            {t.foundationFeature3}
-          </div>
-        </div>
+        )}
 
         {/* Pricing - Only show in purchase mode */}
         {!isLoginMode && (
@@ -500,40 +504,55 @@ export default function FoundationModal({ show, onClose, startInLoginMode = fals
           </button>
         )}
 
-        {/* Foundation Counter - Subtle */}
-        <div style={{ fontSize: '11px', color: '#555', fontWeight: 300 }}>
-          {stats.isAvailable ? (
-            <div>
-              <div style={{ marginBottom: '8px' }}>
-                {stats.foundationMembers} of {stats.totalSpots} {t.foundationMembers}
-              </div>
-              <div
-                style={{
-                  height: '1px',
-                  background: '#222',
-                  borderRadius: '1px',
-                  overflow: 'hidden'
-                }}
-              >
+        {/* Foundation Counter - Only show in purchase mode */}
+        {!isLoginMode && (
+          <div style={{ fontSize: '11px', color: '#555', fontWeight: 300 }}>
+            {stats.isAvailable ? (
+              <div>
+                <div style={{ marginBottom: '8px' }}>
+                  {stats.foundationMembers} of {stats.totalSpots} {t.foundationMembers}
+                </div>
                 <div
                   style={{
                     height: '1px',
-                    background: '#444',
-                    width: `${(stats.foundationMembers / stats.totalSpots) * 100}%`,
-                    transition: 'width 0.8s ease'
+                    background: '#222',
+                    borderRadius: '1px',
+                    overflow: 'hidden'
                   }}
-                />
+                >
+                  <div
+                    style={{
+                      height: '1px',
+                      background: '#444',
+                      width: `${(stats.foundationMembers / stats.totalSpots) * 100}%`,
+                      transition: 'width 0.8s ease'
+                    }}
+                  />
+                </div>
               </div>
-            </div>
-          ) : (
-            <div>{t.foundationComplete.replace('{count}', stats.foundationMembers.toString())}</div>
-          )}
-        </div>
+            ) : (
+              <div>{t.foundationComplete.replace('{count}', stats.foundationMembers.toString())}</div>
+            )}
+          </div>
+        )}
 
-        {/* Timeline info */}
-        {stats.isAvailable && (
+        {/* Timeline info - Only show in purchase mode */}
+        {!isLoginMode && stats.isAvailable && (
           <div style={{ fontSize: '10px', color: '#444', fontWeight: 300, marginTop: '12px' }}>
             {t.foundationTimeline}
+          </div>
+        )}
+
+        {/* Foundation Member identifier - Only show in login mode */}
+        {isLoginMode && (
+          <div style={{
+            fontSize: '11px',
+            color: '#555',
+            fontWeight: 300,
+            textAlign: 'center',
+            marginBottom: '16px'
+          }}>
+            Foundation Member
           </div>
         )}
 
