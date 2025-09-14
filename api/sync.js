@@ -5,6 +5,14 @@ const redis = new Redis({
   token: process.env.KV_REST_API_TOKEN
 });
 
+// Helper function to calculate size of app_data (handles both object and string types)
+function getDataSize(appData) {
+  if (!appData) return 0;
+  if (typeof appData === 'string') return appData.length;
+  if (typeof appData === 'object') return JSON.stringify(appData).length;
+  return 0;
+}
+
 export default async function handler(req, res) {
   console.log('🔄 Sync endpoint called:', {
     method: req.method,
@@ -59,24 +67,25 @@ export default async function handler(req, res) {
                 });
                 console.log('✅ App data initialized for new user:', userKey);
               } else {
-                try {
-                  parsedData = JSON.parse(user.app_data);
-                } catch (parseError) {
-                console.error('🚨 CORRUPTED APP_DATA ON GET:', {
-                  userKey,
-                  dataType: typeof user.app_data,
-                  dataPreview: user.app_data ? (typeof user.app_data === 'string' ? user.app_data.substring(0, 100) : JSON.stringify(user.app_data).substring(0, 100)) : 'null',
-                  error: parseError.message
-                });
-                // Return empty data structure instead of crashing
-                parsedData = { tasks: [], history: [], badges: [], patterns: {}, settings: { targetRatio: 80, notifications: false } };
-
-                // Fix corrupted data in background
-                await redis.hset(userKey, {
-                  app_data: JSON.stringify(parsedData),
-                  data_corruption_fixed: new Date().toISOString()
-                });
-                console.log('🔧 Corrupted data reset during GET for', userKey);
+                // Handle both object (from Upstash auto-parsing) and string types
+                if (typeof user.app_data === 'object' && user.app_data !== null) {
+                  parsedData = user.app_data;  // Already an object, use directly
+                  console.log('📦 Using auto-parsed app_data object from Upstash');
+                } else if (typeof user.app_data === 'string') {
+                  try {
+                    parsedData = JSON.parse(user.app_data);
+                    console.log('📄 Parsed app_data string to object');
+                  } catch (parseError) {
+                    console.error('🚨 INVALID JSON STRING:', {
+                      userKey,
+                      dataPreview: user.app_data.substring(0, 100),
+                      error: parseError.message
+                    });
+                    parsedData = { tasks: [], history: [], badges: [], patterns: {}, settings: { targetRatio: 80, notifications: false } };
+                  }
+                } else {
+                  console.log('⚠️ app_data is neither object nor string, using default');
+                  parsedData = { tasks: [], history: [], badges: [], patterns: {}, settings: { targetRatio: 80, notifications: false } };
                 }
               }
 
@@ -166,8 +175,8 @@ export default async function handler(req, res) {
           userExists: !!user && !!user.email,
           hasSessionToken: !!user.session_token,
           sessionTokenMatch: user.session_token === sessionToken,
-          existingDataSize: user.app_data ? user.app_data.length : 0,
-          existingDataSizeKB: user.app_data ? (user.app_data.length / 1024).toFixed(2) + 'KB' : '0KB',
+          existingDataSize: getDataSize(user.app_data),
+          existingDataSizeKB: getDataSize(user.app_data) ? (getDataSize(user.app_data) / 1024).toFixed(2) + 'KB' : '0KB',
           lastActive: user.last_active ? new Date(parseInt(user.last_active)).toISOString() : 'never',
           firstName: user.first_name || 'none',
           tier: user.tier || 'unknown',
@@ -184,7 +193,7 @@ export default async function handler(req, res) {
         }
 
         // CRITICAL SAFETY CHECK: Prevent overwriting existing data with empty data
-        const existingDataSize = user.app_data ? user.app_data.length : 0;
+        const existingDataSize = getDataSize(user.app_data);
         const newTaskCount = data?.tasks?.length || 0;
 
         let existingTaskCount = 0;
@@ -229,7 +238,7 @@ export default async function handler(req, res) {
         const newAppData = JSON.stringify(data || {});
         const newDataSize = newAppData.length;
         const newDataSizeKB = (newDataSize / 1024).toFixed(2);
-        const dataSizeDelta = user.app_data ? newDataSize - user.app_data.length : newDataSize;
+        const dataSizeDelta = user.app_data ? newDataSize - getDataSize(user.app_data) : newDataSize;
 
         console.log('📤 REDIS OPERATION - UPDATE USER DATA', {
           operation: 'hset',

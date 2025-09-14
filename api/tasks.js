@@ -5,6 +5,14 @@ const redis = new Redis({
   token: process.env.KV_REST_API_TOKEN
 });
 
+// Helper function to calculate size of app_data (handles both object and string types)
+function getDataSize(appData) {
+  if (!appData) return 0;
+  if (typeof appData === 'string') return appData.length;
+  if (typeof appData === 'object') return JSON.stringify(appData).length;
+  return 0;
+}
+
 export default async function handler(req, res) {
   console.log('📋 Tasks endpoint called:', {
     method: req.method,
@@ -102,26 +110,25 @@ export default async function handler(req, res) {
         console.log('✅ App data initialized for new user in TASKS:', userKey);
       }
     } else {
-      try {
-        appData = JSON.parse(user.app_data);
-      } catch (error) {
-      console.error('🚨 CORRUPTED APP_DATA IN TASKS:', {
-        userKey: userKey,
-        userEmail: user.email,
-        dataType: typeof user.app_data,
-        dataPreview: user.app_data ? (typeof user.app_data === 'string' ? user.app_data.substring(0, 100) : JSON.stringify(user.app_data).substring(0, 100)) : 'null',
-        error: error.message
-      });
-      appData = { tasks: [], history: [], badges: [], patterns: {}, settings: { targetRatio: 80, notifications: false } };
-
-      // Fix corrupted data in background (skip for dev sessions)
-      if (!sessionToken.startsWith('dev-session-token-')) {
-        await redis.hset(userKey, {
-          app_data: JSON.stringify(appData),
-          data_corruption_fixed: new Date().toISOString()
-        });
-        console.log('🔧 Corrupted data reset during TASKS for', userKey);
+      // Handle both object (from Upstash auto-parsing) and string types
+      if (typeof user.app_data === 'object' && user.app_data !== null) {
+        appData = user.app_data;  // Already an object, use directly
+        console.log('📦 Using auto-parsed app_data object from Upstash in TASKS');
+      } else if (typeof user.app_data === 'string') {
+        try {
+          appData = JSON.parse(user.app_data);
+          console.log('📄 Parsed app_data string to object in TASKS');
+        } catch (parseError) {
+          console.error('🚨 INVALID JSON STRING IN TASKS:', {
+            userKey,
+            dataPreview: user.app_data.substring(0, 100),
+            error: parseError.message
+          });
+          appData = { tasks: [], history: [], badges: [], patterns: {}, settings: { targetRatio: 80, notifications: false } };
         }
+      } else {
+        console.log('⚠️ app_data is neither object nor string in TASKS, using default');
+        appData = { tasks: [], history: [], badges: [], patterns: {}, settings: { targetRatio: 80, notifications: false } };
       }
     }
 

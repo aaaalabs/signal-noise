@@ -215,6 +215,18 @@ async function handleCheckoutCompleted(session) {
     await incrementFoundation(redis);
   }
 
+  // Initialize default app_data structure
+  const defaultAppData = {
+    tasks: [],
+    history: [],
+    badges: [],
+    patterns: {},
+    settings: {
+      targetRatio: 80,
+      notifications: false
+    }
+  };
+
   const userData = {
     email: customer_email,
     access_token: accessToken,
@@ -226,7 +238,9 @@ async function handleCheckoutCompleted(session) {
     stripe_customer_id: customer,
     payment_amount: (amount_total / 100).toString(), // Convert from cents
     first_name: metadata?.first_name || '',
-    last_payment: Date.now().toString()
+    last_payment: Date.now().toString(),
+    app_data: JSON.stringify(defaultAppData), // Initialize with default structure
+    app_data_initialized: new Date().toISOString()
   };
 
   console.log('👤 User data to store:', userData);
