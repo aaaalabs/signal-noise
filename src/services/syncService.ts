@@ -18,8 +18,8 @@ export function initSyncIndicator() {
   syncState.element = document.getElementById('sync-indicator');
 }
 
-// Show sync indicator with different states
-function showSyncIndicator(state: 'syncing' | 'success') {
+// Show sync indicator with different states (kept for potential future use)
+export function showSyncIndicator(state: 'syncing' | 'success') {
   const indicator = syncState.element || document.getElementById('sync-indicator');
   if (!indicator) return;
 
