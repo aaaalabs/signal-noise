@@ -13,7 +13,7 @@ interface LanguageSwitcherProps {
   data?: AppData;
 }
 
-export default function LanguageSwitcher({ onPremiumClick, tasks = [], currentRatio = 0, totalTasks = 0, data }: LanguageSwitcherProps) {
+export default function LanguageSwitcher({ data }: LanguageSwitcherProps) {
   const { currentLanguage, toggleLanguage } = useLanguage();
   const [premiumStatus, setPremiumStatus] = useState(() => checkPremiumStatus());
   const [showPremiumMenu, setShowPremiumMenu] = useState(false);

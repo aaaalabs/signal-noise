@@ -111,6 +111,49 @@ const translations = {
     newMemberToggle: "Neues Mitglied? →",
     loading: "Lade...",
     firstNamePlaceholder: "Vorname (optional)",
+
+    // Success Criteria (Premium Menu Tooltips)
+    successCriteria: {
+      first_day: "Eine Aufgabe hinzufügen",
+      week_warrior: "Täglich 80%+ Ratio",
+      signal_master: "Woche Ø 80%",
+      perfect_day: "100% Ratio heute",
+      month_hero: "Monatelanger Streak",
+      early_bird: "Aufgabe vor 9 Uhr",
+      decision_maker: "100 Aufgaben erreichen",
+      comeback: "Nach Pause zurückkehren"
+    },
+
+    // FAQ Modal
+    faqTitle: "FAQ",
+    faqSubtitle: "Häufige Fragen & versteckte Features",
+    faqClose: "Schließen",
+    faqItems: [
+      {
+        question: "Was ist das 80/20-Prinzip?",
+        answer: "Die 80/20-Regel besagt, dass <span style='color: #00ff88'>80%</span> der Ergebnisse aus <span style='color: #666'>20%</span> der Anstrengungen stammen. In Signal/Noise kategorisierst du Aufgaben als 'Signal' (wichtig, <span style='color: #00ff88'>80%</span> Zeit) oder 'Noise' (Ablenkungen, <span style='color: #666'>20%</span> Zeit) für optimalen Fokus."
+      },
+      {
+        question: "Wie benutze ich Signal/Noise effektiv?",
+        answer: "Füge Aufgaben hinzu und kategorisiere sie als Signal (wichtig) oder Noise (Ablenkungen). Nutze Tab für schnellen Wechsel zwischen Kategorien. <strong>Dreimal tippen auf eine Aufgabe</strong> verschiebt sie zwischen Signal/Noise-Spalten - du siehst progressive Rückmeldung und Pfeile zur Zielposition. <strong>2,5 Sekunden lang halten</strong> löscht eine Aufgabe mit Fortschrittsbalken. Drücke Cmd+E (Mac) oder Ctrl+E (Windows) zum Datenexport."
+      },
+      {
+        question: "Wie funktionieren Erfolge und Fortschritt?",
+        answer: "Du erhältst Abzeichen für Konstanz: Early Bird (Morgenaufgaben), Comeback (Rückkehr nach Pausen), Perfect Day (optimale Ratios), Week Warrior und Month Hero. Kleine Punkte neben deiner Ratio zeigen Fortschritt - grau (gesperrt), dunkel (erreicht), grün (kürzlich freigeschaltet). Klicken zeigt X/8 Meilenstein-Fortschritt."
+      },
+      {
+        question: "Was sind Premium-Features und Preise?",
+        answer: "Premium beinhaltet AI Coach, Cloud-Sync und lebenslange Updates. Foundation Members (erste 100 Nutzer): €29 lebenslang. Danach: €49 Early Adopter Preis. Kein Abo - einmal zahlen, für immer besitzen. Der AI Coach erscheint nach 3+ Tage Streak, 7+ Tagen mit Aufgaben oder 20+ Gesamtaufgaben."
+      },
+      {
+        question: "Wie funktionieren Datenschutz und Sync?",
+        answer: "Alles wird lokal im Browser gespeichert. Premium-Nutzer erhalten Cloud-Backup mit Sync-Indikator (🔒) neben dem Sprachschalter. Deine Privatsphäre ist immer geschützt - kein Tracking, keine Analyse, kein Data Mining."
+      },
+      {
+        question: "Welche Interface-Features gibt es?",
+        answer: "Klicke auf den kaum sichtbaren 'EN'/'DE'-Schalter oben rechts für sofortigen Sprachwechsel. Das gesamte Interface ändert sich ohne Seitenneuladung. Premium-Nutzer sehen subtile Sync-Indikatoren bei Operationen."
+      }
+    ],
   },
   en: {
     // Input & Buttons
@@ -193,6 +236,49 @@ const translations = {
     newMemberToggle: "New member? →",
     loading: "Loading...",
     firstNamePlaceholder: "First name (optional)",
+
+    // Success Criteria (Premium Menu Tooltips)
+    successCriteria: {
+      first_day: "Add one task",
+      week_warrior: "Daily 80%+ ratio",
+      signal_master: "Week average 80%",
+      perfect_day: "100% ratio today",
+      month_hero: "Month-long streak",
+      early_bird: "Task before 9am",
+      decision_maker: "Reach 100 tasks",
+      comeback: "Return after break"
+    },
+
+    // FAQ Modal
+    faqTitle: "FAQ",
+    faqSubtitle: "Frequently asked questions & hidden features",
+    faqClose: "Close",
+    faqItems: [
+      {
+        question: "What is the 80/20 principle?",
+        answer: "The 80/20 rule suggests that <span style='color: #00ff88'>80%</span> of results come from <span style='color: #666'>20%</span> of efforts. In Signal/Noise, you classify tasks as 'Signal' (important, <span style='color: #00ff88'>80%</span> time) or 'Noise' (distractions, <span style='color: #666'>20%</span> time) to achieve optimal focus."
+      },
+      {
+        question: "How do I use Signal/Noise effectively?",
+        answer: "Add tasks and classify them as Signal (important) or Noise (distractions). Use Tab to quickly switch between categories. <strong>Triple-tap any task</strong> to move it between Signal/Noise columns - you'll see progressive visual feedback and arrows showing the destination. <strong>Hold any task for 2.5 seconds</strong> to delete it with a progress bar. Press Cmd+E (Mac) or Ctrl+E (Windows) to export your data."
+      },
+      {
+        question: "How do achievements and progress tracking work?",
+        answer: "You earn badges for consistency: Early Bird (morning tasks), Comeback (returning after breaks), Perfect Day (optimal ratios), Week Warrior, and Month Hero. Small dots next to your ratio show achievement progress - gray (locked), dark (earned), green (recent unlock). Click them to see your X/8 milestone progress."
+      },
+      {
+        question: "What are premium features and pricing?",
+        answer: "Premium includes AI Coach, cloud sync, and lifetime updates. Foundation Members (first 100 users): €29 lifetime. After that: €49 Early Adopter pricing. No subscription - pay once, own forever. The AI Coach appears after 3+ day streak, 7+ days with tasks, or 20+ total tasks."
+      },
+      {
+        question: "How does data privacy and sync work?",
+        answer: "Everything is stored locally in your browser. Premium users get cloud backup with sync indicator (🔒) next to the language switcher. Your privacy is always protected - no tracking, no analytics, no data mining."
+      },
+      {
+        question: "What interface features are available?",
+        answer: "Click the barely visible 'EN'/'DE' toggle in the top-right corner to switch languages instantly. The entire interface changes without page reload. Premium users see subtle sync indicators during operations."
+      }
+    ],
   }
 };
 

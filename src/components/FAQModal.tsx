@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from '../contexts/LanguageContext';
 
 interface FAQModalProps {
   show: boolean;
@@ -12,6 +13,7 @@ interface FAQItem {
 
 export default function FAQModal({ show, onClose }: FAQModalProps) {
   const [openItems, setOpenItems] = useState<number[]>([]);
+  const t = useTranslation();
 
   if (!show) return null;
 
@@ -23,32 +25,7 @@ export default function FAQModal({ show, onClose }: FAQModalProps) {
     );
   };
 
-  const faqs: FAQItem[] = [
-    {
-      question: "What is the 80/20 principle?",
-      answer: "The 80/20 rule suggests that <span style='color: #00ff88'>80%</span> of results come from <span style='color: #666'>20%</span> of efforts. In Signal/Noise, you classify tasks as 'Signal' (important, <span style='color: #00ff88'>80%</span> time) or 'Noise' (distractions, <span style='color: #666'>20%</span> time) to achieve optimal focus."
-    },
-    {
-      question: "How do I use Signal/Noise effectively?",
-      answer: "Add tasks and classify them as Signal (important) or Noise (distractions). Use Tab to quickly switch between categories. <strong>Triple-tap any task</strong> to move it between Signal/Noise columns - you'll see progressive visual feedback and arrows showing the destination. <strong>Hold any task for 2.5 seconds</strong> to delete it with a progress bar. Press Cmd+E (Mac) or Ctrl+E (Windows) to export your data."
-    },
-    {
-      question: "How do achievements and progress tracking work?",
-      answer: "You earn badges for consistency: Early Bird (morning tasks), Comeback (returning after breaks), Perfect Day (optimal ratios), Week Warrior, and Month Hero. Small dots next to your ratio show achievement progress - gray (locked), dark (earned), green (recent unlock). Click them to see your X/8 milestone progress."
-    },
-    {
-      question: "What are premium features and pricing?",
-      answer: "Premium includes AI Coach, cloud sync, and lifetime updates. Foundation Members (first 100 users): €29 lifetime. After that: €49 Early Adopter pricing. No subscription - pay once, own forever. The AI Coach appears after 3+ day streak, 7+ days with tasks, or 20+ total tasks."
-    },
-    {
-      question: "How does data privacy and sync work?",
-      answer: "Everything is stored locally in your browser. Premium users get cloud backup with sync indicator (🔒) next to the language switcher. Your privacy is always protected - no tracking, no analytics, no data mining."
-    },
-    {
-      question: "What interface features are available?",
-      answer: "Click the barely visible 'EN'/'DE' toggle in the top-right corner to switch languages instantly. The entire interface changes without page reload. Premium users see subtle sync indicators during operations."
-    }
-  ];
+  const faqs: FAQItem[] = (t as any).faqItems || [];
 
   return (
     <div
@@ -86,7 +63,7 @@ export default function FAQModal({ show, onClose }: FAQModalProps) {
             marginBottom: '8px',
             letterSpacing: '-0.5px'
           }}>
-            FAQ
+            {(t as any).faqTitle}
           </h2>
           <p style={{
             fontSize: '14px',
@@ -94,7 +71,7 @@ export default function FAQModal({ show, onClose }: FAQModalProps) {
             fontWeight: 300,
             lineHeight: 1.5
           }}>
-            Frequently asked questions & hidden features
+            {(t as any).faqSubtitle}
           </p>
         </div>
 
@@ -195,7 +172,7 @@ export default function FAQModal({ show, onClose }: FAQModalProps) {
               e.currentTarget.style.color = '#999';
             }}
           >
-            Close
+            {(t as any).faqClose}
           </button>
         </div>
 

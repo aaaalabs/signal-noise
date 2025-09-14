@@ -8,6 +8,7 @@ interface PatternInsightsProps {
 export default function PatternInsights({ tasks }: PatternInsightsProps) {
   const insights = generatePatternInsights(tasks);
 
+  // When no insights, show nothing - emptiness is the message
   if (insights.length === 0) {
     return null;
   }

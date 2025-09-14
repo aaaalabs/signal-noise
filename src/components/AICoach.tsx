@@ -195,10 +195,10 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
         },
         patterns: {
           bestHour: bestHour || 9,
-          worstDay: worstDay?.day || (weeklyTrend.direction === 'declining' ? 'Mo' : 'Fr'),
+          worstDay: worstDay?.day || (weeklyTrend?.direction === 'declining' ? 'Mo' : 'Fr'),
           hourlyDistribution,
           weeklyPattern,
-          trendDirection: weeklyTrend.direction,
+          trendDirection: weeklyTrend?.direction || 'stable',
           consistencyScore
         },
         history: {

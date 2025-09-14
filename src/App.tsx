@@ -14,6 +14,7 @@ import SuccessPage from './components/SuccessPage';
 import SuccessModal from './components/SuccessModal';
 import InvoicePage from './components/InvoicePage';
 import FoundationModal from './components/FoundationModal';
+import VerifyMagicLink from './components/VerifyMagicLink';
 import Footer from './components/Footer';
 import BrandIcon from './components/BrandIcon';
 import LanguageSwitcher from './components/LanguageSwitcher';
@@ -53,13 +54,25 @@ function AppContent() {
   const [invoiceToken, setInvoiceToken] = useState<string>('');
   const [showFoundationModal, setShowFoundationModal] = useState(false);
   const [foundationModalLoginMode, setFoundationModalLoginMode] = useState(false);
+  const [showVerifyMagicLink, setShowVerifyMagicLink] = useState(false);
+  const [verifyToken, setVerifyToken] = useState<string>('');
 
   // Load data from localStorage on mount
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
 
-    // Check for invoice page routes
+    // Check for magic link verification (/verify?token=...)
     const pathname = window.location.pathname;
+    if (pathname === '/verify') {
+      const token = urlParams.get('token');
+      if (token) {
+        setVerifyToken(token);
+        setShowVerifyMagicLink(true);
+        return;
+      }
+    }
+
+    // Check for invoice page routes
     // Direct invoice route (/invoice/A00000001)
     const invoiceMatch = pathname.match(/^\/invoice\/([A-Z]\d{8})$/);
     if (invoiceMatch) {
@@ -99,9 +112,10 @@ function AppContent() {
       setShowWhisper(true);
     }
 
-    // Development: Auto-activate premium for testing
-    if (import.meta.env.DEV) {
+    // Development: Auto-activate premium for testing (only on first visit)
+    if (import.meta.env.DEV && !localStorage.getItem('dev_premium_initialized')) {
       activatePremiumForDev();
+      localStorage.setItem('dev_premium_initialized', 'true');
     }
 
     // Check onboarding first
@@ -267,6 +281,25 @@ function AppContent() {
   const currentRatio = calculateRatio();
   const todayTasks = getTodayTasks();
   const { earnedCount } = checkAchievements(data);
+
+  // Show Magic Link Verification if navigated to verify route
+  if (showVerifyMagicLink) {
+    return (
+      <VerifyMagicLink
+        token={verifyToken}
+        onSuccess={() => {
+          setShowVerifyMagicLink(false);
+          // Clean URL and redirect to main app
+          window.history.replaceState({}, '', '/');
+        }}
+        onError={() => {
+          setShowVerifyMagicLink(false);
+          // Clean URL and redirect to main app
+          window.history.replaceState({}, '', '/');
+        }}
+      />
+    );
+  }
 
   // Show Invoice Page if navigated to invoice route
   if (showInvoicePage) {

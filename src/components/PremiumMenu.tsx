@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import type { AppData } from '../types';
 import { calculateStreak, createBadgeDefinitions, getAverageRatio, getTodayRatio } from '../utils/achievements';
 import { deactivatePremium } from '../services/premiumService';
+import { useTranslation } from '../contexts/LanguageContext';
 
 interface PremiumMenuProps {
   show: boolean;
@@ -20,6 +21,7 @@ export default function PremiumMenu({
 }: PremiumMenuProps) {
   const menuRef = useRef<HTMLDivElement>(null);
   const [showTooltip, setShowTooltip] = useState<string | null>(null);
+  const t = useTranslation();
 
   if (!data) return null;
 
@@ -58,17 +60,7 @@ export default function PremiumMenu({
 
   // Get success criteria text
   const getSuccessCriteria = (achievementId: string): string => {
-    switch (achievementId) {
-      case 'first_day': return 'Add one task';
-      case 'week_warrior': return 'Daily 80%+ ratio';
-      case 'signal_master': return 'Week average 80%';
-      case 'perfect_day': return '100% ratio today';
-      case 'month_hero': return 'Month-long streak';
-      case 'early_bird': return 'Task before 9am';
-      case 'decision_maker': return 'Reach 100 tasks';
-      case 'comeback': return 'Return after break';
-      default: return '';
-    }
+    return (t as any).successCriteria?.[achievementId] || '';
   };
 
   // Handle tooltip display with auto-hide

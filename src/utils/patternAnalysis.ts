@@ -21,6 +21,12 @@ export function calculateDailyRatios(tasks: Task[], days: number = 30): number[]
 }
 
 export function getBestProductiveHour(tasks: Task[]): number | null {
+  // Require at least 20 tasks across 3+ different days
+  if (tasks.length < 20) return null;
+
+  const uniqueDays = new Set(tasks.map(t => new Date(t.timestamp).toDateString()));
+  if (uniqueDays.size < 3) return null;
+
   const hourCounts: Record<number, number> = {};
 
   tasks.forEach(t => {
@@ -35,13 +41,17 @@ export function getBestProductiveHour(tasks: Task[]): number | null {
   return parseInt(bestHour[0]);
 }
 
-export function getWeeklyTrend(tasks: Task[]): { trend: number, direction: 'improving' | 'stable' | 'declining' } {
+export function getWeeklyTrend(tasks: Task[]): { trend: number, direction: 'improving' | 'stable' | 'declining' } | null {
   const ratios = calculateDailyRatios(tasks, 14);
   const recent = ratios.slice(-7);
   const older = ratios.slice(0, 7);
 
-  if (recent.length === 0 || older.length === 0) {
-    return { trend: 0, direction: 'stable' };
+  // Require at least 5 active days in each week (non-zero ratios)
+  const recentActiveDays = recent.filter(r => r > 0).length;
+  const olderActiveDays = older.filter(r => r > 0).length;
+
+  if (recentActiveDays < 5 || olderActiveDays < 5) {
+    return null;
   }
 
   const recentAvg = recent.reduce((a, b) => a + b, 0) / recent.length;
@@ -56,6 +66,9 @@ export function getWeeklyTrend(tasks: Task[]): { trend: number, direction: 'impr
 }
 
 export function getWorstDayOfWeek(tasks: Task[]): { day: string, ratio: number } | null {
+  // Require at least 2 weeks of data
+  if (tasks.length < 70) return null; // ~10 tasks per weekday * 7 days
+
   const dayRatios: Record<number, { signal: number, total: number }> = {};
   const dayNames = currentLang === 'de'
     ? ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa']
@@ -73,7 +86,8 @@ export function getWorstDayOfWeek(tasks: Task[]): { day: string, ratio: number }
 
   Object.entries(dayRatios).forEach(([day, counts]) => {
     const ratio = (counts.signal / counts.total) * 100;
-    if (ratio < worstRatio && counts.total > 3) {
+    // Require at least 10 tasks per weekday
+    if (ratio < worstRatio && counts.total >= 10) {
       worstRatio = ratio;
       worstDay = { day: dayNames[parseInt(day)], ratio: Math.round(ratio) };
     }
@@ -95,16 +109,16 @@ export function generatePatternInsights(tasks: Task[]): PatternInsight[] {
   }
 
   // Weekly trend analysis
-  const { trend, direction } = getWeeklyTrend(tasks);
-  if (direction === 'improving') {
+  const weeklyTrend = getWeeklyTrend(tasks);
+  if (weeklyTrend && weeklyTrend.direction === 'improving') {
     const message = currentLang === 'de'
-      ? `Dein Fokus hat sich um <strong>+${trend}%</strong> verbessert diese Woche!`
-      : `Your focus improved by <strong>+${trend}%</strong> this week!`;
+      ? `Dein Fokus hat sich um <strong>+${weeklyTrend.trend}%</strong> verbessert diese Woche!`
+      : `Your focus improved by <strong>+${weeklyTrend.trend}%</strong> this week!`;
     insights.push({ type: 'positive', message });
-  } else if (direction === 'declining') {
+  } else if (weeklyTrend && weeklyTrend.direction === 'declining') {
     const message = currentLang === 'de'
-      ? `Achtung: Dein Signal-Ratio ist um <strong>${trend}%</strong> gefallen.`
-      : `Warning: Your Signal ratio dropped by <strong>${trend}%</strong>.`;
+      ? `Achtung: Dein Signal-Ratio ist um <strong>${weeklyTrend.trend}%</strong> gefallen.`
+      : `Warning: Your Signal ratio dropped by <strong>${weeklyTrend.trend}%</strong>.`;
     insights.push({ type: 'warning', message });
   }
 
