@@ -38,7 +38,7 @@ export default function VerifyMagicLink({ token, onSuccess, onError }: VerifyMag
 
       if (data.success && data.user) {
         // Store premium access in localStorage
-        activatePremium(data.user.tier as 'foundation' | 'early', data.user.accessToken);
+        activatePremium(data.user.email, data.user.accessToken);
 
         // Store user info
         localStorage.setItem('userEmail', data.user.email);
