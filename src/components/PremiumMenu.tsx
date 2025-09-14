@@ -75,20 +75,21 @@ export default function PremiumMenu({
         right: '0',
         marginTop: '8px',
         minWidth: '220px',
-        backgroundColor: '#111',
-        border: '1px solid #333',
-        borderRadius: '8px',
-        boxShadow: '0 8px 24px rgba(0, 0, 0, 0.4)',
+        backgroundColor: 'rgba(17, 17, 17, 0.8)',
+        border: '1px solid rgba(255, 255, 255, 0.1)',
+        borderRadius: '12px',
+        boxShadow: '0 20px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05)',
         zIndex: 99999,
         padding: '16px',
         fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
         fontSize: '13px',
         animation: 'fadeIn 0.2s ease-out',
-        backdropFilter: 'blur(8px)'
+        backdropFilter: 'blur(16px) saturate(1.2)',
+        WebkitBackdropFilter: 'blur(16px) saturate(1.2)'
       }}
     >
       {/* Identity Section */}
-      <div style={{ marginBottom: '16px', paddingBottom: '12px', borderBottom: '1px solid #222' }}>
+      <div style={{ marginBottom: '16px', paddingBottom: '12px', borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>
         <div style={{ color: '#999', fontSize: '11px', marginBottom: '2px', fontWeight: 300 }}>
           {email}
         </div>
@@ -98,7 +99,7 @@ export default function PremiumMenu({
       </div>
 
       {/* Stats Section */}
-      <div style={{ marginBottom: '16px', paddingBottom: '12px', borderBottom: '1px solid #222' }}>
+      <div style={{ marginBottom: '16px', paddingBottom: '12px', borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
           <span style={{ color: '#999', fontWeight: 300 }}>Streak</span>
           <span style={{ color: '#fff', fontWeight: 400 }}>{streak} days</span>
