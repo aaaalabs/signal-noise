@@ -90,8 +90,23 @@ export default async function handler(req, res) {
     try {
       appData = JSON.parse(user.app_data || '{}');
     } catch (error) {
-      console.error('❌ Failed to parse app data:', error);
-      appData = { tasks: [], history: [], badges: [], patterns: {}, settings: {} };
+      console.error('🚨 CORRUPTED APP_DATA IN TASKS:', {
+        userKey: userKey,
+        userEmail: user.email,
+        dataType: typeof user.app_data,
+        dataPreview: user.app_data ? user.app_data.substring(0, 100) : 'null',
+        error: error.message
+      });
+      appData = { tasks: [], history: [], badges: [], patterns: {}, settings: { targetRatio: 80, notifications: false } };
+
+      // Fix corrupted data in background (skip for dev sessions)
+      if (!sessionToken.startsWith('dev-session-token-')) {
+        await redis.hset(userKey, {
+          app_data: JSON.stringify(appData),
+          data_corruption_fixed: new Date().toISOString()
+        });
+        console.log('🔧 Corrupted data reset during TASKS for', userKey);
+      }
     }
 
     // Handle GET request - retrieve tasks

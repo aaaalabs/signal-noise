@@ -44,9 +44,30 @@ export default async function handler(req, res) {
 
             const user = await redis.hgetall(userKey);
             if (user.session_token === sessionToken) {
-              // Return user's cloud data
+              // Return user's cloud data with corrupted data protection
+              let parsedData = {};
+              try {
+                parsedData = JSON.parse(user.app_data || '{}');
+              } catch (parseError) {
+                console.error('🚨 CORRUPTED APP_DATA ON GET:', {
+                  userKey,
+                  dataType: typeof user.app_data,
+                  dataPreview: user.app_data ? user.app_data.substring(0, 100) : 'null',
+                  error: parseError.message
+                });
+                // Return empty data structure instead of crashing
+                parsedData = { tasks: [], history: [], badges: [], patterns: {}, settings: { targetRatio: 80, notifications: false } };
+
+                // Fix corrupted data in background
+                await redis.hset(userKey, {
+                  app_data: JSON.stringify(parsedData),
+                  data_corruption_fixed: new Date().toISOString()
+                });
+                console.log('🔧 Corrupted data reset during GET for', userKey);
+              }
+
               userData = {
-                data: JSON.parse(user.app_data || '{}'),
+                data: parsedData,
                 firstName: user.first_name || '',
                 language: 'en',
                 timestamp: user.last_active,
@@ -151,7 +172,28 @@ export default async function handler(req, res) {
         // CRITICAL SAFETY CHECK: Prevent overwriting existing data with empty data
         const existingDataSize = user.app_data ? user.app_data.length : 0;
         const newTaskCount = data?.tasks?.length || 0;
-        const existingTaskCount = user.app_data ? (JSON.parse(user.app_data || '{}').tasks || []).length : 0;
+
+        let existingTaskCount = 0;
+        if (user.app_data) {
+          try {
+            const existingData = JSON.parse(user.app_data || '{}');
+            existingTaskCount = (existingData.tasks || []).length;
+          } catch (parseError) {
+            console.error('🚨 CORRUPTED APP_DATA DETECTED:', {
+              userKey,
+              dataType: typeof user.app_data,
+              dataPreview: user.app_data.substring(0, 100),
+              error: parseError.message
+            });
+            // Reset corrupted data - prefer empty over corrupted
+            existingTaskCount = 0;
+            await redis.hset(userKey, {
+              app_data: JSON.stringify({ tasks: [], history: [], badges: [], patterns: {}, settings: { targetRatio: 80, notifications: false } }),
+              data_corruption_fixed: new Date().toISOString()
+            });
+            console.log('🔧 Corrupted data reset to empty state for', userKey);
+          }
+        }
 
         // Block sync if trying to overwrite existing tasks with empty data
         if (existingTaskCount > 0 && newTaskCount === 0) {
