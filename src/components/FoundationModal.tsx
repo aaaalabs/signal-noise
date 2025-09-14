@@ -4,6 +4,7 @@ import { useTranslation } from '../contexts/LanguageContext';
 interface FoundationModalProps {
   show: boolean;
   onClose: () => void;
+  startInLoginMode?: boolean;
 }
 
 interface FoundationStats {
@@ -21,7 +22,7 @@ interface UserStatus {
   tier?: string;
 }
 
-export default function FoundationModal({ show, onClose }: FoundationModalProps) {
+export default function FoundationModal({ show, onClose, startInLoginMode = false }: FoundationModalProps) {
   const t = useTranslation();
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -36,8 +37,9 @@ export default function FoundationModal({ show, onClose }: FoundationModalProps)
   useEffect(() => {
     if (show) {
       fetchFoundationStats();
+      setIsLoginMode(startInLoginMode);
     }
-  }, [show]);
+  }, [show, startInLoginMode]);
 
   const fetchFoundationStats = async () => {
     // Simple: Development = preview mode, Production = live data

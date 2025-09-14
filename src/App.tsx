@@ -52,6 +52,7 @@ function AppContent() {
   const [invoiceId, setInvoiceId] = useState<string>('');
   const [invoiceToken, setInvoiceToken] = useState<string>('');
   const [showFoundationModal, setShowFoundationModal] = useState(false);
+  const [foundationModalLoginMode, setFoundationModalLoginMode] = useState(false);
 
   // Load data from localStorage on mount
   useEffect(() => {
@@ -313,12 +314,19 @@ function AppContent() {
       {/* Foundation Modal */}
       <FoundationModal
         show={showFoundationModal}
-        onClose={() => setShowFoundationModal(false)}
+        onClose={() => {
+          setShowFoundationModal(false);
+          setFoundationModalLoginMode(false);
+        }}
+        startInLoginMode={foundationModalLoginMode}
       />
 
       <div className="container" style={{ position: 'relative' }}>
         {/* Brand Icon - Subtle Watermark */}
-        <BrandIcon onLoginClick={() => setShowFoundationModal(true)} />
+        <BrandIcon onLoginClick={() => {
+          setFoundationModalLoginMode(true);
+          setShowFoundationModal(true);
+        }} />
 
         {/* Language Switcher - Ultra-minimal toggle */}
         <LanguageSwitcher />
@@ -368,7 +376,10 @@ function AppContent() {
         />
 
         {/* Footer */}
-        <Footer onFoundationClick={() => setShowFoundationModal(true)} />
+        <Footer onFoundationClick={() => {
+          setFoundationModalLoginMode(true);
+          setShowFoundationModal(true);
+        }} />
       </div>
     </>
   );
