@@ -71,25 +71,8 @@ export default async function handler(req, res) {
       }
     }
 
-    // Legacy hash-based retrieval for free users
-    if (!emailHash) {
-      return res.status(400).json({ error: 'Email hash or authentication required' });
-    }
-
-    try {
-      const userData = await redis.get(`sn:u:sync:${emailHash}`);
-
-      if (!userData) {
-        return res.status(404).json({ error: 'No data found' });
-      }
-
-      console.log('✅ Data retrieved for hash:', emailHash.substring(0, 6) + '...');
-      return res.json(userData);
-
-    } catch (error) {
-      console.error('❌ Sync retrieve error:', error);
-      return res.status(500).json({ error: 'Failed to retrieve data' });
-    }
+    // No legacy users - authentication required
+    return res.status(401).json({ error: 'Authentication required - no legacy access' });
   }
 
   // Handle POST request - store user data
@@ -165,42 +148,8 @@ export default async function handler(req, res) {
       }
     }
 
-    // Legacy hash-based sync for free users
-    const { emailHash, data, firstName, language, timestamp } = body;
-
-    if (!emailHash) {
-      return res.status(400).json({ error: 'Email hash or authentication required' });
-    }
-
-    try {
-      const syncData = {
-        data: data || {},
-        firstName: firstName || '',
-        language: language || 'en',
-        timestamp: timestamp || Date.now(),
-        lastSync: new Date().toISOString(),
-        version: '1.0.0'
-      };
-
-      // Store in Redis with TTL of 1 year (31536000 seconds)
-      await redis.setex(`sn:u:sync:${emailHash}`, 31536000, JSON.stringify(syncData));
-
-      console.log('✅ Data synced for hash:', emailHash.substring(0, 6) + '...', {
-        taskCount: data?.tasks?.length || 0,
-        hasFirstName: !!firstName,
-        language
-      });
-
-      return res.json({
-        success: true,
-        timestamp: syncData.timestamp,
-        synced: syncData.lastSync
-      });
-
-    } catch (error) {
-      console.error('❌ Sync store error:', error);
-      return res.status(500).json({ error: 'Failed to sync data' });
-    }
+    // No legacy users - authentication required
+    return res.status(401).json({ error: 'Authentication required - no legacy access' });
   }
 
   // Method not allowed

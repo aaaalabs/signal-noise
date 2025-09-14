@@ -19,46 +19,44 @@ export default async function handler(req, res) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
 
-  const { emailHash, email } = req.query;
+  const { email } = req.query;
 
   try {
-    let targetEmailHash = emailHash;
-
-    // If email provided instead of hash, convert it
-    if (email && !emailHash) {
-      targetEmailHash = btoa(email).replace(/[^a-zA-Z0-9]/g, '').substring(0, 12);
+    if (!email) {
+      return res.status(400).json({ error: 'Email required - no legacy hash support' });
     }
 
-    if (!targetEmailHash) {
-      return res.status(400).json({ error: 'Email hash or email required' });
+    // Get premium user data directly by email
+    const userData = await redis.hgetall(`sn:u:${email}`);
+
+    if (!userData || !userData.email) {
+      return res.status(404).json({ error: 'No premium user found for this email' });
     }
 
-    // Get user data
-    const userData = await redis.get(`sn:u:sync:${targetEmailHash}`);
-
-    if (!userData) {
-      return res.status(404).json({ error: 'No data found for this user' });
-    }
+    // Parse app data
+    const appData = userData.app_data ? JSON.parse(userData.app_data) : {};
 
     // Return admin-friendly summary
     const response = {
-      emailHash: targetEmailHash,
-      found: !!userData,
+      email: userData.email,
+      found: true,
       userData: {
-        firstName: userData.firstName || '',
-        language: userData.language || 'en',
-        lastSync: userData.lastSync || null,
-        taskCount: userData.data?.tasks?.length || 0,
-        hasAchievements: userData.data?.badges?.length > 0 || false,
-        version: userData.version || 'unknown',
-        lastActive: userData.lastSync || null,
+        firstName: userData.first_name || '',
+        tier: userData.tier || 'early_adopter',
+        paymentType: userData.payment_type || 'lifetime',
+        lastActive: userData.last_active ? new Date(parseInt(userData.last_active)).toISOString() : null,
+        taskCount: appData.tasks?.length || 0,
+        hasAchievements: appData.badges?.length > 0 || false,
+        syncedFromLocal: userData.synced_from_local || null,
+        hasSessionToken: !!userData.session_token,
         premiumStatus: 'active'
       }
     };
 
-    console.log('🔍 Admin lookup for hash:', targetEmailHash.substring(0, 6) + '...', {
-      found: !!userData,
-      taskCount: response.userData?.taskCount || 0
+    console.log('🔍 Admin lookup for email:', email, {
+      found: true,
+      taskCount: response.userData?.taskCount || 0,
+      tier: userData.tier
     });
 
     return res.json(response);
