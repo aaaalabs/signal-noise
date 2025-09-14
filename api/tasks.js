@@ -47,19 +47,30 @@ export default async function handler(req, res) {
       console.log(`🔍 Found ${userKeys.length} user keys in Redis:`, userKeys);
 
       for (const key of userKeys) {
-        const userData = await redis.hgetall(key);
-        console.log(`🔍 Checking key: ${key}`, {
-          hasSessionToken: !!userData.session_token,
-          sessionTokenMatch: userData.session_token === sessionToken,
-          userEmail: userData.email,
-          status: userData.status
-        });
+        try {
+          // Skip keys that don't follow the user pattern
+          if (!key.startsWith('sn:u:') || key.includes(':sync:')) {
+            console.log(`⏭️ Skipping non-user key: ${key}`);
+            continue;
+          }
 
-        if (userData.session_token === sessionToken) {
-          console.log('✅ Session token match found!', key);
-          userKey = key;
-          user = userData;
-          break;
+          const userData = await redis.hgetall(key);
+          console.log(`🔍 Checking key: ${key}`, {
+            hasSessionToken: !!userData.session_token,
+            sessionTokenMatch: userData.session_token === sessionToken,
+            userEmail: userData.email,
+            status: userData.status
+          });
+
+          if (userData.session_token === sessionToken) {
+            console.log('✅ Session token match found!', key);
+            userKey = key;
+            user = userData;
+            break;
+          }
+        } catch (keyError) {
+          console.log(`⚠️ Error checking key ${key}:`, keyError.message, '- skipping');
+          continue;
         }
       }
 
