@@ -32,6 +32,8 @@ export default async function handler(req, res) {
       email: userData.email,
       subscriptionId: userData.access_token,
       paymentType: userData.payment_type,
+      tier: userData.tier || 'early_adopter', // Add tier for correct welcome message
+      firstName: userData.first_name || '', // Add firstName for personalized greeting
       activatedAt: userData.created_at ? new Date(parseInt(userData.created_at)).toISOString() : null
     });
 

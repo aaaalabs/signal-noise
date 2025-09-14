@@ -20,6 +20,7 @@ interface UserStatus {
   exists: boolean;
   isActive: boolean;
   tier?: string;
+  firstName?: string;
 }
 
 export default function FoundationModal({ show, onClose, startInLoginMode = false }: FoundationModalProps) {
@@ -81,7 +82,8 @@ export default function FoundationModal({ show, onClose, startInLoginMode = fals
         return {
           exists: data.isActive, // User exists if they have active premium
           isActive: data.isActive,
-          tier: data.paymentType // Use paymentType as tier (early_adopter, foundation, etc.)
+          tier: data.tier, // Use correct tier field from database
+          firstName: data.firstName // Add firstName for personalized greeting
         };
       } else {
         // For non-200 responses, assume user doesn't exist (new user)
@@ -397,7 +399,7 @@ export default function FoundationModal({ show, onClose, startInLoginMode = fals
               animation: 'fadeIn 0.3s ease forwards'
             }}>
               {userStatus.exists && userStatus.isActive
-                ? `${t.welcomeBack}, ${userStatus.tier === 'foundation' ? t.foundationMember : t.earlyAdopter}!`
+                ? `${t.welcomeBack}${userStatus.firstName ? `, ${userStatus.firstName}` : ''} - ${userStatus.tier === 'foundation' ? t.foundationMember : t.earlyAdopter}!`
                 : userStatus.exists
                 ? t.accountInactive
                 : t.newMember}
