@@ -16,6 +16,7 @@ function TaskItem({ task, onTransfer, onDelete }: { task: Task; onTransfer: (id:
   const [isDeleting, setIsDeleting] = useState(false);
   const [tapCount, setTapCount] = useState(0);
   const [isTransferring, setIsTransferring] = useState(false);
+  const [showTapFeedback, setShowTapFeedback] = useState(false);
   const deleteStartTime = useRef<number>(0);
   const deleteAnimationId = useRef<number | null>(null);
   const hasMilestoneVibrated = useRef(false);
@@ -93,6 +94,7 @@ function TaskItem({ task, onTransfer, onDelete }: { task: Task; onTransfer: (id:
       tapTimeoutId.current = null;
     }
     setTapCount(0);
+    setShowTapFeedback(false);
     lastTapTime.current = 0;
   };
 
@@ -104,6 +106,7 @@ function TaskItem({ task, onTransfer, onDelete }: { task: Task; onTransfer: (id:
 
     // Update state
     setTapCount(currentTapCount);
+    setShowTapFeedback(currentTapCount > 0);
     lastTapTime.current = now;
 
     // Visual feedback - progressive pulse in destination category color
@@ -190,7 +193,7 @@ function TaskItem({ task, onTransfer, onDelete }: { task: Task; onTransfer: (id:
             ? 'rgba(255, 159, 10, 0.08)'
             : 'rgba(0, 255, 136, 0.08)',
           borderRadius: '8px'
-        } : isPressed && tapCount > 0 ? {
+        } : showTapFeedback ? {
           border: `${tapCount === 1 ? '1px' : '2px'} solid ${task.type === 'signal' ? 'var(--noise)' : 'var(--signal)'}`,
           backgroundColor: task.type === 'signal'
             ? `rgba(255, 159, 10, ${tapCount === 1 ? 0.03 : 0.06})`
@@ -219,7 +222,7 @@ function TaskItem({ task, onTransfer, onDelete }: { task: Task; onTransfer: (id:
       )}
 
       {/* Transfer direction indicator - appears on second tap */}
-      {isPressed && tapCount === 2 && (
+      {showTapFeedback && tapCount === 2 && (
         <div
           style={{
             position: 'absolute',
