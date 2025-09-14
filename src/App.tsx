@@ -141,7 +141,11 @@ function AppContent() {
 
               if (cloudResponse.ok) {
                 const { data: cloudData } = await cloudResponse.json();
-                console.log('✅ Premium data loaded from cloud');
+                console.log('✅ Premium data loaded from cloud:', {
+                  taskCount: cloudData.tasks?.length || 0,
+                  premium: true,
+                  email: user.firstName || 'Unknown'
+                });
 
                 // Migrate cloud data structure if needed
                 if (!cloudData.badges) cloudData.badges = [];
@@ -226,8 +230,15 @@ function AppContent() {
         })
       });
 
-      if (!response.ok) {
-        console.error('❌ Failed to save data to cloud');
+      if (response.ok) {
+        const result = await response.json();
+        console.log('✅ Cloud sync successful:', {
+          taskCount: appData.tasks?.length || 0,
+          timestamp: result.timestamp,
+          premium: result.premium || false
+        });
+      } else {
+        console.error('❌ Failed to save data to cloud:', response.status, response.statusText);
       }
     } catch (error) {
       console.error('❌ Cloud save error:', error);
@@ -243,6 +254,10 @@ function AppContent() {
       } else {
         // Save to localStorage for free users
         localStorage.setItem(DATA_KEY, JSON.stringify(data));
+        console.log('💾 LocalStorage sync successful:', {
+          taskCount: data.tasks?.length || 0,
+          premium: false
+        });
       }
     }
   }, [data, isLoaded, isPremiumMode, sessionToken, saveToCloud]);
