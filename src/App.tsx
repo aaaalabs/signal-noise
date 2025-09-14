@@ -337,6 +337,7 @@ function AppContent() {
           tasks={data.tasks}
           currentRatio={currentRatio}
           totalTasks={todayTasks.length}
+          data={data}
         />
 
 

@@ -3,16 +3,17 @@ import { useEffect, useState } from 'react';
 import { initSyncIndicator } from '../services/syncService';
 import { checkPremiumStatus } from '../services/premiumService';
 import PremiumMenu from './PremiumMenu';
-import type { Task } from '../types';
+import type { Task, AppData } from '../types';
 
 interface LanguageSwitcherProps {
   onPremiumClick?: () => void;
   tasks?: Task[];
   currentRatio?: number;
   totalTasks?: number;
+  data?: AppData;
 }
 
-export default function LanguageSwitcher({ onPremiumClick, tasks = [], currentRatio = 0, totalTasks = 0 }: LanguageSwitcherProps) {
+export default function LanguageSwitcher({ onPremiumClick, tasks = [], currentRatio = 0, totalTasks = 0, data }: LanguageSwitcherProps) {
   const { currentLanguage, toggleLanguage } = useLanguage();
   const [premiumStatus, setPremiumStatus] = useState(() => checkPremiumStatus());
   const [showPremiumMenu, setShowPremiumMenu] = useState(false);
@@ -106,9 +107,7 @@ export default function LanguageSwitcher({ onPremiumClick, tasks = [], currentRa
             onClose={() => setShowPremiumMenu(false)}
             email={premiumStatus.email || ''}
             tier={premiumStatus.subscriptionId?.includes('foundation') ? 'foundation' : 'early_adopter'}
-            tasks={tasks}
-            currentRatio={currentRatio}
-            totalTasks={totalTasks}
+            data={data}
           />
         </div>
       )}

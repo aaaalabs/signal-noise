@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
-import type { Task } from '../types';
-import { calculateStreak } from '../utils/achievements';
+import type { AppData } from '../types';
+import { calculateStreak, createBadgeDefinitions, getAverageRatio, getTodayRatio } from '../utils/achievements';
 import { deactivatePremium } from '../services/premiumService';
 
 interface PremiumMenuProps {
@@ -8,9 +8,7 @@ interface PremiumMenuProps {
   onClose: () => void;
   email: string;
   tier: string;
-  tasks: Task[];
-  currentRatio: number;
-  totalTasks: number;
+  data?: AppData;
 }
 
 export default function PremiumMenu({
@@ -18,12 +16,63 @@ export default function PremiumMenu({
   onClose,
   email,
   tier,
-  tasks,
-  currentRatio,
-  totalTasks
+  data
 }: PremiumMenuProps) {
   const menuRef = useRef<HTMLDivElement>(null);
-  const streak = calculateStreak(tasks);
+
+  if (!data) return null;
+
+  const achievements = createBadgeDefinitions(data);
+  const streak = calculateStreak(data.tasks);
+  const todayRatio = getTodayRatio(data.tasks);
+  const weekAvg = getAverageRatio(data.tasks, 7);
+
+  // Calculate progress for each achievement (0-100)
+  const getProgress = (achievement: any): number => {
+    switch (achievement.id) {
+      case 'first_day':
+        return data.tasks.length >= 1 ? 100 : 0;
+      case 'week_warrior':
+        return Math.min((streak / 7) * 100, 100);
+      case 'signal_master':
+        return Math.min((weekAvg / 80) * 100, 100);
+      case 'perfect_day':
+        const todayTasks = data.tasks.filter(t =>
+          new Date(t.timestamp).toDateString() === new Date().toDateString()
+        );
+        return todayTasks.length >= 3 && todayRatio === 100 ? 100 : (todayRatio / 100) * 100;
+      case 'month_hero':
+        return Math.min((streak / 30) * 100, 100);
+      case 'early_bird':
+        const earlyTasks = data.tasks.filter(t => new Date(t.timestamp).getHours() < 9);
+        return earlyTasks.length > 0 ? 100 : 0;
+      case 'decision_maker':
+        return Math.min((data.tasks.length / 100) * 100, 100);
+      case 'comeback':
+        return achievement.condition() ? 100 : 0;
+      default:
+        return 0;
+    }
+  };
+
+  const ProgressBar = ({ progress }: { progress: number }) => {
+    const filledBars = Math.floor((progress / 100) * 5);
+    return (
+      <div style={{ display: 'flex', gap: '1px', alignItems: 'center' }}>
+        {[...Array(5)].map((_, i) => (
+          <div
+            key={i}
+            style={{
+              width: '3px',
+              height: '3px',
+              backgroundColor: i < filledBars ? 'rgba(0, 255, 136, 0.8)' : 'rgba(255, 255, 255, 0.1)',
+              borderRadius: '1px'
+            }}
+          />
+        ))}
+      </div>
+    );
+  };
 
   useEffect(() => {
     if (!show) return;
@@ -98,24 +147,34 @@ export default function PremiumMenu({
         </div>
       </div>
 
-      {/* Stats Section */}
-      <div style={{ marginBottom: '16px', paddingBottom: '12px', borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-          <span style={{ color: '#999', fontWeight: 300 }}>Streak</span>
-          <span style={{ color: '#fff', fontWeight: 400 }}>{streak} days</span>
-        </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-          <span style={{ color: '#999', fontWeight: 300 }}>Today's Ratio</span>
-          <span style={{
-            color: currentRatio >= 80 ? 'var(--signal)' : currentRatio >= 50 ? '#ff9f0a' : '#666',
-            fontWeight: 400
-          }}>
-            {currentRatio}%
-          </span>
-        </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ color: '#999', fontWeight: 300 }}>Tasks Today</span>
-          <span style={{ color: '#fff', fontWeight: 400 }}>{totalTasks}</span>
+      {/* Achievement Progress */}
+      <div style={{ marginBottom: '16px' }}>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          gap: '8px',
+          fontSize: '10px'
+        }}>
+          {achievements.map(achievement => {
+            const progress = getProgress(achievement);
+            return (
+              <div key={achievement.id} style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '2px 0'
+              }}>
+                <ProgressBar progress={progress} />
+                <span style={{
+                  color: progress > 0 ? '#ccc' : '#666',
+                  fontWeight: 300,
+                  fontSize: '10px'
+                }}>
+                  {achievement.name}
+                </span>
+              </div>
+            );
+          })}
         </div>
       </div>
 
