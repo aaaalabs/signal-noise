@@ -483,11 +483,24 @@ function AppContent() {
 
   // Sign out function
   const handleSignOut = useCallback(() => {
-    console.log('🚪 Signing out...');
-    clearSession();
+    console.log('🚪 Signing out - clearing ALL browser storage...');
+
+    // Clear ALL localStorage (not just session-specific items)
+    localStorage.clear();
+
+    // Also clear sessionStorage if any data exists there
+    sessionStorage.clear();
+
+    // Clear any cookies (if any exist for this domain)
+    document.cookie.split(";").forEach((c) => {
+      document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+    });
+
+    // Reset React state
     setIsPremiumMode(false);
     setSessionToken('');
 
+    console.log('✅ All browser storage cleared, reloading page...');
     // Force reload to reinitialize app state
     window.location.reload();
   }, []);

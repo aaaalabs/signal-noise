@@ -129,8 +129,21 @@ export default function PremiumMenu({
   }, [show, onClose]);
 
   const handleSignOut = () => {
-    deactivatePremium();
+    console.log('🚪 PremiumMenu: Signing out - clearing ALL browser storage...');
+
+    // Clear ALL localStorage (not just session-specific items)
+    localStorage.clear();
+
+    // Also clear sessionStorage if any data exists there
+    sessionStorage.clear();
+
+    // Clear any cookies (if any exist for this domain)
+    document.cookie.split(";").forEach((c) => {
+      document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+    });
+
     onClose();
+    console.log('✅ All browser storage cleared, reloading page...');
     // Refresh to update the UI
     window.location.reload();
   };
