@@ -243,7 +243,7 @@ const PrivacyContent = () => (
   </div>
 );
 
-export default function Footer() {
+export default function Footer({ onFoundationClick }: { onFoundationClick?: () => void }) {
   const [showLegal, setShowLegal] = useState(false);
   const [showTerms, setShowTerms] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
@@ -374,7 +374,17 @@ export default function Footer() {
                 libralab.ai
               </a>
             </div>
-            <div>made with ♥ in austria</div>
+            <div
+              style={{
+                cursor: onFoundationClick ? 'pointer' : 'default',
+                transition: 'color 0.2s'
+              }}
+              onClick={onFoundationClick}
+              onMouseEnter={(e) => onFoundationClick && (e.currentTarget.style.color = '#888')}
+              onMouseLeave={(e) => onFoundationClick && (e.currentTarget.style.color = '#555')}
+            >
+              Foundation Member • libralab.ai
+            </div>
           </div>
         </div>
       </footer>

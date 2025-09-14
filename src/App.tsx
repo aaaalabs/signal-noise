@@ -13,6 +13,7 @@ import StreakIndicator from './components/StreakIndicator';
 import SuccessPage from './components/SuccessPage';
 import SuccessModal from './components/SuccessModal';
 import InvoicePage from './components/InvoicePage';
+import FoundationModal from './components/FoundationModal';
 import Footer from './components/Footer';
 import BrandIcon from './components/BrandIcon';
 import LanguageSwitcher from './components/LanguageSwitcher';
@@ -50,6 +51,7 @@ function AppContent() {
   const [showInvoicePage, setShowInvoicePage] = useState(false);
   const [invoiceId, setInvoiceId] = useState<string>('');
   const [invoiceToken, setInvoiceToken] = useState<string>('');
+  const [showFoundationModal, setShowFoundationModal] = useState(false);
 
   // Load data from localStorage on mount
   useEffect(() => {
@@ -227,11 +229,14 @@ function AppContent() {
     }
   };
 
-  const toggleTask = (id: number) => {
+  const transferTask = (id: number) => {
     setData(prev => ({
       ...prev,
       tasks: prev.tasks.map(task =>
-        task.id === id ? { ...task, completed: !task.completed } : task
+        task.id === id ? {
+          ...task,
+          type: task.type === 'signal' ? 'noise' : 'signal'
+        } : task
       )
     }));
   };
@@ -252,10 +257,10 @@ function AppContent() {
 
   const calculateRatio = (): number => {
     const todayTasks = getTodayTasks();
-    const activeTasks = todayTasks.filter(task => !task.completed);
-    const signals = activeTasks.filter(task => task.type === 'signal').length;
+    // All tasks now count toward ratio - no completed state
+    const signals = todayTasks.filter(task => task.type === 'signal').length;
 
-    return activeTasks.length > 0 ? Math.round((signals / activeTasks.length) * 100) : 0;
+    return todayTasks.length > 0 ? Math.round((signals / todayTasks.length) * 100) : 0;
   };
 
   const currentRatio = calculateRatio();
@@ -305,9 +310,15 @@ function AppContent() {
         sessionId={paymentSessionId}
       />
 
+      {/* Foundation Modal */}
+      <FoundationModal
+        show={showFoundationModal}
+        onClose={() => setShowFoundationModal(false)}
+      />
+
       <div className="container" style={{ position: 'relative' }}>
         {/* Brand Icon - Subtle Watermark */}
-        <BrandIcon />
+        <BrandIcon onLoginClick={() => setShowFoundationModal(true)} />
 
         {/* Language Switcher - Ultra-minimal toggle */}
         <LanguageSwitcher />
@@ -334,7 +345,7 @@ function AppContent() {
         {/* Tasks Grid */}
         <TaskGrid
           tasks={todayTasks}
-          onToggle={toggleTask}
+          onTransfer={transferTask}
           onDelete={deleteTask}
         />
 
@@ -357,7 +368,7 @@ function AppContent() {
         />
 
         {/* Footer */}
-        <Footer />
+        <Footer onFoundationClick={() => setShowFoundationModal(true)} />
       </div>
     </>
   );

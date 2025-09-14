@@ -1,7 +1,12 @@
-export default function BrandIcon() {
+interface BrandIconProps {
+  onLoginClick?: () => void;
+}
+
+export default function BrandIcon({ onLoginClick }: BrandIconProps) {
   return (
     <div
       className="brand-icon"
+      onClick={onLoginClick}
       style={{
         position: 'absolute',
         top: '20px',
@@ -11,7 +16,8 @@ export default function BrandIcon() {
         opacity: 0,
         animation: 'fadeInBrand 2s ease-out 1s forwards',
         zIndex: 1,
-        pointerEvents: 'none'
+        pointerEvents: onLoginClick ? 'auto' : 'none',
+        cursor: onLoginClick ? 'pointer' : 'default'
       }}
     >
       <svg

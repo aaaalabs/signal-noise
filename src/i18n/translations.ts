@@ -75,7 +75,7 @@ const translations = {
 
     // Onboarding
     onboardingTitle: "Signal",
-    onboardingText: "80% deiner Zeit für das, <br>was wirklich zählt.<br>20% für den Rest.",
+    onboardingText: "<span style='color: var(--signal)'>80%</span> deiner Zeit für das, <br>was wirklich zählt.<br><span style='color: #666'>20%</span> für den Rest.",
     onboardingStart: "Begin",
 
     // Premium Modal
@@ -157,7 +157,7 @@ const translations = {
 
     // Onboarding
     onboardingTitle: "Signal",
-    onboardingText: "80% of your time for what really matters.<br>20% for the rest.",
+    onboardingText: "<span style='color: var(--signal)'>80%</span> of your time for <br>what really matters.<br><span style='color: #666'>20%</span> for the rest.",
     onboardingStart: "Begin",
 
     // Premium Modal

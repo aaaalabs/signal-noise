@@ -1,21 +1,26 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import type { Task } from '../types';
 import { useTranslation } from '../contexts/LanguageContext';
 import { formatTime } from '../i18n/translations';
 
 interface TaskGridProps {
   tasks: Task[];
-  onToggle: (id: number) => void;
+  onTransfer: (id: number) => void;
   onDelete: (id: number) => void;
 }
 
-function TaskItem({ task, onToggle, onDelete }: { task: Task; onToggle: (id: number) => void; onDelete: (id: number) => void }) {
+function TaskItem({ task, onTransfer, onDelete }: { task: Task; onTransfer: (id: number) => void; onDelete: (id: number) => void }) {
   const t = useTranslation();
   const [isPressed, setIsPressed] = useState(false);
-  const [pressTimer, setPressTimer] = useState<number | null>(null);
-  const [showDelete, setShowDelete] = useState(false);
-  const [deleteCountdown, setDeleteCountdown] = useState<number | null>(null);
-  const [countdownTimer, setCountdownTimer] = useState<number | null>(null);
+  const [deleteProgress, setDeleteProgress] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [tapCount, setTapCount] = useState(0);
+  const [isTransferring, setIsTransferring] = useState(false);
+  const deleteStartTime = useRef<number>(0);
+  const deleteAnimationId = useRef<number | null>(null);
+  const hasMilestoneVibrated = useRef(false);
+  const tapTimeoutId = useRef<number | null>(null);
+  const lastTapTime = useRef<number>(0);
 
   const formatTaskTime = (timestamp: string): string => {
     const date = new Date(timestamp);
@@ -29,67 +34,135 @@ function TaskItem({ task, onToggle, onDelete }: { task: Task; onToggle: (id: num
     return date.toLocaleDateString();
   };
 
+  const HOLD_DURATION = 2500; // 2.5 seconds to complete deletion
+
+  const startDeleteProgress = () => {
+    deleteStartTime.current = performance.now();
+    setIsDeleting(true);
+    setDeleteProgress(0);
+    hasMilestoneVibrated.current = false;
+
+    // Initial vibration feedback
+    if (navigator.vibrate) {
+      navigator.vibrate(10);
+    }
+
+    const updateProgress = () => {
+      const elapsed = performance.now() - deleteStartTime.current;
+      const progress = Math.min((elapsed / HOLD_DURATION) * 100, 100);
+
+      setDeleteProgress(progress);
+
+      // Milestone vibration at 50%
+      if (progress >= 50 && !hasMilestoneVibrated.current) {
+        hasMilestoneVibrated.current = true;
+        if (navigator.vibrate) {
+          navigator.vibrate(5);
+        }
+      }
+
+      if (progress >= 100) {
+        // Deletion complete - strong vibration
+        if (navigator.vibrate) {
+          navigator.vibrate(20);
+        }
+        onDelete(task.id);
+        resetDeleteState();
+      } else {
+        deleteAnimationId.current = requestAnimationFrame(updateProgress);
+      }
+    };
+
+    deleteAnimationId.current = requestAnimationFrame(updateProgress);
+  };
+
+  const resetDeleteState = () => {
+    if (deleteAnimationId.current) {
+      cancelAnimationFrame(deleteAnimationId.current);
+      deleteAnimationId.current = null;
+    }
+    setIsDeleting(false);
+    setDeleteProgress(0);
+    setIsPressed(false);
+    hasMilestoneVibrated.current = false;
+  };
+
+  const resetTapState = () => {
+    if (tapTimeoutId.current) {
+      clearTimeout(tapTimeoutId.current);
+      tapTimeoutId.current = null;
+    }
+    setTapCount(0);
+    lastTapTime.current = 0;
+  };
+
+  const handleTap = () => {
+    const now = performance.now();
+
+    // If more than 1 second since last tap, reset count
+    if (now - lastTapTime.current > 1000) {
+      setTapCount(1);
+    } else {
+      setTapCount(prev => prev + 1);
+    }
+
+    lastTapTime.current = now;
+
+    // Visual feedback - subtle pulse
+    setIsPressed(true);
+    setTimeout(() => setIsPressed(false), 100);
+
+    // Haptic feedback
+    if (navigator.vibrate) {
+      navigator.vibrate(5);
+    }
+
+    // Clear existing timeout
+    if (tapTimeoutId.current) {
+      clearTimeout(tapTimeoutId.current);
+    }
+
+    // Check if third tap within window
+    if (tapCount >= 2) {
+      // Third tap - trigger transfer
+      setIsTransferring(true);
+      if (navigator.vibrate) {
+        navigator.vibrate(15);
+      }
+
+      setTimeout(() => {
+        onTransfer(task.id);
+        setIsTransferring(false);
+        resetTapState();
+      }, 100);
+    } else {
+      // Set timeout to reset tap count
+      tapTimeoutId.current = window.setTimeout(resetTapState, 1000);
+    }
+  };
+
   const handlePressStart = (e: React.MouseEvent | React.TouchEvent) => {
     e.preventDefault();
     setIsPressed(true);
-    const timer = setTimeout(() => {
-      setShowDelete(true);
-    }, 700);
-    setPressTimer(timer);
+    startDeleteProgress();
   };
 
   const handlePressEnd = (e: React.MouseEvent | React.TouchEvent) => {
     e.preventDefault();
-    setIsPressed(false);
-    if (pressTimer) {
-      clearTimeout(pressTimer);
-      setPressTimer(null);
-    }
-    if (showDelete && !deleteCountdown) {
-      // Start 3-second countdown
-      startDeleteCountdown();
-    } else if (deleteCountdown) {
-      // Cancel deletion if countdown is active
-      cancelDeleteCountdown();
-    } else {
-      onToggle(task.id);
+
+    if (isDeleting && deleteProgress < 100) {
+      // Release before completion - cancel deletion
+      resetDeleteState();
+    } else if (!isDeleting) {
+      // Quick tap - handle triple-tap logic
+      setIsPressed(false);
+      handleTap();
     }
   };
 
   const handlePressCancel = () => {
-    setIsPressed(false);
-    setShowDelete(false);
-    if (pressTimer) {
-      clearTimeout(pressTimer);
-      setPressTimer(null);
-    }
-    cancelDeleteCountdown();
-  };
-
-  const startDeleteCountdown = () => {
-    setDeleteCountdown(3);
-    const timer = setInterval(() => {
-      setDeleteCountdown(prev => {
-        if (prev === null || prev <= 1) {
-          clearInterval(timer);
-          setCountdownTimer(null);
-          // Execute deletion
-          onDelete(task.id);
-          return null;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-    setCountdownTimer(timer);
-  };
-
-  const cancelDeleteCountdown = () => {
-    if (countdownTimer) {
-      clearInterval(countdownTimer);
-      setCountdownTimer(null);
-    }
-    setDeleteCountdown(null);
-    setShowDelete(false);
+    // Mouse leave or touch cancel - stop deletion
+    resetDeleteState();
   };
 
 
@@ -101,34 +174,40 @@ function TaskItem({ task, onToggle, onDelete }: { task: Task; onToggle: (id: num
       onTouchStart={handlePressStart}
       onTouchEnd={handlePressEnd}
       onTouchCancel={handlePressCancel}
-      className={`task-item ${task.type}-item ${task.completed ? 'completed' : ''} ${isPressed ? 'pressing' : ''} ${showDelete ? 'delete-mode' : ''} ${deleteCountdown ? 'countdown-active' : ''}`}
+      className={`task-item ${task.type}-item ${isPressed ? 'pressing' : ''} ${isDeleting ? 'deleting' : ''} ${isTransferring ? 'transferring' : ''}`}
       style={{
-        opacity: task.completed ? 0.3 : 1,
-        transform: isPressed ? 'scale(0.98)' : 'scale(1)',
-        transition: 'all 0.2s ease',
-        cursor: showDelete || deleteCountdown ? 'pointer' : 'default',
+        opacity: 1, // Always full opacity - no completed state
+        transform: isPressed ? 'scale(0.95)' : 'scale(1)',
+        transition: isTransferring ? 'all 0.3s ease-out' : 'transform 0.1s ease',
+        cursor: isDeleting ? 'pointer' : 'default',
         position: 'relative',
         userSelect: 'none',
         WebkitUserSelect: 'none',
-        ...(showDelete || deleteCountdown ? {
-          border: '2px solid #ff3b30',
-          backgroundColor: 'rgba(255, 59, 48, 0.05)',
+        ...(isDeleting ? {
+          border: '1px solid #ff3b30',
+          backgroundColor: 'rgba(255, 59, 48, 0.03)',
           borderRadius: '8px'
-        } : {}),
+        } : isTransferring ? {
+          border: '1px solid var(--signal)',
+          backgroundColor: 'rgba(0, 255, 136, 0.05)',
+          borderRadius: '8px'
+        } : {
+          border: '1px solid #222'
+        }),
         overflow: 'hidden'
       }}
     >
-      {/* Visual countdown indicator */}
-      {deleteCountdown && (
+      {/* Smooth progress indicator */}
+      {isDeleting && (
         <div
           style={{
             position: 'absolute',
             top: 0,
-            right: 0,
+            left: 0,
             height: '100%',
-            width: `${((4 - deleteCountdown) / 3) * 100}%`,
-            backgroundColor: 'rgba(255, 59, 48, 0.2)',
-            transition: 'width 1s linear',
+            width: `${deleteProgress}%`,
+            backgroundColor: 'rgba(255, 59, 48, 0.15)',
+            transition: 'none', // Smooth via requestAnimationFrame
             zIndex: 0
           }}
         />
@@ -139,7 +218,7 @@ function TaskItem({ task, onToggle, onDelete }: { task: Task; onToggle: (id: num
   );
 }
 
-export default function TaskGrid({ tasks, onToggle, onDelete }: TaskGridProps) {
+export default function TaskGrid({ tasks, onTransfer, onDelete }: TaskGridProps) {
   const t = useTranslation();
   const signalTasks = tasks.filter(task => task.type === 'signal');
   const noiseTasks = tasks.filter(task => task.type === 'noise');
@@ -154,7 +233,7 @@ export default function TaskGrid({ tasks, onToggle, onDelete }: TaskGridProps) {
               <TaskItem
                 key={task.id}
                 task={task}
-                onToggle={onToggle}
+                onTransfer={onTransfer}
                 onDelete={onDelete}
               />
             ))}
@@ -173,7 +252,7 @@ export default function TaskGrid({ tasks, onToggle, onDelete }: TaskGridProps) {
               <TaskItem
                 key={task.id}
                 task={task}
-                onToggle={onToggle}
+                onTransfer={onTransfer}
                 onDelete={onDelete}
               />
             ))}

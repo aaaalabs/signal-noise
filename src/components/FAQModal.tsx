@@ -26,47 +26,27 @@ export default function FAQModal({ show, onClose }: FAQModalProps) {
   const faqs: FAQItem[] = [
     {
       question: "What is the 80/20 principle?",
-      answer: "The 80/20 rule suggests that 80% of results come from 20% of efforts. In Signal/Noise, you classify tasks as 'Signal' (important, 80% time) or 'Noise' (distractions, 20% time) to achieve optimal focus."
+      answer: "The 80/20 rule suggests that <span style='color: #00ff88'>80%</span> of results come from <span style='color: #666'>20%</span> of efforts. In Signal/Noise, you classify tasks as 'Signal' (important, <span style='color: #00ff88'>80%</span> time) or 'Noise' (distractions, <span style='color: #666'>20%</span> time) to achieve optimal focus."
     },
     {
-      question: "How do I access premium features?",
-      answer: "Click 'Dein Coach' to access premium AI coaching. The system intelligently detects if you're a new or returning member and shows the appropriate flow."
+      question: "How do I use Signal/Noise effectively?",
+      answer: "Add tasks and classify them as Signal (important) or Noise (distractions). Use Tab to quickly switch between categories. Long-press tasks to delete them with a 3-second countdown. Press Cmd+E (Mac) or Ctrl+E (Windows) to export your data."
     },
     {
-      question: "How do I delete tasks?",
-      answer: "Long-press any task for a moment to reveal the delete option, then tap again to start a 3-second countdown. You can tap once more during the countdown to cancel deletion. The visual progress bar fills from right to left, giving you full control without accidental deletions."
+      question: "How do achievements and progress tracking work?",
+      answer: "You earn badges for consistency: Early Bird (morning tasks), Comeback (returning after breaks), Perfect Day (optimal ratios), Week Warrior, and Month Hero. Small dots next to your ratio show achievement progress - gray (locked), dark (earned), green (recent unlock). Click them to see your X/8 milestone progress."
     },
     {
-      question: "What keyboard shortcuts are available?",
-      answer: "Press Cmd+E (Mac) or Ctrl+E (Windows) to export your data. Use Tab to quickly switch between Signal and Noise when adding tasks - no need to click the buttons!"
+      question: "What are premium features and pricing?",
+      answer: "Premium includes AI Coach, cloud sync, and lifetime updates. Foundation Members (first 100 users): €29 lifetime. After that: €49 Early Adopter pricing. No subscription - pay once, own forever. The AI Coach appears after 3+ day streak, 7+ days with tasks, or 20+ total tasks."
     },
     {
-      question: "How does the achievement system work?",
-      answer: "You earn badges for consistency: Early Bird (morning tasks), Comeback (returning after breaks), Perfect Day (optimal ratios), Week Warrior, and Month Hero. Look for subtle glows when you unlock them!"
+      question: "How does data privacy and sync work?",
+      answer: "Everything is stored locally in your browser. Premium users get cloud backup with sync indicator (🔒) next to the language switcher. Your privacy is always protected - no tracking, no analytics, no data mining."
     },
     {
-      question: "What do the small dots next to my ratio mean?",
-      answer: "The small dots represent your achievement progress. Gray dots are locked milestones, darker dots are earned achievements, and green dots show your most recent unlock. Click them to see your progress (X/8 milestones). They appear only after you've earned your first achievement - a subtle reward system that grows with your consistency."
-    },
-    {
-      question: "What are the sync indicators?",
-      answer: "Premium users see a small sync indicator (🔒) next to the language switcher when data is protected and synced. It appears subtly during sync operations."
-    },
-    {
-      question: "Can I switch languages instantly?",
-      answer: "Yes! Click the barely visible 'EN'/'DE' toggle in the top-right corner. The entire interface switches immediately without page reload."
-    },
-    {
-      question: "What happens to my data?",
-      answer: "Everything is stored locally in your browser. Premium users get cloud backup, but your privacy is always protected. No tracking, no analytics, no data mining."
-    },
-    {
-      question: "Foundation vs Early Adopter pricing?",
-      answer: "Foundation Members (first 100 users): €29 lifetime access. After that: €49 Early Adopter pricing. Both include AI Coach, lifetime updates, and no subscription. The Foundation tier is designed for power users who discover quality tools early - a limited opportunity that won't return."
-    },
-    {
-      question: "When does the AI Coach become available?",
-      answer: "The AI Coach appears automatically once you have enough activity data for meaningful insights: 3+ day streak, or 7+ days with tasks, or 20+ total tasks. This ensures the AI has patterns to analyze and can provide valuable coaching rather than generic advice."
+      question: "What interface features are available?",
+      answer: "Click the barely visible 'EN'/'DE' toggle in the top-right corner to switch languages instantly. The entire interface changes without page reload. Premium users see subtle sync indicators during operations."
     }
   ];
 
@@ -184,7 +164,7 @@ export default function FAQModal({ show, onClose }: FAQModalProps) {
                     animation: 'fadeInDown 0.3s ease'
                   }}
                 >
-                  {faq.answer}
+                  <span dangerouslySetInnerHTML={{ __html: faq.answer }} />
                 </div>
               )}
             </div>
