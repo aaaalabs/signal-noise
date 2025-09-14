@@ -51,6 +51,7 @@ function AppContent() {
 
   // Flag to prevent auto-sync during cloud data loading
   const [isLoadingFromCloud, setIsLoadingFromCloud] = useState(false);
+  const [hasAttemptedCloudLoad, setHasAttemptedCloudLoad] = useState(false);
   const [isPremiumMode, setIsPremiumMode] = useState(false);
   const [sessionToken, setSessionToken] = useState<string>('');
   const [showOnboarding, setShowOnboarding] = useState(false);
@@ -247,6 +248,7 @@ function AppContent() {
                 setData(cloudData);
                 setIsLoaded(true);
                 setIsLoadingFromCloud(false); // CRITICAL: Re-enable auto-sync after cloud load success
+                setHasAttemptedCloudLoad(true); // Mark that we've attempted cloud loading
                 console.log('🔄 Cloud data loaded successfully - auto-sync re-enabled');
                 return;
               } else {
@@ -254,6 +256,7 @@ function AppContent() {
                 // Keep premium mode active but load local data
                 loadLocalData();
                 setIsLoadingFromCloud(false); // CRITICAL: Re-enable auto-sync after fallback to local
+                setHasAttemptedCloudLoad(true); // Mark that we've attempted cloud loading
                 return;
               }
             } else {
@@ -266,6 +269,7 @@ function AppContent() {
             console.log('🔄 Server validation failed, using localStorage session...');
             loadLocalData();
             setIsLoadingFromCloud(false); // CRITICAL: Re-enable auto-sync after server error fallback
+            setHasAttemptedCloudLoad(true); // Mark that we've attempted cloud loading
             return;
           }
         } catch (error) {
@@ -274,6 +278,7 @@ function AppContent() {
           console.log('🔄 Validation error, using localStorage session...');
           loadLocalData();
           setIsLoadingFromCloud(false); // CRITICAL: Re-enable auto-sync after exception fallback
+          setHasAttemptedCloudLoad(true); // Mark that we've attempted cloud loading
           return;
         }
       } else {
@@ -289,6 +294,7 @@ function AppContent() {
       setSessionToken('');
       loadLocalData();
       setIsLoadingFromCloud(false); // CRITICAL: Re-enable auto-sync for free users
+      setHasAttemptedCloudLoad(true); // Mark that we've attempted cloud loading
     };
 
     const loadLocalData = () => {
@@ -469,8 +475,8 @@ function AppContent() {
 
   // Save data to localStorage or cloud whenever data changes
   useEffect(() => {
-    // CRITICAL: Don't auto-sync if we're loading from cloud to prevent data loss!
-    if (isLoaded && data && !isLoadingFromCloud) {
+    // CRITICAL: Don't auto-sync until we've attempted to load from cloud first!
+    if (isLoaded && data && !isLoadingFromCloud && hasAttemptedCloudLoad) {
       const currentTime = Date.now();
       const dataSize = JSON.stringify(data).length;
       const dataSizeKB = (dataSize / 1024).toFixed(2);
@@ -521,7 +527,7 @@ function AppContent() {
 
       syncTracker.current.lastDataSize = dataSize;
     }
-  }, [data, isLoaded, isPremiumMode, sessionToken, saveToCloud]);
+  }, [data, isLoaded, isPremiumMode, sessionToken, saveToCloud, hasAttemptedCloudLoad]);
 
   // Comprehensive state verification utility
   const verifyAuthState = useCallback(() => {
