@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { activatePremiumSession, type SessionData } from '../services/premiumService';
 
 interface VerifyMagicLinkProps {
@@ -18,8 +18,13 @@ export default function VerifyMagicLink({ token, onSuccess, onError }: VerifyMag
   const [isVerifying, setIsVerifying] = useState(true);
   const [error, setError] = useState<string>('');
   const [success, setSuccess] = useState(false);
+  const hasVerified = useRef(false);
 
   const verifyMagicLink = useCallback(async () => {
+    // Prevent duplicate verification calls (React StrictMode issue)
+    if (hasVerified.current) return;
+    hasVerified.current = true;
+
     try {
       const response = await fetch(`/api/auth/verify-magic-link?token=${encodeURIComponent(token)}`);
       const data: VerificationResult = await response.json();
