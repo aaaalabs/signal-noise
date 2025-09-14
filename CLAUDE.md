@@ -157,10 +157,11 @@ All UI changes must follow these principles:
 ### Redis Namespace (Backend)
 **SLC Structure** for clean LibraLab project separation:
 ```
-sn:fcount         → Foundation counter (Signal/Noise members)
-sn:u:{email}      → User premium data (Hash format)
-sn:core           → Core stats/metadata (JSON)
-lib               → LibraLab store data (unchanged)
+sn:fcount                    → Foundation counter (Signal/Noise members)
+sn:u:{email}                 → User premium data (Hash format with usage tracking)
+sn:core                      → Core stats/metadata (JSON)
+lib:invoice:A123:token       → Secure invoices with embedded tokens
+lib:ivnr                     → Invoice sequence counter (LibraLab compatible)
 ```
 
 **Helper Functions** (`api/redis-helper.js`):
@@ -169,12 +170,23 @@ lib               → LibraLab store data (unchanged)
 - `getUser(redis, email)` → Get user premium status
 - `setUser(redis, email, data)` → Store user data
 - `getCore(redis)` / `setCore(redis, data)` → Core stats management
+- `incrementUserUsage(redis, email, date)` → Track AI coach usage in user hash
+- `getUserUsage(redis, email, date)` → Get daily usage from user hash
+- `getInvoice(redis, invoiceNumber)` → Dual-pattern invoice retrieval (legacy + token)
+- `getInvoiceByToken(redis, token)` → Secure token-based invoice access
 
 ### Achievement System
 - 8 progressive badges for user engagement
 - Streak calculations (daily, weekly patterns)
 - Pattern-based achievements (early bird, comeback, perfect day)
 - Visual feedback without overwhelming the interface
+
+### Usage Tracking System (Sept 2024)
+**Migration from separate keys to user hash consolidation:**
+- **Old Pattern**: `usage:email:2024-01-15` → "3" (separate keys per day)
+- **New Pattern**: User hash fields `usage_2024_01_15: "3"` (consolidated)
+- **Benefits**: Reduced Redis key count, automatic 30-day cleanup, centralized user data
+- **Auto-cleanup**: Old usage fields >30 days removed probabilistically (10% chance per call)
 
 ## Testing & Quality
 
