@@ -46,9 +46,22 @@ export default async function handler(req, res) {
             if (user.session_token === sessionToken) {
               // Return user's cloud data with corrupted data protection
               let parsedData = {};
-              try {
-                parsedData = JSON.parse(user.app_data || '{}');
-              } catch (parseError) {
+
+              // Handle missing app_data field (new users)
+              if (!user.app_data) {
+                console.log('🆕 New user without app_data - initializing:', userKey);
+                parsedData = { tasks: [], history: [], badges: [], patterns: {}, settings: { targetRatio: 80, notifications: false } };
+
+                // Initialize app_data for new user
+                await redis.hset(userKey, {
+                  app_data: JSON.stringify(parsedData),
+                  app_data_initialized: new Date().toISOString()
+                });
+                console.log('✅ App data initialized for new user:', userKey);
+              } else {
+                try {
+                  parsedData = JSON.parse(user.app_data);
+                } catch (parseError) {
                 console.error('🚨 CORRUPTED APP_DATA ON GET:', {
                   userKey,
                   dataType: typeof user.app_data,
@@ -64,6 +77,7 @@ export default async function handler(req, res) {
                   data_corruption_fixed: new Date().toISOString()
                 });
                 console.log('🔧 Corrupted data reset during GET for', userKey);
+                }
               }
 
               userData = {
@@ -174,7 +188,12 @@ export default async function handler(req, res) {
         const newTaskCount = data?.tasks?.length || 0;
 
         let existingTaskCount = 0;
-        if (user.app_data) {
+
+        // Handle missing app_data field (new users)
+        if (!user.app_data) {
+          console.log('🆕 New user without app_data during POST - initializing:', userKey);
+          existingTaskCount = 0;
+        } else {
           try {
             const existingData = JSON.parse(user.app_data || '{}');
             existingTaskCount = (existingData.tasks || []).length;

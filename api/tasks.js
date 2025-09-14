@@ -87,9 +87,24 @@ export default async function handler(req, res) {
 
     // Parse current app data
     let appData = {};
-    try {
-      appData = JSON.parse(user.app_data || '{}');
-    } catch (error) {
+
+    // Handle missing app_data field (new users)
+    if (!user.app_data) {
+      console.log('🆕 New user without app_data in TASKS - initializing:', userKey);
+      appData = { tasks: [], history: [], badges: [], patterns: {}, settings: { targetRatio: 80, notifications: false } };
+
+      // Initialize app_data for new user (skip for dev sessions)
+      if (!sessionToken.startsWith('dev-session-token-')) {
+        await redis.hset(userKey, {
+          app_data: JSON.stringify(appData),
+          app_data_initialized: new Date().toISOString()
+        });
+        console.log('✅ App data initialized for new user in TASKS:', userKey);
+      }
+    } else {
+      try {
+        appData = JSON.parse(user.app_data);
+      } catch (error) {
       console.error('🚨 CORRUPTED APP_DATA IN TASKS:', {
         userKey: userKey,
         userEmail: user.email,
@@ -106,6 +121,7 @@ export default async function handler(req, res) {
           data_corruption_fixed: new Date().toISOString()
         });
         console.log('🔧 Corrupted data reset during TASKS for', userKey);
+        }
       }
     }
 
