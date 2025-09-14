@@ -67,26 +67,9 @@ export default async function handler(req, res) {
                 });
                 console.log('✅ App data initialized for new user:', userKey);
               } else {
-                // Handle both object (from Upstash auto-parsing) and string types
-                if (typeof user.app_data === 'object' && user.app_data !== null) {
-                  parsedData = user.app_data;  // Already an object, use directly
-                  console.log('📦 Using auto-parsed app_data object from Upstash');
-                } else if (typeof user.app_data === 'string') {
-                  try {
-                    parsedData = JSON.parse(user.app_data);
-                    console.log('📄 Parsed app_data string to object');
-                  } catch (parseError) {
-                    console.error('🚨 INVALID JSON STRING:', {
-                      userKey,
-                      dataPreview: user.app_data.substring(0, 100),
-                      error: parseError.message
-                    });
-                    parsedData = { tasks: [], history: [], badges: [], patterns: {}, settings: { targetRatio: 80, notifications: false } };
-                  }
-                } else {
-                  console.log('⚠️ app_data is neither object nor string, using default');
-                  parsedData = { tasks: [], history: [], badges: [], patterns: {}, settings: { targetRatio: 80, notifications: false } };
-                }
+                // Upstash returns app_data as object directly
+                parsedData = user.app_data || { tasks: [], history: [], badges: [], patterns: {}, settings: { targetRatio: 80, notifications: false } };
+                console.log('📦 Using app_data object from Upstash');
               }
 
               userData = {
@@ -203,24 +186,9 @@ export default async function handler(req, res) {
           console.log('🆕 New user without app_data during POST - initializing:', userKey);
           existingTaskCount = 0;
         } else {
-          try {
-            const existingData = JSON.parse(user.app_data || '{}');
-            existingTaskCount = (existingData.tasks || []).length;
-          } catch (parseError) {
-            console.error('🚨 CORRUPTED APP_DATA DETECTED:', {
-              userKey,
-              dataType: typeof user.app_data,
-              dataPreview: user.app_data ? (typeof user.app_data === 'string' ? user.app_data.substring(0, 100) : JSON.stringify(user.app_data).substring(0, 100)) : 'null',
-              error: parseError.message
-            });
-            // Reset corrupted data - prefer empty over corrupted
-            existingTaskCount = 0;
-            await redis.hset(userKey, {
-              app_data: JSON.stringify({ tasks: [], history: [], badges: [], patterns: {}, settings: { targetRatio: 80, notifications: false } }),
-              data_corruption_fixed: new Date().toISOString()
-            });
-            console.log('🔧 Corrupted data reset to empty state for', userKey);
-          }
+          // Upstash returns app_data as object directly
+          const existingData = user.app_data || { tasks: [] };
+          existingTaskCount = (existingData.tasks || []).length;
         }
 
         // Block sync if trying to overwrite existing tasks with empty data

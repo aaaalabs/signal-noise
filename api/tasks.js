@@ -110,26 +110,9 @@ export default async function handler(req, res) {
         console.log('✅ App data initialized for new user in TASKS:', userKey);
       }
     } else {
-      // Handle both object (from Upstash auto-parsing) and string types
-      if (typeof user.app_data === 'object' && user.app_data !== null) {
-        appData = user.app_data;  // Already an object, use directly
-        console.log('📦 Using auto-parsed app_data object from Upstash in TASKS');
-      } else if (typeof user.app_data === 'string') {
-        try {
-          appData = JSON.parse(user.app_data);
-          console.log('📄 Parsed app_data string to object in TASKS');
-        } catch (parseError) {
-          console.error('🚨 INVALID JSON STRING IN TASKS:', {
-            userKey,
-            dataPreview: user.app_data.substring(0, 100),
-            error: parseError.message
-          });
-          appData = { tasks: [], history: [], badges: [], patterns: {}, settings: { targetRatio: 80, notifications: false } };
-        }
-      } else {
-        console.log('⚠️ app_data is neither object nor string in TASKS, using default');
-        appData = { tasks: [], history: [], badges: [], patterns: {}, settings: { targetRatio: 80, notifications: false } };
-      }
+      // Upstash returns app_data as object directly
+      appData = user.app_data || { tasks: [], history: [], badges: [], patterns: {}, settings: { targetRatio: 80, notifications: false } };
+      console.log('📦 Using app_data object from Upstash in TASKS');
     }
 
     // Handle GET request - retrieve tasks
