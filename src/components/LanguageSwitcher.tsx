@@ -47,7 +47,7 @@ export default function LanguageSwitcher({ onPremiumClick, tasks = [], currentRa
       display: 'flex',
       alignItems: 'center',
       gap: '12px',
-      zIndex: 1
+      zIndex: 100
     }}>
       {/* Sync Indicator - Left of language switcher */}
       <span
