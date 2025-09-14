@@ -20,6 +20,12 @@ export default async function handler(req, res) {
   const sessionToken = authHeader.substring(7);
 
   try {
+    console.log('🔍 Tasks endpoint - session validation:', {
+      sessionTokenPresent: !!sessionToken,
+      sessionTokenLength: sessionToken?.length,
+      sessionTokenPreview: sessionToken?.substring(0, 8) + '...'
+    });
+
     let userKey = null;
     let user = null;
 
@@ -36,16 +42,32 @@ export default async function handler(req, res) {
       };
     } else {
       // Find user by session token in Redis
+      console.log('🔍 Searching for user with session token...');
       const userKeys = await redis.keys('sn:u:*');
+      console.log(`🔍 Found ${userKeys.length} user keys in Redis:`, userKeys);
 
       for (const key of userKeys) {
         const userData = await redis.hgetall(key);
+        console.log(`🔍 Checking key: ${key}`, {
+          hasSessionToken: !!userData.session_token,
+          sessionTokenMatch: userData.session_token === sessionToken,
+          userEmail: userData.email,
+          status: userData.status
+        });
+
         if (userData.session_token === sessionToken) {
+          console.log('✅ Session token match found!', key);
           userKey = key;
           user = userData;
           break;
         }
       }
+
+      console.log('🔍 Session token search result:', {
+        userFound: !!user,
+        userKey: userKey,
+        userEmail: user?.email
+      });
     }
 
     if (!user) {
