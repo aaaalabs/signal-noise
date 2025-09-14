@@ -152,3 +152,34 @@ const interval = setInterval(checkPremium, 1000);
 - Clearer error reporting
 - Faster problem identification
 - More reliable system behavior
+
+---
+
+## Production System Architecture (September 2024)
+
+### Complete Signal/Noise Foundation Payment System
+
+**Final Architecture Status:**
+- ✅ **Primary Path**: Stripe webhook (`checkout.session.completed`) → user creation + invoice + email
+- ✅ **Backup Path**: `ensure-user-created` endpoint with grandfathering to prevent duplicates
+- ✅ **Secure Invoices**: Token-based access with GDPR compliance
+- ✅ **Foundation Pricing**: €29 lifetime access (first 100 users), €49 Early Adopter
+- ✅ **Email Integration**: Welcome emails with embedded secure invoice links
+
+**Production Files (Essential Only):**
+```
+api/
+├── stripe-webhook.js          # Primary webhook handler
+├── ensure-user-created.js     # Grandfathered backup system
+├── invoice-secure.js          # Token-based secure invoice access
+├── email-helper.js            # Resend API integration
+├── redis-helper.js            # Redis utilities with SLC namespace
+├── create-checkout.js         # Stripe checkout session creation
+└── foundation-stats.js        # Foundation member counting
+```
+
+**Archived Development Files:**
+All `test-*.js` debugging scripts and `invoice.deprecated.js` moved to `archive/development-scripts/` with documentation. Production system now contains only essential files with integrated logging.
+
+**Key Achievement:**
+Complete payment processing system with dual-path redundancy, preventing any payment loss while maintaining clean production codebase.
