@@ -48,6 +48,9 @@ function AppContent() {
     lastSyncTime: 0,
     lastDataSize: 0
   });
+
+  // Flag to prevent auto-sync during cloud data loading
+  const [isLoadingFromCloud, setIsLoadingFromCloud] = useState(false);
   const [isPremiumMode, setIsPremiumMode] = useState(false);
   const [sessionToken, setSessionToken] = useState<string>('');
   const [showOnboarding, setShowOnboarding] = useState(false);
@@ -177,6 +180,7 @@ function AppContent() {
     // Check for premium session first
     const checkPremiumSession = async () => {
       console.log('🔍 Starting checkPremiumSession...');
+      setIsLoadingFromCloud(true); // CRITICAL: Prevent auto-sync during cloud load
       const sessionData = getSessionData();
       console.log('🔍 Session data from getSessionData():', {
         hasSessionData: !!sessionData,
@@ -242,11 +246,14 @@ function AppContent() {
 
                 setData(cloudData);
                 setIsLoaded(true);
+                setIsLoadingFromCloud(false); // CRITICAL: Re-enable auto-sync after cloud load success
+                console.log('🔄 Cloud data loaded successfully - auto-sync re-enabled');
                 return;
               } else {
                 console.error('❌ Failed to load cloud data:', cloudResponse.status, cloudResponse.statusText);
                 // Keep premium mode active but load local data
                 loadLocalData();
+                setIsLoadingFromCloud(false); // CRITICAL: Re-enable auto-sync after fallback to local
                 return;
               }
             } else {
@@ -258,6 +265,7 @@ function AppContent() {
             // This handles server errors gracefully
             console.log('🔄 Server validation failed, using localStorage session...');
             loadLocalData();
+            setIsLoadingFromCloud(false); // CRITICAL: Re-enable auto-sync after server error fallback
             return;
           }
         } catch (error) {
@@ -265,6 +273,7 @@ function AppContent() {
           // Continue with premium mode if localStorage session exists
           console.log('🔄 Validation error, using localStorage session...');
           loadLocalData();
+          setIsLoadingFromCloud(false); // CRITICAL: Re-enable auto-sync after exception fallback
           return;
         }
       } else {
@@ -279,6 +288,7 @@ function AppContent() {
       setIsPremiumMode(false);
       setSessionToken('');
       loadLocalData();
+      setIsLoadingFromCloud(false); // CRITICAL: Re-enable auto-sync for free users
     };
 
     const loadLocalData = () => {
@@ -324,6 +334,7 @@ function AppContent() {
   }, []);
 
   // Helper functions defined before use
+
   const saveToCloud = useCallback(async (appData: AppData) => {
     const startTime = performance.now();
     const payloadSize = JSON.stringify(appData).length;
@@ -446,7 +457,8 @@ function AppContent() {
 
   // Save data to localStorage or cloud whenever data changes
   useEffect(() => {
-    if (isLoaded && data) {
+    // CRITICAL: Don't auto-sync if we're loading from cloud to prevent data loss!
+    if (isLoaded && data && !isLoadingFromCloud) {
       const currentTime = Date.now();
       const dataSize = JSON.stringify(data).length;
       const dataSizeKB = (dataSize / 1024).toFixed(2);
