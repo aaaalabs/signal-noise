@@ -188,9 +188,9 @@ async function handleCheckoutCompleted(session) {
     return;
   }
 
-  // Skip test emails to avoid database pollution
-  if (customer_email.includes('@example.com') || customer_email.includes('test@')) {
-    console.log(`🚫 Skipping test email in webhook: ${customer_email}`);
+  // Skip only obvious fake emails to avoid database pollution
+  if (customer_email.includes('@example.com')) {
+    console.log(`🚫 Skipping fake email in webhook: ${customer_email}`);
     return;
   }
 
