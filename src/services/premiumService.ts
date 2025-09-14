@@ -53,20 +53,45 @@ export function checkPremiumStatus(): PremiumStatus {
 
 // Session management functions
 export function getSessionData(): SessionData | null {
+  console.log('🔍 getSessionData called');
+
   const sessionData = localStorage.getItem('sessionData');
-  if (!sessionData) return null;
+  console.log('🔍 sessionData from localStorage:', {
+    exists: !!sessionData,
+    length: sessionData?.length || 0,
+    preview: sessionData?.substring(0, 100) + '...'
+  });
+
+  if (!sessionData) {
+    console.log('❌ No sessionData in localStorage');
+    return null;
+  }
 
   try {
     const session = JSON.parse(sessionData);
+    console.log('✅ Parsed sessionData:', {
+      email: session.email,
+      hasSessionToken: !!session.sessionToken,
+      sessionTokenLength: session.sessionToken?.length || 0,
+      expires: session.expires,
+      expiresDate: new Date(session.expires).toISOString(),
+      isExpired: session.expires < Date.now(),
+      now: Date.now(),
+      firstName: session.firstName,
+      tier: session.tier
+    });
 
     // Check if session is expired
     if (session.expires < Date.now()) {
+      console.log('❌ Session expired, clearing session');
       clearSession();
       return null;
     }
 
+    console.log('✅ Returning valid session data');
     return session;
-  } catch {
+  } catch (error) {
+    console.log('❌ Failed to parse sessionData:', error);
     clearSession();
     return null;
   }

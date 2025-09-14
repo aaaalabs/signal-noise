@@ -108,35 +108,79 @@ function AppContent() {
     }
 
     // Development: Auto-activate premium for testing with magic link session
-    if (import.meta.env.DEV && !localStorage.getItem('dev_premium_initialized')) {
-      const devSessionData: SessionData = {
-        email: 'dev@signal-noise.test',
-        token: 'dev-token-12345',
-        sessionToken: 'dev-session-token-' + Date.now(),
-        created: Date.now(),
-        lastActive: Date.now(),
-        expires: Date.now() + (30 * 24 * 60 * 60 * 1000),
-        firstName: 'Dev User',
-        tier: 'early_adopter',
-        paymentType: 'lifetime',
-        syncedFromLocal: null
-      };
+    // Only create if no existing real session and explicitly enabled
+    if (import.meta.env.DEV) {
+      const existingSessionData = localStorage.getItem('sessionData');
+      const forceDevSession = localStorage.getItem('force_dev_session') === 'true';
+      const hasDevSession = localStorage.getItem('dev_premium_initialized') === 'true';
 
-      localStorage.setItem('sessionData', JSON.stringify(devSessionData));
-      localStorage.setItem('userEmail', devSessionData.email);
-      localStorage.setItem('dev_premium_initialized', 'true');
-      console.log('🚧 Development: Premium session created for testing');
+      console.log('🚧 Development session check:', {
+        hasExistingSession: !!existingSessionData,
+        forceDevSession,
+        hasDevSession,
+        existingSessionPreview: existingSessionData?.substring(0, 50) + '...' || 'none'
+      });
+
+      // Only create dev session if:
+      // 1. No existing session data, OR
+      // 2. Explicitly forced via localStorage.setItem('force_dev_session', 'true')
+      if ((!existingSessionData && !hasDevSession) || forceDevSession) {
+        console.log('🚧 Creating development session...');
+
+        const devSessionData: SessionData = {
+          email: 'dev@signal-noise.test',
+          token: 'dev-token-12345',
+          sessionToken: 'dev-session-token-' + Date.now(),
+          created: Date.now(),
+          lastActive: Date.now(),
+          expires: Date.now() + (30 * 24 * 60 * 60 * 1000),
+          firstName: 'Dev User',
+          tier: 'early_adopter',
+          paymentType: 'lifetime',
+          syncedFromLocal: null
+        };
+
+        localStorage.setItem('sessionData', JSON.stringify(devSessionData));
+        localStorage.setItem('userEmail', devSessionData.email);
+        localStorage.setItem('dev_premium_initialized', 'true');
+
+        // Clear the force flag after using it
+        if (forceDevSession) {
+          localStorage.removeItem('force_dev_session');
+        }
+
+        console.log('🚧 Development session created for testing');
+      } else if (existingSessionData) {
+        const existingSession = JSON.parse(existingSessionData);
+        const isDevSession = existingSession.sessionToken?.startsWith('dev-session-token-');
+        console.log('🚧 Existing session found:', {
+          email: existingSession.email,
+          isDevSession,
+          message: isDevSession ? 'Development session active' : 'Real premium session active'
+        });
+
+        // If real session exists, ensure dev flag doesn't interfere
+        if (!isDevSession) {
+          localStorage.removeItem('dev_premium_initialized');
+          console.log('🚧 Removed dev flag - real premium session takes precedence');
+        }
+      }
     }
 
     // Check for premium session first
     const checkPremiumSession = async () => {
+      console.log('🔍 Starting checkPremiumSession...');
       const sessionData = getSessionData();
-      console.log('🔍 Checking premium session:', {
+      console.log('🔍 Session data from getSessionData():', {
         hasSessionData: !!sessionData,
-        sessionToken: sessionData?.sessionToken?.substring(0, 8) + '...' || 'none'
+        sessionToken: sessionData?.sessionToken?.substring(0, 8) + '...' || 'none',
+        email: sessionData?.email || 'none',
+        expires: sessionData?.expires ? new Date(sessionData.expires).toISOString() : 'none',
+        isExpired: sessionData?.expires ? sessionData.expires < Date.now() : 'unknown'
       });
 
       if (sessionData && sessionData.sessionToken) {
+        console.log('🔍 Valid session data found, validating with server...');
         try {
           // Validate session with server
           const response = await fetch('/api/auth/validate-session', {
@@ -145,18 +189,37 @@ function AppContent() {
             }
           });
 
+          console.log('🔍 Server validation response:', {
+            status: response.status,
+            statusText: response.statusText,
+            ok: response.ok
+          });
+
           if (response.ok) {
             const { valid, user } = await response.json();
+            console.log('🔍 Server validation result:', { valid, user });
+
             if (valid) {
-              console.log('✅ Premium session validated');
+              console.log('✅ Premium session validated - setting React state...');
               setIsPremiumMode(true);
               setSessionToken(sessionData.sessionToken);
+
+              console.log('🔍 React state updated:', {
+                isPremiumMode: true,
+                hasSessionToken: true,
+                sessionTokenLength: sessionData.sessionToken.length
+              });
 
               // Load data from cloud instead of localStorage
               const cloudResponse = await fetch('/api/tasks', {
                 headers: {
                   'Authorization': `Bearer ${sessionData.sessionToken}`
                 }
+              });
+
+              console.log('🔍 Cloud data fetch response:', {
+                status: cloudResponse.status,
+                ok: cloudResponse.ok
               });
 
               if (cloudResponse.ok) {
@@ -175,18 +238,29 @@ function AppContent() {
                 setData(cloudData);
                 setIsLoaded(true);
                 return;
+              } else {
+                console.error('❌ Failed to load cloud data:', cloudResponse.status, cloudResponse.statusText);
               }
+            } else {
+              console.log('❌ Server returned invalid session');
             }
+          } else {
+            console.error('❌ Server validation failed:', response.status, response.statusText);
           }
-
-          console.log('❌ Premium session invalid, falling back to localStorage');
         } catch (error) {
           console.error('❌ Premium session check failed:', error);
         }
+      } else {
+        console.log('❌ No valid session data found:', {
+          hasSessionData: !!sessionData,
+          hasSessionToken: !!(sessionData?.sessionToken)
+        });
       }
 
       // Fall back to local storage mode (free users or invalid session)
+      console.log('🔄 Falling back to localStorage mode...');
       setIsPremiumMode(false);
+      setSessionToken('');
       loadLocalData();
     };
 
@@ -234,9 +308,34 @@ function AppContent() {
 
   // Helper functions defined before use
   const saveToCloud = useCallback(async (appData: AppData) => {
-    if (!sessionToken) return;
+    console.log('🔍 saveToCloud called:', {
+      hasSessionToken: !!sessionToken,
+      sessionTokenLength: sessionToken?.length || 0,
+      isPremiumMode,
+      taskCount: appData.tasks?.length || 0
+    });
+
+    if (!sessionToken) {
+      console.log('❌ saveToCloud: No session token available');
+      return;
+    }
+
+    if (!isPremiumMode) {
+      console.log('❌ saveToCloud: Not in premium mode');
+      return;
+    }
 
     try {
+      // Get email from session data rather than localStorage
+      const sessionData = getSessionData();
+      const email = sessionData?.email || localStorage.getItem('userEmail') || '';
+
+      console.log('🔄 Saving to cloud...', {
+        email: email?.substring(0, 3) + '...' || 'none',
+        taskCount: appData.tasks?.length || 0,
+        firstName: appData.settings.firstName || 'none'
+      });
+
       const response = await fetch('/api/sync', {
         method: 'POST',
         headers: {
@@ -244,10 +343,16 @@ function AppContent() {
           'Authorization': `Bearer ${sessionToken}`
         },
         body: JSON.stringify({
-          email: localStorage.getItem('userEmail'),
+          email,
           data: appData,
-          firstName: appData.settings.firstName
+          firstName: appData.settings.firstName || ''
         })
+      });
+
+      console.log('🔍 Cloud sync response:', {
+        status: response.status,
+        statusText: response.statusText,
+        ok: response.ok
       });
 
       if (response.ok) {
@@ -255,40 +360,152 @@ function AppContent() {
         console.log('✅ Cloud sync successful:', {
           taskCount: appData.tasks?.length || 0,
           timestamp: result.timestamp,
-          premium: result.premium || false
+          premium: result.premium || false,
+          synced: result.synced
         });
       } else {
-        console.error('❌ Failed to save data to cloud:', response.status, response.statusText);
+        console.error('❌ Failed to save data to cloud:', {
+          status: response.status,
+          statusText: response.statusText,
+          url: response.url
+        });
+
+        // If unauthorized, the session might be expired
+        if (response.status === 401 || response.status === 403) {
+          console.log('🔄 Session may be expired, clearing session...');
+          localStorage.removeItem('sessionData');
+          setIsPremiumMode(false);
+          setSessionToken('');
+        }
       }
     } catch (error) {
       console.error('❌ Cloud save error:', error);
     }
-  }, [sessionToken]);
+  }, [sessionToken, isPremiumMode]);
 
   // Save data to localStorage or cloud whenever data changes
   useEffect(() => {
     if (isLoaded) {
-      console.log('🔍 Sync decision check:', {
+      // Get fresh session data to ensure we have latest state
+      const currentSessionData = getSessionData();
+
+      console.log('🔍 Sync decision check (CRITICAL):', {
+        isLoaded,
         isPremiumMode,
         hasSessionToken: !!sessionToken,
-        sessionTokenLength: sessionToken?.length || 0
+        sessionTokenLength: sessionToken?.length || 0,
+        sessionTokenPreview: sessionToken?.substring(0, 8) + '...' || 'none',
+        currentSessionExists: !!currentSessionData,
+        currentSessionTokenExists: !!currentSessionData?.sessionToken,
+        currentSessionEmail: currentSessionData?.email?.substring(0, 3) + '...' || 'none',
+        premiumActiveLS: localStorage.getItem('premiumActive'),
+        sessionDataLS: !!localStorage.getItem('sessionData'),
+        dataTaskCount: data.tasks?.length || 0
       });
+
+      // Double-check session validity if we have sessionData but no React state
+      if (!isPremiumMode && !sessionToken && currentSessionData?.sessionToken) {
+        console.log('⚠️  CONTRADICTION DETECTED: Session exists in localStorage but not in React state');
+        console.log('🔄 Attempting to restore session state from localStorage...');
+
+        // Try to restore the premium state
+        setIsPremiumMode(true);
+        setSessionToken(currentSessionData.sessionToken);
+
+        // Don't save yet, let the next cycle handle it with correct state
+        console.log('🔄 Session state restored, will sync on next cycle');
+        return;
+      }
 
       if (isPremiumMode && sessionToken) {
         // Save to cloud for premium users
-        console.log('☁️ Using cloud sync...');
+        console.log('☁️ USING CLOUD SYNC - Premium user authenticated');
         saveToCloud(data);
       } else {
         // Save to localStorage for free users
         localStorage.setItem(DATA_KEY, JSON.stringify(data));
-        console.log('💾 LocalStorage sync successful:', {
+        console.log('💾 USING LOCALSTORAGE SYNC:', {
           taskCount: data.tasks?.length || 0,
           premium: false,
-          reason: !isPremiumMode ? 'not premium' : 'no session token'
+          reason: !isPremiumMode ? 'not premium mode' : 'no session token',
+          isPremiumMode,
+          hasSessionToken: !!sessionToken,
+          fallbackReason: 'Free user or session invalid'
         });
       }
     }
   }, [data, isLoaded, isPremiumMode, sessionToken, saveToCloud]);
+
+  // Comprehensive state verification utility
+  const verifyAuthState = useCallback(() => {
+    console.log('\n🔍 === COMPREHENSIVE AUTH STATE VERIFICATION ===');
+
+    // Get fresh session data
+    const freshSessionData = getSessionData();
+
+    const authState = {
+      timestamp: new Date().toISOString(),
+      reactState: {
+        isPremiumMode,
+        hasSessionToken: !!sessionToken,
+        sessionTokenLength: sessionToken?.length || 0,
+        sessionTokenPreview: sessionToken?.substring(0, 12) + '...' || 'none',
+        isLoaded
+      },
+      localStorage: {
+        sessionData: !!localStorage.getItem('sessionData'),
+        premiumActive: localStorage.getItem('premiumActive'),
+        userEmail: localStorage.getItem('userEmail'),
+        devPremiumInitialized: localStorage.getItem('dev_premium_initialized'),
+        forceDevSession: localStorage.getItem('force_dev_session'),
+        appData: !!localStorage.getItem(DATA_KEY)
+      },
+      freshSessionData: freshSessionData ? {
+        email: freshSessionData.email,
+        hasSessionToken: !!freshSessionData.sessionToken,
+        sessionTokenPreview: freshSessionData.sessionToken?.substring(0, 12) + '...' || 'none',
+        expires: new Date(freshSessionData.expires).toISOString(),
+        isExpired: freshSessionData.expires < Date.now(),
+        firstName: freshSessionData.firstName,
+        tier: freshSessionData.tier,
+        isDevSession: freshSessionData.sessionToken?.startsWith('dev-session-token-') || false
+      } : null,
+      consistency: {
+        reactVsLocalStorage: isPremiumMode === (localStorage.getItem('premiumActive') === 'true'),
+        reactVsFreshSession: !!(isPremiumMode === !!freshSessionData?.sessionToken),
+        sessionTokensMatch: sessionToken === freshSessionData?.sessionToken,
+        expectedCloudSync: isPremiumMode && !!sessionToken,
+        hasContradiction: !isPremiumMode && !!freshSessionData?.sessionToken
+      },
+      appData: {
+        taskCount: data.tasks?.length || 0,
+        hasHistory: data.history?.length > 0,
+        hasBadges: data.badges?.length > 0,
+        hasFirstName: !!data.settings?.firstName
+      }
+    };
+
+    console.log('📊 Auth State Report:', authState);
+
+    // Highlight issues
+    if (authState.consistency.hasContradiction) {
+      console.error('🚨 CONTRADICTION: Session exists in localStorage but not in React state!');
+    }
+
+    if (!authState.consistency.sessionTokensMatch) {
+      console.error('🚨 TOKEN MISMATCH: React sessionToken differs from localStorage sessionToken!');
+    }
+
+    if (authState.consistency.expectedCloudSync) {
+      console.log('✅ EXPECTED: Should use cloud sync');
+    } else {
+      console.log('💾 EXPECTED: Should use localStorage sync');
+    }
+
+    console.log('🔍 === END STATE VERIFICATION ===\n');
+
+    return authState;
+  }, [isPremiumMode, sessionToken, isLoaded, data]);
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -302,11 +519,17 @@ function AppContent() {
           exportData();
         });
       }
+
+      // Cmd+Shift+D for debug state verification
+      if ((event.metaKey || event.ctrlKey) && event.shiftKey && event.key === 'D') {
+        event.preventDefault();
+        verifyAuthState();
+      }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [verifyAuthState]);
 
   const handleOnboardingComplete = () => {
     localStorage.setItem(ONBOARDING_KEY, 'true');
@@ -337,16 +560,49 @@ function AppContent() {
 
   const handleOneTimeSyncToCloud = async (sessionData: SessionData) => {
     try {
-      console.log('🔄 Starting one-time sync to cloud storage');
+      console.log('🔄 Starting one-time sync to cloud storage...');
 
       // Get current localStorage data
       const localData = localStorage.getItem(DATA_KEY);
+      console.log('🔍 Local data check:', {
+        exists: !!localData,
+        length: localData?.length || 0,
+        preview: localData?.substring(0, 100) || 'none'
+      });
+
       if (!localData) {
         console.log('✅ No local data to sync');
         return;
       }
 
-      const parsedData = JSON.parse(localData);
+      let parsedData;
+      try {
+        parsedData = JSON.parse(localData);
+      } catch (parseError) {
+        console.error('❌ Failed to parse local data:', parseError);
+        return;
+      }
+
+      // Check if there's meaningful data to sync (not empty)
+      const hasRealData = parsedData.tasks?.length > 0 ||
+                         parsedData.history?.length > 0 ||
+                         parsedData.badges?.length > 0 ||
+                         (parsedData.settings?.firstName && parsedData.settings.firstName !== '');
+
+      console.log('🔍 Local data analysis:', {
+        taskCount: parsedData.tasks?.length || 0,
+        historyCount: parsedData.history?.length || 0,
+        badgeCount: parsedData.badges?.length || 0,
+        hasFirstName: !!(parsedData.settings?.firstName),
+        hasRealData
+      });
+
+      if (!hasRealData) {
+        console.log('✅ No meaningful local data to sync');
+        return;
+      }
+
+      console.log('🔄 Syncing local data to cloud...');
 
       // Sync to cloud using authenticated endpoint
       const response = await fetch('/api/sync', {
@@ -358,22 +614,30 @@ function AppContent() {
         body: JSON.stringify({
           email: sessionData.email,
           data: parsedData,
-          firstName: sessionData.firstName,
+          firstName: sessionData.firstName || parsedData.settings?.firstName || '',
           syncType: 'initial'
         })
       });
 
+      console.log('🔍 Sync response:', {
+        status: response.status,
+        statusText: response.statusText,
+        ok: response.ok
+      });
+
       if (response.ok) {
-        console.log('✅ One-time sync completed successfully');
+        const result = await response.json();
+        console.log('✅ One-time sync completed successfully:', result);
 
         // Clear localStorage since we're now cloud-based
         localStorage.removeItem(DATA_KEY);
+        console.log('🗑️ localStorage cleared - now using cloud storage');
 
         // Show success message
         setWhisperMessage('Data synced to cloud!');
         setShowWhisper(true);
       } else {
-        console.error('❌ Failed to sync data to cloud');
+        console.error('❌ Failed to sync data to cloud:', response.status, response.statusText);
       }
     } catch (error) {
       console.error('❌ One-time sync error:', error);
