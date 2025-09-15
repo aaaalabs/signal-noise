@@ -289,6 +289,7 @@ body {
     transition: all 0.3s;
     cursor: pointer;
     position: relative;
+    will-change: transform, height;
 }
 
 .history-bar:hover {
@@ -301,6 +302,49 @@ body {
 
 .history-bar.medium {
     background: #ffaa00;
+}
+
+/* Minimal Analytics Mode */
+.analytics-minimal {
+    background: var(--surface);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    will-change: height;
+}
+
+.analytics-minimal:hover {
+    border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.history-chart-minimal {
+    width: 100%;
+    position: relative;
+}
+
+.mini-bar {
+    will-change: transform, height, background-color;
+    transition: opacity 0.3s;
+}
+
+.mini-bar:hover {
+    opacity: 0.8;
+}
+
+/* Animation states */
+.analytics-morphing {
+    pointer-events: none;
+}
+
+/* Expand hint animation */
+@keyframes pulseHint {
+    0%, 100% {
+        opacity: 0.2;
+    }
+    50% {
+        opacity: 0.4;
+    }
 }
 
 /* Premium Upsell */
