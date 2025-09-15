@@ -87,7 +87,7 @@ export default function Analytics({ tasks }: AnalyticsProps) {
     setIsExpanded(!isExpanded);
 
     // Reset animation lock after animation completes
-    setTimeout(() => setIsAnimating(false), 600);
+    setTimeout(() => setIsAnimating(false), 1500); // Extended from 600ms
   };
 
   // Don't render if no data
@@ -105,9 +105,9 @@ export default function Analytics({ tasks }: AnalyticsProps) {
         }}
         transition={{
           type: "spring",
-          stiffness: 300,
-          damping: 30,
-          duration: 0.6
+          stiffness: 100,    // Slower, softer (was 300)
+          damping: 22,       // Smooth damping
+          mass: 1           // Add mass for weight
         }}
         onClick={!isExpanded ? handleToggle : undefined}
         style={{
@@ -116,6 +116,72 @@ export default function Analytics({ tasks }: AnalyticsProps) {
           overflow: 'hidden'
         }}
       >
+        {/* Bars always rendered - never fade */}
+        <motion.div
+          className={isExpanded ? "history-chart" : "history-chart-minimal"}
+          style={{
+            position: isExpanded ? 'relative' : 'absolute',
+            top: isExpanded ? 'auto' : '50%',
+            transform: isExpanded ? 'none' : 'translateY(-50%)',
+            height: isExpanded ? '120px' : '40px',
+            display: 'flex',
+            alignItems: isExpanded ? 'flex-end' : 'center',
+            gap: '2px',
+            padding: isExpanded ? '20px 0' : '0 20px',
+            width: isExpanded ? '100%' : 'calc(100% - 40px)',
+            zIndex: 1
+          }}
+        >
+          {dailyRatios.map((ratio, index) => {
+            // Use full opacity colors
+            const color = ratio >= 80 ? 'var(--signal)' :
+                         ratio >= 60 ? '#ffaa00' :
+                         ratio > 0 ? '#ff4444' :  // Full opacity red
+                         'rgba(255, 255, 255, 0.05)';
+
+            return (
+              <motion.div
+                key={index}
+                layoutId={`bar-${index}`}
+                className={isExpanded ? `history-bar ${ratio >= 80 ? '' : ratio >= 60 ? 'medium' : ratio > 0 ? 'low' : ''}` : 'mini-bar'}
+                initial={false}
+                animate={{
+                  height: isExpanded
+                    ? `${Math.max(4, ratio)}%`
+                    : `${Math.max(10, Math.min(40, ratio * 0.4))}px`,
+                  backgroundColor: color,
+                  borderRadius: isExpanded ? '2px 2px 0 0' : '1px'
+                }}
+                transition={{
+                  layout: {
+                    type: "spring",
+                    stiffness: 70,      // Very soft spring (was 300)
+                    damping: 20,        // Smooth damping
+                    restDelta: 0.01,   // Higher precision
+                    delay: index * 0.01 // 10ms stagger for wave effect
+                  },
+                  backgroundColor: {
+                    duration: 0.5       // Slower color transition
+                  },
+                  height: {
+                    type: "spring",
+                    stiffness: 70,
+                    damping: 20
+                  }
+                }}
+                style={{
+                  flex: 1,
+                  minWidth: '2px',
+                  transformOrigin: 'bottom center',
+                  opacity: 1  // Always full opacity
+                }}
+                title={isExpanded ? `Day ${index - 29}: ${ratio}%` : undefined}
+              />
+            );
+          })}
+        </motion.div>
+
+        {/* Content that fades in/out */}
         <AnimatePresence mode="wait">
           {isExpanded ? (
             <>
@@ -125,7 +191,8 @@ export default function Analytics({ tasks }: AnalyticsProps) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.3, delay: 0.2 }}
+                transition={{ duration: 0.4, delay: 0.3 }}
+                style={{ position: 'relative', zIndex: 2 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                   <h2>{t.analyticsTitle}</h2>
@@ -173,119 +240,42 @@ export default function Analytics({ tasks }: AnalyticsProps) {
                 </div>
               </motion.div>
 
-              {/* Chart Container - Expanded */}
-              <motion.div
-                className="history-chart"
-                style={{ position: 'relative' }}
-              >
-                {dailyRatios.map((ratio, index) => (
-                  <motion.div
-                    key={index}
-                    layoutId={`bar-${index}`}
-                    className={`history-bar ${ratio >= 80 ? '' : ratio >= 60 ? 'medium' : ratio > 0 ? 'low' : ''}`}
-                    initial={false}
-                    animate={{
-                      height: `${Math.max(4, ratio)}%`,
-                    }}
-                    transition={{
-                      layout: {
-                        type: "spring",
-                        stiffness: 300,
-                        damping: 30
-                      }
-                    }}
-                    title={`Day ${index - 29}: ${ratio}%`}
-                  />
-                ))}
-              </motion.div>
-
               {/* Pattern Insights - Only in expanded view */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.3, delay: 0.3 }}
+                transition={{ duration: 0.4, delay: 0.4 }}
+                style={{ position: 'relative', zIndex: 2 }}
               >
                 <PatternInsights tasks={tasks} />
               </motion.div>
             </>
           ) : (
             <>
-              {/* Collapsed View - Minimal Chart */}
+              {/* Minimal mode hint */}
               <motion.div
-                key="collapsed-content"
-                className="history-chart-minimal"
+                key="collapsed-hint"
+                className="expand-hint"
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3, delay: 0.2 }}
+                animate={{ opacity: [0.2, 0.4, 0.2] }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 4,
+                  ease: "easeInOut"
+                }}
                 style={{
-                  height: '60px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '2px',
-                  padding: '10px 20px',
-                  position: 'relative'
+                  position: 'absolute',
+                  right: '10px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  fontSize: '10px',
+                  color: 'var(--signal)',
+                  pointerEvents: 'none',
+                  zIndex: 2
                 }}
               >
-                {/* Bars in minimal mode */}
-                {dailyRatios.map((ratio, index) => {
-                  const color = ratio >= 80 ? 'var(--signal)' :
-                               ratio >= 60 ? '#ffaa00' :
-                               ratio > 0 ? 'rgba(255, 68, 68, 0.6)' :
-                               'rgba(255, 255, 255, 0.05)';
-
-                  return (
-                    <motion.div
-                      key={index}
-                      layoutId={`bar-${index}`}
-                      className="mini-bar"
-                      initial={false}
-                      animate={{
-                        height: `${Math.max(10, Math.min(40, ratio * 0.4))}px`,
-                        backgroundColor: color,
-                      }}
-                      transition={{
-                        layout: {
-                          type: "spring",
-                          stiffness: 300,
-                          damping: 30
-                        },
-                        backgroundColor: {
-                          duration: 0.3
-                        }
-                      }}
-                      style={{
-                        flex: 1,
-                        minWidth: '2px',
-                        borderRadius: '1px',
-                      }}
-                    />
-                  );
-                })}
-
-                {/* Subtle pulse hint */}
-                <motion.div
-                  className="expand-hint"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: [0.2, 0.4, 0.2] }}
-                  transition={{
-                    repeat: Infinity,
-                    duration: 4,
-                    ease: "easeInOut"
-                  }}
-                  style={{
-                    position: 'absolute',
-                    right: '10px',
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    fontSize: '10px',
-                    color: 'var(--signal)',
-                    pointerEvents: 'none'
-                  }}
-                >
-                  ⋯
-                </motion.div>
+                ⋯
               </motion.div>
             </>
           )}
