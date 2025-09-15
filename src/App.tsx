@@ -43,7 +43,7 @@ function AppContent() {
   const t = useTranslation();
   const [data, setData] = useState<AppData>(initialData);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [localVersion, setLocalVersion] = useState(0);
+  const [_localVersion, setLocalVersion] = useState(0);
 
   // Sync tracking variables
   const syncTracker = useRef({

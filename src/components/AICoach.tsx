@@ -16,7 +16,8 @@ import {
 import PremiumModal from './PremiumModal';
 import FoundationModal from './FoundationModal';
 import FirstNameModal from './FirstNameModal';
-import { checkPremiumStatus, activatePremium } from '../services/premiumService';
+import { checkPremiumStatus } from '../services/premiumService';
+import { checkAndActivateBetaPremium } from '../utils/betaPremiumHack'; // TODO: Remove in production
 
 import type { AppData } from '../types';
 
@@ -41,14 +42,9 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
   // Check premium status on mount and listen for changes
   useEffect(() => {
     const checkPremium = () => {
-      // Beta testing override for premium
-      const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.get('beta') === 'premium2027!') {
-        // Create actual premium credentials for beta users
-        const betaEmail = 'beta@signal-noise.test';
-        activatePremium(betaEmail, 'beta-subscription-2027');
+      // Check for beta premium hack (TODO: Remove in production)
+      if (checkAndActivateBetaPremium()) {
         setIsPremium(true);
-        console.log('🚀 Beta premium activated for testing');
         return;
       }
 
