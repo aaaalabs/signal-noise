@@ -18,9 +18,11 @@ import VerifyMagicLink from './components/VerifyMagicLink';
 import Footer from './components/Footer';
 import BrandIcon from './components/BrandIcon';
 import LanguageSwitcher from './components/LanguageSwitcher';
+import SyncIndicator from './components/SyncIndicator';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { checkAchievements } from './utils/achievements';
 import { handleStripeReturn, getSessionData, type SessionData } from './services/premiumService';
+import { syncStart, syncSuccess, syncError, syncIdle, syncChecking, syncReceiving } from './services/syncService';
 
 const DATA_KEY = 'signal_noise_data';
 const ONBOARDING_KEY = 'signal_noise_onboarded';
@@ -41,12 +43,14 @@ function AppContent() {
   const t = useTranslation();
   const [data, setData] = useState<AppData>(initialData);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [localVersion, setLocalVersion] = useState(0);
 
   // Sync tracking variables
   const syncTracker = useRef({
     counter: 0,
     lastSyncTime: 0,
-    lastDataSize: 0
+    lastDataSize: 0,
+    version: 0
   });
 
   // Flag to prevent auto-sync during cloud data loading
@@ -395,6 +399,7 @@ function AppContent() {
         fullEmail: email || 'missing',
         authHeader: `Bearer ${sessionToken.substring(0, 8)}...`,
         bodyKeys: ['email', 'data', 'firstName'],
+        localVersion: syncTracker.current.version,
         requestStartTime: Date.now()
       });
 
@@ -403,6 +408,9 @@ function AppContent() {
         data: appData,
         firstName: appData.settings.firstName || ''
       };
+
+      // 🔄 Start sync feedback animation
+      syncStart();
 
       const response = await fetch('/api/sync', {
         method: 'POST',
@@ -426,6 +434,14 @@ function AppContent() {
 
       if (response.ok) {
         const result = await response.json();
+
+        // ✅ Success sync feedback animation with haptic
+        syncSuccess();
+
+        // Increment local version to match what server just saved
+        syncTracker.current.version++;
+        setLocalVersion(syncTracker.current.version);
+
         console.log('✅ CLOUD SYNC SUCCESS - REDIS WRITE CONFIRMED', {
           serverResponse: result,
           tasksSynced: appData.tasks?.length || 0,
@@ -433,10 +449,14 @@ function AppContent() {
           serverTimestamp: result.timestamp,
           premium: result.premium || false,
           syncedAt: result.synced,
+          newVersion: syncTracker.current.version,
           totalResponseTime: `${(performance.now() - startTime).toFixed(2)}ms`,
           redisOperationSuccess: true
         });
       } else {
+        // ❌ Error sync feedback animation
+        syncError();
+
         console.error('❌ CLOUD SYNC FAILED - SERVER ERROR', {
           httpStatus: response.status,
           httpStatusText: response.statusText,
@@ -463,6 +483,10 @@ function AppContent() {
       }
     } catch (error) {
       const totalTime = performance.now() - startTime;
+
+      // ❌ Network error sync feedback animation
+      syncError();
+
       console.error('❌ CLOUD SYNC NETWORK ERROR', {
         error: error instanceof Error ? error.message : 'Unknown error',
         errorType: error instanceof Error ? error.constructor.name : typeof error,
@@ -647,6 +671,94 @@ function AppContent() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [verifyAuthState, handleSignOut, isPremiumMode]);
 
+  // Pull-on-focus for multi-device sync
+  useEffect(() => {
+    const handleVisibilityChange = async () => {
+      // Only check when becoming visible and premium mode is active
+      if (document.visibilityState === 'visible' && isPremiumMode && sessionToken && isLoaded && !isLoadingFromCloud) {
+        console.log('🔍 App regained focus - checking for cloud updates...');
+
+        try {
+          // Show checking animation
+          syncChecking();
+
+          // Check cloud metadata
+          const response = await fetch('/api/sync-meta', {
+            headers: {
+              'Authorization': `Bearer ${sessionToken}`
+            }
+          });
+
+          if (response.ok) {
+            const metadata = await response.json();
+            console.log('📊 Cloud metadata check:', {
+              cloudVersion: metadata.version,
+              localVersion: syncTracker.current.version,
+              needsUpdate: metadata.version > syncTracker.current.version,
+              lastDevice: metadata.lastDevice,
+              age: metadata.lastModified ? `${Date.now() - metadata.lastModified}ms ago` : 'unknown'
+            });
+
+            // If cloud is newer, pull the data
+            if (metadata.version > syncTracker.current.version) {
+              console.log('⬇️ Cloud has newer data - pulling updates...');
+
+              // Show receiving animation
+              syncReceiving();
+
+              // Fetch full data from cloud
+              const dataResponse = await fetch('/api/tasks', {
+                headers: {
+                  'Authorization': `Bearer ${sessionToken}`
+                }
+              });
+
+              if (dataResponse.ok) {
+                const { data: cloudData } = await dataResponse.json();
+
+                console.log('✅ Cloud data received:', {
+                  taskCount: cloudData.tasks?.length || 0,
+                  fromDevice: metadata.lastDevice,
+                  version: metadata.version
+                });
+
+                // Update local data with cloud data
+                setData(cloudData);
+                syncTracker.current.version = metadata.version;
+                setLocalVersion(metadata.version);
+
+                // Show success with device whisper
+                syncSuccess();
+
+                // Show device whisper if different device
+                if (metadata.lastDevice && metadata.lastDevice !== 'Unknown') {
+                  import('./services/syncService').then(({ showDeviceWhisper }) => {
+                    showDeviceWhisper(metadata.lastDevice);
+                  });
+                }
+              } else {
+                console.error('❌ Failed to fetch cloud data');
+                syncError();
+              }
+            } else {
+              console.log('✅ Local data is up to date');
+              syncIdle();
+            }
+          } else {
+            console.error('❌ Failed to check cloud metadata:', response.status);
+            syncIdle();
+          }
+        } catch (error) {
+          console.error('❌ Error checking for cloud updates:', error);
+          syncIdle();
+        }
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, [isPremiumMode, sessionToken, isLoaded, isLoadingFromCloud]);
+
   const handleOnboardingComplete = () => {
     localStorage.setItem(ONBOARDING_KEY, 'true');
     setShowOnboarding(false);
@@ -720,6 +832,9 @@ function AppContent() {
 
       console.log('🔄 Syncing local data to cloud...');
 
+      // 🔄 Start sync feedback animation for one-time sync
+      syncStart();
+
       // Sync to cloud using authenticated endpoint
       const response = await fetch('/api/sync', {
         method: 'POST',
@@ -743,6 +858,10 @@ function AppContent() {
 
       if (response.ok) {
         const result = await response.json();
+
+        // ✅ Success sync feedback animation with haptic
+        syncSuccess();
+
         console.log('✅ One-time sync completed successfully:', result);
 
         // Clear localStorage since we're now cloud-based
@@ -753,9 +872,15 @@ function AppContent() {
         setWhisperMessage('Data synced to cloud!');
         setShowWhisper(true);
       } else {
+        // ❌ Error sync feedback for failed response
+        syncError();
+
         console.error('❌ Failed to sync data to cloud:', response.status, response.statusText);
       }
     } catch (error) {
+      // ❌ Network error sync feedback
+      syncError();
+
       console.error('❌ One-time sync error:', error);
     }
   };
@@ -923,17 +1048,22 @@ function AppContent() {
           setShowFoundationModal(true);
         }} />
 
-        {/* Language Switcher - Ultra-minimal toggle */}
-        <LanguageSwitcher
-          onPremiumClick={() => {
-            setFoundationModalLoginMode(true);
-            setShowFoundationModal(true);
-          }}
-          tasks={data.tasks}
-          currentRatio={currentRatio}
-          totalTasks={todayTasks.length}
-          data={data}
-        />
+        {/* Top-right controls container */}
+        <div style={{
+          position: 'absolute',
+          top: '20px',
+          right: '20px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '12px',
+          zIndex: 100
+        }}>
+          {/* Sync Indicator - Premium status and sync feedback */}
+          <SyncIndicator data={data} />
+
+          {/* Language Switcher - Ultra-minimal toggle */}
+          <LanguageSwitcher />
+        </div>
 
 
         {/* Header with Ratio */}

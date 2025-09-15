@@ -147,7 +147,7 @@ const translations = {
       },
       {
         question: "Wie funktionieren Datenschutz und Sync?",
-        answer: "Alles wird lokal im Browser gespeichert. Premium-Nutzer erhalten Cloud-Backup mit Sync-Indikator (🔒) neben dem Sprachschalter. Deine Privatsphäre ist immer geschützt - kein Tracking, keine Analyse, kein Data Mining."
+        answer: "Alles wird lokal im Browser gespeichert. <strong>Premium-Nutzer erhalten Cloud-Sync für die Nutzung auf mehreren Geräten</strong> - deine Daten sind automatisch auf Handy, Laptop und Tablet synchron. Der Sync-Indikator (🔒) neben dem Sprachschalter zeigt die Verbindung. Deine Privatsphäre ist immer geschützt - kein Tracking, keine Analyse, kein Data Mining."
       },
       {
         question: "Welche Interface-Features gibt es?",
@@ -272,7 +272,7 @@ const translations = {
       },
       {
         question: "How does data privacy and sync work?",
-        answer: "Everything is stored locally in your browser. Premium users get cloud backup with sync indicator (🔒) next to the language switcher. Your privacy is always protected - no tracking, no analytics, no data mining."
+        answer: "Everything is stored locally in your browser. <strong>Premium users get cloud sync for use across multiple devices</strong> - your data automatically stays in sync across phone, laptop, and tablet. The sync indicator (🔒) next to the language switcher shows connection status. Your privacy is always protected - no tracking, no analytics, no data mining."
       },
       {
         question: "What interface features are available?",

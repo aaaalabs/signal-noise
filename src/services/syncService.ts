@@ -18,33 +18,40 @@ export function initSyncIndicator() {
   syncState.element = document.getElementById('sync-indicator');
 }
 
-// Show sync indicator with different states (kept for potential future use)
-export function showSyncIndicator(state: 'syncing' | 'success') {
-  const indicator = syncState.element || document.getElementById('sync-indicator');
-  if (!indicator) return;
+// Show sync feedback using the premium dot (Jony Ive style)
+export function showSyncIndicator(state: 'syncing' | 'success' | 'error') {
+  console.log('🔄 Sync feedback:', state);
 
-  // Clear any existing timeout
-  if (syncState.timeout) {
-    clearTimeout(syncState.timeout);
-    syncState.timeout = null;
+  // Use the new premium dot feedback system
+  const feedbackSystem = (window as any).signalNoiseSyncFeedback;
+
+  if (feedbackSystem) {
+    switch (state) {
+      case 'syncing':
+        feedbackSystem.showSyncing();
+        break;
+      case 'success':
+        feedbackSystem.showSuccess();
+        break;
+      case 'error':
+        feedbackSystem.showError();
+        break;
+    }
+  } else {
+    // Fallback for development/debugging
+    console.log('⚠️ Sync feedback system not available yet');
   }
 
-  if (state === 'syncing') {
-    // Show infinity symbol for 500ms
-    indicator.textContent = '∞';
-    indicator.style.color = '#fbbf24'; // amber-400
-
-    syncState.timeout = window.setTimeout(() => {
-      indicator.textContent = '∞';
-    }, 500);
-  } else if (state === 'success') {
-    // Show checkmark briefly
-    indicator.textContent = '✓';
-    indicator.style.color = '#00ff88'; // signal green
-
-    syncState.timeout = window.setTimeout(() => {
-      indicator.textContent = '';
-    }, 2000);
+  // Legacy indicator (kept for potential future use)
+  const indicator = syncState.element || document.getElementById('sync-indicator');
+  if (indicator) {
+    // Clear any existing timeout
+    if (syncState.timeout) {
+      clearTimeout(syncState.timeout);
+      syncState.timeout = null;
+    }
+    // Keep the element hidden since we're using the premium dot now
+    indicator.style.opacity = '0';
   }
 }
 
@@ -69,6 +76,53 @@ function getTodayRatio(): number {
 // REMOVED: syncData(), loadFromCloud(), restoreData(), startAutoSync()
 // These functions were causing conflicts with App.tsx cloud sync
 // App.tsx already handles all cloud synchronization correctly
+
+// Convenience functions for common sync scenarios
+export function syncStart() {
+  showSyncIndicator('syncing');
+}
+
+export function syncSuccess() {
+  showSyncIndicator('success');
+}
+
+export function syncError() {
+  showSyncIndicator('error');
+}
+
+export function syncIdle() {
+  const feedbackSystem = (window as any).signalNoiseSyncFeedback;
+  if (feedbackSystem) {
+    feedbackSystem.showIdle();
+  }
+}
+
+export function syncChecking() {
+  const feedbackSystem = (window as any).signalNoiseSyncFeedback;
+  if (feedbackSystem && feedbackSystem.showChecking) {
+    feedbackSystem.showChecking();
+  } else {
+    // Fallback to regular sync indicator
+    showSyncIndicator('syncing');
+  }
+}
+
+export function syncReceiving() {
+  const feedbackSystem = (window as any).signalNoiseSyncFeedback;
+  if (feedbackSystem && feedbackSystem.showReceiving) {
+    feedbackSystem.showReceiving();
+  } else {
+    // Fallback to success indicator
+    showSyncIndicator('success');
+  }
+}
+
+export function showDeviceWhisper(device: string) {
+  const feedbackSystem = (window as any).signalNoiseSyncFeedback;
+  if (feedbackSystem && feedbackSystem.showDeviceWhisper) {
+    feedbackSystem.showDeviceWhisper(device);
+  }
+}
 
 // Export data to JSON file (KEPT - this is useful)
 export async function exportData(): Promise<boolean> {

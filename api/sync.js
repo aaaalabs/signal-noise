@@ -221,12 +221,27 @@ export default async function handler(req, res) {
           timestamp: Date.now()
         });
 
-        // Update user data in Redis
+        // Get current version and increment
+        const currentVersion = parseInt(user.version || '0');
+        const newVersion = currentVersion + 1;
+
+        // Get device info from user agent
+        const userAgent = req.headers['user-agent'] || '';
+        let deviceType = 'Desktop';
+        if (userAgent.includes('iPhone')) deviceType = 'iPhone';
+        else if (userAgent.includes('iPad')) deviceType = 'iPad';
+        else if (userAgent.includes('Android')) deviceType = 'Android';
+        else if (userAgent.includes('Mac')) deviceType = 'Mac';
+
+        // Update user data in Redis with version tracking
         const updateStartTime = Date.now();
         await redis.hset(userKey, {
           app_data: newAppData,
           first_name: firstName || user.first_name || '',
           last_active: Date.now().toString(),
+          version: newVersion.toString(),
+          last_modified: Date.now().toString(),
+          last_device: deviceType,
           synced_from_local: syncType === 'initial' ? Date.now().toString() : user.synced_from_local || null
         });
         const updateTime = Date.now() - updateStartTime;
@@ -239,6 +254,8 @@ export default async function handler(req, res) {
           tasksSaved: data?.tasks?.length || 0,
           firstName: firstName || user.first_name || 'none',
           syncType: syncType || 'update',
+          version: `${currentVersion} → ${newVersion}`,
+          device: deviceType,
           timestamp: new Date().toISOString(),
           redisOperationSuccess: true
         });
