@@ -16,6 +16,17 @@ export default function Analytics({ tasks }: AnalyticsProps) {
     return stored !== 'false'; // Default to expanded
   });
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile/desktop for responsive fixed heights
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 600);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Persist expansion preference
   useEffect(() => {
@@ -81,13 +92,24 @@ export default function Analytics({ tasks }: AnalyticsProps) {
     new Date(task.timestamp) > thirtyDaysAgo
   );
 
+  // Fixed heights for predictable animations (Jony Ive approved)
+  const HEIGHTS = {
+    collapsed: 64,
+    expanded: {
+      desktop: 340,  // Reduced to bring bars closer to content
+      mobile: 380    // Proportionally adjusted for mobile
+    }
+  };
+
+  const expandedHeight = isMobile ? HEIGHTS.expanded.mobile : HEIGHTS.expanded.desktop;
+
   const handleToggle = () => {
     if (isAnimating) return; // Prevent interruption
     setIsAnimating(true);
-    setIsExpanded(!isExpanded);
+    setIsExpanded(prev => !prev);
 
     // Reset animation lock after animation completes
-    setTimeout(() => setIsAnimating(false), 1500); // Extended from 600ms
+    setTimeout(() => setIsAnimating(false), 1000); // Precisely timed for spring physics
   };
 
   // Don't render if no data
@@ -101,43 +123,117 @@ export default function Analytics({ tasks }: AnalyticsProps) {
         className={`analytics ${isExpanded ? '' : 'analytics-minimal'}`}
         initial={false}
         animate={{
-          height: isExpanded ? 'auto' : '60px',
+          height: isExpanded ? expandedHeight : HEIGHTS.collapsed,
         }}
         transition={{
           type: "spring",
-          stiffness: 100,    // Slower, softer (was 300)
-          damping: 22,       // Smooth damping
-          mass: 1           // Add mass for weight
+          stiffness: 40,     // Soft like pressing quality aluminum
+          damping: 25,       // Higher damping for controlled motion
+          mass: 2.0,         // Heavier for deliberate, weighted feel
+          restDelta: 0.01   // Precision without over-optimization
         }}
-        onClick={!isExpanded ? handleToggle : undefined}
+        onClick={handleToggle}
         style={{
-          cursor: !isExpanded ? 'pointer' : 'default',
+          cursor: 'pointer',
           position: 'relative',
-          overflow: 'hidden'
+          overflow: 'hidden',
+          width: '100%',
+          padding: isExpanded ? '30px 24px 24px 24px' : '0',
+          background: 'var(--surface)',
+          borderRadius: isExpanded ? '16px' : '12px',
+          border: isExpanded ? '1px solid #222' : '1px solid rgba(255, 255, 255, 0.05)',
+          transition: 'padding 0.8s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.8s ease, border-radius 0.8s ease',
+          boxSizing: 'border-box'
         }}
       >
-        {/* Bars always rendered - never fade */}
+        {/* Content that fades in/out - render first when expanded */}
+        {isExpanded && (
+          <AnimatePresence mode="wait">
+            <motion.div
+              key="expanded-content"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              style={{ position: 'relative', zIndex: 2 }}
+            >
+              <h2 style={{ userSelect: 'none' }}>
+                {t.analyticsTitle}
+              </h2>
+
+              <div className="stat-grid">
+                <div className="stat">
+                  <div className="stat-value">
+                    {avgRatio > 0 ? `${avgRatio}%` : '—'}
+                  </div>
+                  <div className="stat-label">{t.avgRatio}</div>
+                </div>
+                <div className="stat">
+                  <div className="stat-value">{recentTasks.length}</div>
+                  <div className="stat-label">{t.tasksTotal}</div>
+                </div>
+                <div className="stat">
+                  <div className="stat-value">{calculateStreak()}</div>
+                  <div className="stat-label">{t.dayStreak}</div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Pattern Insights - Only in expanded view */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4, delay: 0.3 }}
+              style={{ position: 'relative', zIndex: 2 }}
+            >
+              <PatternInsights tasks={tasks} />
+            </motion.div>
+          </AnimatePresence>
+        )}
+
+        {/* Bars always rendered - at bottom when expanded */}
         <motion.div
           className={isExpanded ? "history-chart" : "history-chart-minimal"}
+          initial={false}
+          animate={{
+            height: isExpanded ? 80 : 40,  // Reduced expanded height for tighter layout
+            opacity: 1
+          }}
+          transition={{
+            type: "spring",
+            stiffness: 40,
+            damping: 25,
+            mass: 1.8,
+            restDelta: 0.01
+          }}
           style={{
-            position: isExpanded ? 'relative' : 'absolute',
+            position: isExpanded ? 'absolute' : 'absolute',
+            bottom: isExpanded ? '40px' : 'auto',
             top: isExpanded ? 'auto' : '50%',
+            left: isExpanded ? '24px' : '0',
+            right: isExpanded ? '24px' : '0',
             transform: isExpanded ? 'none' : 'translateY(-50%)',
-            height: isExpanded ? '120px' : '40px',
             display: 'flex',
-            alignItems: isExpanded ? 'flex-end' : 'center',
+            alignItems: 'flex-end',
             gap: '2px',
-            padding: isExpanded ? '20px 0' : '0 20px',
-            width: isExpanded ? '100%' : 'calc(100% - 40px)',
-            zIndex: 1
+            padding: isExpanded ? '0' : '0 10px',
+            boxSizing: 'border-box'
           }}
         >
           {dailyRatios.map((ratio, index) => {
-            // Use full opacity colors
+            // Determine if this is a future day (no data possible yet)
+            const dayOffset = 29 - index;
+            const targetDate = new Date();
+            targetDate.setDate(targetDate.getDate() - dayOffset);
+            const isFutureDay = targetDate > new Date();
+
+            // Use full opacity colors - ALL empty days get signal color when expanded
             const color = ratio >= 80 ? 'var(--signal)' :
                          ratio >= 60 ? '#ffaa00' :
                          ratio > 0 ? '#ff4444' :  // Full opacity red
-                         'rgba(255, 255, 255, 0.05)';
+                         isExpanded ? 'var(--signal)' :  // ALL empty days green when expanded
+                         'rgba(255, 255, 255, 0.05)';  // Subtle background for empty days when collapsed
 
             return (
               <motion.div
@@ -148,138 +244,34 @@ export default function Analytics({ tasks }: AnalyticsProps) {
                 animate={{
                   height: isExpanded
                     ? `${Math.max(4, ratio)}%`
-                    : `${Math.max(10, Math.min(40, ratio * 0.4))}px`,
+                    : ratio === 0 || isFutureDay
+                      ? '8px'  // Fixed height for empty/future days
+                      : `${Math.max(15, Math.min(35, ratio * 0.35))}px`,
                   backgroundColor: color,
-                  borderRadius: isExpanded ? '2px 2px 0 0' : '1px'
+                  borderRadius: isExpanded ? '2px 2px 0 0' : '1px',
+                  scaleY: isExpanded ? 1 : 1,  // No compression needed with proper sizing
                 }}
                 transition={{
-                  layout: {
-                    type: "spring",
-                    stiffness: 70,      // Very soft spring (was 300)
-                    damping: 20,        // Smooth damping
-                    restDelta: 0.01,   // Higher precision
-                    delay: index * 0.01 // 10ms stagger for wave effect
-                  },
-                  backgroundColor: {
-                    duration: 0.5       // Slower color transition
-                  },
-                  height: {
-                    type: "spring",
-                    stiffness: 70,
-                    damping: 20
-                  }
+                  type: "spring",
+                  stiffness: 38,
+                  damping: 24,
+                  mass: 1.5,
+                  delay: index * 0.008,  // Subtle wave effect (8ms)
+                  restDelta: 0.01
                 }}
                 style={{
                   flex: 1,
                   minWidth: '2px',
                   transformOrigin: 'bottom center',
-                  opacity: 1  // Always full opacity
+                  opacity: 1,
+                  willChange: 'height, transform'
                 }}
-                title={isExpanded ? `Day ${index - 29}: ${ratio}%` : undefined}
+                title={isExpanded ? `${targetDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}: ${isFutureDay ? 'Future' : ratio > 0 ? `${ratio}%` : 'No tasks'}` : undefined}
               />
             );
           })}
         </motion.div>
 
-        {/* Content that fades in/out */}
-        <AnimatePresence mode="wait">
-          {isExpanded ? (
-            <>
-              {/* Expanded View - Full Analytics */}
-              <motion.div
-                key="expanded-content"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.4, delay: 0.3 }}
-                style={{ position: 'relative', zIndex: 2 }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <h2>{t.analyticsTitle}</h2>
-                  <motion.button
-                    whileTap={{ scale: 0.95 }}
-                    onClick={handleToggle}
-                    style={{
-                      background: 'transparent',
-                      border: '1px solid rgba(255, 255, 255, 0.1)',
-                      borderRadius: '6px',
-                      padding: '4px 8px',
-                      fontSize: '11px',
-                      color: 'rgba(255, 255, 255, 0.4)',
-                      cursor: 'pointer',
-                      transition: 'all 0.2s'
-                    }}
-                    onMouseEnter={(e) => {
-                      (e.target as HTMLElement).style.borderColor = 'rgba(255, 255, 255, 0.2)';
-                      (e.target as HTMLElement).style.color = 'rgba(255, 255, 255, 0.6)';
-                    }}
-                    onMouseLeave={(e) => {
-                      (e.target as HTMLElement).style.borderColor = 'rgba(255, 255, 255, 0.1)';
-                      (e.target as HTMLElement).style.color = 'rgba(255, 255, 255, 0.4)';
-                    }}
-                  >
-                    minimize
-                  </motion.button>
-                </div>
-
-                <div className="stat-grid">
-                  <div className="stat">
-                    <div className="stat-value">
-                      {avgRatio > 0 ? `${avgRatio}%` : '—'}
-                    </div>
-                    <div className="stat-label">{t.avgRatio}</div>
-                  </div>
-                  <div className="stat">
-                    <div className="stat-value">{recentTasks.length}</div>
-                    <div className="stat-label">{t.tasksTotal}</div>
-                  </div>
-                  <div className="stat">
-                    <div className="stat-value">{calculateStreak()}</div>
-                    <div className="stat-label">{t.dayStreak}</div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Pattern Insights - Only in expanded view */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.4, delay: 0.4 }}
-                style={{ position: 'relative', zIndex: 2 }}
-              >
-                <PatternInsights tasks={tasks} />
-              </motion.div>
-            </>
-          ) : (
-            <>
-              {/* Minimal mode hint */}
-              <motion.div
-                key="collapsed-hint"
-                className="expand-hint"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: [0.2, 0.4, 0.2] }}
-                transition={{
-                  repeat: Infinity,
-                  duration: 4,
-                  ease: "easeInOut"
-                }}
-                style={{
-                  position: 'absolute',
-                  right: '10px',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  fontSize: '10px',
-                  color: 'var(--signal)',
-                  pointerEvents: 'none',
-                  zIndex: 2
-                }}
-              >
-                ⋯
-              </motion.div>
-            </>
-          )}
-        </AnimatePresence>
       </motion.div>
     </LayoutGroup>
   );

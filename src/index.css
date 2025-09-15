@@ -235,10 +235,8 @@ body {
 /* Analytics View */
 .analytics {
     margin: 60px 0;
-    padding: 30px;
-    background: var(--surface);
-    border-radius: 16px;
-    border: 1px solid #222;
+    /* padding handled by Framer Motion animation */
+    /* background, border-radius, and border handled inline */
 }
 
 .analytics h2 {
@@ -274,11 +272,10 @@ body {
 
 /* History Chart */
 .history-chart {
-    height: 120px;
+    /* height and padding handled by Framer Motion animation */
     display: flex;
     align-items: flex-end;
     gap: 2px;
-    padding: 20px 0;
 }
 
 .history-bar {
@@ -306,11 +303,9 @@ body {
 
 /* Minimal Analytics Mode */
 .analytics-minimal {
-    background: var(--surface);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    transition: all 0.3s ease;
-    will-change: height;
+    /* background, border, and border-radius handled inline */
+    /* transitions handled by Framer Motion */
+    will-change: height, padding;
 }
 
 .analytics-minimal:hover {

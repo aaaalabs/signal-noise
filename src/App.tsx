@@ -238,18 +238,22 @@ function AppContent() {
 
               if (cloudResponse.ok) {
                 const { data: cloudData } = await cloudResponse.json();
+
+                // Parse cloudData if it's a string (Redis returns JSON strings)
+                const parsedData = typeof cloudData === 'string' ? JSON.parse(cloudData) : cloudData;
+
                 console.log('✅ Premium data loaded from cloud:', {
-                  taskCount: cloudData.tasks?.length || 0,
+                  taskCount: parsedData.tasks?.length || 0,
                   premium: true,
                   email: user.firstName || 'Unknown'
                 });
 
                 // Migrate cloud data structure if needed
-                if (!cloudData.badges) cloudData.badges = [];
-                if (!cloudData.patterns) cloudData.patterns = {};
-                if (!cloudData.settings) cloudData.settings = { targetRatio: 80, notifications: false, firstName: user.firstName || '' };
+                if (!parsedData.badges) parsedData.badges = [];
+                if (!parsedData.patterns) parsedData.patterns = {};
+                if (!parsedData.settings) parsedData.settings = { targetRatio: 80, notifications: false, firstName: user.firstName || '' };
 
-                setData(cloudData);
+                setData(parsedData);
                 setIsLoaded(true);
                 setIsLoadingFromCloud(false); // CRITICAL: Re-enable auto-sync after cloud load success
                 setHasAttemptedCloudLoad(true); // Mark that we've attempted cloud loading
