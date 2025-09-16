@@ -16,17 +16,6 @@ export default function Analytics({ tasks }: AnalyticsProps) {
     return stored !== 'false'; // Default to expanded
   });
   const [isAnimating, setIsAnimating] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  // Detect mobile/desktop for responsive fixed heights
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 600);
-    };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   // Persist expansion preference
   useEffect(() => {
@@ -82,8 +71,9 @@ export default function Analytics({ tasks }: AnalyticsProps) {
   };
 
   const dailyRatios = useMemo(() => calculateDailyRatios(), [tasks]);
-  const avgRatio = dailyRatios.length > 0
-    ? Math.round(dailyRatios.reduce((a, b) => a + b, 0) / dailyRatios.length)
+  const activeDays = dailyRatios.filter(ratio => ratio > 0);
+  const avgRatio = activeDays.length > 0
+    ? Math.round(activeDays.reduce((a, b) => a + b, 0) / activeDays.length)
     : 0;
 
   const thirtyDaysAgo = new Date();
@@ -95,13 +85,10 @@ export default function Analytics({ tasks }: AnalyticsProps) {
   // Fixed heights for predictable animations (Jony Ive approved)
   const HEIGHTS = {
     collapsed: 64,
-    expanded: {
-      desktop: 340,  // Reduced to bring bars closer to content
-      mobile: 380    // Proportionally adjusted for mobile
-    }
+    expanded: 340  // Same height for both mobile and desktop now
   };
 
-  const expandedHeight = isMobile ? HEIGHTS.expanded.mobile : HEIGHTS.expanded.desktop;
+  const expandedHeight = HEIGHTS.expanded;
 
   const handleToggle = () => {
     if (isAnimating) return; // Prevent interruption

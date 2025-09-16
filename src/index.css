@@ -444,9 +444,19 @@ body {
         grid-template-columns: 1fr;
     }
 
+    /* Keep stat-grid horizontal on mobile for better space utilization */
     .stat-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;  /* Slightly reduced gap for mobile */
+    }
+
+    /* Optimize stat sizing for mobile */
+    .stat-value {
+        font-size: 28px;  /* Slightly smaller for mobile readability */
+    }
+
+    .stat-label {
+        font-size: 10px;  /* Ensure labels are readable */
     }
 }
 

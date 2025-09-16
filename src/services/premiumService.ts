@@ -39,11 +39,33 @@ export function checkPremiumStatus(): PremiumStatus {
           };
         }
       } catch {
-        // Session data corrupted, ignore
+        // Try to recover from backup
+        const backup = localStorage.getItem('sessionBackup');
+        if (backup) {
+          try {
+            const backupData = JSON.parse(backup);
+            if (backupData.expiresBackup > Date.now()) {
+              console.log('🔄 Recovering session from backup');
+              // Restore session from backup
+              localStorage.setItem('sessionData', JSON.stringify({
+                ...backupData,
+                expires: Date.now() + (30 * 24 * 60 * 60 * 1000),
+                lastActive: Date.now()
+              }));
+              return {
+                isActive: true,
+                email: backupData.email,
+                activatedAt: new Date(backupData.created).toISOString(),
+                subscriptionId: backupData.token
+              };
+            }
+          } catch {
+            // Backup corrupted, ignore
+          }
+        }
       }
     }
     return { isActive: false };
-  }
 
   try {
     const status = JSON.parse(premiumData);
@@ -95,6 +117,15 @@ export function getSessionData(): SessionData | null {
       return null;
     }
 
+    // Auto-refresh session if it expires within 7 days
+    const daysUntilExpiry = (session.expires - Date.now()) / (1000 * 60 * 60 * 24);
+    if (daysUntilExpiry < 7) {
+      console.log('🔄 Session expires soon, extending by 30 days');
+      session.expires = Date.now() + (30 * 24 * 60 * 60 * 1000);
+      session.lastActive = Date.now();
+      localStorage.setItem('sessionData', JSON.stringify(session));
+    }
+
     console.log('✅ Returning valid session data');
     return session;
   } catch (error) {
@@ -131,6 +162,24 @@ export function activatePremiumSession(sessionData: SessionData): void {
 }
 
 export function clearSession(): void {
+  // Save session backup before clearing (for recovery)
+  const sessionData = localStorage.getItem('sessionData');
+  if (sessionData) {
+    try {
+      const session = JSON.parse(sessionData);
+      // Keep backup for 7 days in case of accidental logout
+      const backup = {
+        ...session,
+        clearedAt: Date.now(),
+        expiresBackup: Date.now() + (7 * 24 * 60 * 60 * 1000)
+      };
+      localStorage.setItem('sessionBackup', JSON.stringify(backup));
+      console.log('💾 Session backup created before clearing');
+    } catch (e) {
+      console.error('Failed to backup session:', e);
+    }
+  }
+
   localStorage.removeItem('sessionData');
   localStorage.removeItem('premiumStatus');
   localStorage.removeItem('premiumActive');
