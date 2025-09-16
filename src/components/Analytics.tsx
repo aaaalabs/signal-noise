@@ -3,6 +3,7 @@ import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
 import type { Task, DayRatio } from '../types';
 import { useTranslation } from '../contexts/LanguageContext';
 import PatternInsights from './PatternInsights';
+import { generatePatternInsights } from '../utils/patternAnalysis';
 
 interface AnalyticsProps {
   tasks: Task[];
@@ -82,13 +83,20 @@ export default function Analytics({ tasks }: AnalyticsProps) {
     new Date(task.timestamp) > thirtyDaysAgo
   );
 
+  // Check if we have pattern insights to show
+  const hasInsights = useMemo(() => {
+    const insights = generatePatternInsights(tasks);
+    return insights.length > 0;
+  }, [tasks]);
+
   // Fixed heights for predictable animations (Jony Ive approved)
   const HEIGHTS = {
     collapsed: 64,
-    expanded: 380  // Increased to prevent text overlap with chart
+    expandedWithInsights: 380,  // Taller when showing pattern insights
+    expandedNoInsights: 340     // Original height when no insights
   };
 
-  const expandedHeight = HEIGHTS.expanded;
+  const expandedHeight = hasInsights ? HEIGHTS.expandedWithInsights : HEIGHTS.expandedNoInsights;
 
   const handleToggle = () => {
     if (isAnimating) return; // Prevent interruption
