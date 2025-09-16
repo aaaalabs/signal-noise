@@ -112,8 +112,11 @@ export function getSessionData(): SessionData | null {
 
     // Check if session is expired
     if (session.expires < Date.now()) {
-      console.log('❌ Session expired, clearing session');
+      console.log('❌ Session expired, clearing session and app data');
       clearSession();
+      // Also clear app data so user has clean slate
+      localStorage.removeItem('signal_noise_data');
+      console.log('🗑️ Cleared app data for clean re-login');
       return null;
     }
 
@@ -161,20 +164,23 @@ export function activatePremiumSession(sessionData: SessionData): void {
   }, 1000);
 }
 
-export function clearSession(): void {
+export function clearSession(preserveAppData: boolean = false): void {
   // Save session backup before clearing (for recovery)
   const sessionData = localStorage.getItem('sessionData');
   if (sessionData) {
     try {
       const session = JSON.parse(sessionData);
-      // Keep backup for 7 days in case of accidental logout
-      const backup = {
-        ...session,
-        clearedAt: Date.now(),
-        expiresBackup: Date.now() + (7 * 24 * 60 * 60 * 1000)
-      };
-      localStorage.setItem('sessionBackup', JSON.stringify(backup));
-      console.log('💾 Session backup created before clearing');
+      // Only create backup if session was still valid (not expired)
+      if (session.expires > Date.now()) {
+        // Keep backup for 7 days in case of accidental logout
+        const backup = {
+          ...session,
+          clearedAt: Date.now(),
+          expiresBackup: Date.now() + (7 * 24 * 60 * 60 * 1000)
+        };
+        localStorage.setItem('sessionBackup', JSON.stringify(backup));
+        console.log('💾 Session backup created before clearing');
+      }
     } catch (e) {
       console.error('Failed to backup session:', e);
     }
@@ -184,6 +190,13 @@ export function clearSession(): void {
   localStorage.removeItem('premiumStatus');
   localStorage.removeItem('premiumActive');
   localStorage.removeItem('userEmail');
+
+  // Clear app data unless explicitly preserved (for manual sign out vs expiry)
+  if (!preserveAppData) {
+    localStorage.removeItem('signal_noise_data');
+    console.log('🗑️ Cleared app data for clean slate');
+  }
+
   console.log('🚪 Session cleared');
 }
 
