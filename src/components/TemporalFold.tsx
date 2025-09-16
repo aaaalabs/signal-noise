@@ -67,10 +67,11 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
     const deltaY = touch.clientY - startYRef.current;
 
     if (!isOpen && deltaY > 0) {
-      // Opening gesture
-      let distance = deltaY;
+      // Opening gesture - add deltaY to base 40px
+      let distance = 40 + deltaY;
       if (distance > ACTIVATION_THRESHOLD) {
-        distance = ACTIVATION_THRESHOLD + (distance - ACTIVATION_THRESHOLD) * ELASTIC_FACTOR;
+        const excess = distance - ACTIVATION_THRESHOLD;
+        distance = ACTIVATION_THRESHOLD + (excess * ELASTIC_FACTOR);
       }
       distance = Math.min(distance, OPEN_HEIGHT);
       setPullDistance(distance);
@@ -124,14 +125,17 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
     if (!isDragging) return;
 
     const deltaY = e.clientY - startYRef.current;
+    console.log('🟡 MouseMove - deltaY:', deltaY, 'startY:', startYRef.current, 'currentY:', e.clientY);
 
     if (!isOpen && deltaY > 0) {
-      // Opening gesture
-      let distance = deltaY;
+      // Opening gesture - add deltaY to base 40px
+      let distance = 40 + deltaY;
       if (distance > ACTIVATION_THRESHOLD) {
-        distance = ACTIVATION_THRESHOLD + (distance - ACTIVATION_THRESHOLD) * ELASTIC_FACTOR;
+        const excess = distance - ACTIVATION_THRESHOLD;
+        distance = ACTIVATION_THRESHOLD + (excess * ELASTIC_FACTOR);
       }
       distance = Math.min(distance, OPEN_HEIGHT);
+      console.log('🟡 Setting pullDistance to:', distance);
       setPullDistance(distance);
 
       if (distance > ACTIVATION_THRESHOLD && !isRevealed) {
