@@ -1,0 +1,52 @@
+{
+  "packageId": "app.signalnoise.twa",
+  "host": "signal-noise.app",
+  "name": "Signal/Noise",
+  "launcherName": "Signal/Noise",
+  "display": "standalone",
+  "themeColor": "#000000",
+  "themeColorDark": "#000000",
+  "navigationColor": "#000000",
+  "navigationColorDark": "#000000",
+  "navigationDividerColor": "#000000",
+  "navigationDividerColorDark": "#000000",
+  "backgroundColor": "#000000",
+  "enableNotifications": true,
+  "startUrl": "/",
+  "iconUrl": "https://signal-noise.app/android-launchericon-512-512.png",
+  "maskableIconUrl": "https://signal-noise.app/android-launchericon-192-192.png",
+  "monochromeIconUrl": "https://signal-noise.app/android-launchericon-192-192.png",
+  "splashScreenFadeOutDuration": 300,
+  "signingKey": {
+    "path": "./android.keystore",
+    "alias": "android"
+  },
+  "appVersionName": "1.0.0",
+  "appVersionCode": 1,
+  "shortcuts": [
+    {
+      "name": "Add Signal Task",
+      "shortName": "Signal",
+      "url": "/?action=signal",
+      "icons": [
+        {
+          "src": "https://signal-noise.app/android-launchericon-96-96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "generatorApp": "bubblewrap-cli",
+  "webManifestUrl": "https://signal-noise.app/manifest.json",
+  "fallbackType": "customtabs",
+  "features": {
+    "locationDelegation": {
+      "enabled": false
+    },
+    "playBilling": {
+      "enabled": false
+    }
+  },
+  "bubblewrapVersion": "1.0.0"
+}
