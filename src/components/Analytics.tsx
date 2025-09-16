@@ -129,7 +129,7 @@ export default function Analytics({ tasks }: AnalyticsProps) {
           background: 'var(--surface)',
           borderRadius: isExpanded ? '16px' : '12px',
           border: isExpanded ? '1px solid #222' : '1px solid rgba(255, 255, 255, 0.05)',
-          transition: 'padding 0.8s cubic-bezier(0.2, 0, 0.1, 1.3), border-color 0.8s ease, border-radius 0.8s cubic-bezier(0.2, 0, 0.1, 1.3)',
+          transition: 'padding 0.8s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.8s ease, border-radius 0.8s ease',
           boxSizing: 'border-box'
         }}
       >
