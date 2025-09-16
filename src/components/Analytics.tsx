@@ -240,9 +240,9 @@ export default function Analytics({ tasks }: AnalyticsProps) {
                 }}
                 transition={{
                   type: "spring",
-                  stiffness: 38,
-                  damping: 24,
-                  mass: 1.5,
+                  stiffness: 120,  // Higher stiffness for sharper snap
+                  damping: 15,     // Lower damping for less resistance
+                  mass: 2.2,       // Higher mass for slower start
                   delay: index * 0.008,  // Subtle wave effect (8ms)
                   restDelta: 0.01
                 }}
