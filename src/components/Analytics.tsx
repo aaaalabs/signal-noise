@@ -85,7 +85,7 @@ export default function Analytics({ tasks }: AnalyticsProps) {
   // Fixed heights for predictable animations (Jony Ive approved)
   const HEIGHTS = {
     collapsed: 64,
-    expanded: 340  // Same height for both mobile and desktop now
+    expanded: 380  // Increased to prevent text overlap with chart
   };
 
   const expandedHeight = HEIGHTS.expanded;
@@ -196,7 +196,7 @@ export default function Analytics({ tasks }: AnalyticsProps) {
           }}
           style={{
             position: isExpanded ? 'absolute' : 'absolute',
-            bottom: isExpanded ? '40px' : 'auto',
+            bottom: isExpanded ? '20px' : 'auto',
             top: isExpanded ? 'auto' : '50%',
             left: isExpanded ? '24px' : '0',
             right: isExpanded ? '24px' : '0',
