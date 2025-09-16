@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import type { Task } from '../types';
 import { useTranslation } from '../contexts/LanguageContext';
 
@@ -13,18 +13,11 @@ interface HistoricalTask extends Task {
 
 export default function TemporalFold({ tasks }: TemporalFoldProps) {
   const t = useTranslation();
-  const [isRevealed, setIsRevealed] = useState(false);
-  const [pullDistance, setPullDistance] = useState(40);
-  const [isDragging, setIsDragging] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const startYRef = useRef(0);
-  const currentDistanceRef = useRef(40);
 
-  const ACTIVATION_THRESHOLD = 50;
+  const CLOSED_HEIGHT = 40;
   const OPEN_HEIGHT = 400;
-  const CLOSE_THRESHOLD = -30;
-  const ELASTIC_FACTOR = 0.5;
 
   const getHistoricalTasks = (): HistoricalTask[] => {
     const now = new Date();
@@ -55,161 +48,17 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
     return historicalTasks.sort((a, b) => b.daysAgo - a.daysAgo);
   };
 
-  const handleTouchStart = (e: React.TouchEvent) => {
-    const touch = e.touches[0];
-    startYRef.current = touch.clientY;
-    setIsDragging(true);
-    // Prevent browser pull-to-refresh when interacting with temporal fold
-    e.preventDefault();
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isDragging) return;
-
-    // Prevent browser pull-to-refresh during drag gesture
-    e.preventDefault();
-
-    const touch = e.touches[0];
-    const deltaY = touch.clientY - startYRef.current;
-
-    if (!isOpen && deltaY > 0) {
-      // Opening gesture - add deltaY to base 40px
-      let distance = 40 + deltaY;
-      if (distance > ACTIVATION_THRESHOLD) {
-        const excess = distance - ACTIVATION_THRESHOLD;
-        distance = ACTIVATION_THRESHOLD + (excess * ELASTIC_FACTOR);
-      }
-      distance = Math.min(distance, OPEN_HEIGHT);
-      setPullDistance(distance);
-      currentDistanceRef.current = distance;
-
-      if (distance > ACTIVATION_THRESHOLD && !isRevealed) {
-        if (navigator.vibrate) {
-          navigator.vibrate(5);
-        }
-        setIsRevealed(true);
-      }
-    } else if (isOpen && deltaY < 0) {
-      // Closing gesture when open
-      const currentHeight = OPEN_HEIGHT + deltaY;
-      setPullDistance(Math.max(40, currentHeight));
-    }
-  };
-
-  const handleTouchEnd = () => {
-    const currentPull = currentDistanceRef.current;
-    setIsDragging(false);
-
-    if (!isOpen) {
-      // Opening logic - use ref value not stale state
-      if (currentPull > ACTIVATION_THRESHOLD) {
-        setPullDistance(OPEN_HEIGHT);
-        currentDistanceRef.current = OPEN_HEIGHT;
-        setIsOpen(true);
-        setIsRevealed(true);
-      } else {
-        setPullDistance(40);
-        currentDistanceRef.current = 40;
-        setIsRevealed(false);
-      }
-    } else {
-      // Closing logic when already open
-      const deltaY = pullDistance - OPEN_HEIGHT;
-      if (deltaY < CLOSE_THRESHOLD) {
-        setPullDistance(40);
-        setIsOpen(false);
-        setIsRevealed(false);
-      } else {
-        setPullDistance(OPEN_HEIGHT);
-      }
-    }
-  };
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    startYRef.current = e.clientY;
-    setIsDragging(true);
-    e.preventDefault();
-  };
-
-  const handleMouseMove = (e: MouseEvent) => {
-    if (!isDragging) return;
-
-    const deltaY = e.clientY - startYRef.current;
-
-    if (!isOpen && deltaY > 0) {
-      // Opening gesture - add deltaY to base 40px
-      let distance = 40 + deltaY;
-      if (distance > ACTIVATION_THRESHOLD) {
-        const excess = distance - ACTIVATION_THRESHOLD;
-        distance = ACTIVATION_THRESHOLD + (excess * ELASTIC_FACTOR);
-      }
-      distance = Math.min(distance, OPEN_HEIGHT);
-      setPullDistance(distance);
-      currentDistanceRef.current = distance;
-
-      if (distance > ACTIVATION_THRESHOLD && !isRevealed) {
-        setIsRevealed(true);
-      }
-    } else if (isOpen && deltaY < 0) {
-      // Closing gesture when open
-      const currentHeight = OPEN_HEIGHT + deltaY;
-      setPullDistance(Math.max(40, currentHeight));
-    }
-  };
-
-  const handleMouseUp = () => {
-    const currentPull = currentDistanceRef.current;
-    setIsDragging(false);
-
-    if (!isOpen) {
-      // Opening logic - use ref value not stale state
-      if (currentPull > ACTIVATION_THRESHOLD) {
-        setPullDistance(OPEN_HEIGHT);
-        currentDistanceRef.current = OPEN_HEIGHT;
-        setIsOpen(true);
-        setIsRevealed(true);
-      } else {
-        setPullDistance(40);
-        currentDistanceRef.current = 40;
-        setIsRevealed(false);
-      }
-    } else {
-      // Closing logic when already open
-      const deltaY = pullDistance - OPEN_HEIGHT;
-      if (deltaY < CLOSE_THRESHOLD) {
-        setPullDistance(40);
-        setIsOpen(false);
-        setIsRevealed(false);
-      } else {
-        setPullDistance(OPEN_HEIGHT);
-      }
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+    // Optional haptic feedback on mobile
+    if (navigator.vibrate) {
+      navigator.vibrate(5);
     }
   };
 
   const handleClose = () => {
-    setPullDistance(40);
-    setIsRevealed(false);
     setIsOpen(false);
   };
-
-  // Ensure correct height when open state changes
-  useEffect(() => {
-    if (isOpen && !isDragging) {
-      setPullDistance(OPEN_HEIGHT);
-    }
-  }, [isOpen, isDragging]);
-
-  useEffect(() => {
-    if (isDragging) {
-      document.addEventListener('mousemove', handleMouseMove);
-      document.addEventListener('mouseup', handleMouseUp);
-
-      return () => {
-        document.removeEventListener('mousemove', handleMouseMove);
-        document.removeEventListener('mouseup', handleMouseUp);
-      };
-    }
-  }, [isDragging]);
 
   const historicalTasks = getHistoricalTasks();
   const groupedTasks: { [key: string]: HistoricalTask[] } = {};
@@ -221,40 +70,48 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
     groupedTasks[task.dateLabel].push(task);
   });
 
-  const opacity = isOpen ? 0.3 : Math.min(pullDistance / ACTIVATION_THRESHOLD, 1);
-  const contentOpacity = isRevealed ? 1 : 0;
-
   return (
     <div
       ref={containerRef}
       className="temporal-fold"
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
-      onMouseDown={handleMouseDown}
+      onClick={handleToggle}
       style={{
-        height: isOpen && !isDragging ? `${OPEN_HEIGHT}px` : `${Math.max(40, pullDistance)}px`,
-        transition: isDragging ? 'none' : 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
-        touchAction: 'pan-y'
+        height: isOpen ? `${OPEN_HEIGHT}px` : `${CLOSED_HEIGHT}px`,
+        transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+        cursor: 'pointer'
       }}
     >
-      <div className="fold-handle" style={{ opacity: opacity * 0.3 }} />
+      <div
+        className="fold-handle"
+        style={{
+          opacity: isOpen ? 0.1 : 0.3,
+          transition: 'opacity 0.3s ease'
+        }}
+      />
 
       <div
         className="fold-content"
         style={{
-          opacity: contentOpacity,
-          transform: `translateY(${isRevealed ? 0 : -20}px)`,
-          transition: isDragging ? 'none' : 'all 0.4s ease-out',
-          height: isOpen && !isDragging ? `${OPEN_HEIGHT - 40}px` : `${Math.max(0, pullDistance - 40)}px`,
+          opacity: isOpen ? 1 : 0,
+          transform: `translateY(${isOpen ? 0 : -20}px)`,
+          transition: 'all 0.4s ease-out',
+          height: isOpen ? `${OPEN_HEIGHT - CLOSED_HEIGHT}px` : '0px',
           overflow: 'auto'
         }}
       >
-        {isRevealed && (
+        {isOpen && (
           <>
             <div className="fold-header">
               <h3>{t.historicalTasks || 'Historical Tasks'}</h3>
-              <button className="fold-close" onClick={handleClose}>×</button>
+              <button
+                className="fold-close"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleClose();
+                }}
+              >
+                ×
+              </button>
             </div>
 
             <div className="fold-tasks">

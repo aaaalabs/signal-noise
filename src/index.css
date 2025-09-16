@@ -650,9 +650,14 @@ body {
     position: relative;
     min-height: 40px;
     margin: 0;
-    cursor: ns-resize;
+    cursor: pointer;
     user-select: none;
     overflow: hidden;
+    transition: all 0.2s ease;
+}
+
+.temporal-fold:hover {
+    background: rgba(255, 255, 255, 0.01);
 }
 
 .fold-handle {
