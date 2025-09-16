@@ -639,3 +639,178 @@ body {
         transform: scale(1.1);
     }
 }
+
+/* Temporal Fold - Historical Task Viewer */
+.temporal-fold {
+    position: relative;
+    min-height: 20px;
+    margin: -10px 0;
+    cursor: ns-resize;
+    user-select: none;
+    overflow: hidden;
+}
+
+.fold-handle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 3px;
+    background: #333;
+    border-radius: 2px;
+    transition: opacity 0.3s;
+}
+
+.temporal-fold:hover .fold-handle {
+    opacity: 0.5 !important;
+}
+
+.fold-content {
+    padding: 20px;
+    background: var(--surface);
+    border: 1px solid #222;
+    border-radius: 12px;
+    margin-top: 10px;
+}
+
+.fold-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #222;
+}
+
+.fold-header h3 {
+    font-size: 14px;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #666;
+}
+
+.fold-close {
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+}
+
+.fold-close:hover {
+    color: #999;
+}
+
+.fold-tasks {
+    max-height: 350px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.fold-date-group {
+    margin-bottom: 24px;
+}
+
+.fold-date-label {
+    font-size: 12px;
+    font-weight: 300;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.fold-task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.fold-task {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid #1a1a1a;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.fold-task.signal {
+    border-left: 2px solid var(--signal);
+}
+
+.fold-task.noise {
+    border-left: 2px solid var(--noise);
+}
+
+.fold-task:hover {
+    background: rgba(255,255,255,0.04);
+}
+
+.fold-task-text {
+    flex: 1;
+    color: #ccc;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.fold-task-type {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 600;
+    margin-left: 12px;
+}
+
+.fold-task-type.signal {
+    background: rgba(0, 255, 136, 0.1);
+    color: var(--signal);
+    border: 1px solid rgba(0, 255, 136, 0.3);
+}
+
+.fold-task-type.noise {
+    background: rgba(102, 102, 102, 0.1);
+    color: var(--noise);
+    border: 1px solid rgba(102, 102, 102, 0.3);
+}
+
+.fold-empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: #444;
+    font-size: 14px;
+}
+
+/* Scrollbar styling for fold content */
+.fold-tasks::-webkit-scrollbar {
+    width: 6px;
+}
+
+.fold-tasks::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.02);
+    border-radius: 3px;
+}
+
+.fold-tasks::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 3px;
+}
+
+.fold-tasks::-webkit-scrollbar-thumb:hover {
+    background: #444;
+}

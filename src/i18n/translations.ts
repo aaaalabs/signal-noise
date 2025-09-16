@@ -65,6 +65,10 @@ const translations = {
     timeJustNow: "gerade eben",
     timeMinutesAgo: "vor {n}m",
     timeHoursAgo: "vor {n}h",
+    yesterday: "Gestern",
+    daysAgo: "Tage her",
+    historicalTasks: "Vergangene Aufgaben",
+    noHistoricalTasks: "Noch keine vergangenen Aufgaben",
 
     // Header
     ratioLabel: "Signal Ratio",
@@ -190,6 +194,10 @@ const translations = {
     timeJustNow: "just now",
     timeMinutesAgo: "{n}m ago",
     timeHoursAgo: "{n}h ago",
+    yesterday: "Yesterday",
+    daysAgo: "days ago",
+    historicalTasks: "Historical Tasks",
+    noHistoricalTasks: "No historical tasks yet",
 
     // Header
     ratioLabel: "Signal Ratio",

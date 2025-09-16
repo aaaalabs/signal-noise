@@ -4,6 +4,7 @@ import { useTranslation } from './contexts/LanguageContext';
 import RatioDisplay from './components/RatioDisplay';
 import TaskInput from './components/TaskInput';
 import TaskGrid from './components/TaskGrid';
+import TemporalFold from './components/TemporalFold';
 import Analytics from './components/Analytics';
 import AICoach from './components/AICoach';
 import Onboarding from './components/Onboarding';
@@ -1087,6 +1088,9 @@ function AppContent() {
 
         {/* Input Section */}
         <TaskInput onAdd={addTask} />
+
+        {/* Temporal Fold - Historical Tasks */}
+        <TemporalFold tasks={data.tasks} />
 
         {/* Tasks Grid */}
         <TaskGrid

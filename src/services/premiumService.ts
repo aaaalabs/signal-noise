@@ -66,6 +66,7 @@ export function checkPremiumStatus(): PremiumStatus {
       }
     }
     return { isActive: false };
+  }
 
   try {
     const status = JSON.parse(premiumData);
