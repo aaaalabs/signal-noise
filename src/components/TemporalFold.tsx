@@ -168,7 +168,7 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
       onTouchEnd={handleTouchEnd}
       onMouseDown={handleMouseDown}
       style={{
-        height: `${Math.max(20, pullDistance)}px`,
+        height: `${Math.max(40, pullDistance)}px`,
         transition: isDragging ? 'none' : 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)'
       }}
     >
@@ -180,7 +180,7 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
           opacity: contentOpacity,
           transform: `translateY(${isRevealed ? 0 : -20}px)`,
           transition: isDragging ? 'none' : 'all 0.4s ease-out',
-          height: `${pullDistance - 20}px`,
+          height: `${pullDistance - 40}px`,
           overflow: 'auto'
         }}
       >
