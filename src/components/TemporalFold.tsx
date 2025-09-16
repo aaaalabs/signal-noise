@@ -145,15 +145,18 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
   };
 
   const handleMouseUp = () => {
+    console.log('🔵 MouseUp - pullDistance:', pullDistance, 'isOpen:', isOpen);
     setIsDragging(false);
 
     if (!isOpen) {
       // Opening logic
       if (pullDistance > ACTIVATION_THRESHOLD) {
+        console.log('🟢 Opening panel - setting to OPEN_HEIGHT:', OPEN_HEIGHT);
         setPullDistance(OPEN_HEIGHT);
         setIsOpen(true);
         setIsRevealed(true);
       } else {
+        console.log('🔴 Not enough pull - resetting to 40');
         setPullDistance(40);
         setIsRevealed(false);
       }
@@ -178,7 +181,9 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
 
   // Ensure correct height when open state changes
   useEffect(() => {
+    console.log('📊 useEffect - isOpen:', isOpen, 'isDragging:', isDragging);
     if (isOpen && !isDragging) {
+      console.log('✅ Setting pullDistance to OPEN_HEIGHT in useEffect:', OPEN_HEIGHT);
       setPullDistance(OPEN_HEIGHT);
     }
   }, [isOpen, isDragging]);
@@ -220,6 +225,8 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
         height: isOpen && !isDragging ? `${OPEN_HEIGHT}px` : `${Math.max(40, pullDistance)}px`,
         transition: isDragging ? 'none' : 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)'
       }}
+      // Debug attribute to see current state
+      data-debug={`isOpen=${isOpen} pullDistance=${pullDistance} isDragging=${isDragging}`}
     >
       <div className="fold-handle" style={{ opacity: opacity * 0.3 }} />
 
