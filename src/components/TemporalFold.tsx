@@ -59,10 +59,15 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
     const touch = e.touches[0];
     startYRef.current = touch.clientY;
     setIsDragging(true);
+    // Prevent browser pull-to-refresh when interacting with temporal fold
+    e.preventDefault();
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
     if (!isDragging) return;
+
+    // Prevent browser pull-to-refresh during drag gesture
+    e.preventDefault();
 
     const touch = e.touches[0];
     const deltaY = touch.clientY - startYRef.current;
@@ -130,7 +135,6 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
     if (!isDragging) return;
 
     const deltaY = e.clientY - startYRef.current;
-    console.log('🟡 MouseMove - deltaY:', deltaY, 'startY:', startYRef.current, 'currentY:', e.clientY);
 
     if (!isOpen && deltaY > 0) {
       // Opening gesture - add deltaY to base 40px
@@ -140,7 +144,6 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
         distance = ACTIVATION_THRESHOLD + (excess * ELASTIC_FACTOR);
       }
       distance = Math.min(distance, OPEN_HEIGHT);
-      console.log('🟡 Setting pullDistance to:', distance);
       setPullDistance(distance);
       currentDistanceRef.current = distance;
 
@@ -156,19 +159,16 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
 
   const handleMouseUp = () => {
     const currentPull = currentDistanceRef.current;
-    console.log('🔵 MouseUp - currentPull:', currentPull, 'pullDistance state:', pullDistance, 'isOpen:', isOpen);
     setIsDragging(false);
 
     if (!isOpen) {
       // Opening logic - use ref value not stale state
       if (currentPull > ACTIVATION_THRESHOLD) {
-        console.log('🟢 Opening panel - setting to OPEN_HEIGHT:', OPEN_HEIGHT);
         setPullDistance(OPEN_HEIGHT);
         currentDistanceRef.current = OPEN_HEIGHT;
         setIsOpen(true);
         setIsRevealed(true);
       } else {
-        console.log('🔴 Not enough pull - resetting to 40');
         setPullDistance(40);
         currentDistanceRef.current = 40;
         setIsRevealed(false);
@@ -194,9 +194,7 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
 
   // Ensure correct height when open state changes
   useEffect(() => {
-    console.log('📊 useEffect - isOpen:', isOpen, 'isDragging:', isDragging);
     if (isOpen && !isDragging) {
-      console.log('✅ Setting pullDistance to OPEN_HEIGHT in useEffect:', OPEN_HEIGHT);
       setPullDistance(OPEN_HEIGHT);
     }
   }, [isOpen, isDragging]);
@@ -236,10 +234,9 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
       onMouseDown={handleMouseDown}
       style={{
         height: isOpen && !isDragging ? `${OPEN_HEIGHT}px` : `${Math.max(40, pullDistance)}px`,
-        transition: isDragging ? 'none' : 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)'
+        transition: isDragging ? 'none' : 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+        touchAction: 'pan-y'
       }}
-      // Debug attribute to see current state
-      data-debug={`isOpen=${isOpen} pullDistance=${pullDistance} isDragging=${isDragging}`}
     >
       <div className="fold-handle" style={{ opacity: opacity * 0.3 }} />
 

@@ -180,10 +180,9 @@ export function clearSession(preserveAppData: boolean = false): void {
           expiresBackup: Date.now() + (7 * 24 * 60 * 60 * 1000)
         };
         localStorage.setItem('sessionBackup', JSON.stringify(backup));
-        console.log('💾 Session backup created before clearing');
       }
-    } catch (e) {
-      console.error('Failed to backup session:', e);
+    } catch {
+      // Backup failed, ignore
     }
   }
 

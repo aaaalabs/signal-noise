@@ -128,8 +128,6 @@ export default function PremiumMenu({
   }, [show, onClose]);
 
   const handleSignOut = () => {
-    console.log('🚪 PremiumMenu: Signing out - clearing ALL browser storage...');
-
     // Clear ALL localStorage (not just session-specific items)
     localStorage.clear();
 
@@ -142,7 +140,6 @@ export default function PremiumMenu({
     });
 
     onClose();
-    console.log('✅ All browser storage cleared, reloading page...');
     // Refresh to update the UI
     window.location.reload();
   };

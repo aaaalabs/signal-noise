@@ -11,6 +11,11 @@
     --surface: #0a0a0a;
 }
 
+html, body {
+    /* Prevent browser pull-to-refresh on mobile devices */
+    overscroll-behavior: none;
+}
+
 body {
     background: var(--bg);
     color: #fff;
