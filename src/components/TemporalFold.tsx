@@ -14,7 +14,7 @@ interface HistoricalTask extends Task {
 export default function TemporalFold({ tasks }: TemporalFoldProps) {
   const t = useTranslation();
   const [isRevealed, setIsRevealed] = useState(false);
-  const [pullDistance, setPullDistance] = useState(0);
+  const [pullDistance, setPullDistance] = useState(40);
   const [isDragging, setIsDragging] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -98,14 +98,14 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
         setIsOpen(true);
         setIsRevealed(true);
       } else {
-        setPullDistance(0);
+        setPullDistance(40);
         setIsRevealed(false);
       }
     } else {
       // Closing logic when already open
       const deltaY = pullDistance - OPEN_HEIGHT;
       if (deltaY < CLOSE_THRESHOLD) {
-        setPullDistance(0);
+        setPullDistance(40);
         setIsOpen(false);
         setIsRevealed(false);
       } else {
@@ -154,14 +154,14 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
         setIsOpen(true);
         setIsRevealed(true);
       } else {
-        setPullDistance(0);
+        setPullDistance(40);
         setIsRevealed(false);
       }
     } else {
       // Closing logic when already open
       const deltaY = pullDistance - OPEN_HEIGHT;
       if (deltaY < CLOSE_THRESHOLD) {
-        setPullDistance(0);
+        setPullDistance(40);
         setIsOpen(false);
         setIsRevealed(false);
       } else {
@@ -171,10 +171,17 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
   };
 
   const handleClose = () => {
-    setPullDistance(0);
+    setPullDistance(40);
     setIsRevealed(false);
     setIsOpen(false);
   };
+
+  // Ensure correct height when open state changes
+  useEffect(() => {
+    if (isOpen && !isDragging) {
+      setPullDistance(OPEN_HEIGHT);
+    }
+  }, [isOpen, isDragging]);
 
   useEffect(() => {
     if (isDragging) {
