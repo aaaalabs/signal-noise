@@ -16,12 +16,13 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
   const [isRevealed, setIsRevealed] = useState(false);
   const [pullDistance, setPullDistance] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const startYRef = useRef(0);
-  const contentHeightRef = useRef(400);
 
   const ACTIVATION_THRESHOLD = 50;
-  const MAX_PULL = 400;
+  const OPEN_HEIGHT = 400;
+  const CLOSE_THRESHOLD = -30;
   const ELASTIC_FACTOR = 0.5;
 
   const getHistoricalTasks = (): HistoricalTask[] => {
@@ -65,12 +66,13 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
     const touch = e.touches[0];
     const deltaY = touch.clientY - startYRef.current;
 
-    if (deltaY > 0) {
+    if (!isOpen && deltaY > 0) {
+      // Opening gesture
       let distance = deltaY;
       if (distance > ACTIVATION_THRESHOLD) {
         distance = ACTIVATION_THRESHOLD + (distance - ACTIVATION_THRESHOLD) * ELASTIC_FACTOR;
       }
-      distance = Math.min(distance, MAX_PULL);
+      distance = Math.min(distance, OPEN_HEIGHT);
       setPullDistance(distance);
 
       if (distance > ACTIVATION_THRESHOLD && !isRevealed) {
@@ -79,17 +81,36 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
         }
         setIsRevealed(true);
       }
+    } else if (isOpen && deltaY < 0) {
+      // Closing gesture when open
+      const currentHeight = OPEN_HEIGHT + deltaY;
+      setPullDistance(Math.max(40, currentHeight));
     }
   };
 
   const handleTouchEnd = () => {
     setIsDragging(false);
 
-    if (pullDistance > ACTIVATION_THRESHOLD) {
-      setPullDistance(contentHeightRef.current);
+    if (!isOpen) {
+      // Opening logic
+      if (pullDistance > ACTIVATION_THRESHOLD) {
+        setPullDistance(OPEN_HEIGHT);
+        setIsOpen(true);
+        setIsRevealed(true);
+      } else {
+        setPullDistance(0);
+        setIsRevealed(false);
+      }
     } else {
-      setPullDistance(0);
-      setIsRevealed(false);
+      // Closing logic when already open
+      const deltaY = pullDistance - OPEN_HEIGHT;
+      if (deltaY < CLOSE_THRESHOLD) {
+        setPullDistance(0);
+        setIsOpen(false);
+        setIsRevealed(false);
+      } else {
+        setPullDistance(OPEN_HEIGHT);
+      }
     }
   };
 
@@ -104,34 +125,55 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
 
     const deltaY = e.clientY - startYRef.current;
 
-    if (deltaY > 0) {
+    if (!isOpen && deltaY > 0) {
+      // Opening gesture
       let distance = deltaY;
       if (distance > ACTIVATION_THRESHOLD) {
         distance = ACTIVATION_THRESHOLD + (distance - ACTIVATION_THRESHOLD) * ELASTIC_FACTOR;
       }
-      distance = Math.min(distance, MAX_PULL);
+      distance = Math.min(distance, OPEN_HEIGHT);
       setPullDistance(distance);
 
       if (distance > ACTIVATION_THRESHOLD && !isRevealed) {
         setIsRevealed(true);
       }
+    } else if (isOpen && deltaY < 0) {
+      // Closing gesture when open
+      const currentHeight = OPEN_HEIGHT + deltaY;
+      setPullDistance(Math.max(40, currentHeight));
     }
   };
 
   const handleMouseUp = () => {
     setIsDragging(false);
 
-    if (pullDistance > ACTIVATION_THRESHOLD) {
-      setPullDistance(contentHeightRef.current);
+    if (!isOpen) {
+      // Opening logic
+      if (pullDistance > ACTIVATION_THRESHOLD) {
+        setPullDistance(OPEN_HEIGHT);
+        setIsOpen(true);
+        setIsRevealed(true);
+      } else {
+        setPullDistance(0);
+        setIsRevealed(false);
+      }
     } else {
-      setPullDistance(0);
-      setIsRevealed(false);
+      // Closing logic when already open
+      const deltaY = pullDistance - OPEN_HEIGHT;
+      if (deltaY < CLOSE_THRESHOLD) {
+        setPullDistance(0);
+        setIsOpen(false);
+        setIsRevealed(false);
+      } else {
+        setPullDistance(OPEN_HEIGHT);
+      }
     }
   };
 
   const handleClose = () => {
     setPullDistance(0);
     setIsRevealed(false);
+    setIsOpen(false);
   };
 
   useEffect(() => {
@@ -156,8 +198,8 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
     groupedTasks[task.dateLabel].push(task);
   });
 
-  const opacity = Math.min(pullDistance / ACTIVATION_THRESHOLD, 1);
-  const contentOpacity = isRevealed ? Math.min((pullDistance - ACTIVATION_THRESHOLD) / 50, 1) : 0;
+  const opacity = isOpen ? 0.3 : Math.min(pullDistance / ACTIVATION_THRESHOLD, 1);
+  const contentOpacity = isRevealed ? 1 : 0;
 
   return (
     <div
@@ -168,7 +210,7 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
       onTouchEnd={handleTouchEnd}
       onMouseDown={handleMouseDown}
       style={{
-        height: `${Math.max(40, pullDistance)}px`,
+        height: isOpen && !isDragging ? `${OPEN_HEIGHT}px` : `${Math.max(40, pullDistance)}px`,
         transition: isDragging ? 'none' : 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)'
       }}
     >
@@ -180,7 +222,7 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
           opacity: contentOpacity,
           transform: `translateY(${isRevealed ? 0 : -20}px)`,
           transition: isDragging ? 'none' : 'all 0.4s ease-out',
-          height: `${pullDistance - 40}px`,
+          height: isOpen && !isDragging ? `${OPEN_HEIGHT - 40}px` : `${Math.max(0, pullDistance - 40)}px`,
           overflow: 'auto'
         }}
       >
