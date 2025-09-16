@@ -19,6 +19,7 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const startYRef = useRef(0);
+  const currentDistanceRef = useRef(40);
 
   const ACTIVATION_THRESHOLD = 50;
   const OPEN_HEIGHT = 400;
@@ -75,6 +76,7 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
       }
       distance = Math.min(distance, OPEN_HEIGHT);
       setPullDistance(distance);
+      currentDistanceRef.current = distance;
 
       if (distance > ACTIVATION_THRESHOLD && !isRevealed) {
         if (navigator.vibrate) {
@@ -90,16 +92,19 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
   };
 
   const handleTouchEnd = () => {
+    const currentPull = currentDistanceRef.current;
     setIsDragging(false);
 
     if (!isOpen) {
-      // Opening logic
-      if (pullDistance > ACTIVATION_THRESHOLD) {
+      // Opening logic - use ref value not stale state
+      if (currentPull > ACTIVATION_THRESHOLD) {
         setPullDistance(OPEN_HEIGHT);
+        currentDistanceRef.current = OPEN_HEIGHT;
         setIsOpen(true);
         setIsRevealed(true);
       } else {
         setPullDistance(40);
+        currentDistanceRef.current = 40;
         setIsRevealed(false);
       }
     } else {
@@ -137,6 +142,7 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
       distance = Math.min(distance, OPEN_HEIGHT);
       console.log('🟡 Setting pullDistance to:', distance);
       setPullDistance(distance);
+      currentDistanceRef.current = distance;
 
       if (distance > ACTIVATION_THRESHOLD && !isRevealed) {
         setIsRevealed(true);
@@ -149,19 +155,22 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
   };
 
   const handleMouseUp = () => {
-    console.log('🔵 MouseUp - pullDistance:', pullDistance, 'isOpen:', isOpen);
+    const currentPull = currentDistanceRef.current;
+    console.log('🔵 MouseUp - currentPull:', currentPull, 'pullDistance state:', pullDistance, 'isOpen:', isOpen);
     setIsDragging(false);
 
     if (!isOpen) {
-      // Opening logic
-      if (pullDistance > ACTIVATION_THRESHOLD) {
+      // Opening logic - use ref value not stale state
+      if (currentPull > ACTIVATION_THRESHOLD) {
         console.log('🟢 Opening panel - setting to OPEN_HEIGHT:', OPEN_HEIGHT);
         setPullDistance(OPEN_HEIGHT);
+        currentDistanceRef.current = OPEN_HEIGHT;
         setIsOpen(true);
         setIsRevealed(true);
       } else {
         console.log('🔴 Not enough pull - resetting to 40');
         setPullDistance(40);
+        currentDistanceRef.current = 40;
         setIsRevealed(false);
       }
     } else {
