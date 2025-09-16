@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signal/Noise - Screenshot Mode</title>
+    <script>
+      // Pre-load mock data before React initializes
+      const mockData = {
+        perfectDay: {
+          tasks: [
+            { type: 'signal', title: 'Complete Q4 strategy presentation', timestamp: Date.now() - 7200000, id: '1' },
+            { type: 'signal', title: 'Review team performance metrics', timestamp: Date.now() - 5400000, id: '2' },
+            { type: 'signal', title: 'Client proposal finalization', timestamp: Date.now() - 4800000, id: '3' },
+            { type: 'signal', title: 'Product roadmap planning', timestamp: Date.now() - 3600000, id: '4' },
+            { type: 'noise', title: 'Check social media', timestamp: Date.now() - 1800000, id: '5' },
+            { type: 'signal', title: 'Code review for release', timestamp: Date.now() - 900000, id: '6' }
+          ],
+          history: Array.from({length: 30}, (_, i) => ({
+            date: new Date(Date.now() - (29-i) * 86400000).toISOString().split('T')[0],
+            ratio: Math.round(82 + Math.random() * 8),
+            signalCount: 12 + Math.floor(Math.random() * 5),
+            noiseCount: 2 + Math.floor(Math.random() * 2)
+          })),
+          badges: ['early-bird', 'streak-7', 'perfect-ratio', 'focused-friday'],
+          patterns: {},
+          settings: {
+            targetRatio: 80,
+            notifications: true,
+            firstName: 'Alex'
+          }
+        }
+      };
+
+      // Get scenario from URL params or default
+      const urlParams = new URLSearchParams(window.location.search);
+      const scenario = urlParams.get('scenario') || 'perfectDay';
+
+      // Set the mock data in localStorage
+      localStorage.setItem('signal_noise_data', JSON.stringify(mockData[scenario]));
+      localStorage.setItem('screenshot_mode', 'true');
+
+      // Also set premium status for premium screenshots
+      if (scenario === 'aiCoachActive') {
+        const premiumData = {
+          status: 'active',
+          tier: 'foundation',
+          email: 'alex@example.com',
+          activatedAt: Date.now() - 86400000
+        };
+        localStorage.setItem('signal_noise_premium', JSON.stringify(premiumData));
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
