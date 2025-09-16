@@ -135,7 +135,7 @@ export default function Analytics({ tasks }: AnalyticsProps) {
       >
         {/* Content that fades in/out - render first when expanded */}
         {isExpanded && (
-          <AnimatePresence mode="wait">
+          <AnimatePresence>
             <motion.div
               key="expanded-content"
               initial={{ opacity: 0 }}
