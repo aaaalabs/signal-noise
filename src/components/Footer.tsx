@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import AboutModal from './AboutModal';
 import FAQModal from './FAQModal';
+import FeedbackModal from './FeedbackModal';
 import { checkPremiumStatus } from '../services/premiumService';
 
 // Legal modals
@@ -65,8 +66,10 @@ const LegalModal = ({ show, onClose, title, children }: {
   );
 };
 
-const ImpressumContent = () => (
+
+const LegalContent = () => (
   <div>
+    {/* Impressum Section */}
     <section style={{ marginBottom: '32px' }}>
       <h3 style={{ fontSize: '18px', fontWeight: 500, marginBottom: '16px', color: '#fff' }}>
         Angaben gemäß § 5 TMG
@@ -115,7 +118,7 @@ const ImpressumContent = () => (
       </div>
     </section>
 
-    <section>
+    <section style={{ marginBottom: '48px' }}>
       <h3 style={{ fontSize: '18px', fontWeight: 500, marginBottom: '16px', color: '#fff' }}>
         Datenschutzbeauftragter
       </h3>
@@ -124,11 +127,11 @@ const ImpressumContent = () => (
         <p><strong>E-Mail:</strong> privacy@libralab.ai</p>
       </div>
     </section>
-  </div>
-);
 
-const TermsContent = () => (
-  <div>
+    {/* Visual Separator */}
+    <div style={{ borderTop: '1px solid #374151', marginBottom: '48px' }} />
+
+    {/* Terms Section */}
     <section style={{ marginBottom: '32px' }}>
       <h3 style={{ fontSize: '18px', fontWeight: 500, marginBottom: '16px', color: '#fff' }}>
         Nutzungsbedingungen
@@ -246,10 +249,10 @@ const PrivacyContent = () => (
 
 export default function Footer({ onFoundationClick }: { onFoundationClick?: () => void }) {
   const [showLegal, setShowLegal] = useState(false);
-  const [showTerms, setShowTerms] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
   const [showFAQ, setShowFAQ] = useState(false);
+  const [showFeedback, setShowFeedback] = useState(false);
   const [isPremium, setIsPremium] = useState(false);
 
   useEffect(() => {
@@ -317,6 +320,21 @@ export default function Footer({ onFoundationClick }: { onFoundationClick?: () =
               FAQ
             </button>
             <button
+              onClick={() => setShowFeedback(true)}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: '#666',
+                fontSize: '12px',
+                cursor: 'pointer',
+                transition: 'color 0.2s'
+              }}
+              onMouseEnter={(e) => (e.target as HTMLButtonElement).style.color = '#999'}
+              onMouseLeave={(e) => (e.target as HTMLButtonElement).style.color = '#666'}
+            >
+              Feedback
+            </button>
+            <button
               onClick={() => setShowLegal(true)}
               style={{
                 background: 'none',
@@ -330,21 +348,6 @@ export default function Footer({ onFoundationClick }: { onFoundationClick?: () =
               onMouseLeave={(e) => (e.target as HTMLButtonElement).style.color = '#666'}
             >
               Legal
-            </button>
-            <button
-              onClick={() => setShowTerms(true)}
-              style={{
-                background: 'none',
-                border: 'none',
-                color: '#666',
-                fontSize: '12px',
-                cursor: 'pointer',
-                transition: 'color 0.2s'
-              }}
-              onMouseEnter={(e) => (e.target as HTMLButtonElement).style.color = '#999'}
-              onMouseLeave={(e) => (e.target as HTMLButtonElement).style.color = '#666'}
-            >
-              Terms
             </button>
             <button
               onClick={() => setShowPrivacy(true)}
@@ -388,13 +391,12 @@ export default function Footer({ onFoundationClick }: { onFoundationClick?: () =
       {/* FAQ Modal */}
       <FAQModal show={showFAQ} onClose={() => setShowFAQ(false)} />
 
-      {/* Legal Modals */}
-      <LegalModal show={showLegal} onClose={() => setShowLegal(false)} title="Legal / Impressum">
-        <ImpressumContent />
-      </LegalModal>
+      {/* Feedback Modal */}
+      <FeedbackModal show={showFeedback} onClose={() => setShowFeedback(false)} />
 
-      <LegalModal show={showTerms} onClose={() => setShowTerms(false)} title="Terms of Service">
-        <TermsContent />
+      {/* Legal Modal - Combined Impressum and Terms */}
+      <LegalModal show={showLegal} onClose={() => setShowLegal(false)} title="Legal / Rechtliches">
+        <LegalContent />
       </LegalModal>
 
       <LegalModal show={showPrivacy} onClose={() => setShowPrivacy(false)} title="Privacy Policy">
