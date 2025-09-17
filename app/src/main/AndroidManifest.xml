@@ -179,7 +179,7 @@
         <!-- Signal Wave Widget Provider -->
         <receiver android:name=".widget.SignalWaveWidgetProvider"
             android:exported="true"
-            android:label="Signal Wave">
+            android:label="@string/signal_wave_name">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="app.signalnoise.SIGNAL_WAVE_REFRESH" />
