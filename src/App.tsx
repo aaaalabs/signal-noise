@@ -21,7 +21,7 @@ import BrandIcon from './components/BrandIcon';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import SyncIndicator from './components/SyncIndicator';
 import { LanguageProvider } from './contexts/LanguageContext';
-import { checkAchievements } from './utils/achievements';
+import { checkAchievements, getTodayRatio } from './utils/achievements';
 import { handleStripeReturn, getSessionData, type SessionData } from './services/premiumService';
 import { syncStart, syncSuccess, syncError, syncIdle, syncChecking, syncReceiving } from './services/syncService';
 
@@ -78,6 +78,15 @@ function AppContent() {
   // Load data from localStorage on mount
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
+
+    // Handle Android app shortcuts
+    const action = urlParams.get('action');
+    if (action === 'add-signal' || action === 'add-noise') {
+      // Store the action for processing after data loads
+      sessionStorage.setItem('pendingShortcutAction', action);
+      // Clean URL
+      window.history.replaceState({}, '', window.location.pathname);
+    }
 
     // Check for magic link verification (/auth/verify?token=... or legacy /verify?token=...)
     const pathname = window.location.pathname;
@@ -343,6 +352,38 @@ function AppContent() {
       }
 
       setIsLoaded(true);
+
+      // Process pending shortcut action if any
+      const pendingAction = sessionStorage.getItem('pendingShortcutAction');
+      if (pendingAction) {
+        sessionStorage.removeItem('pendingShortcutAction');
+        // Add default task based on shortcut
+        if (pendingAction === 'add-signal') {
+          const newTask: Task = {
+            id: Date.now(),
+            text: 'Quick Signal',
+            type: 'signal',
+            timestamp: new Date().toISOString(),
+            completed: false
+          };
+          setData(prev => ({
+            ...prev,
+            tasks: [newTask, ...prev.tasks]
+          }));
+        } else if (pendingAction === 'add-noise') {
+          const newTask: Task = {
+            id: Date.now(),
+            text: 'Quick Noise',
+            type: 'noise',
+            timestamp: new Date().toISOString(),
+            completed: false
+          };
+          setData(prev => ({
+            ...prev,
+            tasks: [newTask, ...prev.tasks]
+          }));
+        }
+      }
     };
 
     checkPremiumSession();
@@ -555,6 +596,23 @@ function AppContent() {
       }
 
       syncTracker.current.lastDataSize = dataSize;
+
+      // Update Android widget if in TWA
+      try {
+        const ratio = getTodayRatio(data.tasks);
+        const isSignal = ratio >= 80;
+
+        // Store widget data for Android to read
+        localStorage.setItem('widget_ratio', ratio.toString());
+        localStorage.setItem('widget_is_signal', isSignal.toString());
+
+        // If Android JavaScript interface is available, use it
+        if ('Android' in window && (window as any).Android?.updateHomeWidget) {
+          (window as any).Android.updateHomeWidget(ratio, isSignal);
+        }
+      } catch (e) {
+        // Widget update not available in browser
+      }
     }
   }, [data, isLoaded, isPremiumMode, sessionToken, saveToCloud, hasAttemptedCloudLoad]);
 

@@ -9,7 +9,11 @@
     <color name="navigationColorDark">#000000</color>
     <color name="navigationDividerColor">#000000</color>
     <color name="navigationDividerColorDark">#000000</color>
+    <color name="noiseGray">#666666</color>
     <color name="shortcut_background">#F5F5F5</color>
+    <color name="signalGreen">#00FF88</color>
+    <color name="widgetBlack">#000000</color>
+    <color name="widgetWhite">#FFFFFF</color>
     <integer name="splashScreenFadeOutDuration">300</integer>
     <string name="appName" translatable="false">Signal/Noise - Focus Tracker</string>
     <string name="assetStatements">
@@ -30,5 +34,9 @@
     <string name="launcherName" translatable="false">Signal/Noise</string>
     <string name="orientation" translatable="false">portrait</string>
     <string name="providerAuthority" translatable="false">app.signalnoise.twa.fileprovider</string>
+    <string name="shortcut_name_0" translatable="false">Signal</string>
+    <string name="shortcut_name_1" translatable="false">Noise</string>
+    <string name="shortcut_short_name_0" translatable="false">Signal</string>
+    <string name="shortcut_short_name_1" translatable="false">Noise</string>
     <string name="webManifestUrl" translatable="false">https://signal-noise.app/manifest.json</string>
 </resources>

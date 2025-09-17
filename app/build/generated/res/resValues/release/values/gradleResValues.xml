@@ -42,6 +42,14 @@
     <!-- Value from default config. -->
     <string name="providerAuthority" translatable="false">app.signalnoise.twa.fileprovider</string>
     <!-- Value from default config. -->
+    <string name="shortcut_name_0" translatable="false">Signal</string>
+    <!-- Value from default config. -->
+    <string name="shortcut_name_1" translatable="false">Noise</string>
+    <!-- Value from default config. -->
+    <string name="shortcut_short_name_0" translatable="false">Signal</string>
+    <!-- Value from default config. -->
+    <string name="shortcut_short_name_1" translatable="false">Noise</string>
+    <!-- Value from default config. -->
     <string name="webManifestUrl" translatable="false">https://signal-noise.app/manifest.json</string>
 
 </resources>

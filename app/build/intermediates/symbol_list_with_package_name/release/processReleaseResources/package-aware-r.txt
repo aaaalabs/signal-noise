@@ -399,6 +399,7 @@ color navigationColor
 color navigationColorDark
 color navigationDividerColor
 color navigationDividerColorDark
+color noiseGray
 color notification_action_color_filter
 color notification_icon_bg_color
 color primary_dark_material_dark
@@ -416,6 +417,7 @@ color secondary_text_default_material_light
 color secondary_text_disabled_material_dark
 color secondary_text_disabled_material_light
 color shortcut_background
+color signalGreen
 color switch_thumb_disabled_material_dark
 color switch_thumb_disabled_material_light
 color switch_thumb_material_dark
@@ -424,6 +426,8 @@ color switch_thumb_normal_material_dark
 color switch_thumb_normal_material_light
 color tooltip_background_dark
 color tooltip_background_light
+color widgetBlack
+color widgetWhite
 dimen abc_action_bar_content_inset_material
 dimen abc_action_bar_content_inset_with_nav
 dimen abc_action_bar_default_height_material
@@ -655,6 +659,8 @@ drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable shortcut_legacy_background
+drawable shortcut_noise
+drawable shortcut_signal
 drawable splash
 drawable splash_icon
 drawable test_level_drawable
@@ -843,6 +849,9 @@ id view_tree_on_back_pressed_dispatcher_owner
 id view_tree_saved_state_registry_owner
 id view_tree_view_model_store_owner
 id visible_removing_fragment_view_tag
+id widget_container
+id widget_ratio
+id widget_status
 id withText
 id wrap_content
 integer abc_config_activityDefaultDur
@@ -901,6 +910,7 @@ layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
+layout widget_signal_noise
 mipmap ic_launcher
 mipmap ic_maskable
 string abc_action_bar_home_description
@@ -957,6 +967,10 @@ string no_provider_toast
 string orientation
 string providerAuthority
 string search_menu_title
+string shortcut_name_0
+string shortcut_name_1
+string shortcut_short_name_0
+string shortcut_short_name_1
 string status_bar_notification_info_overflow
 string update_chrome_toast
 string webManifestUrl
@@ -1360,3 +1374,4 @@ styleable ViewStubCompat android_id android_layout android_inflatedId
 xml filepaths
 xml image_share_filepaths
 xml shortcuts
+xml widget_info

@@ -7669,13 +7669,37 @@ androidx.viewpager.widget.ViewPager$SimpleOnPageChangeListener
 androidx.viewpager.widget.ViewPager$ViewPositionComparator
 androidx.viewpager.widget.ViewPager
 app.signalnoise.twa.R$bool
-app.signalnoise.twa.R$color
+app.signalnoise.twa.R$color:
+    public static int backgroundColor
+    public static int colorPrimary
+    public static int colorPrimaryDark
+    public static int navigationColor
+    public static int navigationColorDark
+    public static int navigationDividerColor
+    public static int navigationDividerColorDark
+    public static int shortcut_background
+    public static int widgetBlack
+    public static int widgetWhite
+    private void <init>()
 app.signalnoise.twa.R$drawable
+app.signalnoise.twa.R$id:
+    private void <init>()
 app.signalnoise.twa.R$integer
+app.signalnoise.twa.R$layout:
+    private void <init>()
 app.signalnoise.twa.R$mipmap
 app.signalnoise.twa.R$string
 app.signalnoise.twa.R$xml
 app.signalnoise.twa.R
+app.signalnoise.twa.widget.SignalNoiseWidgetProvider:
+    private static final java.lang.String PREFS_NAME
+    private static final java.lang.String PREF_IS_SIGNAL
+    private static final java.lang.String PREF_RATIO
+    private static final int UPDATE_THRESHOLD
+app.signalnoise.twa.widget.WidgetUpdateReceiver:
+    public static final java.lang.String ACTION_UPDATE_WIDGET
+    public static final java.lang.String EXTRA_IS_SIGNAL
+    public static final java.lang.String EXTRA_RATIO
 com.google.androidbrowserhelper.BuildConfig
 com.google.androidbrowserhelper.R$drawable:
     private void <init>()

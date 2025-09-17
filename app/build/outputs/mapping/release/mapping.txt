@@ -3,8 +3,8 @@
 # min_api: 21
 # common_typos_disable
 # {"id":"com.android.tools.r8.mapping","version":"2.2"}
-# pg_map_id: 1b691c5
-# pg_map_hash: SHA-256 1b691c56cd544d584481cd34c6c6e0270f1568183a537ee614e1363fe0f31b10
+# pg_map_id: 0a73e36
+# pg_map_hash: SHA-256 0a73e368272675d7bbcd8002cc4d1881dc2c76c2d1cf86962e19f9a671f3f083
 android.support.customtabs.ICustomTabsCallback -> a.a:
 # {"id":"sourceFile","fileName":"ICustomTabsCallback.java"}
     java.lang.String DESCRIPTOR -> a
@@ -307,7 +307,7 @@ androidx.activity.ComponentActivity$4 -> androidx.activity.ComponentActivity$4:
 androidx.activity.ComponentActivity$Companion -> androidx.activity.b$a:
 # {"id":"sourceFile","fileName":"ComponentActivity.kt"}
     1:1:void <init>(kotlin.jvm.internal.DefaultConstructorMarker):0:0 -> <init>
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LS/b;)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LT/b;)V"}
     2:2:void <init>():1160:1160 -> <init>
 androidx.activity.ImmLeaksCleaner -> androidx.activity.ImmLeaksCleaner:
 # {"id":"sourceFile","fileName":"ImmLeaksCleaner.kt"}
@@ -315,10 +315,10 @@ androidx.activity.ImmLeaksCleaner -> androidx.activity.ImmLeaksCleaner:
     androidx.activity.ImmLeaksCleaner$Companion Companion -> b
       # {"id":"com.android.tools.r8.residualsignature","signature":"Landroidx/activity/ImmLeaksCleaner$c;"}
     kotlin.Lazy cleaner$delegate -> c
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LN/a;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LO/a;"}
     9:17:void <clinit>():113:113 -> <clinit>
     1:3:kotlin.Lazy access$getCleaner$delegate$cp():28:28 -> d
-      # {"id":"com.android.tools.r8.residualsignature","signature":"()LN/a;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"()LO/a;"}
     11:15:void onStateChanged(androidx.lifecycle.LifecycleOwner,androidx.lifecycle.Lifecycle$Event):30:30 -> h
       # {"id":"com.android.tools.r8.residualsignature","signature":"(Landroidx/lifecycle/k;Landroidx/lifecycle/f$a;)V"}
     16:30:void onStateChanged(androidx.lifecycle.LifecycleOwner,androidx.lifecycle.Lifecycle$Event):34:34 -> h
@@ -335,7 +335,7 @@ androidx.activity.ImmLeaksCleaner -> androidx.activity.ImmLeaksCleaner:
 androidx.activity.ImmLeaksCleaner$Cleaner -> androidx.activity.ImmLeaksCleaner$a:
 # {"id":"sourceFile","fileName":"ImmLeaksCleaner.kt"}
     1:1:void <init>(kotlin.jvm.internal.DefaultConstructorMarker):0:0 -> <init>
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LS/b;)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LT/b;)V"}
     2:2:void <init>():54:54 -> <init>
     boolean clearNextServedView(android.view.inputmethod.InputMethodManager) -> a
     java.lang.Object getLock(android.view.inputmethod.InputMethodManager) -> b
@@ -343,7 +343,7 @@ androidx.activity.ImmLeaksCleaner$Cleaner -> androidx.activity.ImmLeaksCleaner$a
 androidx.activity.ImmLeaksCleaner$Companion -> androidx.activity.ImmLeaksCleaner$c:
 # {"id":"sourceFile","fileName":"ImmLeaksCleaner.kt"}
     1:1:void <init>(kotlin.jvm.internal.DefaultConstructorMarker):0:0 -> <init>
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LS/b;)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LT/b;)V"}
     2:2:void <init>():111:111 -> <init>
     1:11:androidx.activity.ImmLeaksCleaner$Cleaner getCleaner():113:113 -> a
       # {"id":"com.android.tools.r8.residualsignature","signature":"()Landroidx/activity/ImmLeaksCleaner$a;"}
@@ -10635,7 +10635,7 @@ androidx.collection.ArraySet -> q.b:
     3:4:void <init>(int):50:51 -> <init>
     5:5:void <init>(int):88:88 -> <init>
     6:6:void <init>(int,int,kotlin.jvm.internal.DefaultConstructorMarker):47:47 -> <init>
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(IILS/b;)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(IILT/b;)V"}
     1:4:void ensureCapacity(int):311:311 -> a
     5:11:void ensureCapacity(int):312:312 -> a
     12:15:void ensureCapacity(int):313:313 -> a
@@ -10810,7 +10810,7 @@ androidx.collection.LongSparseArray -> q.f:
     3:4:void <init>(int):73:74 -> <init>
     5:7:void <init>(int):76:78 -> <init>
     8:8:void <init>(int,int,kotlin.jvm.internal.DefaultConstructorMarker):52:52 -> <init>
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(IILS/b;)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(IILT/b;)V"}
     1:14:void append(long,java.lang.Object):545:545 -> a
     15:18:void append(long,java.lang.Object):546:546 -> a
     19:27:void append(long,java.lang.Object):549:549 -> a
@@ -11022,7 +11022,7 @@ androidx.collection.SimpleArrayMap -> q.i:
     6:7:void <init>(int):70:71 -> <init>
     8:8:void <init>(int):69:69 -> <init>
     9:9:void <init>(int,int,kotlin.jvm.internal.DefaultConstructorMarker):63:63 -> <init>
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(IILS/b;)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(IILT/b;)V"}
     1:4:int __restricted$indexOfValue(java.lang.Object):236:236 -> a
     5:12:int __restricted$indexOfValue(java.lang.Object):237:237 -> a
     13:24:int __restricted$indexOfValue(java.lang.Object):241:241 -> a
@@ -11178,7 +11178,7 @@ androidx.collection.SparseArrayCompat -> q.j:
     3:4:void <init>(int):82:83 -> <init>
     5:7:void <init>(int):85:87 -> <init>
     8:8:void <init>(int,int,kotlin.jvm.internal.DefaultConstructorMarker):61:61 -> <init>
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(IILS/b;)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(IILT/b;)V"}
     1:12:void append(int,java.lang.Object):497:497 -> a
     13:16:void append(int,java.lang.Object):498:498 -> a
     17:25:void append(int,java.lang.Object):501:501 -> a
@@ -19667,7 +19667,7 @@ androidx.lifecycle.Lifecycle$Event -> androidx.lifecycle.f$a:
 androidx.lifecycle.Lifecycle$Event$Companion -> androidx.lifecycle.f$a$a:
 # {"id":"sourceFile","fileName":"Lifecycle.kt"}
     1:1:void <init>(kotlin.jvm.internal.DefaultConstructorMarker):0:0 -> <init>
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LS/b;)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LT/b;)V"}
     2:2:void <init>():151:151 -> <init>
     6:24:androidx.lifecycle.Lifecycle$Event downFrom(androidx.lifecycle.Lifecycle$State):162:162 -> a
       # {"id":"com.android.tools.r8.residualsignature","signature":"(Landroidx/lifecycle/f$b;)Landroidx/lifecycle/f$a;"}
@@ -19716,7 +19716,7 @@ androidx.lifecycle.LifecycleCoroutineScopeImpl -> androidx.lifecycle.LifecycleCo
     androidx.lifecycle.Lifecycle lifecycle -> a
       # {"id":"com.android.tools.r8.residualsignature","signature":"Landroidx/lifecycle/f;"}
     1:2:kotlin.coroutines.CoroutineContext getCoroutineContext():381:381 -> d
-      # {"id":"com.android.tools.r8.residualsignature","signature":"()LP/a;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"()LQ/a;"}
     11:26:void onStateChanged(androidx.lifecycle.LifecycleOwner,androidx.lifecycle.Lifecycle$Event):403:403 -> h
       # {"id":"com.android.tools.r8.residualsignature","signature":"(Landroidx/lifecycle/k;Landroidx/lifecycle/f$a;)V"}
     27:33:void onStateChanged(androidx.lifecycle.LifecycleOwner,androidx.lifecycle.Lifecycle$Event):404:404 -> h
@@ -19860,7 +19860,7 @@ androidx.lifecycle.LifecycleRegistry -> androidx.lifecycle.l:
 androidx.lifecycle.LifecycleRegistry$Companion -> androidx.lifecycle.l$a:
 # {"id":"sourceFile","fileName":"LifecycleRegistry.kt"}
     1:1:void <init>(kotlin.jvm.internal.DefaultConstructorMarker):0:0 -> <init>
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LS/b;)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LT/b;)V"}
     2:2:void <init>():319:319 -> <init>
     8:15:androidx.lifecycle.Lifecycle$State min$lifecycle_runtime_release(androidx.lifecycle.Lifecycle$State,androidx.lifecycle.Lifecycle$State):336:336 -> a
       # {"id":"com.android.tools.r8.residualsignature","signature":"(Landroidx/lifecycle/f$b;Landroidx/lifecycle/f$b;)Landroidx/lifecycle/f$b;"}
@@ -20065,7 +20065,7 @@ androidx.lifecycle.ProcessLifecycleOwner$Api29Impl -> androidx.lifecycle.r$a:
 androidx.lifecycle.ProcessLifecycleOwner$Companion -> androidx.lifecycle.r$b:
 # {"id":"sourceFile","fileName":"ProcessLifecycleOwner.kt"}
     1:1:void <init>(kotlin.jvm.internal.DefaultConstructorMarker):0:0 -> <init>
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LS/b;)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LT/b;)V"}
     2:2:void <init>():72:72 -> <init>
     1:5:androidx.lifecycle.LifecycleOwner get():85:85 -> a
       # {"id":"com.android.tools.r8.residualsignature","signature":"()Landroidx/lifecycle/k;"}
@@ -20151,7 +20151,7 @@ androidx.lifecycle.ReportFragment$ActivityInitializationListener -> androidx.lif
 androidx.lifecycle.ReportFragment$Companion -> androidx.lifecycle.s$b:
 # {"id":"sourceFile","fileName":"ReportFragment.kt"}
     1:1:void <init>(kotlin.jvm.internal.DefaultConstructorMarker):0:0 -> <init>
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LS/b;)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LT/b;)V"}
     2:2:void <init>():161:161 -> <init>
     11:14:void dispatch$lifecycle_runtime_release(android.app.Activity,androidx.lifecycle.Lifecycle$Event):189:189 -> a
       # {"id":"com.android.tools.r8.residualsignature","signature":"(Landroid/app/Activity;Landroidx/lifecycle/f$a;)V"}
@@ -20182,7 +20182,7 @@ androidx.lifecycle.ReportFragment$LifecycleCallbacks -> androidx.lifecycle.s$c:
 androidx.lifecycle.ReportFragment$LifecycleCallbacks$Companion -> androidx.lifecycle.s$c$a:
 # {"id":"sourceFile","fileName":"ReportFragment.kt"}
     1:1:void <init>(kotlin.jvm.internal.DefaultConstructorMarker):0:0 -> <init>
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LS/b;)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LT/b;)V"}
     2:2:void <init>():153:153 -> <init>
     6:14:void registerIn(android.app.Activity):156:156 -> a
 androidx.lifecycle.ReportFragment$LifecycleCallbacks$Companion$$ExternalSyntheticApiModelOutline0 -> androidx.lifecycle.t:
@@ -21199,7 +21199,7 @@ androidx.savedstate.Recreator -> androidx.savedstate.Recreator:
 androidx.savedstate.Recreator$Companion -> androidx.savedstate.Recreator$a:
 # {"id":"sourceFile","fileName":"Recreator.kt"}
     1:1:void <init>(kotlin.jvm.internal.DefaultConstructorMarker):0:0 -> <init>
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LS/b;)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LT/b;)V"}
     2:2:void <init>():93:93 -> <init>
 androidx.startup.AppInitializer -> androidx.startup.a:
 # {"id":"sourceFile","fileName":"AppInitializer.java"}
@@ -22710,12 +22710,64 @@ app.signalnoise.twa.LauncherActivity -> app.signalnoise.twa.LauncherActivity:
     4:11:void onCreate(android.os.Bundle):38:38 -> onCreate
     12:16:void onCreate(android.os.Bundle):39:39 -> onCreate
     17:20:void onCreate(android.os.Bundle):41:41 -> onCreate
-com.google.androidbrowserhelper.R$drawable -> I.a:
+app.signalnoise.twa.R$color -> I.a:
+    int noiseGray -> a
+    int signalGreen -> b
+app.signalnoise.twa.R$id -> I.b:
+    int widget_container -> a
+    int widget_ratio -> b
+    int widget_status -> c
+app.signalnoise.twa.R$layout -> I.c:
+    int widget_signal_noise -> a
+app.signalnoise.twa.widget.SignalNoiseWidgetProvider -> app.signalnoise.twa.widget.SignalNoiseWidgetProvider:
+# {"id":"sourceFile","fileName":"SignalNoiseWidgetProvider.java"}
+    1:4:void <init>():14:14 -> <init>
+    1:7:void updateAllWidgets(android.content.Context,int,boolean):56:56 -> a
+    8:15:void updateAllWidgets(android.content.Context,int,boolean):57:57 -> a
+    16:25:void updateAllWidgets(android.content.Context,int,boolean):60:60 -> a
+    26:29:void updateAllWidgets(android.content.Context,int,boolean):65:65 -> a
+    30:35:void updateAllWidgets(android.content.Context,int,boolean):66:66 -> a
+    36:39:void updateAllWidgets(android.content.Context,int,boolean):67:67 -> a
+    40:42:void updateAllWidgets(android.content.Context,int,boolean):68:68 -> a
+    43:46:void updateAllWidgets(android.content.Context,int,boolean):71:71 -> a
+    47:53:void updateAllWidgets(android.content.Context,int,boolean):72:72 -> a
+    54:57:void updateAllWidgets(android.content.Context,int,boolean):73:73 -> a
+    58:62:void updateAllWidgets(android.content.Context,int,boolean):75:75 -> a
+    63:69:void updateAllWidgets(android.content.Context,int,boolean):76:76 -> a
+    1:11:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int,boolean):34:34 -> b
+    12:22:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int,boolean):37:37 -> b
+    23:27:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int,boolean):40:40 -> b
+    28:32:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int,boolean):41:41 -> b
+    33:34:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int,boolean):42:42 -> b
+    35:49:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int,boolean):43:43 -> b
+    50:52:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int,boolean):42:42 -> b
+    53:61:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int,boolean):46:46 -> b
+    62:67:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int,boolean):47:47 -> b
+    68:71:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int,boolean):48:48 -> b
+    72:76:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int,boolean):50:50 -> b
+    77:80:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int,boolean):52:52 -> b
+    1:7:void onDisabled(android.content.Context):89:89 -> onDisabled
+    8:18:void onDisabled(android.content.Context):90:90 -> onDisabled
+    19:22:void onDisabled(android.content.Context):91:91 -> onDisabled
+    1:4:void onEnabled(android.content.Context):83:83 -> onEnabled
+    1:7:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):23:23 -> onUpdate
+    8:13:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):24:24 -> onUpdate
+    14:20:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):25:25 -> onUpdate
+    21:25:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):27:27 -> onUpdate
+    26:32:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):28:28 -> onUpdate
+app.signalnoise.twa.widget.WidgetUpdateReceiver -> app.signalnoise.twa.widget.WidgetUpdateReceiver:
+# {"id":"sourceFile","fileName":"WidgetUpdateReceiver.java"}
+    1:4:void <init>():7:7 -> <init>
+    1:12:void onReceive(android.content.Context,android.content.Intent):14:14 -> onReceive
+    13:19:void onReceive(android.content.Context,android.content.Intent):15:15 -> onReceive
+    20:26:void onReceive(android.content.Context,android.content.Intent):16:16 -> onReceive
+    27:30:void onReceive(android.content.Context,android.content.Intent):19:19 -> onReceive
+com.google.androidbrowserhelper.R$drawable -> J.a:
     int ic_site_settings -> a
-com.google.androidbrowserhelper.R$string -> I.b:
+com.google.androidbrowserhelper.R$string -> J.b:
     int manage_space_no_data_toast -> a
     int manage_space_not_supported_toast -> b
-com.google.androidbrowserhelper.trusted.ChromeLegacyUtils -> J.b:
+com.google.androidbrowserhelper.trusted.ChromeLegacyUtils -> K.b:
 # {"id":"sourceFile","fileName":"ChromeLegacyUtils.java"}
     java.util.List SUPPORTED_CHROME_PACKAGES -> a
     java.util.List VERSION_CHECK_CHROME_PACKAGES -> b
@@ -22738,15 +22790,15 @@ com.google.androidbrowserhelper.trusted.ChromeLegacyUtils -> J.b:
     1:13:boolean supportsTrustedWebActivities(android.content.pm.PackageManager,java.lang.String):105:105 -> g
     14:18:boolean supportsTrustedWebActivities(android.content.pm.PackageManager,java.lang.String):107:107 -> g
     1:7:boolean usesWhiteNavbar(java.lang.String):86:86 -> h
-com.google.androidbrowserhelper.trusted.ChromeLegacyUtils$$ExternalSyntheticApiModelOutline0 -> J.a:
+com.google.androidbrowserhelper.trusted.ChromeLegacyUtils$$ExternalSyntheticApiModelOutline0 -> K.a:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
-    1:1:long J.ChromeLegacyUtils$$ExternalSyntheticApiModelOutline0.m(android.content.pm.PackageInfo):0:0 -> a
+    1:1:long K.ChromeLegacyUtils$$ExternalSyntheticApiModelOutline0.m(android.content.pm.PackageInfo):0:0 -> a
       # {"id":"com.android.tools.r8.synthesized"}
-com.google.androidbrowserhelper.trusted.ChromeOsSupport -> J.c:
+com.google.androidbrowserhelper.trusted.ChromeOsSupport -> K.c:
 # {"id":"sourceFile","fileName":"ChromeOsSupport.java"}
     1:7:boolean isRunningOnArc(android.content.pm.PackageManager):33:33 -> a
-com.google.androidbrowserhelper.trusted.ChromeUpdatePrompt -> J.d:
+com.google.androidbrowserhelper.trusted.ChromeUpdatePrompt -> K.d:
 # {"id":"sourceFile","fileName":"ChromeUpdatePrompt.java"}
     1:16:boolean chromeNeedsUpdate(android.content.pm.PackageManager,java.lang.String):51:51 -> a
     1:9:void promptIfNeeded(android.content.Context,java.lang.String):42:42 -> b
@@ -22756,11 +22808,11 @@ com.google.androidbrowserhelper.trusted.ChromeUpdatePrompt -> J.d:
     6:9:void showToastIfResourceExists(android.content.Context,java.lang.String):62:62 -> c
     10:17:void showToastIfResourceExists(android.content.Context,java.lang.String):61:61 -> c
     18:25:void showToastIfResourceExists(android.content.Context,java.lang.String):65:65 -> c
-com.google.androidbrowserhelper.trusted.DelegationService -> J.e:
+com.google.androidbrowserhelper.trusted.DelegationService -> K.e:
 # {"id":"sourceFile","fileName":"DelegationService.java"}
     java.util.List mExtraCommandHandlers -> d
     com.google.androidbrowserhelper.trusted.SharedPreferencesTokenStore mTokenStore -> e
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LJ/D;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LK/D;"}
     1:3:void <init>():40:40 -> <init>
     4:10:void <init>():37:37 -> <init>
     11:19:void <init>():41:41 -> <init>
@@ -22777,8 +22829,8 @@ com.google.androidbrowserhelper.trusted.DelegationService -> J.e:
     23:31:android.os.Bundle onExtraCommand(java.lang.String,android.os.Bundle,androidx.browser.trusted.TrustedWebActivityCallbackRemote):71:71 -> f
     32:34:android.os.Bundle onExtraCommand(java.lang.String,android.os.Bundle,androidx.browser.trusted.TrustedWebActivityCallbackRemote):75:75 -> f
     1:6:void registerExtraCommandHandler(com.google.androidbrowserhelper.trusted.ExtraCommandHandler):79:79 -> k
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LJ/f;)V"}
-com.google.androidbrowserhelper.trusted.ExtraCommandHandler -> J.f:
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LK/f;)V"}
+com.google.androidbrowserhelper.trusted.ExtraCommandHandler -> K.f:
 # {"id":"sourceFile","fileName":"ExtraCommandHandler.java"}
     android.os.Bundle handleExtraCommand(android.content.Context,java.lang.String,android.os.Bundle,androidx.browser.trusted.TrustedWebActivityCallbackRemote) -> a
       # {"id":"com.android.tools.r8.residualsignature","signature":"(Landroid/content/Context;Ljava/lang/String;Landroid/os/Bundle;Lo/p;)Landroid/os/Bundle;"}
@@ -22797,21 +22849,21 @@ com.google.androidbrowserhelper.trusted.FocusActivity -> com.google.androidbrows
     64:67:void addToIntent(android.content.Intent,android.content.Context):47:47 -> a
     1:3:void onCreate(android.os.Bundle):53:53 -> onCreate
     4:7:void onCreate(android.os.Bundle):54:54 -> onCreate
-com.google.androidbrowserhelper.trusted.LauncherActivity -> J.h:
+com.google.androidbrowserhelper.trusted.LauncherActivity -> K.h:
 # {"id":"sourceFile","fileName":"LauncherActivity.java"}
     com.google.androidbrowserhelper.trusted.LauncherActivityMetadata mMetadata -> a
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LJ/i;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LK/i;"}
     boolean mBrowserWasLaunched -> b
     com.google.androidbrowserhelper.trusted.splashscreens.PwaWrapperSplashScreenStrategy mSplashScreenStrategy -> c
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LK/c;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LL/c;"}
     com.google.androidbrowserhelper.trusted.TwaLauncher mTwaLauncher -> d
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LJ/K;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LK/K;"}
     long mStartupUptimeMillis -> e
     boolean sChromeVersionChecked -> f
     int sLauncherActivitiesAlive -> g
     1:4:void <init>():105:105 -> <init>
     2:4:void lambda$launchTwa$0():246:246 -> a
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LJ/h;)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LK/h;)V"}
     1:12:void addFileDataIfPresent(androidx.browser.trusted.TrustedWebActivityIntentBuilder):306:306 -> b
       # {"id":"com.android.tools.r8.residualsignature","signature":"(Lo/s;)V"}
     13:23:void addFileDataIfPresent(androidx.browser.trusted.TrustedWebActivityIntentBuilder):307:307 -> b
@@ -22830,14 +22882,14 @@ com.google.androidbrowserhelper.trusted.LauncherActivity -> J.h:
     30:34:void addShareDataIfPresent(androidx.browser.trusted.TrustedWebActivityIntentBuilder):297:297 -> c
     35:59:void addShareDataIfPresent(androidx.browser.trusted.TrustedWebActivityIntentBuilder):299:299 -> c
     1:24:com.google.androidbrowserhelper.trusted.TwaLauncher createTwaLauncher():271:271 -> d
-      # {"id":"com.android.tools.r8.residualsignature","signature":"()LJ/K;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"()LK/K;"}
     1:5:int getColorCompat(int):349:349 -> e
     1:6:androidx.browser.customtabs.CustomTabsCallback getCustomTabsCallback():267:267 -> f
       # {"id":"com.android.tools.r8.residualsignature","signature":"()Ln/b;"}
     1:5:androidx.browser.trusted.TrustedWebActivityDisplayMode getDisplayMode():476:476 -> g
       # {"id":"com.android.tools.r8.residualsignature","signature":"()Lo/q;"}
     1:12:com.google.androidbrowserhelper.trusted.TwaLauncher$FallbackStrategy getFallbackStrategy():461:461 -> h
-      # {"id":"com.android.tools.r8.residualsignature","signature":"()LJ/K$a;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"()LK/K$a;"}
     13:15:com.google.androidbrowserhelper.trusted.TwaLauncher$FallbackStrategy getFallbackStrategy():462:462 -> h
     16:18:com.google.androidbrowserhelper.trusted.TwaLauncher$FallbackStrategy getFallbackStrategy():464:464 -> h
     1:8:android.net.Uri getLaunchingUrl():414:414 -> i
@@ -22943,18 +22995,18 @@ com.google.androidbrowserhelper.trusted.LauncherActivity -> J.h:
     4:11:void onSaveInstanceState(android.os.Bundle):377:377 -> onSaveInstanceState
     1:8:boolean splashScreenNeeded():277:277 -> p
     9:13:boolean splashScreenNeeded():283:283 -> p
-com.google.androidbrowserhelper.trusted.LauncherActivity$$ExternalSyntheticLambda0 -> J.g:
+com.google.androidbrowserhelper.trusted.LauncherActivity$$ExternalSyntheticLambda0 -> K.g:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
     com.google.androidbrowserhelper.trusted.LauncherActivity com.google.androidbrowserhelper.trusted.LauncherActivity$$InternalSyntheticLambda$1$d6e17f375f6c9c31ec4180080cb2b267785baf6f34a2d45886d50dc7d8912c6e$0.f$0 -> a
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LJ/h;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LK/h;"}
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void J.LauncherActivity$$ExternalSyntheticLambda0.<init>(J.LauncherActivity):0:0 -> <init>
+    1:1:void K.LauncherActivity$$ExternalSyntheticLambda0.<init>(K.LauncherActivity):0:0 -> <init>
       # {"id":"com.android.tools.r8.synthesized"}
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LJ/h;)V"}
-    1:1:void J.LauncherActivity$$ExternalSyntheticLambda0.run():0:0 -> run
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LK/h;)V"}
+    1:1:void K.LauncherActivity$$ExternalSyntheticLambda0.run():0:0 -> run
       # {"id":"com.android.tools.r8.synthesized"}
-com.google.androidbrowserhelper.trusted.LauncherActivityMetadata -> J.i:
+com.google.androidbrowserhelper.trusted.LauncherActivityMetadata -> K.i:
 # {"id":"sourceFile","fileName":"LauncherActivityMetadata.java"}
     java.lang.String defaultUrl -> a
     int statusBarColorId -> b
@@ -23028,7 +23080,7 @@ com.google.androidbrowserhelper.trusted.LauncherActivityMetadata -> J.i:
     11:17:int getLaunchHandlerClientMode(java.lang.String):291:291 -> b
     13:122:int getOrientation(java.lang.String):243:243 -> c
     1:4:com.google.androidbrowserhelper.trusted.LauncherActivityMetadata parse(android.content.Context):298:298 -> d
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(Landroid/content/Context;)LJ/i;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Landroid/content/Context;)LK/i;"}
     5:9:com.google.androidbrowserhelper.trusted.LauncherActivityMetadata parse(android.content.Context):299:299 -> d
     10:15:com.google.androidbrowserhelper.trusted.LauncherActivityMetadata parse(android.content.Context):301:301 -> d
     16:24:com.google.androidbrowserhelper.trusted.LauncherActivityMetadata parse(android.content.Context):302:302 -> d
@@ -23137,65 +23189,65 @@ com.google.androidbrowserhelper.trusted.ManageDataLauncherActivity -> com.google
     4:7:void onStop():201:201 -> onStop
     8:10:void onStop():202:202 -> onStop
     11:14:void onStop():204:204 -> onStop
-com.google.androidbrowserhelper.trusted.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline0 -> J.j:
+com.google.androidbrowserhelper.trusted.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline0 -> K.j:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
-    1:1:java.lang.Class J.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline0.m():0:0 -> a
+    1:1:java.lang.Class K.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline0.m():0:0 -> a
       # {"id":"com.android.tools.r8.synthesized"}
-com.google.androidbrowserhelper.trusted.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline1 -> J.m:
+com.google.androidbrowserhelper.trusted.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline1 -> K.m:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
-    1:1:java.lang.Object J.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline1.m(android.content.Context,java.lang.Class):0:0 -> a
+    1:1:java.lang.Object K.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline1.m(android.content.Context,java.lang.Class):0:0 -> a
       # {"id":"com.android.tools.r8.synthesized"}
-com.google.androidbrowserhelper.trusted.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline10 -> J.k:
+com.google.androidbrowserhelper.trusted.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline10 -> K.k:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
-    1:1:android.content.pm.ShortcutInfo J.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline10.m(android.content.pm.ShortcutInfo$Builder):0:0 -> a
+    1:1:android.content.pm.ShortcutInfo K.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline10.m(android.content.pm.ShortcutInfo$Builder):0:0 -> a
       # {"id":"com.android.tools.r8.synthesized"}
-com.google.androidbrowserhelper.trusted.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline11 -> J.l:
+com.google.androidbrowserhelper.trusted.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline11 -> K.l:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
-    1:1:android.content.pm.ShortcutInfo$Builder J.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline11.m(android.content.Context,java.lang.String):0:0 -> a
+    1:1:android.content.pm.ShortcutInfo$Builder K.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline11.m(android.content.Context,java.lang.String):0:0 -> a
       # {"id":"com.android.tools.r8.synthesized"}
-com.google.androidbrowserhelper.trusted.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline2 -> J.n:
+com.google.androidbrowserhelper.trusted.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline2 -> K.n:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
-    1:1:android.content.pm.ShortcutManager J.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline2.m(java.lang.Object):0:0 -> a
+    1:1:android.content.pm.ShortcutManager K.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline2.m(java.lang.Object):0:0 -> a
       # {"id":"com.android.tools.r8.synthesized"}
-com.google.androidbrowserhelper.trusted.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline3 -> J.o:
+com.google.androidbrowserhelper.trusted.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline3 -> K.o:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void J.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline3.m(android.content.pm.ShortcutManager,java.util.List):0:0 -> a
+    1:1:void K.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline3.m(android.content.pm.ShortcutManager,java.util.List):0:0 -> a
       # {"id":"com.android.tools.r8.synthesized"}
-com.google.androidbrowserhelper.trusted.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline4 -> J.p:
+com.google.androidbrowserhelper.trusted.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline4 -> K.p:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
-    1:1:boolean J.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline4.m(android.content.pm.ShortcutManager,java.util.List):0:0 -> a
+    1:1:boolean K.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline4.m(android.content.pm.ShortcutManager,java.util.List):0:0 -> a
       # {"id":"com.android.tools.r8.synthesized"}
-com.google.androidbrowserhelper.trusted.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline5 -> J.q:
+com.google.androidbrowserhelper.trusted.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline5 -> K.q:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
-    1:1:android.content.pm.ShortcutInfo$Builder J.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline5.m(android.content.pm.ShortcutInfo$Builder,java.lang.CharSequence):0:0 -> a
+    1:1:android.content.pm.ShortcutInfo$Builder K.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline5.m(android.content.pm.ShortcutInfo$Builder,java.lang.CharSequence):0:0 -> a
       # {"id":"com.android.tools.r8.synthesized"}
-com.google.androidbrowserhelper.trusted.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline6 -> J.r:
+com.google.androidbrowserhelper.trusted.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline6 -> K.r:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
-    1:1:android.content.pm.ShortcutInfo$Builder J.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline6.m(android.content.pm.ShortcutInfo$Builder,java.lang.CharSequence):0:0 -> a
+    1:1:android.content.pm.ShortcutInfo$Builder K.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline6.m(android.content.pm.ShortcutInfo$Builder,java.lang.CharSequence):0:0 -> a
       # {"id":"com.android.tools.r8.synthesized"}
-com.google.androidbrowserhelper.trusted.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline7 -> J.s:
+com.google.androidbrowserhelper.trusted.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline7 -> K.s:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
-    1:1:android.graphics.drawable.Icon J.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline7.m(android.content.Context,int):0:0 -> a
+    1:1:android.graphics.drawable.Icon K.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline7.m(android.content.Context,int):0:0 -> a
       # {"id":"com.android.tools.r8.synthesized"}
-com.google.androidbrowserhelper.trusted.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline8 -> J.t:
+com.google.androidbrowserhelper.trusted.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline8 -> K.t:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
-    1:1:android.content.pm.ShortcutInfo$Builder J.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline8.m(android.content.pm.ShortcutInfo$Builder,android.graphics.drawable.Icon):0:0 -> a
+    1:1:android.content.pm.ShortcutInfo$Builder K.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline8.m(android.content.pm.ShortcutInfo$Builder,android.graphics.drawable.Icon):0:0 -> a
       # {"id":"com.android.tools.r8.synthesized"}
-com.google.androidbrowserhelper.trusted.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline9 -> J.u:
+com.google.androidbrowserhelper.trusted.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline9 -> K.u:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
-    1:1:android.content.pm.ShortcutInfo$Builder J.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline9.m(android.content.pm.ShortcutInfo$Builder,android.content.Intent):0:0 -> a
+    1:1:android.content.pm.ShortcutInfo$Builder K.ManageDataLauncherActivity$$ExternalSyntheticApiModelOutline9.m(android.content.pm.ShortcutInfo$Builder,android.content.Intent):0:0 -> a
       # {"id":"com.android.tools.r8.synthesized"}
 com.google.androidbrowserhelper.trusted.ManageDataLauncherActivity$1 -> com.google.androidbrowserhelper.trusted.ManageDataLauncherActivity$a:
 # {"id":"sourceFile","fileName":"ManageDataLauncherActivity.java"}
@@ -23240,7 +23292,7 @@ com.google.androidbrowserhelper.trusted.ManageDataLauncherActivity$LegacyChromeC
     14:42:void onRelationshipValidationResult(int,android.net.Uri,boolean,android.os.Bundle):275:275 -> i
     43:50:void onRelationshipValidationResult(int,android.net.Uri,boolean,android.os.Bundle):276:276 -> i
     51:62:void onRelationshipValidationResult(int,android.net.Uri,boolean,android.os.Bundle):279:279 -> i
-com.google.androidbrowserhelper.trusted.NotificationDelegationExtraCommandHandler -> J.v:
+com.google.androidbrowserhelper.trusted.NotificationDelegationExtraCommandHandler -> K.v:
 # {"id":"sourceFile","fileName":"NotificationDelegationExtraCommandHandler.java"}
     1:4:void <init>():28:28 -> <init>
     1:6:android.os.Bundle handleExtraCommand(android.content.Context,java.lang.String,android.os.Bundle,androidx.browser.trusted.TrustedWebActivityCallbackRemote):41:41 -> a
@@ -23288,7 +23340,7 @@ com.google.androidbrowserhelper.trusted.NotificationPermissionRequestActivity ->
     29:34:void onRequestPermissionsResult(int,java.lang.String[],int[]):100:100 -> onRequestPermissionsResult
     35:39:void onRequestPermissionsResult(int,java.lang.String[],int[]):103:103 -> onRequestPermissionsResult
     40:43:void onRequestPermissionsResult(int,java.lang.String[],int[]):104:104 -> onRequestPermissionsResult
-com.google.androidbrowserhelper.trusted.NotificationUtils -> J.x:
+com.google.androidbrowserhelper.trusted.NotificationUtils -> K.x:
 # {"id":"sourceFile","fileName":"NotificationUtils.java"}
     1:12:boolean areNotificationsEnabled(android.content.Context,java.lang.String):34:34 -> a
     13:20:boolean areNotificationsEnabled(android.content.Context,java.lang.String):36:36 -> a
@@ -23298,20 +23350,20 @@ com.google.androidbrowserhelper.trusted.NotificationUtils -> J.x:
     1:7:void createNotificationChannel(android.content.Context,java.lang.String):47:47 -> c
     8:19:void createNotificationChannel(android.content.Context,java.lang.String):49:49 -> c
     20:27:void createNotificationChannel(android.content.Context,java.lang.String):51:51 -> c
-com.google.androidbrowserhelper.trusted.NotificationUtils$$ExternalSyntheticApiModelOutline0 -> J.w:
+com.google.androidbrowserhelper.trusted.NotificationUtils$$ExternalSyntheticApiModelOutline0 -> K.w:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void J.NotificationUtils$$ExternalSyntheticApiModelOutline0.m():0:0 -> a
+    1:1:void K.NotificationUtils$$ExternalSyntheticApiModelOutline0.m():0:0 -> a
       # {"id":"com.android.tools.r8.synthesized"}
-com.google.androidbrowserhelper.trusted.PrefUtils -> J.y:
+com.google.androidbrowserhelper.trusted.PrefUtils -> K.y:
 # {"id":"sourceFile","fileName":"PrefUtils.java"}
     1:12:android.content.SharedPreferences getAppSharedPreferences(android.content.Context):34:34 -> a
     1:12:boolean hasRequestedNotificationPermission(android.content.Context):39:39 -> b
     1:19:void setHasRequestedNotificationPermission(android.content.Context):43:43 -> c
-com.google.androidbrowserhelper.trusted.QualityEnforcer -> J.B:
+com.google.androidbrowserhelper.trusted.QualityEnforcer -> K.B:
 # {"id":"sourceFile","fileName":"QualityEnforcer.java"}
     com.google.androidbrowserhelper.trusted.QualityEnforcer$Delegate mDelegate -> a
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LJ/B$a;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LK/B$a;"}
     1:3:void <init>():53:53 -> <init>
     4:11:void <init>():54:54 -> <init>
     3:12:android.os.Bundle extraCallbackWithResult(java.lang.String,android.os.Bundle):70:70 -> b
@@ -23322,26 +23374,26 @@ com.google.androidbrowserhelper.trusted.QualityEnforcer -> J.B:
     35:40:android.os.Bundle extraCallbackWithResult(java.lang.String,android.os.Bundle):76:76 -> b
     1:18:void lambda$new$1(java.lang.String):57:57 -> l
     1:6:void lambda$new$0(java.lang.String):58:58 -> m
-com.google.androidbrowserhelper.trusted.QualityEnforcer$$ExternalSyntheticLambda0 -> J.z:
+com.google.androidbrowserhelper.trusted.QualityEnforcer$$ExternalSyntheticLambda0 -> K.z:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void J.QualityEnforcer$$ExternalSyntheticLambda0.<init>():0:0 -> <init>
+    1:1:void K.QualityEnforcer$$ExternalSyntheticLambda0.<init>():0:0 -> <init>
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void J.QualityEnforcer$$ExternalSyntheticLambda0.crash(java.lang.String):0:0 -> a
+    1:1:void K.QualityEnforcer$$ExternalSyntheticLambda0.crash(java.lang.String):0:0 -> a
       # {"id":"com.android.tools.r8.synthesized"}
-com.google.androidbrowserhelper.trusted.QualityEnforcer$$ExternalSyntheticLambda1 -> J.A:
+com.google.androidbrowserhelper.trusted.QualityEnforcer$$ExternalSyntheticLambda1 -> K.A:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
     java.lang.String com.google.androidbrowserhelper.trusted.QualityEnforcer$$InternalSyntheticLambda$3$3b69d296e4617850fa0b4437bff84a5384ff1b0f4217de8559dce21e574c0196$0.f$0 -> a
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void J.QualityEnforcer$$ExternalSyntheticLambda1.<init>(java.lang.String):0:0 -> <init>
+    1:1:void K.QualityEnforcer$$ExternalSyntheticLambda1.<init>(java.lang.String):0:0 -> <init>
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void J.QualityEnforcer$$ExternalSyntheticLambda1.run():0:0 -> run
+    1:1:void K.QualityEnforcer$$ExternalSyntheticLambda1.run():0:0 -> run
       # {"id":"com.android.tools.r8.synthesized"}
-com.google.androidbrowserhelper.trusted.QualityEnforcer$Delegate -> J.B$a:
+com.google.androidbrowserhelper.trusted.QualityEnforcer$Delegate -> K.B$a:
 # {"id":"sourceFile","fileName":"QualityEnforcer.java"}
     void crash(java.lang.String) -> a
-com.google.androidbrowserhelper.trusted.SessionStore -> J.C:
+com.google.androidbrowserhelper.trusted.SessionStore -> K.C:
 # {"id":"sourceFile","fileName":"SessionStore.java"}
     java.util.Map mTaskIdToSessionId -> a
     1:8:void <clinit>():13:13 -> <clinit>
@@ -23350,7 +23402,7 @@ com.google.androidbrowserhelper.trusted.SessionStore -> J.C:
     21:25:java.lang.Integer makeSessionId(java.lang.Integer):27:27 -> a
     26:33:java.lang.Integer makeSessionId(java.lang.Integer):28:28 -> a
     34:38:java.lang.Integer makeSessionId(java.lang.Integer):29:29 -> a
-com.google.androidbrowserhelper.trusted.SharedPreferencesTokenStore -> J.D:
+com.google.androidbrowserhelper.trusted.SharedPreferencesTokenStore -> K.D:
 # {"id":"sourceFile","fileName":"SharedPreferencesTokenStore.java"}
     android.content.Context mContext -> a
     1:3:void <init>(android.content.Context):43:43 -> <init>
@@ -23368,7 +23420,7 @@ com.google.androidbrowserhelper.trusted.SharedPreferencesTokenStore -> J.D:
     32:35:void store(androidx.browser.trusted.Token):65:65 -> b
     36:39:void store(androidx.browser.trusted.Token):66:66 -> b
     40:43:void store(androidx.browser.trusted.Token):67:67 -> b
-com.google.androidbrowserhelper.trusted.SharingUtils -> J.E:
+com.google.androidbrowserhelper.trusted.SharingUtils -> K.E:
 # {"id":"sourceFile","fileName":"SharingUtils.java"}
     1:4:boolean isShareIntent(android.content.Intent):41:41 -> a
     5:25:boolean isShareIntent(android.content.Intent):42:42 -> a
@@ -23403,14 +23455,14 @@ com.google.androidbrowserhelper.trusted.SharingUtils -> J.E:
     36:39:androidx.browser.trusted.sharing.ShareData retrieveShareDataFromIntent(android.content.Intent):62:62 -> e
     40:49:androidx.browser.trusted.sharing.ShareData retrieveShareDataFromIntent(android.content.Intent):64:64 -> e
     50:57:androidx.browser.trusted.sharing.ShareData retrieveShareDataFromIntent(android.content.Intent):65:65 -> e
-com.google.androidbrowserhelper.trusted.TwaLauncher -> J.K:
+com.google.androidbrowserhelper.trusted.TwaLauncher -> K.K:
 # {"id":"sourceFile","fileName":"TwaLauncher.java"}
     android.content.Context mContext -> a
     java.lang.String mProviderPackage -> b
     int mLaunchMode -> c
     int mSessionId -> d
     com.google.androidbrowserhelper.trusted.TwaLauncher$TwaCustomTabsServiceConnection mServiceConnection -> e
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LJ/K$b;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LK/K$b;"}
     androidx.browser.customtabs.CustomTabsSession mSession -> f
       # {"id":"com.android.tools.r8.residualsignature","signature":"Ln/f;"}
     androidx.browser.trusted.TokenStore mTokenStore -> g
@@ -23418,9 +23470,9 @@ com.google.androidbrowserhelper.trusted.TwaLauncher -> J.K:
     boolean mDestroyed -> h
     long mStartupUptimeMillis -> i
     com.google.androidbrowserhelper.trusted.TwaLauncher$FallbackStrategy CCT_FALLBACK_STRATEGY -> j
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LJ/K$a;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LK/K$a;"}
     com.google.androidbrowserhelper.trusted.TwaLauncher$FallbackStrategy WEBVIEW_FALLBACK_STRATEGY -> k
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LJ/K$a;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LK/K$a;"}
     1:7:void <clinit>():55:55 -> <clinit>
     8:15:void <clinit>():73:73 -> <clinit>
     1:3:void <init>(android.content.Context,java.lang.String,java.lang.Integer,androidx.browser.trusted.TokenStore):153:153 -> <init>
@@ -23434,9 +23486,9 @@ com.google.androidbrowserhelper.trusted.TwaLauncher -> J.K:
     33:35:void <init>(android.content.Context,java.lang.String,java.lang.Integer,androidx.browser.trusted.TokenStore):163:163 -> <init>
     36:38:void <init>(android.content.Context,java.lang.String,java.lang.Integer,androidx.browser.trusted.TokenStore):164:164 -> <init>
     1:4:void lambda$launchTwa$2(androidx.browser.trusted.TrustedWebActivityIntentBuilder,com.google.androidbrowserhelper.trusted.splashscreens.SplashScreenStrategy,java.lang.Runnable):249:249 -> a
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LJ/K;Lo/s;LK/e;Ljava/lang/Runnable;)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LK/K;Lo/s;LL/e;Ljava/lang/Runnable;)V"}
     1:8:void lambda$launchTwa$3(com.google.androidbrowserhelper.trusted.TwaLauncher$FallbackStrategy,androidx.browser.trusted.TrustedWebActivityIntentBuilder,java.lang.Runnable):260:260 -> b
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LJ/K;LJ/K$a;Lo/s;Ljava/lang/Runnable;)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LK/K;LK/K$a;Lo/s;Ljava/lang/Runnable;)V"}
     1:6:void lambda$static$0(android.content.Context,androidx.browser.trusted.TrustedWebActivityIntentBuilder,java.lang.String,java.lang.Runnable):59:59 -> c
       # {"id":"com.android.tools.r8.residualsignature","signature":"(Landroid/content/Context;Lo/s;Ljava/lang/String;Ljava/lang/Runnable;)V"}
     7:11:void lambda$static$0(android.content.Context,androidx.browser.trusted.TrustedWebActivityIntentBuilder,java.lang.String,java.lang.Runnable):61:61 -> c
@@ -23445,22 +23497,22 @@ com.google.androidbrowserhelper.trusted.TwaLauncher -> J.K:
     30:38:void lambda$static$0(android.content.Context,androidx.browser.trusted.TrustedWebActivityIntentBuilder,java.lang.String,java.lang.Runnable):67:67 -> c
     39:42:void lambda$static$0(android.content.Context,androidx.browser.trusted.TrustedWebActivityIntentBuilder,java.lang.String,java.lang.Runnable):69:69 -> c
     1:4:void lambda$launchWhenSessionEstablished$4(androidx.browser.trusted.TrustedWebActivityIntentBuilder,java.lang.Runnable):282:282 -> d
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LJ/K;Lo/s;Ljava/lang/Runnable;)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LK/K;Lo/s;Ljava/lang/Runnable;)V"}
     1:8:void lambda$static$1(android.content.Context,androidx.browser.trusted.TrustedWebActivityIntentBuilder,java.lang.String,java.lang.Runnable):76:76 -> e
       # {"id":"com.android.tools.r8.residualsignature","signature":"(Landroid/content/Context;Lo/s;Ljava/lang/String;Ljava/lang/Runnable;)V"}
     9:12:void lambda$static$1(android.content.Context,androidx.browser.trusted.TrustedWebActivityIntentBuilder,java.lang.String,java.lang.Runnable):75:75 -> e
     13:17:void lambda$static$1(android.content.Context,androidx.browser.trusted.TrustedWebActivityIntentBuilder,java.lang.String,java.lang.Runnable):77:77 -> e
     18:21:void lambda$static$1(android.content.Context,androidx.browser.trusted.TrustedWebActivityIntentBuilder,java.lang.String,java.lang.Runnable):79:79 -> e
     1:3:android.content.Context access$100(com.google.androidbrowserhelper.trusted.TwaLauncher):44:44 -> f
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LJ/K;)Landroid/content/Context;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LK/K;)Landroid/content/Context;"}
     1:3:java.lang.String access$200(com.google.androidbrowserhelper.trusted.TwaLauncher):44:44 -> g
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LJ/K;)Ljava/lang/String;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LK/K;)Ljava/lang/String;"}
     1:3:androidx.browser.customtabs.CustomTabsSession access$300(com.google.androidbrowserhelper.trusted.TwaLauncher):44:44 -> h
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LJ/K;)Ln/f;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LK/K;)Ln/f;"}
     1:3:androidx.browser.customtabs.CustomTabsSession access$302(com.google.androidbrowserhelper.trusted.TwaLauncher,androidx.browser.customtabs.CustomTabsSession):44:44 -> i
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LJ/K;Ln/f;)Ln/f;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LK/K;Ln/f;)Ln/f;"}
     1:3:int access$400(com.google.androidbrowserhelper.trusted.TwaLauncher):44:44 -> j
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LJ/K;)I"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LK/K;)I"}
     1:5:void destroy():314:314 -> k
     6:9:void destroy():317:317 -> k
     10:15:void destroy():318:318 -> k
@@ -23468,7 +23520,7 @@ com.google.androidbrowserhelper.trusted.TwaLauncher -> J.K:
     19:21:void destroy():321:321 -> k
     1:3:java.lang.String getProviderPackage():329:329 -> l
     1:4:void launch(androidx.browser.trusted.TrustedWebActivityIntentBuilder,androidx.browser.customtabs.CustomTabsCallback,com.google.androidbrowserhelper.trusted.splashscreens.SplashScreenStrategy,java.lang.Runnable,com.google.androidbrowserhelper.trusted.TwaLauncher$FallbackStrategy):199:199 -> m
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(Lo/s;Ln/b;LK/e;Ljava/lang/Runnable;LJ/K$a;)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Lo/s;Ln/b;LL/e;Ljava/lang/Runnable;LK/K$a;)V"}
     5:8:void launch(androidx.browser.trusted.TrustedWebActivityIntentBuilder,androidx.browser.customtabs.CustomTabsCallback,com.google.androidbrowserhelper.trusted.splashscreens.SplashScreenStrategy,java.lang.Runnable,com.google.androidbrowserhelper.trusted.TwaLauncher$FallbackStrategy):203:203 -> m
     9:15:void launch(androidx.browser.trusted.TrustedWebActivityIntentBuilder,androidx.browser.customtabs.CustomTabsCallback,com.google.androidbrowserhelper.trusted.splashscreens.SplashScreenStrategy,java.lang.Runnable,com.google.androidbrowserhelper.trusted.TwaLauncher$FallbackStrategy):204:204 -> m
     16:22:void launch(androidx.browser.trusted.TrustedWebActivityIntentBuilder,androidx.browser.customtabs.CustomTabsCallback,com.google.androidbrowserhelper.trusted.splashscreens.SplashScreenStrategy,java.lang.Runnable,com.google.androidbrowserhelper.trusted.TwaLauncher$FallbackStrategy):207:207 -> m
@@ -23476,7 +23528,7 @@ com.google.androidbrowserhelper.trusted.TwaLauncher -> J.K:
     35:53:void launch(androidx.browser.trusted.TrustedWebActivityIntentBuilder,androidx.browser.customtabs.CustomTabsCallback,com.google.androidbrowserhelper.trusted.splashscreens.SplashScreenStrategy,java.lang.Runnable,com.google.androidbrowserhelper.trusted.TwaLauncher$FallbackStrategy):215:215 -> m
     54:61:void launch(androidx.browser.trusted.TrustedWebActivityIntentBuilder,androidx.browser.customtabs.CustomTabsCallback,com.google.androidbrowserhelper.trusted.splashscreens.SplashScreenStrategy,java.lang.Runnable,com.google.androidbrowserhelper.trusted.TwaLauncher$FallbackStrategy):200:200 -> m
     3:7:void launchTwa(androidx.browser.trusted.TrustedWebActivityIntentBuilder,androidx.browser.customtabs.CustomTabsCallback,com.google.androidbrowserhelper.trusted.splashscreens.SplashScreenStrategy,java.lang.Runnable,com.google.androidbrowserhelper.trusted.TwaLauncher$FallbackStrategy):245:245 -> n
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(Lo/s;Ln/b;LK/e;Ljava/lang/Runnable;LJ/K$a;)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Lo/s;Ln/b;LL/e;Ljava/lang/Runnable;LK/K$a;)V"}
     8:12:void launchTwa(androidx.browser.trusted.TrustedWebActivityIntentBuilder,androidx.browser.customtabs.CustomTabsCallback,com.google.androidbrowserhelper.trusted.splashscreens.SplashScreenStrategy,java.lang.Runnable,com.google.androidbrowserhelper.trusted.TwaLauncher$FallbackStrategy):248:248 -> n
     13:16:void launchTwa(androidx.browser.trusted.TrustedWebActivityIntentBuilder,androidx.browser.customtabs.CustomTabsCallback,com.google.androidbrowserhelper.trusted.splashscreens.SplashScreenStrategy,java.lang.Runnable,com.google.androidbrowserhelper.trusted.TwaLauncher$FallbackStrategy):251:251 -> n
     17:20:void launchTwa(androidx.browser.trusted.TrustedWebActivityIntentBuilder,androidx.browser.customtabs.CustomTabsCallback,com.google.androidbrowserhelper.trusted.splashscreens.SplashScreenStrategy,java.lang.Runnable,com.google.androidbrowserhelper.trusted.TwaLauncher$FallbackStrategy):252:252 -> n
@@ -23486,7 +23538,7 @@ com.google.androidbrowserhelper.trusted.TwaLauncher -> J.K:
     37:41:void launchTwa(androidx.browser.trusted.TrustedWebActivityIntentBuilder,androidx.browser.customtabs.CustomTabsCallback,com.google.androidbrowserhelper.trusted.splashscreens.SplashScreenStrategy,java.lang.Runnable,com.google.androidbrowserhelper.trusted.TwaLauncher$FallbackStrategy):267:267 -> n
     42:51:void launchTwa(androidx.browser.trusted.TrustedWebActivityIntentBuilder,androidx.browser.customtabs.CustomTabsCallback,com.google.androidbrowserhelper.trusted.splashscreens.SplashScreenStrategy,java.lang.Runnable,com.google.androidbrowserhelper.trusted.TwaLauncher$FallbackStrategy):269:269 -> n
     1:6:void launchWhenSessionEstablished(androidx.browser.trusted.TrustedWebActivityIntentBuilder,com.google.androidbrowserhelper.trusted.splashscreens.SplashScreenStrategy,java.lang.Runnable):276:276 -> o
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(Lo/s;LK/e;Ljava/lang/Runnable;)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Lo/s;LL/e;Ljava/lang/Runnable;)V"}
     7:15:void launchWhenSessionEstablished(androidx.browser.trusted.TrustedWebActivityIntentBuilder,com.google.androidbrowserhelper.trusted.splashscreens.SplashScreenStrategy,java.lang.Runnable):281:281 -> o
     16:19:void launchWhenSessionEstablished(androidx.browser.trusted.TrustedWebActivityIntentBuilder,com.google.androidbrowserhelper.trusted.splashscreens.SplashScreenStrategy,java.lang.Runnable):284:284 -> o
     20:27:void launchWhenSessionEstablished(androidx.browser.trusted.TrustedWebActivityIntentBuilder,com.google.androidbrowserhelper.trusted.splashscreens.SplashScreenStrategy,java.lang.Runnable):277:277 -> o
@@ -23501,90 +23553,90 @@ com.google.androidbrowserhelper.trusted.TwaLauncher -> J.K:
     61:67:void launchWhenSplashScreenReady(androidx.browser.trusted.TrustedWebActivityIntentBuilder,java.lang.Runnable):303:303 -> p
     68:71:void launchWhenSplashScreenReady(androidx.browser.trusted.TrustedWebActivityIntentBuilder,java.lang.Runnable):306:306 -> p
     1:3:void setStartupUptimeMillis(long):338:338 -> q
-com.google.androidbrowserhelper.trusted.TwaLauncher$$ExternalSyntheticLambda0 -> J.F:
+com.google.androidbrowserhelper.trusted.TwaLauncher$$ExternalSyntheticLambda0 -> K.F:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void J.TwaLauncher$$ExternalSyntheticLambda0.<init>():0:0 -> <init>
+    1:1:void K.TwaLauncher$$ExternalSyntheticLambda0.<init>():0:0 -> <init>
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void J.TwaLauncher$$ExternalSyntheticLambda0.launch(android.content.Context,o.TrustedWebActivityIntentBuilder,java.lang.String,java.lang.Runnable):0:0 -> a
+    1:1:void K.TwaLauncher$$ExternalSyntheticLambda0.launch(android.content.Context,o.TrustedWebActivityIntentBuilder,java.lang.String,java.lang.Runnable):0:0 -> a
       # {"id":"com.android.tools.r8.synthesized"}
       # {"id":"com.android.tools.r8.residualsignature","signature":"(Landroid/content/Context;Lo/s;Ljava/lang/String;Ljava/lang/Runnable;)V"}
-com.google.androidbrowserhelper.trusted.TwaLauncher$$ExternalSyntheticLambda1 -> J.G:
+com.google.androidbrowserhelper.trusted.TwaLauncher$$ExternalSyntheticLambda1 -> K.G:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void J.TwaLauncher$$ExternalSyntheticLambda1.<init>():0:0 -> <init>
+    1:1:void K.TwaLauncher$$ExternalSyntheticLambda1.<init>():0:0 -> <init>
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void J.TwaLauncher$$ExternalSyntheticLambda1.launch(android.content.Context,o.TrustedWebActivityIntentBuilder,java.lang.String,java.lang.Runnable):0:0 -> a
+    1:1:void K.TwaLauncher$$ExternalSyntheticLambda1.launch(android.content.Context,o.TrustedWebActivityIntentBuilder,java.lang.String,java.lang.Runnable):0:0 -> a
       # {"id":"com.android.tools.r8.synthesized"}
       # {"id":"com.android.tools.r8.residualsignature","signature":"(Landroid/content/Context;Lo/s;Ljava/lang/String;Ljava/lang/Runnable;)V"}
-com.google.androidbrowserhelper.trusted.TwaLauncher$$ExternalSyntheticLambda2 -> J.H:
+com.google.androidbrowserhelper.trusted.TwaLauncher$$ExternalSyntheticLambda2 -> K.H:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
     com.google.androidbrowserhelper.trusted.TwaLauncher com.google.androidbrowserhelper.trusted.TwaLauncher$$InternalSyntheticLambda$2$d24b8e084a7d2f55c169bb96fa355584b63e8b3b4fa4e1f5c82aab7fb52fc48c$0.f$0 -> a
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LJ/K;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LK/K;"}
       # {"id":"com.android.tools.r8.synthesized"}
     androidx.browser.trusted.TrustedWebActivityIntentBuilder com.google.androidbrowserhelper.trusted.TwaLauncher$$InternalSyntheticLambda$2$d24b8e084a7d2f55c169bb96fa355584b63e8b3b4fa4e1f5c82aab7fb52fc48c$0.f$1 -> b
       # {"id":"com.android.tools.r8.residualsignature","signature":"Lo/s;"}
       # {"id":"com.android.tools.r8.synthesized"}
     com.google.androidbrowserhelper.trusted.splashscreens.SplashScreenStrategy com.google.androidbrowserhelper.trusted.TwaLauncher$$InternalSyntheticLambda$2$d24b8e084a7d2f55c169bb96fa355584b63e8b3b4fa4e1f5c82aab7fb52fc48c$0.f$2 -> c
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LK/e;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LL/e;"}
       # {"id":"com.android.tools.r8.synthesized"}
     java.lang.Runnable com.google.androidbrowserhelper.trusted.TwaLauncher$$InternalSyntheticLambda$2$d24b8e084a7d2f55c169bb96fa355584b63e8b3b4fa4e1f5c82aab7fb52fc48c$0.f$3 -> d
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void J.TwaLauncher$$ExternalSyntheticLambda2.<init>(J.TwaLauncher,o.TrustedWebActivityIntentBuilder,K.SplashScreenStrategy,java.lang.Runnable):0:0 -> <init>
+    1:1:void K.TwaLauncher$$ExternalSyntheticLambda2.<init>(K.TwaLauncher,o.TrustedWebActivityIntentBuilder,L.SplashScreenStrategy,java.lang.Runnable):0:0 -> <init>
       # {"id":"com.android.tools.r8.synthesized"}
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LJ/K;Lo/s;LK/e;Ljava/lang/Runnable;)V"}
-    1:1:void J.TwaLauncher$$ExternalSyntheticLambda2.run():0:0 -> run
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LK/K;Lo/s;LL/e;Ljava/lang/Runnable;)V"}
+    1:1:void K.TwaLauncher$$ExternalSyntheticLambda2.run():0:0 -> run
       # {"id":"com.android.tools.r8.synthesized"}
-com.google.androidbrowserhelper.trusted.TwaLauncher$$ExternalSyntheticLambda3 -> J.I:
+com.google.androidbrowserhelper.trusted.TwaLauncher$$ExternalSyntheticLambda3 -> K.I:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
     com.google.androidbrowserhelper.trusted.TwaLauncher com.google.androidbrowserhelper.trusted.TwaLauncher$$InternalSyntheticLambda$2$d24b8e084a7d2f55c169bb96fa355584b63e8b3b4fa4e1f5c82aab7fb52fc48c$1.f$0 -> a
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LJ/K;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LK/K;"}
       # {"id":"com.android.tools.r8.synthesized"}
     com.google.androidbrowserhelper.trusted.TwaLauncher$FallbackStrategy com.google.androidbrowserhelper.trusted.TwaLauncher$$InternalSyntheticLambda$2$d24b8e084a7d2f55c169bb96fa355584b63e8b3b4fa4e1f5c82aab7fb52fc48c$1.f$1 -> b
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LJ/K$a;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LK/K$a;"}
       # {"id":"com.android.tools.r8.synthesized"}
     androidx.browser.trusted.TrustedWebActivityIntentBuilder com.google.androidbrowserhelper.trusted.TwaLauncher$$InternalSyntheticLambda$2$d24b8e084a7d2f55c169bb96fa355584b63e8b3b4fa4e1f5c82aab7fb52fc48c$1.f$2 -> c
       # {"id":"com.android.tools.r8.residualsignature","signature":"Lo/s;"}
       # {"id":"com.android.tools.r8.synthesized"}
     java.lang.Runnable com.google.androidbrowserhelper.trusted.TwaLauncher$$InternalSyntheticLambda$2$d24b8e084a7d2f55c169bb96fa355584b63e8b3b4fa4e1f5c82aab7fb52fc48c$1.f$3 -> d
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void J.TwaLauncher$$ExternalSyntheticLambda3.<init>(J.TwaLauncher,J.TwaLauncher$FallbackStrategy,o.TrustedWebActivityIntentBuilder,java.lang.Runnable):0:0 -> <init>
+    1:1:void K.TwaLauncher$$ExternalSyntheticLambda3.<init>(K.TwaLauncher,K.TwaLauncher$FallbackStrategy,o.TrustedWebActivityIntentBuilder,java.lang.Runnable):0:0 -> <init>
       # {"id":"com.android.tools.r8.synthesized"}
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LJ/K;LJ/K$a;Lo/s;Ljava/lang/Runnable;)V"}
-    1:1:void J.TwaLauncher$$ExternalSyntheticLambda3.run():0:0 -> run
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LK/K;LK/K$a;Lo/s;Ljava/lang/Runnable;)V"}
+    1:1:void K.TwaLauncher$$ExternalSyntheticLambda3.run():0:0 -> run
       # {"id":"com.android.tools.r8.synthesized"}
-com.google.androidbrowserhelper.trusted.TwaLauncher$$ExternalSyntheticLambda4 -> J.J:
+com.google.androidbrowserhelper.trusted.TwaLauncher$$ExternalSyntheticLambda4 -> K.J:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
     com.google.androidbrowserhelper.trusted.TwaLauncher com.google.androidbrowserhelper.trusted.TwaLauncher$$InternalSyntheticLambda$3$a0a04302483e3a3af79e1df8ddd61a3ffbdcf6bed9f2f9c77669c070994eb975$0.f$0 -> a
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LJ/K;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LK/K;"}
       # {"id":"com.android.tools.r8.synthesized"}
     androidx.browser.trusted.TrustedWebActivityIntentBuilder com.google.androidbrowserhelper.trusted.TwaLauncher$$InternalSyntheticLambda$3$a0a04302483e3a3af79e1df8ddd61a3ffbdcf6bed9f2f9c77669c070994eb975$0.f$1 -> b
       # {"id":"com.android.tools.r8.residualsignature","signature":"Lo/s;"}
       # {"id":"com.android.tools.r8.synthesized"}
     java.lang.Runnable com.google.androidbrowserhelper.trusted.TwaLauncher$$InternalSyntheticLambda$3$a0a04302483e3a3af79e1df8ddd61a3ffbdcf6bed9f2f9c77669c070994eb975$0.f$2 -> c
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void J.TwaLauncher$$ExternalSyntheticLambda4.<init>(J.TwaLauncher,o.TrustedWebActivityIntentBuilder,java.lang.Runnable):0:0 -> <init>
+    1:1:void K.TwaLauncher$$ExternalSyntheticLambda4.<init>(K.TwaLauncher,o.TrustedWebActivityIntentBuilder,java.lang.Runnable):0:0 -> <init>
       # {"id":"com.android.tools.r8.synthesized"}
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LJ/K;Lo/s;Ljava/lang/Runnable;)V"}
-    1:1:void J.TwaLauncher$$ExternalSyntheticLambda4.run():0:0 -> run
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LK/K;Lo/s;Ljava/lang/Runnable;)V"}
+    1:1:void K.TwaLauncher$$ExternalSyntheticLambda4.run():0:0 -> run
       # {"id":"com.android.tools.r8.synthesized"}
-com.google.androidbrowserhelper.trusted.TwaLauncher$FallbackStrategy -> J.K$a:
+com.google.androidbrowserhelper.trusted.TwaLauncher$FallbackStrategy -> K.K$a:
 # {"id":"sourceFile","fileName":"TwaLauncher.java"}
     void launch(android.content.Context,androidx.browser.trusted.TrustedWebActivityIntentBuilder,java.lang.String,java.lang.Runnable) -> a
       # {"id":"com.android.tools.r8.residualsignature","signature":"(Landroid/content/Context;Lo/s;Ljava/lang/String;Ljava/lang/Runnable;)V"}
-com.google.androidbrowserhelper.trusted.TwaLauncher$TwaCustomTabsServiceConnection -> J.K$b:
+com.google.androidbrowserhelper.trusted.TwaLauncher$TwaCustomTabsServiceConnection -> K.K$b:
 # {"id":"sourceFile","fileName":"TwaLauncher.java"}
     java.lang.Runnable mOnSessionCreatedRunnable -> b
     java.lang.Runnable mOnSessionCreationFailedRunnable -> c
     androidx.browser.customtabs.CustomTabsCallback mCustomTabsCallback -> d
       # {"id":"com.android.tools.r8.residualsignature","signature":"Ln/b;"}
     com.google.androidbrowserhelper.trusted.TwaLauncher this$0 -> e
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LJ/K;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LK/K;"}
     1:5:void <init>(com.google.androidbrowserhelper.trusted.TwaLauncher,androidx.browser.customtabs.CustomTabsCallback):346:346 -> <init>
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LJ/K;Ln/b;)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LK/K;Ln/b;)V"}
     6:8:void <init>(com.google.androidbrowserhelper.trusted.TwaLauncher,androidx.browser.customtabs.CustomTabsCallback):347:347 -> <init>
     1:2:void onCustomTabsServiceConnected(android.content.ComponentName,androidx.browser.customtabs.CustomTabsClient):359:359 -> a
       # {"id":"com.android.tools.r8.residualsignature","signature":"(Landroid/content/ComponentName;Ln/c;)V"}
@@ -23600,11 +23652,11 @@ com.google.androidbrowserhelper.trusted.TwaLauncher$TwaCustomTabsServiceConnecti
     88:89:void onCustomTabsServiceConnected(android.content.ComponentName,androidx.browser.customtabs.CustomTabsClient):377:377 -> a
     90:92:void onCustomTabsServiceConnected(android.content.ComponentName,androidx.browser.customtabs.CustomTabsClient):378:378 -> a
     1:4:void access$000(com.google.androidbrowserhelper.trusted.TwaLauncher$TwaCustomTabsServiceConnection,java.lang.Runnable,java.lang.Runnable):341:341 -> c
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LJ/K$b;Ljava/lang/Runnable;Ljava/lang/Runnable;)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LK/K$b;Ljava/lang/Runnable;Ljava/lang/Runnable;)V"}
     1:2:void setSessionCreationRunnables(java.lang.Runnable,java.lang.Runnable):352:352 -> d
     3:5:void setSessionCreationRunnables(java.lang.Runnable,java.lang.Runnable):353:353 -> d
     1:7:void onServiceDisconnected(android.content.ComponentName):383:383 -> onServiceDisconnected
-com.google.androidbrowserhelper.trusted.TwaProviderPicker -> J.L:
+com.google.androidbrowserhelper.trusted.TwaProviderPicker -> K.L:
 # {"id":"sourceFile","fileName":"TwaProviderPicker.java"}
     java.lang.String sPackageNameForTesting -> a
     1:13:java.util.Map getLaunchModesForCustomTabsServices(android.content.pm.PackageManager):184:184 -> a
@@ -23618,7 +23670,7 @@ com.google.androidbrowserhelper.trusted.TwaProviderPicker -> J.L:
     70:73:java.util.Map getLaunchModesForCustomTabsServices(android.content.pm.PackageManager):203:203 -> a
     74:78:java.util.Map getLaunchModesForCustomTabsServices(android.content.pm.PackageManager):202:202 -> a
     1:7:com.google.androidbrowserhelper.trusted.TwaProviderPicker$Action pickProvider(android.content.pm.PackageManager):106:106 -> b
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(Landroid/content/pm/PackageManager;)LJ/L$a;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Landroid/content/pm/PackageManager;)LK/L$a;"}
     8:13:com.google.androidbrowserhelper.trusted.TwaProviderPicker$Action pickProvider(android.content.pm.PackageManager):107:107 -> b
     14:17:com.google.androidbrowserhelper.trusted.TwaProviderPicker$Action pickProvider(android.content.pm.PackageManager):108:108 -> b
     18:30:com.google.androidbrowserhelper.trusted.TwaProviderPicker$Action pickProvider(android.content.pm.PackageManager):109:109 -> b
@@ -23640,21 +23692,21 @@ com.google.androidbrowserhelper.trusted.TwaProviderPicker -> J.L:
     210:215:com.google.androidbrowserhelper.trusted.TwaProviderPicker$Action pickProvider(android.content.pm.PackageManager):167:167 -> b
     216:235:com.google.androidbrowserhelper.trusted.TwaProviderPicker$Action pickProvider(android.content.pm.PackageManager):170:170 -> b
     236:241:com.google.androidbrowserhelper.trusted.TwaProviderPicker$Action pickProvider(android.content.pm.PackageManager):171:171 -> b
-com.google.androidbrowserhelper.trusted.TwaProviderPicker$Action -> J.L$a:
+com.google.androidbrowserhelper.trusted.TwaProviderPicker$Action -> K.L$a:
 # {"id":"sourceFile","fileName":"TwaProviderPicker.java"}
     int launchMode -> a
     java.lang.String provider -> b
     1:3:void <init>(int,java.lang.String):93:93 -> <init>
     4:5:void <init>(int,java.lang.String):94:94 -> <init>
     6:8:void <init>(int,java.lang.String):95:95 -> <init>
-com.google.androidbrowserhelper.trusted.TwaSharedPreferencesManager -> J.M:
+com.google.androidbrowserhelper.trusted.TwaSharedPreferencesManager -> K.M:
 # {"id":"sourceFile","fileName":"TwaSharedPreferencesManager.java"}
     android.content.SharedPreferences mSharedPreferences -> a
     1:3:void <init>(android.content.Context):16:16 -> <init>
     4:13:void <init>(android.content.Context):17:17 -> <init>
     1:10:java.lang.String readLastLaunchedProviderPackageName():32:32 -> a
     1:16:void writeLastLaunchedProviderPackageName(java.lang.String):24:24 -> b
-com.google.androidbrowserhelper.trusted.Utils -> J.N:
+com.google.androidbrowserhelper.trusted.Utils -> K.N:
 # {"id":"sourceFile","fileName":"Utils.java"}
     1:12:void addSystemUiVisibilityFlag(android.app.Activity,int):59:59 -> a
     13:17:void addSystemUiVisibilityFlag(android.app.Activity,int):60:60 -> a
@@ -23697,7 +23749,7 @@ com.google.androidbrowserhelper.trusted.WebViewFallbackActivity -> com.google.an
     1:3:java.lang.String access$400():52:52 -> f
     1:3:java.util.List access$500(com.google.androidbrowserhelper.trusted.WebViewFallbackActivity):52:52 -> g
     1:7:android.content.Intent createLaunchIntent(android.content.Context,android.net.Uri,com.google.androidbrowserhelper.trusted.LauncherActivityMetadata):70:70 -> h
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(Landroid/content/Context;Landroid/net/Uri;LJ/i;)Landroid/content/Intent;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Landroid/content/Context;Landroid/net/Uri;LK/i;)Landroid/content/Intent;"}
     8:12:android.content.Intent createLaunchIntent(android.content.Context,android.net.Uri,com.google.androidbrowserhelper.trusted.LauncherActivityMetadata):71:71 -> h
     13:14:android.content.Intent createLaunchIntent(android.content.Context,android.net.Uri,com.google.androidbrowserhelper.trusted.LauncherActivityMetadata):73:73 -> h
     15:18:android.content.Intent createLaunchIntent(android.content.Context,android.net.Uri,com.google.androidbrowserhelper.trusted.LauncherActivityMetadata):74:74 -> h
@@ -23804,7 +23856,7 @@ com.google.androidbrowserhelper.trusted.WebViewFallbackActivity$2 -> com.google.
     10:17:void onShowCustomView(android.view.View,android.webkit.WebChromeClient$CustomViewCallback):298:298 -> onShowCustomView
     18:28:void onShowCustomView(android.view.View,android.webkit.WebChromeClient$CustomViewCallback):300:300 -> onShowCustomView
     29:48:void onShowCustomView(android.view.View,android.webkit.WebChromeClient$CustomViewCallback):301:301 -> onShowCustomView
-com.google.androidbrowserhelper.trusted.splashscreens.PwaWrapperSplashScreenStrategy -> K.c:
+com.google.androidbrowserhelper.trusted.splashscreens.PwaWrapperSplashScreenStrategy -> L.c:
 # {"id":"sourceFile","fileName":"PwaWrapperSplashScreenStrategy.java"}
     android.app.Activity mActivity -> a
     int mDrawableId -> b
@@ -23815,14 +23867,14 @@ com.google.androidbrowserhelper.trusted.splashscreens.PwaWrapperSplashScreenStra
     int mFadeOutDurationMillis -> g
     android.graphics.Bitmap mSplashImage -> h
     com.google.androidbrowserhelper.trusted.splashscreens.SplashImageTransferTask mSplashImageTransferTask -> i
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LK/d;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LL/d;"}
     java.lang.String mProviderPackage -> j
     boolean mProviderSupportsSplashScreens -> k
     boolean mEnterAnimationComplete -> l
     java.lang.Runnable mOnEnterAnimationCompleteRunnable -> m
     boolean mStartChromeBeforeAnimationComplete -> n
     com.google.androidbrowserhelper.trusted.splashscreens.SystemBarColorPredictor sSystemBarColorPredictor -> o
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LK/f;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LL/f;"}
     1:8:void <clinit>():60:60 -> <clinit>
     1:4:void <init>(android.app.Activity,int,int,android.widget.ImageView$ScaleType,android.graphics.Matrix,int,java.lang.String,boolean):111:111 -> <init>
     5:6:void <init>(android.app.Activity,int,int,android.widget.ImageView$ScaleType,android.graphics.Matrix,int,java.lang.String,boolean):85:85 -> <init>
@@ -23850,10 +23902,10 @@ com.google.androidbrowserhelper.trusted.splashscreens.PwaWrapperSplashScreenStra
     45:53:void configureTwaBuilder(androidx.browser.trusted.TrustedWebActivityIntentBuilder,androidx.browser.customtabs.CustomTabsSession,java.lang.Runnable):199:199 -> b
     54:57:void configureTwaBuilder(androidx.browser.trusted.TrustedWebActivityIntentBuilder,androidx.browser.customtabs.CustomTabsSession,java.lang.Runnable):187:187 -> b
     4:6:void lambda$onSplashImageTransferred$1(java.lang.Runnable):213:213 -> c
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LK/c;Ljava/lang/Runnable;)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LL/c;Ljava/lang/Runnable;)V"}
     7:13:void lambda$onSplashImageTransferred$1(java.lang.Runnable):214:214 -> c
     1:4:void lambda$configureTwaBuilder$0(androidx.browser.trusted.TrustedWebActivityIntentBuilder,java.lang.Runnable,androidx.browser.customtabs.CustomTabsSession,boolean):200:200 -> d
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LK/c;Lo/s;Ljava/lang/Runnable;Ln/f;Z)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LL/c;Lo/s;Ljava/lang/Runnable;Ln/f;Z)V"}
     1:10:void customizeStatusAndNavBarDuringSplashScreen(java.lang.String,androidx.browser.trusted.TrustedWebActivityIntentBuilder):169:169 -> e
       # {"id":"com.android.tools.r8.residualsignature","signature":"(Ljava/lang/String;Lo/s;)V"}
     11:19:void customizeStatusAndNavBarDuringSplashScreen(java.lang.String,androidx.browser.trusted.TrustedWebActivityIntentBuilder):172:172 -> e
@@ -23898,11 +23950,11 @@ com.google.androidbrowserhelper.trusted.splashscreens.PwaWrapperSplashScreenStra
     52:57:void showSplashScreen():156:156 -> k
     58:62:void showSplashScreen():157:157 -> k
     63:68:void showSplashScreen():160:160 -> k
-com.google.androidbrowserhelper.trusted.splashscreens.PwaWrapperSplashScreenStrategy$$ExternalSyntheticLambda0 -> K.a:
+com.google.androidbrowserhelper.trusted.splashscreens.PwaWrapperSplashScreenStrategy$$ExternalSyntheticLambda0 -> L.a:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
     com.google.androidbrowserhelper.trusted.splashscreens.PwaWrapperSplashScreenStrategy com.google.androidbrowserhelper.trusted.splashscreens.PwaWrapperSplashScreenStrategy$$InternalSyntheticLambda$4$ac57bb04aa222145a88b5997ebbf5ae83e400f59aac1cd29d11f6f72cdb01219$0.f$0 -> a
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LK/c;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LL/c;"}
       # {"id":"com.android.tools.r8.synthesized"}
     androidx.browser.trusted.TrustedWebActivityIntentBuilder com.google.androidbrowserhelper.trusted.splashscreens.PwaWrapperSplashScreenStrategy$$InternalSyntheticLambda$4$ac57bb04aa222145a88b5997ebbf5ae83e400f59aac1cd29d11f6f72cdb01219$0.f$1 -> b
       # {"id":"com.android.tools.r8.residualsignature","signature":"Lo/s;"}
@@ -23912,25 +23964,25 @@ com.google.androidbrowserhelper.trusted.splashscreens.PwaWrapperSplashScreenStra
     androidx.browser.customtabs.CustomTabsSession com.google.androidbrowserhelper.trusted.splashscreens.PwaWrapperSplashScreenStrategy$$InternalSyntheticLambda$4$ac57bb04aa222145a88b5997ebbf5ae83e400f59aac1cd29d11f6f72cdb01219$0.f$3 -> d
       # {"id":"com.android.tools.r8.residualsignature","signature":"Ln/f;"}
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void K.PwaWrapperSplashScreenStrategy$$ExternalSyntheticLambda0.<init>(K.PwaWrapperSplashScreenStrategy,o.TrustedWebActivityIntentBuilder,java.lang.Runnable,n.CustomTabsSession):0:0 -> <init>
+    1:1:void L.PwaWrapperSplashScreenStrategy$$ExternalSyntheticLambda0.<init>(L.PwaWrapperSplashScreenStrategy,o.TrustedWebActivityIntentBuilder,java.lang.Runnable,n.CustomTabsSession):0:0 -> <init>
       # {"id":"com.android.tools.r8.synthesized"}
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LK/c;Lo/s;Ljava/lang/Runnable;Ln/f;)V"}
-    1:1:void K.PwaWrapperSplashScreenStrategy$$ExternalSyntheticLambda0.onFinished(boolean):0:0 -> a
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LL/c;Lo/s;Ljava/lang/Runnable;Ln/f;)V"}
+    1:1:void L.PwaWrapperSplashScreenStrategy$$ExternalSyntheticLambda0.onFinished(boolean):0:0 -> a
       # {"id":"com.android.tools.r8.synthesized"}
-com.google.androidbrowserhelper.trusted.splashscreens.PwaWrapperSplashScreenStrategy$$ExternalSyntheticLambda1 -> K.b:
+com.google.androidbrowserhelper.trusted.splashscreens.PwaWrapperSplashScreenStrategy$$ExternalSyntheticLambda1 -> L.b:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
     com.google.androidbrowserhelper.trusted.splashscreens.PwaWrapperSplashScreenStrategy com.google.androidbrowserhelper.trusted.splashscreens.PwaWrapperSplashScreenStrategy$$InternalSyntheticLambda$5$692d7ed3fc6e15fbd0a3c2981d97735276302431e6c91c9bcf466b7999727a38$0.f$0 -> a
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LK/c;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LL/c;"}
       # {"id":"com.android.tools.r8.synthesized"}
     java.lang.Runnable com.google.androidbrowserhelper.trusted.splashscreens.PwaWrapperSplashScreenStrategy$$InternalSyntheticLambda$5$692d7ed3fc6e15fbd0a3c2981d97735276302431e6c91c9bcf466b7999727a38$0.f$1 -> b
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void K.PwaWrapperSplashScreenStrategy$$ExternalSyntheticLambda1.<init>(K.PwaWrapperSplashScreenStrategy,java.lang.Runnable):0:0 -> <init>
+    1:1:void L.PwaWrapperSplashScreenStrategy$$ExternalSyntheticLambda1.<init>(L.PwaWrapperSplashScreenStrategy,java.lang.Runnable):0:0 -> <init>
       # {"id":"com.android.tools.r8.synthesized"}
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LK/c;Ljava/lang/Runnable;)V"}
-    1:1:void K.PwaWrapperSplashScreenStrategy$$ExternalSyntheticLambda1.run():0:0 -> run
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LL/c;Ljava/lang/Runnable;)V"}
+    1:1:void L.PwaWrapperSplashScreenStrategy$$ExternalSyntheticLambda1.run():0:0 -> run
       # {"id":"com.android.tools.r8.synthesized"}
-com.google.androidbrowserhelper.trusted.splashscreens.SplashImageTransferTask -> K.d:
+com.google.androidbrowserhelper.trusted.splashscreens.SplashImageTransferTask -> L.d:
 # {"id":"sourceFile","fileName":"SplashImageTransferTask.java"}
     android.content.Context mContext -> a
     android.graphics.Bitmap mBitmap -> b
@@ -23939,7 +23991,7 @@ com.google.androidbrowserhelper.trusted.splashscreens.SplashImageTransferTask ->
       # {"id":"com.android.tools.r8.residualsignature","signature":"Ln/f;"}
     java.lang.String mProviderPackage -> e
     com.google.androidbrowserhelper.trusted.splashscreens.SplashImageTransferTask$Callback mCallback -> f
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LK/d$b;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LL/d$b;"}
     android.os.AsyncTask mAsyncTask -> g
     1:1:void <clinit>():37:37 -> <clinit>
     1:3:void <init>(android.content.Context,android.graphics.Bitmap,java.lang.String,androidx.browser.customtabs.CustomTabsSession,java.lang.String):63:63 -> <init>
@@ -23951,28 +24003,28 @@ com.google.androidbrowserhelper.trusted.splashscreens.SplashImageTransferTask ->
     21:22:void <init>(android.content.Context,android.graphics.Bitmap,java.lang.String,androidx.browser.customtabs.CustomTabsSession,java.lang.String):67:67 -> <init>
     23:25:void <init>(android.content.Context,android.graphics.Bitmap,java.lang.String,androidx.browser.customtabs.CustomTabsSession,java.lang.String):68:68 -> <init>
     1:3:android.content.Context access$000(com.google.androidbrowserhelper.trusted.splashscreens.SplashImageTransferTask):37:37 -> a
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LK/d;)Landroid/content/Context;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LL/d;)Landroid/content/Context;"}
     1:3:android.graphics.Bitmap access$100(com.google.androidbrowserhelper.trusted.splashscreens.SplashImageTransferTask):37:37 -> b
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LK/d;)Landroid/graphics/Bitmap;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LL/d;)Landroid/graphics/Bitmap;"}
     1:3:java.lang.String access$200(com.google.androidbrowserhelper.trusted.splashscreens.SplashImageTransferTask):37:37 -> c
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LK/d;)Ljava/lang/String;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LL/d;)Ljava/lang/String;"}
     1:3:java.lang.String access$300(com.google.androidbrowserhelper.trusted.splashscreens.SplashImageTransferTask):37:37 -> d
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LK/d;)Ljava/lang/String;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LL/d;)Ljava/lang/String;"}
     1:3:androidx.browser.customtabs.CustomTabsSession access$400(com.google.androidbrowserhelper.trusted.splashscreens.SplashImageTransferTask):37:37 -> e
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LK/d;)Ln/f;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LL/d;)Ln/f;"}
     1:3:com.google.androidbrowserhelper.trusted.splashscreens.SplashImageTransferTask$Callback access$500(com.google.androidbrowserhelper.trusted.splashscreens.SplashImageTransferTask):37:37 -> f
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LK/d;)LK/d$b;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LL/d;)LL/d$b;"}
     1:7:void cancel():86:86 -> g
     8:10:void cancel():87:87 -> g
     1:2:void execute(com.google.androidbrowserhelper.trusted.splashscreens.SplashImageTransferTask$Callback):77:77 -> h
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LK/d$b;)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LL/d$b;)V"}
     3:11:void execute(com.google.androidbrowserhelper.trusted.splashscreens.SplashImageTransferTask$Callback):78:78 -> h
-com.google.androidbrowserhelper.trusted.splashscreens.SplashImageTransferTask$1 -> K.d$a:
+com.google.androidbrowserhelper.trusted.splashscreens.SplashImageTransferTask$1 -> L.d$a:
 # {"id":"sourceFile","fileName":"SplashImageTransferTask.java"}
     com.google.androidbrowserhelper.trusted.splashscreens.SplashImageTransferTask this$0 -> a
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LK/d;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LL/d;"}
     1:6:void <init>(com.google.androidbrowserhelper.trusted.splashscreens.SplashImageTransferTask):91:91 -> <init>
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LK/d;)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LL/d;)V"}
     1:9:java.lang.Boolean doInBackground(java.lang.Void[]):95:95 -> a
     10:26:java.lang.Boolean doInBackground(java.lang.Void[]):96:96 -> a
     27:32:java.lang.Boolean doInBackground(java.lang.Void[]):97:97 -> a
@@ -24005,16 +24057,16 @@ com.google.androidbrowserhelper.trusted.splashscreens.SplashImageTransferTask$1 
     25:29:boolean transferToCustomTabsProvider(java.io.File):127:127 -> d
     1:7:java.lang.Object doInBackground(java.lang.Object[]):91:91 -> doInBackground
     1:6:void onPostExecute(java.lang.Object):91:91 -> onPostExecute
-com.google.androidbrowserhelper.trusted.splashscreens.SplashImageTransferTask$Callback -> K.d$b:
+com.google.androidbrowserhelper.trusted.splashscreens.SplashImageTransferTask$Callback -> L.d$b:
 # {"id":"sourceFile","fileName":"SplashImageTransferTask.java"}
     void onFinished(boolean) -> a
-com.google.androidbrowserhelper.trusted.splashscreens.SplashScreenStrategy -> K.e:
+com.google.androidbrowserhelper.trusted.splashscreens.SplashScreenStrategy -> L.e:
 # {"id":"sourceFile","fileName":"SplashScreenStrategy.java"}
     void onTwaLaunchInitiated(java.lang.String,androidx.browser.trusted.TrustedWebActivityIntentBuilder) -> a
       # {"id":"com.android.tools.r8.residualsignature","signature":"(Ljava/lang/String;Lo/s;)V"}
     void configureTwaBuilder(androidx.browser.trusted.TrustedWebActivityIntentBuilder,androidx.browser.customtabs.CustomTabsSession,java.lang.Runnable) -> b
       # {"id":"com.android.tools.r8.residualsignature","signature":"(Lo/s;Ln/f;Ljava/lang/Runnable;)V"}
-com.google.androidbrowserhelper.trusted.splashscreens.SystemBarColorPredictor -> K.f:
+com.google.androidbrowserhelper.trusted.splashscreens.SystemBarColorPredictor -> L.f:
 # {"id":"sourceFile","fileName":"SystemBarColorPredictor.java"}
     java.util.Map mSupportedFeaturesCache -> a
     1:3:void <init>():44:44 -> <init>
@@ -24046,7 +24098,7 @@ com.google.androidbrowserhelper.trusted.splashscreens.SystemBarColorPredictor ->
     24:31:java.lang.Integer getExpectedStatusBarColor(android.content.Context,java.lang.String,androidx.browser.trusted.TrustedWebActivityIntentBuilder):60:60 -> c
     32:40:java.lang.Integer getExpectedStatusBarColor(android.content.Context,java.lang.String,androidx.browser.trusted.TrustedWebActivityIntentBuilder):61:61 -> c
     1:11:com.google.androidbrowserhelper.trusted.splashscreens.SystemBarColorPredictor$SupportedFeatures getSupportedFeatures(android.content.Context,java.lang.String):100:100 -> d
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(Landroid/content/Context;Ljava/lang/String;)LK/f$b;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Landroid/content/Context;Ljava/lang/String;)LL/f$b;"}
     12:15:com.google.androidbrowserhelper.trusted.splashscreens.SystemBarColorPredictor$SupportedFeatures getSupportedFeatures(android.content.Context,java.lang.String):104:104 -> d
     16:22:com.google.androidbrowserhelper.trusted.splashscreens.SystemBarColorPredictor$SupportedFeatures getSupportedFeatures(android.content.Context,java.lang.String):103:103 -> d
     23:28:com.google.androidbrowserhelper.trusted.splashscreens.SystemBarColorPredictor$SupportedFeatures getSupportedFeatures(android.content.Context,java.lang.String):106:106 -> d
@@ -24062,38 +24114,38 @@ com.google.androidbrowserhelper.trusted.splashscreens.SystemBarColorPredictor ->
     3:16:boolean hasCategory(android.content.pm.ResolveInfo,java.lang.String):126:126 -> e
     1:7:boolean providerSupportsColorSchemeParams(android.content.Context,java.lang.String):95:95 -> f
     1:7:boolean providerSupportsNavBarColorCustomization(android.content.Context,java.lang.String):91:91 -> g
-com.google.androidbrowserhelper.trusted.splashscreens.SystemBarColorPredictor$1 -> K.f$a:
+com.google.androidbrowserhelper.trusted.splashscreens.SystemBarColorPredictor$1 -> L.f$a:
 # {"id":"sourceFile","fileName":"SystemBarColorPredictor.java"}
-com.google.androidbrowserhelper.trusted.splashscreens.SystemBarColorPredictor$SupportedFeatures -> K.f$b:
+com.google.androidbrowserhelper.trusted.splashscreens.SystemBarColorPredictor$SupportedFeatures -> L.f$b:
 # {"id":"sourceFile","fileName":"SystemBarColorPredictor.java"}
     boolean navbarColorCustomization -> a
     boolean colorSchemeCustomization -> b
     1:1:void <init>(boolean,boolean,com.google.androidbrowserhelper.trusted.splashscreens.SystemBarColorPredictor$1):144:144 -> <init>
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(ZZLK/f$a;)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(ZZLL/f$a;)V"}
     2:4:void <init>(boolean,boolean):149:151 -> <init>
-com.google.common.base.ExtraObjectsMethodsForWeb -> L.a:
+com.google.common.base.ExtraObjectsMethodsForWeb -> M.a:
 # {"id":"sourceFile","fileName":"ExtraObjectsMethodsForWeb.java"}
-com.google.common.base.Objects -> L.b:
+com.google.common.base.Objects -> M.b:
 # {"id":"sourceFile","fileName":"Objects.java"}
     5:15:boolean equal(java.lang.Object,java.lang.Object):52:52 -> a
-com.google.common.base.PatternCompiler -> L.c:
+com.google.common.base.PatternCompiler -> M.c:
 # {"id":"sourceFile","fileName":"PatternCompiler.java"}
-com.google.common.base.Platform -> L.d:
+com.google.common.base.Platform -> M.d:
 # {"id":"sourceFile","fileName":"Platform.java"}
     com.google.common.base.PatternCompiler patternCompiler -> a
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LL/c;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LM/c;"}
     1:7:void <clinit>():30:30 -> <clinit>
     1:7:com.google.common.base.PatternCompiler loadPatternCompiler():104:104 -> a
-      # {"id":"com.android.tools.r8.residualsignature","signature":"()LL/c;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"()LM/c;"}
     1:5:java.lang.String stringValueOf(java.lang.Object):86:86 -> b
-com.google.common.base.Platform$1 -> L.d$a:
+com.google.common.base.Platform$1 -> M.d$a:
 # {"id":"sourceFile","fileName":"Platform.java"}
-com.google.common.base.Platform$JdkPatternCompiler -> L.d$b:
+com.google.common.base.Platform$JdkPatternCompiler -> M.d$b:
 # {"id":"sourceFile","fileName":"Platform.java"}
     1:1:void <init>():107:107 -> <init>
     2:2:void <init>(com.google.common.base.Platform$1):107:107 -> <init>
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LL/d$a;)V"}
-com.google.common.base.Preconditions -> L.e:
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LM/d$a;)V"}
+com.google.common.base.Preconditions -> M.e:
 # {"id":"sourceFile","fileName":"Preconditions.java"}
     6:24:java.lang.String badElementIndex(int,int,java.lang.String):1376:1376 -> a
     25:48:java.lang.String badElementIndex(int,int,java.lang.String):1380:1380 -> a
@@ -24111,7 +24163,7 @@ com.google.common.base.Preconditions -> L.e:
     1:7:int checkPositionIndex(int,int):1396:1396 -> h
     6:15:int checkPositionIndex(int,int,java.lang.String):1414:1414 -> i
     8:17:void checkPositionIndexes(int,int,int):1444:1444 -> j
-com.google.common.base.Strings -> L.f:
+com.google.common.base.Strings -> M.f:
 # {"id":"sourceFile","fileName":"Strings.java"}
     1:8:java.lang.String lenientFormat(java.lang.String,java.lang.Object[]):262:262 -> a
     9:16:java.lang.String lenientFormat(java.lang.String,java.lang.Object[]):265:265 -> a
@@ -24138,7 +24190,7 @@ com.google.common.base.Strings -> L.f:
     48:72:java.lang.String lenientToString(java.lang.Object):313:313 -> b
     73:75:java.lang.String lenientToString(java.lang.Object):314:314 -> b
     76:114:java.lang.String lenientToString(java.lang.Object):315:315 -> b
-com.google.common.collect.AbstractIndexedListIterator -> M.a:
+com.google.common.collect.AbstractIndexedListIterator -> N.a:
 # {"id":"sourceFile","fileName":"AbstractIndexedListIterator.java"}
     int size -> a
     int position -> b
@@ -24157,19 +24209,19 @@ com.google.common.collect.AbstractIndexedListIterator -> M.a:
     7:17:java.lang.Object previous():100:100 -> previous
     18:23:java.lang.Object previous():98:98 -> previous
     1:5:int previousIndex():105:105 -> previousIndex
-com.google.common.collect.CollectPreconditions -> M.b:
+com.google.common.collect.CollectPreconditions -> N.b:
 # {"id":"sourceFile","fileName":"CollectPreconditions.java"}
     6:33:void checkEntryNotNull(java.lang.Object,java.lang.Object):32:32 -> a
     34:56:void checkEntryNotNull(java.lang.Object,java.lang.Object):30:30 -> a
     4:29:int checkNonnegative(int,java.lang.String):39:39 -> b
-com.google.common.collect.Collections2 -> M.c:
+com.google.common.collect.Collections2 -> N.c:
 # {"id":"sourceFile","fileName":"Collections2.java"}
     1:5:java.lang.StringBuilder newStringBuilderForCollection(int):331:331 -> a
     6:24:java.lang.StringBuilder newStringBuilderForCollection(int):332:332 -> a
-com.google.common.collect.Hashing -> M.d:
+com.google.common.collect.Hashing -> N.d:
 # {"id":"sourceFile","fileName":"Hashing.java"}
     10:21:int smear(int):52:52 -> a
-com.google.common.collect.ImmutableCollection -> M.f:
+com.google.common.collect.ImmutableCollection -> N.f:
 # {"id":"sourceFile","fileName":"ImmutableCollection.java"}
     java.lang.Object[] EMPTY_ARRAY -> a
     2:6:void <clinit>():199:199 -> <clinit>
@@ -24192,15 +24244,15 @@ com.google.common.collect.ImmutableCollection -> M.f:
     6:6:java.lang.Object[] toArray(java.lang.Object[]):229:229 -> toArray
     7:9:java.lang.Object[] toArray(java.lang.Object[]):231:233 -> toArray
     10:10:java.lang.Object[] toArray(java.lang.Object[]):235:235 -> toArray
-com.google.common.collect.ImmutableCollection$$ExternalSyntheticApiModelOutline0 -> M.e:
+com.google.common.collect.ImmutableCollection$$ExternalSyntheticApiModelOutline0 -> N.e:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
-    1:1:java.util.Spliterator M.ImmutableCollection$$ExternalSyntheticApiModelOutline0.m(java.util.Collection,int):0:0 -> a
+    1:1:java.util.Spliterator N.ImmutableCollection$$ExternalSyntheticApiModelOutline0.m(java.util.Collection,int):0:0 -> a
       # {"id":"com.android.tools.r8.synthesized"}
-com.google.common.collect.ImmutableList -> M.g:
+com.google.common.collect.ImmutableList -> N.g:
 # {"id":"sourceFile","fileName":"ImmutableList.java"}
     com.google.common.collect.UnmodifiableListIterator EMPTY_ITR -> b
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LM/s;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LN/s;"}
     1:11:void <clinit>():393:393 -> <clinit>
     1:4:void <init>():365:365 -> <init>
     1:9:int copyIntoArray(java.lang.Object[],int):586:586 -> a
@@ -24209,55 +24261,55 @@ com.google.common.collect.ImmutableList -> M.g:
     1:6:boolean addAll(int,java.util.Collection):526:526 -> addAll
     1:10:boolean contains(java.lang.Object):422:422 -> contains
     1:6:com.google.common.collect.ImmutableList asImmutableList(java.lang.Object[]):354:354 -> e
-      # {"id":"com.android.tools.r8.residualsignature","signature":"([Ljava/lang/Object;)LM/g;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"([Ljava/lang/Object;)LN/g;"}
     1:5:boolean equals(java.lang.Object):675:675 -> equals
     3:7:com.google.common.collect.ImmutableList asImmutableList(java.lang.Object[],int):360:360 -> f
-      # {"id":"com.android.tools.r8.residualsignature","signature":"([Ljava/lang/Object;I)LM/g;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"([Ljava/lang/Object;I)LN/g;"}
     8:13:com.google.common.collect.ImmutableList asImmutableList(java.lang.Object[],int):362:362 -> f
     1:5:com.google.common.collect.UnmodifiableIterator iterator():371:371 -> g
-      # {"id":"com.android.tools.r8.residualsignature","signature":"()LM/r;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"()LN/r;"}
     2:6:com.google.common.collect.UnmodifiableListIterator listIterator():376:376 -> h
-      # {"id":"com.android.tools.r8.residualsignature","signature":"()LM/s;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"()LN/s;"}
     1:10:int hashCode():681:681 -> hashCode
     11:25:int hashCode():683:683 -> hashCode
     1:7:com.google.common.collect.UnmodifiableListIterator listIterator(int):382:382 -> i
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(I)LM/s;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(I)LN/s;"}
     8:13:com.google.common.collect.UnmodifiableListIterator listIterator(int):383:383 -> i
     14:16:com.google.common.collect.UnmodifiableListIterator listIterator(int):384:384 -> i
     17:22:com.google.common.collect.UnmodifiableListIterator listIterator(int):386:386 -> i
     5:9:int indexOf(java.lang.Object):412:412 -> indexOf
     1:5:java.util.Iterator iterator():59:59 -> iterator
     1:3:com.google.common.collect.ImmutableList of():86:86 -> j
-      # {"id":"com.android.tools.r8.residualsignature","signature":"()LM/g;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"()LN/g;"}
     1:9:com.google.common.collect.ImmutableList subList(int,int):440:440 -> k
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(II)LM/g;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(II)LN/g;"}
     10:18:com.google.common.collect.ImmutableList subList(int,int):442:442 -> k
     19:23:com.google.common.collect.ImmutableList subList(int,int):445:445 -> k
     24:28:com.google.common.collect.ImmutableList subList(int,int):447:447 -> k
     1:7:com.google.common.collect.ImmutableList subListUnchecked(int,int):456:456 -> l
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(II)LM/g;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(II)LN/g;"}
     5:9:int lastIndexOf(java.lang.Object):417:417 -> lastIndexOf
     1:1:java.util.ListIterator listIterator():59:59 -> listIterator
     2:2:java.util.ListIterator listIterator(int):59:59 -> listIterator
     1:6:java.lang.Object remove(int):567:567 -> remove
     1:6:java.lang.Object set(int,java.lang.Object):540:540 -> set
     1:5:java.util.List subList(int,int):59:59 -> subList
-com.google.common.collect.ImmutableList$Itr -> M.g$a:
+com.google.common.collect.ImmutableList$Itr -> N.g$a:
 # {"id":"sourceFile","fileName":"ImmutableList.java"}
     com.google.common.collect.ImmutableList list -> c
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LM/g;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LN/g;"}
     1:7:void <init>(com.google.common.collect.ImmutableList,int):400:400 -> <init>
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LM/g;I)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LN/g;I)V"}
     8:10:void <init>(com.google.common.collect.ImmutableList,int):401:401 -> <init>
     1:7:java.lang.Object get(int):406:406 -> a
-com.google.common.collect.ImmutableList$SubList -> M.g$b:
+com.google.common.collect.ImmutableList$SubList -> N.g$b:
 # {"id":"sourceFile","fileName":"ImmutableList.java"}
     int offset -> c
     int length -> d
     com.google.common.collect.ImmutableList this$0 -> e
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LM/g;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LN/g;"}
     1:5:void <init>(com.google.common.collect.ImmutableList,int,int):463:463 -> <init>
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LM/g;II)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LN/g;II)V"}
     6:7:void <init>(com.google.common.collect.ImmutableList,int,int):464:464 -> <init>
     8:10:void <init>(com.google.common.collect.ImmutableList,int,int):465:465 -> <init>
     1:7:java.lang.Object[] internalArray():475:475 -> b
@@ -24267,48 +24319,48 @@ com.google.common.collect.ImmutableList$SubList -> M.g$b:
     6:15:java.lang.Object get(int):491:491 -> get
     1:5:java.util.Iterator iterator():459:459 -> iterator
     1:5:com.google.common.collect.ImmutableList subList(int,int):496:496 -> k
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(II)LM/g;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(II)LN/g;"}
     6:16:com.google.common.collect.ImmutableList subList(int,int):497:497 -> k
     1:1:java.util.ListIterator listIterator():459:459 -> listIterator
     2:2:java.util.ListIterator listIterator(int):459:459 -> listIterator
     1:3:int size():470:470 -> size
     1:5:java.util.List subList(int,int):459:459 -> subList
-com.google.common.collect.ImmutableMap -> M.h:
+com.google.common.collect.ImmutableMap -> N.h:
 # {"id":"sourceFile","fileName":"ImmutableMap.java"}
     com.google.common.collect.ImmutableSet entrySet -> a
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LM/i;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LN/i;"}
     com.google.common.collect.ImmutableSet keySet -> b
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LM/i;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LN/i;"}
     com.google.common.collect.ImmutableCollection values -> c
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LM/f;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LN/f;"}
     java.util.Map$Entry[] EMPTY_ENTRY_ARRAY -> d
     2:6:void <clinit>():761:761 -> <clinit>
     1:4:void <init>():811:811 -> <init>
     com.google.common.collect.ImmutableSet createEntrySet() -> a
-      # {"id":"com.android.tools.r8.residualsignature","signature":"()LM/i;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"()LN/i;"}
     com.google.common.collect.ImmutableSet createKeySet() -> b
-      # {"id":"com.android.tools.r8.residualsignature","signature":"()LM/i;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"()LN/i;"}
     com.google.common.collect.ImmutableCollection createValues() -> c
-      # {"id":"com.android.tools.r8.residualsignature","signature":"()LM/f;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"()LN/f;"}
     1:6:void clear():863:863 -> clear
     1:10:boolean containsKey(java.lang.Object):873:873 -> containsKey
     1:9:boolean containsValue(java.lang.Object):878:878 -> containsValue
     1:4:com.google.common.collect.ImmutableSet entrySet():941:941 -> d
-      # {"id":"com.android.tools.r8.residualsignature","signature":"()LM/i;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"()LN/i;"}
     5:11:com.google.common.collect.ImmutableSet entrySet():942:942 -> d
     1:4:com.google.common.collect.ImmutableSet keySet():955:955 -> e
-      # {"id":"com.android.tools.r8.residualsignature","signature":"()LM/i;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"()LN/i;"}
     5:11:com.google.common.collect.ImmutableSet keySet():956:956 -> e
     1:5:java.util.Set entrySet():67:67 -> entrySet
     1:5:boolean equals(java.lang.Object):1099:1099 -> equals
     1:3:com.google.common.collect.ImmutableMap of(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object):167:167 -> f
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)LM/h;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)LN/h;"}
     4:6:com.google.common.collect.ImmutableMap of(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object):168:168 -> f
     7:9:com.google.common.collect.ImmutableMap of(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object):169:169 -> f
     10:15:com.google.common.collect.ImmutableMap of(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object):170:170 -> f
     16:45:com.google.common.collect.ImmutableMap of(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object):171:171 -> f
     1:4:com.google.common.collect.ImmutableCollection values():989:989 -> g
-      # {"id":"com.android.tools.r8.residualsignature","signature":"()LM/f;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"()LN/f;"}
     5:11:com.google.common.collect.ImmutableCollection values():990:990 -> g
     java.lang.Object get(java.lang.Object) -> get
     1:8:java.lang.Object getOrDefault(java.lang.Object,java.lang.Object):924:924 -> getOrDefault
@@ -24320,9 +24372,9 @@ com.google.common.collect.ImmutableMap -> M.h:
     1:6:java.lang.Object remove(java.lang.Object):837:837 -> remove
     1:5:java.lang.String toString():1115:1115 -> toString
     1:5:java.util.Collection values():67:67 -> values
-com.google.common.collect.ImmutableMap$Builder -> M.h$a:
+com.google.common.collect.ImmutableMap$Builder -> N.h$a:
 # {"id":"sourceFile","fileName":"ImmutableMap.java"}
-com.google.common.collect.ImmutableMap$Builder$DuplicateKey -> M.h$a$a:
+com.google.common.collect.ImmutableMap$Builder$DuplicateKey -> N.h$a$a:
 # {"id":"sourceFile","fileName":"ImmutableMap.java"}
     java.lang.Object key -> a
     java.lang.Object value1 -> b
@@ -24332,13 +24384,13 @@ com.google.common.collect.ImmutableMap$Builder$DuplicateKey -> M.h$a$a:
     6:7:void <init>(java.lang.Object,java.lang.Object,java.lang.Object):708:708 -> <init>
     8:10:void <init>(java.lang.Object,java.lang.Object,java.lang.Object):709:709 -> <init>
     1:53:java.lang.IllegalArgumentException exception():713:713 -> a
-com.google.common.collect.ImmutableSet -> M.i:
+com.google.common.collect.ImmutableSet -> N.i:
 # {"id":"sourceFile","fileName":"ImmutableSet.java"}
     com.google.common.collect.ImmutableList asList -> b
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LM/g;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LN/g;"}
     1:4:void <init>():340:340 -> <init>
     1:4:com.google.common.collect.ImmutableList asList():375:375 -> e
-      # {"id":"com.android.tools.r8.residualsignature","signature":"()LM/g;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"()LN/g;"}
     5:11:com.google.common.collect.ImmutableList asList():376:376 -> e
     5:8:boolean equals(java.lang.Object):352:352 -> equals
     9:17:boolean equals(java.lang.Object):353:353 -> equals
@@ -24349,10 +24401,10 @@ com.google.common.collect.ImmutableSet -> M.i:
     14:41:int chooseTableSize(int):239:239 -> f
     42:47:int chooseTableSize(int):247:247 -> f
     1:9:com.google.common.collect.ImmutableList createAsList():380:380 -> g
-      # {"id":"com.android.tools.r8.residualsignature","signature":"()LM/g;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"()LN/g;"}
     1:2:boolean isHashCodeFast():344:344 -> h
     1:5:int hashCode():363:363 -> hashCode
-com.google.common.collect.Iterators -> M.j:
+com.google.common.collect.Iterators -> N.j:
 # {"id":"sourceFile","fileName":"Iterators.java"}
     1:6:boolean elementsEqual(java.util.Iterator,java.util.Iterator):273:273 -> a
     7:14:boolean elementsEqual(java.util.Iterator,java.util.Iterator):274:274 -> a
@@ -24360,7 +24412,7 @@ com.google.common.collect.Iterators -> M.j:
     19:22:boolean elementsEqual(java.util.Iterator,java.util.Iterator):278:278 -> a
     23:29:boolean elementsEqual(java.util.Iterator,java.util.Iterator):279:279 -> a
     30:36:boolean elementsEqual(java.util.Iterator,java.util.Iterator):283:283 -> a
-com.google.common.collect.Lists -> M.k:
+com.google.common.collect.Lists -> N.k:
 # {"id":"sourceFile","fileName":"Lists.java"}
     1:8:boolean equalsImpl(java.util.List,java.lang.Object):1018:1018 -> a
     9:14:boolean equalsImpl(java.util.List,java.lang.Object):1021:1021 -> a
@@ -24389,7 +24441,7 @@ com.google.common.collect.Lists -> M.k:
     11:20:int lastIndexOfRandomAccess(java.util.List,java.lang.Object):1105:1105 -> e
     21:28:int lastIndexOfRandomAccess(java.util.List,java.lang.Object):1110:1110 -> e
     29:44:int lastIndexOfRandomAccess(java.util.List,java.lang.Object):1111:1111 -> e
-com.google.common.collect.Maps -> M.l:
+com.google.common.collect.Maps -> N.l:
 # {"id":"sourceFile","fileName":"Maps.java"}
     5:8:boolean equalsImpl(java.util.Map,java.lang.Object):3706:3706 -> a
     9:10:boolean equalsImpl(java.util.Map,java.lang.Object):3707:3707 -> a
@@ -24399,20 +24451,20 @@ com.google.common.collect.Maps -> M.l:
     37:41:java.lang.String toStringImpl(java.util.Map):3719:3719 -> b
     42:64:java.lang.String toStringImpl(java.util.Map):3722:3722 -> b
     65:72:java.lang.String toStringImpl(java.util.Map):3724:3724 -> b
-com.google.common.collect.ObjectArrays -> M.m:
+com.google.common.collect.ObjectArrays -> N.m:
 # {"id":"sourceFile","fileName":"ObjectArrays.java"}
     1:5:java.lang.Object[] newArray(java.lang.Object[],int):62:62 -> a
-com.google.common.collect.Platform -> M.n:
+com.google.common.collect.Platform -> N.n:
 # {"id":"sourceFile","fileName":"Platform.java"}
     1:9:java.lang.Object[] copy(java.lang.Object[],int,int,java.lang.Object[]):119:119 -> a
     1:9:java.lang.Object[] newArray(java.lang.Object[],int):100:100 -> b
     10:14:java.lang.Object[] newArray(java.lang.Object[],int):101:101 -> b
-com.google.common.collect.RegularImmutableList -> M.o:
+com.google.common.collect.RegularImmutableList -> N.o:
 # {"id":"sourceFile","fileName":"RegularImmutableList.java"}
     java.lang.Object[] array -> c
     int size -> d
     com.google.common.collect.ImmutableList EMPTY -> e
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LM/g;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LN/g;"}
     1:11:void <clinit>():37:37 -> <clinit>
     1:3:void <init>(java.lang.Object[],int):43:43 -> <init>
     4:5:void <init>(java.lang.Object[],int):44:44 -> <init>
@@ -24425,30 +24477,30 @@ com.google.common.collect.RegularImmutableList -> M.o:
     1:5:java.lang.Object get(int):83:83 -> get
     6:13:java.lang.Object get(int):85:85 -> get
     1:3:int size():50:50 -> size
-com.google.common.collect.RegularImmutableMap -> M.p:
+com.google.common.collect.RegularImmutableMap -> N.p:
 # {"id":"sourceFile","fileName":"RegularImmutableMap.java"}
     java.lang.Object hashTable -> e
     java.lang.Object[] alternatingKeysAndValues -> f
     int size -> g
     com.google.common.collect.ImmutableMap EMPTY -> h
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LM/h;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LN/h;"}
     1:12:void <clinit>():50:50 -> <clinit>
     1:3:void <init>(java.lang.Object,java.lang.Object[],int):294:294 -> <init>
     4:5:void <init>(java.lang.Object,java.lang.Object[],int):295:295 -> <init>
     6:7:void <init>(java.lang.Object,java.lang.Object[],int):296:296 -> <init>
     8:10:void <init>(java.lang.Object,java.lang.Object[],int):297:297 -> <init>
     1:11:com.google.common.collect.ImmutableSet createEntrySet():377:377 -> a
-      # {"id":"com.android.tools.r8.residualsignature","signature":"()LM/i;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"()LN/i;"}
     1:10:com.google.common.collect.ImmutableSet createKeySet():478:478 -> b
-      # {"id":"com.android.tools.r8.residualsignature","signature":"()LM/i;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"()LN/i;"}
     11:16:com.google.common.collect.ImmutableSet createKeySet():480:480 -> b
     1:11:com.google.common.collect.ImmutableCollection createValues():571:571 -> c
-      # {"id":"com.android.tools.r8.residualsignature","signature":"()LM/f;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"()LN/f;"}
     1:15:java.lang.Object get(java.lang.Object):308:308 -> get
     2:6:com.google.common.collect.RegularImmutableMap create(int,java.lang.Object[]):92:92 -> h
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(I[Ljava/lang/Object;)LM/p;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(I[Ljava/lang/Object;)LN/p;"}
     3:11:com.google.common.collect.RegularImmutableMap create(int,java.lang.Object[],com.google.common.collect.ImmutableMap$Builder):104:104 -> i
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(I[Ljava/lang/Object;LM/h$a;)LM/p;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(I[Ljava/lang/Object;LN/h$a;)LN/p;"}
     12:13:com.google.common.collect.RegularImmutableMap create(int,java.lang.Object[],com.google.common.collect.ImmutableMap$Builder):108:108 -> i
     14:21:com.google.common.collect.RegularImmutableMap create(int,java.lang.Object[],com.google.common.collect.ImmutableMap$Builder):109:109 -> i
     22:24:com.google.common.collect.RegularImmutableMap create(int,java.lang.Object[],com.google.common.collect.ImmutableMap$Builder):108:108 -> i
@@ -24533,15 +24585,15 @@ com.google.common.collect.RegularImmutableMap -> M.p:
     137:146:java.lang.Object get(java.lang.Object,java.lang.Object[],int,int,java.lang.Object):368:368 -> k
     147:152:java.lang.Object get(java.lang.Object,java.lang.Object[],int,int,java.lang.Object):369:369 -> k
     1:3:int size():302:302 -> size
-com.google.common.collect.RegularImmutableMap$EntrySet -> M.p$a:
+com.google.common.collect.RegularImmutableMap$EntrySet -> N.p$a:
 # {"id":"sourceFile","fileName":"RegularImmutableMap.java"}
     com.google.common.collect.ImmutableMap map -> c
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LM/h;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LN/h;"}
     java.lang.Object[] alternatingKeysAndValues -> d
     int keyOffset -> e
     int size -> f
     1:3:void <init>(com.google.common.collect.ImmutableMap,java.lang.Object[],int,int):390:390 -> <init>
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LM/h;[Ljava/lang/Object;II)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LN/h;[Ljava/lang/Object;II)V"}
     4:5:void <init>(com.google.common.collect.ImmutableMap,java.lang.Object[],int,int):391:391 -> <init>
     6:7:void <init>(com.google.common.collect.ImmutableMap,java.lang.Object[],int,int):392:392 -> <init>
     8:9:void <init>(com.google.common.collect.ImmutableMap,java.lang.Object[],int,int):393:393 -> <init>
@@ -24553,48 +24605,48 @@ com.google.common.collect.RegularImmutableMap$EntrySet -> M.p$a:
     12:17:boolean contains(java.lang.Object):449:449 -> contains
     18:32:boolean contains(java.lang.Object):450:450 -> contains
     1:6:com.google.common.collect.ImmutableList createAsList():409:409 -> g
-      # {"id":"com.android.tools.r8.residualsignature","signature":"()LM/g;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"()LN/g;"}
     1:3:int access$000(com.google.common.collect.RegularImmutableMap$EntrySet):380:380 -> i
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LM/p$a;)I"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LN/p$a;)I"}
     1:5:java.util.Iterator iterator():380:380 -> iterator
     1:3:java.lang.Object[] access$100(com.google.common.collect.RegularImmutableMap$EntrySet):380:380 -> j
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LM/p$a;)[Ljava/lang/Object;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LN/p$a;)[Ljava/lang/Object;"}
     1:3:int access$200(com.google.common.collect.RegularImmutableMap$EntrySet):380:380 -> k
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LM/p$a;)I"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LN/p$a;)I"}
     1:9:com.google.common.collect.UnmodifiableIterator iterator():399:399 -> l
-      # {"id":"com.android.tools.r8.residualsignature","signature":"()LM/r;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"()LN/r;"}
     1:3:int size():462:462 -> size
-com.google.common.collect.RegularImmutableMap$EntrySet$1 -> M.p$a$a:
+com.google.common.collect.RegularImmutableMap$EntrySet$1 -> N.p$a$a:
 # {"id":"sourceFile","fileName":"RegularImmutableMap.java"}
     com.google.common.collect.RegularImmutableMap$EntrySet this$0 -> c
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LM/p$a;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LN/p$a;"}
     1:6:void <init>(com.google.common.collect.RegularImmutableMap$EntrySet):409:409 -> <init>
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LM/p$a;)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LN/p$a;)V"}
     1:5:java.lang.Object get(int):409:409 -> get
     1:9:java.util.Map$Entry get(int):412:412 -> m
     10:29:java.util.Map$Entry get(int):418:418 -> m
     30:49:java.util.Map$Entry get(int):420:420 -> m
     50:55:java.util.Map$Entry get(int):421:421 -> m
     1:7:int size():426:426 -> size
-com.google.common.collect.RegularImmutableMap$KeySet -> M.p$b:
+com.google.common.collect.RegularImmutableMap$KeySet -> N.p$b:
 # {"id":"sourceFile","fileName":"RegularImmutableMap.java"}
     com.google.common.collect.ImmutableMap map -> c
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LM/h;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LN/h;"}
     com.google.common.collect.ImmutableList list -> d
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LM/g;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LN/g;"}
     1:3:void <init>(com.google.common.collect.ImmutableMap,com.google.common.collect.ImmutableList):523:523 -> <init>
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LM/h;LM/g;)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LN/h;LN/g;)V"}
     4:5:void <init>(com.google.common.collect.ImmutableMap,com.google.common.collect.ImmutableList):524:524 -> <init>
     6:8:void <init>(com.google.common.collect.ImmutableMap,com.google.common.collect.ImmutableList):525:525 -> <init>
     1:9:int copyIntoArray(java.lang.Object[],int):535:535 -> a
     1:12:boolean contains(java.lang.Object):545:545 -> contains
     1:3:com.google.common.collect.ImmutableList asList():540:540 -> e
-      # {"id":"com.android.tools.r8.residualsignature","signature":"()LM/g;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"()LN/g;"}
     1:9:com.google.common.collect.UnmodifiableIterator iterator():530:530 -> i
-      # {"id":"com.android.tools.r8.residualsignature","signature":"()LM/r;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"()LN/r;"}
     1:5:java.util.Iterator iterator():519:519 -> iterator
     1:7:int size():555:555 -> size
-com.google.common.collect.RegularImmutableMap$KeysOrValuesAsList -> M.p$c:
+com.google.common.collect.RegularImmutableMap$KeysOrValuesAsList -> N.p$c:
 # {"id":"sourceFile","fileName":"RegularImmutableMap.java"}
     java.lang.Object[] alternatingKeysAndValues -> c
     int offset -> d
@@ -24606,43 +24658,43 @@ com.google.common.collect.RegularImmutableMap$KeysOrValuesAsList -> M.p$c:
     1:5:java.lang.Object get(int):496:496 -> get
     6:18:java.lang.Object get(int):498:498 -> get
     1:3:int size():508:508 -> size
-com.google.common.collect.Sets -> M.q:
+com.google.common.collect.Sets -> N.q:
 # {"id":"sourceFile","fileName":"Sets.java"}
     5:9:boolean equalsImpl(java.util.Set,java.lang.Object):1789:1789 -> a
     10:11:boolean equalsImpl(java.util.Set,java.lang.Object):1790:1790 -> a
     12:29:boolean equalsImpl(java.util.Set,java.lang.Object):1793:1793 -> a
     1:18:int hashCodeImpl(java.util.Set):1775:1775 -> b
     19:29:int hashCodeImpl(java.util.Set):1776:1776 -> b
-com.google.common.collect.UnmodifiableIterator -> M.r:
+com.google.common.collect.UnmodifiableIterator -> N.r:
 # {"id":"sourceFile","fileName":"UnmodifiableIterator.java"}
     1:4:void <init>():37:37 -> <init>
     1:6:void remove():49:49 -> remove
-com.google.common.collect.UnmodifiableListIterator -> M.s:
+com.google.common.collect.UnmodifiableListIterator -> N.s:
 # {"id":"sourceFile","fileName":"UnmodifiableListIterator.java"}
     1:4:void <init>():34:34 -> <init>
     1:6:void add(java.lang.Object):46:46 -> add
     1:6:void set(java.lang.Object):59:59 -> set
-kotlin.Lazy -> N.a:
+kotlin.Lazy -> O.a:
 # {"id":"sourceFile","fileName":"Lazy.kt"}
     java.lang.Object getValue() -> getValue
-kotlin.LazyKt -> N.b:
-kotlin.LazyKt__LazyJVMKt -> N.c:
+kotlin.LazyKt -> O.b:
+kotlin.LazyKt__LazyJVMKt -> O.c:
 # {"id":"sourceFile","fileName":"LazyJVM.kt"}
     6:13:kotlin.Lazy lazy(kotlin.jvm.functions.Function0):21:21 -> a
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LR/a;)LN/a;"}
-kotlin.LazyKt__LazyKt -> N.d:
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LS/a;)LO/a;"}
+kotlin.LazyKt__LazyKt -> O.d:
 # {"id":"sourceFile","fileName":"Lazy.kt"}
-kotlin.SynchronizedLazyImpl -> N.e:
+kotlin.SynchronizedLazyImpl -> O.e:
 # {"id":"sourceFile","fileName":"LazyJVM.kt"}
     kotlin.jvm.functions.Function0 initializer -> a
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LR/a;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LS/a;"}
     java.lang.Object _value -> b
     java.lang.Object lock -> c
     1:3:void <init>(kotlin.jvm.functions.Function0,java.lang.Object):55:57 -> <init>
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LR/a;Ljava/lang/Object;)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LS/a;Ljava/lang/Object;)V"}
     4:4:void <init>(kotlin.jvm.functions.Function0,java.lang.Object):59:59 -> <init>
     5:5:void <init>(kotlin.jvm.functions.Function0,java.lang.Object,int,kotlin.jvm.internal.DefaultConstructorMarker):55:55 -> <init>
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LR/a;Ljava/lang/Object;ILS/b;)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LS/a;Ljava/lang/Object;ILT/b;)V"}
     1:10:boolean isInitialized():82:82 -> a
     1:2:java.lang.Object getValue():63:63 -> getValue
     3:7:java.lang.Object getValue():64:64 -> getValue
@@ -24653,26 +24705,26 @@ kotlin.SynchronizedLazyImpl -> N.e:
     28:29:java.lang.Object getValue():76:76 -> getValue
     30:34:java.lang.Object getValue():69:69 -> getValue
     1:18:java.lang.String toString():84:84 -> toString
-kotlin.UNINITIALIZED_VALUE -> N.f:
+kotlin.UNINITIALIZED_VALUE -> O.f:
 # {"id":"sourceFile","fileName":"Lazy.kt"}
     kotlin.UNINITIALIZED_VALUE INSTANCE -> a
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LN/f;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LO/f;"}
     1:8:void <clinit>():0:0 -> <clinit>
     1:4:void <init>():71:71 -> <init>
-kotlin.Unit -> N.g:
+kotlin.Unit -> O.g:
 # {"id":"sourceFile","fileName":"Unit.kt"}
     kotlin.Unit INSTANCE -> a
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LN/g;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LO/g;"}
     1:8:void <clinit>():0:0 -> <clinit>
     1:4:void <init>():22:22 -> <init>
     1:3:java.lang.String toString():23:23 -> toString
-kotlin.collections.ArraysKt -> O.a:
-kotlin.collections.ArraysKt__ArraysJVMKt -> O.b:
+kotlin.collections.ArraysKt -> P.a:
+kotlin.collections.ArraysKt__ArraysJVMKt -> P.b:
 # {"id":"sourceFile","fileName":"ArraysJVM.kt"}
     4:39:void copyOfRangeToIndexCheck(int,int):49:49 -> a
-kotlin.collections.ArraysKt__ArraysKt -> O.c:
+kotlin.collections.ArraysKt__ArraysKt -> P.c:
 # {"id":"sourceFile","fileName":"Arrays.kt"}
-kotlin.collections.ArraysKt___ArraysJvmKt -> O.d:
+kotlin.collections.ArraysKt___ArraysJvmKt -> P.d:
 # {"id":"sourceFile","fileName":"_ArraysJvm.kt"}
     12:15:int[] copyInto(int[],int[],int,int,int):1316:1316 -> b
     12:15:long[] copyInto(long[],long[],int,int,int):1339:1339 -> c
@@ -24681,31 +24733,31 @@ kotlin.collections.ArraysKt___ArraysJvmKt -> O.d:
     16:21:java.lang.Object[] copyInto$default(java.lang.Object[],java.lang.Object[],int,int,int,int,java.lang.Object):1246:1246 -> f
     6:9:java.lang.Object[] copyOfRange(java.lang.Object[],int,int):1835:1835 -> g
     10:19:java.lang.Object[] copyOfRange(java.lang.Object[],int,int):1836:1836 -> g
-kotlin.collections.ArraysKt___ArraysKt -> O.e:
+kotlin.collections.ArraysKt___ArraysKt -> P.e:
 # {"id":"sourceFile","fileName":"_Arrays.kt"}
-kotlin.collections.CollectionsKt -> O.f:
-kotlin.collections.CollectionsKt__CollectionsJVMKt -> O.g:
+kotlin.collections.CollectionsKt -> P.f:
+kotlin.collections.CollectionsKt__CollectionsJVMKt -> P.g:
 # {"id":"sourceFile","fileName":"CollectionsJVM.kt"}
     1:10:java.util.List listOf(java.lang.Object):20:20 -> a
-kotlin.collections.CollectionsKt__CollectionsKt -> O.h:
+kotlin.collections.CollectionsKt__CollectionsKt -> P.h:
 # {"id":"sourceFile","fileName":"Collections.kt"}
     1:3:java.util.List emptyList():71:71 -> b
     1:8:void throwIndexOverflow():465:465 -> c
-kotlin.collections.CollectionsKt__IterablesKt -> O.i:
+kotlin.collections.CollectionsKt__IterablesKt -> P.i:
 # {"id":"sourceFile","fileName":"Iterables.kt"}
-kotlin.collections.CollectionsKt__IteratorsJVMKt -> O.j:
+kotlin.collections.CollectionsKt__IteratorsJVMKt -> P.j:
 # {"id":"sourceFile","fileName":"IteratorsJVM.kt"}
-kotlin.collections.CollectionsKt__IteratorsKt -> O.k:
+kotlin.collections.CollectionsKt__IteratorsKt -> P.k:
 # {"id":"sourceFile","fileName":"Iterators.kt"}
-kotlin.collections.CollectionsKt__MutableCollectionsJVMKt -> O.l:
+kotlin.collections.CollectionsKt__MutableCollectionsJVMKt -> P.l:
 # {"id":"sourceFile","fileName":"MutableCollectionsJVM.kt"}
-kotlin.collections.CollectionsKt__MutableCollectionsKt -> O.m:
+kotlin.collections.CollectionsKt__MutableCollectionsKt -> P.m:
 # {"id":"sourceFile","fileName":"MutableCollections.kt"}
-kotlin.collections.CollectionsKt__ReversedViewsKt -> O.n:
+kotlin.collections.CollectionsKt__ReversedViewsKt -> P.n:
 # {"id":"sourceFile","fileName":"ReversedViews.kt"}
-kotlin.collections.CollectionsKt___CollectionsJvmKt -> O.o:
+kotlin.collections.CollectionsKt___CollectionsJvmKt -> P.o:
 # {"id":"sourceFile","fileName":"_CollectionsJvm.kt"}
-kotlin.collections.CollectionsKt___CollectionsKt -> O.p:
+kotlin.collections.CollectionsKt___CollectionsKt -> P.p:
 # {"id":"sourceFile","fileName":"_Collections.kt"}
     6:9:boolean contains(java.lang.Iterable,java.lang.Object):74:74 -> d
     10:16:boolean contains(java.lang.Iterable,java.lang.Object):75:75 -> d
@@ -24720,10 +24772,10 @@ kotlin.collections.CollectionsKt___CollectionsKt -> O.p:
     17:33:int indexOf(java.lang.Iterable,java.lang.Object):315:315 -> f
     34:36:int indexOf(java.lang.Iterable,java.lang.Object):316:316 -> f
     37:48:int indexOf(java.lang.Iterable,java.lang.Object):317:317 -> f
-kotlin.collections.EmptyIterator -> O.q:
+kotlin.collections.EmptyIterator -> P.q:
 # {"id":"sourceFile","fileName":"Collections.kt"}
     kotlin.collections.EmptyIterator INSTANCE -> a
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LO/q;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LP/q;"}
     1:8:void <clinit>():0:0 -> <clinit>
     1:4:void <init>():15:15 -> <init>
     1:6:java.lang.Void next():20:20 -> a
@@ -24737,13 +24789,13 @@ kotlin.collections.EmptyIterator -> O.q:
     1:2:int previousIndex():19:19 -> previousIndex
     1:8:void remove():0:0 -> remove
     1:8:void set(java.lang.Object):0:0 -> set
-kotlin.collections.EmptyList -> O.r:
+kotlin.collections.EmptyList -> P.r:
 # {"id":"sourceFile","fileName":"Collections.kt"}
     kotlin.collections.EmptyList INSTANCE -> a
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LO/r;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LP/r;"}
     1:8:void <clinit>():0:0 -> <clinit>
     1:4:void <init>():24:24 -> <init>
-    1:1:boolean O.EmptyList.contains(java.lang.Void):0:0 -> a
+    1:1:boolean P.EmptyList.contains(java.lang.Void):0:0 -> a
       # {"id":"com.android.tools.r8.synthesized"}
     1:1:void add(int,java.lang.Object):0:0 -> add
     2:2:boolean add(java.lang.Object):0:0 -> add
@@ -24754,9 +24806,9 @@ kotlin.collections.EmptyList -> O.r:
     1:8:void clear():0:0 -> clear
     1:13:boolean contains(java.lang.Object):24:24 -> contains
     6:10:boolean containsAll(java.util.Collection):34:34 -> containsAll
-    1:1:int O.EmptyList.indexOf(java.lang.Void):0:0 -> d
+    1:1:int P.EmptyList.indexOf(java.lang.Void):0:0 -> d
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:int O.EmptyList.lastIndexOf(java.lang.Void):0:0 -> e
+    1:1:int P.EmptyList.lastIndexOf(java.lang.Void):0:0 -> e
       # {"id":"com.android.tools.r8.synthesized"}
     1:16:boolean equals(java.lang.Object):27:27 -> equals
     1:5:java.lang.Object get(int):24:24 -> get
@@ -24778,31 +24830,31 @@ kotlin.collections.EmptyList -> O.r:
     1:1:java.lang.Object[] toArray():0:0 -> toArray
     2:2:java.lang.Object[] toArray(java.lang.Object[]):0:0 -> toArray
     1:3:java.lang.String toString():29:29 -> toString
-kotlin.collections.IntIterator -> O.s:
+kotlin.collections.IntIterator -> P.s:
 # {"id":"sourceFile","fileName":"PrimitiveIterators.kt"}
     1:4:void <init>():35:35 -> <init>
     int nextInt() -> a
     1:9:java.lang.Object next():35:35 -> next
     1:8:void remove():0:0 -> remove
-kotlin.coroutines.CoroutineContext -> P.a:
+kotlin.coroutines.CoroutineContext -> Q.a:
 # {"id":"sourceFile","fileName":"CoroutineContext.kt"}
     kotlin.coroutines.CoroutineContext$Element get(kotlin.coroutines.CoroutineContext$Key) -> a
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LP/a$b;)LP/a$a;"}
-kotlin.coroutines.CoroutineContext$Element -> P.a$a:
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LQ/a$b;)LQ/a$a;"}
+kotlin.coroutines.CoroutineContext$Element -> Q.a$a:
 # {"id":"sourceFile","fileName":"CoroutineContext.kt"}
-kotlin.coroutines.CoroutineContext$Key -> P.a$b:
+kotlin.coroutines.CoroutineContext$Key -> Q.a$b:
 # {"id":"sourceFile","fileName":"CoroutineContext.kt"}
-kotlin.internal.ProgressionUtilKt -> Q.a:
+kotlin.internal.ProgressionUtilKt -> R.a:
 # {"id":"sourceFile","fileName":"progressionUtil.kt"}
     1:14:int differenceModulo(int,int,int):21:21 -> a
     6:17:int getProgressionLastElement(int,int,int):46:46 -> b
     18:23:int getProgressionLastElement(int,int,int):47:47 -> b
     24:31:int getProgressionLastElement(int,int,int):48:48 -> b
     1:6:int mod(int,int):10:10 -> c
-kotlin.jvm.functions.Function0 -> R.a:
+kotlin.jvm.functions.Function0 -> S.a:
 # {"id":"sourceFile","fileName":"Functions.kt"}
     java.lang.Object invoke() -> a
-kotlin.jvm.internal.CollectionToArray -> S.a:
+kotlin.jvm.internal.CollectionToArray -> T.a:
 # {"id":"sourceFile","fileName":"CollectionToArray.kt"}
     java.lang.Object[] EMPTY -> a
     2:3:void <clinit>():127:127 -> <clinit>
@@ -24835,11 +24887,11 @@ kotlin.jvm.internal.CollectionToArray -> S.a:
     112:119:java.lang.Object[] toArray(java.util.Collection,java.lang.Object[]):126:126 -> b
     120:122:java.lang.Object[] toArray(java.util.Collection,java.lang.Object[]):43:43 -> b
     123:132:java.lang.Object[] toArray(java.util.Collection,java.lang.Object[]):46:46 -> b
-kotlin.jvm.internal.DefaultConstructorMarker -> S.b:
+kotlin.jvm.internal.DefaultConstructorMarker -> T.b:
 # {"id":"sourceFile","fileName":"DefaultConstructorMarker.java"}
-kotlin.jvm.internal.FunctionBase -> S.c:
+kotlin.jvm.internal.FunctionBase -> T.c:
 # {"id":"sourceFile","fileName":"FunctionBase.kt"}
-kotlin.jvm.internal.Intrinsics -> S.d:
+kotlin.jvm.internal.Intrinsics -> T.d:
 # {"id":"sourceFile","fileName":"Intrinsics.java"}
     9:13:boolean areEqual(java.lang.Object,java.lang.Object):169:169 -> a
     3:6:void checkNotNull(java.lang.Object):25:25 -> b
@@ -24863,38 +24915,38 @@ kotlin.jvm.internal.Intrinsics -> S.d:
     1:12:void throwJavaNpe():45:45 -> i
     1:12:void throwJavaNpe(java.lang.String):50:50 -> j
     1:16:void throwParameterIsNullNPE(java.lang.String):140:140 -> k
-kotlin.jvm.internal.Lambda -> S.e:
+kotlin.jvm.internal.Lambda -> T.e:
 # {"id":"sourceFile","fileName":"Lambda.kt"}
     int arity -> a
     1:6:void <init>(int):10:10 -> <init>
     1:10:java.lang.String toString():11:11 -> toString
-kotlin.jvm.internal.Reflection -> S.f:
+kotlin.jvm.internal.Reflection -> T.f:
 # {"id":"sourceFile","fileName":"Reflection.java"}
     kotlin.jvm.internal.ReflectionFactory factory -> a
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LS/g;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LT/g;"}
     kotlin.reflect.KClass[] EMPTY_K_CLASS_ARRAY -> b
-      # {"id":"com.android.tools.r8.residualsignature","signature":"[LU/a;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"[LV/a;"}
     2:7:void <clinit>():26:26 -> <clinit>
     8:19:void <clinit>():27:27 -> <clinit>
     20:27:void <clinit>():34:34 -> <clinit>
     28:32:void <clinit>():39:39 -> <clinit>
     1:7:java.lang.String renderLambdaToString(kotlin.jvm.internal.Lambda):79:79 -> a
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LS/e;)Ljava/lang/String;"}
-kotlin.jvm.internal.ReflectionFactory -> S.g:
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LT/e;)Ljava/lang/String;"}
+kotlin.jvm.internal.ReflectionFactory -> T.g:
 # {"id":"sourceFile","fileName":"ReflectionFactory.java"}
     1:4:void <init>():14:14 -> <init>
     1:15:java.lang.String renderLambdaToString(kotlin.jvm.internal.FunctionBase):44:44 -> a
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LS/c;)Ljava/lang/String;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LT/c;)Ljava/lang/String;"}
     16:30:java.lang.String renderLambdaToString(kotlin.jvm.internal.FunctionBase):45:45 -> a
     1:5:java.lang.String renderLambdaToString(kotlin.jvm.internal.Lambda):39:39 -> b
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LS/e;)Ljava/lang/String;"}
-kotlin.ranges.IntProgression -> T.a:
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LT/e;)Ljava/lang/String;"}
+kotlin.ranges.IntProgression -> U.a:
 # {"id":"sourceFile","fileName":"Progressions.kt"}
     int first -> a
     int last -> b
     int step -> c
     kotlin.ranges.IntProgression$Companion Companion -> d
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LT/a$a;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LU/a$a;"}
     1:9:void <clinit>():0:0 -> <clinit>
     1:9:void <init>(int,int,int):77:77 -> <init>
     10:11:void <init>(int,int,int):92:92 -> <init>
@@ -24906,21 +24958,21 @@ kotlin.ranges.IntProgression -> T.a:
     1:3:int getLast():97:97 -> b
     1:3:int getStep():102:102 -> c
     1:12:kotlin.collections.IntIterator iterator():104:104 -> d
-      # {"id":"com.android.tools.r8.residualsignature","signature":"()LO/s;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"()LP/s;"}
     1:19:boolean equals(java.lang.Object):115:115 -> equals
     20:43:boolean equals(java.lang.Object):116:116 -> equals
     1:21:int hashCode():119:119 -> hashCode
     1:22:boolean isEmpty():112:112 -> isEmpty
     1:5:java.util.Iterator iterator():77:77 -> iterator
     1:66:java.lang.String toString():121:121 -> toString
-kotlin.ranges.IntProgression$Companion -> T.a$a:
+kotlin.ranges.IntProgression$Companion -> U.a$a:
 # {"id":"sourceFile","fileName":"Progressions.kt"}
     1:1:void <init>(kotlin.jvm.internal.DefaultConstructorMarker):0:0 -> <init>
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LS/b;)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LT/b;)V"}
     2:2:void <init>():123:123 -> <init>
     1:6:kotlin.ranges.IntProgression fromClosedRange(int,int,int):132:132 -> a
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(III)LT/a;"}
-kotlin.ranges.IntProgressionIterator -> T.b:
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(III)LU/a;"}
+kotlin.ranges.IntProgressionIterator -> U.b:
 # {"id":"sourceFile","fileName":"ProgressionIterators.kt"}
     int step -> a
     int finalElement -> b
@@ -24937,12 +24989,12 @@ kotlin.ranges.IntProgressionIterator -> T.b:
     15:20:int nextInt():48:48 -> a
     21:26:int nextInt():52:52 -> a
     1:3:boolean hasNext():43:43 -> hasNext
-kotlin.ranges.IntRange -> T.c:
+kotlin.ranges.IntRange -> U.c:
 # {"id":"sourceFile","fileName":"PrimitiveRanges.kt"}
     kotlin.ranges.IntRange$Companion Companion -> e
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LT/c$a;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LU/c$a;"}
     kotlin.ranges.IntRange EMPTY -> f
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LT/c;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LU/c;"}
     9:18:void <clinit>():86:86 -> <clinit>
     2:5:void <init>(int,int):54:54 -> <init>
     1:19:boolean equals(java.lang.Object):76:76 -> equals
@@ -24950,47 +25002,47 @@ kotlin.ranges.IntRange -> T.c:
     1:20:int hashCode():80:80 -> hashCode
     1:14:boolean isEmpty():73:73 -> isEmpty
     1:29:java.lang.String toString():82:82 -> toString
-kotlin.ranges.IntRange$Companion -> T.c$a:
+kotlin.ranges.IntRange$Companion -> U.c$a:
 # {"id":"sourceFile","fileName":"PrimitiveRanges.kt"}
     1:1:void <init>(kotlin.jvm.internal.DefaultConstructorMarker):0:0 -> <init>
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LS/b;)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LT/b;)V"}
     2:2:void <init>():84:84 -> <init>
-kotlin.ranges.RangesKt -> T.d:
-kotlin.ranges.RangesKt__RangesKt -> T.e:
+kotlin.ranges.RangesKt -> U.d:
+kotlin.ranges.RangesKt__RangesKt -> U.e:
 # {"id":"sourceFile","fileName":"Ranges.kt"}
-kotlin.ranges.RangesKt___RangesKt -> T.f:
+kotlin.ranges.RangesKt___RangesKt -> U.f:
 # {"id":"sourceFile","fileName":"_Ranges.kt"}
     1:4:int coerceAtLeast(int,int):1244:1244 -> a
     1:4:int coerceAtMost(int,int):1321:1321 -> b
     1:8:kotlin.ranges.IntProgression downTo(int,int):828:828 -> c
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(II)LT/a;"}
-kotlin.reflect.KClass -> U.a:
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(II)LU/a;"}
+kotlin.reflect.KClass -> V.a:
 # {"id":"sourceFile","fileName":"KClass.kt"}
-kotlin.text.CharsKt__CharJVMKt -> V.a:
+kotlin.text.CharsKt__CharJVMKt -> W.a:
 # {"id":"sourceFile","fileName":"CharJVM.kt"}
-kotlin.text.CharsKt__CharKt -> V.b:
+kotlin.text.CharsKt__CharKt -> W.b:
 # {"id":"sourceFile","fileName":"Char.kt"}
     9:12:boolean equals(char,char,boolean):237:237 -> a
     13:18:boolean equals(char,char,boolean):238:238 -> a
     19:31:boolean equals(char,char,boolean):240:240 -> a
-kotlin.text.StringsKt -> V.c:
-kotlin.text.StringsKt__AppendableKt -> V.d:
+kotlin.text.StringsKt -> W.c:
+kotlin.text.StringsKt__AppendableKt -> W.d:
 # {"id":"sourceFile","fileName":"Appendable.kt"}
-kotlin.text.StringsKt__IndentKt -> V.e:
+kotlin.text.StringsKt__IndentKt -> W.e:
 # {"id":"sourceFile","fileName":"Indent.kt"}
-kotlin.text.StringsKt__RegexExtensionsJVMKt -> V.f:
+kotlin.text.StringsKt__RegexExtensionsJVMKt -> W.f:
 # {"id":"sourceFile","fileName":"RegexExtensionsJVM.kt"}
-kotlin.text.StringsKt__RegexExtensionsKt -> V.g:
+kotlin.text.StringsKt__RegexExtensionsKt -> W.g:
 # {"id":"sourceFile","fileName":"RegexExtensions.kt"}
-kotlin.text.StringsKt__StringBuilderJVMKt -> V.h:
+kotlin.text.StringsKt__StringBuilderJVMKt -> W.h:
 # {"id":"sourceFile","fileName":"StringBuilderJVM.kt"}
-kotlin.text.StringsKt__StringBuilderKt -> V.i:
+kotlin.text.StringsKt__StringBuilderKt -> W.i:
 # {"id":"sourceFile","fileName":"StringBuilder.kt"}
-kotlin.text.StringsKt__StringNumberConversionsJVMKt -> V.j:
+kotlin.text.StringsKt__StringNumberConversionsJVMKt -> W.j:
 # {"id":"sourceFile","fileName":"StringNumberConversionsJVM.kt"}
-kotlin.text.StringsKt__StringNumberConversionsKt -> V.k:
+kotlin.text.StringsKt__StringNumberConversionsKt -> W.k:
 # {"id":"sourceFile","fileName":"StringNumberConversions.kt"}
-kotlin.text.StringsKt__StringsJVMKt -> V.l:
+kotlin.text.StringsKt__StringsJVMKt -> W.l:
 # {"id":"sourceFile","fileName":"StringsJVM.kt"}
     13:23:boolean regionMatches(java.lang.String,int,java.lang.String,int,int,boolean):654:654 -> a
     24:28:boolean regionMatches(java.lang.String,int,java.lang.String,int,int,boolean):656:656 -> a
@@ -25005,7 +25057,7 @@ kotlin.text.StringsKt__StringsJVMKt -> V.l:
     71:87:java.lang.String replace(java.lang.String,java.lang.String,java.lang.String,boolean):105:105 -> b
     88:93:java.lang.String replace(java.lang.String,java.lang.String,java.lang.String,boolean):95:95 -> b
     6:10:java.lang.String replace$default(java.lang.String,java.lang.String,java.lang.String,boolean,int,java.lang.Object):86:86 -> c
-kotlin.text.StringsKt__StringsKt -> V.m:
+kotlin.text.StringsKt__StringsKt -> W.m:
 # {"id":"sourceFile","fileName":"Strings.kt"}
     6:12:int getLastIndex(java.lang.CharSequence):379:379 -> d
     13:17:int indexOf(java.lang.CharSequence,java.lang.String,int,boolean):1102:1102 -> e
@@ -25021,29 +25073,29 @@ kotlin.text.StringsKt__StringsKt -> V.m:
     15:19:int indexOf$StringsKt__StringsKt$default(java.lang.CharSequence,java.lang.CharSequence,int,int,boolean,boolean,int,java.lang.Object):972:972 -> g
     16:35:boolean regionMatchesImpl(java.lang.CharSequence,int,java.lang.CharSequence,int,int,boolean):821:821 -> h
     36:58:boolean regionMatchesImpl(java.lang.CharSequence,int,java.lang.CharSequence,int,int,boolean):826:826 -> h
-kotlin.text.StringsKt___StringsJvmKt -> V.n:
+kotlin.text.StringsKt___StringsJvmKt -> W.n:
 # {"id":"sourceFile","fileName":"_StringsJvm.kt"}
-kotlin.text.StringsKt___StringsKt -> V.o:
+kotlin.text.StringsKt___StringsKt -> W.o:
 # {"id":"sourceFile","fileName":"_Strings.kt"}
-kotlinx.coroutines.Job -> W.a:
+kotlinx.coroutines.Job -> X.a:
 # {"id":"sourceFile","fileName":"Job.kt"}
     kotlinx.coroutines.Job$Key Key -> a
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LW/a$a;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LX/a$a;"}
     1:5:void <clinit>():0:0 -> <clinit>
-kotlinx.coroutines.Job$Key -> W.a$a:
+kotlinx.coroutines.Job$Key -> X.a$a:
 # {"id":"sourceFile","fileName":"Job.kt"}
     kotlinx.coroutines.Job$Key $$INSTANCE -> a
-      # {"id":"com.android.tools.r8.residualsignature","signature":"LW/a$a;"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"LX/a$a;"}
     1:8:void <clinit>():0:0 -> <clinit>
     1:4:void <init>():116:116 -> <init>
-kotlinx.coroutines.JobKt -> W.b:
+kotlinx.coroutines.JobKt -> X.b:
     1:4:void cancel(kotlin.coroutines.CoroutineContext,java.util.concurrent.CancellationException):1:1 -> a
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LP/a;Ljava/util/concurrent/CancellationException;)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LQ/a;Ljava/util/concurrent/CancellationException;)V"}
     1:4:void cancel$default(kotlin.coroutines.CoroutineContext,java.util.concurrent.CancellationException,int,java.lang.Object):1:1 -> b
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LP/a;Ljava/util/concurrent/CancellationException;ILjava/lang/Object;)V"}
-kotlinx.coroutines.JobKt__JobKt -> W.c:
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LQ/a;Ljava/util/concurrent/CancellationException;ILjava/lang/Object;)V"}
+kotlinx.coroutines.JobKt__JobKt -> X.c:
 # {"id":"sourceFile","fileName":"Job.kt"}
     1:6:void cancel(kotlin.coroutines.CoroutineContext,java.util.concurrent.CancellationException):564:564 -> a
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LP/a;Ljava/util/concurrent/CancellationException;)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LQ/a;Ljava/util/concurrent/CancellationException;)V"}
     6:9:void cancel$default(kotlin.coroutines.CoroutineContext,java.util.concurrent.CancellationException,int,java.lang.Object):563:563 -> b
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(LP/a;Ljava/util/concurrent/CancellationException;ILjava/lang/Object;)V"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(LQ/a;Ljava/util/concurrent/CancellationException;ILjava/lang/Object;)V"}

@@ -165,6 +165,25 @@
                 android:resource="@xml/filepaths" />
         </provider>
 
+        <!-- Widget Provider -->
+        <receiver android:name=".widget.SignalNoiseWidgetProvider"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info" />
+        </receiver>
+
+        <!-- Widget Update Receiver -->
+        <receiver android:name=".widget.WidgetUpdateReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="app.signalnoise.twa.UPDATE_WIDGET" />
+            </intent-filter>
+        </receiver>
+
         <service
             android:name=".DelegationService"
             android:enabled="@bool/enableNotification"
