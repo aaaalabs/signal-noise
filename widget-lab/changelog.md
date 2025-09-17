@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.1.0] - 2025-09-17 - Signal Wave Release
+
+### Released to Production
+- Signal Wave Widget deployed to Google Play Store
+- Version 1.1.0 (Build 4)
+- Full integration with main Signal/Noise app
+
 ## [Unreleased]
 
 ### Signal Wave Widget - Phase 2 Complete ✅

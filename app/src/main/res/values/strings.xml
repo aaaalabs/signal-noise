@@ -34,17 +34,21 @@
     
   </string>
 
-  <!-- Widget Names - Minimal -->
-  <string name="widget_mock_name">Mock</string>
-  <string name="widget_test1_name">T1</string>
-  <string name="widget_test2_name">T2</string>
-  <string name="widget_test3_name">T3</string>
-  <string name="widget_test4_name">T4</string>
-  <string name="widget_test5_name">T5</string>
-  <string name="widget_diag1_name">D1</string>
-  <string name="widget_diag2_name">D2</string>
-  <string name="widget_diag3_name">D3</string>
-  <string name="widget_diag4_name">D4</string>
-  <string name="widget_diag5_name">D5</string>
+  <!-- Original Widget -->
   <string name="widget_main_name">S/N</string>
+
+  <!-- Signal Wave Widget -->
+  <string name="signal_wave_name">Signal Wave</string>
+  <string name="signal_wave_description">Beautiful productivity visualization with live wave animations</string>
+  <string name="wave_visualization">Productivity wave visualization</string>
+
+  <!-- Widget status messages -->
+  <string name="excellent_focus">Excellent Focus</string>
+  <string name="good_balance">Good Balance</string>
+  <string name="refocus_needed">Refocus Needed</string>
+  <string name="start_today">Start today</string>
+
+  <!-- AI insights -->
+  <string name="ai_loading">Loading insights...</string>
+  <string name="ai_unavailable">Premium feature</string>
 </resources>
