@@ -20,9 +20,27 @@ public class SignalNoiseWidgetProvider extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+        // Try to read from the app's main SharedPreferences first
+        SharedPreferences appPrefs = context.getSharedPreferences(
+            context.getPackageName() + "_preferences", Context.MODE_PRIVATE);
+        String ratioStr = appPrefs.getString("widget_ratio", null);
+
+        // Fallback to widget-specific prefs
         SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        int ratio = prefs.getInt(PREF_RATIO, 0);
-        boolean isSignal = prefs.getBoolean(PREF_IS_SIGNAL, true);
+        int ratio = 0;
+        if (ratioStr != null) {
+            try {
+                ratio = Integer.parseInt(ratioStr);
+                // Save to widget prefs for next time
+                prefs.edit().putInt(PREF_RATIO, ratio).apply();
+            } catch (NumberFormatException e) {
+                ratio = prefs.getInt(PREF_RATIO, 0);
+            }
+        } else {
+            ratio = prefs.getInt(PREF_RATIO, 0);
+        }
+
+        boolean isSignal = ratio >= 80;
 
         for (int appWidgetId : appWidgetIds) {
             updateWidget(context, appWidgetManager, appWidgetId, ratio, isSignal);
@@ -31,23 +49,19 @@ public class SignalNoiseWidgetProvider extends AppWidgetProvider {
 
     static void updateWidget(Context context, AppWidgetManager appWidgetManager,
                             int appWidgetId, int ratio, boolean isSignal) {
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_signal_noise);
+        // For simplicity, always use 1x1 layout for new widgets
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_1x1);
 
-        // Update ratio text - pure white, no percentage symbol
-        views.setTextViewText(R.id.widget_ratio, String.valueOf(ratio));
-
-        // Update status text with appropriate color
-        String status = isSignal ? "signal" : "noise";
-        views.setTextViewText(R.id.widget_status, status);
-        views.setTextColor(R.id.widget_status,
-            context.getResources().getColor(isSignal ? R.color.signalGreen : R.color.noiseGray));
+        // Update ratio text - show dash if no data
+        String displayText = ratio > 0 ? String.valueOf(ratio) : "—";
+        views.setTextViewText(R.id.widget_ratio, displayText);
 
         // Set click intent to open app
         Intent intent = new Intent(context, LauncherActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent,
             PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-        views.setOnClickPendingIntent(R.id.widget_container, pendingIntent);
+        views.setOnClickPendingIntent(R.id.widget_ratio, pendingIntent);
 
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }

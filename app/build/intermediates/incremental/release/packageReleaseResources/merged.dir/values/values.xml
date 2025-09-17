@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="enableNotification">true</bool>
+    <bool name="enableSiteSettingsShortcut">true</bool>
+    <color name="backgroundColor">#0A0A0A</color>
+    <color name="colorPrimary">#0A0A0A</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="navigationColor">#000000</color>
+    <color name="navigationColorDark">#000000</color>
+    <color name="navigationDividerColor">#000000</color>
+    <color name="navigationDividerColorDark">#000000</color>
+    <color name="noiseGray">#666666</color>
+    <color name="shortcut_background">#F5F5F5</color>
+    <color name="signalGreen">#00FF88</color>
+    <color name="widgetBlack">#000000</color>
+    <color name="widgetWhite">#FFFFFF</color>
+    <integer name="splashScreenFadeOutDuration">300</integer>
+    <string name="appName" translatable="false">Signal/Noise - Focus Tracker</string>
+    <string name="assetStatements">
+    [{
+        \"relation\": [\"delegate_permission/common.handle_all_urls\"],
+        \"target\": {
+            \"namespace\": \"web\",
+            \"site\": \"https://signal-noise.app\"
+        }
+    }]
+    
+  </string>
+    <string name="fallbackType" translatable="false">customtabs</string>
+    <string name="fullScopeUrl" translatable="false">https://signal-noise.app/</string>
+    <string name="generatorApp" translatable="false">bubblewrap-cli</string>
+    <string name="hostName" translatable="false">signal-noise.app</string>
+    <string name="launchUrl" translatable="false">https://signal-noise.app/</string>
+    <string name="launcherName" translatable="false">Signal/Noise</string>
+    <string name="orientation" translatable="false">portrait</string>
+    <string name="providerAuthority" translatable="false">app.signalnoise.twa.fileprovider</string>
+    <string name="shortcut_name_0" translatable="false">Signal</string>
+    <string name="shortcut_name_1" translatable="false">Noise</string>
+    <string name="shortcut_short_name_0" translatable="false">Signal</string>
+    <string name="shortcut_short_name_1" translatable="false">Noise</string>
+    <string name="webManifestUrl" translatable="false">https://signal-noise.app/manifest.json</string>
+</resources>

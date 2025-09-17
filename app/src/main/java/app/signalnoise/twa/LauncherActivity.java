@@ -15,6 +15,7 @@
  */
 package app.signalnoise.twa;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Build;
@@ -44,11 +45,14 @@ public class LauncherActivity
 
     @Override
     protected Uri getLaunchingUrl() {
-        // Get the original launch Url.
-        Uri uri = super.getLaunchingUrl();
+        // Check if launched from a shortcut with data
+        Intent intent = getIntent();
+        if (intent != null && intent.getData() != null) {
+            // Return the shortcut URL directly
+            return intent.getData();
+        }
 
-        
-
-        return uri;
+        // Otherwise return the default launch URL
+        return super.getLaunchingUrl();
     }
 }

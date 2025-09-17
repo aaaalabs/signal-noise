@@ -3,8 +3,8 @@
 # min_api: 21
 # common_typos_disable
 # {"id":"com.android.tools.r8.mapping","version":"2.2"}
-# pg_map_id: 0a73e36
-# pg_map_hash: SHA-256 0a73e368272675d7bbcd8002cc4d1881dc2c76c2d1cf86962e19f9a671f3f083
+# pg_map_id: b34bef8
+# pg_map_hash: SHA-256 b34bef83d78d8de103c31f1fbf4e68a3ee33b739e16c74b89fff35d8f6bd66f6
 android.support.customtabs.ICustomTabsCallback -> a.a:
 # {"id":"sourceFile","fileName":"ICustomTabsCallback.java"}
     java.lang.String DESCRIPTOR -> a
@@ -22704,57 +22704,58 @@ app.signalnoise.twa.DelegationService -> app.signalnoise.twa.DelegationService:
     1:4:void onCreate():9:9 -> onCreate
 app.signalnoise.twa.LauncherActivity -> app.signalnoise.twa.LauncherActivity:
 # {"id":"sourceFile","fileName":"LauncherActivity.java"}
-    1:4:void <init>():25:25 -> <init>
-    1:5:android.net.Uri getLaunchingUrl():48:48 -> i
-    1:3:void onCreate(android.os.Bundle):33:33 -> onCreate
-    4:11:void onCreate(android.os.Bundle):38:38 -> onCreate
-    12:16:void onCreate(android.os.Bundle):39:39 -> onCreate
-    17:20:void onCreate(android.os.Bundle):41:41 -> onCreate
-app.signalnoise.twa.R$color -> I.a:
-    int noiseGray -> a
-    int signalGreen -> b
-app.signalnoise.twa.R$id -> I.b:
-    int widget_container -> a
-    int widget_ratio -> b
-    int widget_status -> c
-app.signalnoise.twa.R$layout -> I.c:
-    int widget_signal_noise -> a
+    1:4:void <init>():26:26 -> <init>
+    1:6:android.net.Uri getLaunchingUrl():49:49 -> i
+    7:12:android.net.Uri getLaunchingUrl():50:50 -> i
+    13:17:android.net.Uri getLaunchingUrl():52:52 -> i
+    18:22:android.net.Uri getLaunchingUrl():56:56 -> i
+    1:3:void onCreate(android.os.Bundle):34:34 -> onCreate
+    4:11:void onCreate(android.os.Bundle):39:39 -> onCreate
+    12:16:void onCreate(android.os.Bundle):40:40 -> onCreate
+    17:20:void onCreate(android.os.Bundle):42:42 -> onCreate
+app.signalnoise.twa.R$id -> I.a:
+    int widget_ratio -> a
+app.signalnoise.twa.R$layout -> I.b:
+    int widget_1x1 -> a
 app.signalnoise.twa.widget.SignalNoiseWidgetProvider -> app.signalnoise.twa.widget.SignalNoiseWidgetProvider:
 # {"id":"sourceFile","fileName":"SignalNoiseWidgetProvider.java"}
     1:4:void <init>():14:14 -> <init>
-    1:7:void updateAllWidgets(android.content.Context,int,boolean):56:56 -> a
-    8:15:void updateAllWidgets(android.content.Context,int,boolean):57:57 -> a
-    16:25:void updateAllWidgets(android.content.Context,int,boolean):60:60 -> a
-    26:29:void updateAllWidgets(android.content.Context,int,boolean):65:65 -> a
-    30:35:void updateAllWidgets(android.content.Context,int,boolean):66:66 -> a
-    36:39:void updateAllWidgets(android.content.Context,int,boolean):67:67 -> a
-    40:42:void updateAllWidgets(android.content.Context,int,boolean):68:68 -> a
-    43:46:void updateAllWidgets(android.content.Context,int,boolean):71:71 -> a
-    47:53:void updateAllWidgets(android.content.Context,int,boolean):72:72 -> a
-    54:57:void updateAllWidgets(android.content.Context,int,boolean):73:73 -> a
-    58:62:void updateAllWidgets(android.content.Context,int,boolean):75:75 -> a
-    63:69:void updateAllWidgets(android.content.Context,int,boolean):76:76 -> a
-    1:11:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int,boolean):34:34 -> b
-    12:22:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int,boolean):37:37 -> b
-    23:27:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int,boolean):40:40 -> b
-    28:32:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int,boolean):41:41 -> b
-    33:34:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int,boolean):42:42 -> b
-    35:49:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int,boolean):43:43 -> b
-    50:52:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int,boolean):42:42 -> b
-    53:61:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int,boolean):46:46 -> b
-    62:67:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int,boolean):47:47 -> b
-    68:71:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int,boolean):48:48 -> b
-    72:76:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int,boolean):50:50 -> b
-    77:80:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int,boolean):52:52 -> b
-    1:7:void onDisabled(android.content.Context):89:89 -> onDisabled
-    8:18:void onDisabled(android.content.Context):90:90 -> onDisabled
-    19:22:void onDisabled(android.content.Context):91:91 -> onDisabled
-    1:4:void onEnabled(android.content.Context):83:83 -> onEnabled
-    1:7:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):23:23 -> onUpdate
-    8:13:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):24:24 -> onUpdate
-    14:20:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):25:25 -> onUpdate
-    21:25:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):27:27 -> onUpdate
-    26:32:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):28:28 -> onUpdate
+    1:7:void updateAllWidgets(android.content.Context,int,boolean):70:70 -> a
+    8:15:void updateAllWidgets(android.content.Context,int,boolean):71:71 -> a
+    16:25:void updateAllWidgets(android.content.Context,int,boolean):74:74 -> a
+    26:29:void updateAllWidgets(android.content.Context,int,boolean):79:79 -> a
+    30:35:void updateAllWidgets(android.content.Context,int,boolean):80:80 -> a
+    36:39:void updateAllWidgets(android.content.Context,int,boolean):81:81 -> a
+    40:42:void updateAllWidgets(android.content.Context,int,boolean):82:82 -> a
+    43:46:void updateAllWidgets(android.content.Context,int,boolean):85:85 -> a
+    47:53:void updateAllWidgets(android.content.Context,int,boolean):86:86 -> a
+    54:57:void updateAllWidgets(android.content.Context,int,boolean):87:87 -> a
+    58:62:void updateAllWidgets(android.content.Context,int,boolean):89:89 -> a
+    63:69:void updateAllWidgets(android.content.Context,int,boolean):90:90 -> a
+    1:13:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int,boolean):53:53 -> b
+    14:20:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int,boolean):56:56 -> b
+    21:25:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int,boolean):57:57 -> b
+    26:34:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int,boolean):60:60 -> b
+    35:40:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int,boolean):61:61 -> b
+    41:44:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int,boolean):62:62 -> b
+    45:49:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int,boolean):64:64 -> b
+    50:53:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int,boolean):66:66 -> b
+    1:7:void onDisabled(android.content.Context):103:103 -> onDisabled
+    8:18:void onDisabled(android.content.Context):104:104 -> onDisabled
+    19:22:void onDisabled(android.content.Context):105:105 -> onDisabled
+    1:4:void onEnabled(android.content.Context):97:97 -> onEnabled
+    1:5:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):24:24 -> onUpdate
+    6:22:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):25:25 -> onUpdate
+    23:26:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):24:24 -> onUpdate
+    27:33:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):26:26 -> onUpdate
+    34:39:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):29:29 -> onUpdate
+    40:43:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):31:31 -> onUpdate
+    44:47:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):33:33 -> onUpdate
+    48:59:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):35:35 -> onUpdate
+    60:64:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):37:37 -> onUpdate
+    65:75:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):40:40 -> onUpdate
+    76:80:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):45:45 -> onUpdate
+    81:87:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):46:46 -> onUpdate
 app.signalnoise.twa.widget.WidgetUpdateReceiver -> app.signalnoise.twa.widget.WidgetUpdateReceiver:
 # {"id":"sourceFile","fileName":"WidgetUpdateReceiver.java"}
     1:4:void <init>():7:7 -> <init>

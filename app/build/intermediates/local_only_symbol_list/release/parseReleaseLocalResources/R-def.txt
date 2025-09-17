@@ -24,6 +24,7 @@ id widget_container
 id widget_ratio
 id widget_status
 integer splashScreenFadeOutDuration
+layout widget_1x1
 layout widget_signal_noise
 mipmap ic_launcher
 mipmap ic_maskable

@@ -597,18 +597,21 @@ function AppContent() {
 
       syncTracker.current.lastDataSize = dataSize;
 
-      // Update Android widget if in TWA
+      // Update Android widget data - SLC approach
       try {
         const ratio = getTodayRatio(data.tasks);
-        const isSignal = ratio >= 80;
 
-        // Store widget data for Android to read
+        // Store in multiple places for maximum compatibility
+        localStorage.setItem('android.widget.ratio', ratio.toString());
         localStorage.setItem('widget_ratio', ratio.toString());
-        localStorage.setItem('widget_is_signal', isSignal.toString());
 
-        // If Android JavaScript interface is available, use it
-        if ('Android' in window && (window as any).Android?.updateHomeWidget) {
-          (window as any).Android.updateHomeWidget(ratio, isSignal);
+        // Also try to communicate via Android interface if available
+        if ('Android' in window) {
+          try {
+            (window as any).Android?.updateWidgetData?.(ratio);
+          } catch (e) {
+            // Interface not available, that's OK
+          }
         }
       } catch (e) {
         // Widget update not available in browser

@@ -7669,23 +7669,15 @@ androidx.viewpager.widget.ViewPager$SimpleOnPageChangeListener
 androidx.viewpager.widget.ViewPager$ViewPositionComparator
 androidx.viewpager.widget.ViewPager
 app.signalnoise.twa.R$bool
-app.signalnoise.twa.R$color:
-    public static int backgroundColor
-    public static int colorPrimary
-    public static int colorPrimaryDark
-    public static int navigationColor
-    public static int navigationColorDark
-    public static int navigationDividerColor
-    public static int navigationDividerColorDark
-    public static int shortcut_background
-    public static int widgetBlack
-    public static int widgetWhite
-    private void <init>()
+app.signalnoise.twa.R$color
 app.signalnoise.twa.R$drawable
 app.signalnoise.twa.R$id:
+    public static int widget_container
+    public static int widget_status
     private void <init>()
 app.signalnoise.twa.R$integer
 app.signalnoise.twa.R$layout:
+    public static int widget_signal_noise
     private void <init>()
 app.signalnoise.twa.R$mipmap
 app.signalnoise.twa.R$string
