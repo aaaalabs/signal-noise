@@ -1,0 +1,29 @@
+{
+  "packageId": "app.signalnoise.twa",
+  "host": "signal-noise.app",
+  "name": "Signal/Noise - Focus Tracker",
+  "launcherName": "Signal/Noise",
+  "display": "standalone",
+  "themeColor": "#00ff88",
+  "navigationColor": "#0a0a0a",
+  "backgroundColor": "#0a0a0a",
+  "enableNotifications": false,
+  "startUrl": "/",
+  "iconUrl": "https://signal-noise.app/icon-512.png",
+  "maskableIconUrl": "https://signal-noise.app/icon-512.png",
+  "appVersion": "1.0.0",
+  "signingKey": {
+    "alias": "android",
+    "path": "./android.keystore"
+  },
+  "appVersionCode": 1,
+  "shortcuts": [],
+  "generatorApp": "bubblewrap-cli",
+  "webManifestUrl": "https://signal-noise.app/manifest.json",
+  "fallbackType": "customtabs",
+  "features": {},
+  "enableSiteSettingsShortcut": true,
+  "isChromeOSOnly": false,
+  "orientation": "portrait",
+  "fingerprints": []
+}

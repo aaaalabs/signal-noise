@@ -59,12 +59,15 @@ export default function Analytics({ tasks }: AnalyticsProps) {
         if (ratio >= 80) {
           streak++;
         } else {
+          // Only break if we're not on the first day (today)
+          // If today doesn't meet 80%, streak is 0
           break;
         }
       } else if (i === 0) {
-        // Today has no tasks yet, continue streak
+        // Today has no tasks yet, continue checking yesterday
         continue;
       } else {
+        // No tasks on a previous day breaks the streak
         break;
       }
     }

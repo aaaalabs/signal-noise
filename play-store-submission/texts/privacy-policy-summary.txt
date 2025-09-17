@@ -1,0 +1,45 @@
+PRIVACY POLICY SUMMARY
+
+Signal/Noise is built on privacy-first principles.
+
+DATA COLLECTION:
+• We collect ZERO personal data
+• All data stays on your device (localStorage)
+• No analytics or tracking
+• No cookies beyond functional requirements
+• No third-party data sharing
+
+DATA STORAGE:
+• 100% local storage on your device
+• No cloud backups
+• No server-side storage
+• Data deleted when you clear browser data
+• You own and control all your data
+
+PREMIUM FEATURES (Optional):
+• AI Coach sends only anonymized patterns
+• No personal task content sent
+• Only first name stored locally
+• Payment processed by Stripe (PCI compliant)
+• No payment info stored by us
+
+PERMISSIONS:
+• No special permissions required
+• Works entirely offline
+• No access to contacts, photos, or files
+• No background tracking
+
+USER RIGHTS:
+• Delete all data anytime (clear browser data)
+• Export your data anytime (browser console)
+• No account means no data retention
+• Full transparency on data usage
+• GDPR compliant by design
+
+CONTACT:
+For privacy questions: privacy@signal-noise.app
+Full policy: https://signal-noise.app/privacy
+
+Last updated: January 2025
+
+Your focus is your business. We keep it that way.

@@ -1,0 +1,30 @@
+PRIMARY CATEGORY:
+Productivity
+
+RECOMMENDED GOOGLE PLAY CATEGORY:
+Apps > Productivity
+
+ALTERNATIVE CATEGORIES TO CONSIDER:
+- Business (if targeting professional users)
+- Tools (for utility aspect)
+
+APP CONTENT RATING:
+Everyone (no objectionable content)
+
+TARGET AUDIENCE:
+- Age: 18-45
+- Interests: Productivity, Entrepreneurship, Technology, Startups
+- Occupation: Founders, Developers, Creators, Freelancers, Remote Workers
+- Pain Points: Distraction, Time Management, Focus, Busy Work
+
+APP TAGS (for better discoverability):
+#productivity
+#focus
+#timemanagement
+#80/20
+#minimalist
+#tracker
+#habits
+#deepwork
+#startup
+#entrepreneur

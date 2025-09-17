@@ -12,6 +12,11 @@ export default function StreakIndicator({ tasks }: StreakIndicatorProps) {
   const [showMilestone, setShowMilestone] = useState(false);
   const { streak, isMilestone } = getStreakData(tasks);
 
+  // Calculate total unique days with tasks
+  const totalDays = new Set(
+    tasks.map(t => new Date(t.timestamp).toDateString())
+  ).size;
+
   useEffect(() => {
     if (isMilestone) {
       setShowMilestone(true);
@@ -22,11 +27,13 @@ export default function StreakIndicator({ tasks }: StreakIndicatorProps) {
     }
   }, [isMilestone]);
 
-  if (streak === 0) {
+  // Don't show anything if no days recorded
+  if (totalDays === 0) {
     return null;
   }
 
   const dayText = currentLanguage === 'de' ? 'Tag' : 'Day';
+  const totalText = currentLanguage === 'de' ? 'Gesamt' : 'Total';
 
   return (
     <span
@@ -39,7 +46,11 @@ export default function StreakIndicator({ tasks }: StreakIndicatorProps) {
         })
       }}
     >
-      {' • '}{dayText} {streak}
+      {streak > 0 ? (
+        <>{' • '}{dayText} {streak} • {totalText} {totalDays}</>
+      ) : (
+        <>{' • '}{totalText} {totalDays}</>
+      )}
     </span>
   );
 }

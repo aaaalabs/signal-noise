@@ -1,0 +1,43 @@
+GOOGLE PLAY STORE Q&A RESPONSES
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Q: Why should someone install your app?
+A: If you work 12 hours but only make 2 hours of progress, Signal/Noise will show you exactly where your time goes. One number, updated live, that reveals if you're working on what matters (Signal) or getting lost in busy work (Noise). No complex systems - just instant clarity on your focus.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Q: What makes your app unique?
+A: Unlike todo apps that make you manage MORE, Signal/Noise makes you manage LESS. Every task is binary: Signal or Noise. No categories, tags, or projects. Just one ratio that changes everything. Built on the 80/20 principle, it's the simplest way to 10x your actual output.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Q: Is this app safe for children?
+A: Yes. Signal/Noise contains no objectionable content, ads, or social features. It's a simple productivity tool that works entirely offline. However, it's designed for working professionals and may not be engaging for children.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Q: Does this app contain ads?
+A: No. Signal/Noise is completely ad-free and always will be. We believe ads are noise, not signal. Revenue comes exclusively from our one-time Foundation membership (€29).
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Q: Does this app offer in-app purchases?
+A: Yes, one optional purchase: Foundation membership (€29 one-time payment). This unlocks the AI Coach feature and supports development. Core functionality is free forever. No subscriptions.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Q: What data does this app collect?
+A: Zero. All data stays on your device in browser localStorage. No accounts, no cloud sync, no analytics. Even the premium AI Coach only receives anonymized patterns, never your actual tasks. 100% private by design.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Q: Target age group?
+A: 18+ (professionals, founders, creators). While safe for all ages, it's designed for adults managing work priorities.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Q: Content rating justification?
+A: Everyone - No violence, no mature content, no social features, no user-generated content sharing, no gambling, no ads. Pure productivity tool.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

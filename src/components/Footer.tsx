@@ -265,6 +265,13 @@ export default function Footer({ onFoundationClick }: { onFoundationClick?: () =
     checkStatus();
     const interval = setInterval(checkStatus, 5000);
 
+    // Check URL hash for privacy modal
+    if (window.location.hash === '#privacy') {
+      setShowPrivacy(true);
+      // Clean up the hash
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+
     return () => clearInterval(interval);
   }, []);
 
