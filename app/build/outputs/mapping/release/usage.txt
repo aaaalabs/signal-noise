@@ -7672,7 +7672,6 @@ app.signalnoise.twa.R$bool
 app.signalnoise.twa.R$color
 app.signalnoise.twa.R$drawable
 app.signalnoise.twa.R$id:
-    public static int widget_container
     public static int widget_status
     private void <init>()
 app.signalnoise.twa.R$integer

@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.RemoteViews;
+import android.util.Log;
 import app.signalnoise.twa.R;
 import app.signalnoise.twa.LauncherActivity;
 
@@ -20,74 +21,119 @@ public class SignalNoiseWidgetProvider extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        // Try to read from the app's main SharedPreferences first
-        SharedPreferences appPrefs = context.getSharedPreferences(
-            context.getPackageName() + "_preferences", Context.MODE_PRIVATE);
-        String ratioStr = appPrefs.getString("widget_ratio", null);
+        try {
+            Log.d("SignalNoiseWidget", "onUpdate called with " + appWidgetIds.length + " widgets");
 
-        // Fallback to widget-specific prefs
-        SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        int ratio = 0;
-        if (ratioStr != null) {
+            // Get ratio with multiple fallbacks
+            int ratio = 0;
             try {
-                ratio = Integer.parseInt(ratioStr);
-                // Save to widget prefs for next time
-                prefs.edit().putInt(PREF_RATIO, ratio).apply();
-            } catch (NumberFormatException e) {
+                // Try to read from widget prefs first (simplest approach)
+                SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
                 ratio = prefs.getInt(PREF_RATIO, 0);
+                Log.d("SignalNoiseWidget", "Got ratio from prefs: " + ratio);
+            } catch (Exception e) {
+                Log.e("SignalNoiseWidget", "Error reading preferences: " + e.getMessage());
+                ratio = 0;
             }
-        } else {
-            ratio = prefs.getInt(PREF_RATIO, 0);
-        }
 
-        boolean isSignal = ratio >= 80;
-
-        for (int appWidgetId : appWidgetIds) {
-            updateWidget(context, appWidgetManager, appWidgetId, ratio, isSignal);
+            // Update each widget
+            for (int appWidgetId : appWidgetIds) {
+                try {
+                    updateWidget(context, appWidgetManager, appWidgetId, ratio);
+                } catch (Exception e) {
+                    Log.e("SignalNoiseWidget", "Error updating widget " + appWidgetId + ": " + e.getMessage());
+                    // Try to show error widget
+                    showErrorWidget(context, appWidgetManager, appWidgetId);
+                }
+            }
+        } catch (Exception e) {
+            Log.e("SignalNoiseWidget", "Critical error in onUpdate: " + e.getMessage());
+            // Last resort - try to update with fallback for all widgets
+            for (int appWidgetId : appWidgetIds) {
+                showErrorWidget(context, appWidgetManager, appWidgetId);
+            }
         }
     }
 
     static void updateWidget(Context context, AppWidgetManager appWidgetManager,
-                            int appWidgetId, int ratio, boolean isSignal) {
-        // For simplicity, always use 1x1 layout for new widgets
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_1x1);
+                            int appWidgetId, int ratio) {
+        try {
+            Log.d("SignalNoiseWidget", "updateWidget called for widget " + appWidgetId + " with ratio " + ratio);
 
-        // Update ratio text - show dash if no data
-        String displayText = ratio > 0 ? String.valueOf(ratio) : "—";
-        views.setTextViewText(R.id.widget_ratio, displayText);
+            // Create RemoteViews with defensive programming
+            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_1x1);
 
-        // Set click intent to open app
-        Intent intent = new Intent(context, LauncherActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent,
-            PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-        views.setOnClickPendingIntent(R.id.widget_ratio, pendingIntent);
+            // Update ratio text - show dash if no data
+            String displayText = ratio > 0 ? String.valueOf(ratio) : "—";
+            views.setTextViewText(R.id.widget_ratio, displayText);
 
-        appWidgetManager.updateAppWidget(appWidgetId, views);
+            // Set click intent to open app (use root view for click)
+            try {
+                Intent intent = new Intent(context, LauncherActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent,
+                    PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+                views.setOnClickPendingIntent(R.id.widget_container, pendingIntent);
+            } catch (Exception e) {
+                Log.e("SignalNoiseWidget", "Error setting click intent: " + e.getMessage());
+            }
+
+            // Update the widget
+            appWidgetManager.updateAppWidget(appWidgetId, views);
+            Log.d("SignalNoiseWidget", "Widget updated successfully");
+        } catch (Exception e) {
+            Log.e("SignalNoiseWidget", "Error in updateWidget: " + e.getMessage());
+            // Fallback to error widget
+            showErrorWidget(context, appWidgetManager, appWidgetId);
+        }
+    }
+
+    private static void showErrorWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
+        try {
+            Log.d("SignalNoiseWidget", "Showing error widget for " + appWidgetId);
+            // Create a simple fallback view
+            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_1x1);
+            views.setTextViewText(R.id.widget_ratio, "S/N");
+
+            // Try to set click intent
+            try {
+                Intent intent = new Intent(context, LauncherActivity.class);
+                PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent,
+                    PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+                views.setOnClickPendingIntent(R.id.widget_container, pendingIntent);
+            } catch (Exception e) {
+                // Ignore click intent errors
+            }
+
+            appWidgetManager.updateAppWidget(appWidgetId, views);
+        } catch (Exception e) {
+            Log.e("SignalNoiseWidget", "Failed to show error widget: " + e.getMessage());
+        }
     }
 
     public static void updateAllWidgets(Context context, int ratio, boolean isSignal) {
-        SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        int oldRatio = prefs.getInt(PREF_RATIO, 0);
+        try {
+            Log.d("SignalNoiseWidget", "updateAllWidgets called with ratio: " + ratio);
 
-        // Only update if change is significant (5% threshold)
-        if (Math.abs(ratio - oldRatio) < UPDATE_THRESHOLD && ratio != 0) {
-            return;
-        }
+            // Save new values
+            SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+            prefs.edit()
+                .putInt(PREF_RATIO, ratio)
+                .putBoolean(PREF_IS_SIGNAL, isSignal)
+                .apply();
 
-        // Save new values
-        prefs.edit()
-            .putInt(PREF_RATIO, ratio)
-            .putBoolean(PREF_IS_SIGNAL, isSignal)
-            .apply();
+            // Update all widget instances
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+            ComponentName widgetComponent = new ComponentName(context, SignalNoiseWidgetProvider.class);
+            int[] appWidgetIds = appWidgetManager.getAppWidgetIds(widgetComponent);
 
-        // Update all widget instances
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-        ComponentName widgetComponent = new ComponentName(context, SignalNoiseWidgetProvider.class);
-        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(widgetComponent);
+            Log.d("SignalNoiseWidget", "Found " + appWidgetIds.length + " widgets to update");
 
-        for (int appWidgetId : appWidgetIds) {
-            updateWidget(context, appWidgetManager, appWidgetId, ratio, isSignal);
+            for (int appWidgetId : appWidgetIds) {
+                updateWidget(context, appWidgetManager, appWidgetId, ratio);
+            }
+        } catch (Exception e) {
+            Log.e("SignalNoiseWidget", "Error in updateAllWidgets: " + e.getMessage());
         }
     }
 
