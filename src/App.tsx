@@ -951,6 +951,32 @@ function AppContent() {
     }
   };
 
+  // Update Android widget with current ratio
+  const updateAndroidWidget = (ratio: number) => {
+    try {
+      // Store in localStorage for widget to potentially read
+      localStorage.setItem('widget_current_ratio', ratio.toString());
+      localStorage.setItem('widget_last_update', new Date().toISOString());
+
+      // Try to communicate with Android app if available
+      // This uses a special intent URL that the Android app can intercept
+      if (window.location.hostname === 'localhost' || window.location.hostname === 'signal-noise.app') {
+        // Create a hidden iframe to trigger the intent
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.src = `intent://widget/update?ratio=${ratio}#Intent;scheme=signalnoise;package=app.signalnoise.twa;end`;
+        document.body.appendChild(iframe);
+
+        // Remove after a short delay
+        setTimeout(() => {
+          document.body.removeChild(iframe);
+        }, 100);
+      }
+    } catch (e) {
+      // Widget update not critical, fail silently
+    }
+  };
+
   const addTask = (text: string, type: 'signal' | 'noise') => {
     const newTask: Task = {
       id: Date.now(),
@@ -977,6 +1003,10 @@ function AppContent() {
         triggerAchievementFeedback(newBadges);
       }
 
+      // Update Android widget with new ratio
+      const ratio = getTodayRatio(newData.tasks);
+      updateAndroidWidget(ratio);
+
       return newData;
     });
 
@@ -987,22 +1017,38 @@ function AppContent() {
   };
 
   const transferTask = (id: number) => {
-    setData(prev => ({
-      ...prev,
-      tasks: prev.tasks.map(task =>
-        task.id === id ? {
-          ...task,
-          type: task.type === 'signal' ? 'noise' : 'signal'
-        } : task
-      )
-    }));
+    setData(prev => {
+      const newData = {
+        ...prev,
+        tasks: prev.tasks.map(task =>
+          task.id === id ? {
+            ...task,
+            type: (task.type === 'signal' ? 'noise' : 'signal') as 'signal' | 'noise'
+          } : task
+        )
+      };
+
+      // Update Android widget
+      const ratio = getTodayRatio(newData.tasks);
+      updateAndroidWidget(ratio);
+
+      return newData;
+    });
   };
 
   const deleteTask = (id: number) => {
-    setData(prev => ({
-      ...prev,
-      tasks: prev.tasks.filter(task => task.id !== id)
-    }));
+    setData(prev => {
+      const newData = {
+        ...prev,
+        tasks: prev.tasks.filter(task => task.id !== id)
+      };
+
+      // Update Android widget
+      const ratio = getTodayRatio(newData.tasks);
+      updateAndroidWidget(ratio);
+
+      return newData;
+    });
   };
 
   const getTodayTasks = (): Task[] => {

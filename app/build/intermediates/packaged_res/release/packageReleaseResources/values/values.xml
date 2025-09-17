@@ -39,4 +39,16 @@
     <string name="shortcut_short_name_0" translatable="false">Signal</string>
     <string name="shortcut_short_name_1" translatable="false">Noise</string>
     <string name="webManifestUrl" translatable="false">https://signal-noise.app/manifest.json</string>
+    <string name="widget_diag1_name">D1</string>
+    <string name="widget_diag2_name">D2</string>
+    <string name="widget_diag3_name">D3</string>
+    <string name="widget_diag4_name">D4</string>
+    <string name="widget_diag5_name">D5</string>
+    <string name="widget_main_name">S/N</string>
+    <string name="widget_mock_name">Mock</string>
+    <string name="widget_test1_name">T1</string>
+    <string name="widget_test2_name">T2</string>
+    <string name="widget_test3_name">T3</string>
+    <string name="widget_test4_name">T4</string>
+    <string name="widget_test5_name">T5</string>
 </resources>

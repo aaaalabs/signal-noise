@@ -16,10 +16,12 @@
 package app.signalnoise.twa;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import app.signalnoise.twa.widget.SignalNoiseWidgetProvider;
 
 
 
@@ -54,5 +56,24 @@ public class LauncherActivity
 
         // Otherwise return the default launch URL
         return super.getLaunchingUrl();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // When app is opened from widget, simulate a ratio update
+        // This helps sync the widget with the current app state
+        try {
+            // Get the last known ratio from preferences (if any)
+            SharedPreferences prefs = getSharedPreferences("SignalNoiseWidget", MODE_PRIVATE);
+            int currentRatio = prefs.getInt("current_ratio", 80);
+
+            // You can update this with a more recent value if needed
+            // For now, just trigger a widget refresh with current stored value
+            SignalNoiseWidgetProvider.updateAllWidgets(this, currentRatio, currentRatio >= 50);
+        } catch (Exception e) {
+            // Widget update failed, that's OK
+        }
     }
 }

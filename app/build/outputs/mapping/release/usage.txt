@@ -7668,10 +7668,12 @@ androidx.viewpager.widget.ViewPager$SavedState
 androidx.viewpager.widget.ViewPager$SimpleOnPageChangeListener
 androidx.viewpager.widget.ViewPager$ViewPositionComparator
 androidx.viewpager.widget.ViewPager
+app.signalnoise.twa.JavaScriptInterface
 app.signalnoise.twa.R$bool
 app.signalnoise.twa.R$color
 app.signalnoise.twa.R$drawable
 app.signalnoise.twa.R$id:
+    public static int widget_container
     public static int widget_status
     private void <init>()
 app.signalnoise.twa.R$integer
@@ -7686,7 +7688,6 @@ app.signalnoise.twa.widget.SignalNoiseWidgetProvider:
     private static final java.lang.String PREFS_NAME
     private static final java.lang.String PREF_IS_SIGNAL
     private static final java.lang.String PREF_RATIO
-    private static final int UPDATE_THRESHOLD
 app.signalnoise.twa.widget.WidgetUpdateReceiver:
     public static final java.lang.String ACTION_UPDATE_WIDGET
     public static final java.lang.String EXTRA_IS_SIGNAL

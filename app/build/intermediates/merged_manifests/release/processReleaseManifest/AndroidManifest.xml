@@ -23,8 +23,8 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="app.signalnoise.twa"
-    android:versionCode="2"
-    android:versionName="2" >
+    android:versionCode="3"
+    android:versionName="1.0.1" >
 
     <uses-sdk
         android:minSdkVersion="21"
@@ -172,80 +172,6 @@
             <intent-filter>
                 <action android:name="app.signalnoise.twa.UPDATE_WIDGET" />
             </intent-filter>
-        </receiver>
-
-        <!-- Test Widgets for Debugging -->
-        <receiver
-            android:name="app.signalnoise.twa.widget.MockWidgetProvider"
-            android:exported="true"
-            android:label="S/N Mock" >
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_mock_info" />
-        </receiver>
-        <receiver
-            android:name="app.signalnoise.twa.widget.TestWidget1Provider"
-            android:exported="true"
-            android:label="S/N Test1" >
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_test1_info" />
-        </receiver>
-        <receiver
-            android:name="app.signalnoise.twa.widget.TestWidget2Provider"
-            android:exported="true"
-            android:label="S/N Test2" >
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_test2_info" />
-        </receiver>
-        <receiver
-            android:name="app.signalnoise.twa.widget.TestWidget3Provider"
-            android:exported="true"
-            android:label="S/N Test3" >
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_test3_info" />
-        </receiver>
-        <receiver
-            android:name="app.signalnoise.twa.widget.TestWidget4Provider"
-            android:exported="true"
-            android:label="S/N Test4" >
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_test4_info" />
-        </receiver>
-        <receiver
-            android:name="app.signalnoise.twa.widget.TestWidget5Provider"
-            android:exported="true"
-            android:label="S/N Test5" >
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_test5_info" />
         </receiver>
 
         <service
