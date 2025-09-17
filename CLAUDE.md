@@ -266,6 +266,15 @@ if (isDev && req.body && typeof req.body === 'object') {
 - Task categorization insights
 - Behavioral consistency scoring for personalized advice
 
+## Android App & Play Store
+
+For comprehensive Android build, testing, and Play Store deployment instructions, see [ANDROID.md](./ANDROID.md). This includes:
+- TWA (Trusted Web Activity) setup with Bubblewrap
+- Digital Asset Links configuration for standalone mode
+- Keystore management and signing
+- Screenshot generation and Play Store submission
+- Troubleshooting common Android-specific issues
+
 ## Development Insights
 
 For detailed technical lessons, debugging patterns, and architecture decisions, see [lessons-learned.md](./lessons-learned.md).
