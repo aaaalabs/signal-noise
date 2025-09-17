@@ -1,10 +1,12 @@
-[{
-  "relation": ["delegate_permission/common.handle_all_urls"],
-  "target": {
-    "namespace": "android_app",
-    "package_name": "app.signalnoise.twa",
-    "sha256_cert_fingerprints": [
-      "00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00"
-    ]
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.signalnoise.twa",
+      "sha256_cert_fingerprints": [
+        "52:D6:86:4C:78:C2:D1:44:E0:FC:34:95:A6:BF:2F:49:54:35:82:47:9A:CB:CD:B9:C6:CA:62:EA:5D:3C:12:BF"
+      ]
+    }
   }
-}]
+]
