@@ -986,6 +986,7 @@ int layout widget_simple_fix 0x7f0b0038
 int layout widget_sn1x1f 0x7f0b0039
 int layout widget_sn2x1p 0x7f0b003a
 int layout widget_sn2x1r 0x7f0b003b
+int layout widget_working 0x7f0b003c
 int mipmap ic_launcher 0x7f0c0000
 int mipmap ic_maskable 0x7f0c0001
 int string abc_action_bar_home_description 0x7f0d0000

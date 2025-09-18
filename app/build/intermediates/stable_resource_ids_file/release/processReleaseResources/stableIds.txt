@@ -261,6 +261,7 @@ app.signalnoise.twa:style/Base.Widget.AppCompat.DropDownItem.Spinner = 0x7f0e007
 app.signalnoise.twa:string/abc_action_bar_up_description = 0x7f0d0001
 app.signalnoise.twa:style/Base.ThemeOverlay.AppCompat.Dialog.Alert = 0x7f0e004f
 app.signalnoise.twa:string/abc_action_bar_home_description = 0x7f0d0000
+app.signalnoise.twa:layout/widget_working = 0x7f0b003c
 app.signalnoise.twa:style/TextAppearance.AppCompat.Small = 0x7f0e00d2
 app.signalnoise.twa:style/RtlOverlay.Widget.AppCompat.Search.DropDown.Query = 0x7f0e00b7
 app.signalnoise.twa:layout/widget_sn2x1r = 0x7f0b003b

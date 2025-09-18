@@ -248,6 +248,10 @@
         "source": "app.signalnoise.twa.app-main-26:/layout/widget_signal_wave_2x2.xml"
     },
     {
+        "merged": "app.signalnoise.twa.app-release-25:/layout_widget_working.xml.flat",
+        "source": "app.signalnoise.twa.app-main-26:/layout/widget_working.xml"
+    },
+    {
         "merged": "app.signalnoise.twa.app-release-25:/drawable-xxxhdpi_shortcut_noise.png.flat",
         "source": "app.signalnoise.twa.app-main-26:/drawable-xxxhdpi/shortcut_noise.png"
     },

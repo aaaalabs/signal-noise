@@ -25,7 +25,7 @@ public class RedisDataFetcher {
             try {
                 // Circuit breaker: Don't fetch if we just did (prevent crash)
                 SharedPreferences circuitPrefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-                long lastFetch = prefs.getLong("last_fetch_time", 0);
+                long lastFetch = circuitPrefs.getLong("last_fetch_time", 0);
                 long now = System.currentTimeMillis();
 
                 // Minimum 30 seconds between API calls (circuit breaker)
@@ -35,7 +35,7 @@ public class RedisDataFetcher {
                 }
 
                 // Update last fetch time immediately
-                prefs.edit().putLong("last_fetch_time", now).apply();
+                circuitPrefs.edit().putLong("last_fetch_time", now).apply();
 
                 Log.d(TAG, "Fetching from Redis API...");
                 // Build URL with email parameter

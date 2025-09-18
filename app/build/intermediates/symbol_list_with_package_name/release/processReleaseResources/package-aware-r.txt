@@ -987,6 +987,7 @@ layout widget_simple_fix
 layout widget_sn1x1f
 layout widget_sn2x1p
 layout widget_sn2x1r
+layout widget_working
 mipmap ic_launcher
 mipmap ic_maskable
 string abc_action_bar_home_description
