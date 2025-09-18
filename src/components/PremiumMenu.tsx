@@ -347,7 +347,7 @@ export default function PremiumMenu({
           }}
           title="Revokes access on all devices - use magic link to restore"
         >
-          Sign Out All Devices
+          Global Logout
         </button>
       </div>
 
