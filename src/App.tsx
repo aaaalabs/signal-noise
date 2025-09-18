@@ -553,11 +553,16 @@ function AppContent() {
     if (isLoaded && data && !isLoadingFromCloud && hasAttemptedCloudLoad) {
       const currentTime = Date.now();
 
-      // Calculate and update signal_ratio in data before saving
+      // Calculate signal_ratio and update React state if needed
       const ratio = getTodayRatio(data.tasks);
-      const dataWithRatio = { ...data, signal_ratio: ratio };
 
-      const dataSize = JSON.stringify(dataWithRatio).length;
+      // Only update state if signal_ratio has changed to prevent infinite loops
+      if (data.signal_ratio !== ratio) {
+        setData(prev => ({ ...prev, signal_ratio: ratio }));
+        return; // Exit early - the state update will trigger this effect again
+      }
+
+      const dataSize = JSON.stringify(data).length;
       const dataSizeKB = (dataSize / 1024).toFixed(2);
       const timeSinceLastSync = syncTracker.current.lastSyncTime ?
         currentTime - syncTracker.current.lastSyncTime : 0;
@@ -590,16 +595,16 @@ function AppContent() {
           syncAttempt: syncTracker.current.counter,
           email: localStorage.getItem('userEmail')?.substring(0, 3) + '...' || 'unknown'
         });
-        saveToCloud(dataWithRatio);
+        saveToCloud(data);
         syncTracker.current.lastSyncTime = currentTime;
       } else {
         // Save to localStorage for free users
-        localStorage.setItem(DATA_KEY, JSON.stringify(dataWithRatio));
+        localStorage.setItem(DATA_KEY, JSON.stringify(data));
         console.log('💾 LOCALSTORAGE SYNC PATH - Free user or no auth', {
           syncAttempt: syncTracker.current.counter,
-          taskCount: dataWithRatio.tasks?.length || 0,
+          taskCount: data.tasks?.length || 0,
           dataSizeKB: `${dataSizeKB}KB`,
-          signalRatio: dataWithRatio.signal_ratio,
+          signalRatio: data.signal_ratio,
           premium: false,
           reason: !isPremiumMode ? 'not premium mode' : 'no session token'
         });
