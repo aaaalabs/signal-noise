@@ -21,8 +21,20 @@ public class PWinner extends AppWidgetProvider {
         // CRITICAL: Force immediate Redis fetch for first widget
         RedisDataFetcher.fetchAndUpdateWidgetData(context, "thomas.seiger@gmail.com");
 
+        // First update
         for (int appWidgetId : appWidgetIds) {
             updateWidget(context, appWidgetManager, appWidgetId);
+        }
+
+        // Force second fetch for first widget sync issue
+        try {
+            Thread.sleep(1000);
+            RedisDataFetcher.fetchAndUpdateWidgetData(context, "thomas.seiger@gmail.com");
+            for (int appWidgetId : appWidgetIds) {
+                updateWidget(context, appWidgetManager, appWidgetId);
+            }
+        } catch (InterruptedException e) {
+            // Continue without delay
         }
     }
 
