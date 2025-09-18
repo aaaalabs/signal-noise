@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Signal Wave Widget Provider Configuration
+     Optimized for battery efficiency and smooth updates
+-->
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:description="@string/signal_wave_description"
+    android:initialKeyguardLayout="@layout/widget_signal_wave"
+    android:initialLayout="@layout/widget_signal_wave"
+    android:minWidth="180dp"
+    android:minHeight="80dp"
+    android:minResizeWidth="110dp"
+    android:minResizeHeight="60dp"
+    android:resizeMode="horizontal|vertical"
+    android:updatePeriodMillis="1800000"
+    android:widgetCategory="home_screen">
+
+    <!-- Note: updatePeriodMillis=1800000 means 30 minute updates -->
+
+</appwidget-provider>

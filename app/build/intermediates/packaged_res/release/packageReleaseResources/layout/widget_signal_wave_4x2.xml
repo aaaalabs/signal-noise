@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Signal Wave Widget 4x2 Layout
+     Large size with full visualization and detailed metrics
+     Maximum information density while maintaining elegance
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_container_4x2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@drawable/widget_signal_wave_bg"
+    android:padding="12dp">
+
+    <!-- Left Section: Metrics Dashboard -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginEnd="12dp">
+
+        <!-- Main Ratio Display -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="bottom">
+
+            <TextView
+                android:id="@+id/ratio_large"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="87"
+                android:textSize="48sp"
+                android:textColor="#FFFFFF"
+                android:fontFamily="sans-serif-thin"
+                android:includeFontPadding="false" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="%"
+                android:textSize="20sp"
+                android:textColor="#888888"
+                android:fontFamily="sans-serif-thin"
+                android:layout_marginStart="2dp" />
+        </LinearLayout>
+
+        <!-- Status Line -->
+        <TextView
+            android:id="@+id/status_large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Excellent Focus"
+            android:textSize="12sp"
+            android:textColor="#00ff88"
+            android:fontFamily="sans-serif"
+            android:layout_marginTop="-4dp" />
+
+        <!-- Divider -->
+        <View
+            android:layout_width="60dp"
+            android:layout_height="0.5dp"
+            android:background="#333333"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Stats Grid -->
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:rowCount="2">
+
+            <!-- Streak -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginEnd="16dp">
+                <TextView
+                    android:id="@+id/streak_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="7"
+                    android:textSize="14sp"
+                    android:textColor="#FFFFFF"
+                    android:fontFamily="sans-serif-light" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" days"
+                    android:textSize="10sp"
+                    android:textColor="#666666"
+                    android:fontFamily="sans-serif-light" />
+            </LinearLayout>
+
+            <!-- Today's Tasks -->
+            <LinearLayout
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/today_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="30"
+                    android:textSize="14sp"
+                    android:textColor="#FFFFFF"
+                    android:fontFamily="sans-serif-light" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" tasks"
+                    android:textSize="10sp"
+                    android:textColor="#666666"
+                    android:fontFamily="sans-serif-light" />
+            </LinearLayout>
+
+            <!-- Signal Count -->
+            <TextView
+                android:id="@+id/signal_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Signal: 24"
+                android:textSize="10sp"
+                android:textColor="#00ff88"
+                android:fontFamily="sans-serif"
+                android:layout_marginTop="4dp" />
+
+            <!-- Noise Count -->
+            <TextView
+                android:id="@+id/noise_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Noise: 6"
+                android:textSize="10sp"
+                android:textColor="#ff8800"
+                android:fontFamily="sans-serif"
+                android:layout_marginTop="4dp" />
+        </GridLayout>
+
+        <!-- Spacer -->
+        <View
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!-- Best Hour Indicator -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Peak Hour"
+                android:textSize="9sp"
+                android:textColor="#666666"
+                android:fontFamily="sans-serif-light" />
+            <TextView
+                android:id="@+id/peak_hour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="9:00 - 10:00"
+                android:textSize="11sp"
+                android:textColor="#00ff88"
+                android:fontFamily="sans-serif-light" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Right Section: Visualizations -->
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2">
+
+        <!-- Main Wave Canvas -->
+        <ImageView
+            android:id="@+id/wave_canvas_large"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter" />
+
+        <!-- 24-Hour Pattern Bar Chart -->
+        <LinearLayout
+            android:id="@+id/pattern_chart"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal"
+            android:gravity="bottom"
+            android:layout_marginBottom="20dp">
+
+            <!-- 24 bars will be added programmatically -->
+        </LinearLayout>
+
+        <!-- AI Insight Overlay (Premium) -->
+        <LinearLayout
+            android:id="@+id/ai_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:orientation="horizontal"
+            android:background="@drawable/ai_insight_bg"
+            android:padding="6dp"
+            android:layout_margin="4dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:src="@drawable/ai_icon"
+                android:layout_marginEnd="6dp" />
+
+            <TextView
+                android:id="@+id/ai_message"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Your productivity peaks at 9am. Schedule important tasks then."
+                android:textSize="10sp"
+                android:textColor="#FFFFFF"
+                android:fontFamily="sans-serif-light"
+                android:maxLines="2"
+                android:ellipsize="end" />
+        </LinearLayout>
+
+        <!-- Time and Update Indicator -->
+        <TextView
+            android:id="@+id/last_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:text="Updated 12:34"
+            android:textSize="8sp"
+            android:textColor="#444444"
+            android:fontFamily="sans-serif-light" />
+    </FrameLayout>
+
+</LinearLayout>

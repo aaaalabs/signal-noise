@@ -276,8 +276,8 @@
 158-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:171:19-49
 159            android:exported="true"
 159-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:171:50-73
-160            android:label="PWinner" >
-160-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:171:74-97
+160            android:label="PWinner 2x2" >
+160-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:171:74-101
 161            <intent-filter>
 161-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:172:13-111
 162                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

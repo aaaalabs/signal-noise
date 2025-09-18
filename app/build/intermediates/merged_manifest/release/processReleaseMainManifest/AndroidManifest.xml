@@ -157,7 +157,7 @@
         <receiver
             android:name="app.signalnoise.twa.widget.PWinner"
             android:exported="true"
-            android:label="PWinner" >
+            android:label="PWinner 2x2" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
