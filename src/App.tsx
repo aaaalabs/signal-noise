@@ -37,7 +37,8 @@ const initialData: AppData = {
     targetRatio: 80,
     notifications: false,
     firstName: ''
-  }
+  },
+  signal_ratio: 0
 };
 
 function AppContent() {
@@ -262,6 +263,7 @@ function AppContent() {
                 if (!parsedData.badges) parsedData.badges = [];
                 if (!parsedData.patterns) parsedData.patterns = {};
                 if (!parsedData.settings) parsedData.settings = { targetRatio: 80, notifications: false, firstName: user.firstName || '' };
+                if (parsedData.signal_ratio === undefined) parsedData.signal_ratio = getTodayRatio(parsedData.tasks || []);
 
                 setData(parsedData);
                 setIsLoaded(true);
@@ -334,6 +336,7 @@ function AppContent() {
           if (!parsedData.badges) parsedData.badges = [];
           if (!parsedData.patterns) parsedData.patterns = {};
           if (!parsedData.settings) parsedData.settings = { targetRatio: 80, notifications: false, firstName: '' };
+          if (parsedData.signal_ratio === undefined) parsedData.signal_ratio = getTodayRatio(parsedData.tasks || []);
 
           // Merge saved name if not already present
           if (userName && !parsedData.settings.firstName) {
@@ -344,10 +347,11 @@ function AppContent() {
           console.error('Failed to load stored data:', error);
         }
       } else if (userName) {
-        // Even for new users, keep saved name
+        // Even for new users, keep saved name and initialize signal_ratio
         setData(prev => ({
           ...prev,
-          settings: { ...prev.settings, firstName: userName }
+          settings: { ...prev.settings, firstName: userName },
+          signal_ratio: getTodayRatio(prev.tasks)
         }));
       }
 
@@ -548,7 +552,12 @@ function AppContent() {
     // CRITICAL: Don't auto-sync until we've attempted to load from cloud first!
     if (isLoaded && data && !isLoadingFromCloud && hasAttemptedCloudLoad) {
       const currentTime = Date.now();
-      const dataSize = JSON.stringify(data).length;
+
+      // Calculate and update signal_ratio in data before saving
+      const ratio = getTodayRatio(data.tasks);
+      const dataWithRatio = { ...data, signal_ratio: ratio };
+
+      const dataSize = JSON.stringify(dataWithRatio).length;
       const dataSizeKB = (dataSize / 1024).toFixed(2);
       const timeSinceLastSync = syncTracker.current.lastSyncTime ?
         currentTime - syncTracker.current.lastSyncTime : 0;
@@ -565,6 +574,7 @@ function AppContent() {
         dataSizeDelta: syncTracker.current.lastDataSize ?
           `${dataSize - syncTracker.current.lastDataSize} bytes` : 'initial',
         taskCount: data?.tasks?.length || 0,
+        currentSignalRatio: ratio,
         hasPatterns: !!data?.patterns && Object.keys(data.patterns).length > 0,
         hasHistory: !!data?.history && data.history.length > 0,
         hasSettings: !!data?.settings,
@@ -580,15 +590,16 @@ function AppContent() {
           syncAttempt: syncTracker.current.counter,
           email: localStorage.getItem('userEmail')?.substring(0, 3) + '...' || 'unknown'
         });
-        saveToCloud(data);
+        saveToCloud(dataWithRatio);
         syncTracker.current.lastSyncTime = currentTime;
       } else {
         // Save to localStorage for free users
-        localStorage.setItem(DATA_KEY, JSON.stringify(data));
+        localStorage.setItem(DATA_KEY, JSON.stringify(dataWithRatio));
         console.log('💾 LOCALSTORAGE SYNC PATH - Free user or no auth', {
           syncAttempt: syncTracker.current.counter,
-          taskCount: data.tasks?.length || 0,
+          taskCount: dataWithRatio.tasks?.length || 0,
           dataSizeKB: `${dataSizeKB}KB`,
+          signalRatio: dataWithRatio.signal_ratio,
           premium: false,
           reason: !isPremiumMode ? 'not premium mode' : 'no session token'
         });
@@ -599,8 +610,6 @@ function AppContent() {
 
       // Update Android widget data - SLC approach
       try {
-        const ratio = getTodayRatio(data.tasks);
-
         // Store in multiple places for maximum compatibility
         localStorage.setItem('android.widget.ratio', ratio.toString());
         localStorage.setItem('widget_ratio', ratio.toString());

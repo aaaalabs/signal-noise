@@ -48,6 +48,7 @@ export interface AppData {
     notifications: boolean;
     firstName?: string;
   };
+  signal_ratio?: number;
 }
 
 export interface CoachPayload {
