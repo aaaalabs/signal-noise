@@ -151,6 +151,9 @@ layout widget_simple_fix
 layout widget_sn1x1f
 layout widget_sn2x1p
 layout widget_sn2x1r
+layout widget_v1
+layout widget_v2
+layout widget_v3
 layout widget_w1
 layout widget_w2
 layout widget_w3
@@ -211,6 +214,9 @@ xml widget_sn2x1r_info
 xml widget_sn3x1r_info
 xml widget_sn4x1r_info
 xml widget_ultra_simple_info
+xml widget_v1_info
+xml widget_v2_info
+xml widget_v3_info
 xml widget_w1_info
 xml widget_w2_info
 xml widget_w3_info

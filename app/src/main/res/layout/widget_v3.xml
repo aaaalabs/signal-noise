@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/compact_glow"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/ratio_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="87%"
+        android:textColor="#00FF88"
+        android:textSize="38sp"
+        android:fontFamily="sans-serif-thin"
+        android:layout_marginBottom="6dp" />
+
+    <TextView
+        android:id="@+id/signal_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="5 signal"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/noise_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2 noise"
+        android:textColor="#CCCCCC"
+        android:textSize="10sp"
+        android:layout_marginTop="1dp" />
+
+    <TextView
+        android:id="@+id/trend_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="trending up"
+        android:textColor="#FFFFFF"
+        android:textSize="8sp"
+        android:layout_marginTop="2dp" />
+
+</LinearLayout>

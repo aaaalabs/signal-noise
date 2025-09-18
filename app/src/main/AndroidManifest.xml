@@ -167,11 +167,26 @@
         </provider>
 
 
-        <!-- REFINED W4 WINNER + SUBTLE VARIATIONS v9.0 -->
+        <!-- REFINED W4 WINNER + 4 SUBTLE VARIATIONS v9.0 -->
 
-        <receiver android:name=".widget.W4" android:exported="true" android:label="Signal/Noise">
+        <receiver android:name=".widget.W4" android:exported="true" android:label="W4 Winner">
             <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_w4_info" />
+        </receiver>
+
+        <receiver android:name=".widget.V1" android:exported="true" android:label="V1 Light">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_v1_info" />
+        </receiver>
+
+        <receiver android:name=".widget.V2" android:exported="true" android:label="V2 Tight">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_v2_info" />
+        </receiver>
+
+        <receiver android:name=".widget.V3" android:exported="true" android:label="V3 Size">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_v3_info" />
         </receiver>
 
         <!-- Widget Update Receiver -->

@@ -12,6 +12,10 @@
         "source": "app.signalnoise.twa.app-main-26:/xml/widget_w2_info.xml"
     },
     {
+        "merged": "app.signalnoise.twa.app-release-25:/xml_widget_v3_info.xml.flat",
+        "source": "app.signalnoise.twa.app-main-26:/xml/widget_v3_info.xml"
+    },
+    {
         "merged": "app.signalnoise.twa.app-release-25:/xml_widget_signal_wave_info.xml.flat",
         "source": "app.signalnoise.twa.app-main-26:/xml/widget_signal_wave_info.xml"
     },
@@ -172,6 +176,10 @@
         "source": "app.signalnoise.twa.app-main-26:/layout/widget_zen.xml"
     },
     {
+        "merged": "app.signalnoise.twa.app-release-25:/layout_widget_v1.xml.flat",
+        "source": "app.signalnoise.twa.app-main-26:/layout/widget_v1.xml"
+    },
+    {
         "merged": "app.signalnoise.twa.app-release-25:/xml_widget_sn2x1r_info.xml.flat",
         "source": "app.signalnoise.twa.app-main-26:/xml/widget_sn2x1r_info.xml"
     },
@@ -214,6 +222,10 @@
     {
         "merged": "app.signalnoise.twa.app-release-25:/layout_widget_breathing_calm.xml.flat",
         "source": "app.signalnoise.twa.app-main-26:/layout/widget_breathing_calm.xml"
+    },
+    {
+        "merged": "app.signalnoise.twa.app-release-25:/layout_widget_v3.xml.flat",
+        "source": "app.signalnoise.twa.app-main-26:/layout/widget_v3.xml"
     },
     {
         "merged": "app.signalnoise.twa.app-release-25:/xml_widget_sn1x1f_info.xml.flat",
@@ -264,6 +276,10 @@
         "source": "app.signalnoise.twa.app-main-26:/xml/widget_info.xml"
     },
     {
+        "merged": "app.signalnoise.twa.app-release-25:/xml_widget_v1_info.xml.flat",
+        "source": "app.signalnoise.twa.app-main-26:/xml/widget_v1_info.xml"
+    },
+    {
         "merged": "app.signalnoise.twa.app-release-25:/xml_widget_sn2x1p_info.xml.flat",
         "source": "app.signalnoise.twa.app-main-26:/xml/widget_sn2x1p_info.xml"
     },
@@ -282,6 +298,10 @@
     {
         "merged": "app.signalnoise.twa.app-release-25:/xml_widget_w4_info.xml.flat",
         "source": "app.signalnoise.twa.app-main-26:/xml/widget_w4_info.xml"
+    },
+    {
+        "merged": "app.signalnoise.twa.app-release-25:/layout_widget_v2.xml.flat",
+        "source": "app.signalnoise.twa.app-main-26:/layout/widget_v2.xml"
     },
     {
         "merged": "app.signalnoise.twa.app-release-25:/drawable_widget_fast_background.xml.flat",
@@ -394,6 +414,10 @@
     {
         "merged": "app.signalnoise.twa.app-release-25:/xml_widget_signal_noise_info.xml.flat",
         "source": "app.signalnoise.twa.app-main-26:/xml/widget_signal_noise_info.xml"
+    },
+    {
+        "merged": "app.signalnoise.twa.app-release-25:/xml_widget_v2_info.xml.flat",
+        "source": "app.signalnoise.twa.app-main-26:/xml/widget_v2_info.xml"
     },
     {
         "merged": "app.signalnoise.twa.app-release-25:/mipmap-xxxhdpi_ic_maskable.png.flat",
