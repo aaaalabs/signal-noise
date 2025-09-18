@@ -1,5 +1,5 @@
 import { Redis } from '@upstash/redis';
-import { randomBytes } from 'crypto';
+import { createUserSession, migrateLegacyUser, getDeviceType } from '../session-helper.js';
 
 const redis = new Redis({
   url: process.env.KV_REST_API_URL,
@@ -51,13 +51,29 @@ export default async function handler(req, res) {
       return res.status(403).json({ error: 'Premium access not active' });
     }
 
-    // Generate new session token
-    const sessionToken = randomBytes(32).toString('hex');
+    // Check if user needs migration from legacy single-session
+    const userAgent = req.headers['user-agent'] || '';
+    let sessionInfo;
+
+    if (userData.session_token) {
+      // Migrate legacy user to multi-session system
+      console.log('🔄 Migrating legacy user to multi-session:', email);
+      const migratedToken = await migrateLegacyUser(redis, email, userData.session_token, userAgent);
+      sessionInfo = {
+        sessionToken: migratedToken,
+        deviceType: getDeviceType(userAgent),
+        created: parseInt(userData.last_active || Date.now()),
+        expires: Date.now() + (30 * 24 * 60 * 60 * 1000)
+      };
+    } else {
+      // Create new session (multi-session system)
+      sessionInfo = await createUserSession(redis, email, userAgent);
+    }
+
     const now = Date.now();
 
-    // Update user session data
+    // Update user login count and last active
     await redis.hset(userKey, {
-      session_token: sessionToken,
       last_active: now.toString(),
       login_count: (parseInt(userData.login_count || '0') + 1).toString()
     });
@@ -66,10 +82,10 @@ export default async function handler(req, res) {
     const sessionData = {
       email: email,
       token: userData.access_token, // Use the access token from webhook
-      sessionToken: sessionToken,
+      sessionToken: sessionInfo.sessionToken,
       created: now,
       lastActive: now,
-      expires: now + (30 * 24 * 60 * 60 * 1000), // 30 days
+      expires: sessionInfo.expires,
       firstName: userData.first_name || '',
       tier: userData.tier || 'early_adopter',
       paymentType: userData.payment_type || 'lifetime',

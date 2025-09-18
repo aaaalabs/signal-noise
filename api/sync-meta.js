@@ -1,4 +1,5 @@
 import { Redis } from '@upstash/redis';
+import { findUserBySession } from './session-helper.js';
 
 const redis = new Redis({
   url: process.env.KV_REST_API_URL,
@@ -36,40 +37,29 @@ export default async function handler(req, res) {
       });
     }
 
-    // Find user by session token
-    const userKeys = await redis.keys('sn:u:*');
-
-    let user = null;
-    let userKey = null;
-
-    for (const key of userKeys) {
-      // Skip legacy sync keys
-      if (key.includes(':sync:')) continue;
-
-      const userData = await redis.hgetall(key);
-      if (userData.session_token === sessionToken) {
-        user = userData;
-        userKey = key;
-        break;
-      }
-    }
+    // Find user by session token using new multi-session system
+    const user = await findUserBySession(redis, sessionToken);
 
     if (!user) {
       return res.status(403).json({ error: 'Invalid session token' });
     }
 
+    // Get user data from Redis
+    const userKey = `sn:u:${user.email}`;
+    const userData = await redis.hgetall(userKey);
+
     // Return minimal metadata for version checking
     const metadata = {
-      version: parseInt(user.version || '0'),
-      lastModified: parseInt(user.last_modified || user.last_active || '0'),
-      lastDevice: user.last_device || 'Unknown'
+      version: parseInt(userData.version || '0'),
+      lastModified: parseInt(userData.last_modified || userData.last_active || '0'),
+      lastDevice: userData.last_device || 'Unknown'
     };
 
     // Optional: include task count for UI hints
-    if (user.app_data) {
+    if (userData.app_data) {
       try {
-        const appData = typeof user.app_data === 'string' ?
-          JSON.parse(user.app_data) : user.app_data;
+        const appData = typeof userData.app_data === 'string' ?
+          JSON.parse(userData.app_data) : userData.app_data;
         metadata.taskCount = appData.tasks?.length || 0;
       } catch (e) {
         metadata.taskCount = 0;

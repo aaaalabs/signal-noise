@@ -1,4 +1,5 @@
 import { Redis } from '@upstash/redis';
+import { findUserBySession } from './session-helper.js';
 
 const redis = new Redis({
   url: process.env.KV_REST_API_URL,
@@ -43,15 +44,14 @@ export default async function handler(req, res) {
             version: '1.0.0'
           };
         } else {
-          // Find user by session token in Redis
-          const userKeys = await redis.keys('sn:u:*');
+          // Find user by session token using new multi-session system
+          const sessionUser = await findUserBySession(redis, sessionToken);
 
-          for (const userKey of userKeys) {
-            // Skip legacy sync keys - only check user data keys
-            if (userKey.includes('sn:u:sync:')) continue;
-
+          if (sessionUser) {
+            const userKey = `sn:u:${sessionUser.email}`;
             const user = await redis.hgetall(userKey);
-            if (user.session_token === sessionToken) {
+
+            if (user) {
               // Return user's cloud data with corrupted data protection
               let parsedData = {};
 
@@ -80,7 +80,6 @@ export default async function handler(req, res) {
                 lastSync: new Date().toISOString(),
                 version: '1.0.0'
               };
-              break;
             }
           }
         }
@@ -140,7 +139,15 @@ export default async function handler(req, res) {
           });
         }
 
-        // Find and update user by session token in Redis
+        // Validate session using new multi-session system
+        const sessionValidation = await findUserBySession(redis, sessionToken);
+
+        if (!sessionValidation) {
+          console.log('❌ REDIS AUTH FAILED - Invalid session token');
+          return res.status(403).json({ error: 'Invalid session token' });
+        }
+
+        // Get user data from Redis
         const userKey = `sn:u:${email}`;
         const redisStartTime = Date.now();
 
@@ -148,7 +155,8 @@ export default async function handler(req, res) {
           operation: 'hgetall',
           key: userKey,
           timestamp: new Date().toISOString(),
-          sessionTokenProvided: sessionToken.substring(0, 8) + '...'
+          sessionTokenProvided: sessionToken.substring(0, 8) + '...',
+          validatedEmail: sessionValidation.email
         });
 
         const user = await redis.hgetall(userKey);
@@ -156,8 +164,7 @@ export default async function handler(req, res) {
 
         console.log('📦 REDIS USER FETCH RESULT', {
           userExists: !!user && !!user.email,
-          hasSessionToken: !!user.session_token,
-          sessionTokenMatch: user.session_token === sessionToken,
+          emailMatch: user.email === sessionValidation.email,
           existingDataSize: getDataSize(user.app_data),
           existingDataSizeKB: getDataSize(user.app_data) ? (getDataSize(user.app_data) / 1024).toFixed(2) + 'KB' : '0KB',
           lastActive: user.last_active ? new Date(parseInt(user.last_active)).toISOString() : 'never',
@@ -166,11 +173,11 @@ export default async function handler(req, res) {
           fetchTimeMs: userFetchTime + 'ms'
         });
 
-        if (!user.session_token || user.session_token !== sessionToken) {
-          console.log('❌ REDIS AUTH FAILED', {
-            reason: !user.session_token ? 'no session token in Redis' : 'session token mismatch',
-            providedToken: sessionToken.substring(0, 8) + '...',
-            storedToken: user.session_token ? user.session_token.substring(0, 8) + '...' : 'none'
+        if (!user || user.email !== sessionValidation.email) {
+          console.log('❌ REDIS USER MISMATCH', {
+            reason: !user ? 'user not found' : 'email mismatch',
+            expectedEmail: sessionValidation.email,
+            actualEmail: user?.email || 'none'
           });
           return res.status(403).json({ error: 'Invalid session token' });
         }

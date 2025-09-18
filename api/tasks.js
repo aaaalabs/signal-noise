@@ -1,4 +1,5 @@
 import { Redis } from '@upstash/redis';
+import { findUserBySession } from './session-helper.js';
 
 const redis = new Redis({
   url: process.env.KV_REST_API_URL,
@@ -49,37 +50,14 @@ export default async function handler(req, res) {
         app_data: '{"tasks":[],"history":[],"badges":[],"patterns":{},"settings":{"targetRatio":80,"notifications":false,"firstName":"Dev User"}}'
       };
     } else {
-      // Find user by session token in Redis
-      console.log('🔍 Searching for user with session token...');
-      const userKeys = await redis.keys('sn:u:*');
-      console.log(`🔍 Found ${userKeys.length} user keys in Redis:`, userKeys);
+      // Find user by session token using new multi-session system
+      console.log('🔍 Searching for user with session token via multi-session system...');
+      const sessionUser = await findUserBySession(redis, sessionToken);
 
-      for (const key of userKeys) {
-        try {
-          // Skip keys that don't follow the user pattern
-          if (!key.startsWith('sn:u:') || key.includes(':sync:')) {
-            console.log(`⏭️ Skipping non-user key: ${key}`);
-            continue;
-          }
-
-          const userData = await redis.hgetall(key);
-          console.log(`🔍 Checking key: ${key}`, {
-            hasSessionToken: !!userData.session_token,
-            sessionTokenMatch: userData.session_token === sessionToken,
-            userEmail: userData.email,
-            status: userData.status
-          });
-
-          if (userData.session_token === sessionToken) {
-            console.log('✅ Session token match found!', key);
-            userKey = key;
-            user = userData;
-            break;
-          }
-        } catch (keyError) {
-          console.log(`⚠️ Error checking key ${key}:`, keyError.message, '- skipping');
-          continue;
-        }
+      if (sessionUser) {
+        userKey = `sn:u:${sessionUser.email}`;
+        user = await redis.hgetall(userKey);
+        console.log('✅ Session validated for user:', sessionUser.email);
       }
 
       console.log('🔍 Session token search result:', {
