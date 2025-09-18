@@ -363,9 +363,45 @@ android {
 2. **Verify widget registration first** - use dumpsys before assuming code problems
 3. **RemoteViews are very limited** - stick to basic Android views only
 4. **Build issues != Runtime issues** - compilation success doesn't guarantee display
-5. **Android 30+ is problematic** - target SDK 29 for easier deployment
+5. **NEVER deploy single widget alone** - Widget ID conflicts cause "Can't load widget"
+6. **Always include ID spacer widget** - Prevents AlarmManager/RedisDataFetcher collisions
+7. **Android 15 SDK 36 compatible** - Modern Android support achieved
 
 ---
+
+## 🔥 CRITICAL DISCOVERY: Widget ID Conflicts (Sept 18, 2025)
+
+### ⚠️ THE SINGLE WIDGET PROBLEM
+**NEVER deploy a single widget alone!** This causes "Can't load widget" errors due to AlarmManager/RedisDataFetcher ID conflicts.
+
+#### Root Cause Analysis:
+- **Single Widget**: All Redis fetch calls use same AlarmManager ID → overload → crash
+- **Multiple Widgets**: IDs distributed across widgets → each works independently
+- **Android 15**: More strict about widget resource management
+
+#### ✅ PROVEN SOLUTION: ID Spacer Pattern
+```xml
+<!-- Production widget -->
+<receiver android:name=".widget.W4" android:label="Signal/Noise">
+
+<!-- Minimal ID spacer (prevents conflicts) -->
+<receiver android:name=".widget.T1" android:label="• spacer">
+```
+
+#### Why This Works:
+1. **ID Distribution**: AlarmManager IDs spread across multiple widgets
+2. **Resource Isolation**: Each widget gets dedicated background service slots
+3. **Android Compatibility**: System expects multiple widget ecosystem
+
+### 🎯 MANDATORY WIDGET DEPLOYMENT RULE
+**NEVER ship single widget APKs in production!** Always include:
+- **1 Production Widget** (main functionality)
+- **1+ ID Spacer Widgets** (minimal, can be hidden in picker)
+
+### Android SDK Evolution Impact
+- **SDK 29**: Widget ID conflicts masked by looser resource management
+- **SDK 36**: Stricter widget isolation exposes single-widget problems
+- **Solution**: ID spacer pattern works across all Android versions
 
 *"The best design is as little design as possible" - Dieter Rams*
 
