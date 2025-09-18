@@ -3,8 +3,8 @@
 # min_api: 21
 # common_typos_disable
 # {"id":"com.android.tools.r8.mapping","version":"2.2"}
-# pg_map_id: 9dd0460
-# pg_map_hash: SHA-256 9dd046066a91d7948cd1b5d9a64c6a50fc7424d1c04af53fb22818d10ffa5c5d
+# pg_map_id: b65b6e2
+# pg_map_hash: SHA-256 b65b6e22510a9958fd79600ba0974b9489cd98ad285c9eb3de511007edd8eccf
 android.support.customtabs.ICustomTabsCallback -> a.a:
 # {"id":"sourceFile","fileName":"ICustomTabsCallback.java"}
     java.lang.String DESCRIPTOR -> a
@@ -22737,12 +22737,15 @@ app.signalnoise.twa.R$id -> I.b:
     int noise_text -> a
     int ratio_text -> b
     int signal_text -> c
-    int trend_text -> d
-    int widget_container -> e
-    int widget_ratio -> f
+    int simple_text -> d
+    int trend_text -> e
+    int widget_container -> f
+    int widget_ratio -> g
 app.signalnoise.twa.R$layout -> I.c:
     int widget_1x1 -> a
-    int widget_w4 -> b
+    int widget_t1 -> b
+    int widget_t2 -> c
+    int widget_w4 -> d
 app.signalnoise.twa.WidgetUpdateService -> app.signalnoise.twa.WidgetUpdateService:
 # {"id":"sourceFile","fileName":"WidgetUpdateService.java"}
     android.os.Handler handler -> a
@@ -22925,6 +22928,21 @@ app.signalnoise.twa.widget.SignalNoiseWidgetProvider -> J.k:
     54:64:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int):63:63 -> b
     65:71:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int):64:64 -> b
     72:75:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int):65:65 -> b
+app.signalnoise.twa.widget.T1 -> app.signalnoise.twa.widget.T1:
+# {"id":"sourceFile","fileName":"T1.java"}
+    1:4:void <init>():13:13 -> <init>
+    1:6:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):16:16 -> onUpdate
+    7:17:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):17:17 -> onUpdate
+    18:24:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):18:18 -> onUpdate
+    25:31:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):19:19 -> onUpdate
+app.signalnoise.twa.widget.T2 -> app.signalnoise.twa.widget.T2:
+# {"id":"sourceFile","fileName":"T2.java"}
+    1:4:void <init>():12:12 -> <init>
+    1:6:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):15:15 -> onUpdate
+    7:17:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):16:16 -> onUpdate
+    18:24:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):17:17 -> onUpdate
+    25:31:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):18:18 -> onUpdate
+    32:38:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):19:19 -> onUpdate
 app.signalnoise.twa.widget.W4 -> app.signalnoise.twa.widget.W4:
 # {"id":"sourceFile","fileName":"W4.java"}
     1:4:void <init>():16:16 -> <init>

@@ -12,6 +12,10 @@
         "source": "app.signalnoise.twa.app-main-26:/xml/widget_w2_info.xml"
     },
     {
+        "merged": "app.signalnoise.twa.app-release-25:/xml_widget_t2_info.xml.flat",
+        "source": "app.signalnoise.twa.app-main-26:/xml/widget_t2_info.xml"
+    },
+    {
         "merged": "app.signalnoise.twa.app-release-25:/xml_widget_v3_info.xml.flat",
         "source": "app.signalnoise.twa.app-main-26:/xml/widget_v3_info.xml"
     },
@@ -140,6 +144,10 @@
         "source": "app.signalnoise.twa.app-main-26:/drawable/compact_glow_orange.xml"
     },
     {
+        "merged": "app.signalnoise.twa.app-release-25:/xml_widget_t1_info.xml.flat",
+        "source": "app.signalnoise.twa.app-main-26:/xml/widget_t1_info.xml"
+    },
+    {
         "merged": "app.signalnoise.twa.app-release-25:/mipmap-xxhdpi_ic_maskable.png.flat",
         "source": "app.signalnoise.twa.app-main-26:/mipmap-xxhdpi/ic_maskable.png"
     },
@@ -234,6 +242,10 @@
     {
         "merged": "app.signalnoise.twa.app-release-25:/layout_widget_exceptional.xml.flat",
         "source": "app.signalnoise.twa.app-main-26:/layout/widget_exceptional.xml"
+    },
+    {
+        "merged": "app.signalnoise.twa.app-release-25:/layout_widget_t1.xml.flat",
+        "source": "app.signalnoise.twa.app-main-26:/layout/widget_t1.xml"
     },
     {
         "merged": "app.signalnoise.twa.app-release-25:/drawable_gradient_flow.xml.flat",
@@ -470,6 +482,10 @@
     {
         "merged": "app.signalnoise.twa.app-release-25:/xml_widget_wave_info.xml.flat",
         "source": "app.signalnoise.twa.app-main-26:/xml/widget_wave_info.xml"
+    },
+    {
+        "merged": "app.signalnoise.twa.app-release-25:/layout_widget_t2.xml.flat",
+        "source": "app.signalnoise.twa.app-main-26:/layout/widget_t2.xml"
     },
     {
         "merged": "app.signalnoise.twa.app-release-25:/xml_widget_debug_info.xml.flat",
