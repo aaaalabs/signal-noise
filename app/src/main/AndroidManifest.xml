@@ -167,44 +167,10 @@
         </provider>
 
 
-        <!-- WINNER: Progress Bar with 30-second refresh -->
-        <receiver android:name=".widget.WinnerProgress30s"
-            android:exported="true"
-            android:label="Progress_Winner">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_sn2x1p_info" />
-        </receiver>
-
-        <!-- WINNER: Quantum (proven Canvas rendering) -->
-        <receiver android:name=".widget.Q" android:exported="true" android:label="Q">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_quantum_info" />
-        </receiver>
-
-        <!-- JONY IVE MASTERPIECES v5.0 -->
-
-        <receiver android:name=".widget.PWinner" android:exported="true" android:label="PWinner">
+        <!-- LEAN STRATEGY: PWinner ONLY -->
+        <receiver android:name=".widget.PWinner" android:exported="true" android:label="PWinner 2x2">
             <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_perfect_info" />
-        </receiver>
-
-        <receiver android:name=".widget.J1" android:exported="true" android:label="J1">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_j1_info" />
-        </receiver>
-
-        <receiver android:name=".widget.J2" android:exported="true" android:label="J2">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_j2_info" />
-        </receiver>
-
-        <receiver android:name=".widget.J3" android:exported="true" android:label="J3">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_j3_info" />
         </receiver>
 
         <!-- Widget Update Receiver -->
