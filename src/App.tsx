@@ -1111,20 +1111,22 @@ function AppContent() {
       localStorage.setItem('widget_current_ratio', ratio.toString());
       localStorage.setItem('widget_last_update', new Date().toISOString());
 
-      // Try to communicate with Android app if available
-      // This uses a special intent URL that the Android app can intercept
-      if (window.location.hostname === 'localhost' || window.location.hostname === 'signal-noise.app') {
-        // Create a hidden iframe to trigger the intent
-        const iframe = document.createElement('iframe');
-        iframe.style.display = 'none';
-        iframe.src = `intent://widget/update?ratio=${ratio}#Intent;scheme=signalnoise;package=app.signalnoise.twa;end`;
-        document.body.appendChild(iframe);
+      // CRITICAL: Skip iframe intent method on mobile to prevent TWA navigation conflicts
+      // The iframe-based intent communication was causing "Item not found" errors on mobile
 
-        // Remove after a short delay
-        setTimeout(() => {
-          document.body.removeChild(iframe);
-        }, 100);
+      // Simple Android interface communication only (no iframe)
+      if ('Android' in window) {
+        try {
+          (window as any).Android?.updateWidgetData?.(ratio);
+        } catch (e) {
+          // Interface not available, that's OK
+        }
       }
+
+      // Alternative: Use localStorage polling which Android widgets can monitor
+      localStorage.setItem('android.widget.ratio', ratio.toString());
+      localStorage.setItem('widget_ratio', ratio.toString());
+
     } catch (e) {
       // Widget update not critical, fail silently
     }
