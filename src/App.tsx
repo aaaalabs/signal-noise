@@ -265,6 +265,24 @@ function AppContent() {
                 if (!parsedData.settings) parsedData.settings = { targetRatio: 80, notifications: false, firstName: user.firstName || '' };
                 if (parsedData.signal_ratio === undefined) parsedData.signal_ratio = getTodayRatio(parsedData.tasks || []);
 
+                // CRITICAL: Get server version to sync client tracking
+                try {
+                  const metaResponse = await fetch('/api/sync-meta', {
+                    headers: {
+                      'Authorization': `Bearer ${sessionData.sessionToken}`
+                    }
+                  });
+
+                  if (metaResponse.ok) {
+                    const metadata = await metaResponse.json();
+                    syncTracker.current.version = metadata.version || 0;
+                    setLocalVersion(metadata.version || 0);
+                    console.log('🔄 Sync version initialized from server:', metadata.version);
+                  }
+                } catch (error) {
+                  console.log('⚠️ Could not get initial server version:', error);
+                }
+
                 setData(parsedData);
                 setIsLoaded(true);
                 setIsLoadingFromCloud(false); // CRITICAL: Re-enable auto-sync after cloud load success
@@ -771,17 +789,34 @@ function AppContent() {
 
           if (response.ok) {
             const metadata = await response.json();
-            console.log('📊 Cloud metadata check:', {
-              cloudVersion: metadata.version,
-              localVersion: syncTracker.current.version,
-              needsUpdate: metadata.version > syncTracker.current.version,
+
+            // More robust sync decision logic
+            const cloudVersion = metadata.version || 0;
+            const localVersion = syncTracker.current.version || 0;
+            const cloudTimestamp = metadata.lastModified || 0;
+            const timeSinceLastSync = syncTracker.current.lastSyncTime || 0;
+            const isCloudNewer = cloudVersion > localVersion;
+
+            // Timestamp-based fallback: if cloud was modified after our last sync
+            const timestampSyncNeeded = cloudTimestamp > timeSinceLastSync;
+
+            console.log('📊 Focus sync analysis:', {
+              cloudVersion,
+              localVersion,
+              isCloudNewer,
+              cloudTimestamp: new Date(cloudTimestamp).toISOString(),
+              lastSyncTime: timeSinceLastSync ? new Date(timeSinceLastSync).toISOString() : 'never',
+              timestampSyncNeeded,
               lastDevice: metadata.lastDevice,
-              age: metadata.lastModified ? `${Date.now() - metadata.lastModified}ms ago` : 'unknown'
+              decision: isCloudNewer || timestampSyncNeeded ? 'SYNC' : 'SKIP'
             });
 
-            // If cloud is newer, pull the data
-            if (metadata.version > syncTracker.current.version) {
-              console.log('⬇️ Cloud has newer data - pulling updates...');
+            // Sync if version OR timestamp indicates newer data
+            if (isCloudNewer || timestampSyncNeeded) {
+              console.log('⬇️ Cloud has newer data - pulling updates...', {
+                reason: isCloudNewer ? 'version-based' : 'timestamp-based',
+                cloudAge: cloudTimestamp ? `${Date.now() - cloudTimestamp}ms ago` : 'unknown'
+              });
 
               // Show receiving animation
               syncReceiving();
@@ -796,28 +831,39 @@ function AppContent() {
               if (dataResponse.ok) {
                 const { data: cloudData } = await dataResponse.json();
 
-                console.log('✅ Cloud data received:', {
+                // Migrate cloud data if needed
+                if (!cloudData.badges) cloudData.badges = [];
+                if (!cloudData.patterns) cloudData.patterns = {};
+                if (!cloudData.settings) cloudData.settings = { targetRatio: 80, notifications: false };
+                if (cloudData.signal_ratio === undefined) cloudData.signal_ratio = getTodayRatio(cloudData.tasks || []);
+
+                console.log('✅ Cloud data received via focus sync:', {
                   taskCount: cloudData.tasks?.length || 0,
                   fromDevice: metadata.lastDevice,
-                  version: metadata.version
+                  version: cloudVersion,
+                  syncMethod: isCloudNewer ? 'version' : 'timestamp'
                 });
 
                 // Update local data with cloud data
                 setData(cloudData);
-                syncTracker.current.version = metadata.version;
-                setLocalVersion(metadata.version);
+                syncTracker.current.version = cloudVersion;
+                syncTracker.current.lastSyncTime = Date.now();
+                setLocalVersion(cloudVersion);
 
                 // Show success with device whisper
                 syncSuccess();
 
                 // Show device whisper if different device
-                if (metadata.lastDevice && metadata.lastDevice !== 'Unknown') {
+                if (metadata.lastDevice && metadata.lastDevice !== 'Unknown' && metadata.lastDevice !== 'Development') {
                   import('./services/syncService').then(({ showDeviceWhisper }) => {
                     showDeviceWhisper(metadata.lastDevice);
                   });
                 }
               } else {
-                console.error('❌ Failed to fetch cloud data');
+                console.error('❌ Failed to fetch cloud data:', {
+                  status: dataResponse.status,
+                  statusText: dataResponse.statusText
+                });
                 syncError();
               }
             } else {
@@ -825,11 +871,17 @@ function AppContent() {
               syncIdle();
             }
           } else {
-            console.error('❌ Failed to check cloud metadata:', response.status);
+            console.error('❌ Failed to check cloud metadata:', {
+              status: response.status,
+              statusText: response.statusText
+            });
             syncIdle();
           }
         } catch (error) {
-          console.error('❌ Error checking for cloud updates:', error);
+          console.error('❌ Error checking for cloud updates:', {
+            error: error instanceof Error ? error.message : String(error),
+            stack: error instanceof Error ? error.stack : undefined
+          });
           syncIdle();
         }
       }
@@ -1200,6 +1252,29 @@ function AppContent() {
             data={data}
             earnedCount={earnedCount}
             hasAchievement={hasAchievement}
+            onDataUpdate={(newData) => {
+              setData(newData);
+              // Update sync tracker version from server
+              const fetchVersion = async () => {
+                try {
+                  const sessionData = JSON.parse(localStorage.getItem('sessionData') || '{}');
+                  if (sessionData.sessionToken) {
+                    const response = await fetch('/api/sync-meta', {
+                      headers: { 'Authorization': `Bearer ${sessionData.sessionToken}` }
+                    });
+                    if (response.ok) {
+                      const metadata = await response.json();
+                      syncTracker.current.version = metadata.version || 0;
+                      syncTracker.current.lastSyncTime = Date.now();
+                      setLocalVersion(metadata.version || 0);
+                    }
+                  }
+                } catch (error) {
+                  console.log('Could not update version after manual sync:', error);
+                }
+              };
+              fetchVersion();
+            }}
           />
           <div className="ratio-label">
             {t.ratioLabel}

@@ -1,5 +1,9 @@
+import { useState } from 'react';
 import type { AppData } from '../types';
 import AchievementDots from './AchievementDots';
+import { checkPremiumStatus } from '../services/premiumService';
+import { syncSuccess, syncError, syncIdle, syncChecking, syncReceiving } from '../services/syncService';
+import { getTodayRatio } from '../utils/achievements';
 
 interface RatioDisplayProps {
   ratio: number;
@@ -7,9 +11,107 @@ interface RatioDisplayProps {
   data: AppData;
   earnedCount: number;
   hasAchievement?: boolean;
+  onDataUpdate?: (newData: AppData) => void;
 }
 
-export default function RatioDisplay({ ratio, totalTasks, data, earnedCount, hasAchievement }: RatioDisplayProps) {
+export default function RatioDisplay({ ratio, totalTasks, data, earnedCount, hasAchievement, onDataUpdate }: RatioDisplayProps) {
+  const [isManualSyncing, setIsManualSyncing] = useState(false);
+
+  const handleManualSync = async () => {
+    const premiumStatus = checkPremiumStatus();
+
+    if (!premiumStatus.isActive) {
+      // Subtle haptic feedback for non-premium users
+      if (navigator.vibrate) {
+        navigator.vibrate(5);
+      }
+      return;
+    }
+
+    if (isManualSyncing) return; // Prevent double-tap
+
+    setIsManualSyncing(true);
+
+    try {
+      console.log('🔄 Manual sync triggered via ratio tap...');
+
+      // Show checking animation
+      syncChecking();
+
+      const sessionData = JSON.parse(localStorage.getItem('sessionData') || '{}');
+      if (!sessionData.sessionToken) {
+        syncError();
+        return;
+      }
+
+      // Check cloud metadata
+      const response = await fetch('/api/sync-meta', {
+        headers: {
+          'Authorization': `Bearer ${sessionData.sessionToken}`
+        }
+      });
+
+      if (response.ok) {
+        const metadata = await response.json();
+
+        console.log('📊 Manual sync metadata:', {
+          cloudVersion: metadata.version,
+          lastDevice: metadata.lastDevice,
+          lastModified: new Date(metadata.lastModified).toISOString()
+        });
+
+        // Always pull latest data on manual sync
+        syncReceiving();
+
+        const dataResponse = await fetch('/api/tasks', {
+          headers: {
+            'Authorization': `Bearer ${sessionData.sessionToken}`
+          }
+        });
+
+        if (dataResponse.ok) {
+          const { data: cloudData } = await dataResponse.json();
+
+          // Migrate cloud data if needed
+          if (!cloudData.badges) cloudData.badges = [];
+          if (!cloudData.patterns) cloudData.patterns = {};
+          if (!cloudData.settings) cloudData.settings = { targetRatio: 80, notifications: false };
+          if (cloudData.signal_ratio === undefined) cloudData.signal_ratio = getTodayRatio(cloudData.tasks || []);
+
+          console.log('✅ Manual sync completed:', {
+            taskCount: cloudData.tasks?.length || 0,
+            fromDevice: metadata.lastDevice
+          });
+
+          // Update parent component with new data
+          if (onDataUpdate) {
+            onDataUpdate(cloudData);
+          }
+
+          syncSuccess();
+
+          // Haptic feedback for success
+          if (navigator.vibrate) {
+            navigator.vibrate(10);
+          }
+        } else {
+          console.error('❌ Manual sync failed to fetch data');
+          syncError();
+        }
+      } else {
+        console.error('❌ Manual sync failed to get metadata');
+        syncError();
+      }
+    } catch (error) {
+      console.error('❌ Manual sync error:', error);
+      syncError();
+    } finally {
+      setIsManualSyncing(false);
+      // Return to idle after 2 seconds
+      setTimeout(() => syncIdle(), 2000);
+    }
+  };
+
   const getRatioClass = () => {
     if (totalTasks === 0) return '';
     if (ratio >= 80) return 'optimal';
@@ -63,8 +165,12 @@ export default function RatioDisplay({ ratio, totalTasks, data, earnedCount, has
         className={`ratio-display ${getRatioClass()} ${hasAchievement ? 'has-achievement' : ''}`}
         style={{
           position: 'relative',
-          zIndex: 1
+          zIndex: 1,
+          cursor: checkPremiumStatus().isActive ? 'pointer' : 'default',
+          userSelect: 'none'
         }}
+        onClick={handleManualSync}
+        title={checkPremiumStatus().isActive ? 'Tap to sync' : undefined}
       >
         {displayText}
       </div>
