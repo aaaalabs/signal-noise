@@ -7681,11 +7681,14 @@ app.signalnoise.twa.R$id:
     public static int ai_pulse
     public static int ai_section_2x2
     public static int ai_text_2x2
+    public static int breathing_number
     public static int debug_ratio
     public static int debug_source
     public static int debug_title
     public static int debug_update
     public static int elegant_container
+    public static int emotional_container
+    public static int emotional_ratio
     public static int fallback_container
     public static int fallback_text
     public static int flow_field
@@ -7701,6 +7704,8 @@ app.signalnoise.twa.R$id:
     public static int pattern_chart
     public static int peak_hour
     public static int progress_arc
+    public static int quantum_field
+    public static int quantum_ratio
     public static int ratio_large
     public static int ratio_main
     public static int ratio_percent
@@ -7733,6 +7738,7 @@ app.signalnoise.twa.R$id:
     public static int widget_container_4x2
     public static int widget_label
     public static int widget_noise_count
+    public static int widget_progress
     public static int widget_root
     public static int widget_signal_count
     public static int widget_speed
@@ -7742,18 +7748,24 @@ app.signalnoise.twa.R$id:
     public static int x_ratio
     public static int x_state
     public static int zen_number
+    public static int zen_pure_number
     private void <init>()
 app.signalnoise.twa.R$integer
 app.signalnoise.twa.R$layout:
     public static int widget_1x1_compact
+    public static int widget_breathing_calm
+    public static int widget_breathing_focus
+    public static int widget_breathing_stress
     public static int widget_debug
     public static int widget_elegant
+    public static int widget_emotional
     public static int widget_exceptional
     public static int widget_flow
     public static int widget_gradient
     public static int widget_minimal
     public static int widget_minimal_test
     public static int widget_nothing
+    public static int widget_quantum
     public static int widget_signal_noise
     public static int widget_signal_noise_2x1
     public static int widget_signal_wave
@@ -7764,10 +7776,12 @@ app.signalnoise.twa.R$layout:
     public static int widget_signal_wave_simple
     public static int widget_simple_fix
     public static int widget_sn1x1f
+    public static int widget_sn2x1p
     public static int widget_sn2x1r
     public static int widget_wave
     public static int widget_working
     public static int widget_zen
+    public static int widget_zen_pure
     private void <init>()
 app.signalnoise.twa.R$mipmap
 app.signalnoise.twa.R$string
@@ -7788,10 +7802,12 @@ app.signalnoise.twa.widget.DebugWidget:
     public void <init>()
     public void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[])
     private void updateDebugWidget(android.content.Context,android.appwidget.AppWidgetManager,int)
+app.signalnoise.twa.widget.J1
+app.signalnoise.twa.widget.J2
+app.signalnoise.twa.widget.J3
 app.signalnoise.twa.widget.MinimalTestWidget
 app.signalnoise.twa.widget.P
-app.signalnoise.twa.widget.Q:
-    private static final java.lang.String PREFS_NAME
+app.signalnoise.twa.widget.Q
 app.signalnoise.twa.widget.QWinner
 app.signalnoise.twa.widget.RedisDataFetcher:
     private static final java.lang.String API_URL
@@ -7903,10 +7919,7 @@ app.signalnoise.twa.widget.WidgetUpdateReceiver:
     public static final java.lang.String EXTRA_IS_SIGNAL
     public static final java.lang.String EXTRA_RATIO
 app.signalnoise.twa.widget.WinnerColor
-app.signalnoise.twa.widget.WinnerProgress30s:
-    private static final java.lang.String ACTION_AUTO_UPDATE
-    private static final java.lang.String PREFS_NAME
-    private static final java.lang.String TAG
+app.signalnoise.twa.widget.WinnerProgress30s
 com.google.androidbrowserhelper.BuildConfig
 com.google.androidbrowserhelper.R$drawable:
     private void <init>()

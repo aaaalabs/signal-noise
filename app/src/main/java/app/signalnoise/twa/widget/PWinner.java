@@ -1,10 +1,13 @@
 package app.signalnoise.twa.widget;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.RemoteViews;
+import app.signalnoise.twa.LauncherActivity;
 import app.signalnoise.twa.R;
 
 /**
@@ -38,6 +41,13 @@ public class PWinner extends AppWidgetProvider {
         // Recent trend indicator
         String trend = signal > noise ? "↗ trending up" : "↘ needs focus";
         views.setTextViewText(R.id.perfect_trend, trend);
+
+        // Add tap-to-open app functionality
+        Intent launchIntent = new Intent(context, LauncherActivity.class);
+        launchIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, launchIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+        views.setOnClickPendingIntent(R.id.widget_container, pendingIntent);
 
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
