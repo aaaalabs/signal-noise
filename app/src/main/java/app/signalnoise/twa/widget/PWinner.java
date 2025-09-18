@@ -35,11 +35,11 @@ public class PWinner extends AppWidgetProvider {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_perfect);
 
         views.setTextViewText(R.id.perfect_ratio, ratio + "%");
-        views.setTextViewText(R.id.perfect_signal, "⚡ " + signal + " signal");
-        views.setTextViewText(R.id.perfect_noise, "💫 " + noise + " noise");
+        views.setTextViewText(R.id.perfect_signal, signal + " signal");
+        views.setTextViewText(R.id.perfect_noise, noise + " noise");
 
         // Recent trend indicator
-        String trend = signal > noise ? "↗ trending up" : "↘ needs focus";
+        String trend = signal > noise ? "trending up" : "needs focus";
         views.setTextViewText(R.id.perfect_trend, trend);
 
         // Add tap-to-open app functionality

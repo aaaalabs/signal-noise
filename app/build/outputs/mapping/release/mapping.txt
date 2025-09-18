@@ -3,8 +3,8 @@
 # min_api: 21
 # common_typos_disable
 # {"id":"com.android.tools.r8.mapping","version":"2.2"}
-# pg_map_id: 90e08c5
-# pg_map_hash: SHA-256 90e08c5bff5ae8976aff8b13ce7233e69d04d8e50daf7469737ff6bbece94275
+# pg_map_id: 69f15a1
+# pg_map_hash: SHA-256 69f15a1e13da38df881691a967c643efcc76395e59af660382249a4ba695c4ff
 android.support.customtabs.ICustomTabsCallback -> a.a:
 # {"id":"sourceFile","fileName":"ICustomTabsCallback.java"}
     java.lang.String DESCRIPTOR -> a
@@ -22861,15 +22861,15 @@ app.signalnoise.twa.widget.PWinner -> app.signalnoise.twa.widget.PWinner:
     23:29:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):33:33 -> a
     30:40:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):35:35 -> a
     41:62:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):37:37 -> a
-    63:89:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):38:38 -> a
-    90:118:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):39:39 -> a
-    119:123:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):42:42 -> a
-    124:128:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):43:43 -> a
-    129:137:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):46:46 -> a
-    138:142:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):47:47 -> a
-    143:146:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):48:48 -> a
-    147:151:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):50:50 -> a
-    152:155:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):52:52 -> a
+    63:84:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):38:38 -> a
+    85:108:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):39:39 -> a
+    109:113:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):42:42 -> a
+    114:118:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):43:43 -> a
+    119:127:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):46:46 -> a
+    128:132:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):47:47 -> a
+    133:136:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):48:48 -> a
+    137:141:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):50:50 -> a
+    142:145:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):52:52 -> a
     1:5:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):22:22 -> onUpdate
     6:11:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):24:24 -> onUpdate
     12:18:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):25:25 -> onUpdate
