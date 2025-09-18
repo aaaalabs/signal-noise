@@ -17,9 +17,11 @@ color widgetWhite
 drawable ai_icon
 drawable ai_insight_bg
 drawable ai_pulse_dot
+drawable compact_glow
 drawable gradient_drift
 drawable gradient_flow
 drawable gradient_focus
+drawable honest_glass
 drawable ic_notification_icon
 drawable professional_glow
 drawable ratio_background
@@ -129,6 +131,7 @@ layout widget_emotional
 layout widget_exceptional
 layout widget_flow
 layout widget_gradient
+layout widget_j4
 layout widget_minimal
 layout widget_minimal_test
 layout widget_nothing
@@ -191,6 +194,7 @@ xml widget_info
 xml widget_j1_info
 xml widget_j2_info
 xml widget_j3_info
+xml widget_j4_info
 xml widget_minimal_info
 xml widget_minimal_test_info
 xml widget_nothing_info

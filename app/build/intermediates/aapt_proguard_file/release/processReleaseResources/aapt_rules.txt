@@ -7,9 +7,10 @@
 -keep class app.signalnoise.twa.LauncherActivity { <init>(); }
 -keep class app.signalnoise.twa.WidgetUpdateService { <init>(); }
 -keep class app.signalnoise.twa.widget.DataPollingService { <init>(); }
--keep class app.signalnoise.twa.widget.W1 { <init>(); }
--keep class app.signalnoise.twa.widget.W2 { <init>(); }
--keep class app.signalnoise.twa.widget.W3 { <init>(); }
+-keep class app.signalnoise.twa.widget.J1 { <init>(); }
+-keep class app.signalnoise.twa.widget.J2 { <init>(); }
+-keep class app.signalnoise.twa.widget.J3 { <init>(); }
+-keep class app.signalnoise.twa.widget.J4 { <init>(); }
 -keep class app.signalnoise.twa.widget.W4 { <init>(); }
 -keep class app.signalnoise.twa.widget.WidgetUpdateReceiver { <init>(); }
 -keep class com.google.androidbrowserhelper.trusted.FocusActivity { <init>(); }

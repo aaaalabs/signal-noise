@@ -1,10 +1,13 @@
 package app.signalnoise.twa.widget;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.RemoteViews;
+import app.signalnoise.twa.LauncherActivity;
 import app.signalnoise.twa.R;
 
 /**
@@ -42,6 +45,13 @@ public class J1 extends AppWidgetProvider {
                 // Show nothing - true to minimalist philosophy
                 views.setViewVisibility(R.id.zen_pure_number, android.view.View.INVISIBLE);
             }
+
+            // Add tap-to-open functionality
+            Intent launchIntent = new Intent(context, LauncherActivity.class);
+            launchIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, launchIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+            views.setOnClickPendingIntent(R.id.zen_pure_number, pendingIntent);
 
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }

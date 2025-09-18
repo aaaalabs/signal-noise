@@ -153,48 +153,12 @@
                 android:resource="@xml/filepaths" />
         </provider>
 
-        <!-- SIZE TEST BATCH v7.0 - FIND THE WINNER -->
+        <!-- JONY IVE UX UI ULTRATHINK BATCH v8.0 -->
 
-        <receiver
-            android:name="app.signalnoise.twa.widget.W1"
-            android:exported="true"
-            android:label="W1 (146dp)" >
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_w1_info" />
-        </receiver>
-        <receiver
-            android:name="app.signalnoise.twa.widget.W2"
-            android:exported="true"
-            android:label="W2 (targetCell)" >
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_w2_info" />
-        </receiver>
-        <receiver
-            android:name="app.signalnoise.twa.widget.W3"
-            android:exported="true"
-            android:label="W3 (110dp)" >
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_w3_info" />
-        </receiver>
         <receiver
             android:name="app.signalnoise.twa.widget.W4"
             android:exported="true"
-            android:label="W4 (72dp)" >
+            android:label="W4 Winner" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -202,6 +166,54 @@
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_w4_info" />
+        </receiver>
+        <receiver
+            android:name="app.signalnoise.twa.widget.J1"
+            android:exported="true"
+            android:label="J1 Pure Zen" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_j1_info" />
+        </receiver>
+        <receiver
+            android:name="app.signalnoise.twa.widget.J2"
+            android:exported="true"
+            android:label="J2 Emotional" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_j2_info" />
+        </receiver>
+        <receiver
+            android:name="app.signalnoise.twa.widget.J3"
+            android:exported="true"
+            android:label="J3 Breathing" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_j3_info" />
+        </receiver>
+        <receiver
+            android:name="app.signalnoise.twa.widget.J4"
+            android:exported="true"
+            android:label="J4 Materials" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_j4_info" />
         </receiver>
 
         <!-- Widget Update Receiver -->

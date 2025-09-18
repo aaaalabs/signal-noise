@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/professional_glow"
+    android:background="@drawable/compact_glow"
     android:padding="8dp">
 
     <TextView
@@ -14,7 +14,33 @@
         android:layout_height="wrap_content"
         android:text="87%"
         android:textColor="#00FF88"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textSize="32sp"
+        android:fontFamily="sans-serif-thin" />
+
+    <TextView
+        android:id="@+id/signal_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="5 signal"
+        android:textColor="#FFFFFF"
+        android:textSize="8sp"
+        android:layout_marginTop="2dp" />
+
+    <TextView
+        android:id="@+id/noise_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2 noise"
+        android:textColor="#CCCCCC"
+        android:textSize="8sp" />
+
+    <TextView
+        android:id="@+id/trend_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="trending up"
+        android:textColor="#FFFFFF"
+        android:textSize="7sp"
+        android:layout_marginTop="2dp" />
 
 </LinearLayout>
