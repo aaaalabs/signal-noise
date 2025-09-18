@@ -13,8 +13,9 @@ public class A extends AppWidgetProvider {
             SharedPreferences prefs = context.getSharedPreferences("signal_noise_widget_data", Context.MODE_PRIVATE);
             int ratio = prefs.getInt("current_ratio", 43);
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_sn2x1p);
-            views.setTextViewText(R.id.widget_ratio, "A: " + ratio + "%");
-            views.setTextViewText(R.id.widget_progress, "▲▲▲▲▲▲▲");
+            String state = ratio > 70 ? "Flow" : ratio > 50 ? "Focus" : "Drift";
+            views.setTextViewText(R.id.widget_ratio, ratio + "%");
+            views.setTextViewText(R.id.widget_progress, state);
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }
         RedisDataFetcher.fetchAndUpdateWidgetData(context, "thomas.seiger@gmail.com");

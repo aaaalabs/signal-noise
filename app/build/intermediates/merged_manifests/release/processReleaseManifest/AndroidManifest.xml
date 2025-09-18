@@ -167,11 +167,11 @@
                 android:resource="@xml/widget_sn2x1p_info" />
         </receiver>
 
-        <!-- WINNER: Quantum Particles (proven revolutionary visual) -->
+        <!-- WINNER: Quantum (proven Canvas rendering) -->
         <receiver
-            android:name="app.signalnoise.twa.widget.QWinner"
+            android:name="app.signalnoise.twa.widget.Q"
             android:exported="true"
-            android:label="QWinner" >
+            android:label="Q" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -181,18 +181,67 @@
                 android:resource="@xml/widget_quantum_info" />
         </receiver>
 
-        <!-- REVOLUTIONARY: Flow State Meditation Guide -->
+        <!-- APPLE-GRADE MINIMAL v3.0 - Jony Ive Approved -->
+
         <receiver
-            android:name="app.signalnoise.twa.widget.F"
+            android:name="app.signalnoise.twa.widget.M"
             android:exported="true"
-            android:label="F" >
+            android:label="M" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/widget_flow_info" />
+                android:resource="@xml/widget_minimal_info" />
+        </receiver>
+        <receiver
+            android:name="app.signalnoise.twa.widget.T"
+            android:exported="true"
+            android:label="T" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_sn2x1p_info" />
+        </receiver>
+        <receiver
+            android:name="app.signalnoise.twa.widget.S"
+            android:exported="true"
+            android:label="S" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_sn2x1p_info" />
+        </receiver>
+        <receiver
+            android:name="app.signalnoise.twa.widget.G"
+            android:exported="true"
+            android:label="G" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_sn2x1p_info" />
+        </receiver>
+        <receiver
+            android:name="app.signalnoise.twa.widget.A"
+            android:exported="true"
+            android:label="A" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_sn2x1p_info" />
         </receiver>
 
         <!-- Widget Update Receiver -->

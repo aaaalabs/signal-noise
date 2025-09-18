@@ -32,6 +32,10 @@
         "source": "app.signalnoise.twa.app-main-26:/layout/widget_signal_noise_2x1.xml"
     },
     {
+        "merged": "app.signalnoise.twa.app-release-25:/layout_widget_minimal.xml.flat",
+        "source": "app.signalnoise.twa.app-main-26:/layout/widget_minimal.xml"
+    },
+    {
         "merged": "app.signalnoise.twa.app-release-25:/xml_widget_sn1x1f_info.xml.flat",
         "source": "app.signalnoise.twa.app-main-26:/xml/widget_sn1x1f_info.xml"
     },
@@ -242,6 +246,10 @@
     {
         "merged": "app.signalnoise.twa.app-release-25:/xml_widget_sn2x1c_info.xml.flat",
         "source": "app.signalnoise.twa.app-main-26:/xml/widget_sn2x1c_info.xml"
+    },
+    {
+        "merged": "app.signalnoise.twa.app-release-25:/xml_widget_minimal_info.xml.flat",
+        "source": "app.signalnoise.twa.app-main-26:/xml/widget_minimal_info.xml"
     },
     {
         "merged": "app.signalnoise.twa.app-release-25:/layout_widget_1x1.xml.flat",

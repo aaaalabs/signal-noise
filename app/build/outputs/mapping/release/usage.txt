@@ -7687,6 +7687,9 @@ app.signalnoise.twa.R$id:
     public static int debug_update
     public static int fallback_container
     public static int fallback_text
+    public static int flow_field
+    public static int flow_ratio
+    public static int flow_state
     public static int hourly_pattern
     public static int last_update
     public static int minimal_text
@@ -7734,6 +7737,7 @@ app.signalnoise.twa.R$integer
 app.signalnoise.twa.R$layout:
     public static int widget_1x1_compact
     public static int widget_debug
+    public static int widget_flow
     public static int widget_gradient
     public static int widget_minimal_test
     public static int widget_signal_noise
@@ -7758,7 +7762,6 @@ app.signalnoise.twa.SignalNoiseDataBridge
 app.signalnoise.twa.WidgetUpdateService:
     private static final java.lang.String TAG
     private static final long UPDATE_INTERVAL
-app.signalnoise.twa.widget.A
 app.signalnoise.twa.widget.B
 app.signalnoise.twa.widget.C
 app.signalnoise.twa.widget.D
@@ -7771,12 +7774,12 @@ app.signalnoise.twa.widget.DebugWidget:
     public void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[])
     private void updateDebugWidget(android.content.Context,android.appwidget.AppWidgetManager,int)
 app.signalnoise.twa.widget.E
-app.signalnoise.twa.widget.F:
+app.signalnoise.twa.widget.M:
     private static final java.lang.String PREFS_NAME
 app.signalnoise.twa.widget.MinimalTestWidget
-app.signalnoise.twa.widget.Q
-app.signalnoise.twa.widget.QWinner:
+app.signalnoise.twa.widget.Q:
     private static final java.lang.String PREFS_NAME
+app.signalnoise.twa.widget.QWinner
 app.signalnoise.twa.widget.RedisDataFetcher:
     private static final java.lang.String API_URL
     private static final java.lang.String PREFS_NAME

@@ -47,6 +47,7 @@ id flow_ratio
 id flow_state
 id hourly_pattern
 id last_update
+id minimal_field
 id minimal_text
 id noise_count
 id noise_detail
@@ -98,6 +99,7 @@ layout widget_1x1_compact
 layout widget_debug
 layout widget_flow
 layout widget_gradient
+layout widget_minimal
 layout widget_minimal_test
 layout widget_quantum
 layout widget_signal_noise
@@ -146,6 +148,7 @@ xml shortcuts
 xml widget_debug_info
 xml widget_flow_info
 xml widget_info
+xml widget_minimal_info
 xml widget_minimal_test_info
 xml widget_quantum_info
 xml widget_signal_noise_info

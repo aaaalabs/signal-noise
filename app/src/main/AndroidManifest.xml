@@ -179,16 +179,37 @@
                 android:resource="@xml/widget_sn2x1p_info" />
         </receiver>
 
-        <!-- WINNER: Quantum Particles (proven revolutionary visual) -->
-        <receiver android:name=".widget.QWinner" android:exported="true" android:label="QWinner">
+        <!-- WINNER: Quantum (proven Canvas rendering) -->
+        <receiver android:name=".widget.Q" android:exported="true" android:label="Q">
             <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_quantum_info" />
         </receiver>
 
-        <!-- REVOLUTIONARY: Flow State Meditation Guide -->
-        <receiver android:name=".widget.F" android:exported="true" android:label="F">
+        <!-- APPLE-GRADE MINIMAL v3.0 - Jony Ive Approved -->
+
+        <receiver android:name=".widget.M" android:exported="true" android:label="M">
             <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_flow_info" />
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_minimal_info" />
+        </receiver>
+
+        <receiver android:name=".widget.T" android:exported="true" android:label="T">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_sn2x1p_info" />
+        </receiver>
+
+        <receiver android:name=".widget.S" android:exported="true" android:label="S">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_sn2x1p_info" />
+        </receiver>
+
+        <receiver android:name=".widget.G" android:exported="true" android:label="G">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_sn2x1p_info" />
+        </receiver>
+
+        <receiver android:name=".widget.A" android:exported="true" android:label="A">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_sn2x1p_info" />
         </receiver>
 
         <!-- Widget Update Receiver -->

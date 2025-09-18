@@ -3,8 +3,8 @@
 # min_api: 21
 # common_typos_disable
 # {"id":"com.android.tools.r8.mapping","version":"2.2"}
-# pg_map_id: 49aae18
-# pg_map_hash: SHA-256 49aae1843af4e99e356f80cc22f935f474e17c8b7e303c421f49c046932e5c66
+# pg_map_id: f89a553
+# pg_map_hash: SHA-256 f89a5539a0c9c6cff3a9c8c5933056567355a645f096642ea1a85d56c40fbdd3
 android.support.customtabs.ICustomTabsCallback -> a.a:
 # {"id":"sourceFile","fileName":"ICustomTabsCallback.java"}
     java.lang.String DESCRIPTOR -> a
@@ -22731,17 +22731,15 @@ app.signalnoise.twa.LauncherActivity -> app.signalnoise.twa.LauncherActivity:
     11:23:void onResume():92:92 -> onResume
     24:27:void onResume():96:96 -> onResume
 app.signalnoise.twa.R$id -> I.a:
-    int flow_field -> a
-    int flow_ratio -> b
-    int flow_state -> c
-    int quantum_field -> d
-    int quantum_ratio -> e
-    int widget_container -> f
-    int widget_progress -> g
-    int widget_ratio -> h
+    int minimal_field -> a
+    int quantum_field -> b
+    int quantum_ratio -> c
+    int widget_container -> d
+    int widget_progress -> e
+    int widget_ratio -> f
 app.signalnoise.twa.R$layout -> I.b:
     int widget_1x1 -> a
-    int widget_flow -> b
+    int widget_minimal -> b
     int widget_quantum -> c
     int widget_sn2x1p -> d
 app.signalnoise.twa.WidgetUpdateService -> app.signalnoise.twa.WidgetUpdateService:
@@ -22819,6 +22817,18 @@ app.signalnoise.twa.WidgetUpdateService$3 -> app.signalnoise.twa.WidgetUpdateSer
     120:148:void onReceiveValue(java.lang.String):131:131 -> a
     149:154:void onReceiveValue(java.lang.String):134:134 -> a
     1:6:void onReceiveValue(java.lang.Object):101:101 -> onReceiveValue
+app.signalnoise.twa.widget.A -> app.signalnoise.twa.widget.A:
+# {"id":"sourceFile","fileName":"A.java"}
+    1:4:void <init>():9:9 -> <init>
+    1:7:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):12:12 -> onUpdate
+    8:13:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):13:13 -> onUpdate
+    14:21:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):14:14 -> onUpdate
+    22:36:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):15:15 -> onUpdate
+    37:48:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):16:16 -> onUpdate
+    49:70:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):17:17 -> onUpdate
+    71:75:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):18:18 -> onUpdate
+    76:81:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):19:19 -> onUpdate
+    82:87:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):21:21 -> onUpdate
 app.signalnoise.twa.widget.DataPollingService -> app.signalnoise.twa.widget.DataPollingService:
 # {"id":"sourceFile","fileName":"DataPollingService.java"}
     android.os.Handler handler -> a
@@ -22856,63 +22866,57 @@ app.signalnoise.twa.widget.DataPollingService$1 -> app.signalnoise.twa.widget.Da
     6:17:void run():38:38 -> run
 app.signalnoise.twa.widget.DebugWidget -> J.a:
 # {"id":"sourceFile","fileName":"DebugWidget.java"}
-app.signalnoise.twa.widget.F -> app.signalnoise.twa.widget.F:
-# {"id":"sourceFile","fileName":"F.java"}
-    1:4:void <init>():23:23 -> <init>
-    5:10:android.graphics.Bitmap generateFlowState(int,int,int,long):82:82 -> a
-    11:15:android.graphics.Bitmap generateFlowState(int,int,int,long):83:83 -> a
-    16:24:android.graphics.Bitmap generateFlowState(int,int,int,long):86:86 -> a
-    25:30:android.graphics.Bitmap generateFlowState(int,int,int,long):88:88 -> a
-    31:49:android.graphics.Bitmap generateFlowState(int,int,int,long):89:89 -> a
-    50:82:android.graphics.Bitmap generateFlowState(int,int,int,long):96:96 -> a
-    83:108:android.graphics.Bitmap generateFlowState(int,int,int,long):97:97 -> a
-    109:118:android.graphics.Bitmap generateFlowState(int,int,int,long):105:105 -> a
-    119:122:android.graphics.Bitmap generateFlowState(int,int,int,long):107:107 -> a
-    123:141:android.graphics.Bitmap generateFlowState(int,int,int,long):108:108 -> a
-    142:144:android.graphics.Bitmap generateFlowState(int,int,int,long):111:111 -> a
-    145:147:android.graphics.Bitmap generateFlowState(int,int,int,long):112:112 -> a
-    148:152:android.graphics.Bitmap generateFlowState(int,int,int,long):115:115 -> a
-    153:159:android.graphics.Bitmap generateFlowState(int,int,int,long):116:116 -> a
-    160:168:android.graphics.Bitmap generateFlowState(int,int,int,long):117:117 -> a
-    169:193:android.graphics.Bitmap generateFlowState(int,int,int,long):121:121 -> a
-    194:206:android.graphics.Bitmap generateFlowState(int,int,int,long):128:128 -> a
-    207:231:android.graphics.Bitmap generateFlowState(int,int,int,long):129:129 -> a
-    232:238:android.graphics.Bitmap generateFlowState(int,int,int,long):134:134 -> a
-    239:258:android.graphics.Bitmap generateFlowState(int,int,int,long):136:136 -> a
-    259:267:android.graphics.Bitmap generateFlowState(int,int,int,long):142:142 -> a
-    268:270:android.graphics.Bitmap generateFlowState(int,int,int,long):143:143 -> a
-    271:280:android.graphics.Bitmap generateFlowState(int,int,int,long):144:144 -> a
-    281:283:android.graphics.Bitmap generateFlowState(int,int,int,long):148:148 -> a
-    284:289:android.graphics.Bitmap generateFlowState(int,int,int,long):150:150 -> a
-    5:11:java.lang.String getFlowLevel(int):157:157 -> b
-    12:18:java.lang.String getFlowLevel(int):158:158 -> b
-    19:25:java.lang.String getFlowLevel(int):159:159 -> b
-    26:28:java.lang.String getFlowLevel(int):160:160 -> b
-    29:31:java.lang.String getFlowLevel(int):161:161 -> b
-    1:7:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):36:36 -> c
-    8:15:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):37:37 -> c
-    16:24:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):40:40 -> c
-    25:28:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):41:41 -> c
-    29:39:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):43:43 -> c
-    40:44:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):46:46 -> c
-    45:48:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):49:49 -> c
-    49:75:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):50:50 -> c
-    76:80:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):51:51 -> c
-    81:87:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):54:54 -> c
-    88:92:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):55:55 -> c
-    93:105:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):56:56 -> c
-    106:109:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):58:58 -> c
-    110:114:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):62:62 -> c
-    115:119:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):64:64 -> c
-    120:130:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):68:68 -> c
-    131:137:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):69:69 -> c
-    138:144:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):70:70 -> c
-    145:148:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):71:71 -> c
-    1:6:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):28:28 -> onUpdate
-    7:12:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):29:29 -> onUpdate
-    13:18:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):31:31 -> onUpdate
-app.signalnoise.twa.widget.QWinner -> app.signalnoise.twa.widget.QWinner:
-# {"id":"sourceFile","fileName":"QWinner.java"}
+app.signalnoise.twa.widget.G -> app.signalnoise.twa.widget.G:
+# {"id":"sourceFile","fileName":"G.java"}
+    1:4:void <init>():9:9 -> <init>
+    1:7:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):12:12 -> onUpdate
+    8:13:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):13:13 -> onUpdate
+    14:21:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):14:14 -> onUpdate
+    22:32:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):15:15 -> onUpdate
+    33:59:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):16:16 -> onUpdate
+    60:66:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):17:17 -> onUpdate
+    67:72:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):18:18 -> onUpdate
+    73:78:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):20:20 -> onUpdate
+app.signalnoise.twa.widget.M -> app.signalnoise.twa.widget.M:
+# {"id":"sourceFile","fileName":"M.java"}
+    1:4:void <init>():20:20 -> <init>
+    1:6:android.graphics.Bitmap generateMinimal(int,int,int):66:66 -> a
+    7:11:android.graphics.Bitmap generateMinimal(int,int,int):67:67 -> a
+    12:20:android.graphics.Bitmap generateMinimal(int,int,int):70:70 -> a
+    21:24:android.graphics.Bitmap generateMinimal(int,int,int):73:73 -> a
+    25:30:android.graphics.Bitmap generateMinimal(int,int,int):75:75 -> a
+    31:33:android.graphics.Bitmap generateMinimal(int,int,int):76:76 -> a
+    34:36:android.graphics.Bitmap generateMinimal(int,int,int):77:77 -> a
+    37:48:android.graphics.Bitmap generateMinimal(int,int,int):78:78 -> a
+    49:51:android.graphics.Bitmap generateMinimal(int,int,int):79:79 -> a
+    52:56:android.graphics.Bitmap generateMinimal(int,int,int):80:80 -> a
+    57:82:android.graphics.Bitmap generateMinimal(int,int,int):83:83 -> a
+    83:91:android.graphics.Bitmap generateMinimal(int,int,int):87:87 -> a
+    92:98:android.graphics.Bitmap generateMinimal(int,int,int):91:91 -> a
+    99:108:android.graphics.Bitmap generateMinimal(int,int,int):92:92 -> a
+    109:114:android.graphics.Bitmap generateMinimal(int,int,int):93:93 -> a
+    5:13:int getAppleColor(int):101:101 -> b
+    14:26:int getAppleColor(int):102:102 -> b
+    27:31:int getAppleColor(int):103:103 -> b
+    32:38:int getAppleColor(int):104:104 -> b
+    1:7:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):33:33 -> c
+    8:17:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):34:34 -> c
+    18:21:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):37:37 -> c
+    22:32:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):39:39 -> c
+    33:37:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):42:42 -> c
+    38:44:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):45:45 -> c
+    45:53:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):46:46 -> c
+    54:57:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):47:47 -> c
+    58:62:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):50:50 -> c
+    63:66:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):52:52 -> c
+    67:77:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):56:56 -> c
+    78:84:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):57:57 -> c
+    85:88:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):58:58 -> c
+    1:6:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):25:25 -> onUpdate
+    7:12:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):26:26 -> onUpdate
+    13:18:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):28:28 -> onUpdate
+app.signalnoise.twa.widget.Q -> app.signalnoise.twa.widget.Q:
+# {"id":"sourceFile","fileName":"Q.java"}
     1:4:void <init>():21:21 -> <init>
     7:12:android.graphics.Bitmap generateQuantumField(int,int,int):75:75 -> a
     13:17:android.graphics.Bitmap generateQuantumField(int,int,int):76:76 -> a
@@ -22985,6 +22989,19 @@ app.signalnoise.twa.widget.RedisDataFetcher$$ExternalSyntheticLambda0 -> J.b:
       # {"id":"com.android.tools.r8.synthesized"}
     1:1:void J.RedisDataFetcher$$ExternalSyntheticLambda0.run():0:0 -> run
       # {"id":"com.android.tools.r8.synthesized"}
+app.signalnoise.twa.widget.S -> app.signalnoise.twa.widget.S:
+# {"id":"sourceFile","fileName":"S.java"}
+    1:4:void <init>():9:9 -> <init>
+    1:7:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):12:12 -> onUpdate
+    8:13:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):13:13 -> onUpdate
+    14:21:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):14:14 -> onUpdate
+    22:28:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):15:15 -> onUpdate
+    29:35:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):16:16 -> onUpdate
+    36:46:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):17:17 -> onUpdate
+    47:68:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):18:18 -> onUpdate
+    69:98:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):19:19 -> onUpdate
+    99:104:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):20:20 -> onUpdate
+    105:110:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):22:22 -> onUpdate
 app.signalnoise.twa.widget.SN1x1F -> J.d:
 # {"id":"sourceFile","fileName":"SN1x1F.java"}
 app.signalnoise.twa.widget.SN2x1C -> J.e:
@@ -23022,6 +23039,17 @@ app.signalnoise.twa.widget.SignalNoiseWidgetProvider -> J.k:
     54:64:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int):63:63 -> b
     65:71:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int):64:64 -> b
     72:75:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int):65:65 -> b
+app.signalnoise.twa.widget.T -> app.signalnoise.twa.widget.T:
+# {"id":"sourceFile","fileName":"T.java"}
+    1:4:void <init>():9:9 -> <init>
+    1:7:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):12:12 -> onUpdate
+    8:13:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):13:13 -> onUpdate
+    14:21:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):14:14 -> onUpdate
+    22:32:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):15:15 -> onUpdate
+    33:54:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):16:16 -> onUpdate
+    55:61:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):17:17 -> onUpdate
+    62:67:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):18:18 -> onUpdate
+    68:73:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):20:20 -> onUpdate
 app.signalnoise.twa.widget.WidgetUpdateHelper -> J.l:
 # {"id":"sourceFile","fileName":"WidgetUpdateHelper.java"}
     1:7:void updateAllWidgets(android.content.Context):18:18 -> a
