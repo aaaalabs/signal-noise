@@ -7896,6 +7896,10 @@ app.signalnoise.twa.widget.SN4x1R:
     public void <init>()
     public void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[])
     private void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int)
+app.signalnoise.twa.widget.ScreenWakeSyncReceiver:
+    private static final java.lang.String PREFS_NAME
+    private static final java.lang.String TAG
+    private static final long THROTTLE_MS
 app.signalnoise.twa.widget.SignalNoiseWidget:
     private static final java.lang.String PREFS_NAME
     private static final java.lang.String TAG

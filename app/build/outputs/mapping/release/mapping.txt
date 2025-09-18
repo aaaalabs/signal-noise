@@ -3,8 +3,8 @@
 # min_api: 21
 # common_typos_disable
 # {"id":"com.android.tools.r8.mapping","version":"2.2"}
-# pg_map_id: fd1cb66
-# pg_map_hash: SHA-256 fd1cb662f5aa0cd78624f067100c8fb43a0a3b650ad6626c7f230a3e30e07d29
+# pg_map_id: e90c677
+# pg_map_hash: SHA-256 e90c677ce59a93ed4d4b80697e9b1ed6dd430f61baea28615c829944cf02e9fd
 android.support.customtabs.ICustomTabsCallback -> a.a:
 # {"id":"sourceFile","fileName":"ICustomTabsCallback.java"}
     java.lang.String DESCRIPTOR -> a
@@ -22901,6 +22901,18 @@ app.signalnoise.twa.widget.SN3x1R -> J.h:
 # {"id":"sourceFile","fileName":"SN3x1R.java"}
 app.signalnoise.twa.widget.SN4x1R -> J.i:
 # {"id":"sourceFile","fileName":"SN4x1R.java"}
+app.signalnoise.twa.widget.ScreenWakeSyncReceiver -> app.signalnoise.twa.widget.ScreenWakeSyncReceiver:
+# {"id":"sourceFile","fileName":"ScreenWakeSyncReceiver.java"}
+    1:4:void <init>():14:14 -> <init>
+    1:12:void onReceive(android.content.Context,android.content.Intent):21:21 -> onReceive
+    13:21:void onReceive(android.content.Context,android.content.Intent):24:24 -> onReceive
+    22:27:void onReceive(android.content.Context,android.content.Intent):25:25 -> onReceive
+    28:35:void onReceive(android.content.Context,android.content.Intent):26:26 -> onReceive
+    36:41:void onReceive(android.content.Context,android.content.Intent):28:28 -> onReceive
+    42:46:void onReceive(android.content.Context,android.content.Intent):29:29 -> onReceive
+    47:57:void onReceive(android.content.Context,android.content.Intent):32:32 -> onReceive
+    58:63:void onReceive(android.content.Context,android.content.Intent):35:35 -> onReceive
+    64:89:void onReceive(android.content.Context,android.content.Intent):38:38 -> onReceive
 app.signalnoise.twa.widget.SignalNoiseWidget -> J.j:
 # {"id":"sourceFile","fileName":"SignalNoiseWidget.java"}
 app.signalnoise.twa.widget.SignalNoiseWidgetProvider -> J.k:
