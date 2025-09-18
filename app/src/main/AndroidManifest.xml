@@ -198,6 +198,11 @@
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_quantum_info" />
         </receiver>
 
+        <receiver android:name=".widget.W" android:exported="true" android:label="W">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_wave_info" />
+        </receiver>
+
         <!-- Widget Update Receiver -->
         <receiver android:name=".widget.WidgetUpdateReceiver"
             android:exported="false">

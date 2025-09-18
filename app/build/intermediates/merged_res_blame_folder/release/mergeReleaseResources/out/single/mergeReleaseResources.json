@@ -212,6 +212,10 @@
         "source": "app.signalnoise.twa.app-main-26:/layout/widget_signal_wave_fallback.xml"
     },
     {
+        "merged": "app.signalnoise.twa.app-release-25:/layout_widget_wave.xml.flat",
+        "source": "app.signalnoise.twa.app-main-26:/layout/widget_wave.xml"
+    },
+    {
         "merged": "app.signalnoise.twa.app-release-25:/xml_widget_sn3x1r_info.xml.flat",
         "source": "app.signalnoise.twa.app-main-26:/xml/widget_sn3x1r_info.xml"
     },
@@ -274,6 +278,10 @@
     {
         "merged": "app.signalnoise.twa.app-release-25:/layout_widget_sn2x1r.xml.flat",
         "source": "app.signalnoise.twa.app-main-26:/layout/widget_sn2x1r.xml"
+    },
+    {
+        "merged": "app.signalnoise.twa.app-release-25:/xml_widget_wave_info.xml.flat",
+        "source": "app.signalnoise.twa.app-main-26:/xml/widget_wave_info.xml"
     },
     {
         "merged": "app.signalnoise.twa.app-release-25:/xml_widget_debug_info.xml.flat",

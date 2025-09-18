@@ -7873,6 +7873,8 @@ app.signalnoise.twa.widget.SignalWaveWidgetProvider
 app.signalnoise.twa.widget.SimpleSignalWaveProvider
 app.signalnoise.twa.widget.TestWidget
 app.signalnoise.twa.widget.UltraSimpleWidget
+app.signalnoise.twa.widget.W:
+    private static final java.lang.String PREFS_NAME
 app.signalnoise.twa.widget.WidgetUpdateHelper:
     private static final java.lang.String TAG
     public void <init>()

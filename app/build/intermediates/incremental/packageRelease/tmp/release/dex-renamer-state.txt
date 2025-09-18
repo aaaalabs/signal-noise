@@ -1,4 +1,4 @@
-#Thu Sep 18 13:12:55 CEST 2025
+#Thu Sep 18 13:37:28 CEST 2025
 base.0=/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/build/intermediates/dex/release/minifyReleaseWithR8/classes.dex
 renamed.0=classes.dex
 path.0=classes.dex
