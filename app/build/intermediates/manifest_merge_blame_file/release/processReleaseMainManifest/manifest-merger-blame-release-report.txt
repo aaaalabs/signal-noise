@@ -28,7 +28,7 @@
 28
 29    <uses-sdk
 30        android:minSdkVersion="21"
-31        android:targetSdkVersion="29" />
+31        android:targetSdkVersion="36" />
 32
 33    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 33-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:26:9-80

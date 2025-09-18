@@ -73,7 +73,7 @@ android {
     defaultConfig {
         applicationId "app.signalnoise.twa"
         minSdkVersion 21
-        targetSdkVersion 29  // Target SDK 29 to avoid Android 30+ compression issues
+        targetSdkVersion 36  // Upgraded to Android 15 (latest)
         versionCode 12
         versionName "1.2.0"
 
