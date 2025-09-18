@@ -167,21 +167,10 @@
         </provider>
 
 
-        <!-- ANDROID 15 DEBUGGING BATCH - W4 WINNER + TEST WIDGETS -->
-
-        <receiver android:name=".widget.W4" android:exported="true" android:label="W4 Winner">
+        <!-- W4 WINNER - ANDROID 15 PRODUCTION READY -->
+        <receiver android:name=".widget.W4" android:exported="true" android:label="Signal/Noise">
             <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_w4_info" />
-        </receiver>
-
-        <receiver android:name=".widget.T1" android:exported="true" android:label="T1 Minimal">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_t1_info" />
-        </receiver>
-
-        <receiver android:name=".widget.T2" android:exported="true" android:label="T2 Static">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_t2_info" />
         </receiver>
 
 

@@ -153,12 +153,11 @@
                 android:resource="@xml/filepaths" />
         </provider>
 
-        <!-- ANDROID 15 DEBUGGING BATCH - W4 WINNER + TEST WIDGETS -->
-
+        <!-- W4 WINNER - ANDROID 15 PRODUCTION READY -->
         <receiver
             android:name="app.signalnoise.twa.widget.W4"
             android:exported="true"
-            android:label="W4 Winner" >
+            android:label="Signal/Noise" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -166,30 +165,6 @@
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_w4_info" />
-        </receiver>
-        <receiver
-            android:name="app.signalnoise.twa.widget.T1"
-            android:exported="true"
-            android:label="T1 Minimal" >
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_t1_info" />
-        </receiver>
-        <receiver
-            android:name="app.signalnoise.twa.widget.T2"
-            android:exported="true"
-            android:label="T2 Static" >
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_t2_info" />
         </receiver>
 
         <!-- Widget Update Receiver -->
