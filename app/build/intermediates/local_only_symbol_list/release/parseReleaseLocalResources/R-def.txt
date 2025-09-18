@@ -59,6 +59,7 @@ id minimal_field
 id minimal_text
 id noise_count
 id noise_detail
+id noise_text
 id nothing_text
 id pattern_chart
 id peak_hour
@@ -77,6 +78,7 @@ id ratio_text_2x2
 id signal_count
 id signal_detail
 id signal_label
+id signal_text
 id simple_ratio
 id simple_status
 id status_large
@@ -89,6 +91,7 @@ id streak_value
 id text
 id text_compact
 id today_count
+id trend_text
 id update_time
 id update_time_2x2
 id wave_canvas
@@ -143,6 +146,10 @@ layout widget_simple_fix
 layout widget_sn1x1f
 layout widget_sn2x1p
 layout widget_sn2x1r
+layout widget_w1
+layout widget_w2
+layout widget_w3
+layout widget_w4
 layout widget_wave
 layout widget_working
 layout widget_zen
@@ -198,6 +205,10 @@ xml widget_sn2x1r_info
 xml widget_sn3x1r_info
 xml widget_sn4x1r_info
 xml widget_ultra_simple_info
+xml widget_w1_info
+xml widget_w2_info
+xml widget_w3_info
+xml widget_w4_info
 xml widget_wave_info
 xml widget_working_info
 xml widget_zen_info

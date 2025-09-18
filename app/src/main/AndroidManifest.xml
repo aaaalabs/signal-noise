@@ -167,10 +167,26 @@
         </provider>
 
 
-        <!-- LEAN STRATEGY: PWinner ONLY -->
-        <receiver android:name=".widget.PWinner" android:exported="true" android:label="PWinner 2x2">
+        <!-- SIZE TEST BATCH v7.0 - FIND THE WINNER -->
+
+        <receiver android:name=".widget.W1" android:exported="true" android:label="W1 (146dp)">
             <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_perfect_info" />
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_w1_info" />
+        </receiver>
+
+        <receiver android:name=".widget.W2" android:exported="true" android:label="W2 (targetCell)">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_w2_info" />
+        </receiver>
+
+        <receiver android:name=".widget.W3" android:exported="true" android:label="W3 (110dp)">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_w3_info" />
+        </receiver>
+
+        <receiver android:name=".widget.W4" android:exported="true" android:label="W4 (72dp)">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_w4_info" />
         </receiver>
 
         <!-- Widget Update Receiver -->

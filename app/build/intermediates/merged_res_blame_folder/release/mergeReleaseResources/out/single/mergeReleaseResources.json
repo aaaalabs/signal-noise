@@ -8,6 +8,10 @@
         "source": "app.signalnoise.twa.app-main-26:/layout/widget_zen_pure.xml"
     },
     {
+        "merged": "app.signalnoise.twa.app-release-25:/xml_widget_w2_info.xml.flat",
+        "source": "app.signalnoise.twa.app-main-26:/xml/widget_w2_info.xml"
+    },
+    {
         "merged": "app.signalnoise.twa.app-release-25:/xml_widget_signal_wave_info.xml.flat",
         "source": "app.signalnoise.twa.app-main-26:/xml/widget_signal_wave_info.xml"
     },
@@ -64,12 +68,12 @@
         "source": "app.signalnoise.twa.app-main-26:/mipmap-xxhdpi/ic_launcher.png"
     },
     {
-        "merged": "app.signalnoise.twa.app-release-25:/layout_widget_breathing_focus.xml.flat",
-        "source": "app.signalnoise.twa.app-main-26:/layout/widget_breathing_focus.xml"
-    },
-    {
         "merged": "app.signalnoise.twa.app-release-25:/drawable-anydpi_shortcut_legacy_background.xml.flat",
         "source": "app.signalnoise.twa.app-main-26:/drawable-anydpi/shortcut_legacy_background.xml"
+    },
+    {
+        "merged": "app.signalnoise.twa.app-release-25:/layout_widget_breathing_focus.xml.flat",
+        "source": "app.signalnoise.twa.app-main-26:/layout/widget_breathing_focus.xml"
     },
     {
         "merged": "app.signalnoise.twa.app-release-25:/layout_widget_nothing.xml.flat",
@@ -80,12 +84,12 @@
         "source": "app.signalnoise.twa.app-main-26:/xml/widget_flow_info.xml"
     },
     {
-        "merged": "app.signalnoise.twa.app-release-25:/drawable-mdpi_shortcut_noise.png.flat",
-        "source": "app.signalnoise.twa.app-main-26:/drawable-mdpi/shortcut_noise.png"
-    },
-    {
         "merged": "app.signalnoise.twa.app-release-25:/drawable_ratio_circle_bg.xml.flat",
         "source": "app.signalnoise.twa.app-main-26:/drawable/ratio_circle_bg.xml"
+    },
+    {
+        "merged": "app.signalnoise.twa.app-release-25:/drawable-mdpi_shortcut_noise.png.flat",
+        "source": "app.signalnoise.twa.app-main-26:/drawable-mdpi/shortcut_noise.png"
     },
     {
         "merged": "app.signalnoise.twa.app-release-25:/drawable-xxhdpi_ic_notification_icon.png.flat",
@@ -128,6 +132,10 @@
         "source": "app.signalnoise.twa.app-main-26:/mipmap-xxhdpi/ic_maskable.png"
     },
     {
+        "merged": "app.signalnoise.twa.app-release-25:/xml_widget_w1_info.xml.flat",
+        "source": "app.signalnoise.twa.app-main-26:/xml/widget_w1_info.xml"
+    },
+    {
         "merged": "app.signalnoise.twa.app-release-25:/xml_widget_elegant_info.xml.flat",
         "source": "app.signalnoise.twa.app-main-26:/xml/widget_elegant_info.xml"
     },
@@ -142,6 +150,10 @@
     {
         "merged": "app.signalnoise.twa.app-release-25:/xml_widget_zen_info.xml.flat",
         "source": "app.signalnoise.twa.app-main-26:/xml/widget_zen_info.xml"
+    },
+    {
+        "merged": "app.signalnoise.twa.app-release-25:/layout_widget_w4.xml.flat",
+        "source": "app.signalnoise.twa.app-main-26:/layout/widget_w4.xml"
     },
     {
         "merged": "app.signalnoise.twa.app-release-25:/layout_widget_zen.xml.flat",
@@ -166,6 +178,10 @@
     {
         "merged": "app.signalnoise.twa.app-release-25:/layout_widget_signal_wave_fixed.xml.flat",
         "source": "app.signalnoise.twa.app-main-26:/layout/widget_signal_wave_fixed.xml"
+    },
+    {
+        "merged": "app.signalnoise.twa.app-release-25:/layout_widget_w1.xml.flat",
+        "source": "app.signalnoise.twa.app-main-26:/layout/widget_w1.xml"
     },
     {
         "merged": "app.signalnoise.twa.app-release-25:/layout_widget_quantum.xml.flat",
@@ -248,6 +264,10 @@
         "source": "app.signalnoise.twa.app-main-26:/mipmap-mdpi/ic_maskable.png"
     },
     {
+        "merged": "app.signalnoise.twa.app-release-25:/xml_widget_w4_info.xml.flat",
+        "source": "app.signalnoise.twa.app-main-26:/xml/widget_w4_info.xml"
+    },
+    {
         "merged": "app.signalnoise.twa.app-release-25:/drawable_widget_fast_background.xml.flat",
         "source": "app.signalnoise.twa.app-main-26:/drawable/widget_fast_background.xml"
     },
@@ -256,8 +276,16 @@
         "source": "app.signalnoise.twa.app-main-26:/drawable/ai_pulse_dot.xml"
     },
     {
+        "merged": "app.signalnoise.twa.app-release-25:/xml_widget_w3_info.xml.flat",
+        "source": "app.signalnoise.twa.app-main-26:/xml/widget_w3_info.xml"
+    },
+    {
         "merged": "app.signalnoise.twa.app-release-25:/drawable-xxxhdpi_shortcut_signal.png.flat",
         "source": "app.signalnoise.twa.app-main-26:/drawable-xxxhdpi/shortcut_signal.png"
+    },
+    {
+        "merged": "app.signalnoise.twa.app-release-25:/layout_widget_w2.xml.flat",
+        "source": "app.signalnoise.twa.app-main-26:/layout/widget_w2.xml"
     },
     {
         "merged": "app.signalnoise.twa.app-release-25:/drawable_ai_insight_bg.xml.flat",
@@ -314,6 +342,10 @@
     {
         "merged": "app.signalnoise.twa.app-release-25:/xml_widget_sn3x1r_info.xml.flat",
         "source": "app.signalnoise.twa.app-main-26:/xml/widget_sn3x1r_info.xml"
+    },
+    {
+        "merged": "app.signalnoise.twa.app-release-25:/layout_widget_w3.xml.flat",
+        "source": "app.signalnoise.twa.app-main-26:/layout/widget_w3.xml"
     },
     {
         "merged": "app.signalnoise.twa.app-release-25:/layout_widget_minimal_test.xml.flat",

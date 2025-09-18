@@ -7703,13 +7703,16 @@ app.signalnoise.twa.R$id:
     public static int nothing_text
     public static int pattern_chart
     public static int peak_hour
+    public static int perfect_noise
+    public static int perfect_ratio
+    public static int perfect_signal
+    public static int perfect_trend
     public static int progress_arc
     public static int quantum_field
     public static int quantum_ratio
     public static int ratio_large
     public static int ratio_main
     public static int ratio_percent
-    public static int ratio_text
     public static int ratio_text_2x2
     public static int signal_count
     public static int signal_detail
@@ -7765,6 +7768,7 @@ app.signalnoise.twa.R$layout:
     public static int widget_minimal
     public static int widget_minimal_test
     public static int widget_nothing
+    public static int widget_perfect
     public static int widget_quantum
     public static int widget_signal_noise
     public static int widget_signal_noise_2x1
@@ -7807,6 +7811,7 @@ app.signalnoise.twa.widget.J2
 app.signalnoise.twa.widget.J3
 app.signalnoise.twa.widget.MinimalTestWidget
 app.signalnoise.twa.widget.P
+app.signalnoise.twa.widget.PWinner
 app.signalnoise.twa.widget.Q
 app.signalnoise.twa.widget.QWinner
 app.signalnoise.twa.widget.RedisDataFetcher:
