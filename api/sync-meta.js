@@ -1,5 +1,4 @@
 import { Redis } from '@upstash/redis';
-import { findUserBySession } from './session-helper.js';
 
 const redis = new Redis({
   url: process.env.KV_REST_API_URL,
@@ -23,11 +22,11 @@ export default async function handler(req, res) {
     return res.status(401).json({ error: 'Authentication required' });
   }
 
-  const sessionToken = authHeader.substring(7);
+  const accessToken = authHeader.substring(7);
 
   try {
     // Handle development sessions
-    if (sessionToken.startsWith('dev-session-token-')) {
+    if (accessToken.startsWith('dev-session-token-')) {
       console.log('🚧 Development session - returning mock metadata');
       return res.json({
         version: 0,
@@ -37,16 +36,23 @@ export default async function handler(req, res) {
       });
     }
 
-    // Find user by session token using new multi-session system
-    const user = await findUserBySession(redis, sessionToken);
+    // Simple token validation: find user with matching access_token
+    const userKeys = await redis.keys('sn:u:*');
+    let userData = null;
 
-    if (!user) {
-      return res.status(403).json({ error: 'Invalid session token' });
+    for (const userKey of userKeys) {
+      if (userKey.includes(':sessions')) continue; // Skip session lists
+
+      const user = await redis.hgetall(userKey);
+      if (user.access_token === accessToken && user.status === 'active') {
+        userData = user;
+        break;
+      }
     }
 
-    // Get user data from Redis
-    const userKey = `sn:u:${user.email}`;
-    const userData = await redis.hgetall(userKey);
+    if (!userData) {
+      return res.status(403).json({ error: 'Invalid access token' });
+    }
 
     // Return minimal metadata for version checking
     const metadata = {

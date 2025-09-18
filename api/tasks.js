@@ -1,5 +1,4 @@
 import { Redis } from '@upstash/redis';
-import { findUserBySession } from './session-helper.js';
 
 const redis = new Redis({
   url: process.env.KV_REST_API_URL,
@@ -26,20 +25,20 @@ export default async function handler(req, res) {
     return res.status(401).json({ error: 'Authentication required' });
   }
 
-  const sessionToken = authHeader.substring(7);
+  const accessToken = authHeader.substring(7);
 
   try {
-    console.log('🔍 Tasks endpoint - session validation:', {
-      sessionTokenPresent: !!sessionToken,
-      sessionTokenLength: sessionToken?.length,
-      sessionTokenPreview: sessionToken?.substring(0, 8) + '...'
+    console.log('🔍 Tasks endpoint - token validation:', {
+      accessTokenPresent: !!accessToken,
+      accessTokenLength: accessToken?.length,
+      accessTokenPreview: accessToken?.substring(0, 8) + '...'
     });
 
     let userKey = null;
     let user = null;
 
     // Handle development sessions
-    if (sessionToken.startsWith('dev-session-token-')) {
+    if (accessToken.startsWith('dev-session-token-')) {
       console.log('🚧 Development session - using mock user data');
       userKey = 'sn:u:dev@signal-noise.test';
       user = {
@@ -50,17 +49,23 @@ export default async function handler(req, res) {
         app_data: '{"tasks":[],"history":[],"badges":[],"patterns":{},"settings":{"targetRatio":80,"notifications":false,"firstName":"Dev User"}}'
       };
     } else {
-      // Find user by session token using new multi-session system
-      console.log('🔍 Searching for user with session token via multi-session system...');
-      const sessionUser = await findUserBySession(redis, sessionToken);
+      // Simple token validation: find user with matching access_token
+      console.log('🔍 Searching for user with access token...');
+      const userKeys = await redis.keys('sn:u:*');
 
-      if (sessionUser) {
-        userKey = `sn:u:${sessionUser.email}`;
-        user = await redis.hgetall(userKey);
-        console.log('✅ Session validated for user:', sessionUser.email);
+      for (const key of userKeys) {
+        if (key.includes(':sessions')) continue; // Skip session lists
+
+        const userData = await redis.hgetall(key);
+        if (userData.access_token === accessToken && userData.status === 'active') {
+          userKey = key;
+          user = userData;
+          console.log('✅ Access token validated for user:', userData.email);
+          break;
+        }
       }
 
-      console.log('🔍 Session token search result:', {
+      console.log('🔍 Access token search result:', {
         userFound: !!user,
         userKey: userKey,
         userEmail: user?.email
@@ -68,7 +73,7 @@ export default async function handler(req, res) {
     }
 
     if (!user) {
-      return res.status(403).json({ error: 'Invalid session token' });
+      return res.status(403).json({ error: 'Invalid access token' });
     }
 
     // Parse current app data

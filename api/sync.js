@@ -1,5 +1,4 @@
 import { Redis } from '@upstash/redis';
-import { findUserBySession } from './session-helper.js';
 
 const redis = new Redis({
   url: process.env.KV_REST_API_URL,
@@ -25,15 +24,15 @@ export default async function handler(req, res) {
     const { emailHash } = req.query;
     const authHeader = req.headers.authorization;
 
-    // For premium users with session tokens
+    // For premium users with access tokens
     if (authHeader && authHeader.startsWith('Bearer ')) {
-      const sessionToken = authHeader.substring(7);
+      const accessToken = authHeader.substring(7);
 
       try {
         let userData = null;
 
         // Handle development sessions
-        if (sessionToken.startsWith('dev-session-token-')) {
+        if (accessToken.startsWith('dev-session-token-')) {
           console.log('🚧 Development session sync - returning empty data');
           userData = {
             data: { tasks: [], history: [], badges: [], patterns: {}, settings: { targetRatio: 80, notifications: false, firstName: 'Dev User' } },
@@ -44,14 +43,14 @@ export default async function handler(req, res) {
             version: '1.0.0'
           };
         } else {
-          // Find user by session token using new multi-session system
-          const sessionUser = await findUserBySession(redis, sessionToken);
+          // Simple token validation: find user with matching access_token
+          const userKeys = await redis.keys('sn:u:*');
 
-          if (sessionUser) {
-            const userKey = `sn:u:${sessionUser.email}`;
+          for (const userKey of userKeys) {
+            if (userKey.includes(':sessions')) continue; // Skip session lists
+
             const user = await redis.hgetall(userKey);
-
-            if (user) {
+            if (user.access_token === accessToken && user.status === 'active') {
               // Return user's cloud data with corrupted data protection
               let parsedData = {};
 
@@ -80,6 +79,7 @@ export default async function handler(req, res) {
                 lastSync: new Date().toISOString(),
                 version: '1.0.0'
               };
+              break;
             }
           }
         }
@@ -113,18 +113,18 @@ export default async function handler(req, res) {
 
     const authHeader = req.headers.authorization;
 
-    // For premium users with session tokens
+    // For premium users with access tokens
     if (authHeader && authHeader.startsWith('Bearer ')) {
-      const sessionToken = authHeader.substring(7);
+      const accessToken = authHeader.substring(7);
       const { email, data, firstName, syncType } = body;
 
-      if (!email || !sessionToken) {
-        return res.status(400).json({ error: 'Email and session token required for authenticated sync' });
+      if (!email || !accessToken) {
+        return res.status(400).json({ error: 'Email and access token required for authenticated sync' });
       }
 
       try {
         // Handle development sessions
-        if (sessionToken.startsWith('dev-session-token-')) {
+        if (accessToken.startsWith('dev-session-token-')) {
           console.log('🚧 Development session - simulating successful cloud save:', {
             taskCount: data?.tasks?.length || 0,
             syncType,
@@ -139,15 +139,7 @@ export default async function handler(req, res) {
           });
         }
 
-        // Validate session using new multi-session system
-        const sessionValidation = await findUserBySession(redis, sessionToken);
-
-        if (!sessionValidation) {
-          console.log('❌ REDIS AUTH FAILED - Invalid session token');
-          return res.status(403).json({ error: 'Invalid session token' });
-        }
-
-        // Get user data from Redis
+        // Simple token validation: find user with matching access_token
         const userKey = `sn:u:${email}`;
         const redisStartTime = Date.now();
 
@@ -155,8 +147,7 @@ export default async function handler(req, res) {
           operation: 'hgetall',
           key: userKey,
           timestamp: new Date().toISOString(),
-          sessionTokenProvided: sessionToken.substring(0, 8) + '...',
-          validatedEmail: sessionValidation.email
+          accessTokenProvided: accessToken.substring(0, 8) + '...'
         });
 
         const user = await redis.hgetall(userKey);
@@ -164,7 +155,8 @@ export default async function handler(req, res) {
 
         console.log('📦 REDIS USER FETCH RESULT', {
           userExists: !!user && !!user.email,
-          emailMatch: user.email === sessionValidation.email,
+          hasAccessToken: !!user.access_token,
+          accessTokenMatch: user.access_token === accessToken,
           existingDataSize: getDataSize(user.app_data),
           existingDataSizeKB: getDataSize(user.app_data) ? (getDataSize(user.app_data) / 1024).toFixed(2) + 'KB' : '0KB',
           lastActive: user.last_active ? new Date(parseInt(user.last_active)).toISOString() : 'never',
@@ -173,13 +165,15 @@ export default async function handler(req, res) {
           fetchTimeMs: userFetchTime + 'ms'
         });
 
-        if (!user || user.email !== sessionValidation.email) {
-          console.log('❌ REDIS USER MISMATCH', {
-            reason: !user ? 'user not found' : 'email mismatch',
-            expectedEmail: sessionValidation.email,
-            actualEmail: user?.email || 'none'
+        if (!user.access_token || user.access_token !== accessToken || user.status !== 'active') {
+          console.log('❌ REDIS AUTH FAILED', {
+            reason: !user.access_token ? 'no access token in Redis' :
+                   user.access_token !== accessToken ? 'access token mismatch' :
+                   'user not active',
+            providedToken: accessToken.substring(0, 8) + '...',
+            storedToken: user.access_token ? user.access_token.substring(0, 8) + '...' : 'none'
           });
-          return res.status(403).json({ error: 'Invalid session token' });
+          return res.status(403).json({ error: 'Invalid access token' });
         }
 
         // CRITICAL SAFETY CHECK: Prevent overwriting existing data with empty data

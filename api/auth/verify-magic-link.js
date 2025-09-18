@@ -1,5 +1,5 @@
 import { Redis } from '@upstash/redis';
-import { createUserSession, migrateLegacyUser, getDeviceType } from '../session-helper.js';
+import { randomBytes } from 'crypto';
 
 const redis = new Redis({
   url: process.env.KV_REST_API_URL,
@@ -51,26 +51,18 @@ export default async function handler(req, res) {
       return res.status(403).json({ error: 'Premium access not active' });
     }
 
-    // Check if user needs migration from legacy single-session
-    const userAgent = req.headers['user-agent'] || '';
-    let sessionInfo;
-
-    if (userData.session_token) {
-      // Migrate legacy user to multi-session system
-      console.log('🔄 Migrating legacy user to multi-session:', email);
-      const migratedToken = await migrateLegacyUser(redis, email, userData.session_token, userAgent);
-      sessionInfo = {
-        sessionToken: migratedToken,
-        deviceType: getDeviceType(userAgent),
-        created: parseInt(userData.last_active || Date.now()),
-        expires: Date.now() + (30 * 24 * 60 * 60 * 1000)
-      };
-    } else {
-      // Create new session (multi-session system)
-      sessionInfo = await createUserSession(redis, email, userAgent);
-    }
-
     const now = Date.now();
+
+    // Ensure user has permanent access token (SLC approach)
+    let accessToken = userData.access_token;
+    if (!accessToken) {
+      // Generate permanent access token for user
+      accessToken = randomBytes(32).toString('hex');
+      await redis.hset(userKey, {
+        access_token: accessToken
+      });
+      console.log('✅ Generated permanent access token for user:', email);
+    }
 
     // Update user login count and last active
     await redis.hset(userKey, {
@@ -78,14 +70,20 @@ export default async function handler(req, res) {
       login_count: (parseInt(userData.login_count || '0') + 1).toString()
     });
 
-    // Prepare session data for frontend
+    // Clean up any legacy session data (migration)
+    if (userData.session_token) {
+      await redis.hdel(userKey, 'session_token');
+      console.log('🗑️ Cleaned up legacy session_token for:', email);
+    }
+
+    // Prepare session data for frontend (simple permanent token)
     const sessionData = {
       email: email,
-      token: userData.access_token, // Use the access token from webhook
-      sessionToken: sessionInfo.sessionToken,
+      token: accessToken,
+      sessionToken: accessToken, // Use same token for compatibility
       created: now,
       lastActive: now,
-      expires: sessionInfo.expires,
+      expires: now + (365 * 24 * 60 * 60 * 1000), // 1 year (effectively permanent)
       firstName: userData.first_name || '',
       tier: userData.tier || 'early_adopter',
       paymentType: userData.payment_type || 'lifetime',

@@ -1,5 +1,4 @@
 import { Redis } from '@upstash/redis';
-import { validateSession } from '../session-helper.js';
 
 const redis = new Redis({
   url: process.env.KV_REST_API_URL,
@@ -18,34 +17,68 @@ export default async function handler(req, res) {
       return res.status(401).json({ error: 'Authentication required' });
     }
 
-    const sessionToken = authHeader.substring(7);
+    const accessToken = authHeader.substring(7);
 
-    console.log('🔍 Validating session:', sessionToken.substring(0, 8) + '...');
+    console.log('🔍 Validating access token:', accessToken.substring(0, 8) + '...');
 
-    // Use new multi-session validation
-    const result = await validateSession(redis, sessionToken);
+    // Handle development sessions
+    if (accessToken.startsWith('dev-session-token-')) {
+      console.log('🚧 Development session validation');
+      return res.status(200).json({
+        valid: true,
+        user: {
+          email: 'dev@signal-noise.test',
+          firstName: 'Dev User',
+          tier: 'early_adopter',
+          paymentType: 'lifetime',
+          lastActive: Date.now(),
+          expires: Date.now() + (365 * 24 * 60 * 60 * 1000),
+          syncedFromLocal: null
+        }
+      });
+    }
 
-    if (!result.valid) {
-      console.log('❌ Session validation failed:', result.error);
-      return res.status(result.error === 'Session expired' ? 401 : 404).json({
-        error: result.error,
+    // Simple token validation: find user with matching access_token
+    const userKeys = await redis.keys('sn:u:*');
+    let user = null;
+
+    for (const userKey of userKeys) {
+      if (userKey.includes(':sessions')) continue; // Skip session lists
+
+      const userData = await redis.hgetall(userKey);
+      if (userData.access_token === accessToken && userData.status === 'active') {
+        user = userData;
+
+        // Update last active
+        await redis.hset(userKey, {
+          last_active: Date.now().toString()
+        });
+
+        break;
+      }
+    }
+
+    if (!user) {
+      console.log('❌ Invalid access token');
+      return res.status(404).json({
+        error: 'Invalid access token',
         valid: false
       });
     }
 
-    console.log('✅ Session validated for:', result.user.email, 'on', result.session.deviceType);
+    console.log('✅ Access token validated for:', user.email);
 
-    // Return session validation result
+    // Return validation result
     return res.status(200).json({
       valid: true,
       user: {
-        email: result.user.email,
-        firstName: result.user.firstName,
-        tier: result.user.tier,
-        paymentType: result.user.paymentType,
-        lastActive: result.session.lastActive,
-        expires: result.session.expires,
-        syncedFromLocal: result.user.syncedFromLocal
+        email: user.email,
+        firstName: user.first_name || '',
+        tier: user.tier || 'early_adopter',
+        paymentType: user.payment_type || 'lifetime',
+        lastActive: Date.now(),
+        expires: Date.now() + (365 * 24 * 60 * 60 * 1000), // Effectively permanent
+        syncedFromLocal: user.synced_from_local || null
       }
     });
 
