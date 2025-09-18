@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="#000000"
+    android:background="@drawable/professional_glow"
     android:padding="12dp">
 
     <!-- Main Ratio -->

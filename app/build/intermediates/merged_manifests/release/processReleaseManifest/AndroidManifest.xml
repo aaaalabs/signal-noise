@@ -181,19 +181,19 @@
                 android:resource="@xml/widget_quantum_info" />
         </receiver>
 
-        <!-- KWGT-QUALITY CRISP TYPOGRAPHY v4.0 -->
+        <!-- PROFESSIONAL GLOW TYPOGRAPHY v5.0 -->
 
         <receiver
-            android:name="app.signalnoise.twa.widget.N"
+            android:name="app.signalnoise.twa.widget.PWinner"
             android:exported="true"
-            android:label="N" >
+            android:label="PWinner" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/widget_nothing_info" />
+                android:resource="@xml/widget_perfect_info" />
         </receiver>
         <receiver
             android:name="app.signalnoise.twa.widget.E"
@@ -204,32 +204,8 @@
             </intent-filter>
 
             <meta-data
-                android:name="android:appwidget.provider"
+                android:name="android.appwidget.provider"
                 android:resource="@xml/widget_elegant_info" />
-        </receiver>
-        <receiver
-            android:name="app.signalnoise.twa.widget.Z"
-            android:exported="true"
-            android:label="Z" >
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_zen_info" />
-        </receiver>
-        <receiver
-            android:name="app.signalnoise.twa.widget.P"
-            android:exported="true"
-            android:label="P" >
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_perfect_info" />
         </receiver>
         <receiver
             android:name="app.signalnoise.twa.widget.X"

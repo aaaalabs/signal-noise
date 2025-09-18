@@ -208,6 +208,10 @@
         "source": "app.signalnoise.twa.app-main-26:/drawable-xxxhdpi/splash_icon.png"
     },
     {
+        "merged": "app.signalnoise.twa.app-release-25:/drawable_professional_glow.xml.flat",
+        "source": "app.signalnoise.twa.app-main-26:/drawable/professional_glow.xml"
+    },
+    {
         "merged": "app.signalnoise.twa.app-release-25:/layout_widget_simple_fix.xml.flat",
         "source": "app.signalnoise.twa.app-main-26:/layout/widget_simple_fix.xml"
     },

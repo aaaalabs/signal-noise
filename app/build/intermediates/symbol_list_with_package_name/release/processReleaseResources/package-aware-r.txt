@@ -664,6 +664,7 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+drawable professional_glow
 drawable ratio_background
 drawable ratio_circle_bg
 drawable shortcut_legacy_background

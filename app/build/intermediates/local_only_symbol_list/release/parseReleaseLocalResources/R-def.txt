@@ -21,6 +21,7 @@ drawable gradient_drift
 drawable gradient_flow
 drawable gradient_focus
 drawable ic_notification_icon
+drawable professional_glow
 drawable ratio_background
 drawable ratio_circle_bg
 drawable shortcut_legacy_background

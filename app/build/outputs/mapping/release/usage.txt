@@ -7677,6 +7677,7 @@ app.signalnoise.twa.R$drawable:
     public static int ai_insight_bg
     public static int ai_pulse_dot
     public static int ic_notification_icon
+    public static int professional_glow
     public static int ratio_background
     public static int ratio_circle_bg
     public static int shortcut_legacy_background
@@ -7712,6 +7713,7 @@ app.signalnoise.twa.R$id:
     public static int minimal_text
     public static int noise_count
     public static int noise_detail
+    public static int nothing_text
     public static int pattern_chart
     public static int peak_hour
     public static int progress_arc
@@ -7749,6 +7751,7 @@ app.signalnoise.twa.R$id:
     public static int widget_speed
     public static int widget_status
     public static int widget_title
+    public static int zen_number
     private void <init>()
 app.signalnoise.twa.R$integer
 app.signalnoise.twa.R$layout:
@@ -7758,6 +7761,7 @@ app.signalnoise.twa.R$layout:
     public static int widget_gradient
     public static int widget_minimal
     public static int widget_minimal_test
+    public static int widget_nothing
     public static int widget_signal_noise
     public static int widget_signal_noise_2x1
     public static int widget_signal_wave
@@ -7771,6 +7775,7 @@ app.signalnoise.twa.R$layout:
     public static int widget_sn2x1r
     public static int widget_wave
     public static int widget_working
+    public static int widget_zen
     private void <init>()
 app.signalnoise.twa.R$mipmap
 app.signalnoise.twa.R$string
@@ -7792,6 +7797,7 @@ app.signalnoise.twa.widget.DebugWidget:
     public void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[])
     private void updateDebugWidget(android.content.Context,android.appwidget.AppWidgetManager,int)
 app.signalnoise.twa.widget.MinimalTestWidget
+app.signalnoise.twa.widget.P
 app.signalnoise.twa.widget.Q:
     private static final java.lang.String PREFS_NAME
 app.signalnoise.twa.widget.QWinner
