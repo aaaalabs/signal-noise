@@ -181,67 +181,67 @@
                 android:resource="@xml/widget_quantum_info" />
         </receiver>
 
-        <!-- APPLE-GRADE MINIMAL v3.0 - Jony Ive Approved -->
+        <!-- KWGT-QUALITY CRISP TYPOGRAPHY v4.0 -->
 
         <receiver
-            android:name="app.signalnoise.twa.widget.M"
+            android:name="app.signalnoise.twa.widget.N"
             android:exported="true"
-            android:label="M" >
+            android:label="N" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/widget_minimal_info" />
+                android:resource="@xml/widget_nothing_info" />
         </receiver>
         <receiver
-            android:name="app.signalnoise.twa.widget.T"
+            android:name="app.signalnoise.twa.widget.E"
             android:exported="true"
-            android:label="T" >
+            android:label="E" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_sn2x1p_info" />
+                android:name="android:appwidget.provider"
+                android:resource="@xml/widget_elegant_info" />
         </receiver>
         <receiver
-            android:name="app.signalnoise.twa.widget.S"
+            android:name="app.signalnoise.twa.widget.Z"
             android:exported="true"
-            android:label="S" >
+            android:label="Z" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/widget_sn2x1p_info" />
+                android:resource="@xml/widget_zen_info" />
         </receiver>
         <receiver
-            android:name="app.signalnoise.twa.widget.G"
+            android:name="app.signalnoise.twa.widget.P"
             android:exported="true"
-            android:label="G" >
+            android:label="P" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/widget_sn2x1p_info" />
+                android:resource="@xml/widget_perfect_info" />
         </receiver>
         <receiver
-            android:name="app.signalnoise.twa.widget.A"
+            android:name="app.signalnoise.twa.widget.X"
             android:exported="true"
-            android:label="A" >
+            android:label="X" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/widget_sn2x1p_info" />
+                android:resource="@xml/widget_exceptional_info" />
         </receiver>
 
         <!-- Widget Update Receiver -->

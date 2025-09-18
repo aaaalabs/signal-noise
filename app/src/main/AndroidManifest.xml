@@ -185,31 +185,31 @@
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_quantum_info" />
         </receiver>
 
-        <!-- APPLE-GRADE MINIMAL v3.0 - Jony Ive Approved -->
+        <!-- KWGT-QUALITY CRISP TYPOGRAPHY v4.0 -->
 
-        <receiver android:name=".widget.M" android:exported="true" android:label="M">
+        <receiver android:name=".widget.N" android:exported="true" android:label="N">
             <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_minimal_info" />
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_nothing_info" />
         </receiver>
 
-        <receiver android:name=".widget.T" android:exported="true" android:label="T">
+        <receiver android:name=".widget.E" android:exported="true" android:label="E">
             <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_sn2x1p_info" />
+            <meta-data android:name="android:appwidget.provider" android:resource="@xml/widget_elegant_info" />
         </receiver>
 
-        <receiver android:name=".widget.S" android:exported="true" android:label="S">
+        <receiver android:name=".widget.Z" android:exported="true" android:label="Z">
             <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_sn2x1p_info" />
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_zen_info" />
         </receiver>
 
-        <receiver android:name=".widget.G" android:exported="true" android:label="G">
+        <receiver android:name=".widget.P" android:exported="true" android:label="P">
             <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_sn2x1p_info" />
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_perfect_info" />
         </receiver>
 
-        <receiver android:name=".widget.A" android:exported="true" android:label="A">
+        <receiver android:name=".widget.X" android:exported="true" android:label="X">
             <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_sn2x1p_info" />
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_exceptional_info" />
         </receiver>
 
         <!-- Widget Update Receiver -->

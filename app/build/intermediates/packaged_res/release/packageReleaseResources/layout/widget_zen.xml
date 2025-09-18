@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/zen_number"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:gravity="center"
+    android:text="87"
+    android:textColor="#34C759"
+    android:textSize="84sp"
+    android:fontFamily="sans-serif-thin"
+    android:letterSpacing="-0.1"
+    android:shadowColor="#000000"
+    android:shadowDx="0"
+    android:shadowDy="0"
+    android:shadowRadius="0" />

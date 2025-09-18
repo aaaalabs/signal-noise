@@ -640,6 +640,9 @@ drawable btn_radio_off_mtrl
 drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
+drawable gradient_drift
+drawable gradient_flow
+drawable gradient_focus
 drawable ic_call_answer
 drawable ic_call_answer_low
 drawable ic_call_answer_video
@@ -772,6 +775,7 @@ id dialog_button
 id disableHome
 id edit_query
 id edit_text_id
+id elegant_container
 id end
 id expand_activities_button
 id expanded_menu
@@ -808,6 +812,7 @@ id noise_count
 id noise_detail
 id none
 id normal
+id nothing_text
 id notification_background
 id notification_main_column
 id notification_main_column_container
@@ -816,6 +821,10 @@ id on
 id parentPanel
 id pattern_chart
 id peak_hour
+id perfect_noise
+id perfect_ratio
+id perfect_signal
+id perfect_trend
 id progress_arc
 id progress_circular
 id progress_horizontal
@@ -823,6 +832,8 @@ id quantum_field
 id quantum_ratio
 id radio
 id ratio_large
+id ratio_main
+id ratio_percent
 id ratio_text
 id ratio_text_2x2
 id report_drawn
@@ -849,6 +860,7 @@ id showHome
 id showTitle
 id signal_count
 id signal_detail
+id signal_label
 id simple_ratio
 id simple_status
 id spacer
@@ -923,6 +935,10 @@ id widget_status
 id widget_title
 id withText
 id wrap_content
+id x_level
+id x_ratio
+id x_state
+id zen_number
 integer abc_config_activityDefaultDur
 integer abc_config_activityShortDur
 integer cancel_button_image_alpha
@@ -982,10 +998,14 @@ layout support_simple_spinner_dropdown_item
 layout widget_1x1
 layout widget_1x1_compact
 layout widget_debug
+layout widget_elegant
+layout widget_exceptional
 layout widget_flow
 layout widget_gradient
 layout widget_minimal
 layout widget_minimal_test
+layout widget_nothing
+layout widget_perfect
 layout widget_quantum
 layout widget_signal_noise
 layout widget_signal_noise_2x1
@@ -1001,6 +1021,7 @@ layout widget_sn2x1p
 layout widget_sn2x1r
 layout widget_wave
 layout widget_working
+layout widget_zen
 mipmap ic_launcher
 mipmap ic_maskable
 string abc_action_bar_home_description
@@ -1475,10 +1496,14 @@ xml filepaths
 xml image_share_filepaths
 xml shortcuts
 xml widget_debug_info
+xml widget_elegant_info
+xml widget_exceptional_info
 xml widget_flow_info
 xml widget_info
 xml widget_minimal_info
 xml widget_minimal_test_info
+xml widget_nothing_info
+xml widget_perfect_info
 xml widget_quantum_info
 xml widget_signal_noise_info
 xml widget_signal_wave_info
@@ -1491,3 +1516,4 @@ xml widget_sn4x1r_info
 xml widget_ultra_simple_info
 xml widget_wave_info
 xml widget_working_info
+xml widget_zen_info

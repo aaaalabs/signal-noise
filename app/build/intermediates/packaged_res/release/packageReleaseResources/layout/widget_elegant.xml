@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/elegant_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/gradient_focus"
+    android:padding="16dp">
+
+    <!-- Massive Typography -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="bottom">
+
+        <TextView
+            android:id="@+id/ratio_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="87"
+            android:textColor="#FFFFFF"
+            android:textSize="72sp"
+            android:fontFamily="sans-serif-thin"
+            android:letterSpacing="-0.05" />
+
+        <TextView
+            android:id="@+id/ratio_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="%"
+            android:textColor="#FFFFFF"
+            android:textSize="32sp"
+            android:fontFamily="sans-serif-light"
+            android:layout_marginLeft="4dp" />
+
+    </LinearLayout>
+
+    <!-- Subtle Label -->
+    <TextView
+        android:id="@+id/signal_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Signal Rate"
+        android:textColor="#CCCCCC"
+        android:textSize="12sp"
+        android:fontFamily="sans-serif"
+        android:letterSpacing="0.1"
+        android:layout_marginTop="8dp" />
+
+</LinearLayout>

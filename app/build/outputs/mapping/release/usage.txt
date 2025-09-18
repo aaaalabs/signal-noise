@@ -7672,7 +7672,23 @@ app.signalnoise.twa.BasicWidget
 app.signalnoise.twa.JavaScriptInterface
 app.signalnoise.twa.R$bool
 app.signalnoise.twa.R$color
-app.signalnoise.twa.R$drawable
+app.signalnoise.twa.R$drawable:
+    public static int ai_icon
+    public static int ai_insight_bg
+    public static int ai_pulse_dot
+    public static int ic_notification_icon
+    public static int ratio_background
+    public static int ratio_circle_bg
+    public static int shortcut_legacy_background
+    public static int shortcut_noise
+    public static int shortcut_signal
+    public static int splash
+    public static int splash_icon
+    public static int widget_background
+    public static int widget_background_gradient
+    public static int widget_fast_background
+    public static int widget_signal_wave_bg
+    private void <init>()
 app.signalnoise.twa.R$id:
     public static int ai_container
     public static int ai_insight
@@ -7692,6 +7708,7 @@ app.signalnoise.twa.R$id:
     public static int flow_state
     public static int hourly_pattern
     public static int last_update
+    public static int minimal_field
     public static int minimal_text
     public static int noise_count
     public static int noise_detail
@@ -7739,6 +7756,7 @@ app.signalnoise.twa.R$layout:
     public static int widget_debug
     public static int widget_flow
     public static int widget_gradient
+    public static int widget_minimal
     public static int widget_minimal_test
     public static int widget_signal_noise
     public static int widget_signal_noise_2x1
@@ -7773,9 +7791,6 @@ app.signalnoise.twa.widget.DebugWidget:
     public void <init>()
     public void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[])
     private void updateDebugWidget(android.content.Context,android.appwidget.AppWidgetManager,int)
-app.signalnoise.twa.widget.E
-app.signalnoise.twa.widget.M:
-    private static final java.lang.String PREFS_NAME
 app.signalnoise.twa.widget.MinimalTestWidget
 app.signalnoise.twa.widget.Q:
     private static final java.lang.String PREFS_NAME
