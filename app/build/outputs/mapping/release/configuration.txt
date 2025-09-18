@@ -8,10 +8,9 @@
 -keep class app.signalnoise.twa.LauncherActivity { <init>(); }
 -keep class app.signalnoise.twa.WidgetUpdateService { <init>(); }
 -keep class app.signalnoise.twa.widget.DataPollingService { <init>(); }
--keep class app.signalnoise.twa.widget.Q { <init>(); }
--keep class app.signalnoise.twa.widget.W { <init>(); }
+-keep class app.signalnoise.twa.widget.F { <init>(); }
+-keep class app.signalnoise.twa.widget.QWinner { <init>(); }
 -keep class app.signalnoise.twa.widget.WidgetUpdateReceiver { <init>(); }
--keep class app.signalnoise.twa.widget.WinnerColor { <init>(); }
 -keep class app.signalnoise.twa.widget.WinnerProgress30s { <init>(); }
 -keep class com.google.androidbrowserhelper.trusted.FocusActivity { <init>(); }
 -keep class com.google.androidbrowserhelper.trusted.ManageDataLauncherActivity { <init>(); }

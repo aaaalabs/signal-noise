@@ -7717,6 +7717,9 @@ app.signalnoise.twa.R$id:
     public static int wave_canvas
     public static int wave_canvas_2x2
     public static int wave_canvas_large
+    public static int wave_field
+    public static int wave_ratio
+    public static int wave_type
     public static int widget_container_2x2
     public static int widget_container_4x2
     public static int widget_label
@@ -7744,6 +7747,7 @@ app.signalnoise.twa.R$layout:
     public static int widget_simple_fix
     public static int widget_sn1x1f
     public static int widget_sn2x1r
+    public static int widget_wave
     public static int widget_working
     private void <init>()
 app.signalnoise.twa.R$mipmap
@@ -7757,7 +7761,6 @@ app.signalnoise.twa.WidgetUpdateService:
 app.signalnoise.twa.widget.A
 app.signalnoise.twa.widget.B
 app.signalnoise.twa.widget.C
-app.signalnoise.twa.widget.ColorAdaptive
 app.signalnoise.twa.widget.D
 app.signalnoise.twa.widget.DataPollingService:
     private static final long POLL_INTERVAL
@@ -7768,8 +7771,11 @@ app.signalnoise.twa.widget.DebugWidget:
     public void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[])
     private void updateDebugWidget(android.content.Context,android.appwidget.AppWidgetManager,int)
 app.signalnoise.twa.widget.E
+app.signalnoise.twa.widget.F:
+    private static final java.lang.String PREFS_NAME
 app.signalnoise.twa.widget.MinimalTestWidget
-app.signalnoise.twa.widget.Q:
+app.signalnoise.twa.widget.Q
+app.signalnoise.twa.widget.QWinner:
     private static final java.lang.String PREFS_NAME
 app.signalnoise.twa.widget.RedisDataFetcher:
     private static final java.lang.String API_URL
@@ -7873,8 +7879,6 @@ app.signalnoise.twa.widget.SignalWaveWidgetProvider
 app.signalnoise.twa.widget.SimpleSignalWaveProvider
 app.signalnoise.twa.widget.TestWidget
 app.signalnoise.twa.widget.UltraSimpleWidget
-app.signalnoise.twa.widget.W:
-    private static final java.lang.String PREFS_NAME
 app.signalnoise.twa.widget.WidgetUpdateHelper:
     private static final java.lang.String TAG
     public void <init>()
@@ -7882,9 +7886,7 @@ app.signalnoise.twa.widget.WidgetUpdateReceiver:
     public static final java.lang.String ACTION_UPDATE_WIDGET
     public static final java.lang.String EXTRA_IS_SIGNAL
     public static final java.lang.String EXTRA_RATIO
-app.signalnoise.twa.widget.WinnerColor:
-    private static final java.lang.String PREFS_NAME
-app.signalnoise.twa.widget.WinnerColorPsych
+app.signalnoise.twa.widget.WinnerColor
 app.signalnoise.twa.widget.WinnerProgress30s:
     private static final java.lang.String ACTION_AUTO_UPDATE
     private static final java.lang.String PREFS_NAME

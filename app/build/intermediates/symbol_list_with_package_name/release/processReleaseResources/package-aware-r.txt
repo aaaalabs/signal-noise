@@ -777,6 +777,9 @@ id expand_activities_button
 id expanded_menu
 id fallback_container
 id fallback_text
+id flow_field
+id flow_ratio
+id flow_state
 id forever
 id fragment_container_view_tag
 id group_divider
@@ -978,6 +981,7 @@ layout support_simple_spinner_dropdown_item
 layout widget_1x1
 layout widget_1x1_compact
 layout widget_debug
+layout widget_flow
 layout widget_gradient
 layout widget_minimal_test
 layout widget_quantum
@@ -1469,6 +1473,7 @@ xml filepaths
 xml image_share_filepaths
 xml shortcuts
 xml widget_debug_info
+xml widget_flow_info
 xml widget_info
 xml widget_minimal_test_info
 xml widget_quantum_info

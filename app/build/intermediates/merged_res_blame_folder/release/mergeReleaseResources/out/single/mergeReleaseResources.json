@@ -40,6 +40,10 @@
         "source": "app.signalnoise.twa.app-main-26:/layout/widget_gradient.xml"
     },
     {
+        "merged": "app.signalnoise.twa.app-release-25:/layout_widget_flow.xml.flat",
+        "source": "app.signalnoise.twa.app-main-26:/layout/widget_flow.xml"
+    },
+    {
         "merged": "app.signalnoise.twa.app-release-25:/xml_widget_ultra_simple_info.xml.flat",
         "source": "app.signalnoise.twa.app-main-26:/xml/widget_ultra_simple_info.xml"
     },
@@ -130,6 +134,10 @@
     {
         "merged": "app.signalnoise.twa.app-release-25:/drawable-anydpi_shortcut_legacy_background.xml.flat",
         "source": "app.signalnoise.twa.app-main-26:/drawable-anydpi/shortcut_legacy_background.xml"
+    },
+    {
+        "merged": "app.signalnoise.twa.app-release-25:/xml_widget_flow_info.xml.flat",
+        "source": "app.signalnoise.twa.app-main-26:/xml/widget_flow_info.xml"
     },
     {
         "merged": "app.signalnoise.twa.app-release-25:/drawable_ratio_circle_bg.xml.flat",

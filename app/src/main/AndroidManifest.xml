@@ -179,28 +179,16 @@
                 android:resource="@xml/widget_sn2x1p_info" />
         </receiver>
 
-        <!-- WINNER: Color Psychology (proven live sync + sophistication) -->
-        <receiver android:name=".widget.WinnerColor"
-            android:exported="true"
-            android:label="WinnerColor">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_sn2x1p_info" />
-        </receiver>
-
-        <!-- REVOLUTIONARY VISUAL BREAKTHROUGH v2.0 -->
-
-        <receiver android:name=".widget.Q" android:exported="true" android:label="Q">
+        <!-- WINNER: Quantum Particles (proven revolutionary visual) -->
+        <receiver android:name=".widget.QWinner" android:exported="true" android:label="QWinner">
             <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_quantum_info" />
         </receiver>
 
-        <receiver android:name=".widget.W" android:exported="true" android:label="W">
+        <!-- REVOLUTIONARY: Flow State Meditation Guide -->
+        <receiver android:name=".widget.F" android:exported="true" android:label="F">
             <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_wave_info" />
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_flow_info" />
         </receiver>
 
         <!-- Widget Update Receiver -->

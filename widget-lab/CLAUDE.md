@@ -368,3 +368,28 @@ android {
 ---
 
 *"The best design is as little design as possible" - Dieter Rams*
+
+## 🔄 MANDATORY APK DEPLOYMENT WORKFLOW
+
+**After EVERY successful APK build, follow this EXACT sequence:**
+
+### 1. Commit APK Build
+```bash
+git add -A
+git commit -m "claude: [widget_name] APK - [filename] - [brief_description]"
+```
+
+### 2. Update Changelog
+- Add entry to widget-lab/changelog.md with version, changes, learnings, APK filename
+
+### 3. Update Plan
+- Update widget-lab/plan.md with current batch status, winner selection, APK location
+
+### 4. Documentation Commit
+```bash
+git add -A
+git commit -m "claude: update documentation for [APK_version]"
+```
+
+**NO EXCEPTIONS - This prevents losing progress and ensures complete project tracking.**
+
