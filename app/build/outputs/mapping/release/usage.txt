@@ -7754,7 +7754,11 @@ app.signalnoise.twa.SignalNoiseDataBridge
 app.signalnoise.twa.WidgetUpdateService:
     private static final java.lang.String TAG
     private static final long UPDATE_INTERVAL
+app.signalnoise.twa.widget.A
+app.signalnoise.twa.widget.B
+app.signalnoise.twa.widget.C
 app.signalnoise.twa.widget.ColorAdaptive
+app.signalnoise.twa.widget.D
 app.signalnoise.twa.widget.DataPollingService:
     private static final long POLL_INTERVAL
     private static final java.lang.String PREFS_NAME
@@ -7763,7 +7767,10 @@ app.signalnoise.twa.widget.DebugWidget:
     public void <init>()
     public void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[])
     private void updateDebugWidget(android.content.Context,android.appwidget.AppWidgetManager,int)
+app.signalnoise.twa.widget.E
 app.signalnoise.twa.widget.MinimalTestWidget
+app.signalnoise.twa.widget.Q:
+    private static final java.lang.String PREFS_NAME
 app.signalnoise.twa.widget.RedisDataFetcher:
     private static final java.lang.String API_URL
     private static final java.lang.String PREFS_NAME
@@ -7873,8 +7880,9 @@ app.signalnoise.twa.widget.WidgetUpdateReceiver:
     public static final java.lang.String ACTION_UPDATE_WIDGET
     public static final java.lang.String EXTRA_IS_SIGNAL
     public static final java.lang.String EXTRA_RATIO
-app.signalnoise.twa.widget.WinnerColorPsych:
+app.signalnoise.twa.widget.WinnerColor:
     private static final java.lang.String PREFS_NAME
+app.signalnoise.twa.widget.WinnerColorPsych
 app.signalnoise.twa.widget.WinnerProgress30s:
     private static final java.lang.String ACTION_AUTO_UPDATE
     private static final java.lang.String PREFS_NAME

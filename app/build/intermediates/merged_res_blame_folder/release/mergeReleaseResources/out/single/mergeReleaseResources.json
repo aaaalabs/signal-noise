@@ -20,6 +20,10 @@
         "source": "app.signalnoise.twa.app-main-26:/layout/widget_signal_wave_fixed.xml"
     },
     {
+        "merged": "app.signalnoise.twa.app-release-25:/layout_widget_quantum.xml.flat",
+        "source": "app.signalnoise.twa.app-main-26:/layout/widget_quantum.xml"
+    },
+    {
         "merged": "app.signalnoise.twa.app-release-25:/xml_widget_signal_wave_info.xml.flat",
         "source": "app.signalnoise.twa.app-main-26:/xml/widget_signal_wave_info.xml"
     },
@@ -62,6 +66,10 @@
     {
         "merged": "app.signalnoise.twa.app-release-25:/mipmap-anydpi-v26_ic_launcher.xml.flat",
         "source": "app.signalnoise.twa.app-main-26:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "app.signalnoise.twa.app-release-25:/xml_widget_quantum_info.xml.flat",
+        "source": "app.signalnoise.twa.app-main-26:/xml/widget_quantum_info.xml"
     },
     {
         "merged": "app.signalnoise.twa.app-release-25:/drawable_widget_background_gradient.xml.flat",

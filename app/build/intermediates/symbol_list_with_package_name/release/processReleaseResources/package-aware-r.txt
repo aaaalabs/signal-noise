@@ -815,6 +815,8 @@ id peak_hour
 id progress_arc
 id progress_circular
 id progress_horizontal
+id quantum_field
+id quantum_ratio
 id radio
 id ratio_large
 id ratio_text
@@ -975,6 +977,7 @@ layout widget_1x1_compact
 layout widget_debug
 layout widget_gradient
 layout widget_minimal_test
+layout widget_quantum
 layout widget_signal_noise
 layout widget_signal_noise_2x1
 layout widget_signal_wave
@@ -1464,6 +1467,7 @@ xml shortcuts
 xml widget_debug_info
 xml widget_info
 xml widget_minimal_test_info
+xml widget_quantum_info
 xml widget_signal_noise_info
 xml widget_signal_wave_info
 xml widget_sn1x1f_info

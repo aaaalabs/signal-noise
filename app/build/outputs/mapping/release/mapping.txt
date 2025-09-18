@@ -3,8 +3,8 @@
 # min_api: 21
 # common_typos_disable
 # {"id":"com.android.tools.r8.mapping","version":"2.2"}
-# pg_map_id: 1df7265
-# pg_map_hash: SHA-256 1df726541fc8469b25b8be1ec0c1c4794ed36fbf524cc95cc47d265f87e03882
+# pg_map_id: 4cebc39
+# pg_map_hash: SHA-256 4cebc39fa20e16c6c417af5955512b0700f51a7ac886e35273a23ca230160565
 android.support.customtabs.ICustomTabsCallback -> a.a:
 # {"id":"sourceFile","fileName":"ICustomTabsCallback.java"}
     java.lang.String DESCRIPTOR -> a
@@ -22731,12 +22731,15 @@ app.signalnoise.twa.LauncherActivity -> app.signalnoise.twa.LauncherActivity:
     11:23:void onResume():92:92 -> onResume
     24:27:void onResume():96:96 -> onResume
 app.signalnoise.twa.R$id -> I.a:
-    int widget_container -> a
-    int widget_progress -> b
-    int widget_ratio -> c
+    int quantum_field -> a
+    int quantum_ratio -> b
+    int widget_container -> c
+    int widget_progress -> d
+    int widget_ratio -> e
 app.signalnoise.twa.R$layout -> I.b:
     int widget_1x1 -> a
-    int widget_sn2x1p -> b
+    int widget_quantum -> b
+    int widget_sn2x1p -> c
 app.signalnoise.twa.WidgetUpdateService -> app.signalnoise.twa.WidgetUpdateService:
 # {"id":"sourceFile","fileName":"WidgetUpdateService.java"}
     android.os.Handler handler -> a
@@ -22812,50 +22815,6 @@ app.signalnoise.twa.WidgetUpdateService$3 -> app.signalnoise.twa.WidgetUpdateSer
     120:148:void onReceiveValue(java.lang.String):131:131 -> a
     149:154:void onReceiveValue(java.lang.String):134:134 -> a
     1:6:void onReceiveValue(java.lang.Object):101:101 -> onReceiveValue
-app.signalnoise.twa.widget.A -> app.signalnoise.twa.widget.A:
-# {"id":"sourceFile","fileName":"A.java"}
-    1:4:void <init>():9:9 -> <init>
-    1:7:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):12:12 -> onUpdate
-    8:13:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):13:13 -> onUpdate
-    14:21:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):14:14 -> onUpdate
-    22:32:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):15:15 -> onUpdate
-    33:59:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):16:16 -> onUpdate
-    60:66:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):17:17 -> onUpdate
-    67:72:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):18:18 -> onUpdate
-    73:78:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):20:20 -> onUpdate
-app.signalnoise.twa.widget.B -> app.signalnoise.twa.widget.B:
-# {"id":"sourceFile","fileName":"B.java"}
-    1:4:void <init>():9:9 -> <init>
-    1:7:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):12:12 -> onUpdate
-    8:13:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):13:13 -> onUpdate
-    14:21:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):14:14 -> onUpdate
-    22:32:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):15:15 -> onUpdate
-    33:59:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):16:16 -> onUpdate
-    60:66:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):17:17 -> onUpdate
-    67:72:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):18:18 -> onUpdate
-    73:78:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):20:20 -> onUpdate
-app.signalnoise.twa.widget.C -> app.signalnoise.twa.widget.C:
-# {"id":"sourceFile","fileName":"C.java"}
-    1:4:void <init>():9:9 -> <init>
-    1:7:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):12:12 -> onUpdate
-    8:13:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):13:13 -> onUpdate
-    14:21:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):14:14 -> onUpdate
-    22:32:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):15:15 -> onUpdate
-    33:59:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):16:16 -> onUpdate
-    60:66:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):17:17 -> onUpdate
-    67:72:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):18:18 -> onUpdate
-    73:78:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):20:20 -> onUpdate
-app.signalnoise.twa.widget.D -> app.signalnoise.twa.widget.D:
-# {"id":"sourceFile","fileName":"D.java"}
-    1:4:void <init>():9:9 -> <init>
-    1:7:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):12:12 -> onUpdate
-    8:13:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):13:13 -> onUpdate
-    14:21:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):14:14 -> onUpdate
-    22:32:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):15:15 -> onUpdate
-    33:59:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):16:16 -> onUpdate
-    60:66:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):17:17 -> onUpdate
-    67:72:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):18:18 -> onUpdate
-    73:78:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):20:20 -> onUpdate
 app.signalnoise.twa.widget.DataPollingService -> app.signalnoise.twa.widget.DataPollingService:
 # {"id":"sourceFile","fileName":"DataPollingService.java"}
     android.os.Handler handler -> a
@@ -22893,17 +22852,42 @@ app.signalnoise.twa.widget.DataPollingService$1 -> app.signalnoise.twa.widget.Da
     6:17:void run():38:38 -> run
 app.signalnoise.twa.widget.DebugWidget -> J.a:
 # {"id":"sourceFile","fileName":"DebugWidget.java"}
-app.signalnoise.twa.widget.E -> app.signalnoise.twa.widget.E:
-# {"id":"sourceFile","fileName":"E.java"}
-    1:4:void <init>():9:9 -> <init>
-    1:7:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):12:12 -> onUpdate
-    8:13:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):13:13 -> onUpdate
-    14:21:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):14:14 -> onUpdate
-    22:32:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):15:15 -> onUpdate
-    33:59:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):16:16 -> onUpdate
-    60:66:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):17:17 -> onUpdate
-    67:72:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):18:18 -> onUpdate
-    73:78:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):20:20 -> onUpdate
+app.signalnoise.twa.widget.Q -> app.signalnoise.twa.widget.Q:
+# {"id":"sourceFile","fileName":"Q.java"}
+    1:4:void <init>():21:21 -> <init>
+    7:12:android.graphics.Bitmap generateQuantumField(int,int,int):64:64 -> a
+    13:17:android.graphics.Bitmap generateQuantumField(int,int,int):65:65 -> a
+    18:26:android.graphics.Bitmap generateQuantumField(int,int,int):68:68 -> a
+    27:32:android.graphics.Bitmap generateQuantumField(int,int,int):70:70 -> a
+    33:35:android.graphics.Bitmap generateQuantumField(int,int,int):71:71 -> a
+    36:56:android.graphics.Bitmap generateQuantumField(int,int,int):73:73 -> a
+    57:81:android.graphics.Bitmap generateQuantumField(int,int,int):81:81 -> a
+    82:109:android.graphics.Bitmap generateQuantumField(int,int,int):87:87 -> a
+    110:123:android.graphics.Bitmap generateQuantumField(int,int,int):88:88 -> a
+    124:147:android.graphics.Bitmap generateQuantumField(int,int,int):89:89 -> a
+    148:160:android.graphics.Bitmap generateQuantumField(int,int,int):93:93 -> a
+    161:168:android.graphics.Bitmap generateQuantumField(int,int,int):94:94 -> a
+    169:175:android.graphics.Bitmap generateQuantumField(int,int,int):98:98 -> a
+    176:195:android.graphics.Bitmap generateQuantumField(int,int,int):99:99 -> a
+    196:205:android.graphics.Bitmap generateQuantumField(int,int,int):103:103 -> a
+    206:219:android.graphics.Bitmap generateQuantumField(int,int,int):104:104 -> a
+    220:231:android.graphics.Bitmap generateQuantumField(int,int,int):110:110 -> a
+    232:238:android.graphics.Bitmap generateQuantumField(int,int,int):111:111 -> a
+    239:252:android.graphics.Bitmap generateQuantumField(int,int,int):112:112 -> a
+    1:7:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):34:34 -> b
+    8:17:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):35:35 -> b
+    18:21:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):38:38 -> b
+    22:32:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):40:40 -> b
+    33:37:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):43:43 -> b
+    38:64:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):46:46 -> b
+    65:68:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):48:48 -> b
+    69:79:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):52:52 -> b
+    80:86:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):53:53 -> b
+    87:93:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):54:54 -> b
+    94:97:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):55:55 -> b
+    1:6:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):26:26 -> onUpdate
+    7:12:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):27:27 -> onUpdate
+    13:18:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):29:29 -> onUpdate
 app.signalnoise.twa.widget.RedisDataFetcher -> J.c:
 # {"id":"sourceFile","fileName":"RedisDataFetcher.java"}
     1:3:void lambda$fetchAndUpdateWidgetData$0(android.content.Context,java.lang.String):27:29 -> a
@@ -23003,8 +22987,8 @@ app.signalnoise.twa.widget.WidgetUpdateReceiver -> app.signalnoise.twa.widget.Wi
     13:19:void onReceive(android.content.Context,android.content.Intent):15:15 -> onReceive
     20:26:void onReceive(android.content.Context,android.content.Intent):16:16 -> onReceive
     27:30:void onReceive(android.content.Context,android.content.Intent):19:19 -> onReceive
-app.signalnoise.twa.widget.WinnerColorPsych -> app.signalnoise.twa.widget.WinnerColorPsych:
-# {"id":"sourceFile","fileName":"WinnerColorPsych.java"}
+app.signalnoise.twa.widget.WinnerColor -> app.signalnoise.twa.widget.WinnerColor:
+# {"id":"sourceFile","fileName":"WinnerColor.java"}
     1:4:void <init>():15:15 -> <init>
     5:11:java.lang.String getColorState(int):47:47 -> a
     12:18:java.lang.String getColorState(int):48:48 -> a
