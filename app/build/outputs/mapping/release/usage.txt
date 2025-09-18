@@ -7741,7 +7741,6 @@ app.signalnoise.twa.R$id:
     public static int signal_label
     public static int simple_ratio
     public static int simple_status
-    public static int simple_text
     public static int status_large
     public static int status_text
     public static int status_text_2x2
@@ -7806,7 +7805,6 @@ app.signalnoise.twa.R$layout:
     public static int widget_sn1x1f
     public static int widget_sn2x1p
     public static int widget_sn2x1r
-    public static int widget_t1
     public static int widget_t2
     public static int widget_v1
     public static int widget_v2
@@ -7947,7 +7945,6 @@ app.signalnoise.twa.widget.SignalWaveWidgetProvider$BitmapCache
 app.signalnoise.twa.widget.SignalWaveWidgetProvider$WidgetState
 app.signalnoise.twa.widget.SignalWaveWidgetProvider
 app.signalnoise.twa.widget.SimpleSignalWaveProvider
-app.signalnoise.twa.widget.T1
 app.signalnoise.twa.widget.T2
 app.signalnoise.twa.widget.TestWidget
 app.signalnoise.twa.widget.UltraSimpleWidget

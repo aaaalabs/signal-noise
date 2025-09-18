@@ -153,7 +153,7 @@
                 android:resource="@xml/filepaths" />
         </provider>
 
-        <!-- W4 WINNER - ANDROID 15 PRODUCTION READY -->
+        <!-- W4 WINNER + ID SPACER - ANDROID 15 PRODUCTION READY -->
         <receiver
             android:name="app.signalnoise.twa.widget.W4"
             android:exported="true"
@@ -165,6 +165,18 @@
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_w4_info" />
+        </receiver>
+        <receiver
+            android:name="app.signalnoise.twa.widget.T1"
+            android:exported="true"
+            android:label="• spacer" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_t1_info" />
         </receiver>
 
         <!-- Widget Update Receiver -->
