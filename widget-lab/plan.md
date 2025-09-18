@@ -224,16 +224,24 @@ Week 6 (Oct 22-29): Production Release
 
 *Last Updated: September 18, 2025 08:15 - LEAN WIDGET STRATEGY IMPLEMENTED*
 
-## Current Widget Batch (v0.6.0)
+## Current Widget Batch (v1.0) - LEAN DEBUGGING
 
-### Winner (from previous batch)
-- **SN2x1R** - 2x1 Redis live data (proven working)
+### 2 Proven Winners
+- **Progress_Winner** - Progress bar visualization with 30-second refresh (proven live sync)
+- **Color_Winner** - Color psychology states (Excellence/Flow/Focus/Scatter/Chaos)
 
-### New Experiments (testing hypotheses)
-1. **SN4x1R** - Testing maximum screen utilization
-2. **SN1x1F** - Testing fast update frequency (10 sec)
-3. **SN2x1P** - Testing visual progress bars
-4. **SN3x1R** - Testing trend indicators (arrows)
-5. **SN2x1C** - Testing color gradient backgrounds
+### New Candidates (short names for debugging)
+1. **A** - Triangular patterns (▲▲▲▲▲▲▲)
+2. **B** - Circle progression (◉◉◉◉◯◯◯)
+3. **C** - Block visualization (████░░░░)
+4. **D** - Geometric shapes (⟡⟢⟣⟡)
+5. **E** - Line patterns (━━━━━━━━)
 
-APK Location: ~/Downloads/signal-noise-20250918-0813.apk
+### Key Achievements
+- ✅ **Live data sync working** - restored from working commit 1285d34
+- ✅ **Sophisticated visuals proven** - KWGT-inspired design patterns successful
+- ✅ **30-second refresh** for responsive updates
+- ✅ **Git safety net active** - every APK committed
+- ✅ **Short widget names** - A,B,C,D,E for better bug fixing
+
+APK Location: ~/Downloads/signal-noise-20250918-1220.apk
