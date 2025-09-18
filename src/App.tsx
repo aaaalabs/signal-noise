@@ -891,6 +891,101 @@ function AppContent() {
     return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
   }, [isPremiumMode, sessionToken, isLoaded, isLoadingFromCloud]);
 
+  // Smart background sync - checks every 2 minutes when tab is active
+  useEffect(() => {
+    // Only run for premium users with active sessions
+    if (!isPremiumMode || !sessionToken || !isLoaded || isLoadingFromCloud) {
+      return;
+    }
+
+    console.log('🕐 Starting smart background sync (2-min intervals)');
+
+    const backgroundSyncCheck = async () => {
+      // Only sync if tab is visible (user is actively using app)
+      if (document.visibilityState !== 'visible') {
+        console.log('🔍 Background sync skipped - tab not visible');
+        return;
+      }
+
+      // Check if enough time has passed since last sync (avoid spam)
+      const timeSinceLastSync = Date.now() - (syncTracker.current.lastSyncTime || 0);
+      if (timeSinceLastSync < 60000) { // Skip if last sync was < 1 minute ago
+        console.log('🔍 Background sync skipped - recent sync activity');
+        return;
+      }
+
+      console.log('🔍 Background sync check - looking for updates...');
+
+      try {
+        // Use same logic as visibilitychange but with minimal logging
+        const response = await fetch('/api/sync-meta', {
+          headers: {
+            'Authorization': `Bearer ${sessionToken}`
+          }
+        });
+
+        if (response.ok) {
+          const metadata = await response.json();
+          const cloudVersion = metadata.version || 0;
+          const localVersion = syncTracker.current.version || 0;
+          const cloudTimestamp = metadata.lastModified || 0;
+          const timeSinceLastSync = syncTracker.current.lastSyncTime || 0;
+          const isCloudNewer = cloudVersion > localVersion;
+          const timestampSyncNeeded = cloudTimestamp > timeSinceLastSync;
+
+          if (isCloudNewer || timestampSyncNeeded) {
+            console.log('⬇️ Background sync found updates - pulling...', {
+              reason: isCloudNewer ? 'version' : 'timestamp',
+              cloudVersion,
+              localVersion
+            });
+
+            // Silent sync without animations for background operation
+            const dataResponse = await fetch('/api/tasks', {
+              headers: {
+                'Authorization': `Bearer ${sessionToken}`
+              }
+            });
+
+            if (dataResponse.ok) {
+              const { data: cloudData } = await dataResponse.json();
+
+              // Migrate cloud data if needed
+              if (!cloudData.badges) cloudData.badges = [];
+              if (!cloudData.patterns) cloudData.patterns = {};
+              if (!cloudData.settings) cloudData.settings = { targetRatio: 80, notifications: false };
+              if (cloudData.signal_ratio === undefined) cloudData.signal_ratio = getTodayRatio(cloudData.tasks || []);
+
+              // Update local data silently
+              setData(cloudData);
+              syncTracker.current.version = cloudVersion;
+              syncTracker.current.lastSyncTime = Date.now();
+              setLocalVersion(cloudVersion);
+
+              console.log('✅ Background sync completed:', {
+                taskCount: cloudData.tasks?.length || 0,
+                fromDevice: metadata.lastDevice
+              });
+            }
+          } else {
+            console.log('✅ Background sync - no updates needed');
+          }
+        }
+      } catch (error) {
+        console.log('❌ Background sync check failed:', error instanceof Error ? error.message : String(error));
+        // Fail silently for background operations
+      }
+    };
+
+    // Set up 2-minute interval
+    const interval = setInterval(backgroundSyncCheck, 120000); // 2 minutes
+
+    return () => {
+      clearInterval(interval);
+      console.log('🕐 Smart background sync stopped');
+    };
+  }, [isPremiumMode, sessionToken, isLoaded, isLoadingFromCloud]);
+
   const handleOnboardingComplete = () => {
     localStorage.setItem(ONBOARDING_KEY, 'true');
     setShowOnboarding(false);
