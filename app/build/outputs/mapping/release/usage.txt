@@ -7754,8 +7754,7 @@ app.signalnoise.twa.SignalNoiseDataBridge
 app.signalnoise.twa.WidgetUpdateService:
     private static final java.lang.String TAG
     private static final long UPDATE_INTERVAL
-app.signalnoise.twa.widget.ColorAdaptive:
-    private static final java.lang.String PREFS_NAME
+app.signalnoise.twa.widget.ColorAdaptive
 app.signalnoise.twa.widget.DataPollingService:
     private static final long POLL_INTERVAL
     private static final java.lang.String PREFS_NAME
@@ -7764,13 +7763,7 @@ app.signalnoise.twa.widget.DebugWidget:
     public void <init>()
     public void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[])
     private void updateDebugWidget(android.content.Context,android.appwidget.AppWidgetManager,int)
-app.signalnoise.twa.widget.GeometricPulse:
-    private static final java.lang.String PREFS_NAME
 app.signalnoise.twa.widget.MinimalTestWidget
-app.signalnoise.twa.widget.NothingMinimal:
-    private static final java.lang.String PREFS_NAME
-app.signalnoise.twa.widget.QuantumParticles:
-    private static final java.lang.String PREFS_NAME
 app.signalnoise.twa.widget.RedisDataFetcher:
     private static final java.lang.String API_URL
     private static final java.lang.String PREFS_NAME
@@ -7871,14 +7864,8 @@ app.signalnoise.twa.widget.SignalWaveWidgetProvider$BitmapCache
 app.signalnoise.twa.widget.SignalWaveWidgetProvider$WidgetState
 app.signalnoise.twa.widget.SignalWaveWidgetProvider
 app.signalnoise.twa.widget.SimpleSignalWaveProvider
-app.signalnoise.twa.widget.StarField:
-    private static final java.lang.String PREFS_NAME
 app.signalnoise.twa.widget.TestWidget
-app.signalnoise.twa.widget.TimeDilation:
-    private static final java.lang.String PREFS_NAME
 app.signalnoise.twa.widget.UltraSimpleWidget
-app.signalnoise.twa.widget.WavePattern:
-    private static final java.lang.String PREFS_NAME
 app.signalnoise.twa.widget.WidgetUpdateHelper:
     private static final java.lang.String TAG
     public void <init>()
@@ -7886,6 +7873,8 @@ app.signalnoise.twa.widget.WidgetUpdateReceiver:
     public static final java.lang.String ACTION_UPDATE_WIDGET
     public static final java.lang.String EXTRA_IS_SIGNAL
     public static final java.lang.String EXTRA_RATIO
+app.signalnoise.twa.widget.WinnerColorPsych:
+    private static final java.lang.String PREFS_NAME
 app.signalnoise.twa.widget.WinnerProgress30s:
     private static final java.lang.String ACTION_AUTO_UPDATE
     private static final java.lang.String PREFS_NAME

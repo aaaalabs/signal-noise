@@ -179,11 +179,10 @@
                 android:resource="@xml/widget_sn2x1p_info" />
         </receiver>
 
-        <!-- SOPHISTICATED BATCH v0.9.0 - KWGT-Inspired -->
-
-        <receiver android:name=".widget.QuantumParticles"
+        <!-- WINNER: Color Psychology -->
+        <receiver android:name=".widget.WinnerColorPsych"
             android:exported="true"
-            android:label="Quantum_Particles">
+            android:label="Color_Winner">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -192,70 +191,31 @@
                 android:resource="@xml/widget_sn2x1p_info" />
         </receiver>
 
-        <receiver android:name=".widget.NothingMinimal"
-            android:exported="true"
-            android:label="Nothing_Minimal">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_sn2x1p_info" />
+        <!-- NEW CANDIDATES v1.0 - Short Names for Debug -->
+
+        <receiver android:name=".widget.A" android:exported="true" android:label="A">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_sn2x1p_info" />
         </receiver>
 
-        <receiver android:name=".widget.ColorAdaptive"
-            android:exported="true"
-            android:label="Color_Adaptive">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_sn2x1p_info" />
+        <receiver android:name=".widget.B" android:exported="true" android:label="B">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_sn2x1p_info" />
         </receiver>
 
-        <receiver android:name=".widget.WavePattern"
-            android:exported="true"
-            android:label="Wave_Pattern">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_sn2x1p_info" />
+        <receiver android:name=".widget.C" android:exported="true" android:label="C">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_sn2x1p_info" />
         </receiver>
 
-        <receiver android:name=".widget.StarField"
-            android:exported="true"
-            android:label="Star_Field">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_sn2x1p_info" />
+        <receiver android:name=".widget.D" android:exported="true" android:label="D">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_sn2x1p_info" />
         </receiver>
 
-        <receiver android:name=".widget.TimeDilation"
-            android:exported="true"
-            android:label="Time_Dilation">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_sn2x1p_info" />
-        </receiver>
-
-        <receiver android:name=".widget.GeometricPulse"
-            android:exported="true"
-            android:label="Geometric_Pulse">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_sn2x1p_info" />
+        <receiver android:name=".widget.E" android:exported="true" android:label="E">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_sn2x1p_info" />
         </receiver>
 
         <!-- Widget Update Receiver -->
