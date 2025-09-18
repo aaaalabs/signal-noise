@@ -1,0 +1,36 @@
+#!/usr/bin/expect -f
+
+set timeout 180
+
+spawn npx @bubblewrap/cli build --skipPwaValidation
+
+# Handle checksum question
+expect {
+    "*No checksum file was found*" {
+        expect "(Y/n)"
+        send "n\r"
+    }
+}
+
+# Handle password prompts
+expect "Password for the Key Store:"
+send "Singal-Noise2027!!\r"
+
+expect "Password for android:"
+send "Singal-Noise2027!!\r"
+
+# Wait for build completion
+expect {
+    "BUILD SUCCESSFUL" {
+        puts "\nBuild completed successfully!"
+        exit 0
+    }
+    "BUILD FAILED" {
+        puts "\nBuild failed!"
+        exit 1
+    }
+    timeout {
+        puts "\nBuild timed out"
+        exit 1
+    }
+}

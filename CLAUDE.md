@@ -280,3 +280,4 @@ For comprehensive Android build, testing, and Play Store deployment instructions
 For detailed technical lessons, debugging patterns, and architecture decisions, see [lessons-learned.md](./lessons-learned.md).
 
 This React application represents a complete productivity solution focused on simplicity, user privacy, and effective behavioral change through the 80/20 principle.
+- Singal-Noise2027!! are the correct bubblewrap passwords

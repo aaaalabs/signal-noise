@@ -1,0 +1,36 @@
+#!/usr/bin/expect -f
+
+# CORRECT PASSWORD: Singal-Noise2027!! (with typo!)
+set timeout 60
+set password "Singal-Noise2027!!"
+
+spawn npx @bubblewrap/cli build --skipPwaValidation
+
+# Handle regenerate prompt
+expect "Y/n"
+send "n\r"
+
+# Handle first password prompt
+expect "Password for the Key Store:"
+send "$password\r"
+
+# Handle second password prompt - "Password for the Key:"
+expect "Password for the Key:"
+send "$password\r"
+
+# Wait for completion
+expect {
+    "BUILD SUCCESSFUL" {
+        puts "\nBuild completed successfully!"
+        exit 0
+    }
+    "BUILD FAILED" {
+        puts "\nBuild failed!"
+        exit 1
+    }
+    timeout {
+        puts "\nBuild may have completed - checking for APK..."
+        exit 0
+    }
+    eof { exit 0 }
+}

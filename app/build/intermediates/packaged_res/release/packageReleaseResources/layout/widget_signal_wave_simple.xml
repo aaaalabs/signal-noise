@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Simple fallback widget that always works -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="#1a1a1a"
+    android:padding="8dp">
+
+    <!-- Simple ratio display -->
+    <TextView
+        android:id="@+id/simple_ratio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="80%"
+        android:textSize="28sp"
+        android:textColor="#00ff88"
+        android:fontFamily="sans-serif-light" />
+
+    <!-- Simple status -->
+    <TextView
+        android:id="@+id/simple_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Signal/Noise"
+        android:textSize="11sp"
+        android:textColor="#888888"
+        android:fontFamily="sans-serif-light"
+        android:layout_marginTop="4dp" />
+
+</LinearLayout>

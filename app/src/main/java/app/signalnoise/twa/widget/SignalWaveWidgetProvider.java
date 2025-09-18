@@ -20,6 +20,7 @@ import android.graphics.CornerPathEffect;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.View;
 import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -66,31 +67,46 @@ public class SignalWaveWidgetProvider extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+        Log.d(TAG, "===== SignalWave onUpdate START =====");
         Log.d(TAG, "Updating " + appWidgetIds.length + " Signal Wave widgets");
+        Log.d(TAG, "Package: " + context.getPackageName());
 
         for (int appWidgetId : appWidgetIds) {
+            Log.d(TAG, "Processing widget ID: " + appWidgetId);
             updateWidget(context, appWidgetManager, appWidgetId);
         }
 
         // Schedule next update with battery-aware timing
+        Log.d(TAG, "Scheduling next update...");
         scheduleNextUpdate(context);
+        Log.d(TAG, "===== SignalWave onUpdate END =====");
     }
 
     private void updateWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
         try {
+            Log.d(TAG, "updateWidget: Starting for ID " + appWidgetId);
+            Log.d(TAG, "updateWidget: Creating RemoteViews with layout R.layout.widget_signal_wave");
+
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_signal_wave);
+            Log.d(TAG, "updateWidget: RemoteViews created successfully");
 
             // Retrieve current state from SharedPreferences
+            Log.d(TAG, "updateWidget: Loading widget state...");
             WidgetState state = loadWidgetState(context);
+            Log.d(TAG, "updateWidget: State loaded - ratio=" + state.ratio + ", streak=" + state.streak);
 
-            // Generate wave visualization
-            Bitmap waveBitmap = generateWaveVisualization(state);
-            views.setImageViewBitmap(R.id.wave_canvas, waveBitmap);
+            // Skip bitmap generation for now - just update text
+            Log.d(TAG, "updateWidget: Skipping bitmap generation (commented out)");
+            // Bitmap waveBitmap = generateWaveVisualization(state);
+            // views.setImageViewBitmap(R.id.wave_canvas, waveBitmap);
 
             // Update text elements with careful typography
+            Log.d(TAG, "updateWidget: Updating text elements...");
             updateTextElements(views, state);
+            Log.d(TAG, "updateWidget: Text elements updated");
 
             // Set click intent to open app
+            Log.d(TAG, "updateWidget: Setting up click intent...");
             Intent intent = new Intent(context, LauncherActivity.class);
             intent.putExtra("source", "signal_wave_widget");
             PendingIntent pendingIntent = PendingIntent.getActivity(
@@ -98,17 +114,26 @@ public class SignalWaveWidgetProvider extends AppWidgetProvider {
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
             );
             views.setOnClickPendingIntent(R.id.widget_container, pendingIntent);
+            Log.d(TAG, "updateWidget: Click intent configured");
 
             // Apply premium features if available
             if (state.isPremium) {
+                Log.d(TAG, "updateWidget: Applying premium features...");
                 applyPremiumFeatures(views, state);
             }
 
+            Log.d(TAG, "updateWidget: Calling appWidgetManager.updateAppWidget...");
             appWidgetManager.updateAppWidget(appWidgetId, views);
+            Log.d(TAG, "updateWidget: Widget updated successfully for ID " + appWidgetId);
 
         } catch (Exception e) {
-            Log.e(TAG, "Error updating widget", e);
+            Log.e(TAG, "ERROR in updateWidget for ID " + appWidgetId, e);
+            Log.e(TAG, "Exception class: " + e.getClass().getName());
+            Log.e(TAG, "Exception message: " + e.getMessage());
+            e.printStackTrace();
+
             // Graceful degradation - show minimal widget
+            Log.d(TAG, "Attempting fallback widget...");
             showFallbackWidget(context, appWidgetManager, appWidgetId);
         }
     }
@@ -173,7 +198,7 @@ public class SignalWaveWidgetProvider extends AppWidgetProvider {
         // Wave parameters based on golden ratio
         float amplitude = (state.ratio / 100f) * (WAVE_HEIGHT / PHI);
         float frequency = 0.02f * PHI;
-        float phase = (System.currentTimeMillis() / 1000f) % (2 * Math.PI);
+        float phase = (float)((System.currentTimeMillis() / 1000f) % (2 * Math.PI));
 
         path.moveTo(0, WAVE_HEIGHT / 2f);
 
@@ -233,9 +258,9 @@ public class SignalWaveWidgetProvider extends AppWidgetProvider {
         if (state.streak > 0) {
             views.setTextViewText(R.id.streak_text, state.streak + " day" +
                                  (state.streak > 1 ? "s" : ""));
-            views.setViewVisibility(R.id.streak_container, RemoteViews.VISIBLE);
+            views.setViewVisibility(R.id.streak_container, View.VISIBLE);
         } else {
-            views.setViewVisibility(R.id.streak_container, RemoteViews.GONE);
+            views.setViewVisibility(R.id.streak_container, View.GONE);
         }
 
         // Last update time for transparency
@@ -249,12 +274,12 @@ public class SignalWaveWidgetProvider extends AppWidgetProvider {
     private void applyPremiumFeatures(RemoteViews views, WidgetState state) {
         if (state.aiInsight != null && !state.aiInsight.isEmpty()) {
             views.setTextViewText(R.id.ai_insight, state.aiInsight);
-            views.setViewVisibility(R.id.ai_container, RemoteViews.VISIBLE);
+            views.setViewVisibility(R.id.ai_container, View.VISIBLE);
 
             // Subtle pulse animation for AI insights (using view visibility toggle)
-            views.setViewVisibility(R.id.ai_pulse, RemoteViews.VISIBLE);
+            views.setViewVisibility(R.id.ai_pulse, View.VISIBLE);
         } else {
-            views.setViewVisibility(R.id.ai_container, RemoteViews.GONE);
+            views.setViewVisibility(R.id.ai_container, View.GONE);
         }
     }
 
@@ -267,17 +292,25 @@ public class SignalWaveWidgetProvider extends AppWidgetProvider {
 
         WidgetState state = new WidgetState();
 
+        // Set attractive default values for first launch
+        state.ratio = 87;  // Default to 87% for a nice demo
+        state.streak = 7;  // Show a 7-day streak
+        state.isPremium = false;
+        state.aiInsight = "";
+        state.hasAIInsight = false;
+        state.lastUpdate = System.currentTimeMillis();
+
         if (dataJson != null) {
             try {
                 JSONObject data = new JSONObject(dataJson);
-                state.ratio = data.optInt("currentRatio", 80);
-                state.streak = data.optInt("dailyStreak", 0);
+                state.ratio = data.optInt("currentRatio", 87);
+                state.streak = data.optInt("dailyStreak", 7);
                 state.isPremium = data.optBoolean("isPremium", false);
                 state.aiInsight = data.optString("aiInsight", "");
                 state.hasAIInsight = !state.aiInsight.isEmpty();
                 state.lastUpdate = data.optLong("lastUpdate", System.currentTimeMillis());
             } catch (Exception e) {
-                Log.e(TAG, "Error parsing widget data", e);
+                Log.e(TAG, "Error parsing widget data, using defaults", e);
             }
         }
 

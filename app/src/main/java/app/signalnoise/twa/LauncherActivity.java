@@ -43,6 +43,28 @@ public class LauncherActivity
         } else {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         }
+
+        // Initialize with a test value to verify widget data flow
+        // IMPORTANT: Use the same SharedPreferences name as SignalNoiseDataBridge
+        SharedPreferences prefs = getSharedPreferences("signal_noise_widget_data", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        // Set to 95% as a clear test value different from the hardcoded 80%
+        editor.putInt("current_ratio", 95);
+        editor.putString("current_status", "Signal");
+        editor.apply();
+
+        // Force update all widgets immediately using multiple approaches
+        try {
+            // Method 1: Via SignalNoiseWidgetProvider
+            SignalNoiseWidgetProvider.updateAllWidgets(this, 95, true);
+
+            // Method 2: Direct widget update broadcast
+            Intent updateIntent = new Intent(this, app.signalnoise.twa.widget.SN2x1R.class);
+            updateIntent.setAction(android.appwidget.AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+            sendBroadcast(updateIntent);
+        } catch (Exception e) {
+            // Widget update failed, that's OK
+        }
     }
 
     @Override

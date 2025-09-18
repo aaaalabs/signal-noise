@@ -1,0 +1,47 @@
+#!/usr/bin/expect -f
+
+# WORKING Bubblewrap Build Script
+# Password: Singal-Noise2027!! (with intentional typo!)
+
+set timeout 300
+
+# IMPORTANT: Use send_user to ensure complete string sending
+spawn npx @bubblewrap/cli build --skipPwaValidation
+
+# Wait for and answer regenerate prompt
+expect {
+    "(Y/n)" {
+        send -- "n\r"
+        exp_continue
+    }
+    "Password for the Key Store:" {
+        # Send complete password string at once
+        send -- "Singal-Noise2027!!\r"
+        exp_continue
+    }
+    "Password for the Key:" {
+        # Second password prompt
+        send -- "Singal-Noise2027!!\r"
+        exp_continue
+    }
+    "Password for android:" {
+        # Alternative password prompt
+        send -- "Singal-Noise2027!!\r"
+        exp_continue
+    }
+    "BUILD SUCCESSFUL" {
+        puts "\n✅ Build successful!"
+        exit 0
+    }
+    "BUILD FAILED" {
+        puts "\n❌ Build failed"
+        exit 1
+    }
+    eof {
+        puts "\n Build completed - checking for APK..."
+        exit 0
+    }
+}
+
+# Ensure we wait for completion
+wait

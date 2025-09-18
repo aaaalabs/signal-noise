@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- FIXED Signal Wave Widget Layout - RemoteViews compatible -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0A0A0A"
+    android:padding="12dp">
+
+    <!-- Main Ratio Display -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <!-- Ratio Section -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="bottom">
+
+            <TextView
+                android:id="@+id/ratio_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="87"
+                android:textSize="36sp"
+                android:textColor="#00ff88" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="%"
+                android:textSize="20sp"
+                android:textColor="#00ff88"
+                android:layout_marginStart="2dp"
+                android:layout_marginBottom="6dp" />
+        </LinearLayout>
+
+        <!-- Status Text -->
+        <TextView
+            android:id="@+id/status_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Signal"
+            android:textSize="12sp"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="4dp" />
+
+        <!-- Update Time -->
+        <TextView
+            android:id="@+id/update_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12:34"
+            android:textSize="10sp"
+            android:textColor="#666666"
+            android:layout_marginTop="2dp" />
+    </LinearLayout>
+
+    <!-- Streak Badge (top right) -->
+    <TextView
+        android:id="@+id/streak_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:text="7d"
+        android:textSize="10sp"
+        android:textColor="#00ff88"
+        android:background="#1A1A1A"
+        android:padding="4dp"
+        android:visibility="visible" />
+
+</FrameLayout>

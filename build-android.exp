@@ -1,0 +1,24 @@
+#!/usr/bin/expect -f
+set timeout 300
+spawn npx @bubblewrap/cli build --skipPwaValidation
+
+expect {
+    "regenerate your" {
+        expect "(Y/n)"
+        send "n\r"
+        exp_continue
+    }
+    "Password for the Key Store:" {
+        send "Singal-Noise2027!!\r"
+        exp_continue
+    }
+    "Password for android:" {
+        send "Singal-Noise2027!!\r"
+        exp_continue
+    }
+    "Password for the Key:" {
+        send "Singal-Noise2027!!\r"
+        exp_continue
+    }
+    eof
+}

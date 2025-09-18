@@ -20,8 +20,8 @@
     "path": "./android.keystore",
     "alias": "android"
   },
-  "appVersionName": "1.1.1",
-  "appVersionCode": 5,
+  "appVersionName": "1.1.5",
+  "appVersionCode": 9,
   "shortcuts": [],
   "generatorApp": "bubblewrap-cli",
   "webManifestUrl": "https://signal-noise.app/manifest.json",

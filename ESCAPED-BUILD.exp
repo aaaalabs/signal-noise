@@ -1,0 +1,19 @@
+#!/usr/bin/expect -f
+
+set timeout 60
+
+# Store password in variable with proper escaping
+set pwd {Singal-Noise2027!!}
+
+spawn npx @bubblewrap/cli build --skipPwaValidation
+
+expect "(Y/n)"
+send "n\r"
+
+expect "Password for the Key Store:"
+send "$pwd\r"
+
+expect "Password for the Key:"
+send "$pwd\r"
+
+expect eof

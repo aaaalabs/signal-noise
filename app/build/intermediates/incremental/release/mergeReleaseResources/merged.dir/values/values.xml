@@ -317,6 +317,8 @@
     <string name="abc_shareactionprovider_share_with">Share with</string>
     <string name="abc_shareactionprovider_share_with_application">Share with <ns1:g example="Mail" id="application_name">%s</ns1:g></string>
     <string name="abc_toolbar_collapse_description">Collapse</string>
+    <string name="ai_loading">Loading insights...</string>
+    <string name="ai_unavailable">Premium feature</string>
     <string name="androidx_startup" translatable="false">androidx.startup</string>
     <string name="appName" translatable="false">Signal/Noise - Focus Tracker</string>
     <string name="app_name">Android Browser Helper</string>
@@ -338,12 +340,14 @@
     <string name="call_notification_ongoing_text">Ongoing call</string>
     <string name="call_notification_screening_text">Screening an incoming call</string>
     <string name="copy_toast_msg">Link copied to clipboard</string>
+    <string name="excellent_focus">Excellent Focus</string>
     <string name="fallbackType" translatable="false">customtabs</string>
     <string name="fallback_menu_item_copy_link">Copy link</string>
     <string name="fallback_menu_item_open_in_browser">Open in browser</string>
     <string name="fallback_menu_item_share_link">Share link</string>
     <string name="fullScopeUrl" translatable="false">https://signal-noise.app/</string>
     <string name="generatorApp" translatable="false">bubblewrap-cli</string>
+    <string name="good_balance">Good Balance</string>
     <string name="hostName" translatable="false">signal-noise.app</string>
     <string name="launchUrl" translatable="false">https://signal-noise.app/</string>
     <string name="launcherName" translatable="false">Signal/Noise</string>
@@ -352,26 +356,20 @@
     <string name="no_provider_toast">Please install Chrome Stable 72 or later.</string>
     <string name="orientation" translatable="false">portrait</string>
     <string name="providerAuthority" translatable="false">app.signalnoise.twa.fileprovider</string>
+    <string name="refocus_needed">Refocus Needed</string>
     <string name="search_menu_title">Search</string>
     <string name="shortcut_name_0" translatable="false">Signal</string>
     <string name="shortcut_name_1" translatable="false">Noise</string>
     <string name="shortcut_short_name_0" translatable="false">Signal</string>
     <string name="shortcut_short_name_1" translatable="false">Noise</string>
+    <string name="signal_wave_description">Beautiful productivity visualization with live wave animations</string>
+    <string name="signal_wave_name">Signal Wave</string>
+    <string name="start_today">Start today</string>
     <string name="status_bar_notification_info_overflow">999+</string>
     <string name="update_chrome_toast">Please update to Chrome Stable 72 or later.</string>
+    <string name="wave_visualization">Productivity wave visualization</string>
     <string name="webManifestUrl" translatable="false">https://signal-noise.app/manifest.json</string>
-    <string name="widget_diag1_name">D1</string>
-    <string name="widget_diag2_name">D2</string>
-    <string name="widget_diag3_name">D3</string>
-    <string name="widget_diag4_name">D4</string>
-    <string name="widget_diag5_name">D5</string>
     <string name="widget_main_name">S/N</string>
-    <string name="widget_mock_name">Mock</string>
-    <string name="widget_test1_name">T1</string>
-    <string name="widget_test2_name">T2</string>
-    <string name="widget_test3_name">T3</string>
-    <string name="widget_test4_name">T4</string>
-    <string name="widget_test5_name">T5</string>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
     <style name="AlertDialog.AppCompat.Light" parent="Base.AlertDialog.AppCompat.Light"/>
     <style name="Animation.AppCompat.Dialog" parent="Base.Animation.AppCompat.Dialog"/>

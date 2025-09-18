@@ -31,3 +31,8 @@ dist-ssr
 .env.production.local
 .vercel
 .env*.local
+
+# Keystore files and credentials
+android.keystore
+*.keystore
+.keystore-credentials

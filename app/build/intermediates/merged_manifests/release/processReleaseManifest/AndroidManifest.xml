@@ -23,14 +23,15 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="app.signalnoise.twa"
-    android:versionCode="3"
-    android:versionName="1.0.1" >
+    android:versionCode="12"
+    android:versionName="1.2.0" >
 
     <uses-sdk
         android:minSdkVersion="21"
-        android:targetSdkVersion="35" />
+        android:targetSdkVersion="29" />
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <queries>
         <intent>
@@ -152,17 +153,88 @@
                 android:resource="@xml/filepaths" />
         </provider>
 
-        <!-- Widget Provider -->
+        <!-- SN2x1R: 2x1 Redis Live Data (WINNER - Keep this) -->
         <receiver
-            android:name="app.signalnoise.twa.widget.SignalNoiseWidgetProvider"
-            android:exported="true" >
+            android:name="app.signalnoise.twa.widget.SN2x1R"
+            android:exported="true"
+            android:label="SN2x1R" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/widget_info" />
+                android:resource="@xml/widget_sn2x1r_info" />
+        </receiver>
+
+        <!-- SN4x1R: 4x1 Wide Redis Widget -->
+        <receiver
+            android:name="app.signalnoise.twa.widget.SN4x1R"
+            android:exported="true"
+            android:label="SN4x1R" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_sn4x1r_info" />
+        </receiver>
+
+        <!-- SN1x1F: 1x1 Fast Update Widget -->
+        <receiver
+            android:name="app.signalnoise.twa.widget.SN1x1F"
+            android:exported="true"
+            android:label="SN1x1F" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_sn1x1f_info" />
+        </receiver>
+
+        <!-- SN2x1P: 2x1 Progress Bar Widget -->
+        <receiver
+            android:name="app.signalnoise.twa.widget.SN2x1P"
+            android:exported="true"
+            android:label="SN2x1P" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_sn2x1p_info" />
+        </receiver>
+
+        <!-- SN3x1R: 3x1 Redis with Trend Indicator -->
+        <receiver
+            android:name="app.signalnoise.twa.widget.SN3x1R"
+            android:exported="true"
+            android:label="SN3x1R" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_sn3x1r_info" />
+        </receiver>
+
+        <!-- SN2x1C: 2x1 Color Gradient Widget -->
+        <receiver
+            android:name="app.signalnoise.twa.widget.SN2x1C"
+            android:exported="true"
+            android:label="SN2x1C" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_sn2x1c_info" />
         </receiver>
 
         <!-- Widget Update Receiver -->
@@ -174,6 +246,11 @@
             </intent-filter>
         </receiver>
 
+        <!-- Widget Update Service for data synchronization -->
+        <service
+            android:name="app.signalnoise.twa.WidgetUpdateService"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
         <service
             android:name="app.signalnoise.twa.DelegationService"
             android:enabled="@bool/enableNotification"
@@ -190,6 +267,11 @@
         </service>
 
         <activity android:name="com.google.androidbrowserhelper.trusted.NotificationPermissionRequestActivity" />
+
+        <!-- Data polling service for widget updates -->
+        <service
+            android:name="app.signalnoise.twa.widget.DataPollingService"
+            android:exported="false" />
 
         <provider
             android:name="androidx.startup.InitializationProvider"
