@@ -7676,6 +7676,7 @@ app.signalnoise.twa.R$drawable:
     public static int ai_icon
     public static int ai_insight_bg
     public static int ai_pulse_dot
+    public static int compact_glow
     public static int gradient_drift
     public static int gradient_flow
     public static int gradient_focus
@@ -7804,6 +7805,9 @@ app.signalnoise.twa.R$layout:
     public static int widget_sn1x1f
     public static int widget_sn2x1p
     public static int widget_sn2x1r
+    public static int widget_v1
+    public static int widget_v2
+    public static int widget_v3
     public static int widget_w1
     public static int widget_w2
     public static int widget_w3
@@ -7942,6 +7946,9 @@ app.signalnoise.twa.widget.SignalWaveWidgetProvider
 app.signalnoise.twa.widget.SimpleSignalWaveProvider
 app.signalnoise.twa.widget.TestWidget
 app.signalnoise.twa.widget.UltraSimpleWidget
+app.signalnoise.twa.widget.V1
+app.signalnoise.twa.widget.V2
+app.signalnoise.twa.widget.V3
 app.signalnoise.twa.widget.W1
 app.signalnoise.twa.widget.W2
 app.signalnoise.twa.widget.W3
