@@ -3,8 +3,8 @@
 # min_api: 21
 # common_typos_disable
 # {"id":"com.android.tools.r8.mapping","version":"2.2"}
-# pg_map_id: 8efbd54
-# pg_map_hash: SHA-256 8efbd54b20956cbe4dc718700bc709bbd5c0f6bfc61543408166673d56b4680d
+# pg_map_id: 6c2e1be
+# pg_map_hash: SHA-256 6c2e1be1fcd13c7a60120984d60f15acb461033d71ce69a6904f92d9bb25a048
 android.support.customtabs.ICustomTabsCallback -> a.a:
 # {"id":"sourceFile","fileName":"ICustomTabsCallback.java"}
     java.lang.String DESCRIPTOR -> a
@@ -22731,18 +22731,12 @@ app.signalnoise.twa.LauncherActivity -> app.signalnoise.twa.LauncherActivity:
     11:23:void onResume():92:92 -> onResume
     24:27:void onResume():96:96 -> onResume
 app.signalnoise.twa.R$id -> I.a:
-    int text -> a
-    int widget_container -> b
-    int widget_label -> c
-    int widget_progress -> d
-    int widget_ratio -> e
-    int widget_speed -> f
+    int widget_container -> a
+    int widget_progress -> b
+    int widget_ratio -> c
 app.signalnoise.twa.R$layout -> I.b:
     int widget_1x1 -> a
-    int widget_simple_fix -> b
-    int widget_sn1x1f -> c
-    int widget_sn2x1p -> d
-    int widget_sn2x1r -> e
+    int widget_sn2x1p -> b
 app.signalnoise.twa.WidgetUpdateService -> app.signalnoise.twa.WidgetUpdateService:
 # {"id":"sourceFile","fileName":"WidgetUpdateService.java"}
     android.os.Handler handler -> a
@@ -22818,6 +22812,30 @@ app.signalnoise.twa.WidgetUpdateService$3 -> app.signalnoise.twa.WidgetUpdateSer
     120:148:void onReceiveValue(java.lang.String):131:131 -> a
     149:154:void onReceiveValue(java.lang.String):134:134 -> a
     1:6:void onReceiveValue(java.lang.Object):101:101 -> onReceiveValue
+app.signalnoise.twa.widget.ColorAdaptive -> app.signalnoise.twa.widget.ColorAdaptive:
+# {"id":"sourceFile","fileName":"ColorAdaptive.java"}
+    1:4:void <init>():15:15 -> <init>
+    5:11:java.lang.String getColorState(int):47:47 -> a
+    12:18:java.lang.String getColorState(int):48:48 -> a
+    19:25:java.lang.String getColorState(int):49:49 -> a
+    26:28:java.lang.String getColorState(int):50:50 -> a
+    29:31:java.lang.String getColorState(int):51:51 -> a
+    5:11:java.lang.String getStateEmoji(int):55:55 -> b
+    12:18:java.lang.String getStateEmoji(int):56:56 -> b
+    19:25:java.lang.String getStateEmoji(int):57:57 -> b
+    26:28:java.lang.String getStateEmoji(int):58:58 -> b
+    29:31:java.lang.String getStateEmoji(int):59:59 -> b
+    1:11:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):28:28 -> c
+    12:18:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):30:30 -> c
+    19:26:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):31:31 -> c
+    27:30:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):34:34 -> c
+    31:34:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):35:35 -> c
+    35:56:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):37:37 -> c
+    57:81:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):38:38 -> c
+    82:85:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):40:40 -> c
+    1:6:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):20:20 -> onUpdate
+    7:12:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):21:21 -> onUpdate
+    13:18:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):23:23 -> onUpdate
 app.signalnoise.twa.widget.DataPollingService -> app.signalnoise.twa.widget.DataPollingService:
 # {"id":"sourceFile","fileName":"DataPollingService.java"}
     android.os.Handler handler -> a
@@ -22855,6 +22873,63 @@ app.signalnoise.twa.widget.DataPollingService$1 -> app.signalnoise.twa.widget.Da
     6:17:void run():38:38 -> run
 app.signalnoise.twa.widget.DebugWidget -> J.a:
 # {"id":"sourceFile","fileName":"DebugWidget.java"}
+app.signalnoise.twa.widget.GeometricPulse -> app.signalnoise.twa.widget.GeometricPulse:
+# {"id":"sourceFile","fileName":"GeometricPulse.java"}
+    1:4:void <init>():15:15 -> <init>
+    5:11:java.lang.String generateGeometry(int):46:46 -> a
+    12:18:java.lang.String generateGeometry(int):47:47 -> a
+    19:25:java.lang.String generateGeometry(int):48:48 -> a
+    26:32:java.lang.String generateGeometry(int):49:49 -> a
+    33:35:java.lang.String generateGeometry(int):50:50 -> a
+    36:38:java.lang.String generateGeometry(int):51:51 -> a
+    5:11:java.lang.String generatePattern(int):55:55 -> b
+    12:18:java.lang.String generatePattern(int):56:56 -> b
+    19:21:java.lang.String generatePattern(int):57:57 -> b
+    22:24:java.lang.String generatePattern(int):58:58 -> b
+    1:11:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):28:28 -> c
+    12:18:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):30:30 -> c
+    19:26:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):31:31 -> c
+    27:30:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):33:33 -> c
+    31:34:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):34:34 -> c
+    35:59:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):36:36 -> c
+    60:64:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):37:37 -> c
+    65:68:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):39:39 -> c
+    1:6:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):20:20 -> onUpdate
+    7:12:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):21:21 -> onUpdate
+    13:18:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):23:23 -> onUpdate
+app.signalnoise.twa.widget.NothingMinimal -> app.signalnoise.twa.widget.NothingMinimal:
+# {"id":"sourceFile","fileName":"NothingMinimal.java"}
+    1:4:void <init>():15:15 -> <init>
+    1:11:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):28:28 -> a
+    12:18:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):30:30 -> a
+    19:28:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):31:31 -> a
+    29:32:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):34:34 -> a
+    33:41:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):35:35 -> a
+    42:53:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):36:36 -> a
+    54:58:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):39:39 -> a
+    59:63:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):40:40 -> a
+    64:67:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):43:43 -> a
+    1:6:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):20:20 -> onUpdate
+    7:12:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):21:21 -> onUpdate
+    13:18:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):23:23 -> onUpdate
+app.signalnoise.twa.widget.QuantumParticles -> app.signalnoise.twa.widget.QuantumParticles:
+# {"id":"sourceFile","fileName":"QuantumParticles.java"}
+    1:4:void <init>():15:15 -> <init>
+    3:4:java.lang.String generateParticleField(int):46:47 -> a
+    5:13:java.lang.String generateParticleField(int):47:47 -> a
+    14:19:java.lang.String generateParticleField(int):51:51 -> a
+    20:27:java.lang.String generateParticleField(int):53:53 -> a
+    28:32:java.lang.String generateParticleField(int):57:57 -> a
+    1:11:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):28:28 -> b
+    12:18:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):30:30 -> b
+    19:26:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):31:31 -> b
+    27:30:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):34:34 -> b
+    31:52:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):36:36 -> b
+    53:57:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):37:37 -> b
+    58:61:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):39:39 -> b
+    1:6:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):20:20 -> onUpdate
+    7:12:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):21:21 -> onUpdate
+    13:18:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):23:23 -> onUpdate
 app.signalnoise.twa.widget.RedisDataFetcher -> J.c:
 # {"id":"sourceFile","fileName":"RedisDataFetcher.java"}
     1:3:void lambda$fetchAndUpdateWidgetData$0(android.content.Context,java.lang.String):27:29 -> a
@@ -22888,200 +22963,21 @@ app.signalnoise.twa.widget.RedisDataFetcher$$ExternalSyntheticLambda0 -> J.b:
       # {"id":"com.android.tools.r8.synthesized"}
     1:1:void J.RedisDataFetcher$$ExternalSyntheticLambda0.run():0:0 -> run
       # {"id":"com.android.tools.r8.synthesized"}
-app.signalnoise.twa.widget.SN1x1F -> app.signalnoise.twa.widget.SN1x1F:
+app.signalnoise.twa.widget.SN1x1F -> J.d:
 # {"id":"sourceFile","fileName":"SN1x1F.java"}
-    1:4:void <init>():20:20 -> <init>
-    1:10:void setupFastRefresh(android.content.Context,int):74:74 -> a
-    11:17:void setupFastRefresh(android.content.Context,int):76:76 -> a
-    18:22:void setupFastRefresh(android.content.Context,int):77:77 -> a
-    23:31:void setupFastRefresh(android.content.Context,int):78:78 -> a
-    32:35:void setupFastRefresh(android.content.Context,int):80:80 -> a
-    36:44:void setupFastRefresh(android.content.Context,int):88:88 -> a
-    45:47:void setupFastRefresh(android.content.Context,int):89:89 -> a
-    48:69:void setupFastRefresh(android.content.Context,int):91:91 -> a
-    70:75:void setupFastRefresh(android.content.Context,int):94:94 -> a
-    1:15:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):118:118 -> b
-    16:22:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):121:121 -> b
-    23:29:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):122:122 -> b
-    30:39:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):123:123 -> b
-    40:60:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):128:128 -> b
-    61:65:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):133:133 -> b
-    66:72:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):134:134 -> b
-    73:81:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):137:137 -> b
-    82:86:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):138:138 -> b
-    87:90:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):139:139 -> b
-    91:95:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):141:141 -> b
-    96:98:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):143:143 -> b
-    99:127:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):145:145 -> b
-    128:132:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):148:148 -> b
-    133:143:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):151:151 -> b
-    144:148:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):152:152 -> b
-    149:155:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):153:153 -> b
-    156:159:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):154:154 -> b
-    1:8:void onDeleted(android.content.Context,int[]):101:101 -> onDeleted
-    9:14:void onDeleted(android.content.Context,int[]):103:103 -> onDeleted
-    15:21:void onDeleted(android.content.Context,int[]):104:104 -> onDeleted
-    22:30:void onDeleted(android.content.Context,int[]):105:105 -> onDeleted
-    31:36:void onDeleted(android.content.Context,int[]):106:106 -> onDeleted
-    37:39:void onDeleted(android.content.Context,int[]):110:110 -> onDeleted
-    40:46:void onDeleted(android.content.Context,int[]):111:111 -> onDeleted
-    1:3:void onReceive(android.content.Context,android.content.Intent):38:38 -> onReceive
-    4:15:void onReceive(android.content.Context,android.content.Intent):40:40 -> onReceive
-    16:22:void onReceive(android.content.Context,android.content.Intent):41:41 -> onReceive
-    23:27:void onReceive(android.content.Context,android.content.Intent):44:44 -> onReceive
-    28:31:void onReceive(android.content.Context,android.content.Intent):47:47 -> onReceive
-    32:42:void onReceive(android.content.Context,android.content.Intent):48:48 -> onReceive
-    43:49:void onReceive(android.content.Context,android.content.Intent):52:52 -> onReceive
-    50:56:void onReceive(android.content.Context,android.content.Intent):54:54 -> onReceive
-    57:64:void onReceive(android.content.Context,android.content.Intent):55:55 -> onReceive
-    65:67:void onReceive(android.content.Context,android.content.Intent):60:60 -> onReceive
-    68:88:void onReceive(android.content.Context,android.content.Intent):61:61 -> onReceive
-    89:91:void onReceive(android.content.Context,android.content.Intent):64:64 -> onReceive
-    92:96:void onReceive(android.content.Context,android.content.Intent):65:65 -> onReceive
-    97:119:void onReceive(android.content.Context,android.content.Intent):66:66 -> onReceive
-    1:6:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):27:27 -> onUpdate
-    7:9:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):28:28 -> onUpdate
-    10:15:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):29:29 -> onUpdate
-    16:21:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):33:33 -> onUpdate
-app.signalnoise.twa.widget.SN2x1C -> app.signalnoise.twa.widget.SN2x1C:
+app.signalnoise.twa.widget.SN2x1C -> J.e:
 # {"id":"sourceFile","fileName":"SN2x1C.java"}
-    1:4:void <init>():13:13 -> <init>
-    1:11:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):26:26 -> a
-    12:18:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):28:28 -> a
-    19:27:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):29:29 -> a
-    28:52:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):31:31 -> a
-    53:57:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):32:32 -> a
-    58:61:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):34:34 -> a
-    1:6:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):18:18 -> onUpdate
-    7:12:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):19:19 -> onUpdate
-    13:18:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):21:21 -> onUpdate
-app.signalnoise.twa.widget.SN2x1P -> app.signalnoise.twa.widget.SN2x1P:
+app.signalnoise.twa.widget.SN2x1P -> J.f:
 # {"id":"sourceFile","fileName":"SN2x1P.java"}
-    1:4:void <init>():20:20 -> <init>
-    3:7:java.lang.String createProgressBar(int):106:106 -> a
-    8:9:java.lang.String createProgressBar(int):108:109 -> a
-    10:18:java.lang.String createProgressBar(int):109:109 -> a
-    19:24:java.lang.String createProgressBar(int):113:113 -> a
-    25:32:java.lang.String createProgressBar(int):115:115 -> a
-    33:37:java.lang.String createProgressBar(int):119:119 -> a
-    1:8:void setupAutoRefresh(android.content.Context,int):66:66 -> b
-    9:15:void setupAutoRefresh(android.content.Context,int):67:67 -> b
-    16:24:void setupAutoRefresh(android.content.Context,int):68:68 -> b
-    25:28:void setupAutoRefresh(android.content.Context,int):69:69 -> b
-    29:37:void setupAutoRefresh(android.content.Context,int):72:72 -> b
-    38:42:void setupAutoRefresh(android.content.Context,int):73:73 -> b
-    43:50:void setupAutoRefresh(android.content.Context,int):75:75 -> b
-    1:11:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):81:81 -> c
-    12:18:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):83:83 -> c
-    19:27:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):84:84 -> c
-    28:49:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):86:86 -> c
-    50:54:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):87:87 -> c
-    55:58:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):90:90 -> c
-    59:63:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):91:91 -> c
-    64:72:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):93:93 -> c
-    73:76:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):94:94 -> c
-    77:81:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):96:96 -> c
-    82:85:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):98:98 -> c
-    86:93:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):101:101 -> c
-    1:3:void onReceive(android.content.Context,android.content.Intent):36:36 -> onReceive
-    4:15:void onReceive(android.content.Context,android.content.Intent):38:38 -> onReceive
-    16:20:void onReceive(android.content.Context,android.content.Intent):39:39 -> onReceive
-    21:24:void onReceive(android.content.Context,android.content.Intent):41:41 -> onReceive
-    25:35:void onReceive(android.content.Context,android.content.Intent):42:42 -> onReceive
-    36:42:void onReceive(android.content.Context,android.content.Intent):46:46 -> onReceive
-    43:49:void onReceive(android.content.Context,android.content.Intent):48:48 -> onReceive
-    50:57:void onReceive(android.content.Context,android.content.Intent):49:49 -> onReceive
-    58:61:void onReceive(android.content.Context,android.content.Intent):54:54 -> onReceive
-    62:64:void onReceive(android.content.Context,android.content.Intent):57:57 -> onReceive
-    65:70:void onReceive(android.content.Context,android.content.Intent):58:58 -> onReceive
-    1:6:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):27:27 -> onUpdate
-    7:9:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):28:28 -> onUpdate
-    10:15:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):29:29 -> onUpdate
-    16:21:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):31:31 -> onUpdate
-app.signalnoise.twa.widget.SN2x1R -> app.signalnoise.twa.widget.SN2x1R:
+app.signalnoise.twa.widget.SN2x1R -> J.g:
 # {"id":"sourceFile","fileName":"SN2x1R.java"}
-    1:4:void <init>():20:20 -> <init>
-    1:10:void setupAutoRefresh(android.content.Context,int):76:76 -> a
-    11:17:void setupAutoRefresh(android.content.Context,int):78:78 -> a
-    18:22:void setupAutoRefresh(android.content.Context,int):79:79 -> a
-    23:29:void setupAutoRefresh(android.content.Context,int):80:80 -> a
-    30:33:void setupAutoRefresh(android.content.Context,int):82:82 -> a
-    34:42:void setupAutoRefresh(android.content.Context,int):90:90 -> a
-    43:45:void setupAutoRefresh(android.content.Context,int):91:91 -> a
-    46:67:void setupAutoRefresh(android.content.Context,int):93:93 -> a
-    68:73:void setupAutoRefresh(android.content.Context,int):96:96 -> a
-    1:13:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):120:120 -> b
-    14:20:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):123:123 -> b
-    21:27:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):124:124 -> b
-    28:35:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):125:125 -> b
-    36:44:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):126:126 -> b
-    45:64:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):131:131 -> b
-    65:66:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):133:133 -> b
-    67:71:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):136:136 -> b
-    72:93:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):137:137 -> b
-    94:102:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):140:140 -> b
-    103:107:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):141:141 -> b
-    108:111:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):142:142 -> b
-    112:116:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):144:144 -> b
-    117:119:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):146:146 -> b
-    120:148:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):148:148 -> b
-    149:153:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):151:151 -> b
-    154:164:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):154:154 -> b
-    165:171:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):155:155 -> b
-    172:176:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):156:156 -> b
-    177:180:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):157:157 -> b
-    1:8:void onDeleted(android.content.Context,int[]):103:103 -> onDeleted
-    9:14:void onDeleted(android.content.Context,int[]):105:105 -> onDeleted
-    15:21:void onDeleted(android.content.Context,int[]):106:106 -> onDeleted
-    22:28:void onDeleted(android.content.Context,int[]):107:107 -> onDeleted
-    29:34:void onDeleted(android.content.Context,int[]):108:108 -> onDeleted
-    35:37:void onDeleted(android.content.Context,int[]):112:112 -> onDeleted
-    38:44:void onDeleted(android.content.Context,int[]):113:113 -> onDeleted
-    1:3:void onReceive(android.content.Context,android.content.Intent):40:40 -> onReceive
-    4:15:void onReceive(android.content.Context,android.content.Intent):42:42 -> onReceive
-    16:22:void onReceive(android.content.Context,android.content.Intent):43:43 -> onReceive
-    23:27:void onReceive(android.content.Context,android.content.Intent):46:46 -> onReceive
-    28:31:void onReceive(android.content.Context,android.content.Intent):49:49 -> onReceive
-    32:42:void onReceive(android.content.Context,android.content.Intent):50:50 -> onReceive
-    43:49:void onReceive(android.content.Context,android.content.Intent):54:54 -> onReceive
-    50:56:void onReceive(android.content.Context,android.content.Intent):56:56 -> onReceive
-    57:64:void onReceive(android.content.Context,android.content.Intent):57:57 -> onReceive
-    65:67:void onReceive(android.content.Context,android.content.Intent):62:62 -> onReceive
-    68:88:void onReceive(android.content.Context,android.content.Intent):63:63 -> onReceive
-    89:91:void onReceive(android.content.Context,android.content.Intent):66:66 -> onReceive
-    92:96:void onReceive(android.content.Context,android.content.Intent):67:67 -> onReceive
-    97:119:void onReceive(android.content.Context,android.content.Intent):68:68 -> onReceive
-    1:6:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):27:27 -> onUpdate
-    7:9:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):28:28 -> onUpdate
-    10:15:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):31:31 -> onUpdate
-    16:21:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):35:35 -> onUpdate
-app.signalnoise.twa.widget.SN3x1R -> app.signalnoise.twa.widget.SN3x1R:
+app.signalnoise.twa.widget.SN3x1R -> J.h:
 # {"id":"sourceFile","fileName":"SN3x1R.java"}
-    1:4:void <init>():13:13 -> <init>
-    1:11:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):26:26 -> a
-    12:18:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):28:28 -> a
-    19:27:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):29:29 -> a
-    28:47:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):31:31 -> a
-    48:52:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):32:32 -> a
-    53:56:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):34:34 -> a
-    1:6:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):18:18 -> onUpdate
-    7:12:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):19:19 -> onUpdate
-    13:18:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):21:21 -> onUpdate
-app.signalnoise.twa.widget.SN4x1R -> app.signalnoise.twa.widget.SN4x1R:
+app.signalnoise.twa.widget.SN4x1R -> J.i:
 # {"id":"sourceFile","fileName":"SN4x1R.java"}
-    1:4:void <init>():13:13 -> <init>
-    1:11:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):26:26 -> a
-    12:18:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):28:28 -> a
-    19:27:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):29:29 -> a
-    28:47:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):31:31 -> a
-    48:52:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):32:32 -> a
-    53:56:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):34:34 -> a
-    1:6:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):18:18 -> onUpdate
-    7:12:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):19:19 -> onUpdate
-    13:18:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):21:21 -> onUpdate
-app.signalnoise.twa.widget.SignalNoiseWidget -> J.d:
+app.signalnoise.twa.widget.SignalNoiseWidget -> J.j:
 # {"id":"sourceFile","fileName":"SignalNoiseWidget.java"}
-app.signalnoise.twa.widget.SignalNoiseWidgetProvider -> J.e:
+app.signalnoise.twa.widget.SignalNoiseWidgetProvider -> J.k:
 # {"id":"sourceFile","fileName":"SignalNoiseWidgetProvider.java"}
     1:7:void updateAllWidgets(android.content.Context,int,boolean):75:75 -> a
     8:13:void updateAllWidgets(android.content.Context,int,boolean):76:76 -> a
@@ -23104,7 +23000,64 @@ app.signalnoise.twa.widget.SignalNoiseWidgetProvider -> J.e:
     54:64:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int):63:63 -> b
     65:71:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int):64:64 -> b
     72:75:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int,int):65:65 -> b
-app.signalnoise.twa.widget.WidgetUpdateHelper -> J.f:
+app.signalnoise.twa.widget.StarField -> app.signalnoise.twa.widget.StarField:
+# {"id":"sourceFile","fileName":"StarField.java"}
+    1:4:void <init>():15:15 -> <init>
+    1:8:java.lang.String generateConstellation(int,int):47:47 -> a
+    9:14:java.lang.String generateConstellation(int,int):50:50 -> a
+    15:22:java.lang.String generateConstellation(int,int):51:51 -> a
+    23:28:java.lang.String generateConstellation(int,int):54:54 -> a
+    29:34:java.lang.String generateConstellation(int,int):57:57 -> a
+    35:42:java.lang.String generateConstellation(int,int):58:58 -> a
+    43:47:java.lang.String generateConstellation(int,int):61:61 -> a
+    1:11:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):28:28 -> b
+    12:18:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):30:30 -> b
+    19:26:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):31:31 -> b
+    27:33:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):32:32 -> b
+    34:40:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):33:33 -> b
+    41:44:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):35:35 -> b
+    45:66:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):37:37 -> b
+    67:71:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):38:38 -> b
+    72:75:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):40:40 -> b
+    1:6:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):20:20 -> onUpdate
+    7:12:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):21:21 -> onUpdate
+    13:18:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):23:23 -> onUpdate
+app.signalnoise.twa.widget.TimeDilation -> app.signalnoise.twa.widget.TimeDilation:
+# {"id":"sourceFile","fileName":"TimeDilation.java"}
+    1:4:void <init>():16:16 -> <init>
+    5:11:java.lang.String calculateDilation(int):51:51 -> a
+    12:18:java.lang.String calculateDilation(int):52:52 -> a
+    19:21:java.lang.String calculateDilation(int):53:53 -> a
+    22:24:java.lang.String calculateDilation(int):54:54 -> a
+    2:12:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):29:29 -> b
+    13:18:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):31:31 -> b
+    19:26:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):32:32 -> b
+    27:30:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):35:35 -> b
+    31:64:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):36:36 -> b
+    65:68:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):39:39 -> b
+    69:73:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):41:41 -> b
+    74:98:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):42:42 -> b
+    99:102:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):44:44 -> b
+    1:6:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):21:21 -> onUpdate
+    7:12:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):22:22 -> onUpdate
+    13:18:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):24:24 -> onUpdate
+app.signalnoise.twa.widget.WavePattern -> app.signalnoise.twa.widget.WavePattern:
+# {"id":"sourceFile","fileName":"WavePattern.java"}
+    1:4:void <init>():15:15 -> <init>
+    5:11:java.lang.String generateWavePattern(int):45:45 -> a
+    12:14:java.lang.String generateWavePattern(int):46:46 -> a
+    15:17:java.lang.String generateWavePattern(int):47:47 -> a
+    1:11:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):28:28 -> b
+    12:18:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):30:30 -> b
+    19:26:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):31:31 -> b
+    27:30:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):33:33 -> b
+    31:52:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):35:35 -> b
+    53:57:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):36:36 -> b
+    58:61:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):38:38 -> b
+    1:6:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):20:20 -> onUpdate
+    7:12:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):21:21 -> onUpdate
+    13:18:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):23:23 -> onUpdate
+app.signalnoise.twa.widget.WidgetUpdateHelper -> J.l:
 # {"id":"sourceFile","fileName":"WidgetUpdateHelper.java"}
     1:7:void updateAllWidgets(android.content.Context):18:18 -> a
     8:12:void updateAllWidgets(android.content.Context):19:19 -> a
@@ -23133,6 +23086,49 @@ app.signalnoise.twa.widget.WidgetUpdateReceiver -> app.signalnoise.twa.widget.Wi
     13:19:void onReceive(android.content.Context,android.content.Intent):15:15 -> onReceive
     20:26:void onReceive(android.content.Context,android.content.Intent):16:16 -> onReceive
     27:30:void onReceive(android.content.Context,android.content.Intent):19:19 -> onReceive
+app.signalnoise.twa.widget.WinnerProgress30s -> app.signalnoise.twa.widget.WinnerProgress30s:
+# {"id":"sourceFile","fileName":"WinnerProgress30s.java"}
+    1:4:void <init>():20:20 -> <init>
+    3:7:java.lang.String createProgressBar(int):106:106 -> a
+    8:9:java.lang.String createProgressBar(int):108:109 -> a
+    10:18:java.lang.String createProgressBar(int):109:109 -> a
+    19:24:java.lang.String createProgressBar(int):113:113 -> a
+    25:32:java.lang.String createProgressBar(int):115:115 -> a
+    33:37:java.lang.String createProgressBar(int):119:119 -> a
+    1:8:void setupAutoRefresh(android.content.Context,int):66:66 -> b
+    9:15:void setupAutoRefresh(android.content.Context,int):67:67 -> b
+    16:24:void setupAutoRefresh(android.content.Context,int):68:68 -> b
+    25:28:void setupAutoRefresh(android.content.Context,int):69:69 -> b
+    29:36:void setupAutoRefresh(android.content.Context,int):72:72 -> b
+    37:41:void setupAutoRefresh(android.content.Context,int):73:73 -> b
+    42:49:void setupAutoRefresh(android.content.Context,int):75:75 -> b
+    1:11:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):81:81 -> c
+    12:18:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):83:83 -> c
+    19:27:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):84:84 -> c
+    28:49:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):86:86 -> c
+    50:54:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):87:87 -> c
+    55:58:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):90:90 -> c
+    59:63:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):91:91 -> c
+    64:72:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):93:93 -> c
+    73:76:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):94:94 -> c
+    77:81:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):96:96 -> c
+    82:85:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):98:98 -> c
+    86:93:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):101:101 -> c
+    1:3:void onReceive(android.content.Context,android.content.Intent):36:36 -> onReceive
+    4:15:void onReceive(android.content.Context,android.content.Intent):38:38 -> onReceive
+    16:20:void onReceive(android.content.Context,android.content.Intent):39:39 -> onReceive
+    21:24:void onReceive(android.content.Context,android.content.Intent):41:41 -> onReceive
+    25:35:void onReceive(android.content.Context,android.content.Intent):42:42 -> onReceive
+    36:42:void onReceive(android.content.Context,android.content.Intent):46:46 -> onReceive
+    43:49:void onReceive(android.content.Context,android.content.Intent):48:48 -> onReceive
+    50:57:void onReceive(android.content.Context,android.content.Intent):49:49 -> onReceive
+    58:61:void onReceive(android.content.Context,android.content.Intent):54:54 -> onReceive
+    62:64:void onReceive(android.content.Context,android.content.Intent):57:57 -> onReceive
+    65:70:void onReceive(android.content.Context,android.content.Intent):58:58 -> onReceive
+    1:6:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):27:27 -> onUpdate
+    7:9:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):28:28 -> onUpdate
+    10:15:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):29:29 -> onUpdate
+    16:21:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):31:31 -> onUpdate
 com.google.androidbrowserhelper.R$drawable -> K.a:
     int ic_site_settings -> a
 com.google.androidbrowserhelper.R$string -> K.b:

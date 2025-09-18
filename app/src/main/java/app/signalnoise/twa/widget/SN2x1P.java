@@ -69,7 +69,7 @@ public class SN2x1P extends AppWidgetProvider {
             PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 context, appWidgetId + 2000, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
-            long triggerTime = SystemClock.elapsedRealtime() + 600000; // 10 minutes (CONSERVATIVE)
+            long triggerTime = SystemClock.elapsedRealtime() + 30000; // 30 seconds (RESPONSIVE)
             alarmManager.setExact(AlarmManager.ELAPSED_REALTIME, triggerTime, pendingIntent);
         } catch (Exception e) {
             Log.e(TAG, "Failed to setup auto-refresh", e);

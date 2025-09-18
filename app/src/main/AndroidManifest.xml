@@ -167,46 +167,10 @@
         </provider>
 
 
-        <!-- SN2x1R: 2x1 Redis Live Data (WINNER - Keep this) -->
-        <receiver android:name=".widget.SN2x1R"
+        <!-- WINNER: Progress Bar with 30-second refresh -->
+        <receiver android:name=".widget.WinnerProgress30s"
             android:exported="true"
-            android:label="SN2x1R">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_sn2x1r_info" />
-        </receiver>
-
-        <!-- SN4x1R: 4x1 Wide Redis Widget -->
-        <receiver android:name=".widget.SN4x1R"
-            android:exported="true"
-            android:label="SN4x1R">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_sn4x1r_info" />
-        </receiver>
-
-        <!-- SN1x1F: 1x1 Fast Update Widget -->
-        <receiver android:name=".widget.SN1x1F"
-            android:exported="true"
-            android:label="SN1x1F">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_sn1x1f_info" />
-        </receiver>
-
-        <!-- SN2x1P: 2x1 Progress Bar Widget -->
-        <receiver android:name=".widget.SN2x1P"
-            android:exported="true"
-            android:label="SN2x1P">
+            android:label="Progress_Winner">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -215,28 +179,83 @@
                 android:resource="@xml/widget_sn2x1p_info" />
         </receiver>
 
-        <!-- SN3x1R: 3x1 Redis with Trend Indicator -->
-        <receiver android:name=".widget.SN3x1R"
+        <!-- SOPHISTICATED BATCH v0.9.0 - KWGT-Inspired -->
+
+        <receiver android:name=".widget.QuantumParticles"
             android:exported="true"
-            android:label="SN3x1R">
+            android:label="Quantum_Particles">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/widget_sn3x1r_info" />
+                android:resource="@xml/widget_sn2x1p_info" />
         </receiver>
 
-        <!-- SN2x1C: 2x1 Color Gradient Widget -->
-        <receiver android:name=".widget.SN2x1C"
+        <receiver android:name=".widget.NothingMinimal"
             android:exported="true"
-            android:label="SN2x1C">
+            android:label="Nothing_Minimal">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/widget_sn2x1c_info" />
+                android:resource="@xml/widget_sn2x1p_info" />
+        </receiver>
+
+        <receiver android:name=".widget.ColorAdaptive"
+            android:exported="true"
+            android:label="Color_Adaptive">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_sn2x1p_info" />
+        </receiver>
+
+        <receiver android:name=".widget.WavePattern"
+            android:exported="true"
+            android:label="Wave_Pattern">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_sn2x1p_info" />
+        </receiver>
+
+        <receiver android:name=".widget.StarField"
+            android:exported="true"
+            android:label="Star_Field">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_sn2x1p_info" />
+        </receiver>
+
+        <receiver android:name=".widget.TimeDilation"
+            android:exported="true"
+            android:label="Time_Dilation">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_sn2x1p_info" />
+        </receiver>
+
+        <receiver android:name=".widget.GeometricPulse"
+            android:exported="true"
+            android:label="Geometric_Pulse">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_sn2x1p_info" />
         </receiver>
 
         <!-- Widget Update Receiver -->

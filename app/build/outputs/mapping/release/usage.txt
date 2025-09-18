@@ -7709,6 +7709,7 @@ app.signalnoise.twa.R$id:
     public static int streak_number
     public static int streak_text
     public static int streak_value
+    public static int text
     public static int text_compact
     public static int today_count
     public static int update_time
@@ -7718,9 +7719,11 @@ app.signalnoise.twa.R$id:
     public static int wave_canvas_large
     public static int widget_container_2x2
     public static int widget_container_4x2
+    public static int widget_label
     public static int widget_noise_count
     public static int widget_root
     public static int widget_signal_count
+    public static int widget_speed
     public static int widget_status
     public static int widget_title
     private void <init>()
@@ -7738,6 +7741,9 @@ app.signalnoise.twa.R$layout:
     public static int widget_signal_wave_fallback
     public static int widget_signal_wave_fixed
     public static int widget_signal_wave_simple
+    public static int widget_simple_fix
+    public static int widget_sn1x1f
+    public static int widget_sn2x1r
     public static int widget_working
     private void <init>()
 app.signalnoise.twa.R$mipmap
@@ -7748,6 +7754,8 @@ app.signalnoise.twa.SignalNoiseDataBridge
 app.signalnoise.twa.WidgetUpdateService:
     private static final java.lang.String TAG
     private static final long UPDATE_INTERVAL
+app.signalnoise.twa.widget.ColorAdaptive:
+    private static final java.lang.String PREFS_NAME
 app.signalnoise.twa.widget.DataPollingService:
     private static final long POLL_INTERVAL
     private static final java.lang.String PREFS_NAME
@@ -7756,7 +7764,13 @@ app.signalnoise.twa.widget.DebugWidget:
     public void <init>()
     public void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[])
     private void updateDebugWidget(android.content.Context,android.appwidget.AppWidgetManager,int)
+app.signalnoise.twa.widget.GeometricPulse:
+    private static final java.lang.String PREFS_NAME
 app.signalnoise.twa.widget.MinimalTestWidget
+app.signalnoise.twa.widget.NothingMinimal:
+    private static final java.lang.String PREFS_NAME
+app.signalnoise.twa.widget.QuantumParticles:
+    private static final java.lang.String PREFS_NAME
 app.signalnoise.twa.widget.RedisDataFetcher:
     private static final java.lang.String API_URL
     private static final java.lang.String PREFS_NAME
@@ -7766,20 +7780,47 @@ app.signalnoise.twa.widget.SN1x1F:
     private static final java.lang.String ACTION_AUTO_UPDATE
     private static final java.lang.String PREFS_NAME
     private static final java.lang.String TAG
+    public void <init>()
+    public void onDeleted(android.content.Context,int[])
+    public void onReceive(android.content.Context,android.content.Intent)
+    public void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[])
+    private void setupFastRefresh(android.content.Context,int)
+    private void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int)
 app.signalnoise.twa.widget.SN2x1C:
     private static final java.lang.String PREFS_NAME
+    public void <init>()
+    public void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[])
+    private void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int)
 app.signalnoise.twa.widget.SN2x1P:
     private static final java.lang.String ACTION_AUTO_UPDATE
     private static final java.lang.String PREFS_NAME
     private static final java.lang.String TAG
+    public void <init>()
+    private java.lang.String createProgressBar(int)
+    public void onReceive(android.content.Context,android.content.Intent)
+    public void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[])
+    private void setupAutoRefresh(android.content.Context,int)
+    private void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int)
 app.signalnoise.twa.widget.SN2x1R:
     private static final java.lang.String ACTION_AUTO_UPDATE
     private static final java.lang.String PREFS_NAME
     private static final java.lang.String TAG
+    public void <init>()
+    public void onDeleted(android.content.Context,int[])
+    public void onReceive(android.content.Context,android.content.Intent)
+    public void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[])
+    private void setupAutoRefresh(android.content.Context,int)
+    private void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int)
 app.signalnoise.twa.widget.SN3x1R:
     private static final java.lang.String PREFS_NAME
+    public void <init>()
+    public void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[])
+    private void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int)
 app.signalnoise.twa.widget.SN4x1R:
     private static final java.lang.String PREFS_NAME
+    public void <init>()
+    public void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[])
+    private void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int)
 app.signalnoise.twa.widget.SignalNoiseWidget:
     private static final java.lang.String PREFS_NAME
     private static final java.lang.String TAG
@@ -7830,8 +7871,14 @@ app.signalnoise.twa.widget.SignalWaveWidgetProvider$BitmapCache
 app.signalnoise.twa.widget.SignalWaveWidgetProvider$WidgetState
 app.signalnoise.twa.widget.SignalWaveWidgetProvider
 app.signalnoise.twa.widget.SimpleSignalWaveProvider
+app.signalnoise.twa.widget.StarField:
+    private static final java.lang.String PREFS_NAME
 app.signalnoise.twa.widget.TestWidget
+app.signalnoise.twa.widget.TimeDilation:
+    private static final java.lang.String PREFS_NAME
 app.signalnoise.twa.widget.UltraSimpleWidget
+app.signalnoise.twa.widget.WavePattern:
+    private static final java.lang.String PREFS_NAME
 app.signalnoise.twa.widget.WidgetUpdateHelper:
     private static final java.lang.String TAG
     public void <init>()
@@ -7839,6 +7886,10 @@ app.signalnoise.twa.widget.WidgetUpdateReceiver:
     public static final java.lang.String ACTION_UPDATE_WIDGET
     public static final java.lang.String EXTRA_IS_SIGNAL
     public static final java.lang.String EXTRA_RATIO
+app.signalnoise.twa.widget.WinnerProgress30s:
+    private static final java.lang.String ACTION_AUTO_UPDATE
+    private static final java.lang.String PREFS_NAME
+    private static final java.lang.String TAG
 com.google.androidbrowserhelper.BuildConfig
 com.google.androidbrowserhelper.R$drawable:
     private void <init>()
