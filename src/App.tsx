@@ -571,15 +571,6 @@ function AppContent() {
     if (isLoaded && data && !isLoadingFromCloud && hasAttemptedCloudLoad) {
       const currentTime = Date.now();
 
-      // Calculate signal_ratio and update React state if needed
-      const ratio = getTodayRatio(data.tasks);
-
-      // Only update state if signal_ratio has changed to prevent infinite loops
-      if (data.signal_ratio !== ratio) {
-        setData(prev => ({ ...prev, signal_ratio: ratio }));
-        return; // Exit early - the state update will trigger this effect again
-      }
-
       const dataSize = JSON.stringify(data).length;
       const dataSizeKB = (dataSize / 1024).toFixed(2);
       const timeSinceLastSync = syncTracker.current.lastSyncTime ?
@@ -597,7 +588,7 @@ function AppContent() {
         dataSizeDelta: syncTracker.current.lastDataSize ?
           `${dataSize - syncTracker.current.lastDataSize} bytes` : 'initial',
         taskCount: data?.tasks?.length || 0,
-        currentSignalRatio: ratio,
+        currentSignalRatio: data.signal_ratio,
         hasPatterns: !!data?.patterns && Object.keys(data.patterns).length > 0,
         hasHistory: !!data?.history && data.history.length > 0,
         hasSettings: !!data?.settings,
@@ -633,14 +624,15 @@ function AppContent() {
 
       // Update Android widget data - SLC approach
       try {
+        const currentRatio = data.signal_ratio || 0;
         // Store in multiple places for maximum compatibility
-        localStorage.setItem('android.widget.ratio', ratio.toString());
-        localStorage.setItem('widget_ratio', ratio.toString());
+        localStorage.setItem('android.widget.ratio', currentRatio.toString());
+        localStorage.setItem('widget_ratio', currentRatio.toString());
 
         // Also try to communicate via Android interface if available
         if ('Android' in window) {
           try {
-            (window as any).Android?.updateWidgetData?.(ratio);
+            (window as any).Android?.updateWidgetData?.(currentRatio);
           } catch (e) {
             // Interface not available, that's OK
           }
@@ -1164,8 +1156,11 @@ function AppContent() {
         triggerAchievementFeedback(newBadges);
       }
 
-      // Update Android widget with new ratio
+      // Calculate and include signal_ratio in the data update (prevents separate state update)
       const ratio = getTodayRatio(newData.tasks);
+      newData.signal_ratio = ratio;
+
+      // Update Android widget with new ratio
       updateAndroidWidget(ratio);
 
       return newData;
@@ -1189,8 +1184,11 @@ function AppContent() {
         )
       };
 
-      // Update Android widget
+      // Calculate and include signal_ratio in the data update
       const ratio = getTodayRatio(newData.tasks);
+      newData.signal_ratio = ratio;
+
+      // Update Android widget
       updateAndroidWidget(ratio);
 
       return newData;
@@ -1204,8 +1202,11 @@ function AppContent() {
         tasks: prev.tasks.filter(task => task.id !== id)
       };
 
-      // Update Android widget
+      // Calculate and include signal_ratio in the data update
       const ratio = getTodayRatio(newData.tasks);
+      newData.signal_ratio = ratio;
+
+      // Update Android widget
       updateAndroidWidget(ratio);
 
       return newData;
