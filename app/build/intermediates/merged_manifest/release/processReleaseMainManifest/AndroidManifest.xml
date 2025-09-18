@@ -113,9 +113,6 @@
                 android:name="android.support.customtabs.trusted.FILE_PROVIDER_AUTHORITY"
                 android:value="@string/providerAuthority" />
             <meta-data
-                android:name="android.app.shortcuts"
-                android:resource="@xml/shortcuts" />
-            <meta-data
                 android:name="android.support.customtabs.trusted.FALLBACK_STRATEGY"
                 android:value="@string/fallbackType" />
             <meta-data
@@ -169,7 +166,7 @@
         <receiver
             android:name="app.signalnoise.twa.widget.T1"
             android:exported="true"
-            android:label="• spacer" >
+            android:label="S/N Logo" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>

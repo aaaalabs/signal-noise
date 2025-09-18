@@ -7,15 +7,15 @@ import android.widget.RemoteViews;
 import app.signalnoise.twa.R;
 
 /**
- * T1 - Ultra minimal test for Android 15
- * No fontFamily, no dynamic calls, just basic TextView
+ * T1 - Elegant 1x1 logo widget (ID spacer)
+ * Shows Signal/Noise logo as minimal brand presence
  */
 public class T1 extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         for (int appWidgetId : appWidgetIds) {
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_t1);
-            views.setTextViewText(R.id.simple_text, "TEST");
+            // Logo widget needs no text updates - just shows icon
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }
     }

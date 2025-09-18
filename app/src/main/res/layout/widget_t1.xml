@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/simple_text"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
     android:gravity="center"
-    android:text="TEST"
-    android:textColor="#00FF88"
-    android:textSize="24sp" />
+    android:background="#0a000000"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/logo_image"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@mipmap/ic_launcher"
+        android:alpha="0.7" />
+
+</LinearLayout>

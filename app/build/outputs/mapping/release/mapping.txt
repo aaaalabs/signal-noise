@@ -3,8 +3,8 @@
 # min_api: 21
 # common_typos_disable
 # {"id":"com.android.tools.r8.mapping","version":"2.2"}
-# pg_map_id: 65aac94
-# pg_map_hash: SHA-256 65aac94fca03e83581cc87d8222c4d51d31eefffde59c1f2f8704542e5ba7f77
+# pg_map_id: fd1cb66
+# pg_map_hash: SHA-256 fd1cb662f5aa0cd78624f067100c8fb43a0a3b650ad6626c7f230a3e30e07d29
 android.support.customtabs.ICustomTabsCallback -> a.a:
 # {"id":"sourceFile","fileName":"ICustomTabsCallback.java"}
     java.lang.String DESCRIPTOR -> a
@@ -22737,10 +22737,9 @@ app.signalnoise.twa.R$id -> I.b:
     int noise_text -> a
     int ratio_text -> b
     int signal_text -> c
-    int simple_text -> d
-    int trend_text -> e
-    int widget_container -> f
-    int widget_ratio -> g
+    int trend_text -> d
+    int widget_container -> e
+    int widget_ratio -> f
 app.signalnoise.twa.R$layout -> I.c:
     int widget_1x1 -> a
     int widget_t1 -> b
@@ -22932,8 +22931,7 @@ app.signalnoise.twa.widget.T1 -> app.signalnoise.twa.widget.T1:
     1:4:void <init>():13:13 -> <init>
     1:6:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):16:16 -> onUpdate
     7:17:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):17:17 -> onUpdate
-    18:24:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):18:18 -> onUpdate
-    25:31:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):19:19 -> onUpdate
+    18:24:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):19:19 -> onUpdate
 app.signalnoise.twa.widget.W4 -> app.signalnoise.twa.widget.W4:
 # {"id":"sourceFile","fileName":"W4.java"}
     1:4:void <init>():16:16 -> <init>

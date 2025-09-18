@@ -7718,6 +7718,7 @@ app.signalnoise.twa.R$id:
     public static int flow_state
     public static int hourly_pattern
     public static int last_update
+    public static int logo_image
     public static int minimal_field
     public static int minimal_text
     public static int noise_count
