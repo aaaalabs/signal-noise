@@ -312,3 +312,33 @@ We follow conventional commits:
 
 APK: signal-noise-20250918-1220.apk
 
+### [2.0.0] - 2025-09-18 - FLOW STATE MEDITATION WIDGET! 🧘
+
+#### 🎯 Jony Ive-Worthy Innovation
+- **REVOLUTIONARY**: First Android widget that guides users toward flow state
+- **WINNER SELECTED**: QWinner (Quantum particles) - proven Canvas rendering
+- **LEAN STRATEGY**: Removed non-performers (W, ColorAdaptive) for efficiency
+- **FLOW STATE WIDGET (F)**: Breathing circle meditation guide
+
+#### Visual Innovation Breakthrough
+- **Perfect Circle**: Flow state achieved (Signal/Noise balance)
+- **Fragmented Circle**: Distracted state (honest feedback)
+- **Breathing Animation**: Golden ratio breathing rhythm (automatic)
+- **Color Psychology**: Cool (distraction) to warm (flow) gradients
+- **Tap-to-sync**: Manual Redis refresh on widget tap
+
+#### Technical Achievements
+- **Complete APK deployment workflow** added to CLAUDE.md
+- **Git safety net** mandatory backup before resets
+- **Short widget names** (QWinner, F) for debugging
+- **Canvas meditation graphics** with radial gradients
+- **Flow level states**: Flow/Focus/Drift/Scatter/Chaos
+
+#### Why Revolutionary
+- **Goes beyond measurement** - actively guides toward flow state
+- **Emotionally resonant** - users recognize mental state instantly
+- **Meditation aid** - breathing circle guides peak performance
+- **First psychological transformation widget** in Android
+
+APK: signal-noise-20250918-1421.apk
+
