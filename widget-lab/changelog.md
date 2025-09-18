@@ -342,3 +342,33 @@ APK: signal-noise-20250918-1220.apk
 
 APK: signal-noise-20250918-1421.apk
 
+### [3.0.0] - 2025-09-18 - APPLE-GRADE MINIMAL PERFECTION! 🍎
+
+#### 🎯 Jony Ive Design Philosophy Applied
+- **REJECTED**: Nerdy fractal graphics (breathing circles, wave interference)
+- **APPROVED**: Pure typography + color psychology
+- **WINNER KEPT**: Q (Quantum) - proven Canvas rendering capability
+- **LEAN STRATEGY**: Removed all non-Apple-grade widgets
+
+#### Apple-Grade Minimal Candidates
+- **M**: Pure typography - SF Pro Ultra Light with Apple color spectrum
+- **T**: Typography showcase - "Signal Rate" with clean percentage
+- **S**: Task stack - minimal signal/noise count with percentage
+- **G**: Glowing accent - ⚡ symbol with clean percentage
+- **A**: Apple aesthetic - Flow/Focus/Drift states with ratio
+
+#### Design Principles
+- **"Less is exponentially more"** - remove everything decorative
+- **Typography as art** - massive, clean percentage display
+- **Apple color psychology** - red (#FF3B30) → orange (#FF9500) → green (#34C759)
+- **Mathematical spacing** - golden ratio proportions
+- **Meaningful only** - task indicators only if they add value
+
+#### Why Jony Ive Would Approve
+- **Emotionally honest** - color reflects productivity state
+- **Functionally pure** - just the essential information
+- **Typographically sophisticated** - sans-serif-thin at scale
+- **Perfect for lock screen** - ready for Android 16 QPR1
+
+APK: signal-noise-20250918-1450.apk
+
