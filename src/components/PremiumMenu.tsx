@@ -127,7 +127,33 @@ export default function PremiumMenu({
     };
   }, [show, onClose]);
 
-  const handleSignOut = () => {
+  const handleSignOut = async () => {
+    try {
+      console.log('🚪 Global sign out initiated...');
+
+      // Get current session token
+      const sessionData = JSON.parse(localStorage.getItem('sessionData') || '{}');
+
+      if (sessionData.sessionToken && !sessionData.sessionToken.startsWith('dev-session-token-')) {
+        // Call global revoke endpoint
+        const response = await fetch('/api/auth/revoke-access', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${sessionData.sessionToken}`
+          }
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          console.log('✅ Global access revoked:', result.message);
+        } else {
+          console.log('⚠️ Revoke API failed, proceeding with local cleanup');
+        }
+      }
+    } catch (error) {
+      console.log('⚠️ Revoke request failed, proceeding with local cleanup:', error);
+    }
+
     // Clear ALL localStorage (not just session-specific items)
     localStorage.clear();
 
@@ -319,8 +345,9 @@ export default function PremiumMenu({
             e.currentTarget.style.backgroundColor = 'transparent';
             e.currentTarget.style.color = '#ccc';
           }}
+          title="Revokes access on all devices - use magic link to restore"
         >
-          Sign Out
+          Sign Out All Devices
         </button>
       </div>
 

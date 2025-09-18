@@ -107,7 +107,7 @@ export default async function handler(req, res) {
     console.log('✅ Magic link verified successfully:', {
       email,
       tier: userData.tier,
-      sessionToken: sessionToken.substring(0, 8) + '...'
+      accessToken: accessToken.substring(0, 8) + '...'
     });
 
     return res.status(200).json(successResponse);
