@@ -641,6 +641,8 @@ drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
 drawable compact_glow
+drawable compact_glow_green
+drawable compact_glow_orange
 drawable gradient_drift
 drawable gradient_flow
 drawable gradient_focus

@@ -132,6 +132,10 @@
         "source": "app.signalnoise.twa.app-main-26:/layout/widget_j4.xml"
     },
     {
+        "merged": "app.signalnoise.twa.app-release-25:/drawable_compact_glow_orange.xml.flat",
+        "source": "app.signalnoise.twa.app-main-26:/drawable/compact_glow_orange.xml"
+    },
+    {
         "merged": "app.signalnoise.twa.app-release-25:/mipmap-xxhdpi_ic_maskable.png.flat",
         "source": "app.signalnoise.twa.app-main-26:/mipmap-xxhdpi/ic_maskable.png"
     },
@@ -178,6 +182,10 @@
     {
         "merged": "app.signalnoise.twa.app-release-25:/drawable-hdpi_shortcut_signal.png.flat",
         "source": "app.signalnoise.twa.app-main-26:/drawable-hdpi/shortcut_signal.png"
+    },
+    {
+        "merged": "app.signalnoise.twa.app-release-25:/drawable_compact_glow_green.xml.flat",
+        "source": "app.signalnoise.twa.app-main-26:/drawable/compact_glow_green.xml"
     },
     {
         "merged": "app.signalnoise.twa.app-release-25:/mipmap-mdpi_ic_launcher.png.flat",

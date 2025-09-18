@@ -18,6 +18,8 @@ drawable ai_icon
 drawable ai_insight_bg
 drawable ai_pulse_dot
 drawable compact_glow
+drawable compact_glow_green
+drawable compact_glow_orange
 drawable gradient_drift
 drawable gradient_flow
 drawable gradient_focus
