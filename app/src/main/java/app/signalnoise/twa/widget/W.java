@@ -48,6 +48,17 @@ public class W extends AppWidgetProvider {
             views.setTextViewText(R.id.wave_ratio, "W: " + ratio + "%");
             views.setTextViewText(R.id.wave_type, interferenceType);
 
+            // Add tap-to-sync functionality
+            android.content.Intent syncIntent = new android.content.Intent(context, W.class);
+            syncIntent.setAction(android.appwidget.AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+            syncIntent.putExtra(android.appwidget.AppWidgetManager.EXTRA_APPWIDGET_IDS, new int[]{appWidgetId});
+
+            android.app.PendingIntent syncPendingIntent = android.app.PendingIntent.getBroadcast(
+                context, appWidgetId + 1000, syncIntent,
+                android.app.PendingIntent.FLAG_UPDATE_CURRENT | android.app.PendingIntent.FLAG_IMMUTABLE);
+
+            views.setOnClickPendingIntent(R.id.wave_field, syncPendingIntent);
+
             appWidgetManager.updateAppWidget(appWidgetId, views);
 
         } catch (Exception e) {

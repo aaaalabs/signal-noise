@@ -3,8 +3,8 @@
 # min_api: 21
 # common_typos_disable
 # {"id":"com.android.tools.r8.mapping","version":"2.2"}
-# pg_map_id: 849121d
-# pg_map_hash: SHA-256 849121d3fcb898ac3c24053905c4bc57fc1d0ddfb120f0f5745956e0acff55b3
+# pg_map_id: 9f724e9
+# pg_map_hash: SHA-256 9f724e9bf50532ededee608bfd950971f13f0c456d16704efe7007a6d67b5d21
 android.support.customtabs.ICustomTabsCallback -> a.a:
 # {"id":"sourceFile","fileName":"ICustomTabsCallback.java"}
     java.lang.String DESCRIPTOR -> a
@@ -22859,36 +22859,41 @@ app.signalnoise.twa.widget.DebugWidget -> J.a:
 app.signalnoise.twa.widget.Q -> app.signalnoise.twa.widget.Q:
 # {"id":"sourceFile","fileName":"Q.java"}
     1:4:void <init>():21:21 -> <init>
-    7:12:android.graphics.Bitmap generateQuantumField(int,int,int):64:64 -> a
-    13:17:android.graphics.Bitmap generateQuantumField(int,int,int):65:65 -> a
-    18:26:android.graphics.Bitmap generateQuantumField(int,int,int):68:68 -> a
-    27:32:android.graphics.Bitmap generateQuantumField(int,int,int):70:70 -> a
-    33:35:android.graphics.Bitmap generateQuantumField(int,int,int):71:71 -> a
-    36:56:android.graphics.Bitmap generateQuantumField(int,int,int):73:73 -> a
-    57:81:android.graphics.Bitmap generateQuantumField(int,int,int):81:81 -> a
-    82:109:android.graphics.Bitmap generateQuantumField(int,int,int):87:87 -> a
-    110:123:android.graphics.Bitmap generateQuantumField(int,int,int):88:88 -> a
-    124:147:android.graphics.Bitmap generateQuantumField(int,int,int):89:89 -> a
-    148:160:android.graphics.Bitmap generateQuantumField(int,int,int):93:93 -> a
-    161:168:android.graphics.Bitmap generateQuantumField(int,int,int):94:94 -> a
-    169:175:android.graphics.Bitmap generateQuantumField(int,int,int):98:98 -> a
-    176:195:android.graphics.Bitmap generateQuantumField(int,int,int):99:99 -> a
-    196:205:android.graphics.Bitmap generateQuantumField(int,int,int):103:103 -> a
-    206:219:android.graphics.Bitmap generateQuantumField(int,int,int):104:104 -> a
-    220:231:android.graphics.Bitmap generateQuantumField(int,int,int):110:110 -> a
-    232:238:android.graphics.Bitmap generateQuantumField(int,int,int):111:111 -> a
-    239:252:android.graphics.Bitmap generateQuantumField(int,int,int):112:112 -> a
+    7:12:android.graphics.Bitmap generateQuantumField(int,int,int):75:75 -> a
+    13:17:android.graphics.Bitmap generateQuantumField(int,int,int):76:76 -> a
+    18:26:android.graphics.Bitmap generateQuantumField(int,int,int):79:79 -> a
+    27:32:android.graphics.Bitmap generateQuantumField(int,int,int):81:81 -> a
+    33:35:android.graphics.Bitmap generateQuantumField(int,int,int):82:82 -> a
+    36:56:android.graphics.Bitmap generateQuantumField(int,int,int):84:84 -> a
+    57:81:android.graphics.Bitmap generateQuantumField(int,int,int):92:92 -> a
+    82:109:android.graphics.Bitmap generateQuantumField(int,int,int):98:98 -> a
+    110:123:android.graphics.Bitmap generateQuantumField(int,int,int):99:99 -> a
+    124:147:android.graphics.Bitmap generateQuantumField(int,int,int):100:100 -> a
+    148:160:android.graphics.Bitmap generateQuantumField(int,int,int):104:104 -> a
+    161:168:android.graphics.Bitmap generateQuantumField(int,int,int):105:105 -> a
+    169:175:android.graphics.Bitmap generateQuantumField(int,int,int):109:109 -> a
+    176:195:android.graphics.Bitmap generateQuantumField(int,int,int):110:110 -> a
+    196:205:android.graphics.Bitmap generateQuantumField(int,int,int):114:114 -> a
+    206:219:android.graphics.Bitmap generateQuantumField(int,int,int):115:115 -> a
+    220:231:android.graphics.Bitmap generateQuantumField(int,int,int):121:121 -> a
+    232:238:android.graphics.Bitmap generateQuantumField(int,int,int):122:122 -> a
+    239:252:android.graphics.Bitmap generateQuantumField(int,int,int):123:123 -> a
     1:7:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):34:34 -> b
     8:17:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):35:35 -> b
     18:21:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):38:38 -> b
     22:32:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):40:40 -> b
     33:37:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):43:43 -> b
     38:64:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):46:46 -> b
-    65:68:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):48:48 -> b
-    69:79:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):52:52 -> b
-    80:86:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):53:53 -> b
-    87:93:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):54:54 -> b
-    94:97:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):55:55 -> b
+    65:71:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):49:49 -> b
+    72:76:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):50:50 -> b
+    77:87:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):51:51 -> b
+    88:91:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):53:53 -> b
+    92:96:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):57:57 -> b
+    97:100:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):59:59 -> b
+    101:111:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):63:63 -> b
+    112:118:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):64:64 -> b
+    119:125:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):65:65 -> b
+    126:129:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):66:66 -> b
     1:6:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):26:26 -> onUpdate
     7:12:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):27:27 -> onUpdate
     13:18:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):29:29 -> onUpdate
@@ -22965,25 +22970,25 @@ app.signalnoise.twa.widget.SignalNoiseWidgetProvider -> J.k:
 app.signalnoise.twa.widget.W -> app.signalnoise.twa.widget.W:
 # {"id":"sourceFile","fileName":"W.java"}
     1:4:void <init>():21:21 -> <init>
-    7:12:android.graphics.Bitmap generateWaveInterference(int,int,int,long):67:67 -> a
-    13:17:android.graphics.Bitmap generateWaveInterference(int,int,int,long):68:68 -> a
-    18:26:android.graphics.Bitmap generateWaveInterference(int,int,int,long):71:71 -> a
-    27:32:android.graphics.Bitmap generateWaveInterference(int,int,int,long):73:73 -> a
-    33:47:android.graphics.Bitmap generateWaveInterference(int,int,int,long):74:74 -> a
-    48:84:android.graphics.Bitmap generateWaveInterference(int,int,int,long):80:80 -> a
-    85:110:android.graphics.Bitmap generateWaveInterference(int,int,int,long):87:87 -> a
-    111:135:android.graphics.Bitmap generateWaveInterference(int,int,int,long):88:88 -> a
-    136:160:android.graphics.Bitmap generateWaveInterference(int,int,int,long):91:91 -> a
-    161:172:android.graphics.Bitmap generateWaveInterference(int,int,int,long):92:92 -> a
-    173:184:android.graphics.Bitmap generateWaveInterference(int,int,int,long):96:96 -> a
-    185:199:android.graphics.Bitmap generateWaveInterference(int,int,int,long):100:100 -> a
-    200:210:android.graphics.Bitmap generateWaveInterference(int,int,int,long):106:106 -> a
-    211:225:android.graphics.Bitmap generateWaveInterference(int,int,int,long):109:109 -> a
-    226:239:android.graphics.Bitmap generateWaveInterference(int,int,int,long):112:112 -> a
-    240:268:android.graphics.Bitmap generateWaveInterference(int,int,int,long):113:113 -> a
-    269:277:android.graphics.Bitmap generateWaveInterference(int,int,int,long):118:118 -> a
-    278:283:android.graphics.Bitmap generateWaveInterference(int,int,int,long):119:119 -> a
-    284:291:android.graphics.Bitmap generateWaveInterference(int,int,int,long):121:121 -> a
+    7:12:android.graphics.Bitmap generateWaveInterference(int,int,int,long):78:78 -> a
+    13:17:android.graphics.Bitmap generateWaveInterference(int,int,int,long):79:79 -> a
+    18:26:android.graphics.Bitmap generateWaveInterference(int,int,int,long):82:82 -> a
+    27:32:android.graphics.Bitmap generateWaveInterference(int,int,int,long):84:84 -> a
+    33:47:android.graphics.Bitmap generateWaveInterference(int,int,int,long):85:85 -> a
+    48:84:android.graphics.Bitmap generateWaveInterference(int,int,int,long):91:91 -> a
+    85:110:android.graphics.Bitmap generateWaveInterference(int,int,int,long):98:98 -> a
+    111:135:android.graphics.Bitmap generateWaveInterference(int,int,int,long):99:99 -> a
+    136:160:android.graphics.Bitmap generateWaveInterference(int,int,int,long):102:102 -> a
+    161:172:android.graphics.Bitmap generateWaveInterference(int,int,int,long):103:103 -> a
+    173:184:android.graphics.Bitmap generateWaveInterference(int,int,int,long):107:107 -> a
+    185:199:android.graphics.Bitmap generateWaveInterference(int,int,int,long):111:111 -> a
+    200:210:android.graphics.Bitmap generateWaveInterference(int,int,int,long):117:117 -> a
+    211:225:android.graphics.Bitmap generateWaveInterference(int,int,int,long):120:120 -> a
+    226:239:android.graphics.Bitmap generateWaveInterference(int,int,int,long):123:123 -> a
+    240:268:android.graphics.Bitmap generateWaveInterference(int,int,int,long):124:124 -> a
+    269:277:android.graphics.Bitmap generateWaveInterference(int,int,int,long):129:129 -> a
+    278:283:android.graphics.Bitmap generateWaveInterference(int,int,int,long):130:130 -> a
+    284:291:android.graphics.Bitmap generateWaveInterference(int,int,int,long):132:132 -> a
     1:7:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):34:34 -> b
     8:15:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):35:35 -> b
     16:24:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):38:38 -> b
@@ -22993,11 +22998,16 @@ app.signalnoise.twa.widget.W -> app.signalnoise.twa.widget.W:
     49:53:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):47:47 -> b
     54:80:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):48:48 -> b
     81:85:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):49:49 -> b
-    86:89:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):51:51 -> b
-    90:100:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):55:55 -> b
-    101:107:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):56:56 -> b
-    108:114:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):57:57 -> b
-    115:118:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):58:58 -> b
+    86:92:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):52:52 -> b
+    93:97:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):53:53 -> b
+    98:110:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):54:54 -> b
+    111:114:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):56:56 -> b
+    115:119:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):60:60 -> b
+    120:123:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):62:62 -> b
+    124:134:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):66:66 -> b
+    135:141:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):67:67 -> b
+    142:148:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):68:68 -> b
+    149:152:void updateWidget(android.content.Context,android.appwidget.AppWidgetManager,int):69:69 -> b
     1:6:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):26:26 -> onUpdate
     7:12:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):27:27 -> onUpdate
     13:18:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]):29:29 -> onUpdate
