@@ -5,12 +5,12 @@
     <!-- Professional central glow - Signal green radial gradient -->
     <gradient
         android:type="radial"
-        android:gradientRadius="200dp"
+        android:gradientRadius="120dp"
         android:centerX="0.5"
         android:centerY="0.5"
-        android:startColor="#1a00ff88"
-        android:centerColor="#0d00ff88"
-        android:endColor="#000a0a0a" />
+        android:startColor="#6000ff88"
+        android:centerColor="#3000ff88"
+        android:endColor="#0a000000" />
 
     <corners android:radius="20dp" />
 

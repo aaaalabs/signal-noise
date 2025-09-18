@@ -185,21 +185,26 @@
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_quantum_info" />
         </receiver>
 
-        <!-- PROFESSIONAL GLOW TYPOGRAPHY v5.0 -->
+        <!-- JONY IVE MASTERPIECES v5.0 -->
 
         <receiver android:name=".widget.PWinner" android:exported="true" android:label="PWinner">
             <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_perfect_info" />
         </receiver>
 
-        <receiver android:name=".widget.E" android:exported="true" android:label="E">
+        <receiver android:name=".widget.J1" android:exported="true" android:label="J1">
             <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_elegant_info" />
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_j1_info" />
         </receiver>
 
-        <receiver android:name=".widget.X" android:exported="true" android:label="X">
+        <receiver android:name=".widget.J2" android:exported="true" android:label="J2">
             <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_exceptional_info" />
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_j2_info" />
+        </receiver>
+
+        <receiver android:name=".widget.J3" android:exported="true" android:label="J3">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_j3_info" />
         </receiver>
 
         <!-- Widget Update Receiver -->

@@ -181,7 +181,7 @@
                 android:resource="@xml/widget_quantum_info" />
         </receiver>
 
-        <!-- PROFESSIONAL GLOW TYPOGRAPHY v5.0 -->
+        <!-- JONY IVE MASTERPIECES v5.0 -->
 
         <receiver
             android:name="app.signalnoise.twa.widget.PWinner"
@@ -196,28 +196,40 @@
                 android:resource="@xml/widget_perfect_info" />
         </receiver>
         <receiver
-            android:name="app.signalnoise.twa.widget.E"
+            android:name="app.signalnoise.twa.widget.J1"
             android:exported="true"
-            android:label="E" >
+            android:label="J1" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/widget_elegant_info" />
+                android:resource="@xml/widget_j1_info" />
         </receiver>
         <receiver
-            android:name="app.signalnoise.twa.widget.X"
+            android:name="app.signalnoise.twa.widget.J2"
             android:exported="true"
-            android:label="X" >
+            android:label="J2" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/widget_exceptional_info" />
+                android:resource="@xml/widget_j2_info" />
+        </receiver>
+        <receiver
+            android:name="app.signalnoise.twa.widget.J3"
+            android:exported="true"
+            android:label="J3" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_j3_info" />
         </receiver>
 
         <!-- Widget Update Receiver -->
