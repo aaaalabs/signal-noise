@@ -51,6 +51,20 @@ const splashVariants: SplashVariant[] = [
     description: 'Geometric revelation from center outward',
     animationClass: 'splash-signal-emergence',
     duration: 1400
+  },
+  {
+    id: 'blueprint-reveal',
+    name: 'Blueprint Reveal',
+    description: 'Architectural outline first, then solid form',
+    animationClass: 'splash-blueprint-reveal',
+    duration: 2200
+  },
+  {
+    id: 'design-process',
+    name: 'Design Process',
+    description: 'From concept sketch to final product',
+    animationClass: 'splash-design-process',
+    duration: 2800
   }
 ];
 
@@ -135,11 +149,26 @@ const SplashScreenTester: React.FC = () => {
         {isPlaying && (
           <div className={`splash-logo ${selectedVariant.animationClass}`}>
             <div className="signal-icon">
-              <img
-                src={getIconSource()}
-                alt="Signal/Noise"
-                className="icon-svg"
-              />
+              {(selectedVariant.id === 'blueprint-reveal' || selectedVariant.id === 'design-process') ? (
+                <>
+                  <img
+                    src="/sn-icon_outline_white.svg"
+                    alt="Signal/Noise Outline"
+                    className="icon-svg outline-icon"
+                  />
+                  <img
+                    src={getIconSource()}
+                    alt="Signal/Noise"
+                    className="icon-svg solid-icon"
+                  />
+                </>
+              ) : (
+                <img
+                  src={getIconSource()}
+                  alt="Signal/Noise"
+                  className="icon-svg"
+                />
+              )}
             </div>
           </div>
         )}
@@ -173,6 +202,8 @@ const SplashScreenTester: React.FC = () => {
           <li><strong>Material Truth:</strong> Hardware-accelerated PropertyAnimation with scale interpolator</li>
           <li><strong>Breath of Signal:</strong> Ultra-subtle animations require precise timing control</li>
           <li><strong>Signal Emergence:</strong> Combine scale + blur using RenderScript or modern effects</li>
+          <li><strong>Blueprint Reveal:</strong> Layer two ImageViews with coordinated alpha animations</li>
+          <li><strong>Design Process:</strong> Advanced LayerDrawable with synchronized filter effects</li>
           <li><strong>Performance:</strong> All animations respect Jony Ive's 60fps standard</li>
         </ul>
       </div>

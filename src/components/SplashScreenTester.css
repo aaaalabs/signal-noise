@@ -221,6 +221,20 @@
   object-fit: contain;
 }
 
+/* Dual icon support for architectural animations */
+.signal-icon {
+  position: relative;
+}
+
+.outline-icon,
+.solid-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120px;
+  height: 120px;
+}
+
 /* For older text-based logo (fallback) */
 .signal-logo {
   font-size: 3rem;
@@ -297,15 +311,15 @@
   opacity: 0;
 }
 
-/* 4. Material Truth - Micro-scale materialization */
+/* 4. Material Truth - Visible materialization with subtle bounce */
 @keyframes materialTruth {
   0% {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.98);
+    transform: translate(-50%, -50%) scale(0.92);
   }
-  80% {
+  70% {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1.001);
+    transform: translate(-50%, -50%) scale(1.04);
   }
   100% {
     opacity: 1;
@@ -316,7 +330,7 @@
 .splash-material-truth {
   animation: materialTruth 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   opacity: 0;
-  transform: translate(-50%, -50%) scale(0.98);
+  transform: translate(-50%, -50%) scale(0.92);
 }
 
 /* 5. Breath of Signal - Ultra-subtle breathing effect */
@@ -352,12 +366,12 @@
 @keyframes signalEmergence {
   0% {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.1);
-    filter: blur(2px);
+    transform: translate(-50%, -50%) scale(0.5);
+    filter: blur(3px);
   }
   60% {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1.01);
+    transform: translate(-50%, -50%) scale(1.02);
     filter: blur(0px);
   }
   100% {
@@ -370,7 +384,114 @@
 .splash-signal-emergence {
   animation: signalEmergence 1.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
   opacity: 0;
-  transform: translate(-50%, -50%) scale(0.1);
+  transform: translate(-50%, -50%) scale(0.5);
+}
+
+/* 7. Blueprint Reveal - Architectural outline first, then solid form */
+@keyframes blueprintRevealOutline {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+}
+
+@keyframes blueprintRevealSolid {
+  0% {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  60% {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.splash-blueprint-reveal .outline-icon {
+  animation: blueprintRevealOutline 2.2s ease-out forwards;
+  opacity: 0;
+}
+
+.splash-blueprint-reveal .solid-icon {
+  animation: blueprintRevealSolid 2.2s ease-out forwards;
+  opacity: 0;
+}
+
+/* 8. Design Process - From concept sketch to final product */
+@keyframes designProcessOutline {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+    filter: drop-shadow(0 0 0px var(--signal));
+  }
+  20% {
+    opacity: 1;
+    transform: scale(1);
+    filter: drop-shadow(0 0 2px var(--signal));
+  }
+  60% {
+    opacity: 0.8;
+    transform: scale(1);
+    filter: drop-shadow(0 0 4px var(--signal));
+  }
+  80% {
+    opacity: 0.4;
+    transform: scale(1);
+    filter: drop-shadow(0 0 6px var(--signal));
+  }
+  100% {
+    opacity: 0.1;
+    transform: scale(1);
+    filter: drop-shadow(0 0 8px var(--signal));
+  }
+}
+
+@keyframes designProcessSolid {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+    filter: drop-shadow(0 0 0px var(--signal));
+  }
+  40% {
+    opacity: 0;
+    transform: scale(0.95);
+    filter: drop-shadow(0 0 0px var(--signal));
+  }
+  70% {
+    opacity: 0.5;
+    transform: scale(0.98);
+    filter: drop-shadow(0 0 3px var(--signal));
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: drop-shadow(0 0 6px var(--signal));
+  }
+}
+
+.splash-design-process .outline-icon {
+  animation: designProcessOutline 2.8s ease-in-out forwards;
+  opacity: 0;
+}
+
+.splash-design-process .solid-icon {
+  animation: designProcessSolid 2.8s ease-in-out forwards;
+  opacity: 0;
 }
 
 /* Animation Info */
@@ -473,5 +594,11 @@
     height: 80px;
     max-width: 80px;
     max-height: 80px;
+  }
+
+  .outline-icon,
+  .solid-icon {
+    width: 80px;
+    height: 80px;
   }
 }
