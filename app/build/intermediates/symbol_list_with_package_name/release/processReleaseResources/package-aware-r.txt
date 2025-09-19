@@ -395,6 +395,8 @@ color material_grey_600
 color material_grey_800
 color material_grey_850
 color material_grey_900
+color navigationBarColor
+color navigationBarColorDark
 color navigationColor
 color navigationColorDark
 color navigationDividerColor
@@ -674,6 +676,8 @@ drawable ratio_circle_bg
 drawable shortcut_legacy_background
 drawable shortcut_noise
 drawable shortcut_signal
+drawable sn_icon_outline_white
+drawable sn_icon_white
 drawable sn_outline_white
 drawable splash
 drawable splash_icon
@@ -828,6 +832,7 @@ id notification_main_column
 id notification_main_column_container
 id off
 id on
+id outline_icon
 id parentPanel
 id pattern_chart
 id peak_hour
@@ -875,6 +880,7 @@ id signal_label
 id signal_text
 id simple_ratio
 id simple_status
+id solid_icon
 id spacer
 id special_effects_controller_view_tag
 id split_action_bar
@@ -994,6 +1000,7 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_splash
 layout browser_actions_context_menu_page
 layout browser_actions_context_menu_row
 layout custom_dialog

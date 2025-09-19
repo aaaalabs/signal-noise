@@ -5,6 +5,8 @@ bool enableSiteSettingsShortcut
 color backgroundColor
 color colorPrimary
 color colorPrimaryDark
+color navigationBarColor
+color navigationBarColorDark
 color navigationColor
 color navigationColorDark
 color navigationDividerColor
@@ -31,6 +33,8 @@ drawable ratio_circle_bg
 drawable shortcut_legacy_background
 drawable shortcut_noise
 drawable shortcut_signal
+drawable sn_icon_outline_white
+drawable sn_icon_white
 drawable sn_outline_white
 drawable splash
 drawable splash_icon
@@ -66,6 +70,7 @@ id noise_count
 id noise_detail
 id noise_text
 id nothing_text
+id outline_icon
 id pattern_chart
 id peak_hour
 id perfect_noise
@@ -87,6 +92,7 @@ id signal_label
 id signal_text
 id simple_ratio
 id simple_status
+id solid_icon
 id status_large
 id status_text
 id status_text_2x2
@@ -124,6 +130,7 @@ id x_state
 id zen_number
 id zen_pure_number
 integer splashScreenFadeOutDuration
+layout activity_splash
 layout widget_1x1
 layout widget_1x1_compact
 layout widget_breathing_calm

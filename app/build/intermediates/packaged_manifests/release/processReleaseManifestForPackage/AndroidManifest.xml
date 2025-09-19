@@ -74,6 +74,17 @@
                 android:name="android.support.customtabs.trusted.MANAGE_SPACE_URL"
                 android:value="@string/launchUrl" />
         </activity>
+        <!-- Custom Splash Activity with Blueprint Reveal animation -->
+        <activity
+            android:name="app.signalnoise.twa.SplashActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name="app.signalnoise.twa.LauncherActivity"
             android:alwaysRetainTaskState="true"
@@ -119,11 +130,6 @@
                 android:name="android.support.customtabs.trusted.SCREEN_ORIENTATION"
                 android:value="@string/orientation" />
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
             <intent-filter android:autoVerify="true" >
                 <action android:name="android.intent.action.VIEW" />
 

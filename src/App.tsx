@@ -47,6 +47,7 @@ function AppContent() {
   const t = useTranslation();
   const [data, setData] = useState<AppData>(initialData);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [splashCompleted, setSplashCompleted] = useState(false);
   const [_localVersion, setLocalVersion] = useState(0);
 
   // Sync tracking variables
@@ -1303,7 +1304,8 @@ function AppContent() {
     <>
       {/* Loading Splash - Blueprint Reveal during Redis sync */}
       <LoadingSplash
-        show={!isLoaded && !showOnboarding && !showVerifyMagicLink && !showInvoicePage && !showSuccessPage && !showSplashTester}
+        show={(!isLoaded || !splashCompleted) && !showOnboarding && !showVerifyMagicLink && !showInvoicePage && !showSuccessPage && !showSplashTester}
+        onComplete={() => setSplashCompleted(true)}
       />
 
       {/* Onboarding */}
@@ -1338,7 +1340,9 @@ function AppContent() {
         startInLoginMode={foundationModalLoginMode}
       />
 
-      <div className="container" style={{ position: 'relative' }}>
+      {/* Main app content - only show when both loading and splash are complete */}
+      {isLoaded && splashCompleted && (
+        <div className="container" style={{ position: 'relative' }}>
         {/* Brand Icon - Subtle Watermark */}
         <BrandIcon onLoginClick={() => {
           setFoundationModalLoginMode(true);
@@ -1437,7 +1441,8 @@ function AppContent() {
           setFoundationModalLoginMode(true);
           setShowFoundationModal(true);
         }} />
-      </div>
+        </div>
+      )}
     </>
   );
 }

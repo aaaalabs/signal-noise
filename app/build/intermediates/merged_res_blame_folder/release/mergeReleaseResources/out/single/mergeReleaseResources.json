@@ -360,6 +360,14 @@
         "source": "app.signalnoise.twa.app-main-26:/mipmap-xhdpi/ic_launcher.png"
     },
     {
+        "merged": "app.signalnoise.twa.app-release-25:/drawable_sn_icon_white.xml.flat",
+        "source": "app.signalnoise.twa.app-main-26:/drawable/sn_icon_white.xml"
+    },
+    {
+        "merged": "app.signalnoise.twa.app-release-25:/layout_activity_splash.xml.flat",
+        "source": "app.signalnoise.twa.app-main-26:/layout/activity_splash.xml"
+    },
+    {
         "merged": "app.signalnoise.twa.app-release-25:/layout_widget_simple_fix.xml.flat",
         "source": "app.signalnoise.twa.app-main-26:/layout/widget_simple_fix.xml"
     },
@@ -398,6 +406,10 @@
     {
         "merged": "app.signalnoise.twa.app-release-25:/drawable_compact_glow.xml.flat",
         "source": "app.signalnoise.twa.app-main-26:/drawable/compact_glow.xml"
+    },
+    {
+        "merged": "app.signalnoise.twa.app-release-25:/drawable_sn_icon_outline_white.xml.flat",
+        "source": "app.signalnoise.twa.app-main-26:/drawable/sn_icon_outline_white.xml"
     },
     {
         "merged": "app.signalnoise.twa.app-release-25:/layout_widget_w3.xml.flat",

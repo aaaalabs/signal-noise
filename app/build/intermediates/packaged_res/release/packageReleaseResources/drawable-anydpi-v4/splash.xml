@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Background color matching the app theme -->
+    <!-- Pure black background matching PWA Blueprint Reveal -->
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="#0A0A0A"/>
+            <solid android:color="#000000"/>
         </shape>
     </item>
 
-    <!-- Centered app icon -->
+    <!-- Centered white icon for proper contrast on black background -->
     <item>
         <bitmap
             android:src="@drawable/splash_icon"
