@@ -58,6 +58,7 @@ const SplashScreenTester: React.FC = () => {
   const [selectedVariant, setSelectedVariant] = useState<SplashVariant>(splashVariants[0]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isDarkBackground, setIsDarkBackground] = useState(true);
+  const [iconVariant, setIconVariant] = useState<string>('auto');
 
   const playSplash = (variant: SplashVariant) => {
     setSelectedVariant(variant);
@@ -73,6 +74,22 @@ const SplashScreenTester: React.FC = () => {
     setIsPlaying(false);
   };
 
+  const getIconSource = () => {
+    switch (iconVariant) {
+      case 'black':
+        return '/sn-icon.svg';
+      case 'white':
+        return '/sn-icon_white.svg';
+      case 'grey':
+        return '/sn-icon_grey.svg';
+      case 'green':
+        return '/sn-icon_green.svg';
+      case 'auto':
+      default:
+        return isDarkBackground ? '/sn-icon_white.svg' : '/sn-icon.svg';
+    }
+  };
+
   return (
     <div className="splash-tester">
       {/* Controls Panel */}
@@ -80,15 +97,32 @@ const SplashScreenTester: React.FC = () => {
         <h1 className="splash-title">Signal/Noise Splash Screen Variants</h1>
 
         <div className="splash-options">
-          <div className="background-toggle">
-            <label>
-              <input
-                type="checkbox"
-                checked={isDarkBackground}
-                onChange={(e) => setIsDarkBackground(e.target.checked)}
-              />
-              Dark Background
-            </label>
+          <div className="splash-settings">
+            <div className="background-toggle">
+              <label>
+                <input
+                  type="checkbox"
+                  checked={isDarkBackground}
+                  onChange={(e) => setIsDarkBackground(e.target.checked)}
+                />
+                Dark Background
+              </label>
+            </div>
+
+            <div className="icon-variant-selector">
+              <label>Icon Variant:</label>
+              <select
+                value={iconVariant}
+                onChange={(e) => setIconVariant(e.target.value)}
+                className="variant-select"
+              >
+                <option value="auto">Auto (white/black)</option>
+                <option value="black">Black</option>
+                <option value="white">White</option>
+                <option value="grey">Grey</option>
+                <option value="green">Signal Green</option>
+              </select>
+            </div>
           </div>
 
           <div className="variant-grid">
@@ -140,9 +174,12 @@ const SplashScreenTester: React.FC = () => {
       >
         {isPlaying && (
           <div className={`splash-logo ${selectedVariant.animationClass}`}>
-            <div className="signal-logo">
-              <span className="signal-text">Signal</span>
-              <span className="noise-text">/Noise</span>
+            <div className="signal-icon">
+              <img
+                src={getIconSource()}
+                alt="Signal/Noise"
+                className="icon-svg"
+              />
             </div>
           </div>
         )}
