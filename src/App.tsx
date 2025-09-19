@@ -20,6 +20,8 @@ import Footer from './components/Footer';
 import BrandIcon from './components/BrandIcon';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import SyncIndicator from './components/SyncIndicator';
+import SplashScreenTester from './components/SplashScreenTester';
+import LoadingSplash from './components/LoadingSplash';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { checkAchievements, getTodayRatio } from './utils/achievements';
 import { handleStripeReturn, getSessionData, type SessionData } from './services/premiumService';
@@ -45,6 +47,7 @@ function AppContent() {
   const t = useTranslation();
   const [data, setData] = useState<AppData>(initialData);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [splashCompleted, setSplashCompleted] = useState(false);
   const [_localVersion, setLocalVersion] = useState(0);
 
   // Sync tracking variables
@@ -75,6 +78,7 @@ function AppContent() {
   const [foundationModalLoginMode, setFoundationModalLoginMode] = useState(false);
   const [showVerifyMagicLink, setShowVerifyMagicLink] = useState(false);
   const [verifyToken, setVerifyToken] = useState<string>('');
+  const [showSplashTester, setShowSplashTester] = useState(false);
 
   // Load data from localStorage on mount
   useEffect(() => {
@@ -89,8 +93,14 @@ function AppContent() {
       window.history.replaceState({}, '', window.location.pathname);
     }
 
-    // Check for magic link verification (/auth/verify?token=... or legacy /verify?token=...)
+    // Check for splash screen tester route
     const pathname = window.location.pathname;
+    if (pathname === '/splash-tester' || pathname === '/splash') {
+      setShowSplashTester(true);
+      return;
+    }
+
+    // Check for magic link verification (/auth/verify?token=... or legacy /verify?token=...)
     if (pathname === '/auth/verify' || pathname === '/verify') {
       const token = urlParams.get('token');
       if (token) {
@@ -1264,6 +1274,13 @@ function AppContent() {
     );
   }
 
+  // Show Splash Screen Tester if navigated to splash route
+  if (showSplashTester) {
+    return (
+      <SplashScreenTester />
+    );
+  }
+
   // Show Invoice Page if navigated to invoice route
   if (showInvoicePage) {
     return <InvoicePage invoiceId={invoiceId} token={invoiceToken} />;
@@ -1285,6 +1302,12 @@ function AppContent() {
 
   return (
     <>
+      {/* Loading Splash - Blueprint Reveal during Redis sync */}
+      <LoadingSplash
+        show={(!isLoaded || !splashCompleted) && !showOnboarding && !showVerifyMagicLink && !showInvoicePage && !showSuccessPage && !showSplashTester}
+        onComplete={() => setSplashCompleted(true)}
+      />
+
       {/* Onboarding */}
       <Onboarding
         show={showOnboarding}
@@ -1317,7 +1340,9 @@ function AppContent() {
         startInLoginMode={foundationModalLoginMode}
       />
 
-      <div className="container" style={{ position: 'relative' }}>
+      {/* Main app content - only show when both loading and splash are complete */}
+      {isLoaded && splashCompleted && (
+        <div className="container" style={{ position: 'relative' }}>
         {/* Brand Icon - Subtle Watermark */}
         <BrandIcon onLoginClick={() => {
           setFoundationModalLoginMode(true);
@@ -1416,7 +1441,8 @@ function AppContent() {
           setFoundationModalLoginMode(true);
           setShowFoundationModal(true);
         }} />
-      </div>
+        </div>
+      )}
     </>
   );
 }

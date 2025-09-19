@@ -1,0 +1,604 @@
+/* Splash Screen Tester Styles */
+.splash-tester {
+  padding: 20px;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.splash-title {
+  font-size: 2rem;
+  font-weight: 300;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  color: var(--signal);
+}
+
+.splash-subtitle {
+  font-size: 1rem;
+  font-weight: 300;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: var(--fg);
+  opacity: 0.7;
+}
+
+.splash-controls {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.splash-options {
+  margin-bottom: 2rem;
+}
+
+.splash-settings {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.background-toggle label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.background-toggle input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+}
+
+.icon-variant-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+}
+
+.variant-select {
+  background: var(--surface);
+  border: 2px solid var(--signal);
+  border-radius: 6px;
+  color: var(--fg);
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.variant-select:focus {
+  outline: none;
+  border-color: var(--signal);
+  box-shadow: 0 0 0 2px rgba(0, 255, 136, 0.2);
+}
+
+.variant-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 2rem;
+}
+
+.variant-button {
+  background: var(--surface);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.variant-button:hover {
+  border-color: var(--signal);
+  transform: translateY(-2px);
+}
+
+.variant-button.active {
+  border-color: var(--signal);
+  background: rgba(0, 255, 136, 0.1);
+}
+
+.variant-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.variant-name {
+  font-weight: 500;
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+  color: var(--signal);
+}
+
+.variant-description {
+  font-size: 0.9rem;
+  color: var(--fg);
+  opacity: 0.8;
+  margin-bottom: 8px;
+}
+
+.variant-duration {
+  font-size: 0.8rem;
+  color: var(--signal);
+  font-weight: 300;
+}
+
+.control-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.control-btn {
+  padding: 12px 24px;
+  border: 2px solid var(--signal);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--signal);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.control-btn:hover {
+  background: var(--signal);
+  color: var(--bg);
+}
+
+.control-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.control-btn.play {
+  background: var(--signal);
+  color: var(--bg);
+}
+
+.control-btn.play:disabled {
+  background: var(--surface);
+  color: var(--fg);
+  border-color: var(--surface);
+}
+
+/* Splash Preview Area */
+.splash-preview {
+  position: relative;
+  overflow: hidden;
+}
+
+.splash-preview.dark {
+  background: #000000;
+}
+
+.splash-preview.light {
+  background: #ffffff;
+}
+
+.preview-placeholder {
+  text-align: center;
+  color: var(--fg);
+  opacity: 0.6;
+}
+
+.placeholder-text {
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+}
+
+.selected-info {
+  font-size: 1rem;
+}
+
+/* Splash Logo Styling */
+.splash-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.signal-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-svg {
+  width: 120px;
+  height: 120px;
+  max-width: 120px;
+  max-height: 120px;
+  object-fit: contain;
+}
+
+/* Dual icon support for architectural animations */
+.signal-icon {
+  position: relative;
+}
+
+.outline-icon,
+.solid-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120px;
+  height: 120px;
+}
+
+/* For older text-based logo (fallback) */
+.signal-logo {
+  font-size: 3rem;
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.signal-text {
+  color: var(--signal);
+}
+
+.noise-text {
+  color: #888;
+}
+
+/* Jony Ive-Inspired Animation Variants - Honest, minimal, emotionally resonant */
+
+/* 1. Honest Fade - Pure minimalism without effects */
+@keyframes honestFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.splash-honest-fade {
+  animation: honestFade 1s ease-out forwards;
+  opacity: 0;
+}
+
+/* 2. Fade + Subtle Glow - 60% transparent */
+@keyframes fadeGlowSubtle {
+  0% {
+    opacity: 0;
+    filter: drop-shadow(0 0 0px var(--signal));
+  }
+  70% {
+    opacity: 0.6;
+    filter: drop-shadow(0 0 8px var(--signal));
+  }
+  100% {
+    opacity: 0.6;
+    filter: drop-shadow(0 0 4px var(--signal));
+  }
+}
+
+.splash-fade-glow-subtle {
+  animation: fadeGlowSubtle 1.8s ease-out forwards;
+  opacity: 0;
+}
+
+/* 3. Fade + Medium Glow - 60% transparent */
+@keyframes fadeGlowMedium {
+  0% {
+    opacity: 0;
+    filter: drop-shadow(0 0 0px var(--signal));
+  }
+  50% {
+    opacity: 0.6;
+    filter: drop-shadow(0 0 15px var(--signal));
+  }
+  100% {
+    opacity: 0.6;
+    filter: drop-shadow(0 0 8px var(--signal));
+  }
+}
+
+.splash-fade-glow-medium {
+  animation: fadeGlowMedium 2s ease-out forwards;
+  opacity: 0;
+}
+
+/* 4. Material Truth - Visible materialization with subtle bounce */
+@keyframes materialTruth {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.92);
+  }
+  70% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.04);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.splash-material-truth {
+  animation: materialTruth 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.92);
+}
+
+/* 5. Breath of Signal - Ultra-subtle breathing effect */
+@keyframes breathOfSignal {
+  0% {
+    opacity: 0;
+    filter: drop-shadow(0 0 0px var(--signal));
+  }
+  15% {
+    opacity: 1;
+    filter: drop-shadow(0 0 1px var(--signal));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 2px var(--signal));
+  }
+  85% {
+    opacity: 1;
+    filter: drop-shadow(0 0 1px var(--signal));
+  }
+  100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 0px var(--signal));
+  }
+}
+
+.splash-breath-signal {
+  animation: breathOfSignal 4s ease-in-out forwards;
+  opacity: 0;
+}
+
+/* 6. Signal Emergence - Geometric revelation from center outward */
+@keyframes signalEmergence {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+    filter: blur(3px);
+  }
+  60% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.02);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    filter: blur(0px);
+  }
+}
+
+.splash-signal-emergence {
+  animation: signalEmergence 1.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.5);
+}
+
+/* 7. Blueprint Reveal - Architectural outline first, then solid form */
+@keyframes blueprintRevealOutline {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+}
+
+@keyframes blueprintRevealSolid {
+  0% {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  60% {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.splash-blueprint-reveal .outline-icon {
+  animation: blueprintRevealOutline 2.2s ease-out forwards;
+  opacity: 0;
+}
+
+.splash-blueprint-reveal .solid-icon {
+  animation: blueprintRevealSolid 2.2s ease-out forwards;
+  opacity: 0;
+}
+
+/* 8. Design Process - From concept sketch to final product */
+@keyframes designProcessOutline {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+    filter: drop-shadow(0 0 0px var(--signal));
+  }
+  20% {
+    opacity: 1;
+    transform: scale(1);
+    filter: drop-shadow(0 0 2px var(--signal));
+  }
+  60% {
+    opacity: 0.8;
+    transform: scale(1);
+    filter: drop-shadow(0 0 4px var(--signal));
+  }
+  80% {
+    opacity: 0.4;
+    transform: scale(1);
+    filter: drop-shadow(0 0 6px var(--signal));
+  }
+  100% {
+    opacity: 0.1;
+    transform: scale(1);
+    filter: drop-shadow(0 0 8px var(--signal));
+  }
+}
+
+@keyframes designProcessSolid {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+    filter: drop-shadow(0 0 0px var(--signal));
+  }
+  40% {
+    opacity: 0;
+    transform: scale(0.95);
+    filter: drop-shadow(0 0 0px var(--signal));
+  }
+  70% {
+    opacity: 0.5;
+    transform: scale(0.98);
+    filter: drop-shadow(0 0 3px var(--signal));
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: drop-shadow(0 0 6px var(--signal));
+  }
+}
+
+.splash-design-process .outline-icon {
+  animation: designProcessOutline 2.8s ease-in-out forwards;
+  opacity: 0;
+}
+
+.splash-design-process .solid-icon {
+  animation: designProcessSolid 2.8s ease-in-out forwards;
+  opacity: 0;
+}
+
+/* Animation Info */
+.animation-info {
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 2rem 0;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.animation-info h3 {
+  color: var(--signal);
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.animation-info p {
+  margin: 8px 0;
+  line-height: 1.5;
+}
+
+/* Implementation Notes */
+.implementation-notes {
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 2rem 0;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.implementation-notes h3 {
+  color: var(--signal);
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.implementation-notes ul {
+  list-style: none;
+  padding: 0;
+}
+
+.implementation-notes li {
+  margin: 12px 0;
+  padding-left: 20px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.implementation-notes li::before {
+  content: "→";
+  color: var(--signal);
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+.implementation-notes strong {
+  color: var(--signal);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .splash-tester {
+    padding: 16px;
+  }
+
+  .splash-title {
+    font-size: 1.5rem;
+  }
+
+  .variant-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .control-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .splash-settings {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .signal-logo {
+    font-size: 2rem;
+  }
+
+  .splash-preview {
+    height: 40vh !important;
+  }
+
+  .icon-svg {
+    width: 80px;
+    height: 80px;
+    max-width: 80px;
+    max-height: 80px;
+  }
+
+  .outline-icon,
+  .solid-icon {
+    width: 80px;
+    height: 80px;
+  }
+}

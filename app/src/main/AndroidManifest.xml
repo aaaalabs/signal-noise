@@ -68,7 +68,15 @@
                 android:name="android.support.customtabs.trusted.MANAGE_SPACE_URL"
                 android:value="@string/launchUrl" />
             </activity>
-        
+        <!-- Custom Splash Activity with Blueprint Reveal animation -->
+        <activity android:name="SplashActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity android:name="LauncherActivity"
             android:alwaysRetainTaskState="true"
@@ -130,11 +138,6 @@
 
             
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT" />
@@ -177,6 +180,14 @@
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_t1_info" />
         </receiver>
 
+
+        <!-- SLC Screen Wake Sync - Instant widget updates -->
+        <receiver android:name=".widget.ScreenWakeSyncReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.SCREEN_ON" />
+            </intent-filter>
+        </receiver>
 
         <!-- Widget Update Receiver -->
         <receiver android:name=".widget.WidgetUpdateReceiver"
