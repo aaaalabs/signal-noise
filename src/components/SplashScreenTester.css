@@ -1,0 +1,414 @@
+/* Splash Screen Tester Styles */
+.splash-tester {
+  padding: 20px;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.splash-title {
+  font-size: 2rem;
+  font-weight: 300;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: var(--signal);
+}
+
+.splash-controls {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.splash-options {
+  margin-bottom: 2rem;
+}
+
+.background-toggle {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.background-toggle label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.background-toggle input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+}
+
+.variant-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 2rem;
+}
+
+.variant-button {
+  background: var(--surface);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.variant-button:hover {
+  border-color: var(--signal);
+  transform: translateY(-2px);
+}
+
+.variant-button.active {
+  border-color: var(--signal);
+  background: rgba(0, 255, 136, 0.1);
+}
+
+.variant-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.variant-name {
+  font-weight: 500;
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+  color: var(--signal);
+}
+
+.variant-description {
+  font-size: 0.9rem;
+  color: var(--fg);
+  opacity: 0.8;
+  margin-bottom: 8px;
+}
+
+.variant-duration {
+  font-size: 0.8rem;
+  color: var(--signal);
+  font-weight: 300;
+}
+
+.control-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.control-btn {
+  padding: 12px 24px;
+  border: 2px solid var(--signal);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--signal);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.control-btn:hover {
+  background: var(--signal);
+  color: var(--bg);
+}
+
+.control-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.control-btn.play {
+  background: var(--signal);
+  color: var(--bg);
+}
+
+.control-btn.play:disabled {
+  background: var(--surface);
+  color: var(--fg);
+  border-color: var(--surface);
+}
+
+/* Splash Preview Area */
+.splash-preview {
+  position: relative;
+  overflow: hidden;
+}
+
+.splash-preview.dark {
+  background: #000000;
+}
+
+.splash-preview.light {
+  background: #ffffff;
+}
+
+.preview-placeholder {
+  text-align: center;
+  color: var(--fg);
+  opacity: 0.6;
+}
+
+.placeholder-text {
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+}
+
+.selected-info {
+  font-size: 1rem;
+}
+
+/* Splash Logo Styling */
+.splash-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.signal-logo {
+  font-size: 3rem;
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.signal-text {
+  color: var(--signal);
+}
+
+.noise-text {
+  color: #888;
+}
+
+/* Animation Variants */
+
+/* 1. Fade In */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.splash-fade-in {
+  animation: fadeIn 1.5s ease-out forwards;
+  opacity: 0;
+}
+
+/* 2. Scale Up */
+@keyframes scaleUp {
+  0% {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0;
+  }
+  60% {
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+.splash-scale-up {
+  animation: scaleUp 2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.5);
+}
+
+/* 3. Slide Up */
+@keyframes slideUp {
+  from {
+    transform: translate(-50%, 100px);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+}
+
+.splash-slide-up {
+  animation: slideUp 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  opacity: 0;
+  transform: translate(-50%, 100px);
+}
+
+/* 4. Pulse */
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0;
+  }
+  20% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+.splash-pulse {
+  animation: pulse 2.5s ease-in-out forwards;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.8);
+}
+
+/* 5. Rotate + Fade */
+@keyframes rotateFade {
+  from {
+    transform: translate(-50%, -50%) rotate(-15deg);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.splash-rotate-fade {
+  animation: rotateFade 2.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(-15deg);
+}
+
+/* 6. Signal Glow */
+@keyframes signalGlow {
+  0% {
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0;
+    text-shadow: none;
+  }
+  30% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    text-shadow: 0 0 20px var(--signal);
+  }
+  70% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    text-shadow: 0 0 30px var(--signal), 0 0 60px var(--signal);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    text-shadow: 0 0 10px var(--signal);
+  }
+}
+
+.splash-glow {
+  animation: signalGlow 2s ease-out forwards;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.9);
+}
+
+.splash-glow .signal-text {
+  text-shadow: 0 0 10px var(--signal);
+}
+
+/* Animation Info */
+.animation-info {
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 2rem 0;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.animation-info h3 {
+  color: var(--signal);
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.animation-info p {
+  margin: 8px 0;
+  line-height: 1.5;
+}
+
+/* Implementation Notes */
+.implementation-notes {
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 2rem 0;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.implementation-notes h3 {
+  color: var(--signal);
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.implementation-notes ul {
+  list-style: none;
+  padding: 0;
+}
+
+.implementation-notes li {
+  margin: 12px 0;
+  padding-left: 20px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.implementation-notes li::before {
+  content: "→";
+  color: var(--signal);
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+.implementation-notes strong {
+  color: var(--signal);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .splash-tester {
+    padding: 16px;
+  }
+
+  .splash-title {
+    font-size: 1.5rem;
+  }
+
+  .variant-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .control-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .signal-logo {
+    font-size: 2rem;
+  }
+
+  .splash-preview {
+    height: 40vh !important;
+  }
+}

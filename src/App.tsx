@@ -20,6 +20,7 @@ import Footer from './components/Footer';
 import BrandIcon from './components/BrandIcon';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import SyncIndicator from './components/SyncIndicator';
+import SplashScreenTester from './components/SplashScreenTester';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { checkAchievements, getTodayRatio } from './utils/achievements';
 import { handleStripeReturn, getSessionData, type SessionData } from './services/premiumService';
@@ -75,6 +76,7 @@ function AppContent() {
   const [foundationModalLoginMode, setFoundationModalLoginMode] = useState(false);
   const [showVerifyMagicLink, setShowVerifyMagicLink] = useState(false);
   const [verifyToken, setVerifyToken] = useState<string>('');
+  const [showSplashTester, setShowSplashTester] = useState(false);
 
   // Load data from localStorage on mount
   useEffect(() => {
@@ -89,8 +91,14 @@ function AppContent() {
       window.history.replaceState({}, '', window.location.pathname);
     }
 
-    // Check for magic link verification (/auth/verify?token=... or legacy /verify?token=...)
+    // Check for splash screen tester route
     const pathname = window.location.pathname;
+    if (pathname === '/splash-tester' || pathname === '/splash') {
+      setShowSplashTester(true);
+      return;
+    }
+
+    // Check for magic link verification (/auth/verify?token=... or legacy /verify?token=...)
     if (pathname === '/auth/verify' || pathname === '/verify') {
       const token = urlParams.get('token');
       if (token) {
@@ -1261,6 +1269,13 @@ function AppContent() {
           window.history.replaceState({}, '', '/');
         }}
       />
+    );
+  }
+
+  // Show Splash Screen Tester if navigated to splash route
+  if (showSplashTester) {
+    return (
+      <SplashScreenTester />
     );
   }
 
