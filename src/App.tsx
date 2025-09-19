@@ -21,6 +21,7 @@ import BrandIcon from './components/BrandIcon';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import SyncIndicator from './components/SyncIndicator';
 import SplashScreenTester from './components/SplashScreenTester';
+import LoadingSplash from './components/LoadingSplash';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { checkAchievements, getTodayRatio } from './utils/achievements';
 import { handleStripeReturn, getSessionData, type SessionData } from './services/premiumService';
@@ -1300,6 +1301,11 @@ function AppContent() {
 
   return (
     <>
+      {/* Loading Splash - Blueprint Reveal during Redis sync */}
+      <LoadingSplash
+        show={!isLoaded && !showOnboarding && !showVerifyMagicLink && !showInvoicePage && !showSuccessPage && !showSplashTester}
+      />
+
       {/* Onboarding */}
       <Onboarding
         show={showOnboarding}
