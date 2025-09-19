@@ -674,6 +674,7 @@ drawable ratio_circle_bg
 drawable shortcut_legacy_background
 drawable shortcut_noise
 drawable shortcut_signal
+drawable sn_outline_white
 drawable splash
 drawable splash_icon
 drawable test_level_drawable
@@ -810,7 +811,6 @@ id line1
 id line3
 id listMode
 id list_item
-id logo_image
 id message
 id middle
 id minimal_field
@@ -843,6 +843,7 @@ id quantum_ratio
 id radio
 id ratio_large
 id ratio_main
+id ratio_number
 id ratio_percent
 id ratio_text
 id ratio_text_2x2
