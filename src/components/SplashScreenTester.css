@@ -269,18 +269,18 @@
   opacity: 0;
 }
 
-/* 2. Fade + Subtle Glow */
+/* 2. Fade + Subtle Glow - 80% transparent */
 @keyframes fadeGlowSubtle {
   0% {
     opacity: 0;
     filter: drop-shadow(0 0 0px var(--signal));
   }
   70% {
-    opacity: 1;
+    opacity: 0.8;
     filter: drop-shadow(0 0 8px var(--signal));
   }
   100% {
-    opacity: 1;
+    opacity: 0.8;
     filter: drop-shadow(0 0 4px var(--signal));
   }
 }
@@ -290,18 +290,18 @@
   opacity: 0;
 }
 
-/* 3. Fade + Medium Glow */
+/* 3. Fade + Medium Glow - 80% transparent */
 @keyframes fadeGlowMedium {
   0% {
     opacity: 0;
     filter: drop-shadow(0 0 0px var(--signal));
   }
   50% {
-    opacity: 1;
+    opacity: 0.8;
     filter: drop-shadow(0 0 15px var(--signal));
   }
   100% {
-    opacity: 1;
+    opacity: 0.8;
     filter: drop-shadow(0 0 8px var(--signal));
   }
 }
