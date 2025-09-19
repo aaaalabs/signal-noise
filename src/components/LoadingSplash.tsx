@@ -13,7 +13,7 @@ const LoadingSplash: React.FC<LoadingSplashProps> = ({ show, onComplete }) => {
     if (show) {
       setIsAnimating(true);
 
-      // Auto-complete after Blueprint Reveal duration (2200ms)
+      // Match Android splash duration (2200ms)
       const timer = setTimeout(() => {
         setIsAnimating(false);
         onComplete?.();
