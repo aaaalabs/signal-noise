@@ -55,14 +55,14 @@ const splashVariants: SplashVariant[] = [
   {
     id: 'blueprint-reveal',
     name: 'Blueprint Reveal',
-    description: 'Architectural outline first, then solid form',
+    description: 'White outline first, then solid white form appears',
     animationClass: 'splash-blueprint-reveal',
     duration: 2200
   },
   {
     id: 'design-process',
     name: 'Design Process',
-    description: 'From concept sketch to final product',
+    description: 'White outline evolves into final white product',
     animationClass: 'splash-design-process',
     duration: 2800
   }
@@ -86,15 +86,15 @@ const SplashScreenTester: React.FC = () => {
     setIsPlaying(false);
   };
 
-  // Always use black icon on dark background with green glow for visibility
-  const getIconSource = () => '/sn-icon.svg';
+  // Always use white icon on black background for proper visibility
+  const getIconSource = () => '/sn-icon_white.svg';
 
   return (
     <div className="splash-tester">
       {/* Controls Panel */}
       <div className="splash-controls">
         <h1 className="splash-title">Signal/Noise Android Splash Variants</h1>
-        <p className="splash-subtitle">Jony Ive-inspired designs - honest, minimal, emotionally resonant</p>
+        <p className="splash-subtitle">White icons on black background - Jony Ive-inspired designs</p>
 
         <div className="splash-options">
 
@@ -157,7 +157,7 @@ const SplashScreenTester: React.FC = () => {
                     className="icon-svg outline-icon"
                   />
                   <img
-                    src={getIconSource()}
+                    src="/sn-icon_white.svg"
                     alt="Signal/Noise"
                     className="icon-svg solid-icon"
                   />
