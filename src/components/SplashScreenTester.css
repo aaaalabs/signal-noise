@@ -10,9 +10,18 @@
 .splash-title {
   font-size: 2rem;
   font-weight: 300;
-  margin-bottom: 2rem;
+  margin-bottom: 0.5rem;
   text-align: center;
   color: var(--signal);
+}
+
+.splash-subtitle {
+  font-size: 1rem;
+  font-weight: 300;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: var(--fg);
+  opacity: 0.7;
 }
 
 .splash-controls {
@@ -229,10 +238,10 @@
   color: #888;
 }
 
-/* Animation Variants */
+/* Focused Animation Variants - Black icon on dark background with green glow */
 
-/* 1. Fade In */
-@keyframes fadeIn {
+/* 1. Simple Fade */
+@keyframes simpleFade {
   from {
     opacity: 0;
   }
@@ -241,132 +250,136 @@
   }
 }
 
-.splash-fade-in {
-  animation: fadeIn 1.5s ease-out forwards;
+.splash-simple-fade {
+  animation: simpleFade 1.2s ease-out forwards;
   opacity: 0;
 }
 
-/* 2. Scale Up */
-@keyframes scaleUp {
+/* 2. Fade + Subtle Glow */
+@keyframes fadeGlowSubtle {
   0% {
-    transform: translate(-50%, -50%) scale(0.5);
     opacity: 0;
+    filter: drop-shadow(0 0 0px var(--signal));
   }
-  60% {
-    transform: translate(-50%, -50%) scale(1.1);
+  70% {
     opacity: 1;
+    filter: drop-shadow(0 0 8px var(--signal));
   }
   100% {
-    transform: translate(-50%, -50%) scale(1);
     opacity: 1;
+    filter: drop-shadow(0 0 4px var(--signal));
   }
 }
 
-.splash-scale-up {
-  animation: scaleUp 2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+.splash-fade-glow-subtle {
+  animation: fadeGlowSubtle 1.8s ease-out forwards;
   opacity: 0;
-  transform: translate(-50%, -50%) scale(0.5);
 }
 
-/* 3. Slide Up */
-@keyframes slideUp {
-  from {
-    transform: translate(-50%, 100px);
-    opacity: 0;
-  }
-  to {
-    transform: translate(-50%, -50%);
-    opacity: 1;
-  }
-}
-
-.splash-slide-up {
-  animation: slideUp 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-  opacity: 0;
-  transform: translate(-50%, 100px);
-}
-
-/* 4. Pulse */
-@keyframes pulse {
+/* 3. Fade + Medium Glow */
+@keyframes fadeGlowMedium {
   0% {
-    transform: translate(-50%, -50%) scale(0.8);
     opacity: 0;
-  }
-  20% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
+    filter: drop-shadow(0 0 0px var(--signal));
   }
   50% {
-    transform: translate(-50%, -50%) scale(1.05);
     opacity: 1;
+    filter: drop-shadow(0 0 15px var(--signal));
   }
   100% {
-    transform: translate(-50%, -50%) scale(1);
     opacity: 1;
+    filter: drop-shadow(0 0 8px var(--signal));
   }
 }
 
-.splash-pulse {
-  animation: pulse 2.5s ease-in-out forwards;
+.splash-fade-glow-medium {
+  animation: fadeGlowMedium 2s ease-out forwards;
   opacity: 0;
-  transform: translate(-50%, -50%) scale(0.8);
 }
 
-/* 5. Rotate + Fade */
-@keyframes rotateFade {
-  from {
-    transform: translate(-50%, -50%) rotate(-15deg);
-    opacity: 0;
-  }
-  to {
-    transform: translate(-50%, -50%) rotate(0deg);
-    opacity: 1;
-  }
-}
-
-.splash-rotate-fade {
-  animation: rotateFade 2.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-  opacity: 0;
-  transform: translate(-50%, -50%) rotate(-15deg);
-}
-
-/* 6. Signal Glow */
-@keyframes signalGlow {
+/* 4. Fade + Strong Glow */
+@keyframes fadeGlowStrong {
   0% {
-    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0;
+    filter: drop-shadow(0 0 0px var(--signal));
+  }
+  40% {
+    opacity: 1;
+    filter: drop-shadow(0 0 25px var(--signal)) drop-shadow(0 0 50px var(--signal));
+  }
+  100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 12px var(--signal));
+  }
+}
+
+.splash-fade-glow-strong {
+  animation: fadeGlowStrong 2.2s ease-out forwards;
+  opacity: 0;
+}
+
+/* 5. Breathing Glow */
+@keyframes breathingGlow {
+  0% {
     opacity: 0;
     filter: drop-shadow(0 0 0px var(--signal));
   }
   30% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-    filter: drop-shadow(0 0 20px var(--signal));
-  }
-  70% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-    filter: drop-shadow(0 0 30px var(--signal)) drop-shadow(0 0 60px var(--signal));
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(1);
     opacity: 1;
     filter: drop-shadow(0 0 10px var(--signal));
   }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 6px var(--signal));
+  }
+  70% {
+    opacity: 1;
+    filter: drop-shadow(0 0 12px var(--signal));
+  }
+  100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px var(--signal));
+  }
 }
 
-.splash-glow {
-  animation: signalGlow 2s ease-out forwards;
+.splash-breathing-glow {
+  animation: breathingGlow 3s ease-in-out forwards;
   opacity: 0;
-  transform: translate(-50%, -50%) scale(0.9);
 }
 
-.splash-glow .icon-svg {
-  filter: drop-shadow(0 0 10px var(--signal));
+/* 6. Signal Pulse */
+@keyframes signalPulse {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.95);
+    filter: drop-shadow(0 0 0px var(--signal));
+  }
+  25% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    filter: drop-shadow(0 0 8px var(--signal));
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.02);
+    filter: drop-shadow(0 0 15px var(--signal));
+  }
+  75% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    filter: drop-shadow(0 0 10px var(--signal));
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    filter: drop-shadow(0 0 6px var(--signal));
+  }
 }
 
-/* Legacy text glow support */
-.splash-glow .signal-text {
-  text-shadow: 0 0 10px var(--signal);
+.splash-signal-pulse {
+  animation: signalPulse 2.5s ease-in-out forwards;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.95);
 }
 
 /* Animation Info */
