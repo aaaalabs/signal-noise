@@ -238,10 +238,10 @@
   color: #888;
 }
 
-/* Focused Animation Variants - Black icon on dark background with green glow */
+/* Jony Ive-Inspired Animation Variants - Honest, minimal, emotionally resonant */
 
-/* 1. Simple Fade */
-@keyframes simpleFade {
+/* 1. Honest Fade - Pure minimalism without effects */
+@keyframes honestFade {
   from {
     opacity: 0;
   }
@@ -250,8 +250,8 @@
   }
 }
 
-.splash-simple-fade {
-  animation: simpleFade 1.2s ease-out forwards;
+.splash-honest-fade {
+  animation: honestFade 1s ease-out forwards;
   opacity: 0;
 }
 
@@ -297,89 +297,80 @@
   opacity: 0;
 }
 
-/* 4. Fade + Strong Glow */
-@keyframes fadeGlowStrong {
+/* 4. Material Truth - Micro-scale materialization */
+@keyframes materialTruth {
   0% {
     opacity: 0;
-    filter: drop-shadow(0 0 0px var(--signal));
+    transform: translate(-50%, -50%) scale(0.98);
   }
-  40% {
+  80% {
     opacity: 1;
-    filter: drop-shadow(0 0 25px var(--signal)) drop-shadow(0 0 50px var(--signal));
+    transform: translate(-50%, -50%) scale(1.001);
   }
   100% {
     opacity: 1;
-    filter: drop-shadow(0 0 12px var(--signal));
+    transform: translate(-50%, -50%) scale(1);
   }
 }
 
-.splash-fade-glow-strong {
-  animation: fadeGlowStrong 2.2s ease-out forwards;
+.splash-material-truth {
+  animation: materialTruth 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   opacity: 0;
+  transform: translate(-50%, -50%) scale(0.98);
 }
 
-/* 5. Breathing Glow */
-@keyframes breathingGlow {
+/* 5. Breath of Signal - Ultra-subtle breathing effect */
+@keyframes breathOfSignal {
   0% {
     opacity: 0;
     filter: drop-shadow(0 0 0px var(--signal));
   }
-  30% {
+  15% {
     opacity: 1;
-    filter: drop-shadow(0 0 10px var(--signal));
+    filter: drop-shadow(0 0 1px var(--signal));
   }
   50% {
     opacity: 1;
-    filter: drop-shadow(0 0 6px var(--signal));
+    filter: drop-shadow(0 0 2px var(--signal));
   }
-  70% {
+  85% {
     opacity: 1;
-    filter: drop-shadow(0 0 12px var(--signal));
+    filter: drop-shadow(0 0 1px var(--signal));
   }
   100% {
     opacity: 1;
-    filter: drop-shadow(0 0 8px var(--signal));
-  }
-}
-
-.splash-breathing-glow {
-  animation: breathingGlow 3s ease-in-out forwards;
-  opacity: 0;
-}
-
-/* 6. Signal Pulse */
-@keyframes signalPulse {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.95);
     filter: drop-shadow(0 0 0px var(--signal));
   }
-  25% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-    filter: drop-shadow(0 0 8px var(--signal));
+}
+
+.splash-breath-signal {
+  animation: breathOfSignal 4s ease-in-out forwards;
+  opacity: 0;
+}
+
+/* 6. Signal Emergence - Geometric revelation from center outward */
+@keyframes signalEmergence {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.1);
+    filter: blur(2px);
   }
-  50% {
+  60% {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1.02);
-    filter: drop-shadow(0 0 15px var(--signal));
-  }
-  75% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-    filter: drop-shadow(0 0 10px var(--signal));
+    transform: translate(-50%, -50%) scale(1.01);
+    filter: blur(0px);
   }
   100% {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
-    filter: drop-shadow(0 0 6px var(--signal));
+    filter: blur(0px);
   }
 }
 
-.splash-signal-pulse {
-  animation: signalPulse 2.5s ease-in-out forwards;
+.splash-signal-emergence {
+  animation: signalEmergence 1.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
   opacity: 0;
-  transform: translate(-50%, -50%) scale(0.95);
+  transform: translate(-50%, -50%) scale(0.1);
 }
 
 /* Animation Info */

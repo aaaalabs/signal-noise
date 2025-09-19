@@ -11,46 +11,46 @@ interface SplashVariant {
 
 const splashVariants: SplashVariant[] = [
   {
-    id: 'simple-fade',
-    name: 'Simple Fade',
-    description: 'Clean fade-in, no glow',
-    animationClass: 'splash-simple-fade',
-    duration: 1200
+    id: 'honest-fade',
+    name: 'Honest Fade',
+    description: 'Pure minimalism - fade without effects',
+    animationClass: 'splash-honest-fade',
+    duration: 1000
   },
   {
     id: 'fade-glow-subtle',
     name: 'Fade + Subtle Glow',
-    description: 'Fade-in with gentle green glow',
+    description: 'Jony Ive choice - honest glow, gentle presence',
     animationClass: 'splash-fade-glow-subtle',
     duration: 1800
   },
   {
     id: 'fade-glow-medium',
     name: 'Fade + Medium Glow',
-    description: 'Fade-in with moderate green glow',
+    description: 'User preference - balanced visibility and restraint',
     animationClass: 'splash-fade-glow-medium',
     duration: 2000
   },
   {
-    id: 'fade-glow-strong',
-    name: 'Fade + Strong Glow',
-    description: 'Fade-in with pronounced green glow',
-    animationClass: 'splash-fade-glow-strong',
-    duration: 2200
+    id: 'material-truth',
+    name: 'Material Truth',
+    description: 'Micro-scale materialization from digital ether',
+    animationClass: 'splash-material-truth',
+    duration: 1400
   },
   {
-    id: 'breathing-glow',
-    name: 'Breathing Glow',
-    description: 'Fade-in with gentle breathing glow effect',
-    animationClass: 'splash-breathing-glow',
-    duration: 3000
+    id: 'breath-signal',
+    name: 'Breath of Signal',
+    description: 'Ultra-subtle breathing - barely perceptible life',
+    animationClass: 'splash-breath-signal',
+    duration: 4000
   },
   {
-    id: 'signal-pulse',
-    name: 'Signal Pulse',
-    description: 'Fade-in with signature signal pulse',
-    animationClass: 'splash-signal-pulse',
-    duration: 2500
+    id: 'signal-emergence',
+    name: 'Signal Emergence',
+    description: 'Geometric revelation from center outward',
+    animationClass: 'splash-signal-emergence',
+    duration: 1400
   }
 ];
 
@@ -80,7 +80,7 @@ const SplashScreenTester: React.FC = () => {
       {/* Controls Panel */}
       <div className="splash-controls">
         <h1 className="splash-title">Signal/Noise Android Splash Variants</h1>
-        <p className="splash-subtitle">Black icon on dark background with green signal glow variations</p>
+        <p className="splash-subtitle">Jony Ive-inspired designs - honest, minimal, emotionally resonant</p>
 
         <div className="splash-options">
 
@@ -166,12 +166,14 @@ const SplashScreenTester: React.FC = () => {
 
       {/* Android Implementation Notes */}
       <div className="implementation-notes">
-        <h3>Android Implementation Notes</h3>
+        <h3>Android Implementation Guide</h3>
         <ul>
-          <li><strong>Animated Vector Drawable:</strong> Convert logo to SVG, create AVD for native Android animations</li>
-          <li><strong>Lottie:</strong> Export animations as JSON for complex effects (glow, pulse)</li>
-          <li><strong>Splash Screen API:</strong> Android 12+ native splash with icon animation</li>
-          <li><strong>Performance:</strong> Hardware acceleration recommended for smooth animations</li>
+          <li><strong>Honest Fade:</strong> Use Android 12+ Splash Screen API with simple alpha transition</li>
+          <li><strong>Subtle/Medium Glow:</strong> Implement with Layer effects or custom Canvas drawing</li>
+          <li><strong>Material Truth:</strong> Hardware-accelerated PropertyAnimation with scale interpolator</li>
+          <li><strong>Breath of Signal:</strong> Ultra-subtle animations require precise timing control</li>
+          <li><strong>Signal Emergence:</strong> Combine scale + blur using RenderScript or modern effects</li>
+          <li><strong>Performance:</strong> All animations respect Jony Ive's 60fps standard</li>
         </ul>
       </div>
     </div>
