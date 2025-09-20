@@ -28,29 +28,9 @@ export default async function handler(req, res) {
       weekNumber,
       period: getWeekPeriod(now),
       metrics: {
-        uniqueVisitors: data.uniqueVisitors,
-        pageViews: data.pageViews,
-        sessions: data.sessions,
-        bounceRate: (40 + Math.random() * 20).toFixed(1),
-        avgSessionDuration: 120 + Math.floor(Math.random() * 120)
+        pageViews: data.pageViews
       },
-      trends: {
-        visitorsChange: Math.floor(Math.random() * 40) - 20,
-        pageViewsChange: Math.floor(Math.random() * 60) - 30,
-        sessionsChange: Math.floor(Math.random() * 50) - 25
-      },
-      topPages: data.topPages.length > 0 ? data.topPages : [{ path: '/', views: data.pageViews }],
-      referrers: [
-        { source: 'Direct', percentage: 45 },
-        { source: 'Google', percentage: 35 },
-        { source: 'Twitter', percentage: 12 },
-        { source: 'Others', percentage: 8 }
-      ],
-      devices: [
-        { type: 'Desktop', percentage: 60 },
-        { type: 'Mobile', percentage: 35 },
-        { type: 'Tablet', percentage: 5 }
-      ]
+      topPages: data.topPages.length > 0 ? data.topPages : [{ path: '/', views: data.pageViews }]
     };
 
     // Send email
@@ -324,34 +304,10 @@ async function sendAnalyticsEmail(data) {
           <div class="content">
             <div class="metrics-grid">
               <div class="metric-card">
-                <div class="metric-value">${data.metrics.uniqueVisitors.toLocaleString()}</div>
-                <div class="metric-label">Unique Visitors</div>
-                <div class="metric-trend" style="color: ${getTrendColor(data.trends.visitorsChange)}">
-                  ${getTrendIcon(data.trends.visitorsChange)} ${data.trends.visitorsChange > 0 ? '+' : ''}${data.trends.visitorsChange}%
-                </div>
-              </div>
-
-              <div class="metric-card">
                 <div class="metric-value">${data.metrics.pageViews.toLocaleString()}</div>
                 <div class="metric-label">Page Views</div>
-                <div class="metric-trend" style="color: ${getTrendColor(data.trends.pageViewsChange)}">
-                  ${getTrendIcon(data.trends.pageViewsChange)} ${data.trends.pageViewsChange > 0 ? '+' : ''}${data.trends.pageViewsChange}%
-                </div>
-              </div>
-
-              <div class="metric-card">
-                <div class="metric-value">${data.metrics.sessions.toLocaleString()}</div>
-                <div class="metric-label">Sessions</div>
-                <div class="metric-trend" style="color: ${getTrendColor(data.trends.sessionsChange)}">
-                  ${getTrendIcon(data.trends.sessionsChange)} ${data.trends.sessionsChange > 0 ? '+' : ''}${data.trends.sessionsChange}%
-                </div>
-              </div>
-
-              <div class="metric-card">
-                <div class="metric-value">${data.metrics.bounceRate}%</div>
-                <div class="metric-label">Bounce Rate</div>
                 <div class="metric-trend" style="color: #cccccc">
-                  ➡️ ${Math.floor(data.metrics.avgSessionDuration / 60)}m ${data.metrics.avgSessionDuration % 60}s avg
+                  📊 Real tracking data
                 </div>
               </div>
             </div>
@@ -363,30 +319,6 @@ async function sendAnalyticsEmail(data) {
                   <div class="data-item">
                     <span class="data-item-label">${page.path}</span>
                     <span class="data-item-value">${page.views.toLocaleString()}</span>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-
-            <div class="section">
-              <h3 class="section-title">Traffic Sources</h3>
-              <div class="data-list">
-                ${data.referrers.map(ref => `
-                  <div class="data-item">
-                    <span class="data-item-label">${ref.source}</span>
-                    <span class="data-item-value">${ref.percentage}%</span>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-
-            <div class="section">
-              <h3 class="section-title">Device Breakdown</h3>
-              <div class="data-list">
-                ${data.devices.map(device => `
-                  <div class="data-item">
-                    <span class="data-item-label">${device.type}</span>
-                    <span class="data-item-value">${device.percentage}%</span>
                   </div>
                 `).join('')}
               </div>
@@ -408,9 +340,7 @@ Signal/Noise Weekly Intel - Week ${data.weekNumber}
 ${data.period}
 
 KEY METRICS:
-• Unique Visitors: ${data.metrics.uniqueVisitors.toLocaleString()} (${data.trends.visitorsChange > 0 ? '+' : ''}${data.trends.visitorsChange}%)
-• Page Views: ${data.metrics.pageViews.toLocaleString()} (${data.trends.pageViewsChange > 0 ? '+' : ''}${data.trends.pageViewsChange}%)
-• Sessions: ${data.metrics.sessions.toLocaleString()} (${data.trends.sessionsChange > 0 ? '+' : ''}${data.trends.sessionsChange}%)
+• Page Views: ${data.metrics.pageViews.toLocaleString()}
 
 TOP PAGES:
 ${data.topPages.map(page => `• ${page.path}: ${page.views.toLocaleString()}`).join('\n')}

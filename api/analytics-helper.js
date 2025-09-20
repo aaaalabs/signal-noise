@@ -22,8 +22,6 @@ export const getWeeklyData = async () => {
   if (!data || !data.views) {
     return {
       pageViews: 0,
-      uniqueVisitors: 0,
-      sessions: 0,
       topPages: []
     };
   }
@@ -45,8 +43,6 @@ export const getWeeklyData = async () => {
 
   return {
     pageViews: totalViews,
-    uniqueVisitors: Math.floor(totalViews * 0.7), // Estimate
-    sessions: Math.floor(totalViews * 0.8), // Estimate
     topPages
   };
 };
