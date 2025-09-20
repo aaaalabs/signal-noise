@@ -151,46 +151,37 @@ async function sendAnalyticsEmail(data) {
           }
 
           .content {
-            padding: 0 30px 30px;
+            padding: 20px 40px 40px;
             background-color: #000000;
           }
 
           .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 16px;
-            margin-bottom: 32px;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
           }
 
           .metric-card {
             background: linear-gradient(145deg, #0a0a0a 0%, #050505 100%);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            padding: 24px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 32px 24px;
             text-align: center;
             position: relative;
             overflow: hidden;
-            min-height: 110px;
+            width: 240px;
+            min-height: 120px;
             display: flex;
             flex-direction: column;
             justify-content: center;
           }
 
-          .metric-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.3), transparent);
-          }
 
           .metric-value {
-            font-size: 28px;
+            font-size: 36px;
             font-weight: 100;
             color: #ffffff;
-            margin: 0 0 8px 0;
+            margin: 0 0 12px 0;
             line-height: 1.1;
           }
 
@@ -211,15 +202,16 @@ async function sendAnalyticsEmail(data) {
           }
 
           .section {
-            margin-bottom: 40px;
+            margin-bottom: 20px;
           }
 
           .section-title {
             font-size: 15px;
             font-weight: 500;
             color: #ffffff;
-            margin: 0 0 20px 0;
-            letter-spacing: 0.2px;
+            margin: 0 0 24px 0;
+            letter-spacing: 0.4px;
+            text-align: center;
           }
 
           .data-list {
@@ -259,7 +251,7 @@ async function sendAnalyticsEmail(data) {
           }
 
           .footer {
-            padding: 30px 30px 20px;
+            padding: 40px 40px 30px;
             text-align: center;
             background-color: #000000;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -275,21 +267,21 @@ async function sendAnalyticsEmail(data) {
           @media only screen and (max-width: 600px) {
             .email-container { margin: 20px auto; border-radius: 12px; }
             .header { padding: 30px 20px 24px; }
-            .content { padding: 0 20px 24px; }
-            .metrics-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+            .content { padding: 16px 20px 32px; }
             .metric-card {
-              padding: 20px 16px;
-              min-height: 100px;
+              width: 220px;
+              padding: 28px 20px;
+              min-height: 110px;
             }
-            .metric-value { font-size: 24px; }
+            .metric-value { font-size: 32px; }
             .data-item {
               padding: 14px 20px;
               min-height: 48px;
             }
             .data-item-label, .data-item-value { font-size: 13px; }
-            .section { margin-bottom: 32px; }
-            .section-title { margin-bottom: 16px; }
-            .footer { padding: 24px 20px 16px; }
+            .section { margin-bottom: 16px; }
+            .section-title { margin-bottom: 20px; }
+            .footer { padding: 32px 20px 24px; }
           }
         </style>
       </head>
@@ -306,8 +298,8 @@ async function sendAnalyticsEmail(data) {
               <div class="metric-card">
                 <div class="metric-value">${data.metrics.pageViews.toLocaleString()}</div>
                 <div class="metric-label">Page Views</div>
-                <div class="metric-trend" style="color: #cccccc">
-                  📊 Real tracking data
+                <div class="metric-trend" style="color: #666666">
+                  Real-time data
                 </div>
               </div>
             </div>
