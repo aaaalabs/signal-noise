@@ -18,12 +18,17 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
   const [tapCount, setTapCount] = useState(0);
   const [isTransferring, setIsTransferring] = useState(false);
   const [showTapFeedback, setShowTapFeedback] = useState(false);
+  const [swipeOffset, setSwipeOffset] = useState(0);
+  const [isSwipingData, setIsSwipingData] = useState(false);
   const deleteStartTime = useRef<number>(0);
   const deleteAnimationId = useRef<number | null>(null);
   const hasMilestoneVibrated = useRef(false);
   const tapTimeoutId = useRef<number | null>(null);
   const lastTapTime = useRef<number>(0);
   const currentPressId = useRef<number>(0);
+  const touchStartX = useRef<number>(0);
+  const touchStartY = useRef<number>(0);
+  const isDragging = useRef<boolean>(false);
 
   const formatTaskTime = (timestamp: string): string => {
     const date = new Date(timestamp);
@@ -125,20 +130,11 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
       clearTimeout(tapTimeoutId.current);
     }
 
-    // Check for double or triple tap
+    // Handle double tap for completion
     if (currentTapCount === 2) {
       // Second tap - trigger completion toggle
       setTimeout(() => {
         onToggleComplete(task.id);
-        resetTapState();
-      }, 100);
-    } else if (currentTapCount >= 3) {
-      // Third tap - trigger transfer
-      setIsTransferring(true);
-
-      setTimeout(() => {
-        onTransfer(task.id);
-        setIsTransferring(false);
         resetTapState();
       }, 100);
     } else {
@@ -150,6 +146,21 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
   const handlePressStart = (e: React.MouseEvent | React.TouchEvent) => {
     e.preventDefault();
 
+    // Record touch start position for swipe detection
+    if (e.type === 'touchstart') {
+      const touch = (e as React.TouchEvent).touches[0];
+      touchStartX.current = touch.clientX;
+      touchStartY.current = touch.clientY;
+    } else {
+      const mouse = e as React.MouseEvent;
+      touchStartX.current = mouse.clientX;
+      touchStartY.current = mouse.clientY;
+    }
+
+    isDragging.current = false;
+    setSwipeOffset(0);
+    setIsSwipingData(false);
+
     // Generate unique ID for this specific press
     const pressId = Date.now();
     currentPressId.current = pressId;
@@ -157,11 +168,47 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
 
     // Delay deletion start to allow quick taps to escape
     setTimeout(() => {
-      // Only start deletion if THIS SPECIFIC press is still active
-      if (currentPressId.current === pressId && !isDeleting && !isTransferring) {
+      // Only start deletion if THIS SPECIFIC press is still active and not swiping
+      if (currentPressId.current === pressId && !isDeleting && !isTransferring && !isDragging.current) {
         startDeleteProgress();
       }
     }, 150); // 150ms delay before deletion mode starts
+  };
+
+  const handleSwipeMove = (e: React.TouchEvent | React.MouseEvent) => {
+    // Only handle swipe if we have a valid press start and are actually pressed/touching
+    if (!touchStartX.current || currentPressId.current === 0) return;
+
+    let currentX: number;
+    if (e.type === 'touchmove') {
+      const touches = (e as React.TouchEvent).touches;
+      if (touches.length === 0) return;
+      currentX = touches[0].clientX;
+    } else {
+      // For mouse events, only process if mouse button is down
+      if ((e as React.MouseEvent).buttons === 0) return;
+      currentX = (e as React.MouseEvent).clientX;
+    }
+
+    const deltaX = currentX - touchStartX.current;
+    const absDeltaX = Math.abs(deltaX);
+
+    // Start dragging mode if moved more than 10px horizontally
+    if (absDeltaX > 10 && !isDragging.current) {
+      isDragging.current = true;
+      setIsSwipingData(true);
+
+      // Cancel deletion if we start swiping
+      if (isDeleting) {
+        resetDeleteState();
+      }
+    }
+
+    if (isDragging.current) {
+      // Update swipe offset with some resistance
+      const resistance = Math.min(absDeltaX / 100, 1);
+      setSwipeOffset(deltaX * resistance);
+    }
   };
 
   const handlePressEnd = (e: React.MouseEvent | React.TouchEvent) => {
@@ -170,11 +217,29 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
     // Clear the current press ID to prevent late deletion triggers
     currentPressId.current = 0;
 
-    if (isDeleting && deleteProgress < 100) {
+    // Handle swipe completion
+    if (isDragging.current && Math.abs(swipeOffset) > 50) {
+      // Swipe completed - trigger transfer
+      setIsTransferring(true);
+
+      setTimeout(() => {
+        onTransfer(task.id);
+        setIsTransferring(false);
+        setSwipeOffset(0);
+        setIsSwipingData(false);
+        isDragging.current = false;
+      }, 100);
+    } else if (isDragging.current) {
+      // Swipe cancelled - reset
+      setSwipeOffset(0);
+      setIsSwipingData(false);
+      isDragging.current = false;
+      setIsPressed(false);
+    } else if (isDeleting && deleteProgress < 100) {
       // Release before completion - cancel deletion
       resetDeleteState();
     } else if (!isDeleting && !isTransferring) {
-      // Quick tap - handle triple-tap logic only if not already transferring
+      // Quick tap - handle tap logic
       setIsPressed(false);
       handleTap();
     } else {
@@ -186,8 +251,11 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
   const handlePressCancel = () => {
     // Clear the current press ID to prevent late deletion triggers
     currentPressId.current = 0;
-    // Mouse leave or touch cancel - stop deletion
+    // Reset all states
     resetDeleteState();
+    setSwipeOffset(0);
+    setIsSwipingData(false);
+    isDragging.current = false;
   };
 
 
@@ -195,14 +263,18 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
     <div
       onMouseDown={handlePressStart}
       onMouseUp={handlePressEnd}
+      onMouseMove={handleSwipeMove}
       onMouseLeave={handlePressCancel}
       onTouchStart={handlePressStart}
+      onTouchMove={handleSwipeMove}
       onTouchEnd={handlePressEnd}
       onTouchCancel={handlePressCancel}
-      className={`task-item ${task.type}-item ${task.completed ? 'completed' : ''} ${isPressed ? 'pressing' : ''} ${isDeleting ? 'deleting' : ''} ${isTransferring ? 'transferring' : ''}`}
+      className={`task-item ${task.type}-item ${task.completed ? 'completed' : ''} ${isPressed ? 'pressing' : ''} ${isDeleting ? 'deleting' : ''} ${isTransferring ? 'transferring' : ''} ${isSwipingData ? 'swiping' : ''}`}
       style={{
         opacity: task.completed ? 0.6 : 1, // Fade completed tasks
-        transform: isPressed
+        transform: isSwipingData
+          ? `translateX(${swipeOffset}px) scale(0.98)`
+          : isPressed
           ? `scale(${tapCount === 1 ? 0.98 : tapCount === 2 ? 1.02 : 1.05})`
           : 'scale(1)',
         transition: isTransferring ? 'all 0.3s ease-out' : 'all 0.3s ease',
@@ -249,7 +321,7 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
       )}
 
       {/* Completion indicator - appears on second tap */}
-      {showTapFeedback && tapCount === 2 && (
+      {showTapFeedback && tapCount === 2 && !isSwipingData && (
         <div
           style={{
             position: 'absolute',
@@ -267,26 +339,27 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
         </div>
       )}
 
-      {/* Transfer direction indicator - appears on third tap */}
-      {showTapFeedback && tapCount >= 3 && (
+      {/* Swipe direction indicator - appears during swipe */}
+      {isSwipingData && Math.abs(swipeOffset) > 20 && (
         <div
           style={{
             position: 'absolute',
             top: '50%',
-            right: '12px',
+            right: swipeOffset > 0 ? '12px' : 'auto',
+            left: swipeOffset < 0 ? '12px' : 'auto',
             transform: 'translateY(-50%)',
-            fontSize: '18px',
+            fontSize: '20px',
             color: task.type === 'signal' ? 'var(--noise)' : 'var(--signal)',
             fontWeight: 600,
             zIndex: 2,
-            animation: 'pulseArrow 0.2s ease-out'
+            opacity: Math.min(Math.abs(swipeOffset) / 50, 1)
           }}
         >
           <span className="arrow-desktop">
-            {task.type === 'signal' ? '→' : '←'}
+            {swipeOffset > 0 ? '→' : '←'}
           </span>
           <span className="arrow-mobile">
-            {task.type === 'signal' ? '↓' : '↑'}
+            {task.type === 'signal' ? (swipeOffset > 0 ? '↓' : '↑') : (swipeOffset > 0 ? '↑' : '↓')}
           </span>
         </div>
       )}
