@@ -1,0 +1,102 @@
+#!/usr/bin/expect -f
+set timeout 60
+
+spawn npx @bubblewrap/cli init --manifest https://signal-noise.app/manifest.json
+
+# Domain (accept default)
+expect "? Domain:"
+send "\r"
+
+# URL path (accept default)
+expect "? URL path:"
+send "\r"
+
+# App name (accept default)
+expect "? Application name:"
+send "\r"
+
+# Short name (accept default)
+expect "? Short name:"
+send "\r"
+
+# Application ID (accept default)
+expect "? Application ID:"
+send "\r"
+
+# Display mode (accept default)
+expect "? Display mode:"
+send "\r"
+
+# Orientation (accept default)
+expect "? Orientation:"
+send "\r"
+
+# Theme color (accept default)
+expect "? Theme color:"
+send "\r"
+
+# Background color (accept default)
+expect "? Background color:"
+send "\r"
+
+# Start URL (accept default)
+expect "? Start URL:"
+send "\r"
+
+# Icon URL (accept default)
+expect "? Icon URL:"
+send "\r"
+
+# Maskable icon (accept default)
+expect "? Maskable icon URL:"
+send "\r"
+
+# Monochrome icon (accept default)
+expect "? Monochrome icon URL:"
+send "\r"
+
+# Shortcuts (none)
+expect "? Include app shortcuts?"
+send "n\r"
+
+# Key store path
+expect "? Path to the Key Store:"
+send "./android.keystore\r"
+
+# Key store password
+expect "? Key Store password:"
+send "Singal-Noise2027!!\r"
+
+# Key alias
+expect "? Key alias:"
+send "android\r"
+
+# Key password
+expect "? Key password:"
+send "Singal-Noise2027!!\r"
+
+# First and last name
+expect "? First and Last names:"
+send "Signal Noise\r"
+
+# Organizational unit
+expect "? Organizational Unit:"
+send "Development\r"
+
+# Organization
+expect "? Organization:"
+send "Signal Noise App\r"
+
+# City
+expect "? City or Locality:"
+send "Vienna\r"
+
+# State
+expect "? State or Province:"
+send "Vienna\r"
+
+# Country
+expect "? Country code:"
+send "AT\r"
+
+expect eof

@@ -222,8 +222,17 @@ body {
     background: rgba(255,255,255,0.02);
     border: 1px solid rgba(255,255,255,0.05);
     color: #666;
-    text-decoration: line-through;
-    opacity: 0.5;
+}
+
+/* Completed task styling */
+.task-item.completed {
+    transform: scale(0.95);
+    background: rgba(0,255,136,0.02) !important;
+    border-color: rgba(0,255,136,0.15) !important;
+}
+
+.task-item.completed .task-text {
+    color: rgba(255,255,255,0.35);
 }
 
 .task-text {

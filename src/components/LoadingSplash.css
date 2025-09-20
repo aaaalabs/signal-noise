@@ -1,0 +1,99 @@
+/* Loading Splash - Blueprint Reveal Animation */
+.loading-splash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.loading-splash-content {
+  position: relative;
+}
+
+.loading-logo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-icon {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+.loading-outline-icon,
+.loading-solid-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+}
+
+/* Blueprint Reveal Animation - Auto-playing version */
+@keyframes loadingBlueprintOutline {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+}
+
+@keyframes loadingBlueprintSolid {
+  0% {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  60% {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.loading-blueprint-reveal .loading-outline-icon {
+  animation: loadingBlueprintOutline 2.2s ease-out forwards;
+  opacity: 0;
+}
+
+.loading-blueprint-reveal .loading-solid-icon {
+  animation: loadingBlueprintSolid 2.2s ease-out forwards;
+  opacity: 0;
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+  .loading-icon {
+    width: 80px;
+    height: 80px;
+  }
+
+  .loading-outline-icon,
+  .loading-solid-icon {
+    width: 80px;
+    height: 80px;
+  }
+}

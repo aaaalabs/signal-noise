@@ -115,6 +115,7 @@
             <meta-data android:name="android.support.customtabs.trusted.FILE_PROVIDER_AUTHORITY"
                 android:value="@string/providerAuthority"/>
 
+            <meta-data android:name="android.app.shortcuts" android:resource="@xml/shortcuts" />
 
             <meta-data android:name="android.support.customtabs.trusted.FALLBACK_STRATEGY"
                 android:value="@string/fallbackType" />
@@ -172,19 +173,11 @@
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_w4_info" />
         </receiver>
 
-        <receiver android:name=".widget.T1" android:exported="true" android:label="S/N Logo">
+        <receiver android:name=".widget.T1" android:exported="true" android:label="• spacer">
             <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_t1_info" />
         </receiver>
 
-
-        <!-- SLC Screen Wake Sync - Instant widget updates -->
-        <receiver android:name=".widget.ScreenWakeSyncReceiver"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="android.intent.action.SCREEN_ON" />
-            </intent-filter>
-        </receiver>
 
         <!-- Widget Update Receiver -->
         <receiver android:name=".widget.WidgetUpdateReceiver"

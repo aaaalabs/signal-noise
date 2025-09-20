@@ -7,9 +7,10 @@ interface TaskGridProps {
   tasks: Task[];
   onTransfer: (id: number) => void;
   onDelete: (id: number) => void;
+  onToggleComplete: (id: number) => void;
 }
 
-function TaskItem({ task, onTransfer, onDelete }: { task: Task; onTransfer: (id: number) => void; onDelete: (id: number) => void }) {
+function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task; onTransfer: (id: number) => void; onDelete: (id: number) => void; onToggleComplete: (id: number) => void }) {
   const t = useTranslation();
   const [isPressed, setIsPressed] = useState(false);
   const [deleteProgress, setDeleteProgress] = useState(0);
@@ -124,8 +125,14 @@ function TaskItem({ task, onTransfer, onDelete }: { task: Task; onTransfer: (id:
       clearTimeout(tapTimeoutId.current);
     }
 
-    // Check if third tap within window
-    if (currentTapCount >= 3) {
+    // Check for double or triple tap
+    if (currentTapCount === 2) {
+      // Second tap - trigger completion toggle
+      setTimeout(() => {
+        onToggleComplete(task.id);
+        resetTapState();
+      }, 100);
+    } else if (currentTapCount >= 3) {
       // Third tap - trigger transfer
       setIsTransferring(true);
 
@@ -192,13 +199,13 @@ function TaskItem({ task, onTransfer, onDelete }: { task: Task; onTransfer: (id:
       onTouchStart={handlePressStart}
       onTouchEnd={handlePressEnd}
       onTouchCancel={handlePressCancel}
-      className={`task-item ${task.type}-item ${isPressed ? 'pressing' : ''} ${isDeleting ? 'deleting' : ''} ${isTransferring ? 'transferring' : ''}`}
+      className={`task-item ${task.type}-item ${task.completed ? 'completed' : ''} ${isPressed ? 'pressing' : ''} ${isDeleting ? 'deleting' : ''} ${isTransferring ? 'transferring' : ''}`}
       style={{
-        opacity: 1, // Always full opacity - no completed state
+        opacity: task.completed ? 0.6 : 1, // Fade completed tasks
         transform: isPressed
           ? `scale(${tapCount === 1 ? 0.98 : tapCount === 2 ? 1.02 : 1.05})`
           : 'scale(1)',
-        transition: isTransferring ? 'all 0.3s ease-out' : 'transform 0.15s ease',
+        transition: isTransferring ? 'all 0.3s ease-out' : 'all 0.3s ease',
         cursor: isDeleting ? 'pointer' : 'default',
         position: 'relative',
         userSelect: 'none',
@@ -241,8 +248,27 @@ function TaskItem({ task, onTransfer, onDelete }: { task: Task; onTransfer: (id:
         />
       )}
 
-      {/* Transfer direction indicator - appears on second tap */}
+      {/* Completion indicator - appears on second tap */}
       {showTapFeedback && tapCount === 2 && (
+        <div
+          style={{
+            position: 'absolute',
+            top: '50%',
+            right: '12px',
+            transform: 'translateY(-50%)',
+            fontSize: '18px',
+            color: task.completed ? '#666' : 'var(--signal)',
+            fontWeight: 600,
+            zIndex: 2,
+            animation: 'pulseArrow 0.2s ease-out'
+          }}
+        >
+          {task.completed ? '↺' : '✓'}
+        </div>
+      )}
+
+      {/* Transfer direction indicator - appears on third tap */}
+      {showTapFeedback && tapCount >= 3 && (
         <div
           style={{
             position: 'absolute',
@@ -271,7 +297,7 @@ function TaskItem({ task, onTransfer, onDelete }: { task: Task; onTransfer: (id:
   );
 }
 
-export default function TaskGrid({ tasks, onTransfer, onDelete }: TaskGridProps) {
+export default function TaskGrid({ tasks, onTransfer, onDelete, onToggleComplete }: TaskGridProps) {
   const t = useTranslation();
   const signalTasks = tasks.filter(task => task.type === 'signal');
   const noiseTasks = tasks.filter(task => task.type === 'noise');
@@ -288,6 +314,7 @@ export default function TaskGrid({ tasks, onTransfer, onDelete }: TaskGridProps)
                 task={task}
                 onTransfer={onTransfer}
                 onDelete={onDelete}
+                onToggleComplete={onToggleComplete}
               />
             ))}
             {signalTasks.length === 0 && (
@@ -307,6 +334,7 @@ export default function TaskGrid({ tasks, onTransfer, onDelete }: TaskGridProps)
                 task={task}
                 onTransfer={onTransfer}
                 onDelete={onDelete}
+                onToggleComplete={onToggleComplete}
               />
             ))}
             {noiseTasks.length === 0 && (

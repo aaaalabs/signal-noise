@@ -56,10 +56,26 @@ export function getAverageRatio(tasks: Task[], days: number): number {
 export function getTodayRatio(tasks: Task[]): number {
   const today = new Date().toDateString();
   const todayTasks = tasks.filter(t =>
-    new Date(t.timestamp).toDateString() === today && !t.completed
+    new Date(t.timestamp).toDateString() === today
   );
-  const signals = todayTasks.filter(t => t.type === 'signal').length;
-  return todayTasks.length > 0 ? Math.round((signals / todayTasks.length) * 100) : 0;
+
+  if (todayTasks.length === 0) return 0;
+
+  // Count signals with weighted completion
+  let signalWeight = 0;
+  let totalWeight = 0;
+
+  todayTasks.forEach(task => {
+    if (task.type === 'signal') {
+      signalWeight += task.completed ? 1.0 : 1.0; // Completed signals count at full weight
+      totalWeight += 1.0;
+    } else {
+      // Noise tasks
+      totalWeight += task.completed ? 0.2 : 1.0; // Completed noise counts at 20% weight
+    }
+  });
+
+  return totalWeight > 0 ? Math.round((signalWeight / totalWeight) * 100) : 0;
 }
 
 export function hasTaskBefore(tasks: Task[], hour: number): boolean {

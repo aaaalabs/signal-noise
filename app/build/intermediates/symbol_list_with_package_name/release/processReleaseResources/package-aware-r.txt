@@ -810,7 +810,6 @@ id line1
 id line3
 id listMode
 id list_item
-id logo_image
 id message
 id middle
 id minimal_field
@@ -874,6 +873,7 @@ id signal_label
 id signal_text
 id simple_ratio
 id simple_status
+id simple_text
 id spacer
 id special_effects_controller_view_tag
 id split_action_bar

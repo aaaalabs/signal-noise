@@ -59,7 +59,6 @@ id flow_ratio
 id flow_state
 id hourly_pattern
 id last_update
-id logo_image
 id minimal_field
 id minimal_text
 id noise_count
@@ -86,6 +85,7 @@ id signal_label
 id signal_text
 id simple_ratio
 id simple_status
+id simple_text
 id status_large
 id status_text
 id status_text_2x2

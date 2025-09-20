@@ -21,6 +21,7 @@ import BrandIcon from './components/BrandIcon';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import SyncIndicator from './components/SyncIndicator';
 import SplashScreenTester from './components/SplashScreenTester';
+import LoadingSplash from './components/LoadingSplash';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { checkAchievements, getTodayRatio } from './utils/achievements';
 import { handleStripeReturn, getSessionData, type SessionData } from './services/premiumService';
@@ -46,6 +47,7 @@ function AppContent() {
   const t = useTranslation();
   const [data, setData] = useState<AppData>(initialData);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [splashCompleted, setSplashCompleted] = useState(false);
   const [_localVersion, setLocalVersion] = useState(0);
 
   // Sync tracking variables
@@ -273,6 +275,14 @@ function AppContent() {
                 if (!parsedData.settings) parsedData.settings = { targetRatio: 80, notifications: false, firstName: user.firstName || '' };
                 if (parsedData.signal_ratio === undefined) parsedData.signal_ratio = getTodayRatio(parsedData.tasks || []);
 
+                // MIGRATION: Auto-complete existing noise tasks
+                if (parsedData.tasks) {
+                  parsedData.tasks = parsedData.tasks.map((task: Task) => ({
+                    ...task,
+                    completed: task.completed !== undefined ? task.completed : (task.type === 'noise')
+                  }));
+                }
+
                 // CRITICAL: Get server version to sync client tracking
                 try {
                   const metaResponse = await fetch('/api/sync-meta', {
@@ -363,6 +373,14 @@ function AppContent() {
           if (!parsedData.patterns) parsedData.patterns = {};
           if (!parsedData.settings) parsedData.settings = { targetRatio: 80, notifications: false, firstName: '' };
           if (parsedData.signal_ratio === undefined) parsedData.signal_ratio = getTodayRatio(parsedData.tasks || []);
+
+          // MIGRATION: Auto-complete existing noise tasks
+          if (parsedData.tasks) {
+            parsedData.tasks = parsedData.tasks.map((task: Task) => ({
+              ...task,
+              completed: task.completed !== undefined ? task.completed : (task.type === 'noise')
+            }));
+          }
 
           // Merge saved name if not already present
           if (userName && !parsedData.settings.firstName) {
@@ -829,7 +847,12 @@ function AppContent() {
               });
 
               if (dataResponse.ok) {
-                const { data: cloudData } = await dataResponse.json();
+                const responseData = await dataResponse.json();
+
+                // Parse cloudData if it's a string
+                let cloudData = typeof responseData.data === 'string'
+                  ? JSON.parse(responseData.data)
+                  : responseData.data;
 
                 // Migrate cloud data if needed
                 if (!cloudData.badges) cloudData.badges = [];
@@ -1146,7 +1169,7 @@ function AppContent() {
       text: text.trim(),
       type,
       timestamp: new Date().toISOString(),
-      completed: false
+      completed: type === 'noise' // Auto-complete noise tasks
     };
 
     setData(prev => {
@@ -1221,6 +1244,31 @@ function AppContent() {
 
       return newData;
     });
+  };
+
+  const toggleTaskCompletion = (id: number) => {
+    setData(prev => {
+      const newData = {
+        ...prev,
+        tasks: prev.tasks.map(task =>
+          task.id === id ? { ...task, completed: !task.completed } : task
+        )
+      };
+
+      // Calculate and include signal_ratio in the data update
+      const ratio = getTodayRatio(newData.tasks);
+      newData.signal_ratio = ratio;
+
+      // Update Android widget
+      updateAndroidWidget(ratio);
+
+      return newData;
+    });
+
+    // Haptic feedback on completion toggle
+    if (navigator.vibrate) {
+      navigator.vibrate(8);
+    }
   };
 
   const getTodayTasks = (): Task[] => {
@@ -1300,6 +1348,12 @@ function AppContent() {
 
   return (
     <>
+      {/* Loading Splash - Blueprint Reveal during Redis sync */}
+      <LoadingSplash
+        show={(!isLoaded || !splashCompleted) && !showOnboarding && !showVerifyMagicLink && !showInvoicePage && !showSuccessPage && !showSplashTester}
+        onComplete={() => setSplashCompleted(true)}
+      />
+
       {/* Onboarding */}
       <Onboarding
         show={showOnboarding}
@@ -1332,7 +1386,9 @@ function AppContent() {
         startInLoginMode={foundationModalLoginMode}
       />
 
-      <div className="container" style={{ position: 'relative' }}>
+      {/* Main app content - only show when both loading and splash are complete */}
+      {isLoaded && splashCompleted && (
+        <div className="container" style={{ position: 'relative' }}>
         {/* Brand Icon - Subtle Watermark */}
         <BrandIcon onLoginClick={() => {
           setFoundationModalLoginMode(true);
@@ -1406,6 +1462,7 @@ function AppContent() {
           tasks={todayTasks}
           onTransfer={transferTask}
           onDelete={deleteTask}
+          onToggleComplete={toggleTaskCompletion}
         />
 
         {/* AI Coach */}
@@ -1431,7 +1488,8 @@ function AppContent() {
           setFoundationModalLoginMode(true);
           setShowFoundationModal(true);
         }} />
-      </div>
+        </div>
+      )}
     </>
   );
 }

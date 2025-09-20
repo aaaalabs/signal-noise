@@ -11,53 +11,66 @@ interface SplashVariant {
 
 const splashVariants: SplashVariant[] = [
   {
-    id: 'fade-in',
-    name: 'Fade In',
-    description: 'Simple opacity fade from 0 to 1',
-    animationClass: 'splash-fade-in',
-    duration: 1500
+    id: 'honest-fade',
+    name: 'Honest Fade',
+    description: 'Pure minimalism - fade without effects',
+    animationClass: 'splash-honest-fade',
+    duration: 1000
   },
   {
-    id: 'scale-up',
-    name: 'Scale Up',
-    description: 'Logo scales from 0.5x to 1x with bounce',
-    animationClass: 'splash-scale-up',
-    duration: 2000
-  },
-  {
-    id: 'slide-up',
-    name: 'Slide Up',
-    description: 'Logo slides up from bottom with ease-out',
-    animationClass: 'splash-slide-up',
+    id: 'fade-glow-subtle',
+    name: 'Fade + Subtle Glow',
+    description: 'Jony Ive choice - honest glow, gentle presence',
+    animationClass: 'splash-fade-glow-subtle',
     duration: 1800
   },
   {
-    id: 'pulse',
-    name: 'Pulse',
-    description: 'Gentle pulse/heartbeat effect',
-    animationClass: 'splash-pulse',
-    duration: 2500
+    id: 'fade-glow-medium',
+    name: 'Fade + Medium Glow',
+    description: 'User preference - balanced visibility and restraint',
+    animationClass: 'splash-fade-glow-medium',
+    duration: 2000
   },
   {
-    id: 'rotate-fade',
-    name: 'Rotate + Fade',
-    description: 'Combination rotation and fade effect',
-    animationClass: 'splash-rotate-fade',
+    id: 'material-truth',
+    name: 'Material Truth',
+    description: 'Micro-scale materialization from digital ether',
+    animationClass: 'splash-material-truth',
+    duration: 1400
+  },
+  {
+    id: 'breath-signal',
+    name: 'Breath of Signal',
+    description: 'Ultra-subtle breathing - barely perceptible life',
+    animationClass: 'splash-breath-signal',
+    duration: 4000
+  },
+  {
+    id: 'signal-emergence',
+    name: 'Signal Emergence',
+    description: 'Geometric revelation from center outward',
+    animationClass: 'splash-signal-emergence',
+    duration: 1400
+  },
+  {
+    id: 'blueprint-reveal',
+    name: 'Blueprint Reveal',
+    description: 'White outline first, then solid white form appears',
+    animationClass: 'splash-blueprint-reveal',
     duration: 2200
   },
   {
-    id: 'glow',
-    name: 'Signal Glow',
-    description: 'Signature green glow effect with fade',
-    animationClass: 'splash-glow',
-    duration: 2000
+    id: 'design-process',
+    name: 'Design Process',
+    description: 'White outline evolves into final white product',
+    animationClass: 'splash-design-process',
+    duration: 2800
   }
 ];
 
 const SplashScreenTester: React.FC = () => {
   const [selectedVariant, setSelectedVariant] = useState<SplashVariant>(splashVariants[0]);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isDarkBackground, setIsDarkBackground] = useState(true);
 
   const playSplash = (variant: SplashVariant) => {
     setSelectedVariant(variant);
@@ -73,23 +86,17 @@ const SplashScreenTester: React.FC = () => {
     setIsPlaying(false);
   };
 
+  // Always use white icon on black background for proper visibility
+  const getIconSource = () => '/sn-icon_white.svg';
+
   return (
     <div className="splash-tester">
       {/* Controls Panel */}
       <div className="splash-controls">
-        <h1 className="splash-title">Signal/Noise Splash Screen Variants</h1>
+        <h1 className="splash-title">Signal/Noise Android Splash Variants</h1>
+        <p className="splash-subtitle">White icons on black background - Jony Ive-inspired designs</p>
 
         <div className="splash-options">
-          <div className="background-toggle">
-            <label>
-              <input
-                type="checkbox"
-                checked={isDarkBackground}
-                onChange={(e) => setIsDarkBackground(e.target.checked)}
-              />
-              Dark Background
-            </label>
-          </div>
 
           <div className="variant-grid">
             {splashVariants.map((variant) => (
@@ -126,7 +133,7 @@ const SplashScreenTester: React.FC = () => {
 
       {/* Splash Preview Area */}
       <div
-        className={`splash-preview ${isDarkBackground ? 'dark' : 'light'}`}
+        className="splash-preview dark"
         style={{
           position: 'relative',
           height: '60vh',
@@ -135,14 +142,33 @@ const SplashScreenTester: React.FC = () => {
           justifyContent: 'center',
           border: '2px solid var(--surface)',
           borderRadius: '12px',
-          margin: '20px 0'
+          margin: '20px 0',
+          background: '#000000'
         }}
       >
         {isPlaying && (
           <div className={`splash-logo ${selectedVariant.animationClass}`}>
-            <div className="signal-logo">
-              <span className="signal-text">Signal</span>
-              <span className="noise-text">/Noise</span>
+            <div className="signal-icon">
+              {(selectedVariant.id === 'blueprint-reveal' || selectedVariant.id === 'design-process') ? (
+                <>
+                  <img
+                    src="/sn-icon_outline_white.svg"
+                    alt="Signal/Noise Outline"
+                    className="icon-svg outline-icon"
+                  />
+                  <img
+                    src="/sn-icon_white.svg"
+                    alt="Signal/Noise"
+                    className="icon-svg solid-icon"
+                  />
+                </>
+              ) : (
+                <img
+                  src={getIconSource()}
+                  alt="Signal/Noise"
+                  className="icon-svg"
+                />
+              )}
             </div>
           </div>
         )}
@@ -169,12 +195,16 @@ const SplashScreenTester: React.FC = () => {
 
       {/* Android Implementation Notes */}
       <div className="implementation-notes">
-        <h3>Android Implementation Notes</h3>
+        <h3>Android Implementation Guide</h3>
         <ul>
-          <li><strong>Animated Vector Drawable:</strong> Convert logo to SVG, create AVD for native Android animations</li>
-          <li><strong>Lottie:</strong> Export animations as JSON for complex effects (glow, pulse)</li>
-          <li><strong>Splash Screen API:</strong> Android 12+ native splash with icon animation</li>
-          <li><strong>Performance:</strong> Hardware acceleration recommended for smooth animations</li>
+          <li><strong>Honest Fade:</strong> Use Android 12+ Splash Screen API with simple alpha transition</li>
+          <li><strong>Subtle/Medium Glow:</strong> Implement with Layer effects or custom Canvas drawing</li>
+          <li><strong>Material Truth:</strong> Hardware-accelerated PropertyAnimation with scale interpolator</li>
+          <li><strong>Breath of Signal:</strong> Ultra-subtle animations require precise timing control</li>
+          <li><strong>Signal Emergence:</strong> Combine scale + blur using RenderScript or modern effects</li>
+          <li><strong>Blueprint Reveal:</strong> Layer two ImageViews with coordinated alpha animations</li>
+          <li><strong>Design Process:</strong> Advanced LayerDrawable with synchronized filter effects</li>
+          <li><strong>Performance:</strong> All animations respect Jony Ive's 60fps standard</li>
         </ul>
       </div>
     </div>
