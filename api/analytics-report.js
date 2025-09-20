@@ -307,12 +307,14 @@ async function sendAnalyticsEmail(data) {
             <div style="margin-bottom: 20px;">
               <h3 style="font-size: 15px; font-weight: 500; color: #ffffff; margin: 0 0 24px 0; letter-spacing: 0.4px; text-align: center;">Top Pages</h3>
               <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; overflow: hidden;">
-                ${data.topPages.map((page, index) => `
-                  <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; ${index < data.topPages.length - 1 ? 'border-bottom: 1px solid rgba(255, 255, 255, 0.03);' : ''} min-height: 52px;">
-                    <span style="font-size: 14px; color: #cccccc; font-weight: 400; line-height: 1.3;">${page.path}</span>
-                    <span style="font-size: 14px; color: #ffffff; font-weight: 500; line-height: 1.3; margin-left: 16px; text-align: right;">${page.views.toLocaleString()}</span>
-                  </div>
-                `).join('')}
+                <table style="width: 100%; border-collapse: collapse;">
+                  ${data.topPages.map((page, index) => `
+                    <tr>
+                      <td style="padding: 16px 24px; font-size: 14px; color: #cccccc; font-weight: 400; line-height: 1.3; text-align: left; vertical-align: middle; ${index < data.topPages.length - 1 ? 'border-bottom: 1px solid rgba(255, 255, 255, 0.03);' : ''}">${page.path}</td>
+                      <td style="padding: 16px 24px; font-size: 14px; color: #ffffff; font-weight: 500; line-height: 1.3; text-align: right; vertical-align: middle; ${index < data.topPages.length - 1 ? 'border-bottom: 1px solid rgba(255, 255, 255, 0.03);' : ''}">${page.views.toLocaleString()}</td>
+                    </tr>
+                  `).join('')}
+                </table>
               </div>
             </div>
           </div>
