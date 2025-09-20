@@ -206,9 +206,22 @@ export default function FeedbackModal({ show, onClose }: FeedbackModalProps) {
               fontSize: '1rem',
               fontWeight: '300',
               marginBottom: '0.5rem',
-              marginTop: '0'
+              marginTop: '0',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem'
             }}>
-              🤖 Android Beta Testers Needed
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00ff88" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M4 10l0 6" />
+                <path d="M20 10l0 6" />
+                <path d="M7 9h10v8a1 1 0 0 1 -1 1h-8a1 1 0 0 1 -1 -1v-8a5 5 0 0 1 10 0" />
+                <path d="M8 3l1 2" />
+                <path d="M16 3l-1 2" />
+                <path d="M9 18l0 3" />
+                <path d="M15 18l0 3" />
+              </svg>
+              Android Beta Testers Needed
             </h3>
             <p style={{
               color: '#d1d5db',
