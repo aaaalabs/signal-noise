@@ -139,7 +139,7 @@ const translations = {
       },
       {
         question: "Wie benutze ich Signal/Noise effektiv?",
-        answer: "Füge Aufgaben hinzu und kategorisiere sie als Signal (wichtig) oder Noise (Ablenkungen). Nutze Tab für schnellen Wechsel zwischen Kategorien. <strong>Doppelt tippen auf eine Aufgabe</strong> markiert sie als erledigt. <strong>Horizontal wischen</strong> verschiebt Aufgaben zwischen Signal/Noise-Spalten mit visueller Rückmeldung und Richtungspfeilen. <strong>2,5 Sekunden lang halten</strong> löscht eine Aufgabe mit Fortschrittsbalken. Drücke Cmd+E (Mac) oder Ctrl+E (Windows) zum Datenexport."
+        answer: "Füge Aufgaben hinzu und kategorisiere sie als Signal (wichtig) oder Noise (Ablenkungen). Nutze Tab für schnellen Wechsel zwischen Kategorien. <strong>Doppelt tippen auf eine Aufgabe</strong> markiert sie als erledigt. <strong>Horizontal wischen</strong> verschiebt Aufgaben zwischen Signal/Noise-Spalten mit visueller Rückmeldung und Richtungspfeilen. <strong>3 Sekunden lang halten</strong> löscht eine Aufgabe mit Fortschrittsbalken. Drücke Cmd+E (Mac) oder Ctrl+E (Windows) zum Datenexport."
       },
       {
         question: "Wie funktionieren Erfolge und Fortschritt?",
@@ -268,7 +268,7 @@ const translations = {
       },
       {
         question: "How do I use Signal/Noise effectively?",
-        answer: "Add tasks and classify them as Signal (important) or Noise (distractions). Use Tab to quickly switch between categories. <strong>Double-tap any task</strong> to mark it as completed. <strong>Swipe horizontally</strong> to move tasks between Signal/Noise columns with visual feedback and directional arrows. <strong>Hold any task for 2.5 seconds</strong> to delete it with a progress bar. Press Cmd+E (Mac) or Ctrl+E (Windows) to export your data."
+        answer: "Add tasks and classify them as Signal (important) or Noise (distractions). Use Tab to quickly switch between categories. <strong>Double-tap any task</strong> to mark it as completed. <strong>Swipe horizontally</strong> to move tasks between Signal/Noise columns with visual feedback and directional arrows. <strong>Hold any task for 3 seconds</strong> to delete it with a progress bar. Press Cmd+E (Mac) or Ctrl+E (Windows) to export your data."
       },
       {
         question: "How do achievements and progress tracking work?",
