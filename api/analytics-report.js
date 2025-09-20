@@ -71,17 +71,21 @@ async function fetchVercelAnalytics(weekNumber, now) {
 
     console.log(`📊 Fetching analytics data: ${startDate.toISOString()} to ${endDate.toISOString()}`);
 
-    // Vercel Analytics API endpoint
+    // Vercel Analytics API endpoint (v2 is the correct version)
     const teamId = process.env.VERCEL_TEAM_ID || 'team_thomas-projects-2f71c075';
-    const projectId = process.env.VERCEL_PROJECT_ID || 'signal-noise';
+    const projectId = process.env.VERCEL_PROJECT_ID || 'prj_signal-noise';
 
     const headers = {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     };
 
-    // Fetch page views data
-    const pageViewsUrl = `https://api.vercel.com/v1/analytics/views?teamId=${teamId}&projectId=${projectId}&since=${since}&until=${until}`;
+    console.log(`📊 API Request: teamId=${teamId}, projectId=${projectId}`);
+
+    // Fetch page views data (using v2 API)
+    const pageViewsUrl = `https://api.vercel.com/v2/analytics/events?teamId=${teamId}&projectId=${projectId}&since=${since}&until=${until}&event=pageview`;
+    console.log(`📊 Calling: ${pageViewsUrl}`);
+
     const pageViewsResponse = await fetch(pageViewsUrl, { headers });
 
     if (!pageViewsResponse.ok) {
