@@ -119,11 +119,11 @@ export default function FeedbackModal({ show, onClose }: FeedbackModalProps) {
                 padding: '0.75rem 1rem',
                 borderRadius: '0.25rem',
                 display: 'flex',
-                flexDirection: 'column',
                 alignItems: 'flex-start',
                 cursor: 'pointer',
                 transition: 'all 0.2s',
-                textAlign: 'left'
+                textAlign: 'left',
+                gap: '0.75rem'
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = '#00ff88';
@@ -134,21 +134,28 @@ export default function FeedbackModal({ show, onClose }: FeedbackModalProps) {
                 e.currentTarget.style.backgroundColor = 'transparent';
               }}
             >
-              <span style={{
-                color: '#fff',
-                fontSize: '0.9rem',
-                marginBottom: '0.25rem',
-                fontWeight: '300'
-              }}>
-                WhatsApp
-              </span>
-              <span style={{
-                color: '#9ca3af',
-                fontSize: '0.8rem',
-                fontWeight: '100'
-              }}>
-                +43 660 1238172
-              </span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00ff88" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginTop: '0.1rem', flexShrink: 0 }}>
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" />
+                <path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" />
+              </svg>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <span style={{
+                  color: '#fff',
+                  fontSize: '0.9rem',
+                  marginBottom: '0.25rem',
+                  fontWeight: '300'
+                }}>
+                  WhatsApp
+                </span>
+                <span style={{
+                  color: '#9ca3af',
+                  fontSize: '0.8rem',
+                  fontWeight: '100'
+                }}>
+                  +43 660 1238172
+                </span>
+              </div>
             </button>
 
             {/* Email Option */}
@@ -160,11 +167,11 @@ export default function FeedbackModal({ show, onClose }: FeedbackModalProps) {
                 padding: '0.75rem 1rem',
                 borderRadius: '0.25rem',
                 display: 'flex',
-                flexDirection: 'column',
                 alignItems: 'flex-start',
                 cursor: 'pointer',
                 transition: 'all 0.2s',
-                textAlign: 'left'
+                textAlign: 'left',
+                gap: '0.75rem'
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = '#00ff88';
@@ -175,21 +182,28 @@ export default function FeedbackModal({ show, onClose }: FeedbackModalProps) {
                 e.currentTarget.style.backgroundColor = 'transparent';
               }}
             >
-              <span style={{
-                color: '#fff',
-                fontSize: '0.9rem',
-                marginBottom: '0.25rem',
-                fontWeight: '300'
-              }}>
-                Email
-              </span>
-              <span style={{
-                color: '#9ca3af',
-                fontSize: '0.8rem',
-                fontWeight: '100'
-              }}>
-                feedback@signal-noise.app
-              </span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00ff88" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginTop: '0.1rem', flexShrink: 0 }}>
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
+                <path d="M3 7l9 6l9 -6" />
+              </svg>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <span style={{
+                  color: '#fff',
+                  fontSize: '0.9rem',
+                  marginBottom: '0.25rem',
+                  fontWeight: '300'
+                }}>
+                  Email
+                </span>
+                <span style={{
+                  color: '#9ca3af',
+                  fontSize: '0.8rem',
+                  fontWeight: '100'
+                }}>
+                  feedback@signal-noise.app
+                </span>
+              </div>
             </button>
           </div>
 
