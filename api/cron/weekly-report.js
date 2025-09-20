@@ -12,9 +12,9 @@ export default async function handler(req, res) {
       ? `https://${req.headers.host}`
       : 'http://localhost:3000';
 
-    // Call the analytics report endpoint
-    const reportUrl = `${baseUrl}/api/analytics-report`;
-    console.log(`📊 Calling analytics report: ${reportUrl}`);
+    // Call the analytics report endpoint with secret
+    const reportUrl = `${baseUrl}/api/analytics-report?REPORT_SECRET=justME2027!`;
+    console.log(`📊 Calling analytics report: ${baseUrl}/api/analytics-report`);
 
     const response = await fetch(reportUrl, {
       method: 'GET',
