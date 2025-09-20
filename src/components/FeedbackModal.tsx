@@ -192,6 +192,42 @@ export default function FeedbackModal({ show, onClose }: FeedbackModalProps) {
               </span>
             </button>
           </div>
+
+          {/* Android Beta Testing Call-to-Action */}
+          <div style={{
+            marginTop: '2rem',
+            padding: '1rem',
+            backgroundColor: 'rgba(0, 255, 136, 0.05)',
+            border: '1px solid rgba(0, 255, 136, 0.2)',
+            borderRadius: '0.25rem'
+          }}>
+            <h3 style={{
+              color: '#00ff88',
+              fontSize: '1rem',
+              fontWeight: '300',
+              marginBottom: '0.5rem',
+              marginTop: '0'
+            }}>
+              🤖 Android Beta Testers Needed
+            </h3>
+            <p style={{
+              color: '#d1d5db',
+              fontSize: '0.85rem',
+              lineHeight: '1.5',
+              marginBottom: '0.75rem'
+            }}>
+              We're looking for <strong>10 Official Android Users</strong> to test our Android App Version.
+              Includes free premium trial with AI Coach and exclusive features like Widgets!
+            </p>
+            <p style={{
+              color: '#9ca3af',
+              fontSize: '0.8rem',
+              fontStyle: 'italic',
+              margin: '0'
+            }}>
+              Interested? Please drop me a DM via WhatsApp or Email above 📱
+            </p>
+          </div>
         </div>
       </div>
     </div>
