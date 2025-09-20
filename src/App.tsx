@@ -100,6 +100,13 @@ function AppContent() {
       setSplashCompleted(true);
     }
 
+    // Track page view - SLC simple analytics
+    fetch('/api/track', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ path: pathname })
+    }).catch(() => {}); // Silent fail
+
     // Handle /about routing
     if (pathname === '/about' || hash === '#about') {
       setShowAboutModal(true);
