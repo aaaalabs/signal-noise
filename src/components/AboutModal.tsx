@@ -254,7 +254,7 @@ export default function AboutModal({ show, onClose }: AboutModalProps) {
                 fontWeight: '300',
                 marginBottom: '0.5rem'
               }}>
-                {isGerman ? 'Erwähnte Visionäre' : 'Mentioned Visionaries'}
+                {isGerman ? 'Pioniere der Methode' : 'Method Pioneers'}
               </h4>
               <div style={{
                 display: 'grid',
