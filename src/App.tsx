@@ -23,6 +23,7 @@ import SyncIndicator from './components/SyncIndicator';
 import SplashScreenTester from './components/SplashScreenTester';
 import LoadingSplash from './components/LoadingSplash';
 import AboutModal from './components/AboutModal';
+import PrivacyModal from './components/PrivacyModal';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { checkAchievements, getTodayRatio } from './utils/achievements';
 import { handleStripeReturn, getSessionData, type SessionData } from './services/premiumService';
@@ -81,6 +82,7 @@ function AppContent() {
   const [verifyToken, setVerifyToken] = useState<string>('');
   const [showSplashTester, setShowSplashTester] = useState(false);
   const [showAboutModal, setShowAboutModal] = useState(false);
+  const [showPrivacyModal, setShowPrivacyModal] = useState(false);
 
   // Load data from localStorage on mount
   useEffect(() => {
@@ -100,6 +102,11 @@ function AppContent() {
     // Handle /about routing
     if (pathname === '/about' || hash === '#about') {
       setShowAboutModal(true);
+    }
+
+    // Handle /privacy routing
+    if (pathname === '/privacy' || hash === '#privacy') {
+      setShowPrivacyModal(true);
     }
 
     // Handle Android app shortcuts
@@ -466,11 +473,13 @@ function AppContent() {
     };
   }, []);
 
-  // Listen for hash changes to handle #about navigation
+  // Listen for hash changes to handle #about and #privacy navigation
   useEffect(() => {
     const handleHashChange = () => {
       if (window.location.hash === '#about') {
         setShowAboutModal(true);
+      } else if (window.location.hash === '#privacy') {
+        setShowPrivacyModal(true);
       }
     };
 
@@ -1424,6 +1433,20 @@ function AppContent() {
           if (window.location.pathname === '/about') {
             window.history.replaceState({}, '', '/');
           } else if (window.location.hash === '#about') {
+            window.history.replaceState({}, '', window.location.pathname);
+          }
+        }}
+      />
+
+      {/* Privacy Modal */}
+      <PrivacyModal
+        show={showPrivacyModal}
+        onClose={() => {
+          setShowPrivacyModal(false);
+          // Clean URL when closing modal
+          if (window.location.pathname === '/privacy') {
+            window.history.replaceState({}, '', '/');
+          } else if (window.location.hash === '#privacy') {
             window.history.replaceState({}, '', window.location.pathname);
           }
         }}
