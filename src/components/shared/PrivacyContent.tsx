@@ -16,9 +16,10 @@ export const PrivacyContent = () => (
         Keine Datensammlung
       </h3>
       <div style={{ lineHeight: 1.8 }}>
-        <p>Wir sammeln keine persönlichen Daten, keine Nutzungsstatistiken und verwenden keine Tracking-Cookies.</p>
+        <p>Wir sammeln keine persönlichen Daten und verwenden keine Tracking-Cookies.</p>
         <p><strong>Kostenlos:</strong> Ihre Tasks und Produktivitätsmuster verlassen niemals Ihr Gerät.</p>
         <p><strong>Premium:</strong> Nur bei aktiviertem Premium-Sync werden verschlüsselte Daten temporär zur Synchronisation gespeichert.</p>
+        <p><strong>Analytics:</strong> Anonyme Nutzungsstatistiken über Vercel Analytics für Produktverbesserung.</p>
       </div>
     </section>
 

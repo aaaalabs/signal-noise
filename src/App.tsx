@@ -28,6 +28,7 @@ import { LanguageProvider } from './contexts/LanguageContext';
 import { checkAchievements, getTodayRatio } from './utils/achievements';
 import { handleStripeReturn, getSessionData, type SessionData } from './services/premiumService';
 import { syncStart, syncSuccess, syncError, syncIdle, syncChecking, syncReceiving } from './services/syncService';
+import { Analytics as VercelAnalytics } from '@vercel/analytics/react';
 
 const DATA_KEY = 'signal_noise_data';
 const ONBOARDING_KEY = 'signal_noise_onboarded';
@@ -1565,6 +1566,7 @@ function App() {
   return (
     <LanguageProvider>
       <AppContent />
+      <VercelAnalytics />
     </LanguageProvider>
   );
 }
