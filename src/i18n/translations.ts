@@ -139,7 +139,7 @@ const translations = {
       },
       {
         question: "Wie benutze ich Signal/Noise effektiv?",
-        answer: "Füge Aufgaben hinzu und kategorisiere sie als Signal (wichtig) oder Noise (Ablenkungen). Nutze Tab für schnellen Wechsel zwischen Kategorien. <strong>Dreimal tippen auf eine Aufgabe</strong> verschiebt sie zwischen Signal/Noise-Spalten - du siehst progressive Rückmeldung und Pfeile zur Zielposition. <strong>2,5 Sekunden lang halten</strong> löscht eine Aufgabe mit Fortschrittsbalken. Drücke Cmd+E (Mac) oder Ctrl+E (Windows) zum Datenexport."
+        answer: "Füge Aufgaben hinzu und kategorisiere sie als Signal (wichtig) oder Noise (Ablenkungen). Nutze Tab für schnellen Wechsel zwischen Kategorien. <strong>Doppelt tippen auf eine Aufgabe</strong> markiert sie als erledigt. <strong>Horizontal wischen</strong> verschiebt Aufgaben zwischen Signal/Noise-Spalten mit visueller Rückmeldung und Richtungspfeilen. <strong>2,5 Sekunden lang halten</strong> löscht eine Aufgabe mit Fortschrittsbalken. Drücke Cmd+E (Mac) oder Ctrl+E (Windows) zum Datenexport."
       },
       {
         question: "Wie funktionieren Erfolge und Fortschritt?",
@@ -151,7 +151,7 @@ const translations = {
       },
       {
         question: "Wie funktionieren Datenschutz und Sync?",
-        answer: "Alles wird lokal im Browser gespeichert. <strong>Premium-Nutzer erhalten Cloud-Sync für die Nutzung auf mehreren Geräten</strong> - deine Daten sind automatisch auf Handy, Laptop und Tablet synchron. Der Sync-Indikator (🔒) neben dem Sprachschalter zeigt die Verbindung. Deine Privatsphäre ist immer geschützt - kein Tracking, keine Analyse, kein Data Mining."
+        answer: "Alles wird lokal im Browser gespeichert. <strong>Premium-Nutzer erhalten Cloud-Sync für die Nutzung auf mehreren Geräten</strong> - deine Daten sind automatisch auf Handy, Laptop und Tablet synchron. Der grüne Punkt neben dem Sprachschalter zeigt die Verbindung. Deine Privatsphäre ist immer geschützt - kein Tracking, keine Analyse, kein Data Mining."
       },
       {
         question: "Welche Interface-Features gibt es?",
@@ -268,7 +268,7 @@ const translations = {
       },
       {
         question: "How do I use Signal/Noise effectively?",
-        answer: "Add tasks and classify them as Signal (important) or Noise (distractions). Use Tab to quickly switch between categories. <strong>Triple-tap any task</strong> to move it between Signal/Noise columns - you'll see progressive visual feedback and arrows showing the destination. <strong>Hold any task for 2.5 seconds</strong> to delete it with a progress bar. Press Cmd+E (Mac) or Ctrl+E (Windows) to export your data."
+        answer: "Add tasks and classify them as Signal (important) or Noise (distractions). Use Tab to quickly switch between categories. <strong>Double-tap any task</strong> to mark it as completed. <strong>Swipe horizontally</strong> to move tasks between Signal/Noise columns with visual feedback and directional arrows. <strong>Hold any task for 2.5 seconds</strong> to delete it with a progress bar. Press Cmd+E (Mac) or Ctrl+E (Windows) to export your data."
       },
       {
         question: "How do achievements and progress tracking work?",
@@ -280,7 +280,7 @@ const translations = {
       },
       {
         question: "How does data privacy and sync work?",
-        answer: "Everything is stored locally in your browser. <strong>Premium users get cloud sync for use across multiple devices</strong> - your data automatically stays in sync across phone, laptop, and tablet. The sync indicator (🔒) next to the language switcher shows connection status. Your privacy is always protected - no tracking, no analytics, no data mining."
+        answer: "Everything is stored locally in your browser. <strong>Premium users get cloud sync for use across multiple devices</strong> - your data automatically stays in sync across phone, laptop, and tablet. The green dot next to the language switcher shows connection status. Your privacy is always protected - no tracking, no analytics, no data mining."
       },
       {
         question: "What interface features are available?",
