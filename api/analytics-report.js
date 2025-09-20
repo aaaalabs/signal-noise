@@ -293,24 +293,24 @@ async function sendAnalyticsEmail(data) {
             <p class="week-info">Week ${data.weekNumber} • ${data.period}</p>
           </div>
 
-          <div class="content">
-            <div class="metrics-grid">
-              <div class="metric-card">
-                <div class="metric-value">${data.metrics.pageViews.toLocaleString()}</div>
-                <div class="metric-label">Page Views</div>
-                <div class="metric-trend" style="color: #666666">
+          <div style="padding: 20px 40px 40px; background-color: #000000;">
+            <div style="display: flex; justify-content: center; margin-bottom: 40px;">
+              <div style="background: linear-gradient(145deg, #0a0a0a 0%, #050505 100%); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 32px 24px; text-align: center; width: 240px; min-height: 120px; display: flex; flex-direction: column; justify-content: center;">
+                <div style="font-size: 36px; font-weight: 100; color: #ffffff; margin: 0 0 12px 0; line-height: 1.1;">${data.metrics.pageViews.toLocaleString()}</div>
+                <div style="font-size: 11px; color: #666666; text-transform: uppercase; letter-spacing: 0.8px; margin: 0 0 12px 0; line-height: 1.2;">Page Views</div>
+                <div style="font-size: 11px; font-weight: 400; margin: 0; opacity: 0.9; color: #666666;">
                   Real-time data
                 </div>
               </div>
             </div>
 
-            <div class="section">
-              <h3 class="section-title">Top Pages</h3>
-              <div class="data-list">
-                ${data.topPages.map(page => `
-                  <div class="data-item">
-                    <span class="data-item-label">${page.path}</span>
-                    <span class="data-item-value">${page.views.toLocaleString()}</span>
+            <div style="margin-bottom: 20px;">
+              <h3 style="font-size: 15px; font-weight: 500; color: #ffffff; margin: 0 0 24px 0; letter-spacing: 0.4px; text-align: center;">Top Pages</h3>
+              <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; overflow: hidden;">
+                ${data.topPages.map((page, index) => `
+                  <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; ${index < data.topPages.length - 1 ? 'border-bottom: 1px solid rgba(255, 255, 255, 0.03);' : ''} min-height: 52px;">
+                    <span style="font-size: 14px; color: #cccccc; font-weight: 400; line-height: 1.3;">${page.path}</span>
+                    <span style="font-size: 14px; color: #ffffff; font-weight: 500; line-height: 1.3; margin-left: 16px; text-align: right;">${page.views.toLocaleString()}</span>
                   </div>
                 `).join('')}
               </div>
