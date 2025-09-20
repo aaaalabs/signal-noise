@@ -100,12 +100,13 @@ export default function SyncIndicator({ data }: SyncIndicatorProps) {
   return (
     <>
       <div style={{ position: 'relative' }}>
-        <div
+        <span
           className={`premium-dot ${syncState !== 'idle' ? `sync-${syncState}` : ''}`}
           onClick={() => setShowPremiumMenu(!showPremiumMenu)}
           title={`Premium: ${premiumStatus.email || 'Active'} ${syncState !== 'idle' ? ` (${syncState})` : ''}`}
           style={{
-            color: '#00ff88',
+            fontSize: '8px',
+            color: 'var(--signal)',
             opacity: showPremiumMenu ? 0.6 : 0.2,
             cursor: 'pointer',
             userSelect: 'none',
@@ -114,8 +115,9 @@ export default function SyncIndicator({ data }: SyncIndicatorProps) {
             display: 'inline-flex',
             alignItems: 'center',
             justifyContent: 'center',
-            width: '12px',
-            height: '12px'
+            width: '8px',
+            height: '8px',
+            lineHeight: '8px'
           }}
           onMouseEnter={(e) => {
             if (syncState === 'idle') { // Only apply hover effects when not animating
@@ -130,11 +132,8 @@ export default function SyncIndicator({ data }: SyncIndicatorProps) {
             }
           }}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 24 24" fill="currentColor">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-            <path d="M12 7a5 5 0 1 1 -4.995 5.217l-.005 -.217l.005 -.217a5 5 0 0 1 4.995 -4.783z" />
-          </svg>
-        </div>
+          ●
+        </span>
 
         <PremiumMenu
           show={showPremiumMenu}
@@ -146,54 +145,43 @@ export default function SyncIndicator({ data }: SyncIndicatorProps) {
       </div>
 
       <style>{`
-        /* SVG Dot Pulsating Animations */
+        /* Photon metaphor animations */
         @keyframes syncPulse {
           0%, 100% {
-            opacity: 0.3;
+            opacity: 0.2;
             transform: scale(1);
           }
           50% {
-            opacity: 0.7;
-            transform: scale(1.3);
+            opacity: 0.5;
+            transform: scale(1.05);
           }
         }
 
         @keyframes syncGlow {
           0% {
-            opacity: 1;
-            transform: scale(1.4);
-            filter: drop-shadow(0 0 4px #00ff88);
+            opacity: 0.8;
+            transform: scale(1.1);
+            box-shadow: 0 0 8px var(--signal);
           }
           100% {
             opacity: 0.2;
             transform: scale(1);
-            filter: none;
+            box-shadow: none;
           }
         }
 
         @keyframes syncError {
-          0%, 100% {
-            opacity: 0.2;
-            filter: none;
-          }
-          25%, 75% {
-            opacity: 0.6;
-            filter: drop-shadow(0 0 2px #ff4444);
-          }
-          50% {
-            opacity: 0.2;
-            filter: none;
-          }
+          0%, 100% { opacity: 0.2; }
+          25%, 75% { opacity: 0.4; }
+          50% { opacity: 0.2; }
         }
 
         @keyframes syncChecking {
           0%, 100% {
             opacity: 0.3;
-            transform: scale(1);
           }
           50% {
-            opacity: 0.5;
-            transform: scale(1.1);
+            opacity: 0.4;
           }
         }
 
@@ -201,17 +189,16 @@ export default function SyncIndicator({ data }: SyncIndicatorProps) {
           0% {
             opacity: 0.3;
             transform: scale(1);
-            filter: none;
+            box-shadow: none;
           }
           30% {
-            opacity: 0.8;
-            transform: scale(1.5);
-            filter: drop-shadow(0 0 3px #00ff88);
+            opacity: 0.6;
+            transform: scale(1.2);
           }
           100% {
             opacity: 1;
             transform: scale(1);
-            filter: drop-shadow(0 0 2px rgba(0, 255, 136, 0.5));
+            box-shadow: 0 0 4px rgba(0, 255, 136, 0.3);
           }
         }
 
