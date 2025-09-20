@@ -22,6 +22,7 @@ import LanguageSwitcher from './components/LanguageSwitcher';
 import SyncIndicator from './components/SyncIndicator';
 import SplashScreenTester from './components/SplashScreenTester';
 import LoadingSplash from './components/LoadingSplash';
+import AboutModal from './components/AboutModal';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { checkAchievements, getTodayRatio } from './utils/achievements';
 import { handleStripeReturn, getSessionData, type SessionData } from './services/premiumService';
@@ -79,6 +80,7 @@ function AppContent() {
   const [showVerifyMagicLink, setShowVerifyMagicLink] = useState(false);
   const [verifyToken, setVerifyToken] = useState<string>('');
   const [showSplashTester, setShowSplashTester] = useState(false);
+  const [showAboutModal, setShowAboutModal] = useState(false);
 
   // Load data from localStorage on mount
   useEffect(() => {
@@ -93,6 +95,11 @@ function AppContent() {
     if (isDirectLink) {
       // Skip splash screen for direct links
       setSplashCompleted(true);
+    }
+
+    // Handle /about routing
+    if (pathname === '/about' || hash === '#about') {
+      setShowAboutModal(true);
     }
 
     // Handle Android app shortcuts
@@ -457,6 +464,18 @@ function AppContent() {
     return () => {
       window.removeEventListener('premiumSessionUpdated', handlePremiumSessionUpdate as EventListener);
     };
+  }, []);
+
+  // Listen for hash changes to handle #about navigation
+  useEffect(() => {
+    const handleHashChange = () => {
+      if (window.location.hash === '#about') {
+        setShowAboutModal(true);
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
   // Helper functions defined before use
@@ -1394,6 +1413,20 @@ function AppContent() {
           setFoundationModalLoginMode(false);
         }}
         startInLoginMode={foundationModalLoginMode}
+      />
+
+      {/* About Modal */}
+      <AboutModal
+        show={showAboutModal}
+        onClose={() => {
+          setShowAboutModal(false);
+          // Clean URL when closing modal
+          if (window.location.pathname === '/about') {
+            window.history.replaceState({}, '', '/');
+          } else if (window.location.hash === '#about') {
+            window.history.replaceState({}, '', window.location.pathname);
+          }
+        }}
       />
 
       {/* Main app content - only show when both loading and splash are complete */}
