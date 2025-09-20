@@ -292,10 +292,14 @@ async function sendAnalyticsEmail(data) {
             background: linear-gradient(145deg, #0a0a0a 0%, #050505 100%);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 12px;
-            padding: 20px;
+            padding: 24px 20px;
             text-align: center;
             position: relative;
             overflow: hidden;
+            min-height: 110px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
           }
 
           .metric-card::before {
@@ -309,36 +313,39 @@ async function sendAnalyticsEmail(data) {
           }
 
           .metric-value {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 100;
             color: #ffffff;
-            margin: 0 0 4px 0;
+            margin: 0 0 8px 0;
+            line-height: 1.1;
           }
 
           .metric-label {
             font-size: 11px;
             color: #666666;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin: 0 0 8px 0;
+            letter-spacing: 0.8px;
+            margin: 0 0 12px 0;
+            line-height: 1.2;
           }
 
           .metric-trend {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 400;
             margin: 0;
+            opacity: 0.9;
           }
 
           .section {
-            margin-bottom: 32px;
+            margin-bottom: 40px;
           }
 
           .section-title {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 500;
             color: #ffffff;
-            margin: 0 0 16px 0;
-            letter-spacing: 0.3px;
+            margin: 0 0 20px 0;
+            letter-spacing: 0.2px;
           }
 
           .data-list {
@@ -352,8 +359,9 @@ async function sendAnalyticsEmail(data) {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 20px;
+            padding: 16px 24px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            min-height: 52px;
           }
 
           .data-item:last-child {
@@ -361,15 +369,19 @@ async function sendAnalyticsEmail(data) {
           }
 
           .data-item-label {
-            font-size: 13px;
+            font-size: 14px;
             color: #cccccc;
             font-weight: 400;
+            line-height: 1.3;
           }
 
           .data-item-value {
-            font-size: 13px;
+            font-size: 14px;
             color: #ffffff;
             font-weight: 500;
+            line-height: 1.3;
+            margin-left: 16px;
+            text-align: right;
           }
 
           .footer {
@@ -390,9 +402,19 @@ async function sendAnalyticsEmail(data) {
             .email-container { margin: 20px auto; border-radius: 12px; }
             .header { padding: 30px 20px 24px; }
             .content { padding: 0 20px 24px; }
-            .metrics-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-            .metric-card { padding: 16px; }
-            .metric-value { font-size: 20px; }
+            .metrics-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+            .metric-card {
+              padding: 20px 16px;
+              min-height: 100px;
+            }
+            .metric-value { font-size: 24px; }
+            .data-item {
+              padding: 14px 20px;
+              min-height: 48px;
+            }
+            .data-item-label, .data-item-value { font-size: 13px; }
+            .section { margin-bottom: 32px; }
+            .section-title { margin-bottom: 16px; }
             .footer { padding: 24px 20px 16px; }
           }
 
