@@ -247,87 +247,187 @@ async function sendAnalyticsEmail(data) {
             background-color: #000000;
           }
 
-          .metrics-grid {
+          .metrics-hero {
+            margin-bottom: 48px;
+          }
+
+          .primary-metrics {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 16px;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
             margin-bottom: 32px;
           }
 
-          .metric-card {
-            background: linear-gradient(145deg, #0a0a0a 0%, #050505 100%);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            padding: 24px 20px;
+          .hero-metric {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.08) 0%, rgba(0, 255, 136, 0.02) 100%);
+            border: 1px solid rgba(0, 255, 136, 0.15);
+            border-radius: 20px;
+            padding: 40px 32px;
             text-align: center;
             position: relative;
             overflow: hidden;
-            min-height: 110px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            backdrop-filter: blur(10px);
           }
 
-          .metric-card::before {
+          .hero-metric::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ff88, transparent);
+          }
+
+          .hero-metric::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(0, 255, 136, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+          }
+
+          .hero-value {
+            font-size: 42px;
+            font-weight: 300;
+            color: #ffffff;
+            margin: 0 0 12px 0;
+            line-height: 1;
+            letter-spacing: -1px;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+          }
+
+          .hero-label {
+            font-size: 13px;
+            color: #00ff88;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin: 0 0 16px 0;
+          }
+
+          .hero-trend {
+            font-size: 12px;
+            font-weight: 500;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: inline-block;
+          }
+
+          .secondary-metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+          }
+
+          .metric-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 28px 24px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+          }
+
+          .metric-card:hover {
+            border-color: rgba(0, 255, 136, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+          }
+
+          .metric-value {
+            font-size: 32px;
+            font-weight: 200;
+            color: #ffffff;
+            margin: 0 0 8px 0;
+            line-height: 1;
+            letter-spacing: -0.5px;
+          }
+
+          .metric-label {
+            font-size: 12px;
+            color: #888888;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0 0 12px 0;
+          }
+
+          .metric-trend {
+            font-size: 11px;
+            font-weight: 500;
+            margin: 0;
+            padding: 4px 8px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            display: inline-block;
+          }
+
+          .section {
+            margin-bottom: 48px;
+            padding: 32px;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.005) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            position: relative;
+          }
+
+          .section::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.3), transparent);
-          }
-
-          .metric-value {
-            font-size: 28px;
-            font-weight: 100;
-            color: #ffffff;
-            margin: 0 0 8px 0;
-            line-height: 1.1;
-          }
-
-          .metric-label {
-            font-size: 11px;
-            color: #666666;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            margin: 0 0 12px 0;
-            line-height: 1.2;
-          }
-
-          .metric-trend {
-            font-size: 11px;
-            font-weight: 400;
-            margin: 0;
-            opacity: 0.9;
-          }
-
-          .section {
-            margin-bottom: 40px;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.2), transparent);
           }
 
           .section-title {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 500;
             color: #ffffff;
-            margin: 0 0 20px 0;
-            letter-spacing: 0.2px;
+            margin: 0 0 24px 0;
+            letter-spacing: 0.3px;
+            position: relative;
+            padding-left: 16px;
+          }
+
+          .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 16px;
+            background: linear-gradient(180deg, #00ff88, rgba(0, 255, 136, 0.3));
+            border-radius: 2px;
           }
 
           .data-list {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
             overflow: hidden;
+            backdrop-filter: blur(10px);
           }
 
           .data-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 16px 24px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-            min-height: 52px;
+            padding: 20px 28px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            min-height: 60px;
+            transition: all 0.2s ease;
+          }
+
+          .data-item:hover {
+            background: rgba(0, 255, 136, 0.02);
+            border-color: rgba(0, 255, 136, 0.1);
           }
 
           .data-item:last-child {
@@ -335,19 +435,25 @@ async function sendAnalyticsEmail(data) {
           }
 
           .data-item-label {
-            font-size: 14px;
-            color: #cccccc;
+            font-size: 15px;
+            color: #dddddd;
             font-weight: 400;
             line-height: 1.3;
+            flex: 1;
           }
 
           .data-item-value {
-            font-size: 14px;
+            font-size: 16px;
             color: #ffffff;
             font-weight: 500;
             line-height: 1.3;
-            margin-left: 16px;
+            margin-left: 24px;
             text-align: right;
+            min-width: 60px;
+            padding: 4px 12px;
+            background: rgba(0, 255, 136, 0.08);
+            border-radius: 12px;
+            border: 1px solid rgba(0, 255, 136, 0.15);
           }
 
           .footer {
@@ -365,22 +471,67 @@ async function sendAnalyticsEmail(data) {
           }
 
           @media only screen and (max-width: 600px) {
-            .email-container { margin: 20px auto; border-radius: 12px; }
+            .email-container { margin: 16px auto; border-radius: 12px; }
             .header { padding: 30px 20px 24px; }
             .content { padding: 0 20px 24px; }
-            .metrics-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+
+            .primary-metrics {
+              grid-template-columns: 1fr;
+              gap: 20px;
+              margin-bottom: 28px;
+            }
+
+            .hero-metric {
+              padding: 32px 24px;
+              border-radius: 16px;
+            }
+
+            .hero-value { font-size: 36px; }
+            .hero-label { font-size: 12px; }
+
+            .secondary-metrics {
+              grid-template-columns: 1fr;
+              gap: 16px;
+            }
+
             .metric-card {
-              padding: 20px 16px;
-              min-height: 100px;
+              padding: 24px 20px;
+              border-radius: 14px;
             }
-            .metric-value { font-size: 24px; }
+
+            .metric-value { font-size: 28px; }
+
+            .section {
+              margin-bottom: 36px;
+              padding: 24px 20px;
+              border-radius: 16px;
+            }
+
+            .section-title {
+              font-size: 15px;
+              margin-bottom: 20px;
+            }
+
             .data-item {
-              padding: 14px 20px;
-              min-height: 48px;
+              padding: 16px 20px;
+              min-height: 52px;
+              flex-direction: column;
+              align-items: flex-start;
+              gap: 8px;
             }
-            .data-item-label, .data-item-value { font-size: 13px; }
-            .section { margin-bottom: 32px; }
-            .section-title { margin-bottom: 16px; }
+
+            .data-item-label {
+              font-size: 14px;
+              margin: 0;
+            }
+
+            .data-item-value {
+              font-size: 15px;
+              margin: 0;
+              align-self: flex-end;
+              min-width: auto;
+            }
+
             .footer { padding: 24px 20px 16px; }
           }
 
@@ -404,36 +555,40 @@ async function sendAnalyticsEmail(data) {
           </div>
 
           <div class="content">
-            <div class="metrics-grid">
-              <div class="metric-card">
-                <div class="metric-value">${data.metrics.uniqueVisitors.toLocaleString()}</div>
-                <div class="metric-label">Unique Visitors</div>
-                <div class="metric-trend" style="color: ${getTrendColor(data.trends.visitorsChange)}">
-                  ${getTrendIcon(data.trends.visitorsChange)} ${data.trends.visitorsChange > 0 ? '+' : ''}${data.trends.visitorsChange}%
+            <div class="metrics-hero">
+              <div class="primary-metrics">
+                <div class="hero-metric">
+                  <div class="hero-value">${data.metrics.uniqueVisitors.toLocaleString()}</div>
+                  <div class="hero-label">Unique Visitors</div>
+                  <div class="hero-trend" style="color: ${getTrendColor(data.trends.visitorsChange)}">
+                    ${getTrendIcon(data.trends.visitorsChange)} ${data.trends.visitorsChange > 0 ? '+' : ''}${data.trends.visitorsChange}%
+                  </div>
+                </div>
+
+                <div class="hero-metric">
+                  <div class="hero-value">${data.metrics.pageViews.toLocaleString()}</div>
+                  <div class="hero-label">Page Views</div>
+                  <div class="hero-trend" style="color: ${getTrendColor(data.trends.pageViewsChange)}">
+                    ${getTrendIcon(data.trends.pageViewsChange)} ${data.trends.pageViewsChange > 0 ? '+' : ''}${data.trends.pageViewsChange}%
+                  </div>
                 </div>
               </div>
 
-              <div class="metric-card">
-                <div class="metric-value">${data.metrics.pageViews.toLocaleString()}</div>
-                <div class="metric-label">Page Views</div>
-                <div class="metric-trend" style="color: ${getTrendColor(data.trends.pageViewsChange)}">
-                  ${getTrendIcon(data.trends.pageViewsChange)} ${data.trends.pageViewsChange > 0 ? '+' : ''}${data.trends.pageViewsChange}%
+              <div class="secondary-metrics">
+                <div class="metric-card">
+                  <div class="metric-value">${data.metrics.sessions.toLocaleString()}</div>
+                  <div class="metric-label">Sessions</div>
+                  <div class="metric-trend" style="color: ${getTrendColor(data.trends.sessionsChange)}">
+                    ${getTrendIcon(data.trends.sessionsChange)} ${data.trends.sessionsChange > 0 ? '+' : ''}${data.trends.sessionsChange}%
+                  </div>
                 </div>
-              </div>
 
-              <div class="metric-card">
-                <div class="metric-value">${data.metrics.sessions.toLocaleString()}</div>
-                <div class="metric-label">Sessions</div>
-                <div class="metric-trend" style="color: ${getTrendColor(data.trends.sessionsChange)}">
-                  ${getTrendIcon(data.trends.sessionsChange)} ${data.trends.sessionsChange > 0 ? '+' : ''}${data.trends.sessionsChange}%
-                </div>
-              </div>
-
-              <div class="metric-card">
-                <div class="metric-value">${data.metrics.bounceRate}%</div>
-                <div class="metric-label">Bounce Rate</div>
-                <div class="metric-trend" style="color: #cccccc">
-                  ➡️ ${Math.floor(data.metrics.avgSessionDuration / 60)}m ${data.metrics.avgSessionDuration % 60}s avg
+                <div class="metric-card">
+                  <div class="metric-value">${data.metrics.bounceRate}%</div>
+                  <div class="metric-label">Bounce Rate</div>
+                  <div class="metric-trend" style="color: #cccccc">
+                    ⏱️ ${Math.floor(data.metrics.avgSessionDuration / 60)}m ${data.metrics.avgSessionDuration % 60}s avg
+                  </div>
                 </div>
               </div>
             </div>
