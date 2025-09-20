@@ -71,22 +71,44 @@ async function fetchVercelAnalytics(weekNumber, now) {
 
     console.log(`📊 Fetching analytics data: ${startDate.toISOString()} to ${endDate.toISOString()}`);
 
-    // Vercel Analytics API endpoint (v2 is the correct version)
-    const teamId = process.env.VERCEL_TEAM_ID || 'team_thomas-projects-2f71c075';
-    const projectId = process.env.VERCEL_PROJECT_ID || 'prj_signal-noise';
+    // Try multiple API endpoints to find the correct one
+    const teamId = 'team_thomas-projects-2f71c075';
 
     const headers = {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     };
 
-    console.log(`📊 API Request: teamId=${teamId}, projectId=${projectId}`);
+    console.log(`📊 API Request with teamId: ${teamId}`);
 
-    // Fetch page views data (using v2 API)
-    const pageViewsUrl = `https://api.vercel.com/v2/analytics/events?teamId=${teamId}&projectId=${projectId}&since=${since}&until=${until}&event=pageview`;
-    console.log(`📊 Calling: ${pageViewsUrl}`);
+    // First, try to get the project list to find the correct project ID
+    const projectsUrl = `https://api.vercel.com/v9/projects?teamId=${teamId}`;
+    console.log(`📊 Getting projects: ${projectsUrl}`);
 
-    const pageViewsResponse = await fetch(pageViewsUrl, { headers });
+    const projectsResponse = await fetch(projectsUrl, { headers });
+
+    if (!projectsResponse.ok) {
+      console.error('Projects API error:', projectsResponse.status, await projectsResponse.text());
+      throw new Error(`Vercel Projects API failed: ${projectsResponse.status}`);
+    }
+
+    const projectsData = await projectsResponse.json();
+    console.log('📊 Projects found:', projectsData.projects?.map(p => ({ name: p.name, id: p.id })));
+
+    // Find our signal-noise project
+    const signalNoiseProject = projectsData.projects?.find(p => p.name === 'signal-noise');
+    if (!signalNoiseProject) {
+      throw new Error('signal-noise project not found in projects list');
+    }
+
+    const projectId = signalNoiseProject.id;
+    console.log(`📊 Using project ID: ${projectId}`);
+
+    // Now try the analytics API with the correct project ID
+    const analyticsUrl = `https://api.vercel.com/v1/analytics/stats?teamId=${teamId}&projectId=${projectId}&from=${since}&to=${until}`;
+    console.log(`📊 Calling analytics: ${analyticsUrl}`);
+
+    const pageViewsResponse = await fetch(analyticsUrl, { headers });
 
     if (!pageViewsResponse.ok) {
       console.error('Vercel API error:', pageViewsResponse.status, await pageViewsResponse.text());
