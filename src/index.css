@@ -852,11 +852,10 @@ body {
     z-index: -1;
 }
 
-/* Mobile: Push text right to make room for left arrow */
+/* Mobile: Progressive push animation now handled in React component */
 @media (max-width: 600px) {
     .task-item.swiping .task-text {
-        padding-left: 32px;
-        transition: padding 0.2s ease;
+        /* Padding is now dynamically calculated in TaskGrid.tsx */
     }
 }
 

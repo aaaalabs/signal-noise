@@ -384,13 +384,42 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
             {swipeOffset > 0 ? '→' : '←'}
           </span>
           <span className="arrow-mobile">
-            {/* Mobile: Based on task type, not swipe direction */}
-            {task.type === 'noise' ? '↑' : '↓'}
+            {/* Mobile: SVG arrows based on task type */}
+            {task.type === 'noise' ? (
+              // Up arrow in green for noise → signal
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--signal)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M12 5l0 14" />
+                <path d="M18 11l-6 -6" />
+                <path d="M6 11l6 -6" />
+              </svg>
+            ) : (
+              // Down arrow in grey for signal → noise
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M12 5l0 14" />
+                <path d="M18 13l-6 6" />
+                <path d="M6 13l6 6" />
+              </svg>
+            )}
           </span>
         </div>
       )}
 
-      <div className="task-text" style={{ position: 'relative', zIndex: 1 }}>{task.text}</div>
+      <div
+        className="task-text"
+        style={{
+          position: 'relative',
+          zIndex: 1,
+          // Progressive push animation on mobile
+          paddingLeft: isMobile && isSwipingData && Math.abs(swipeOffset) > 20
+            ? `${Math.min(32, Math.abs(swipeOffset) * 0.8)}px`
+            : undefined,
+          transition: 'padding 0.1s ease'
+        }}
+      >
+        {task.text}
+      </div>
       <div className="task-time" style={{ position: 'relative', zIndex: 1 }}>{formatTaskTime(task.timestamp)}</div>
     </div>
   );
