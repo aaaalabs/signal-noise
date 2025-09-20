@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import type { Task } from '../types';
 import { useTranslation } from '../contexts/LanguageContext';
 import { formatTime } from '../i18n/translations';
@@ -20,6 +20,7 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
   const [showTapFeedback, setShowTapFeedback] = useState(false);
   const [swipeOffset, setSwipeOffset] = useState(0);
   const [isSwipingData, setIsSwipingData] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const deleteStartTime = useRef<number>(0);
   const deleteAnimationId = useRef<number | null>(null);
   const hasMilestoneVibrated = useRef(false);
@@ -29,6 +30,14 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
   const touchStartX = useRef<number>(0);
   const touchStartY = useRef<number>(0);
   const isDragging = useRef<boolean>(false);
+
+  // Viewport detection for responsive swipe behavior
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 600);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const formatTaskTime = (timestamp: string): string => {
     const date = new Date(timestamp);
@@ -273,7 +282,9 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
       style={{
         opacity: task.completed ? 0.6 : 1, // Fade completed tasks
         transform: isSwipingData
-          ? `translateX(${swipeOffset}px) scale(0.98)`
+          ? isMobile
+            ? 'scale(0.98)' // Mobile: just scale, no horizontal movement
+            : `translateX(${swipeOffset}px) scale(0.98)` // Desktop: slide horizontally
           : isPressed
           ? `scale(${tapCount === 1 ? 0.98 : tapCount === 2 ? 1.02 : 1.05})`
           : 'scale(1)',
