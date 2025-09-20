@@ -139,41 +139,7 @@ async function fetchVercelAnalytics(weekNumber, now) {
 
   } catch (error) {
     console.error('❌ Failed to fetch Vercel analytics:', error);
-
-    // Fallback to mock data if API fails
-    console.log('🔄 Using fallback mock data');
-    return {
-      weekNumber,
-      period: getWeekPeriod(now),
-      metrics: {
-        uniqueVisitors: Math.floor(Math.random() * 500) + 100,
-        pageViews: Math.floor(Math.random() * 1500) + 300,
-        sessions: Math.floor(Math.random() * 800) + 150,
-        bounceRate: (Math.random() * 30 + 40).toFixed(1),
-        avgSessionDuration: Math.floor(Math.random() * 180 + 120)
-      },
-      trends: {
-        visitorsChange: Math.floor(Math.random() * 40) - 20,
-        pageViewsChange: Math.floor(Math.random() * 60) - 30,
-        sessionsChange: Math.floor(Math.random() * 50) - 25
-      },
-      topPages: [
-        { path: '/', views: Math.floor(Math.random() * 800) + 200 },
-        { path: '/about', views: Math.floor(Math.random() * 200) + 50 },
-        { path: '/privacy', views: Math.floor(Math.random() * 100) + 20 }
-      ],
-      referrers: [
-        { source: 'Direct', percentage: 45 },
-        { source: 'Google', percentage: 35 },
-        { source: 'Twitter', percentage: 12 },
-        { source: 'Others', percentage: 8 }
-      ],
-      devices: [
-        { type: 'Desktop', percentage: 60 },
-        { type: 'Mobile', percentage: 35 },
-        { type: 'Tablet', percentage: 5 }
-      ]
-    };
+    throw error; // Don't hide the failure - let it bubble up
   }
 }
 
