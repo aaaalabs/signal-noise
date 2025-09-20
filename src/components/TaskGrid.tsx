@@ -386,16 +386,42 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
           <span className="arrow-mobile">
             {/* Mobile: SVG arrows based on task type */}
             {task.type === 'noise' ? (
-              // Up arrow in green for noise → signal
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--signal)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              // Up arrow in green for noise → signal with subtle upward drift
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="var(--signal)"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                style={{
+                  animation: 'subtleUpward 2s ease-in-out infinite'
+                }}
+              >
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                 <path d="M12 5l0 14" />
                 <path d="M18 11l-6 -6" />
                 <path d="M6 11l6 -6" />
               </svg>
             ) : (
-              // Down arrow in grey for signal → noise
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              // Down arrow in grey for signal → noise with subtle downward drift
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#666"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                style={{
+                  animation: 'subtleDownward 2s ease-in-out infinite'
+                }}
+              >
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                 <path d="M12 5l0 14" />
                 <path d="M18 13l-6 6" />
@@ -521,6 +547,25 @@ export default function TaskGrid({ tasks, onTransfer, onDelete, onToggleComplete
           100% {
             opacity: 1;
             transform: translateY(-50%) scale(1);
+          }
+        }
+
+        /* Subtle directional drift animations - Jony Ive inspired */
+        @keyframes subtleUpward {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-3px);
+          }
+        }
+
+        @keyframes subtleDownward {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(3px);
           }
         }
       `}</style>
