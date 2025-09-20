@@ -263,10 +263,10 @@ export default function AboutModal({ show, onClose }: AboutModalProps) {
                 color: '#d1d5db',
                 fontSize: '0.85rem'
               }}>
-                <div><strong>Steve Jobs</strong> - Apple CEO, 80% Signal</div>
-                <div><strong>Elon Musk</strong> - 100% Signal, 24/7</div>
-                <div><strong>Jeff Bezos</strong> - Morning-only decisions</div>
-                <div><strong>Kevin O'Leary</strong> - Shark Tank investor</div>
+                <div><strong>Steve Jobs</strong><br />Apple CEO, 80% Signal</div>
+                <div><strong>Elon Musk</strong><br />100% Signal, 24/7</div>
+                <div><strong>Jeff Bezos</strong><br />Morning-only decisions</div>
+                <div><strong>Kevin O'Leary</strong><br />Shark Tank investor</div>
               </div>
             </div>
           </div>
