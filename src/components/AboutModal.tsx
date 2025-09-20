@@ -166,9 +166,9 @@ export default function AboutModal({ show, onClose }: AboutModalProps) {
               fontStyle: 'italic'
             }}>
               {isGerman ? (
-                'Dieses Video befasst sich mit dem Konzept des "Signals versus Rauschens", inspiriert von Steve Jobs, um wichtige Aufgaben von Ablenkungen zu unterscheiden.'
+                'Dieses Video-Tagebuch von Steven Bartlett befasst sich mit dem Konzept des "Signals versus Rauschens", inspiriert von Steve Jobs, um wichtige Aufgaben von Ablenkungen zu unterscheiden.'
               ) : (
-                'This video explores the concept of "Signal versus Noise", inspired by Steve Jobs, to distinguish important tasks from distractions.'
+                'This video diary of Steven Bartlett explores the concept of "Signal versus Noise", inspired by Steve Jobs, to distinguish important tasks from distractions.'
               )}
             </p>
           </div>
