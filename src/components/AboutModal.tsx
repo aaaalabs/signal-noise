@@ -173,6 +173,104 @@ export default function AboutModal({ show, onClose }: AboutModalProps) {
             </p>
           </div>
 
+          {/* Sources & Inspiration */}
+          <div style={{ marginBottom: '2rem' }}>
+            <h3 style={{
+              color: '#fff',
+              fontSize: '1.1rem',
+              fontWeight: '300',
+              marginBottom: '1rem'
+            }}>
+              {isGerman ? 'Quellen & Inspiration' : 'Sources & Inspiration'}
+            </h3>
+
+            {/* Kevin O'Leary Video */}
+            <div style={{ marginBottom: '1.5rem' }}>
+              <h4 style={{
+                color: '#00ff88',
+                fontSize: '1rem',
+                fontWeight: '300',
+                marginBottom: '0.5rem'
+              }}>
+                Kevin O'Leary: Steve Jobs' Signal-to-Noise Method
+              </h4>
+              <a
+                href="https://www.youtube.com/watch?v=mpAZehPviLQ&t=538s"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  color: '#9ca3af',
+                  fontSize: '0.85rem',
+                  textDecoration: 'none',
+                  display: 'block',
+                  marginBottom: '0.5rem'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.color = '#00ff88'}
+                onMouseLeave={(e) => e.currentTarget.style.color = '#9ca3af'}
+              >
+                The Diary Of A CEO - Kevin O'Leary Interview (8:58 - 13:40)
+              </a>
+              <p style={{
+                color: '#d1d5db',
+                fontSize: '0.85rem',
+                lineHeight: '1.5',
+                marginBottom: '1rem'
+              }}>
+                {isGerman ? (
+                  'Kevin O\'Leary erklärt Steve Jobs\' revolutionäre Produktivitätsmethode: 80% Signal (3-5 kritische Aufgaben in den nächsten 18 Stunden), 20% Noise (alles andere). Elon Musk erreicht sogar 100% Signal.'
+                ) : (
+                  'Kevin O\'Leary explains Steve Jobs\' revolutionary productivity method: 80% Signal (3-5 critical tasks in the next 18 hours), 20% Noise (everything else). Elon Musk achieves even 100% Signal.'
+                )}
+              </p>
+
+              {/* Key Quote */}
+              <blockquote style={{
+                borderLeft: '3px solid #00ff88',
+                paddingLeft: '1rem',
+                margin: '1rem 0',
+                fontStyle: 'italic',
+                color: '#d1d5db',
+                fontSize: '0.85rem',
+                lineHeight: '1.6'
+              }}>
+                {isGerman ? (
+                  '"Jobs\' Vision von Signal waren die 3-5 wichtigsten Dinge, die in den nächsten 18 Stunden erledigt werden müssen. Alles, was dich davon abhält, ist Noise. Sein Signal-zu-Noise-Verhältnis war 80:20."'
+                ) : (
+                  '"Jobs\' vision of Signal was the top 3 to 5 things you have to get done in the next 18 hours. Anything that stops you from doing that is the noise. His signal to noise ratio was 80:20."'
+                )}
+              </blockquote>
+            </div>
+
+            {/* Mentioned Visionaries */}
+            <div style={{
+              backgroundColor: 'rgba(0, 255, 136, 0.05)',
+              border: '1px solid rgba(0, 255, 136, 0.2)',
+              padding: '1rem',
+              marginBottom: '1rem'
+            }}>
+              <h4 style={{
+                color: '#00ff88',
+                fontSize: '0.9rem',
+                fontWeight: '300',
+                marginBottom: '0.5rem'
+              }}>
+                {isGerman ? 'Erwähnte Visionäre' : 'Mentioned Visionaries'}
+              </h4>
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+                gap: '0.5rem',
+                color: '#d1d5db',
+                fontSize: '0.85rem'
+              }}>
+                <div><strong>Steve Jobs</strong> - Apple CEO, 80% Signal</div>
+                <div><strong>Elon Musk</strong> - 100% Signal, 24/7</div>
+                <div><strong>Jeff Bezos</strong> - Morning-only decisions</div>
+                <div><strong>Kevin O'Leary</strong> - Shark Tank investor</div>
+              </div>
+            </div>
+          </div>
+
           {/* Key Features */}
           <div style={{ marginBottom: '2rem' }}>
             <h3 style={{

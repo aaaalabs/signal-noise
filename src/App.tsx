@@ -83,6 +83,17 @@ function AppContent() {
   // Load data from localStorage on mount
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
+    const pathname = window.location.pathname;
+    const hash = window.location.hash;
+
+    // Check for direct links that should skip splash screen
+    const isDirectLink = pathname === '/about' || pathname === '/privacy' ||
+                        hash === '#about' || hash === '#privacy';
+
+    if (isDirectLink) {
+      // Skip splash screen for direct links
+      setSplashCompleted(true);
+    }
 
     // Handle Android app shortcuts
     const action = urlParams.get('action');
@@ -94,7 +105,6 @@ function AppContent() {
     }
 
     // Check for splash screen tester route
-    const pathname = window.location.pathname;
     if (pathname === '/splash-tester' || pathname === '/splash') {
       setShowSplashTester(true);
       return;
