@@ -5,6 +5,7 @@
 -keep class app.signalnoise.twa.Application { <init>(); }
 -keep class app.signalnoise.twa.DelegationService { <init>(); }
 -keep class app.signalnoise.twa.LauncherActivity { <init>(); }
+-keep class app.signalnoise.twa.SplashActivity { <init>(); }
 -keep class app.signalnoise.twa.WidgetUpdateService { <init>(); }
 -keep class app.signalnoise.twa.widget.DataPollingService { <init>(); }
 -keep class app.signalnoise.twa.widget.T1 { <init>(); }

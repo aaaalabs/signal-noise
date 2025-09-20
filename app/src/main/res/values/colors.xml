@@ -15,4 +15,11 @@
 -->
 <resources>
     <color name="shortcut_background">#F5F5F5</color>
+
+    <!-- Splash screen colors matching Signal/Noise design system -->
+    <color name="backgroundColor">#000000</color>
+    <color name="navigationBarColor">#000000</color>
+    <color name="navigationBarColorDark">#000000</color>
+    <color name="navigationDividerColor">#0A0A0A</color>
+    <color name="navigationDividerColorDark">#0A0A0A</color>
 </resources>

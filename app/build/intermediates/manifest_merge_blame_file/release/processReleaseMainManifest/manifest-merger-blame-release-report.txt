@@ -42,16 +42,16 @@
 37        <intent>
 37-->[com.google.androidbrowserhelper:androidbrowserhelper:2.6.2] /Users/libra/.gradle/caches/8.11.1/transforms/5053e02be90783e54992393be394bb70/transformed/androidbrowserhelper-2.6.2/AndroidManifest.xml:23:9-29:18
 38            <action android:name="android.intent.action.VIEW" />
-38-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:140:17-68
-38-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:140:25-66
+38-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:142:17-68
+38-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:142:25-66
 39
 40            <category android:name="android.intent.category.BROWSABLE" />
-40-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:142:17-77
-40-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:142:27-75
+40-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:144:17-77
+40-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:144:27-75
 41
 42            <data android:scheme="https" />
-42-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:143:17-146:19
-42-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:143:23-45
+42-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:145:17-148:19
+42-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:145:23-45
 43        </intent>
 44    </queries>
 45
@@ -67,7 +67,7 @@
 50-->[androidx.core:core:1.13.0] /Users/libra/.gradle/caches/8.11.1/transforms/a5429f7b20c607b890f08b5283ad4ec0/transformed/core-1.13.0/AndroidManifest.xml:26:22-94
 51
 52    <application
-52-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:36:5-222:19
+52-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:36:5-232:19
 53        android:name="app.signalnoise.twa.Application"
 53-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:37:9-35
 54        android:allowBackup="true"
@@ -114,335 +114,354 @@
 75                android:value="@string/launchUrl" />
 75-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:69:17-50
 76        </activity>
-77        <activity
-77-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:73:9-152:20
-78            android:name="app.signalnoise.twa.LauncherActivity"
-78-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:73:19-50
-79            android:alwaysRetainTaskState="true"
-79-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:74:13-49
+77        <!-- Custom Splash Activity with Blueprint Reveal animation -->
+78        <activity
+78-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:72:9-79:20
+79            android:name="app.signalnoise.twa.SplashActivity"
+79-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:72:19-48
 80            android:exported="true"
-80-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:76:13-36
-81            android:label="@string/launcherName" >
-81-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:75:13-49
-82            <meta-data
-82-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:77:13-78:53
-83                android:name="android.support.customtabs.trusted.DEFAULT_URL"
-83-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:77:24-85
-84                android:value="@string/launchUrl" />
-84-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:78:17-50
-85            <meta-data
-85-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:80:13-82:58
-86                android:name="android.support.customtabs.trusted.STATUS_BAR_COLOR"
-86-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:81:17-83
-87                android:resource="@color/colorPrimary" />
-87-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:82:17-55
-88            <meta-data
-88-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:86:13-88:62
-89                android:name="android.support.customtabs.trusted.STATUS_BAR_COLOR_DARK"
-89-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:87:17-88
-90                android:resource="@color/colorPrimaryDark" />
-90-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:88:17-59
-91            <meta-data
-91-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:90:13-92:61
-92                android:name="android.support.customtabs.trusted.NAVIGATION_BAR_COLOR"
-92-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:91:17-87
-93                android:resource="@color/navigationColor" />
-93-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:92:17-58
-94            <meta-data
-94-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:94:13-96:65
-95                android:name="android.support.customtabs.trusted.NAVIGATION_BAR_COLOR_DARK"
-95-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:95:17-92
-96                android:resource="@color/navigationColorDark" />
-96-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:96:17-62
-97            <meta-data
-97-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:98:13-100:68
-98                android:name="androix.browser.trusted.NAVIGATION_BAR_DIVIDER_COLOR"
-98-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:99:17-84
-99                android:resource="@color/navigationDividerColor" />
-99-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:100:17-65
-100            <meta-data
-100-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:102:13-104:72
-101                android:name="androix.browser.trusted.NAVIGATION_BAR_DIVIDER_COLOR_DARK"
-101-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:103:17-89
-102                android:resource="@color/navigationDividerColorDark" />
-102-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:104:17-69
-103            <meta-data
-103-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:106:13-107:54
-104                android:name="android.support.customtabs.trusted.SPLASH_IMAGE_DRAWABLE"
-104-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:106:24-95
-105                android:resource="@drawable/splash" />
-105-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:107:17-52
-106            <meta-data
-106-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:109:13-110:60
-107                android:name="android.support.customtabs.trusted.SPLASH_SCREEN_BACKGROUND_COLOR"
-107-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:109:24-104
-108                android:resource="@color/backgroundColor" />
-108-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:110:17-58
-109            <meta-data
-109-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:112:13-113:71
-110                android:name="android.support.customtabs.trusted.SPLASH_SCREEN_FADE_OUT_DURATION"
-110-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:112:24-105
-111                android:value="@integer/splashScreenFadeOutDuration" />
-111-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:113:17-69
-112            <meta-data
-112-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:115:13-116:60
-113                android:name="android.support.customtabs.trusted.FILE_PROVIDER_AUTHORITY"
-113-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:115:24-97
-114                android:value="@string/providerAuthority" />
-114-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:116:17-58
-115            <meta-data
-115-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:118:13-97
-116                android:name="android.app.shortcuts"
-116-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:118:24-60
-117                android:resource="@xml/shortcuts" />
-117-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:118:61-94
-118            <meta-data
-118-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:120:13-121:56
-119                android:name="android.support.customtabs.trusted.FALLBACK_STRATEGY"
-119-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:120:24-91
-120                android:value="@string/fallbackType" />
-120-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:121:17-53
-121            <meta-data
-121-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:127:13-128:54
-122                android:name="android.support.customtabs.trusted.SCREEN_ORIENTATION"
-122-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:127:24-92
-123                android:value="@string/orientation" />
-123-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:128:17-52
-124
-125            <intent-filter>
-125-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:134:13-137:29
-126                <action android:name="android.intent.action.MAIN" />
-126-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:135:17-69
-126-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:135:25-66
-127
-128                <category android:name="android.intent.category.LAUNCHER" />
-128-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:136:17-77
-128-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:136:27-74
-129            </intent-filter>
-130            <intent-filter android:autoVerify="true" >
-130-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:139:13-147:29
-130-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:139:28-53
-131                <action android:name="android.intent.action.VIEW" />
-131-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:140:17-68
-131-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:140:25-66
+80-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:74:13-36
+81            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+81-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:73:13-71
+82            <intent-filter>
+82-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:75:13-78:29
+83                <action android:name="android.intent.action.MAIN" />
+83-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:76:17-69
+83-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:76:25-66
+84
+85                <category android:name="android.intent.category.LAUNCHER" />
+85-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:77:17-77
+85-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:77:27-74
+86            </intent-filter>
+87        </activity>
+88        <activity
+88-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:81:9-154:20
+89            android:name="app.signalnoise.twa.LauncherActivity"
+89-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:81:19-50
+90            android:alwaysRetainTaskState="true"
+90-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:82:13-49
+91            android:exported="true"
+91-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:84:13-36
+92            android:label="@string/launcherName" >
+92-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:83:13-49
+93            <meta-data
+93-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:85:13-86:53
+94                android:name="android.support.customtabs.trusted.DEFAULT_URL"
+94-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:85:24-85
+95                android:value="@string/launchUrl" />
+95-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:86:17-50
+96            <meta-data
+96-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:88:13-90:58
+97                android:name="android.support.customtabs.trusted.STATUS_BAR_COLOR"
+97-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:89:17-83
+98                android:resource="@color/colorPrimary" />
+98-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:90:17-55
+99            <meta-data
+99-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:94:13-96:62
+100                android:name="android.support.customtabs.trusted.STATUS_BAR_COLOR_DARK"
+100-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:95:17-88
+101                android:resource="@color/colorPrimaryDark" />
+101-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:96:17-59
+102            <meta-data
+102-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:98:13-100:61
+103                android:name="android.support.customtabs.trusted.NAVIGATION_BAR_COLOR"
+103-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:99:17-87
+104                android:resource="@color/navigationColor" />
+104-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:100:17-58
+105            <meta-data
+105-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:102:13-104:65
+106                android:name="android.support.customtabs.trusted.NAVIGATION_BAR_COLOR_DARK"
+106-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:103:17-92
+107                android:resource="@color/navigationColorDark" />
+107-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:104:17-62
+108            <meta-data
+108-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:106:13-108:68
+109                android:name="androix.browser.trusted.NAVIGATION_BAR_DIVIDER_COLOR"
+109-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:107:17-84
+110                android:resource="@color/navigationDividerColor" />
+110-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:108:17-65
+111            <meta-data
+111-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:110:13-112:72
+112                android:name="androix.browser.trusted.NAVIGATION_BAR_DIVIDER_COLOR_DARK"
+112-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:111:17-89
+113                android:resource="@color/navigationDividerColorDark" />
+113-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:112:17-69
+114            <meta-data
+114-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:114:13-115:54
+115                android:name="android.support.customtabs.trusted.SPLASH_IMAGE_DRAWABLE"
+115-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:114:24-95
+116                android:resource="@drawable/splash" />
+116-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:115:17-52
+117            <meta-data
+117-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:117:13-118:60
+118                android:name="android.support.customtabs.trusted.SPLASH_SCREEN_BACKGROUND_COLOR"
+118-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:117:24-104
+119                android:resource="@color/backgroundColor" />
+119-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:118:17-58
+120            <meta-data
+120-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:120:13-121:71
+121                android:name="android.support.customtabs.trusted.SPLASH_SCREEN_FADE_OUT_DURATION"
+121-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:120:24-105
+122                android:value="@integer/splashScreenFadeOutDuration" />
+122-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:121:17-69
+123            <meta-data
+123-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:123:13-124:60
+124                android:name="android.support.customtabs.trusted.FILE_PROVIDER_AUTHORITY"
+124-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:123:24-97
+125                android:value="@string/providerAuthority" />
+125-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:124:17-58
+126            <meta-data
+126-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:127:13-128:56
+127                android:name="android.support.customtabs.trusted.FALLBACK_STRATEGY"
+127-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:127:24-91
+128                android:value="@string/fallbackType" />
+128-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:128:17-53
+129            <meta-data
+129-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:134:13-135:54
+130                android:name="android.support.customtabs.trusted.SCREEN_ORIENTATION"
+130-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:134:24-92
+131                android:value="@string/orientation" />
+131-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:135:17-52
 132
-133                <category android:name="android.intent.category.DEFAULT" />
-133-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:141:17-76
-133-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:141:27-73
-134                <category android:name="android.intent.category.BROWSABLE" />
-134-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:142:17-77
-134-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:142:27-75
+133            <intent-filter android:autoVerify="true" >
+133-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:141:13-149:29
+133-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:141:28-53
+134                <action android:name="android.intent.action.VIEW" />
+134-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:142:17-68
+134-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:142:25-66
 135
-136                <data
-136-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:143:17-146:19
-137                    android:host="@string/hostName"
-137-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:144:21-52
-138                    android:scheme="https" />
-138-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:143:23-45
-139            </intent-filter>
-140        </activity>
-141        <activity android:name="com.google.androidbrowserhelper.trusted.FocusActivity" />
-141-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:154:9-90
-141-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:154:19-87
-142        <activity
-142-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:156:9-157:62
-143            android:name="com.google.androidbrowserhelper.trusted.WebViewFallbackActivity"
-143-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:156:19-97
-144            android:configChanges="orientation|screenSize" />
-144-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:157:13-59
-145
-146        <provider
-146-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:159:9-167:20
-147            android:name="androidx.core.content.FileProvider"
-147-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:160:13-62
-148            android:authorities="@string/providerAuthority"
-148-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:161:13-60
-149            android:exported="false"
-149-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:163:13-37
-150            android:grantUriPermissions="true" >
-150-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:162:13-47
-151            <meta-data
-151-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:164:13-166:53
-152                android:name="android.support.FILE_PROVIDER_PATHS"
-152-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:165:17-67
-153                android:resource="@xml/filepaths" />
-153-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:166:17-50
-154        </provider>
-155
-156        <!-- W4 WINNER + ID SPACER - ANDROID 15 PRODUCTION READY -->
-157        <receiver
-157-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:171:9-174:20
-158            android:name="app.signalnoise.twa.widget.W4"
-158-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:171:19-44
-159            android:exported="true"
-159-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:171:45-68
-160            android:label="Signal/Noise" >
-160-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:171:69-97
-161            <intent-filter>
-161-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:172:13-111
-162                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-162-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:172:28-95
-162-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:172:36-92
-163            </intent-filter>
-164
-165            <meta-data
-165-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:173:13-107
-166                android:name="android.appwidget.provider"
-166-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:173:24-65
-167                android:resource="@xml/widget_w4_info" />
-167-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:173:66-104
-168        </receiver>
-169        <receiver
-169-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:176:9-179:20
-170            android:name="app.signalnoise.twa.widget.T1"
-170-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:176:19-44
-171            android:exported="true"
-171-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:176:45-68
-172            android:label="• spacer" >
-172-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:176:69-93
-173            <intent-filter>
-173-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:172:13-111
-174                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-174-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:172:28-95
-174-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:172:36-92
-175            </intent-filter>
-176
-177            <meta-data
-177-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:173:13-107
-178                android:name="android.appwidget.provider"
-178-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:173:24-65
-179                android:resource="@xml/widget_t1_info" />
-179-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:173:66-104
-180        </receiver>
-181
-182        <!-- Widget Update Receiver -->
-183        <receiver
-183-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:183:9-188:20
-184            android:name="app.signalnoise.twa.widget.WidgetUpdateReceiver"
-184-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:183:19-62
-185            android:exported="false" >
-185-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:184:13-37
-186            <intent-filter>
-186-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:185:13-187:29
-187                <action android:name="app.signalnoise.twa.UPDATE_WIDGET" />
-187-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:186:17-76
-187-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:186:25-73
-188            </intent-filter>
-189        </receiver>
-190
-191        <!-- Widget Update Service for data synchronization -->
-192        <service
-192-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:191:9-193:72
-193            android:name="app.signalnoise.twa.WidgetUpdateService"
-193-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:191:18-53
-194            android:exported="false"
-194-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:192:13-37
-195            android:permission="android.permission.BIND_JOB_SERVICE" />
-195-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:193:13-69
-196        <service
-196-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:196:9-211:19
-197            android:name="app.signalnoise.twa.DelegationService"
-197-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:197:13-46
-198            android:enabled="@bool/enableNotification"
-198-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:198:13-55
-199            android:exported="@bool/enableNotification" >
-199-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:199:13-56
-200            <meta-data
-200-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:202:17-204:73
-201                android:name="android.support.customtabs.trusted.SMALL_ICON"
-201-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:203:21-81
-202                android:resource="@drawable/ic_notification_icon" />
-202-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:204:21-70
-203
-204            <intent-filter>
-204-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:207:13-210:29
-205                <action android:name="android.support.customtabs.trusted.TRUSTED_WEB_ACTIVITY_SERVICE" />
-205-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:208:17-105
-205-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:208:25-103
-206
-207                <category android:name="android.intent.category.DEFAULT" />
-207-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:141:17-76
-207-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:141:27-73
-208            </intent-filter>
-209        </service>
-210
-211        <activity android:name="com.google.androidbrowserhelper.trusted.NotificationPermissionRequestActivity" />
-211-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:214:13-118
-211-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:214:23-115
-212
-213        <!-- Data polling service for widget updates -->
-214        <service
-214-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:219:9-220:45
-215            android:name="app.signalnoise.twa.widget.DataPollingService"
-215-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:219:18-59
-216            android:exported="false" />
-216-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:220:18-42
-217
-218        <provider
-218-->[androidx.emoji2:emoji2:1.3.0] /Users/libra/.gradle/caches/8.11.1/transforms/5cb7738f5242d8c4e38c8ffa2b265b31/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
-219            android:name="androidx.startup.InitializationProvider"
-219-->[androidx.emoji2:emoji2:1.3.0] /Users/libra/.gradle/caches/8.11.1/transforms/5cb7738f5242d8c4e38c8ffa2b265b31/transformed/emoji2-1.3.0/AndroidManifest.xml:25:13-67
-220            android:authorities="app.signalnoise.twa.androidx-startup"
-220-->[androidx.emoji2:emoji2:1.3.0] /Users/libra/.gradle/caches/8.11.1/transforms/5cb7738f5242d8c4e38c8ffa2b265b31/transformed/emoji2-1.3.0/AndroidManifest.xml:26:13-68
-221            android:exported="false" >
-221-->[androidx.emoji2:emoji2:1.3.0] /Users/libra/.gradle/caches/8.11.1/transforms/5cb7738f5242d8c4e38c8ffa2b265b31/transformed/emoji2-1.3.0/AndroidManifest.xml:27:13-37
-222            <meta-data
-222-->[androidx.emoji2:emoji2:1.3.0] /Users/libra/.gradle/caches/8.11.1/transforms/5cb7738f5242d8c4e38c8ffa2b265b31/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
-223                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-223-->[androidx.emoji2:emoji2:1.3.0] /Users/libra/.gradle/caches/8.11.1/transforms/5cb7738f5242d8c4e38c8ffa2b265b31/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
-224                android:value="androidx.startup" />
-224-->[androidx.emoji2:emoji2:1.3.0] /Users/libra/.gradle/caches/8.11.1/transforms/5cb7738f5242d8c4e38c8ffa2b265b31/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
-225            <meta-data
-225-->[androidx.lifecycle:lifecycle-process:2.6.2] /Users/libra/.gradle/caches/8.11.1/transforms/4bc52031417e9743197e36b704fe409f/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:29:13-31:52
-226                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-226-->[androidx.lifecycle:lifecycle-process:2.6.2] /Users/libra/.gradle/caches/8.11.1/transforms/4bc52031417e9743197e36b704fe409f/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:30:17-78
-227                android:value="androidx.startup" />
-227-->[androidx.lifecycle:lifecycle-process:2.6.2] /Users/libra/.gradle/caches/8.11.1/transforms/4bc52031417e9743197e36b704fe409f/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:31:17-49
-228            <meta-data
-228-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
-229                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-229-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
-230                android:value="androidx.startup" />
-230-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
-231        </provider>
-232
-233        <receiver
-233-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
-234            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-234-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
-235            android:directBootAware="false"
-235-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
-236            android:enabled="true"
-236-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
-237            android:exported="true"
-237-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
-238            android:permission="android.permission.DUMP" >
-238-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
-239            <intent-filter>
-239-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
-240                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-240-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
-240-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
-241            </intent-filter>
-242            <intent-filter>
-242-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
-243                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-243-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
-243-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
-244            </intent-filter>
-245            <intent-filter>
-245-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
-246                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-246-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
-246-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
-247            </intent-filter>
-248            <intent-filter>
-248-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
-249                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-249-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
-249-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:25-92
-250            </intent-filter>
-251        </receiver>
-252    </application>
-253
-254</manifest>
+136                <category android:name="android.intent.category.DEFAULT" />
+136-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:143:17-76
+136-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:143:27-73
+137                <category android:name="android.intent.category.BROWSABLE" />
+137-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:144:17-77
+137-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:144:27-75
+138
+139                <data
+139-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:145:17-148:19
+140                    android:host="@string/hostName"
+140-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:146:21-52
+141                    android:scheme="https" />
+141-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:145:23-45
+142            </intent-filter>
+143        </activity>
+144        <activity android:name="com.google.androidbrowserhelper.trusted.FocusActivity" />
+144-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:156:9-90
+144-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:156:19-87
+145        <activity
+145-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:158:9-159:62
+146            android:name="com.google.androidbrowserhelper.trusted.WebViewFallbackActivity"
+146-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:158:19-97
+147            android:configChanges="orientation|screenSize" />
+147-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:159:13-59
+148
+149        <provider
+149-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:161:9-169:20
+150            android:name="androidx.core.content.FileProvider"
+150-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:162:13-62
+151            android:authorities="@string/providerAuthority"
+151-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:163:13-60
+152            android:exported="false"
+152-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:165:13-37
+153            android:grantUriPermissions="true" >
+153-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:164:13-47
+154            <meta-data
+154-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:166:13-168:53
+155                android:name="android.support.FILE_PROVIDER_PATHS"
+155-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:167:17-67
+156                android:resource="@xml/filepaths" />
+156-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:168:17-50
+157        </provider>
+158
+159        <!-- W4 WINNER + ID SPACER - ANDROID 15 PRODUCTION READY -->
+160        <receiver
+160-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:173:9-176:20
+161            android:name="app.signalnoise.twa.widget.W4"
+161-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:173:19-44
+162            android:exported="true"
+162-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:173:45-68
+163            android:label="Signal/Noise" >
+163-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:173:69-97
+164            <intent-filter>
+164-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:174:13-111
+165                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+165-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:174:28-95
+165-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:174:36-92
+166            </intent-filter>
+167
+168            <meta-data
+168-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:175:13-107
+169                android:name="android.appwidget.provider"
+169-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:175:24-65
+170                android:resource="@xml/widget_w4_info" />
+170-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:175:66-104
+171        </receiver>
+172        <receiver
+172-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:178:9-181:20
+173            android:name="app.signalnoise.twa.widget.T1"
+173-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:178:19-44
+174            android:exported="true"
+174-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:178:45-68
+175            android:label="S/N Logo" >
+175-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:178:69-93
+176            <intent-filter>
+176-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:174:13-111
+177                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+177-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:174:28-95
+177-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:174:36-92
+178            </intent-filter>
+179
+180            <meta-data
+180-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:175:13-107
+181                android:name="android.appwidget.provider"
+181-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:175:24-65
+182                android:resource="@xml/widget_t1_info" />
+182-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:175:66-104
+183        </receiver>
+184
+185        <!-- SLC Screen Wake Sync - Instant widget updates -->
+186        <receiver
+186-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:185:9-190:20
+187            android:name="app.signalnoise.twa.widget.ScreenWakeSyncReceiver"
+187-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:185:19-64
+188            android:exported="false" >
+188-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:186:13-37
+189            <intent-filter>
+189-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:187:13-189:29
+190                <action android:name="android.intent.action.SCREEN_ON" />
+190-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:188:17-74
+190-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:188:25-71
+191            </intent-filter>
+192        </receiver>
+193
+194        <!-- Widget Update Receiver -->
+195        <receiver
+195-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:193:9-198:20
+196            android:name="app.signalnoise.twa.widget.WidgetUpdateReceiver"
+196-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:193:19-62
+197            android:exported="false" >
+197-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:194:13-37
+198            <intent-filter>
+198-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:195:13-197:29
+199                <action android:name="app.signalnoise.twa.UPDATE_WIDGET" />
+199-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:196:17-76
+199-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:196:25-73
+200            </intent-filter>
+201        </receiver>
+202
+203        <!-- Widget Update Service for data synchronization -->
+204        <service
+204-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:201:9-203:72
+205            android:name="app.signalnoise.twa.WidgetUpdateService"
+205-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:201:18-53
+206            android:exported="false"
+206-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:202:13-37
+207            android:permission="android.permission.BIND_JOB_SERVICE" />
+207-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:203:13-69
+208        <service
+208-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:206:9-221:19
+209            android:name="app.signalnoise.twa.DelegationService"
+209-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:207:13-46
+210            android:enabled="@bool/enableNotification"
+210-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:208:13-55
+211            android:exported="@bool/enableNotification" >
+211-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:209:13-56
+212            <meta-data
+212-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:212:17-214:73
+213                android:name="android.support.customtabs.trusted.SMALL_ICON"
+213-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:213:21-81
+214                android:resource="@drawable/ic_notification_icon" />
+214-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:214:21-70
+215
+216            <intent-filter>
+216-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:217:13-220:29
+217                <action android:name="android.support.customtabs.trusted.TRUSTED_WEB_ACTIVITY_SERVICE" />
+217-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:218:17-105
+217-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:218:25-103
+218
+219                <category android:name="android.intent.category.DEFAULT" />
+219-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:143:17-76
+219-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:143:27-73
+220            </intent-filter>
+221        </service>
+222
+223        <activity android:name="com.google.androidbrowserhelper.trusted.NotificationPermissionRequestActivity" />
+223-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:224:13-118
+223-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:224:23-115
+224
+225        <!-- Data polling service for widget updates -->
+226        <service
+226-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:229:9-230:45
+227            android:name="app.signalnoise.twa.widget.DataPollingService"
+227-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:229:18-59
+228            android:exported="false" />
+228-->/Users/libra/GitHub/_quicks/_signalnoise/signal-noise/app/src/main/AndroidManifest.xml:230:18-42
+229
+230        <provider
+230-->[androidx.emoji2:emoji2:1.3.0] /Users/libra/.gradle/caches/8.11.1/transforms/5cb7738f5242d8c4e38c8ffa2b265b31/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
+231            android:name="androidx.startup.InitializationProvider"
+231-->[androidx.emoji2:emoji2:1.3.0] /Users/libra/.gradle/caches/8.11.1/transforms/5cb7738f5242d8c4e38c8ffa2b265b31/transformed/emoji2-1.3.0/AndroidManifest.xml:25:13-67
+232            android:authorities="app.signalnoise.twa.androidx-startup"
+232-->[androidx.emoji2:emoji2:1.3.0] /Users/libra/.gradle/caches/8.11.1/transforms/5cb7738f5242d8c4e38c8ffa2b265b31/transformed/emoji2-1.3.0/AndroidManifest.xml:26:13-68
+233            android:exported="false" >
+233-->[androidx.emoji2:emoji2:1.3.0] /Users/libra/.gradle/caches/8.11.1/transforms/5cb7738f5242d8c4e38c8ffa2b265b31/transformed/emoji2-1.3.0/AndroidManifest.xml:27:13-37
+234            <meta-data
+234-->[androidx.emoji2:emoji2:1.3.0] /Users/libra/.gradle/caches/8.11.1/transforms/5cb7738f5242d8c4e38c8ffa2b265b31/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
+235                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+235-->[androidx.emoji2:emoji2:1.3.0] /Users/libra/.gradle/caches/8.11.1/transforms/5cb7738f5242d8c4e38c8ffa2b265b31/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
+236                android:value="androidx.startup" />
+236-->[androidx.emoji2:emoji2:1.3.0] /Users/libra/.gradle/caches/8.11.1/transforms/5cb7738f5242d8c4e38c8ffa2b265b31/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
+237            <meta-data
+237-->[androidx.lifecycle:lifecycle-process:2.6.2] /Users/libra/.gradle/caches/8.11.1/transforms/4bc52031417e9743197e36b704fe409f/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:29:13-31:52
+238                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+238-->[androidx.lifecycle:lifecycle-process:2.6.2] /Users/libra/.gradle/caches/8.11.1/transforms/4bc52031417e9743197e36b704fe409f/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:30:17-78
+239                android:value="androidx.startup" />
+239-->[androidx.lifecycle:lifecycle-process:2.6.2] /Users/libra/.gradle/caches/8.11.1/transforms/4bc52031417e9743197e36b704fe409f/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:31:17-49
+240            <meta-data
+240-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
+241                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+241-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
+242                android:value="androidx.startup" />
+242-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
+243        </provider>
+244
+245        <receiver
+245-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
+246            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+246-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
+247            android:directBootAware="false"
+247-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
+248            android:enabled="true"
+248-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
+249            android:exported="true"
+249-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
+250            android:permission="android.permission.DUMP" >
+250-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
+251            <intent-filter>
+251-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
+252                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+252-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
+252-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
+253            </intent-filter>
+254            <intent-filter>
+254-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
+255                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+255-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
+255-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
+256            </intent-filter>
+257            <intent-filter>
+257-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
+258                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+258-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
+258-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
+259            </intent-filter>
+260            <intent-filter>
+260-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
+261                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+261-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
+261-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/libra/.gradle/caches/8.11.1/transforms/bb4a0d32d1b17a1dcea0cf71d2bde5e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:25-92
+262            </intent-filter>
+263        </receiver>
+264    </application>
+265
+266</manifest>

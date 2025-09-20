@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <!-- Outline icon - appears first in Blueprint Reveal -->
+    <ImageView
+        android:id="@+id/outline_icon"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/sn_icon_outline_white"
+        android:alpha="0"
+        android:scaleType="centerInside" />
+
+    <!-- Solid icon - materializes over outline -->
+    <ImageView
+        android:id="@+id/solid_icon"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/sn_icon_white"
+        android:alpha="0"
+        android:scaleType="centerInside" />
+
+</RelativeLayout>
