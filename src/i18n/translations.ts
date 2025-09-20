@@ -151,7 +151,7 @@ const translations = {
       },
       {
         question: "Wie funktionieren Datenschutz und Sync?",
-        answer: "Alles wird lokal im Browser gespeichert. <strong>Premium-Nutzer erhalten Cloud-Sync für die Nutzung auf mehreren Geräten</strong> - deine Daten sind automatisch auf Handy, Laptop und Tablet synchron. Der grüne Punkt neben dem Sprachschalter zeigt die Verbindung. Deine Privatsphäre ist immer geschützt - kein Tracking, keine Analyse, kein Data Mining."
+        answer: "Alles wird lokal im Browser gespeichert. <strong>Premium-Nutzer erhalten Cloud-Sync für die Nutzung auf mehreren Geräten</strong> - deine Daten sind automatisch auf Handy, Laptop und Tablet synchron. Der <svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='#00ff88' style='display: inline; vertical-align: middle; margin: 0 2px;'><path stroke='none' d='M0 0h24v24H0z' fill='none'/><path d='M12 7a5 5 0 1 1 -4.995 5.217l-.005 -.217l.005 -.217a5 5 0 0 1 4.995 -4.783z' /></svg> neben dem Sprachschalter zeigt die Verbindung. Deine Privatsphäre ist immer geschützt - kein Tracking, keine Analyse, kein Data Mining."
       },
       {
         question: "Welche Interface-Features gibt es?",
@@ -280,7 +280,7 @@ const translations = {
       },
       {
         question: "How does data privacy and sync work?",
-        answer: "Everything is stored locally in your browser. <strong>Premium users get cloud sync for use across multiple devices</strong> - your data automatically stays in sync across phone, laptop, and tablet. The green dot next to the language switcher shows connection status. Your privacy is always protected - no tracking, no analytics, no data mining."
+        answer: "Everything is stored locally in your browser. <strong>Premium users get cloud sync for use across multiple devices</strong> - your data automatically stays in sync across phone, laptop, and tablet. The <svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='#00ff88' style='display: inline; vertical-align: middle; margin: 0 2px;'><path stroke='none' d='M0 0h24v24H0z' fill='none'/><path d='M12 7a5 5 0 1 1 -4.995 5.217l-.005 -.217l.005 -.217a5 5 0 0 1 4.995 -4.783z' /></svg> next to the language switcher shows connection status. Your privacy is always protected - no tracking, no analytics, no data mining."
       },
       {
         question: "What interface features are available?",
