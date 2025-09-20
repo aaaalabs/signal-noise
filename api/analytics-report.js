@@ -12,6 +12,12 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
+  // Check for report secret
+  const { REPORT_SECRET } = req.query;
+  if (REPORT_SECRET !== 'justME2027!') {
+    return res.status(401).json({ error: 'Unauthorized: Invalid or missing REPORT_SECRET' });
+  }
+
   try {
     console.log('📊 Starting weekly analytics report...');
 
