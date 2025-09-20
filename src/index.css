@@ -851,3 +851,18 @@ body {
     border-radius: 8px;
     z-index: -1;
 }
+
+/* Mobile: Push text right to make room for left arrow */
+@media (max-width: 600px) {
+    .task-item.swiping .task-text {
+        padding-left: 32px;
+        transition: padding 0.2s ease;
+    }
+}
+
+/* Desktop: No text padding needed */
+@media (min-width: 601px) {
+    .task-item.swiping .task-text {
+        padding-left: 0;
+    }
+}

@@ -356,8 +356,9 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
           style={{
             position: 'absolute',
             top: '50%',
-            right: swipeOffset > 0 ? '12px' : 'auto',
-            left: swipeOffset < 0 ? '12px' : 'auto',
+            // Mobile: Always left, Desktop: Based on swipe direction
+            left: isMobile ? '12px' : (swipeOffset < 0 ? '12px' : 'auto'),
+            right: isMobile ? 'auto' : (swipeOffset > 0 ? '12px' : 'auto'),
             transform: 'translateY(-50%)',
             fontSize: '20px',
             color: task.type === 'signal' ? 'var(--noise)' : 'var(--signal)',
@@ -370,7 +371,8 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
             {swipeOffset > 0 ? '→' : '←'}
           </span>
           <span className="arrow-mobile">
-            {task.type === 'signal' ? (swipeOffset > 0 ? '↓' : '↑') : (swipeOffset > 0 ? '↑' : '↓')}
+            {/* Mobile: Based on task type, not swipe direction */}
+            {task.type === 'noise' ? '↑' : '↓'}
           </span>
         </div>
       )}
