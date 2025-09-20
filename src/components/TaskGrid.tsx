@@ -202,6 +202,15 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
     const deltaX = currentX - touchStartX.current;
     const absDeltaX = Math.abs(deltaX);
 
+    // Desktop: Only allow swipes toward the destination
+    if (!isMobile) {
+      const isValidDirection =
+        (task.type === 'signal' && deltaX > 0) ||  // Signal → right only
+        (task.type === 'noise' && deltaX < 0);      // Noise → left only
+
+      if (!isValidDirection) return; // Ignore wrong direction swipes
+    }
+
     // Start dragging mode if moved more than 10px horizontally
     if (absDeltaX > 10 && !isDragging.current) {
       isDragging.current = true;
@@ -227,7 +236,11 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
     currentPressId.current = 0;
 
     // Handle swipe completion
-    if (isDragging.current && Math.abs(swipeOffset) > 50) {
+    const isValidSwipe = isMobile ||
+      (task.type === 'signal' && swipeOffset > 0) ||
+      (task.type === 'noise' && swipeOffset < 0);
+
+    if (isDragging.current && Math.abs(swipeOffset) > 50 && isValidSwipe) {
       // Swipe completed - trigger transfer
       setIsTransferring(true);
 
