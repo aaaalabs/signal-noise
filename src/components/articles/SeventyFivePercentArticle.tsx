@@ -179,7 +179,7 @@ export default function SeventyFivePercentArticle({ isGerman }: ArticleProps) {
           border: '1px solid #222'
         }}>
           <iframe
-            src="https://www.youtube.com/embed/5yx6BWlEVcY"
+            src="https://www.youtube.com/embed/gTaJhjQHcf8"
             title="Cal Newport on Deep Work and Productivity"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
