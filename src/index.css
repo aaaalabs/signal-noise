@@ -507,6 +507,46 @@ body {
     animation: dotPulse 2s;
 }
 
+/* Commitment Mode Lock Icon */
+.achievement-dot.lock-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    background: transparent;
+}
+
+.achievement-dot.lock-dot.disabled {
+    border: 1px solid #333;
+    opacity: 0.5;
+}
+
+.achievement-dot.lock-dot.available {
+    border: 1px solid var(--signal);
+    cursor: pointer;
+    animation: lockPulse 2s infinite;
+}
+
+.achievement-dot.lock-dot svg {
+    width: 10px;
+    height: 10px;
+}
+
+@keyframes lockPulse {
+    0%, 100% {
+        border-color: var(--signal);
+        opacity: 0.8;
+    }
+    50% {
+        border-color: var(--signal);
+        opacity: 1;
+        transform: scale(1.1);
+    }
+}
+
 .achievement-tooltip {
     position: absolute;
     top: 100%;
