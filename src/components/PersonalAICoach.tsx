@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { getPersonalAIAdvice, hasPersonalAIAccess } from '../services/personalAIService';
 import type { PersonalAIResponse } from '../types';
 import type { Task, CoachPayload, AppData } from '../types';
-import { useTranslation } from '../contexts/LanguageContext';
+// Removed useTranslation import - not needed in minimal design
 import { calculateStreak, getAverageRatio } from '../utils/achievements';
 import {
   getBestProductiveHour,
@@ -13,18 +13,18 @@ import {
   getConsistencyScore,
   calculateDailyRatios
 } from '../utils/patternAnalysis';
-import { checkPremiumStatus } from '../services/premiumService';
+// Removed checkPremiumStatus import - not used in simplified design
 
 interface PersonalAICoachProps {
   tasks: Task[];
   currentRatio: number;
   firstName?: string;
-  onNameUpdate: (name: string) => void;
+  onNameUpdate?: (name: string) => void; // Optional since not used in minimal design
   data: AppData;
 }
 
-export default function PersonalAICoach({ tasks, currentRatio, firstName, onNameUpdate, data }: PersonalAICoachProps) {
-  const t = useTranslation();
+export default function PersonalAICoach({ tasks, currentRatio, firstName, data }: PersonalAICoachProps) {
+  // Removed useTranslation since no translated text in minimal design
   const [personalAIResponse, setPersonalAIResponse] = useState<PersonalAIResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [showPersonalAI, setShowPersonalAI] = useState(false);
@@ -175,9 +175,9 @@ export default function PersonalAICoach({ tasks, currentRatio, firstName, onName
     } catch (error) {
       console.error('PersonalAI error:', error);
       setPersonalAIResponse({
-        action: 'analyze',
+        action: 'focus',
         priority: 'normal',
-        message: 'PersonalAI is temporarily unavailable. Try again in a moment.',
+        message: 'Analysis temporarily unavailable. Try again in a moment.',
         analysis: {
           patternDetected: 'service_unavailable',
           completionReality: currentRatio,
