@@ -136,6 +136,32 @@ export default function SeventyFivePercentArticle({ isGerman }: ArticleProps) {
         </cite>
       </blockquote>
 
+      {/* Jeff Bezos Photo */}
+      <div style={{
+        float: 'left',
+        marginRight: '1.5rem',
+        marginBottom: '1rem',
+        maxWidth: '180px'
+      }}>
+        <img
+          src="/jeff-bezos.jpg"
+          alt="Jeff Bezos"
+          style={{
+            width: '100%',
+            height: 'auto',
+            border: '1px solid #333'
+          }}
+        />
+        <p style={{
+          fontSize: '0.75rem',
+          color: '#666',
+          marginTop: '0.5rem',
+          textAlign: 'center'
+        }}>
+          Jeff Bezos, Amazon founder
+        </p>
+      </div>
+
       {/* The Meeting Problem */}
       <h2 style={{
         fontSize: '1.5rem',
@@ -160,46 +186,77 @@ export default function SeventyFivePercentArticle({ isGerman }: ArticleProps) {
         )}
       </p>
 
-      {/* YouTube Video - Productivity Expert */}
-      <div style={{ margin: '3rem 0' }}>
-        <h2 style={{
-          fontSize: '1.5rem',
+      {/* Cal Newport Video */}
+      <div style={{
+        float: 'right',
+        marginLeft: '1.5rem',
+        marginBottom: '1rem',
+        marginTop: '2rem',
+        maxWidth: '280px',
+        clear: 'right'
+      }}>
+        <h3 style={{
+          fontSize: '1rem',
           fontWeight: '300',
           color: '#fff',
-          marginBottom: '1.5rem'
+          marginBottom: '0.5rem'
         }}>
           {isGerman ? 'Die Wahrheit über Produktivität' : 'The Truth About Productivity'}
-        </h2>
-
-        <div style={{
-          position: 'relative',
-          paddingBottom: '56.25%',
-          height: 0,
-          backgroundColor: '#111',
-          border: '1px solid #222'
-        }}>
-          <iframe
-            src="https://www.youtube.com/embed/gTaJhjQHcf8"
-            title="Cal Newport on Deep Work and Productivity"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
+        </h3>
+        <a
+          href="https://www.youtube.com/watch?v=gTaJhjQHcf8"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: 'block',
+            position: 'relative'
+          }}
+        >
+          <img
+            src="/cal-newport-deep-work.jpg"
+            alt="Cal Newport on Deep Work"
             style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
               width: '100%',
-              height: '100%'
+              height: 'auto',
+              border: '1px solid #333',
+              display: 'block'
             }}
           />
-        </div>
+          {/* Play button overlay */}
+          <div style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: '48px',
+            height: '48px',
+            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            borderRadius: '50%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transition: 'background-color 0.2s'
+          }}
+          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(0, 255, 136, 0.9)'}
+          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.7)'}
+          >
+            <div style={{
+              width: 0,
+              height: 0,
+              borderLeft: '16px solid #fff',
+              borderTop: '10px solid transparent',
+              borderBottom: '10px solid transparent',
+              marginLeft: '3px'
+            }} />
+          </div>
+        </a>
         <p style={{
+          fontSize: '0.75rem',
           color: '#666',
-          fontSize: '0.85rem',
           marginTop: '0.5rem',
-          fontStyle: 'italic'
+          textAlign: 'center'
         }}>
-          Cal Newport on Deep Work vs Shallow Work
+          Cal Newport on Deep Work
         </p>
       </div>
 

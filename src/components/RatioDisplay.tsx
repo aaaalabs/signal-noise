@@ -33,7 +33,7 @@ export default function RatioDisplay({ ratio, totalTasks, data, earnedCount, has
     setIsManualSyncing(true);
 
     try {
-      console.log('🔄 Manual sync triggered via ratio tap...');
+      console.log('Manual sync triggered via ratio tap...');
 
       // Show checking animation
       syncChecking();
@@ -78,7 +78,7 @@ export default function RatioDisplay({ ratio, totalTasks, data, earnedCount, has
           if (!cloudData.settings) cloudData.settings = { targetRatio: 80, notifications: false };
           if (cloudData.signal_ratio === undefined) cloudData.signal_ratio = getTodayRatio(cloudData.tasks || []);
 
-          console.log('✅ Manual sync completed:', {
+          console.log('Manual sync completed:', {
             taskCount: cloudData.tasks?.length || 0,
             fromDevice: metadata.lastDevice
           });

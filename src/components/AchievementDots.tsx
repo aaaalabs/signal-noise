@@ -27,7 +27,7 @@ function createPostCommitmentAchievements(data: AppData) {
   return [
     {
       id: 'signal_master',
-      icon: '⚡',
+      icon: '',
       name: 'Signal Master',
       earned: data.badges.includes('signal_master')
     },
@@ -39,19 +39,19 @@ function createPostCommitmentAchievements(data: AppData) {
     },
     {
       id: 'week_warrior',
-      icon: '🔥',
+      icon: '',
       name: '7 Day Streak',
       earned: data.badges.includes('week_warrior')
     },
     {
       id: 'month_hero',
-      icon: '🏆',
+      icon: '',
       name: '30 Day Hero',
       earned: data.badges.includes('month_hero')
     },
     {
       id: '200_shipped',
-      icon: '🎯',
+      icon: '',
       name: '200 Signals Shipped',
       earned: completedSignals >= 200
     },
@@ -63,7 +63,7 @@ function createPostCommitmentAchievements(data: AppData) {
     },
     {
       id: '1000_shipped',
-      icon: '🚀',
+      icon: '',
       name: '1000 Signals Shipped',
       earned: completedSignals >= 1000
     },

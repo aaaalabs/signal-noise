@@ -71,6 +71,32 @@ export default function SteveJobsArticle({ isGerman }: ArticleProps) {
         </cite>
       </blockquote>
 
+      {/* Steve Jobs Photo */}
+      <div style={{
+        float: 'right',
+        marginLeft: '2rem',
+        marginBottom: '1rem',
+        maxWidth: '200px'
+      }}>
+        <img
+          src="/steve-jobs-think-different.jpg"
+          alt="Steve Jobs"
+          style={{
+            width: '100%',
+            height: 'auto',
+            border: '1px solid #333'
+          }}
+        />
+        <p style={{
+          fontSize: '0.75rem',
+          color: '#666',
+          marginTop: '0.5rem',
+          textAlign: 'center'
+        }}>
+          Steve Jobs, Apple CEO
+        </p>
+      </div>
+
       {/* The Method */}
       <h2 style={{
         fontSize: '1.5rem',
@@ -107,6 +133,71 @@ export default function SteveJobsArticle({ isGerman }: ArticleProps) {
           <>This wasn't just theory. When Jobs returned to Apple in 1997, he found a company 90 days from bankruptcy. Through radical focus - cutting the product line from over 300 to just 10 products - he not only saved Apple but transformed it into the world's most valuable company.</>
         )}
       </p>
+
+      {/* Kevin O'Leary Interview Video */}
+      <div style={{
+        float: 'right',
+        marginLeft: '1.5rem',
+        marginBottom: '1rem',
+        marginTop: '1rem',
+        maxWidth: '280px'
+      }}>
+        <a
+          href="https://www.youtube.com/watch?v=mpAZehPviLQ&t=538s"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: 'block',
+            position: 'relative'
+          }}
+        >
+          <img
+            src="/kevin-oleary-doac.jpg"
+            alt="Kevin O'Leary on Diary of a CEO"
+            style={{
+              width: '100%',
+              height: 'auto',
+              border: '1px solid #333',
+              display: 'block'
+            }}
+          />
+          {/* Play button overlay */}
+          <div style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: '48px',
+            height: '48px',
+            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            borderRadius: '50%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transition: 'background-color 0.2s'
+          }}
+          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(0, 255, 136, 0.9)'}
+          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.7)'}
+          >
+            <div style={{
+              width: 0,
+              height: 0,
+              borderLeft: '16px solid #fff',
+              borderTop: '10px solid transparent',
+              borderBottom: '10px solid transparent',
+              marginLeft: '3px'
+            }} />
+          </div>
+        </a>
+        <p style={{
+          fontSize: '0.75rem',
+          color: '#666',
+          marginTop: '0.5rem',
+          textAlign: 'center'
+        }}>
+          The Diary of a CEO
+        </p>
+      </div>
 
       {/* YouTube Video */}
       <div style={{ margin: '3rem 0' }}>

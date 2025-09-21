@@ -30,6 +30,32 @@ export default function ElonMuskArticle({ isGerman }: ArticleProps) {
         7 September 2025
       </div>
 
+      {/* Elon Musk Photo from Wikipedia via Firecrawl */}
+      <div style={{
+        float: 'right',
+        marginLeft: '2rem',
+        marginBottom: '1rem',
+        maxWidth: '200px'
+      }}>
+        <img
+          src="/elon-musk-2022.jpg"
+          alt="Elon Musk in 2022"
+          style={{
+            width: '100%',
+            height: 'auto',
+            border: '1px solid #333'
+          }}
+        />
+        <p style={{
+          fontSize: '0.75rem',
+          color: '#666',
+          marginTop: '0.5rem',
+          textAlign: 'center'
+        }}>
+          Elon Musk, 2022
+        </p>
+      </div>
+
       {/* Opening */}
       <p style={{
         fontSize: '1.2rem',
@@ -219,31 +245,122 @@ export default function ElonMuskArticle({ isGerman }: ArticleProps) {
         </div>
       </div>
 
-      {/* The Reality of 100% Signal */}
-      <blockquote style={{
-        borderLeft: '3px solid #00ff88',
-        paddingLeft: '1.5rem',
-        margin: '3rem 0',
-        fontStyle: 'italic',
-        color: '#ddd',
-        fontSize: '1.1rem',
-        lineHeight: '1.7'
+      {/* Interview Video - Lex Fridman */}
+      <div style={{
+        float: 'left',
+        marginRight: '1.5rem',
+        marginBottom: '1rem',
+        maxWidth: '280px'
       }}>
-        {isGerman ? (
-          '"Ich schlief auf dem Fabrikboden, damit das Team wusste, dass ich nicht in einem Elfenbeinturm sitze. Sie sollten sehen: So hart es auch für sie war, für mich würde ich es noch härter machen."'
-        ) : (
-          '"I slept on the factory floor so the team knew I wasn\'t in some ivory tower. They needed to see that however hard it was for them, I would make it worse for me."'
-        )}
-        <cite style={{
-          display: 'block',
+        <a
+          href="https://www.youtube.com/watch?v=DxREm3s1scA"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: 'block',
+            position: 'relative'
+          }}
+        >
+          <img
+            src="/elon-lex-clean.jpg"
+            alt="Elon Musk with Lex Fridman"
+            style={{
+              width: '100%',
+              height: 'auto',
+              border: '1px solid #333',
+              display: 'block'
+            }}
+          />
+          {/* Play button overlay */}
+          <div style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: '48px',
+            height: '48px',
+            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            borderRadius: '50%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transition: 'background-color 0.2s'
+          }}
+          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(0, 255, 136, 0.9)'}
+          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.7)'}
+          >
+            <div style={{
+              width: 0,
+              height: 0,
+              borderLeft: '16px solid #fff',
+              borderTop: '10px solid transparent',
+              borderBottom: '10px solid transparent',
+              marginLeft: '3px'
+            }} />
+          </div>
+        </a>
+        <p style={{
+          fontSize: '0.75rem',
+          color: '#666',
           marginTop: '0.5rem',
-          fontStyle: 'normal',
-          fontSize: '0.9rem',
-          color: '#999'
+          textAlign: 'center'
         }}>
-          — Elon Musk, on Tesla Model 3 production
-        </cite>
-      </blockquote>
+          Lex Fridman Podcast
+        </p>
+      </div>
+
+      {/* Visual Break - Factory Floor Story */}
+      <div style={{
+        margin: '3rem 0',
+        clear: 'both',
+        padding: '2rem',
+        backgroundColor: 'rgba(255, 255, 255, 0.02)',
+        border: '1px solid #333',
+        borderLeft: '4px solid #00ff88'
+      }}>
+        <div style={{
+          fontSize: '3rem',
+          color: '#00ff88',
+          marginBottom: '1rem',
+          opacity: 0.3
+        }}>
+        </div>
+        <h3 style={{
+          fontSize: '1.2rem',
+          fontWeight: '300',
+          color: '#fff',
+          marginBottom: '1rem'
+        }}>
+          {isGerman ? 'Die Fabrikboden-Geschichte' : 'The Factory Floor Story'}
+        </h3>
+        <p style={{
+          fontSize: '0.95rem',
+          lineHeight: '1.7',
+          color: '#ddd',
+          marginBottom: '1rem'
+        }}>
+          {isGerman ? (
+            <>2018: Musk lebte buchstäblich in der Tesla-Fabrik. Er hatte einen Schlafsack in einem Konferenzraum neben der Produktionslinie. YouTuber sammelten $9,000 für eine Couch, aber er schlief weiter unter seinem Schreibtisch.</>
+          ) : (
+            <>2018: Musk literally lived in the Tesla factory. He kept a sleeping bag in a conference room adjacent to the production line. YouTubers crowdfunded $9,000 for a couch, but he continued sleeping under his desk.</>
+          )}
+        </p>
+        <blockquote style={{
+          borderLeft: 'none',
+          paddingLeft: 0,
+          margin: '1rem 0 0 0',
+          fontStyle: 'italic',
+          color: '#00ff88',
+          fontSize: '1.1rem',
+          lineHeight: '1.7'
+        }}>
+          {isGerman ? (
+            '"Ich wollte, dass meine Umstände schlimmer sind als die von jedem anderen in der Firma."'
+          ) : (
+            '"I wanted my circumstances to be worse than anyone else at the company."'
+          )}
+        </blockquote>
+      </div>
 
       {/* The Cost */}
       <h2 style={{
@@ -294,13 +411,79 @@ export default function ElonMuskArticle({ isGerman }: ArticleProps) {
         </cite>
       </blockquote>
 
+
+      {/* TED Interview Video */}
+      <div style={{
+        float: 'right',
+        marginLeft: '1.5rem',
+        marginBottom: '1rem',
+        maxWidth: '280px'
+      }}>
+        <a
+          href="https://www.youtube.com/watch?v=cdZZpaB2kDM&t=1620s"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: 'block',
+            position: 'relative'
+          }}
+        >
+          <img
+            src="/elon-ted-2022.jpg"
+            alt="Elon Musk at TED 2022"
+            style={{
+              width: '100%',
+              height: 'auto',
+              border: '1px solid #333',
+              display: 'block'
+            }}
+          />
+          {/* Play button overlay */}
+          <div style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: '48px',
+            height: '48px',
+            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            borderRadius: '50%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transition: 'background-color 0.2s'
+          }}
+          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(0, 255, 136, 0.9)'}
+          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.7)'}
+          >
+            <div style={{
+              width: 0,
+              height: 0,
+              borderLeft: '16px solid #fff',
+              borderTop: '10px solid transparent',
+              borderBottom: '10px solid transparent',
+              marginLeft: '3px'
+            }} />
+          </div>
+        </a>
+        <p style={{
+          fontSize: '0.75rem',
+          color: '#666',
+          marginTop: '0.5rem',
+          textAlign: 'center'
+        }}>
+          TED 2022 Interview
+        </p>
+      </div>
+
       {/* The Results */}
       <h2 style={{
         fontSize: '1.5rem',
         fontWeight: '300',
         color: '#fff',
         marginTop: '3rem',
-        marginBottom: '1.5rem'
+        marginBottom: '1.5rem',
+        clear: 'both'
       }}>
         {isGerman ? 'Die Ergebnisse' : 'The Results'}
       </h2>

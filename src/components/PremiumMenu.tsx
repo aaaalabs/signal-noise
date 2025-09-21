@@ -22,7 +22,7 @@ function createPostCommitmentAchievements(data: AppData) {
     if (completedSignals < 100) {
       return {
         id: '100_shipped',
-        icon: '🎯',
+        icon: '',
         name: '100 Shipped',
         earned: false,
         target: 100,
@@ -31,7 +31,7 @@ function createPostCommitmentAchievements(data: AppData) {
     } else if (completedSignals < 200) {
       return {
         id: '200_shipped',
-        icon: '🎯',
+        icon: '',
         name: '200 Shipped',
         earned: false,
         target: 200,
@@ -49,7 +49,7 @@ function createPostCommitmentAchievements(data: AppData) {
     } else if (completedSignals < 1000) {
       return {
         id: '1000_shipped',
-        icon: '🚀',
+        icon: '',
         name: '1000 Shipped',
         earned: false,
         target: 1000,
@@ -89,7 +89,7 @@ function createPostCommitmentAchievements(data: AppData) {
     },
     {
       id: 'signal_master',
-      icon: '⚡',
+      icon: '',
       name: 'Signal Master',
       earned: data.badges.includes('signal_master'),
       target: undefined,
@@ -97,7 +97,7 @@ function createPostCommitmentAchievements(data: AppData) {
     },
     {
       id: 'week_warrior',
-      icon: '🔥',
+      icon: '',
       name: '7 Day Streak',
       earned: data.badges.includes('week_warrior'),
       target: undefined,
@@ -105,7 +105,7 @@ function createPostCommitmentAchievements(data: AppData) {
     },
     {
       id: 'month_hero',
-      icon: '🏆',
+      icon: '',
       name: '30 Day Hero',
       earned: data.badges.includes('month_hero'),
       target: undefined,
