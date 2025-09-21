@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { getCoachAdvice } from '../services/groqService';
 import type { CoachResponse } from '../services/groqService';
 import type { Task, AppData } from '../types';
-import { useTranslation } from '../contexts/LanguageContext';
+// import { useTranslation } from '../contexts/LanguageContext'; // Not used in Personal AI mode
 import { calculateStreak, getAverageRatio } from '../utils/achievements';
 import { checkAndActivatePersonalAI } from '../utils/betaPremiumHack';
 import { checkPremiumStatus } from '../services/premiumService';
@@ -29,7 +29,7 @@ interface TaskAnalysis {
 }
 
 export default function PersonalAICoach({ tasks, currentRatio, firstName, data }: PersonalAICoachProps) {
-  const t = useTranslation();
+  // const t = useTranslation(); // Not used in Personal AI mode
   const [isPersonalMode, setIsPersonalMode] = useState(false);
   const [coachResponse, setCoachResponse] = useState<CoachResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);

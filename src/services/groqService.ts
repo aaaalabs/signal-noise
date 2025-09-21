@@ -26,7 +26,7 @@ export async function getCoachAdvice(
   // Use different system prompt for Personal AI mode
   const systemPrompt = options?.isPersonalMode
     ? getPersonalAISystemPrompt()
-    : (currentLang === 'de'
+    : currentLang === 'de'
     ? `Du bist ein persönlicher Productivity Coach für die Signal/Noise App. Deine Aufgabe ist es, Nutzer dabei zu unterstützen, ihr optimales Signal-zu-Noise-Verhältnis von 80:20 zu erreichen.
 
 WICHTIGE CHARAKTERISTIKA:
@@ -66,7 +66,7 @@ Return your response as JSON with:
 
   const userPrompt = options?.isPersonalMode
     ? buildPersonalAIPrompt(payload, currentLang)
-    : (currentLang === 'de'
+    : currentLang === 'de'
     ? `Analysiere diese Produktivitätsdaten für ${payload.firstName}:
 
 KONTEXT:
