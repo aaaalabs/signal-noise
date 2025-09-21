@@ -227,7 +227,7 @@ export default function ElonMuskArticle({ isGerman }: ArticleProps) {
           color: '#fff',
           marginBottom: '1.5rem'
         }}>
-          {isGerman ? 'Musk bei TED 2022' : 'Musk at TED 2022'}
+          {isGerman ? 'Musk über seine Arbeitsweise' : 'Musk on His Work Approach'}
         </h2>
 
         <div style={{
@@ -238,8 +238,8 @@ export default function ElonMuskArticle({ isGerman }: ArticleProps) {
           border: '1px solid #222'
         }}>
           <iframe
-            src="https://www.youtube.com/embed/cdZZpaB2kDM?start=1620"
-            title="Elon Musk TED 2022 Interview"
+            src="https://www.youtube.com/embed/uegOUmgKB4E"
+            title="Elon Musk on Work Life Balance"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
@@ -258,7 +258,7 @@ export default function ElonMuskArticle({ isGerman }: ArticleProps) {
           marginTop: '0.5rem',
           fontStyle: 'italic'
         }}>
-          Elon Musk at TED 2022 discussing managing multiple companies (27:00)
+          Elon Musk discussing work-life balance and his approach to productivity
         </p>
       </div>
 
