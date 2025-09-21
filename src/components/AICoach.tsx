@@ -16,7 +16,9 @@ import {
 import PremiumModal from './PremiumModal';
 import FoundationModal from './FoundationModal';
 import FirstNameModal from './FirstNameModal';
+import PersonalAICoach from './PersonalAICoach';
 import { checkPremiumStatus } from '../services/premiumService';
+import { hasPersonalAIAccess } from '../services/personalAIService';
 import { checkAndActivateBetaPremium, checkAndActivatePersonalAI } from '../utils/betaPremiumHack'; // TODO: Remove in production
 
 import type { AppData } from '../types';
@@ -304,6 +306,19 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
         onClose={() => setShowNameModal(false)}
         onSave={handleNameSave}
       />
+
+      {/* PersonalAI Coach - Separate Component */}
+      {hasPersonalAIAccess() && (
+        <div style={{ marginBottom: '8px' }}>
+          <PersonalAICoach
+            tasks={tasks}
+            currentRatio={currentRatio}
+            firstName={firstName}
+            onNameUpdate={onNameUpdate}
+            data={data}
+          />
+        </div>
+      )}
 
       {!showCoach && hasEnoughDataForCoaching() && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>

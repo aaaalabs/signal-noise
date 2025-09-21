@@ -84,3 +84,29 @@ export interface CoachPayload {
     dailyRatios: Array<{ date: string; ratio: number; taskCount: number }>;
   };
 }
+
+export interface PersonalAIResponse {
+  action: 'celebrate' | 'nudge' | 'warn' | 'focus' | 'reset';
+  priority: 'urgent' | 'high' | 'normal' | 'low';
+  message: string;
+
+  analysis: {
+    patternDetected: string;
+    completionReality: number;
+    focusLevel: 'deep' | 'moderate' | 'scattered';
+    timeContext: 'peak' | 'productive' | 'declining' | 'rest';
+  };
+
+  interventions: Array<{
+    action: 'do_now' | 'schedule' | 'delegate' | 'delete';
+    taskRef: string;
+    reasoning: string;
+    estimatedImpact: number;
+  }>;
+
+  metrics: {
+    momentumScore: number;
+    decisionQuality: number;
+    predictedSuccess: number;
+  };
+}
