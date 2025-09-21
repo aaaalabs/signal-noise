@@ -79,7 +79,7 @@ export default function ElonMuskArticle({ isGerman }: ArticleProps) {
         marginTop: '3rem',
         marginBottom: '1.5rem'
       }}>
-        {isGerman ? 'Der 5-Minuten-Takt' : 'The 5-Minute Blocks'}
+        {isGerman ? 'Die Wahrheit über Timeboxing' : 'The Truth About Timeboxing'}
       </h2>
 
       <p style={{
@@ -89,9 +89,9 @@ export default function ElonMuskArticle({ isGerman }: ArticleProps) {
         marginBottom: '2rem'
       }}>
         {isGerman ? (
-          <>Musk teilt seinen Tag in 5-Minuten-Blöcke ein. Das sind 288 Blöcke pro Tag. Jeder Block hat einen Zweck. Keine Verschwendung. Diese Methode nennt er "Time Boxing" - und sie ist der Schlüssel zu seiner unmenschlichen Produktivität.</>
+          <>Entgegen populären Mythen hat Musk selbst klargestellt: "Ich mache definitiv nicht dieses 5-Minuten-Ding. Man braucht lange, ununterbrochene Zeit zum Nachdenken." Stattdessen nutzt er "Timeboxing" - größere Zeitblöcke für spezifische Aufgaben. Bei 80-100 Stunden pro Woche ist jede Stunde geplant und hat einen Zweck.</>
         ) : (
-          <>Musk divides his day into 5-minute blocks. That's 288 blocks per day. Each block has a purpose. No waste. He calls this method "time boxing" - and it's the key to his inhuman productivity.</>
+          <>Contrary to popular myths, Musk himself clarified: "I definitely don't do this 5 minute thing. Need to have long uninterrupted times to think." Instead, he uses "timeboxing" - larger time blocks for specific tasks. At 80-100 hours per week, every hour is planned and has a purpose.</>
         )}
       </p>
 
@@ -227,7 +227,7 @@ export default function ElonMuskArticle({ isGerman }: ArticleProps) {
           color: '#fff',
           marginBottom: '1.5rem'
         }}>
-          {isGerman ? 'Musk über Produktivität' : 'Musk on Productivity'}
+          {isGerman ? 'Musk bei TED 2022' : 'Musk at TED 2022'}
         </h2>
 
         <div style={{
@@ -238,8 +238,8 @@ export default function ElonMuskArticle({ isGerman }: ArticleProps) {
           border: '1px solid #222'
         }}>
           <iframe
-            src="https://www.youtube.com/embed/ycPr5-27vSI"
-            title="Elon Musk on Work Ethic and Time Management"
+            src="https://www.youtube.com/embed/cdZZpaB2kDM?start=1620"
+            title="Elon Musk TED 2022 Interview"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
@@ -258,7 +258,7 @@ export default function ElonMuskArticle({ isGerman }: ArticleProps) {
           marginTop: '0.5rem',
           fontStyle: 'italic'
         }}>
-          Elon Musk explaining his productivity philosophy
+          Elon Musk at TED 2022 discussing managing multiple companies (27:00)
         </p>
       </div>
 
