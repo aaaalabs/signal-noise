@@ -82,8 +82,27 @@ export default async function handler(req, res) {
     let personalAIResponse;
 
     try {
+      // Log raw response for debugging
+      console.log('Raw Groq response content:', data.choices[0].message.content);
+
+      let content = data.choices[0].message.content;
+
+      // Extract JSON if mixed with text (common AI response issue)
+      const jsonMatch = content.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        content = jsonMatch[0];
+        console.log('Extracted JSON from mixed response:', content.substring(0, 100) + '...');
+      }
+
       // Parse and validate the JSON response
-      personalAIResponse = JSON.parse(data.choices[0].message.content);
+      personalAIResponse = JSON.parse(content);
+
+      // Validate and fix action type
+      const validActions = ['celebrate', 'nudge', 'warn', 'focus', 'reset'];
+      if (!validActions.includes(personalAIResponse.action)) {
+        console.log(`Invalid action '${personalAIResponse.action}', defaulting to 'focus'`);
+        personalAIResponse.action = 'focus';
+      }
 
       // Validate required fields
       if (!personalAIResponse.action || !personalAIResponse.message) {
@@ -91,9 +110,11 @@ export default async function handler(req, res) {
       }
     } catch (parseError) {
       console.error('PersonalAI JSON parsing error:', parseError);
-      // Fallback response
+      console.error('Failed content:', data.choices[0].message.content);
+
+      // Fallback response with valid action type
       personalAIResponse = {
-        action: 'analyze',
+        action: 'focus',
         priority: 'normal',
         message: `Hey ${payload.firstName}! I'm analyzing your productivity patterns. Let me give you a quick insight based on your current ${payload.context.currentRatio}% signal ratio.`,
         analysis: {
@@ -129,7 +150,10 @@ export default async function handler(req, res) {
  * Enhanced system prompt for PersonalAI with structured JSON output
  */
 function buildPersonalAISystemPrompt() {
-  return `You are an ultra-intelligent PersonalAI that understands the deeper patterns behind productivity decisions. You analyze task completion reality, not just intentions.
+  return `CRITICAL: Output ONLY valid JSON. Your ENTIRE response must be a single JSON object.
+Do not include ANY text before or after the JSON object.
+
+You are an ultra-intelligent PersonalAI that understands the deeper patterns behind productivity decisions. You analyze task completion reality, not just intentions.
 
 CORE MISSION:
 - Be the smartest productivity buddy who sees patterns others miss
@@ -138,7 +162,7 @@ CORE MISSION:
 - Understand task psychology and timing context
 
 RESPONSE REQUIREMENTS:
-You MUST respond with valid JSON in this exact structure:
+You MUST respond with ONLY valid JSON in this exact structure. NEVER output text outside the JSON structure:
 
 {
   "action": "celebrate|nudge|warn|focus|reset",
