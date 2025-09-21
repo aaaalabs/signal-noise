@@ -178,17 +178,41 @@ Das Projekt ist **100% bereit für Go-Live**. Nur noch API Keys setzen und deplo
 
 # 🚀 Signal/Noise Future Features Roadmap
 
+## ✅ COMPLETED: September 21, 2025
+
+### 🔒 Commitment Mode (Production Ready)
+**Irreversible Productivity Mode - "Real Artists Ship"**
+
+✅ **IMPLEMENTED**: 6/8 Achievement unlock requirement
+✅ **DEPLOYED**: Commitment Mode modal with Steve Jobs quote
+✅ **ACTIVE**: Time-based logic (pre/post commitment task counting)
+✅ **EVOLVING**: Achievement system transforms after activation
+✅ **DOCUMENTED**: FAQ integration for premium users
+✅ **STYLED**: Lock icon with grey/green states and CSS animations
+
+**Key Features:**
+- Lock icon appears as 9th achievement dot
+- Grey when < 6 achievements, green pulsing when ready
+- Modal activation: "From this moment forward: Only completed signals count"
+- Post-activation: Basic achievements disappear, elite shipping metrics appear
+- Future-proof: Only tasks after activation date require completion
+
+### 🤖 Personal AI Buddy (Beta Production)
+**Smart Buddy System with Deep Task Understanding**
+
+✅ **IMPLEMENTED**: `?beta=personalAI` activation for premium users
+✅ **DEPLOYED**: Time-aware context analysis (hour, day, completion patterns)
+✅ **ACTIVE**: Task pattern recognition (client tasks, long tasks, perfectionism)
+✅ **BUDDY-STYLE**: Acknowledges achievements first, then pattern insights
+✅ **CONTEXTUAL**: Morning/evening/weekend-aware responses
+✅ **PRACTICAL**: Ultra-concrete 2-minute actions instead of generic advice
+
+**Examples:**
+- "Nice! Du hast 3 Signals erledigt - solid. Aber 'Customer Call' sammelt Staub seit 4 Tagen."
+- "Early bird mode - perfekt für schwierige Tasks. Pick ONE für jetzt, Rest später."
+- "Real talk: 'Blog Post' seit einer Woche - Signal oder Ego-Noise? Kill it oder ship it."
+
 ## Near-Term Future Features
-
-### 🤖 AI Coach Private/Personal Mode
-**Enhanced AI Coaching with Task Content Analysis**
-
-- **Content Access**: AI gets read access to actual task text and completion status
-- **Personalized Analysis**: Deep understanding of user's specific Signal/Noise habits
-- **Content-Aware Coaching**: AI can reference specific tasks and patterns in advice
-- **Motivational Context**: Personal encouragement based on actual work being done
-- **Privacy Controls**: Users can enable/disable content sharing for AI analysis
-- **Implementation**: Extend existing Groq integration with task content payload
 
 ### 🌅 Smart Morning Notifications
 **Automatic Planning Prompts**
