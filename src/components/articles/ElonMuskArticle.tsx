@@ -219,48 +219,31 @@ export default function ElonMuskArticle({ isGerman }: ArticleProps) {
         </div>
       </div>
 
-      {/* YouTube Video */}
-      <div style={{ margin: '3rem 0' }}>
-        <h2 style={{
-          fontSize: '1.5rem',
-          fontWeight: '300',
-          color: '#fff',
-          marginBottom: '1.5rem'
-        }}>
-          {isGerman ? 'Musk über seine Arbeitsweise' : 'Musk on His Work Approach'}
-        </h2>
-
-        <div style={{
-          position: 'relative',
-          paddingBottom: '56.25%',
-          height: 0,
-          backgroundColor: '#111',
-          border: '1px solid #222'
-        }}>
-          <iframe
-            src="https://www.youtube.com/embed/uegOUmgKB4E"
-            title="Elon Musk on Work Life Balance"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%'
-            }}
-          />
-        </div>
-        <p style={{
-          color: '#666',
-          fontSize: '0.85rem',
+      {/* The Reality of 100% Signal */}
+      <blockquote style={{
+        borderLeft: '3px solid #00ff88',
+        paddingLeft: '1.5rem',
+        margin: '3rem 0',
+        fontStyle: 'italic',
+        color: '#ddd',
+        fontSize: '1.1rem',
+        lineHeight: '1.7'
+      }}>
+        {isGerman ? (
+          '"Ich schlief auf dem Fabrikboden, damit das Team wusste, dass ich nicht in einem Elfenbeinturm sitze. Sie sollten sehen: So hart es auch für sie war, für mich würde ich es noch härter machen."'
+        ) : (
+          '"I slept on the factory floor so the team knew I wasn\'t in some ivory tower. They needed to see that however hard it was for them, I would make it worse for me."'
+        )}
+        <cite style={{
+          display: 'block',
           marginTop: '0.5rem',
-          fontStyle: 'italic'
+          fontStyle: 'normal',
+          fontSize: '0.9rem',
+          color: '#999'
         }}>
-          Elon Musk discussing work-life balance and his approach to productivity
-        </p>
-      </div>
+          — Elon Musk, on Tesla Model 3 production
+        </cite>
+      </blockquote>
 
       {/* The Cost */}
       <h2 style={{
