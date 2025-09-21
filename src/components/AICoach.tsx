@@ -17,7 +17,7 @@ import PremiumModal from './PremiumModal';
 import FoundationModal from './FoundationModal';
 import FirstNameModal from './FirstNameModal';
 import { checkPremiumStatus } from '../services/premiumService';
-import { checkAndActivateBetaPremium } from '../utils/betaPremiumHack'; // TODO: Remove in production
+import { checkAndActivateBetaPremium, checkAndActivatePersonalAI } from '../utils/betaPremiumHack'; // TODO: Remove in production
 
 import type { AppData } from '../types';
 
@@ -38,10 +38,14 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
   const [showFoundationModal, setShowFoundationModal] = useState(false);
   const [showNameModal, setShowNameModal] = useState(false);
   const [isPremium, setIsPremium] = useState(false);
+  const [isPersonalMode, setIsPersonalMode] = useState(false);
 
-  // Check premium status on mount and listen for changes
+  // Check premium status and personal AI mode on mount and listen for changes
   useEffect(() => {
     const checkPremium = () => {
+      // Check for personal AI beta mode
+      const personalAIActive = checkAndActivatePersonalAI();
+      setIsPersonalMode(personalAIActive);
       // Check for beta premium hack (TODO: Remove in production)
       if (checkAndActivateBetaPremium()) {
         setIsPremium(true);
@@ -114,6 +118,38 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
     getCoachingAdvice();
   };
 
+  // Deep task pattern analysis for Personal AI
+  const analyzeTaskPatterns = (tasks: Task[]) => {
+    const signals = tasks.filter(t => t.type === 'signal');
+    const completedSignals = signals.filter(t => t.completed);
+
+    // Find abandoned signals (>3 days old, uncompleted)
+    const abandonedSignals = signals.filter(t => {
+      if (t.completed) return false;
+      const age = (Date.now() - new Date(t.timestamp).getTime()) / (1000 * 60 * 60 * 24);
+      return age > 3;
+    }).map(t => ({
+      text: t.text,
+      ageInDays: Math.floor((Date.now() - new Date(t.timestamp).getTime()) / (1000 * 60 * 60 * 24))
+    }));
+
+    // Get oldest uncompleted signal
+    const oldestSignal = signals
+      .filter(t => !t.completed)
+      .sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime())[0];
+
+    return {
+      totalSignals: signals.length,
+      completedSignals: completedSignals.length,
+      completionRate: signals.length > 0 ? (completedSignals.length / signals.length * 100).toFixed(1) : '0',
+      abandonedSignals,
+      oldestUncompletedSignal: oldestSignal ? {
+        text: oldestSignal.text,
+        ageInDays: Math.floor((Date.now() - new Date(oldestSignal.timestamp).getTime()) / (1000 * 60 * 60 * 24))
+      } : null
+    };
+  };
+
   const getCoachingAdvice = async () => {
     let userName = firstName || localStorage.getItem('userFirstName');
 
@@ -167,8 +203,25 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
         }, 0)
       );
 
+      // Prepare Personal AI analysis if enabled
+      let personalAIData = {};
+      if (isPersonalMode) {
+        const analysis = analyzeTaskPatterns(tasks);
+        personalAIData = {
+          deepTaskAnalysis: {
+            allTasks: tasks.map(t => ({
+              text: t.text,
+              type: t.type,
+              completed: t.completed,
+              ageInDays: Math.floor((Date.now() - new Date(t.timestamp).getTime()) / (1000 * 60 * 60 * 24))
+            })),
+            completionReality: analysis
+          }
+        };
+      }
+
       // Generate coaching payload with REAL data
-      const payload: CoachPayload = {
+      const payload: CoachPayload & any = {
         firstName: userName,
         timestamp: new Date().toISOString(),
         timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
@@ -204,10 +257,11 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
             timestamp: t.timestamp
           })),
           dailyRatios
-        }
+        },
+        ...personalAIData
       };
 
-      const response = await getCoachAdvice(payload);
+      const response = await getCoachAdvice(payload, { isPersonalMode });
       setCoachResponse(response);
     } catch (error) {
       console.error('Coaching error:', error);

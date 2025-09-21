@@ -115,11 +115,15 @@ function createBetaAppData(): AppData {
 
   return {
     tasks: [
-      // Today's tasks
-      { id: now - 1000, text: "Review quarterly goals", type: "signal", timestamp: new Date().toISOString(), completed: false },
-      { id: now - 2000, text: "Check social media", type: "noise", timestamp: new Date().toISOString(), completed: false },
-      { id: now - 3000, text: "Strategic planning session", type: "signal", timestamp: new Date().toISOString(), completed: false },
-      { id: now - 4000, text: "Deep work on project", type: "signal", timestamp: new Date().toISOString(), completed: false },
+      // Today's tasks - some completed, some abandoned for Personal AI testing
+      { id: now - 1000, text: "Finalize Q4 strategy document", type: "signal", timestamp: new Date().toISOString(), completed: false },
+      { id: now - 2000, text: "Check social media", type: "noise", timestamp: new Date().toISOString(), completed: true },
+      { id: now - 3000, text: "Call important client about deal", type: "signal", timestamp: new Date().toISOString(), completed: false },
+      { id: now - 4000, text: "Deep work on project", type: "signal", timestamp: new Date().toISOString(), completed: true },
+      // 3 days ago - abandoned signal for Personal AI analysis
+      { id: now - 259200000 - 1000, text: "Complete performance review for team", type: "signal", timestamp: new Date(now - 259200000).toISOString(), completed: false },
+      // 5 days ago - another abandoned signal
+      { id: now - 432000000 - 1000, text: "Write blog post about productivity", type: "signal", timestamp: new Date(now - 432000000).toISOString(), completed: false },
       // Yesterday's tasks
       { id: now - 86400000, text: "Team standup", type: "signal", timestamp: new Date(now - 86400000).toISOString(), completed: true },
       { id: now - 86401000, text: "Reply to emails", type: "noise", timestamp: new Date(now - 86400000).toISOString(), completed: true },
@@ -163,6 +167,31 @@ function createBetaAppData(): AppData {
       firstName: "Beta Tester"
     }
   };
+}
+
+/**
+ * Checks if personal AI beta flag should be activated
+ * @returns true if personal AI beta was activated or already exists
+ */
+export function checkAndActivatePersonalAI(): boolean {
+  // Check for beta URL parameter
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('beta') === 'personalAI') {
+    localStorage.setItem('personalAI_beta', 'true');
+    console.log('Personal AI mode activated');
+    return true;
+  }
+
+  // Check if already activated
+  return localStorage.getItem('personalAI_beta') === 'true';
+}
+
+/**
+ * Deactivates personal AI beta mode
+ */
+export function deactivatePersonalAI(): void {
+  localStorage.removeItem('personalAI_beta');
+  console.log('Personal AI mode deactivated');
 }
 
 /**
