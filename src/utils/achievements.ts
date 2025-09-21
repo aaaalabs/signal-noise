@@ -217,9 +217,14 @@ export function checkAchievements(data: AppData): { newBadges: BadgeDefinition[]
     }
   });
 
+  // For earnedCount, only count the basic 8 pre-commitment achievements
+  const basicAchievementIds = ['first_day', 'week_warrior', 'signal_master', 'perfect_day', 'month_hero', 'early_bird', 'decision_maker', 'comeback'];
+  const earnedBasicAchievements = data.badges.filter(badgeId => basicAchievementIds.includes(badgeId));
+  const newBasicAchievements = newBadges.filter(badge => basicAchievementIds.includes(badge.id));
+
   return {
     newBadges,
-    earnedCount: data.badges.length + newBadges.length
+    earnedCount: earnedBasicAchievements.length + newBasicAchievements.length
   };
 }
 
