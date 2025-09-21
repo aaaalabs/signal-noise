@@ -196,50 +196,7 @@ export default function PersonalAICoach({ tasks, currentRatio, firstName, onName
     }
   };
 
-  const getActionColor = (action: PersonalAIResponse['action']) => {
-    switch (action) {
-      case 'celebrate': return 'var(--signal)';
-      case 'warn': return '#ff6b6b';
-      case 'reset': return '#ff4757';
-      case 'focus': return '#3742fa';
-      case 'nudge': return '#ffa502';
-      default: return '#999';
-    }
-  };
-
-  const getPriorityBadge = (priority: PersonalAIResponse['priority']) => {
-    const colors = {
-      urgent: '#ff4757',
-      high: '#ff6b6b',
-      normal: '#ffa502',
-      low: '#999'
-    };
-
-    return (
-      <span
-        style={{
-          fontSize: '10px',
-          color: colors[priority],
-          textTransform: 'uppercase',
-          letterSpacing: '1px',
-          fontWeight: '500'
-        }}
-      >
-        {priority}
-      </span>
-    );
-  };
-
-  const getActionIcon = (action: PersonalAIResponse['action']) => {
-    switch (action) {
-      case 'celebrate': return '🎉';
-      case 'warn': return '⚠️';
-      case 'reset': return '🔄';
-      case 'focus': return '🎯';
-      case 'nudge': return '👆';
-      default: return '🤖';
-    }
-  };
+  // Removed getActionColor, getPriorityBadge, getActionIcon - Jony Ive approved design uses minimal typography only
 
   if (!isPersonalAIAvailable) {
     return null; // Don't show if PersonalAI not available
@@ -250,201 +207,123 @@ export default function PersonalAICoach({ tasks, currentRatio, firstName, onName
       {!showPersonalAI && (
         <button
           onClick={handlePersonalAIClick}
-          className="personal-ai-button"
+          className="advanced-analysis-button"
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            justifyContent: 'center',
-            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            background: 'none',
             border: 'none',
-            borderRadius: '8px',
-            color: 'white',
-            padding: '10px 16px',
+            color: '#666',
             fontSize: '14px',
-            fontWeight: '500',
+            fontWeight: '300',
             cursor: 'pointer',
-            transition: 'all 0.2s ease',
-            boxShadow: '0 2px 8px rgba(102, 126, 234, 0.2)'
+            padding: '4px 0',
+            borderBottom: '1px solid transparent',
+            transition: 'opacity 0.2s ease',
+            textAlign: 'left'
+          }}
+          onMouseEnter={(e) => {
+            (e.target as HTMLButtonElement).style.opacity = '0.8';
+            (e.target as HTMLButtonElement).style.borderBottomColor = '#333';
+          }}
+          onMouseLeave={(e) => {
+            (e.target as HTMLButtonElement).style.opacity = '1';
+            (e.target as HTMLButtonElement).style.borderBottomColor = 'transparent';
           }}
         >
-          <span style={{ fontSize: '16px' }}>🤖</span>
-          PersonalAI
+          Advanced Analysis
         </button>
       )}
 
       {showPersonalAI && (
         <div
-          className="personal-ai-response"
+          className="advanced-analysis-response"
           style={{
-            border: personalAIResponse ? `1px solid ${getActionColor(personalAIResponse.action)}` : '1px solid #333',
-            borderRadius: '12px',
+            border: '1px solid #333',
+            borderRadius: '8px',
             padding: '16px',
-            backgroundColor: 'rgba(0,0,0,0.3)',
-            backdropFilter: 'blur(10px)'
+            backgroundColor: 'rgba(0,0,0,0.2)',
+            marginTop: '8px'
           }}
         >
           {isLoading ? (
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
-                width: '20px',
-                height: '20px',
-                border: '2px solid #667eea',
-                borderTop: '2px solid transparent',
+                width: '16px',
+                height: '16px',
+                border: '1px solid #666',
+                borderTop: '1px solid transparent',
                 borderRadius: '50%',
                 animation: 'spin 1s linear infinite'
               }} />
-              <span style={{ color: '#999' }}>PersonalAI analyzing patterns...</span>
+              <span style={{ color: '#999', fontSize: '13px', fontWeight: '300' }}>Analyzing patterns</span>
             </div>
           ) : personalAIResponse ? (
             <div>
-              {/* Action Header */}
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                marginBottom: '12px'
-              }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <span style={{ fontSize: '18px' }}>{getActionIcon(personalAIResponse.action)}</span>
-                  <span style={{
-                    color: getActionColor(personalAIResponse.action),
-                    fontWeight: '500',
-                    textTransform: 'capitalize'
-                  }}>
-                    {personalAIResponse.action}
-                  </span>
-                </div>
-                {getPriorityBadge(personalAIResponse.priority)}
-              </div>
-
-              {/* Main Message */}
+              {/* Main Message - Primary Focus */}
               <div style={{
                 fontSize: '14px',
-                lineHeight: '1.5',
-                marginBottom: '16px',
-                color: '#fff'
+                fontWeight: '300',
+                lineHeight: '1.4',
+                color: '#fff',
+                marginBottom: '12px'
               }}>
                 {personalAIResponse.message}
               </div>
 
-              {/* Analysis Section */}
-              <div style={{ marginBottom: '16px' }}>
+              {/* Key Insight - Single Line */}
+              {personalAIResponse.analysis.patternDetected !== 'baseline_analysis' && (
                 <div style={{
-                  fontSize: '11px',
-                  color: '#666',
-                  textTransform: 'uppercase',
-                  letterSpacing: '1px',
-                  marginBottom: '8px'
+                  fontSize: '12px',
+                  color: '#999',
+                  fontStyle: 'italic',
+                  marginBottom: '12px'
                 }}>
-                  Analysis
-                </div>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
-                  <div style={{ fontSize: '12px' }}>
-                    <div style={{ color: '#999' }}>Focus Level</div>
-                    <div style={{ color: '#fff', textTransform: 'capitalize' }}>
-                      {personalAIResponse.analysis.focusLevel}
-                    </div>
-                  </div>
-                  <div style={{ fontSize: '12px' }}>
-                    <div style={{ color: '#999' }}>Pattern</div>
-                    <div style={{ color: '#fff' }}>
-                      {personalAIResponse.analysis.patternDetected.replace(/_/g, ' ')}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Metrics */}
-              <div style={{ marginBottom: '16px' }}>
-                <div style={{
-                  fontSize: '11px',
-                  color: '#666',
-                  textTransform: 'uppercase',
-                  letterSpacing: '1px',
-                  marginBottom: '8px'
-                }}>
-                  Metrics
-                </div>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px' }}>
-                  <div style={{ fontSize: '12px', textAlign: 'center' }}>
-                    <div style={{ color: '#999' }}>Momentum</div>
-                    <div style={{ color: '#fff', fontWeight: '500' }}>
-                      {personalAIResponse.metrics.momentumScore}%
-                    </div>
-                  </div>
-                  <div style={{ fontSize: '12px', textAlign: 'center' }}>
-                    <div style={{ color: '#999' }}>Quality</div>
-                    <div style={{ color: '#fff', fontWeight: '500' }}>
-                      {personalAIResponse.metrics.decisionQuality}%
-                    </div>
-                  </div>
-                  <div style={{ fontSize: '12px', textAlign: 'center' }}>
-                    <div style={{ color: '#999' }}>Success</div>
-                    <div style={{ color: '#fff', fontWeight: '500' }}>
-                      {personalAIResponse.metrics.predictedSuccess}%
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Interventions */}
-              {personalAIResponse.interventions && personalAIResponse.interventions.length > 0 && (
-                <div style={{ marginBottom: '16px' }}>
-                  <div style={{
-                    fontSize: '11px',
-                    color: '#666',
-                    textTransform: 'uppercase',
-                    letterSpacing: '1px',
-                    marginBottom: '8px'
-                  }}>
-                    Interventions
-                  </div>
-                  {personalAIResponse.interventions.map((intervention, index) => (
-                    <div key={index} style={{
-                      fontSize: '12px',
-                      padding: '8px',
-                      backgroundColor: 'rgba(0,0,0,0.2)',
-                      borderRadius: '6px',
-                      marginBottom: '4px',
-                      borderLeft: `3px solid ${getActionColor(personalAIResponse.action)}`
-                    }}>
-                      <div style={{
-                        fontWeight: '500',
-                        color: '#fff',
-                        textTransform: 'capitalize',
-                        marginBottom: '2px'
-                      }}>
-                        {intervention.action.replace(/_/g, ' ')}: {intervention.taskRef}
-                      </div>
-                      <div style={{ color: '#999' }}>{intervention.reasoning}</div>
-                      <div style={{
-                        color: getActionColor(personalAIResponse.action),
-                        fontSize: '11px',
-                        marginTop: '4px'
-                      }}>
-                        Impact: {intervention.estimatedImpact}%
-                      </div>
-                    </div>
-                  ))}
+                  {personalAIResponse.analysis.patternDetected.replace(/_/g, ' ')}
                 </div>
               )}
 
-              <button
-                onClick={() => setShowPersonalAI(false)}
-                style={{
+              {/* Single Critical Metric */}
+              <div style={{
+                fontSize: '12px',
+                color: '#999',
+                marginBottom: '16px'
+              }}>
+                Momentum <span style={{
+                  color: '#fff',
+                  fontWeight: '100',
+                  fontSize: '13px'
+                }}>{personalAIResponse.metrics.momentumScore}%</span>
+              </div>
+
+              {/* Primary Intervention Only */}
+              {personalAIResponse.interventions && personalAIResponse.interventions.length > 0 && personalAIResponse.interventions[0].estimatedImpact > 50 && (
+                <div style={{
                   fontSize: '12px',
-                  color: '#666',
-                  background: 'none',
-                  border: 'none',
-                  cursor: 'pointer',
-                  transition: 'color 0.2s'
-                }}
-                onMouseEnter={(e) => (e.target as HTMLButtonElement).style.color = '#999'}
-                onMouseLeave={(e) => (e.target as HTMLButtonElement).style.color = '#666'}
-              >
-                Close PersonalAI
-              </button>
+                  color: '#999',
+                  marginBottom: '16px'
+                }}>
+                  Next: <span style={{ color: '#fff' }}>{personalAIResponse.interventions[0].taskRef}</span>
+                </div>
+              )}
+
+              {/* Minimal Dismiss */}
+              <div style={{ textAlign: 'right' }}>
+                <button
+                  onClick={() => setShowPersonalAI(false)}
+                  style={{
+                    fontSize: '11px',
+                    color: '#666',
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    fontWeight: '300',
+                    opacity: 0.7
+                  }}
+                  onMouseEnter={(e) => (e.target as HTMLButtonElement).style.opacity = '1'}
+                  onMouseLeave={(e) => (e.target as HTMLButtonElement).style.opacity = '0.7'}
+                >
+                  dismiss
+                </button>
+              </div>
             </div>
           ) : null}
         </div>
@@ -454,11 +333,6 @@ export default function PersonalAICoach({ tasks, currentRatio, firstName, onName
         @keyframes spin {
           0% { transform: rotate(0deg); }
           100% { transform: rotate(360deg); }
-        }
-
-        .personal-ai-button:hover {
-          transform: translateY(-1px);
-          box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
         }
       `}</style>
     </div>
