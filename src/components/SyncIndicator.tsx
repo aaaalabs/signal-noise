@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
 import { checkPremiumStatus } from '../services/premiumService';
+import { checkAchievements } from '../utils/achievements';
 import PremiumMenu from './PremiumMenu';
 import type { AppData } from '../types';
 
 interface SyncIndicatorProps {
   data: AppData;
+  onCommitmentModeClick?: () => void;
 }
 
-export default function SyncIndicator({ data }: SyncIndicatorProps) {
+export default function SyncIndicator({ data, onCommitmentModeClick }: SyncIndicatorProps) {
   const [premiumStatus, setPremiumStatus] = useState(() => checkPremiumStatus());
   const [showPremiumMenu, setShowPremiumMenu] = useState(false);
   const [syncState, setSyncState] = useState<'idle' | 'syncing' | 'success' | 'error' | 'checking' | 'receiving'>('idle');
@@ -141,6 +143,11 @@ export default function SyncIndicator({ data }: SyncIndicatorProps) {
           email={premiumStatus.email || ''}
           tier={premiumStatus.subscriptionId?.includes('foundation') ? 'foundation' : 'early_adopter'}
           data={data}
+          earnedCount={checkAchievements(data).earnedCount}
+          onCommitmentModeClick={() => {
+            setShowPremiumMenu(false);
+            onCommitmentModeClick?.();
+          }}
         />
       </div>
 

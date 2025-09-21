@@ -509,8 +509,8 @@ body {
 
 /* Commitment Mode Lock Icon */
 .achievement-dot.lock-dot {
-    width: 12px;
-    height: 12px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     display: inline-flex;
     align-items: center;
@@ -534,8 +534,8 @@ body {
 }
 
 .achievement-dot.lock-dot svg {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
 }
 
 @keyframes lockPulse {

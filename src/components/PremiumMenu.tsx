@@ -3,12 +3,28 @@ import type { AppData } from '../types';
 import { calculateStreak, createBadgeDefinitions, getAverageRatio, getTodayRatio } from '../utils/achievements';
 import { useTranslation } from '../contexts/LanguageContext';
 
+// Extended achievement type that includes both regular achievements and commitment mode
+type ExtendedAchievement = {
+  id: string;
+  name: string;
+  progress: number;
+  // Regular achievement properties
+  icon?: string;
+  condition?: () => boolean;
+  // Commitment mode specific properties
+  isCommitmentMode?: boolean;
+  canActivate?: boolean;
+  isActivated?: boolean;
+};
+
 interface PremiumMenuProps {
   show: boolean;
   onClose: () => void;
   email: string;
   tier: string;
   data?: AppData;
+  earnedCount?: number;
+  onCommitmentModeClick?: () => void;
 }
 
 export default function PremiumMenu({
@@ -16,7 +32,9 @@ export default function PremiumMenu({
   onClose,
   email,
   tier,
-  data
+  data,
+  earnedCount = 0,
+  onCommitmentModeClick
 }: PremiumMenuProps) {
   const menuRef = useRef<HTMLDivElement>(null);
   const [showTooltip, setShowTooltip] = useState<string | null>(null);
@@ -75,14 +93,30 @@ export default function PremiumMenu({
     }
   };
 
-  // Filter and sort achievements with progress
-  const achievementsWithProgress = achievements
+  // Create Commitment Mode achievement item
+  const isCommitmentMode = !!data?.settings?.commitModeActivatedAt;
+  const canActivateCommitment = earnedCount >= 6;
+
+  const commitmentAchievement: ExtendedAchievement = {
+    id: 'commitment_mode',
+    name: 'Commitment Mode',
+    progress: isCommitmentMode ? 100 : (canActivateCommitment ? 90 : Math.min((earnedCount / 6) * 80, 80)),
+    isCommitmentMode: true,
+    canActivate: canActivateCommitment,
+    isActivated: isCommitmentMode
+  };
+
+  // Filter and sort achievements with progress, then add commitment mode
+  const achievementsWithProgress: ExtendedAchievement[] = achievements
     .map(achievement => ({
       ...achievement,
       progress: getProgress(achievement)
     }))
     .filter(achievement => achievement.progress > 0)
     .sort((a, b) => b.progress - a.progress);
+
+  // Add commitment mode as the last item (9th achievement)
+  const allAchievements: ExtendedAchievement[] = [...achievementsWithProgress, commitmentAchievement];
 
   const ProgressBar = ({ progress }: { progress: number }) => {
     const filledBars = Math.floor((progress / 100) * 5);
@@ -214,47 +248,88 @@ export default function PremiumMenu({
 
       {/* Achievement Progress */}
       <div style={{ marginBottom: '16px' }}>
-        {achievementsWithProgress.length > 0 ? (
+        {allAchievements.length > 0 ? (
           <div style={{
             display: 'flex',
             flexDirection: 'column',
             gap: '4px',
             fontSize: '10px'
           }}>
-            {achievementsWithProgress.map(achievement => (
+            {allAchievements.map(achievement => (
               <div key={achievement.id}>
                 <div
-                  onClick={() => handleTooltipToggle(achievement.id)}
+                  onClick={() => {
+                    if (achievement.isCommitmentMode && achievement.canActivate && !achievement.isActivated && onCommitmentModeClick) {
+                      onCommitmentModeClick();
+                      onClose(); // Close the menu after clicking
+                    } else {
+                      handleTooltipToggle(achievement.id);
+                    }
+                  }}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
                     gap: '8px',
                     padding: '1px 0',
-                    cursor: 'pointer',
-                    transition: 'opacity 0.2s ease'
+                    cursor: achievement.isCommitmentMode && achievement.canActivate && !achievement.isActivated ? 'pointer' : 'default',
+                    transition: 'opacity 0.2s ease',
+                    opacity: achievement.isCommitmentMode && !achievement.canActivate && !achievement.isActivated ? 0.5 : 1
                   }}
                   onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.opacity = '0.7';
+                    if (!achievement.isCommitmentMode || achievement.canActivate || achievement.isActivated) {
+                      (e.currentTarget as HTMLElement).style.opacity = '0.7';
+                    }
                   }}
                   onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.opacity = '1';
+                    const opacity = achievement.isCommitmentMode && !achievement.canActivate && !achievement.isActivated ? 0.5 : 1;
+                    (e.currentTarget as HTMLElement).style.opacity = opacity.toString();
                   }}
                 >
-                  <ProgressBar progress={achievement.progress} />
+                  {achievement.isCommitmentMode ? (
+                    // Special lock icon for Commitment Mode
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '20px' }}>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="10"
+                        height="10"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke={achievement.isActivated ? '#00ff88' : achievement.canActivate ? '#00ff88' : '#666'}
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        style={{
+                          opacity: achievement.canActivate || achievement.isActivated ? 1 : 0.6,
+                          animation: achievement.canActivate && !achievement.isActivated ? 'lockPulse 2s infinite' : 'none'
+                        }}
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6z" />
+                        <path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
+                        <path d="M8 11v-4a4 4 0 1 1 8 0v4" />
+                      </svg>
+                    </div>
+                  ) : (
+                    <ProgressBar progress={achievement.progress} />
+                  )}
                   <span style={{
-                    color: '#ccc',
-                    fontWeight: 300,
+                    color: achievement.isCommitmentMode && achievement.isActivated ? '#00ff88' : '#ccc',
+                    fontWeight: achievement.isCommitmentMode && achievement.isActivated ? 400 : 300,
                     fontSize: '10px',
                     flex: 1
                   }}>
                     {achievement.name}
+                    {achievement.isCommitmentMode && achievement.isActivated && ' ✓'}
                   </span>
                   <span style={{
                     color: '#666',
                     fontWeight: 300,
                     fontSize: '9px'
                   }}>
-                    {Math.round(achievement.progress)}%
+                    {achievement.isCommitmentMode ?
+                      (achievement.isActivated ? 'Active' : achievement.canActivate ? 'Ready' : `${earnedCount}/6`) :
+                      `${Math.round(achievement.progress)}%`
+                    }
                   </span>
                 </div>
                 {showTooltip === achievement.id && (
@@ -268,7 +343,12 @@ export default function PremiumMenu({
                     animation: 'tooltipFadeIn 0.2s ease-out',
                     fontStyle: 'italic'
                   }}>
-                    {getSuccessCriteria(achievement.id)}
+                    {achievement.isCommitmentMode ?
+                      (achievement.isActivated ? 'Only completed signals count from activation date' :
+                       achievement.canActivate ? 'Click to activate irreversible productivity mode' :
+                       'Earn 6 achievements to unlock Commitment Mode') :
+                      getSuccessCriteria(achievement.id)
+                    }
                   </div>
                 )}
               </div>

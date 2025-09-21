@@ -12,10 +12,9 @@ interface RatioDisplayProps {
   earnedCount: number;
   hasAchievement?: boolean;
   onDataUpdate?: (newData: AppData) => void;
-  onCommitmentModeClick?: () => void;
 }
 
-export default function RatioDisplay({ ratio, totalTasks, data, earnedCount, hasAchievement, onDataUpdate, onCommitmentModeClick }: RatioDisplayProps) {
+export default function RatioDisplay({ ratio, totalTasks, data, earnedCount, hasAchievement, onDataUpdate }: RatioDisplayProps) {
   const [isManualSyncing, setIsManualSyncing] = useState(false);
 
   const handleManualSync = async () => {
@@ -188,7 +187,6 @@ export default function RatioDisplay({ ratio, totalTasks, data, earnedCount, has
         <AchievementDots
           data={data}
           earnedCount={earnedCount}
-          onCommitmentModeClick={onCommitmentModeClick}
         />
       </div>
     </div>

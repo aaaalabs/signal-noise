@@ -1508,7 +1508,7 @@ function AppContent() {
           zIndex: 100
         }}>
           {/* Sync Indicator - Premium status and sync feedback */}
-          <SyncIndicator data={data} />
+          <SyncIndicator data={data} onCommitmentModeClick={() => setShowCommitmentModal(true)} />
 
           {/* Language Switcher - Ultra-minimal toggle */}
           <LanguageSwitcher />
@@ -1523,7 +1523,6 @@ function AppContent() {
             data={data}
             earnedCount={earnedCount}
             hasAchievement={hasAchievement}
-            onCommitmentModeClick={() => setShowCommitmentModal(true)}
             onDataUpdate={(newData) => {
               setData(newData);
               // Update sync tracker version from server
