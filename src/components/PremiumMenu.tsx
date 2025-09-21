@@ -422,8 +422,8 @@ export default function PremiumMenu({
                   }}
                 >
                   {achievement.isCommitmentMode ? (
-                    // Special lock icon for Commitment Mode - same width as progress bars
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', width: '20px' }}>
+                    // Special lock icon for Commitment Mode - same width as progress bars (5×4px + 4×1px = 24px)
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '24px' }}>
 {achievement.isActivated ? (
                         // Locked padlock (green) - commitment is active/locked in
                         <svg
