@@ -244,7 +244,7 @@ export default function PremiumMenu({
 
     const commitmentAchievement: ExtendedAchievement = {
       id: 'commitment_mode',
-      name: 'Commitment Mode',
+      name: 'Commit',
       progress: canActivateCommitment ? 90 : Math.min((earnedCount / 6) * 80, 80),
       isCommitmentMode: true,
       canActivate: canActivateCommitment,
@@ -422,14 +422,14 @@ export default function PremiumMenu({
                   }}
                 >
                   {achievement.isCommitmentMode ? (
-                    // Special lock icon for Commitment Mode
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '20px' }}>
+                    // Special lock icon for Commitment Mode - same width as progress bars
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', width: '20px' }}>
 {achievement.isActivated ? (
                         // Locked padlock (green) - commitment is active/locked in
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          width="10"
-                          height="10"
+                          width="12"
+                          height="12"
                           viewBox="0 0 24 24"
                           fill="none"
                           stroke="#00ff88"
@@ -446,8 +446,8 @@ export default function PremiumMenu({
                         // Unlocked padlock (green, pulsing) - ready to activate
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          width="10"
-                          height="10"
+                          width="12"
+                          height="12"
                           viewBox="0 0 24 24"
                           fill="none"
                           stroke="#00ff88"
@@ -467,8 +467,8 @@ export default function PremiumMenu({
                         // Locked padlock (grey) - not yet eligible
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          width="10"
-                          height="10"
+                          width="12"
+                          height="12"
                           viewBox="0 0 24 24"
                           fill="none"
                           stroke="#666"
