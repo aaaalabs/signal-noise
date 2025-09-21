@@ -1,7 +1,75 @@
 import { useEffect, useRef, useState } from 'react';
-import type { AppData } from '../types';
+import type { AppData, Task } from '../types';
 import { calculateStreak, createBadgeDefinitions, getAverageRatio, getTodayRatio } from '../utils/achievements';
 import { useTranslation } from '../contexts/LanguageContext';
+
+// Helper function to count completed signals after commitment
+function getCompletedSignalsAfterCommitment(tasks: Task[], commitDate: string): number {
+  const commitTime = new Date(commitDate);
+  return tasks.filter(task =>
+    task.type === 'signal' &&
+    task.completed &&
+    new Date(task.timestamp) >= commitTime
+  ).length;
+}
+
+// Create post-commitment achievements
+function createPostCommitmentAchievements(data: AppData) {
+  const completedSignals = data.settings.commitModeActivatedAt
+    ? getCompletedSignalsAfterCommitment(data.tasks, data.settings.commitModeActivatedAt)
+    : 0;
+
+  return [
+    {
+      id: 'signal_master',
+      icon: '⚡',
+      name: 'Signal Master',
+      earned: data.badges.includes('signal_master')
+    },
+    {
+      id: 'perfect_day',
+      icon: '💎',
+      name: 'Perfect Day',
+      earned: data.badges.includes('perfect_day')
+    },
+    {
+      id: 'week_warrior',
+      icon: '🔥',
+      name: '7 Day Streak',
+      earned: data.badges.includes('week_warrior')
+    },
+    {
+      id: 'month_hero',
+      icon: '🏆',
+      name: '30 Day Hero',
+      earned: data.badges.includes('month_hero')
+    },
+    {
+      id: '200_shipped',
+      icon: '🎯',
+      name: '200 Signals Shipped',
+      earned: completedSignals >= 200
+    },
+    {
+      id: '500_shipped',
+      icon: '📍',
+      name: '500 Signals Shipped',
+      earned: completedSignals >= 500
+    },
+    {
+      id: '1000_shipped',
+      icon: '🚀',
+      name: '1000 Signals Shipped',
+      earned: completedSignals >= 1000
+    },
+    {
+      id: '2000_shipped',
+      icon: '⭐',
+      name: '2000 Signals Shipped',
+      earned: completedSignals >= 2000
+    }
+  ];
+}
 
 // Extended achievement type that includes both regular achievements and commitment mode
 type ExtendedAchievement = {
@@ -11,6 +79,7 @@ type ExtendedAchievement = {
   // Regular achievement properties
   icon?: string;
   condition?: () => boolean;
+  earned?: boolean;
   // Commitment mode specific properties
   isCommitmentMode?: boolean;
   canActivate?: boolean;
@@ -93,30 +162,43 @@ export default function PremiumMenu({
     }
   };
 
-  // Create Commitment Mode achievement item
+  // Determine which achievements to show based on commitment mode
   const isCommitmentMode = !!data?.settings?.commitModeActivatedAt;
   const canActivateCommitment = earnedCount >= 6;
 
-  const commitmentAchievement: ExtendedAchievement = {
-    id: 'commitment_mode',
-    name: 'Commitment Mode',
-    progress: isCommitmentMode ? 100 : (canActivateCommitment ? 90 : Math.min((earnedCount / 6) * 80, 80)),
-    isCommitmentMode: true,
-    canActivate: canActivateCommitment,
-    isActivated: isCommitmentMode
-  };
+  let allAchievements: ExtendedAchievement[];
 
-  // Filter and sort achievements with progress, then add commitment mode
-  const achievementsWithProgress: ExtendedAchievement[] = achievements
-    .map(achievement => ({
-      ...achievement,
-      progress: getProgress(achievement)
-    }))
-    .filter(achievement => achievement.progress > 0)
-    .sort((a, b) => b.progress - a.progress);
+  if (isCommitmentMode) {
+    // Post-commitment: Show elite shipping achievements only
+    const postCommitmentAchievements = createPostCommitmentAchievements(data);
+    allAchievements = postCommitmentAchievements
+      .map(achievement => ({
+        ...achievement,
+        progress: achievement.earned ? 100 : 0
+      }))
+      .filter(achievement => achievement.progress > 0)
+      .sort((a, b) => b.progress - a.progress);
+  } else {
+    // Pre-commitment: Show basic achievements + commitment mode lock
+    const basicAchievementsWithProgress = achievements
+      .map(achievement => ({
+        ...achievement,
+        progress: getProgress(achievement)
+      }))
+      .filter(achievement => achievement.progress > 0)
+      .sort((a, b) => b.progress - a.progress);
 
-  // Add commitment mode as the last item (9th achievement)
-  const allAchievements: ExtendedAchievement[] = [...achievementsWithProgress, commitmentAchievement];
+    const commitmentAchievement: ExtendedAchievement = {
+      id: 'commitment_mode',
+      name: 'Commitment Mode',
+      progress: canActivateCommitment ? 90 : Math.min((earnedCount / 6) * 80, 80),
+      isCommitmentMode: true,
+      canActivate: canActivateCommitment,
+      isActivated: false
+    };
+
+    allAchievements = [...basicAchievementsWithProgress, commitmentAchievement];
+  }
 
   const ProgressBar = ({ progress }: { progress: number }) => {
     const filledBars = Math.floor((progress / 100) * 5);
