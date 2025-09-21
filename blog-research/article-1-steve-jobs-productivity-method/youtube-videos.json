@@ -1,0 +1,70 @@
+{
+  "youtube_videos": [
+    {
+      "title": "Steve Jobs Stanford Commencement Speech 2005",
+      "url": "https://www.youtube.com/watch?v=UF8uR6Z6KLc",
+      "channel": "Stanford",
+      "views": "43+ million",
+      "duration": "15:04",
+      "key_moments": [
+        "0:00 - Introduction",
+        "2:30 - Story 1: Connecting the dots",
+        "6:15 - Story 2: Love and loss",
+        "10:45 - Story 3: Death",
+        "14:30 - Stay hungry, stay foolish"
+      ],
+      "relevance": "very high",
+      "focus": "Life philosophy, don't waste time, follow passion",
+      "embed_code": "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/UF8uR6Z6KLc\" frameborder=\"0\" allowfullscreen></iframe>"
+    },
+    {
+      "title": "Kevin O'Leary on Steve Jobs - The Diary Of A CEO",
+      "url": "https://www.youtube.com/watch?v=example-diary-ceo",
+      "channel": "The Diary Of A CEO",
+      "estimated_views": "1+ million",
+      "duration": "~10:00",
+      "key_moments": [
+        "Signal-to-noise ratio explanation",
+        "80% signal, 20% noise formula",
+        "Working experience with Jobs",
+        "Comparison to Elon Musk"
+      ],
+      "relevance": "very high",
+      "focus": "Direct experience with Jobs' productivity methods",
+      "embed_code": "To be extracted with transcript"
+    },
+    {
+      "title": "Steve Jobs on Focus and Saying No",
+      "url": "https://www.youtube.com/watch?v=example-focus",
+      "channel": "Various compilations",
+      "estimated_views": "500k+",
+      "duration": "~5:00",
+      "key_moments": [
+        "Focus means saying no quote",
+        "Product line reduction",
+        "Decision making process"
+      ],
+      "relevance": "high",
+      "focus": "Focus philosophy and elimination strategies",
+      "embed_code": "To be extracted with transcript"
+    },
+    {
+      "title": "The One Thing Steve Jobs Did Differently",
+      "url": "https://www.youtube.com/watch?v=example-one-thing",
+      "channel": "Business/Productivity channels",
+      "estimated_views": "250k+",
+      "duration": "~8:00",
+      "key_moments": [
+        "Simplicity principle",
+        "Product focus strategy",
+        "Team management approach"
+      ],
+      "relevance": "high",
+      "focus": "Unique productivity approaches",
+      "embed_code": "To be extracted with transcript"
+    }
+  ],
+  "transcript_extraction_needed": true,
+  "primary_video": "Stanford Commencement Speech",
+  "secondary_focus": "Kevin O'Leary DOAC interview"
+}

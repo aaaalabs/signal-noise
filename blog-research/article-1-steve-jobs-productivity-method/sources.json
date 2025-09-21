@@ -1,0 +1,88 @@
+{
+  "sources": [
+    {
+      "url": "https://dansilvestre.com/steve-jobs-success/",
+      "title": "Top 10 Steve Jobs Success Secrets for Insane Productivity",
+      "domain": "dansilvestre.com",
+      "type": "blog",
+      "authority": "high",
+      "relevance": "very high",
+      "key_insights": "Ruthless prioritization, simplicity principle, saying no to distractions"
+    },
+    {
+      "url": "https://medium.com/@MartinMessier/the-hidden-productivity-principle-that-powers-visionaries-like-jobs-and-musk-9457fd366033",
+      "title": "The Hidden Productivity Principle That Powers Visionaries Like Jobs and Musk",
+      "domain": "medium.com",
+      "type": "article",
+      "authority": "medium",
+      "relevance": "very high",
+      "key_insights": "Signal-to-noise ratio principle, focus on vital few"
+    },
+    {
+      "url": "https://dev.to/nkusikevin/the-steve-jobs-signal-to-noise-ratio-a-revolutionary-8020-approach-to-peak-productivity-2k9p",
+      "title": "The Steve Jobs Signal-to-Noise Ratio: A Revolutionary 80/20 Approach to Peak Productivity",
+      "domain": "dev.to",
+      "type": "technical blog",
+      "authority": "medium",
+      "relevance": "very high",
+      "key_insights": "Direct connection between Jobs' methods and 80/20 principle"
+    },
+    {
+      "url": "https://medium.com/swlh/steve-jobs-insane-productivity-secrets-470e99c482f6",
+      "title": "Steve Jobs Insane Productivity Secrets",
+      "domain": "medium.com",
+      "type": "article",
+      "authority": "medium",
+      "relevance": "high",
+      "key_insights": "Product line reduction by 70%, focus on four core products"
+    },
+    {
+      "url": "https://yourstory.com/2025/01/steve-jobs-productivity-secrets",
+      "title": "Steve Jobs' top 10 productivity and success secrets revealed",
+      "domain": "yourstory.com",
+      "type": "business article",
+      "authority": "high",
+      "relevance": "high",
+      "key_insights": "Single-task focus, high-impact goal selection"
+    },
+    {
+      "url": "https://singjupost.com/kevin-oleary-this-habit-is-keeping-you-poor-every-time-you-get-paid-do-this-transcript/",
+      "title": "Kevin O'Leary's Interview on The Diary Of A CEO (Full Transcript)",
+      "domain": "singjupost.com",
+      "type": "transcript",
+      "authority": "high",
+      "relevance": "very high",
+      "key_insights": "80% signal, 20% noise ratio from direct Jobs experience"
+    },
+    {
+      "url": "https://www.benzinga.com/markets/tech/25/07/46288606/kevin-oleary-says-steve-jobs-was-not-a-nice-guy-but-taught-him-a-success-formula-that-elon-musk-now-uses",
+      "title": "Kevin O'Leary Says Steve Jobs Was 'Not A Nice Guy' But Taught Him A Success Formula",
+      "domain": "benzinga.com",
+      "type": "financial news",
+      "authority": "high",
+      "relevance": "high",
+      "key_insights": "Signal-to-noise ratio formula, comparison to Elon Musk"
+    },
+    {
+      "url": "https://news.stanford.edu/stories/2005/06/youve-got-find-love-jobs-says",
+      "title": "'You've got to find what you love,' Jobs says",
+      "domain": "stanford.edu",
+      "type": "university news",
+      "authority": "very high",
+      "relevance": "high",
+      "key_insights": "Don't waste time living someone else's life, follow your passion"
+    },
+    {
+      "url": "https://www.rev.com/transcripts/steve-jobs-stanford-commencement-speech-transcript-2005",
+      "title": "Steve Jobs Stanford Commencement Speech Transcript",
+      "domain": "rev.com",
+      "type": "transcript",
+      "authority": "high",
+      "relevance": "medium",
+      "key_insights": "Complete transcript of famous Stanford speech"
+    }
+  ],
+  "total_sources": 9,
+  "research_date": "2024-09-21",
+  "article_focus": "Steve Jobs' productivity methods and 80/20 principle application"
+}

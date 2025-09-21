@@ -1,0 +1,97 @@
+{
+  "sources": [
+    {
+      "url": "https://rogermartin.medium.com/personal-effectiveness-strategy-cc448a516ee5",
+      "title": "Personal Effectiveness Strategy. Managing Signal vs. Noise",
+      "domain": "medium.com",
+      "type": "strategy article",
+      "authority": "high",
+      "relevance": "very high",
+      "key_insights": "Personal effectiveness as signal production without noise, strategic framework"
+    },
+    {
+      "url": "https://medium.com/@john_27181/signal-vs-noise-the-key-to-better-decision-making-and-problem-solving-6211f2a13656",
+      "title": "Signal vs. Noise: The Key to Better Decision-Making and Problem-Solving",
+      "domain": "medium.com",
+      "type": "decision-making guide",
+      "authority": "medium",
+      "relevance": "very high",
+      "key_insights": "Decision-making framework, information processing strategies"
+    },
+    {
+      "url": "https://latourleadershipacademy.com/signal-vs-noise/",
+      "title": "Signal VS Noise",
+      "domain": "latourleadershipacademy.com",
+      "type": "leadership guide",
+      "authority": "medium",
+      "relevance": "high",
+      "key_insights": "Leadership applications of signal vs noise thinking"
+    },
+    {
+      "url": "https://routine.co/blog/posts/signal-vs-noise",
+      "title": "Signal vs. Noise: A Simple Guide",
+      "domain": "routine.co",
+      "type": "productivity guide",
+      "authority": "medium",
+      "relevance": "high",
+      "key_insights": "Practical implementation guide for signal vs noise"
+    },
+    {
+      "url": "https://www.tatianaastray.com/mastering-leadership/2025/7/7/the-leadership-filter-signal-vs-noise-why-top-performers-dont-waste-time-on-the-wrong-things",
+      "title": "The Leadership Filter | Signal vs. Noise: Why Top Performers Don't Waste Time",
+      "domain": "tatianaastray.com",
+      "type": "leadership analysis",
+      "authority": "medium",
+      "relevance": "very high",
+      "key_insights": "Top performer strategies, leadership filtering techniques"
+    },
+    {
+      "url": "https://www.nngroup.com/articles/signal-noise-ratio/",
+      "title": "Signal–to–Noise Ratio",
+      "domain": "nngroup.com",
+      "type": "design/UX article",
+      "authority": "very high",
+      "relevance": "medium",
+      "key_insights": "Technical SNR concepts, context-dependent nature of signal/noise"
+    },
+    {
+      "url": "https://medium.com/@MartinMessier/the-hidden-productivity-principle-that-powers-visionaries-like-jobs-and-musk-9457fd366033",
+      "title": "The Hidden Productivity Principle That Powers Visionaries Like Jobs and Musk",
+      "domain": "medium.com",
+      "type": "productivity analysis",
+      "authority": "medium",
+      "relevance": "very high",
+      "key_insights": "Visionary applications of signal vs noise, Steve Jobs and Elon Musk examples"
+    },
+    {
+      "url": "https://www.linkedin.com/pulse/signal-vs-noise-productivity-principle-thats-my-focus-oliver-mapm-atpqe",
+      "title": "Signal vs. Noise: The Productivity Principle",
+      "domain": "linkedin.com",
+      "type": "professional insight",
+      "authority": "medium",
+      "relevance": "high",
+      "key_insights": "Professional application of signal vs noise principles"
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Signal-to-noise_ratio",
+      "title": "Signal-to-noise ratio - Wikipedia",
+      "domain": "wikipedia.org",
+      "type": "technical reference",
+      "authority": "very high",
+      "relevance": "medium",
+      "key_insights": "Technical definition and historical context"
+    },
+    {
+      "url": "https://conceptually.org/concepts/signal-and-noise",
+      "title": "Signal and Noise - Definition and examples",
+      "domain": "conceptually.org",
+      "type": "educational resource",
+      "authority": "medium",
+      "relevance": "high",
+      "key_insights": "Clear definitions and practical examples"
+    }
+  ],
+  "total_sources": 10,
+  "research_date": "2024-09-21",
+  "article_focus": "Signal vs noise philosophy, information theory applications to productivity"
+}

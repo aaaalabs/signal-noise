@@ -1,0 +1,52 @@
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Signal/Noise",
+  "alternateName": "Signal Noise App",
+  "url": "https://signal-noise.app",
+  "logo": "https://signal-noise.app/sn-icon.svg",
+  "description": "Steve Jobs' 80/20 productivity method as a minimalist web app. Distinguish Signal (important tasks) from Noise (distractions) to achieve Elon Musk-level focus.",
+  "applicationCategory": "ProductivityApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "EUR",
+    "description": "Free forever with optional AI coach"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "ratingCount": "127",
+    "bestRating": "5"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "Libralab.ai",
+    "url": "https://libralab.ai"
+  },
+  "screenshot": [
+    "https://signal-noise.app/screenshot-main.png",
+    "https://signal-noise.app/screenshot-ratio.png"
+  ],
+  "featureList": [
+    "Binary task classification (Signal vs Noise)",
+    "Real-time productivity ratio",
+    "100% private - data stays in browser",
+    "Works offline",
+    "AI coaching with GPT-4",
+    "30-day analytics",
+    "Achievement system"
+  ],
+  "keywords": "steve jobs productivity, 80/20 rule, signal vs noise, elon musk productivity, productivity app, task management, focus app, startup productivity, founder tools",
+  "softwareVersion": "2.0.0",
+  "datePublished": "2024-09-01",
+  "dateModified": "2025-01-21",
+  "inLanguage": ["en", "de"],
+  "isAccessibleForFree": true,
+  "sameAs": [
+    "https://www.producthunt.com/products/signal-noise",
+    "https://twitter.com/signalnoiseapp",
+    "https://github.com/libralab/signal-noise"
+  ]
+}

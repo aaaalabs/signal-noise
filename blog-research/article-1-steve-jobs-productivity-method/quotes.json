@@ -1,0 +1,68 @@
+{
+  "steve_jobs_quotes": [
+    {
+      "quote": "People think focus means saying yes to the thing you've got to focus on. But that's not what it means at all. It means saying no to the hundred other good ideas that there are.",
+      "source": "Apple Worldwide Developers Conference 1997",
+      "context": "Product strategy and focus",
+      "relevance": "core philosophy"
+    },
+    {
+      "quote": "Simple can be harder than complex: You have to work hard to get your thinking clean to make it simple.",
+      "source": "BusinessWeek interview",
+      "context": "Simplicity principle",
+      "relevance": "productivity method"
+    },
+    {
+      "quote": "Your time is limited, so don't waste it living someone else's life. Don't be trapped by dogma — which is living with the results of other people's thinking.",
+      "source": "Stanford Commencement Speech 2005",
+      "context": "Life philosophy and time management",
+      "relevance": "time prioritization"
+    },
+    {
+      "quote": "Innovation is saying no to 1,000 things.",
+      "source": "Various interviews",
+      "context": "Product development",
+      "relevance": "elimination strategy"
+    },
+    {
+      "quote": "You've got to find what you love... The only way to do great work is to love what you do.",
+      "source": "Stanford Commencement Speech 2005",
+      "context": "Career and passion",
+      "relevance": "productivity through passion"
+    }
+  ],
+  "kevin_oleary_quotes": [
+    {
+      "quote": "For Steve Jobs it was 80 signal, 20 noise. Signal meant focusing only on the 3 to 5 most important tasks of the day.",
+      "source": "The Diary of a CEO podcast",
+      "context": "Direct experience working with Jobs",
+      "relevance": "80/20 application"
+    },
+    {
+      "quote": "He would email me at 2:30 in the morning and expect me to get back to him.",
+      "source": "The Diary of a CEO podcast",
+      "context": "Jobs' work intensity",
+      "relevance": "extreme focus approach"
+    },
+    {
+      "quote": "Elon Musk... he has no noise. Sixty seconds of every minute, 60 minutes of every hour, the 18 hours he's awake, it's all signal.",
+      "source": "The Diary of a CEO podcast",
+      "context": "Comparison to modern visionaries",
+      "relevance": "signal-to-noise evolution"
+    }
+  ],
+  "supporting_quotes": [
+    {
+      "quote": "Jobs slashed the product line by 70%, killing dozens of models to focus on just four.",
+      "source": "Multiple business publications",
+      "context": "Product line reduction",
+      "relevance": "practical 80/20 application"
+    },
+    {
+      "quote": "The signal was the singular, critical mission. Not the top 3-5 tasks for the day, but the one or two projects that would define the future.",
+      "source": "Business analysis articles",
+      "context": "Mission focus",
+      "relevance": "strategic prioritization"
+    }
+  ]
+}

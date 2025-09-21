@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import type { Task, AppData } from './types';
 import { useTranslation } from './contexts/LanguageContext';
+import AboutPage from './components/AboutPage';
 import RatioDisplay from './components/RatioDisplay';
 import TaskInput from './components/TaskInput';
 import TaskGrid from './components/TaskGrid';
@@ -1599,10 +1601,15 @@ function AppContent() {
 // Main App component that provides the LanguageProvider
 function App() {
   return (
-    <LanguageProvider>
-      <AppContent />
-      <VercelAnalytics />
-    </LanguageProvider>
+    <BrowserRouter>
+      <LanguageProvider>
+        <Routes>
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/*" element={<AppContent />} />
+        </Routes>
+        <VercelAnalytics />
+      </LanguageProvider>
+    </BrowserRouter>
   );
 }
 

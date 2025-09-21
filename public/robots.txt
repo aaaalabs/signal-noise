@@ -1,18 +1,37 @@
-# Signal/Noise - Productivity App Robots.txt
+# Signal/Noise - Steve Jobs Productivity Method App
 # https://signal-noise.app
 
 User-agent: *
 Allow: /
+Allow: /about
+Allow: /success
+Allow: /invoice/
+
+# Prioritize important SEO pages
+Allow: /about$
 
 # Sitemap location
 Sitemap: https://signal-noise.app/sitemap.xml
 
-# Block access to sensitive areas (if any)
+# Block access to sensitive areas
 Disallow: /api/
 Disallow: /*.json$
+Disallow: /src/
+Disallow: /node_modules/
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 1
+
+# Special instructions for major search engines
+User-agent: Googlebot
+Allow: /
+Allow: /about
+Crawl-delay: 0.5
+
+User-agent: Bingbot
+Allow: /
+Allow: /about
+Crawl-delay: 0.5
 
 # Additional sitemaps (if you add more in the future)
 # Sitemap: https://signal-noise.app/sitemap-blog.xml

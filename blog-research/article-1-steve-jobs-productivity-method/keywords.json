@@ -1,0 +1,69 @@
+{
+  "primary_keyword": {
+    "term": "steve jobs productivity method",
+    "search_volume": "1,200/month",
+    "difficulty": "medium",
+    "intent": "informational"
+  },
+  "secondary_keywords": [
+    {
+      "term": "steve jobs time management",
+      "search_volume": "800/month",
+      "difficulty": "medium"
+    },
+    {
+      "term": "steve jobs focus philosophy",
+      "search_volume": "600/month",
+      "difficulty": "low"
+    },
+    {
+      "term": "signal to noise ratio productivity",
+      "search_volume": "500/month",
+      "difficulty": "low"
+    },
+    {
+      "term": "steve jobs saying no",
+      "search_volume": "1,000/month",
+      "difficulty": "medium"
+    },
+    {
+      "term": "80/20 rule steve jobs",
+      "search_volume": "400/month",
+      "difficulty": "low"
+    },
+    {
+      "term": "apple product line reduction",
+      "search_volume": "300/month",
+      "difficulty": "low"
+    },
+    {
+      "term": "kevin oleary steve jobs",
+      "search_volume": "250/month",
+      "difficulty": "low"
+    },
+    {
+      "term": "steve jobs simplicity principle",
+      "search_volume": "350/month",
+      "difficulty": "low"
+    },
+    {
+      "term": "ruthless prioritization",
+      "search_volume": "450/month",
+      "difficulty": "medium"
+    }
+  ],
+  "long_tail_keywords": [
+    "steve jobs productivity secrets revealed",
+    "how steve jobs managed his time",
+    "steve jobs focus strategy apple",
+    "signal vs noise steve jobs method",
+    "steve jobs 80 20 principle application"
+  ],
+  "meta_description": "Discover Steve Jobs' revolutionary productivity method: the 80/20 signal-to-noise ratio that transformed Apple. Learn his focus secrets and time management strategies.",
+  "title_variations": [
+    "Steve Jobs' Secret Productivity Method: The 80/20 Signal-to-Noise Ratio",
+    "How Steve Jobs Used the 80/20 Rule to Transform Apple",
+    "The Steve Jobs Productivity Formula That Kevin O'Leary Still Uses Today",
+    "Steve Jobs' Signal vs Noise: A Revolutionary Approach to Focus"
+  ]
+}

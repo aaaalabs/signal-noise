@@ -1,0 +1,87 @@
+{
+  "youtube_videos": [
+    {
+      "title": "The 80/20 Rule Explained - Pareto Principle",
+      "url": "https://www.youtube.com/search?q=80+20+rule+productivity+explained",
+      "channel": "Various productivity channels",
+      "estimated_views": "500k+",
+      "duration": "~8:00",
+      "key_moments": [
+        "Pareto principle origins",
+        "80/20 application to tasks",
+        "Real-world examples",
+        "Implementation strategies"
+      ],
+      "relevance": "very high",
+      "focus": "Core 80/20 principle explanation",
+      "embed_code": "To be extracted with transcript"
+    },
+    {
+      "title": "Why You're Busy But Not Productive",
+      "url": "https://www.youtube.com/search?q=busy+vs+productive+work",
+      "channel": "Productivity experts",
+      "estimated_views": "300k+",
+      "duration": "~10:00",
+      "key_moments": [
+        "Busy work vs productive work",
+        "Time waste statistics",
+        "How to identify essential tasks",
+        "Priority management"
+      ],
+      "relevance": "very high",
+      "focus": "Distinguishing productive from busy work",
+      "embed_code": "To be extracted with transcript"
+    },
+    {
+      "title": "The Eisenhower Matrix: Urgent vs Important",
+      "url": "https://www.youtube.com/search?q=eisenhower+matrix+productivity",
+      "channel": "Business/productivity channels",
+      "estimated_views": "200k+",
+      "duration": "~6:00",
+      "key_moments": [
+        "Four quadrants explanation",
+        "Urgent vs important distinction",
+        "Task prioritization method",
+        "Practical examples"
+      ],
+      "relevance": "high",
+      "focus": "Task prioritization framework",
+      "embed_code": "To be extracted with transcript"
+    },
+    {
+      "title": "Cal Newport on Deep Work vs Shallow Work",
+      "url": "https://www.youtube.com/search?q=cal+newport+deep+work+shallow",
+      "channel": "Various interview channels",
+      "estimated_views": "400k+",
+      "duration": "~15:00",
+      "key_moments": [
+        "Deep work definition",
+        "Shallow work problems",
+        "Attention management",
+        "Knowledge worker productivity"
+      ],
+      "relevance": "high",
+      "focus": "Deep vs shallow work distinction",
+      "embed_code": "To be extracted with transcript"
+    },
+    {
+      "title": "Why Most To-Do Lists Don't Work",
+      "url": "https://www.youtube.com/search?q=why+todo+lists+dont+work",
+      "channel": "Productivity/psychology channels",
+      "estimated_views": "150k+",
+      "duration": "~8:00",
+      "key_moments": [
+        "Common to-do list mistakes",
+        "Priority vs quantity",
+        "Task categorization",
+        "Better alternatives"
+      ],
+      "relevance": "medium",
+      "focus": "Task management critique",
+      "embed_code": "To be extracted with transcript"
+    }
+  ],
+  "transcript_extraction_needed": true,
+  "primary_video": "80/20 Rule Explanation",
+  "secondary_focus": "Busy vs Productive Work"
+}

@@ -1,0 +1,79 @@
+{
+  "sources": [
+    {
+      "url": "https://asana.com/resources/pareto-principle-80-20-rule",
+      "title": "Learn the Pareto Principle (The 80/20 Rule) [2025]",
+      "domain": "asana.com",
+      "type": "productivity guide",
+      "authority": "very high",
+      "relevance": "very high",
+      "key_insights": "80% of outcomes from 20% of causes, task prioritization framework"
+    },
+    {
+      "url": "https://activecollab.com/blog/productivity/pareto-principle",
+      "title": "Pareto Principle: A Guide To The 80/20 Time Management Hack",
+      "domain": "activecollab.com",
+      "type": "business blog",
+      "authority": "high",
+      "relevance": "very high",
+      "key_insights": "Practical application of 80/20 rule to daily work"
+    },
+    {
+      "url": "https://electroiq.com/stats/wasting-time-at-workplace-statistics/",
+      "title": "Wasting Time At Workplace Statistics",
+      "domain": "electroiq.com",
+      "type": "statistical analysis",
+      "authority": "high",
+      "relevance": "very high",
+      "key_insights": "89% of employees waste 30+ minutes daily, productivity statistics"
+    },
+    {
+      "url": "https://www.apollotechnical.com/employee-productivity-statistics/",
+      "title": "15 Employee Productivity Statistics You Want to Know (2025)",
+      "domain": "apollotechnical.com",
+      "type": "research compilation",
+      "authority": "high",
+      "relevance": "very high",
+      "key_insights": "2 hours 53 minutes productive per day (31% of workday)"
+    },
+    {
+      "url": "https://clockify.me/productivity-statistics",
+      "title": "Workplace Productivity Statistics 2025",
+      "domain": "clockify.me",
+      "type": "productivity research",
+      "authority": "high",
+      "relevance": "high",
+      "key_insights": "Meeting statistics, distraction costs, focus recovery time"
+    },
+    {
+      "url": "https://reclaim.ai/blog/pareto-principle-for-priority-management",
+      "title": "Pareto Principle for Priority Management",
+      "domain": "reclaim.ai",
+      "type": "productivity blog",
+      "authority": "medium",
+      "relevance": "high",
+      "key_insights": "Priority management techniques using 80/20 rule"
+    },
+    {
+      "url": "https://monday.com/blog/project-management/pareto-principle/",
+      "title": "The Pareto Principle: How the 80/20 rule leads to better productivity",
+      "domain": "monday.com",
+      "type": "business guide",
+      "authority": "high",
+      "relevance": "high",
+      "key_insights": "Project management application of Pareto principle"
+    },
+    {
+      "url": "https://www.activtrak.com/blog/employee-productivity-vs-hours-worked/",
+      "title": "Employee Productivity vs. Hours Worked: Guidance for Managers",
+      "domain": "activtrak.com",
+      "type": "research article",
+      "authority": "high",
+      "relevance": "medium",
+      "key_insights": "Diminishing returns with longer work hours"
+    }
+  ],
+  "total_sources": 8,
+  "research_date": "2024-09-21",
+  "article_focus": "Task prioritization, productive vs busy work, Pareto principle statistics"
+}
