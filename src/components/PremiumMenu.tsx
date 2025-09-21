@@ -3,21 +3,18 @@ import type { AppData, Task } from '../types';
 import { calculateStreak, createBadgeDefinitions, getAverageRatio, getTodayRatio } from '../utils/achievements';
 import { useTranslation } from '../contexts/LanguageContext';
 
-// Helper function to count completed signals after commitment
-function getCompletedSignalsAfterCommitment(tasks: Task[], commitDate: string): number {
-  const commitTime = new Date(commitDate);
+// Helper function to count ALL completed signals (entire history)
+function getAllCompletedSignals(tasks: Task[]): number {
   return tasks.filter(task =>
     task.type === 'signal' &&
-    task.completed &&
-    new Date(task.timestamp) >= commitTime
+    task.completed
   ).length;
 }
 
 // Create post-commitment achievements
 function createPostCommitmentAchievements(data: AppData) {
-  const completedSignals = data.settings.commitModeActivatedAt
-    ? getCompletedSignalsAfterCommitment(data.tasks, data.settings.commitModeActivatedAt)
-    : 0;
+  // Count ALL completed signals throughout user's entire history
+  const completedSignals = getAllCompletedSignals(data.tasks);
 
   // Progressive shipping challenges - show ONLY the next big challenge
   const getCurrentShippingChallenge = () => {
