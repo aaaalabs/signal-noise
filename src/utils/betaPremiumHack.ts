@@ -34,6 +34,13 @@ export function checkAndActivateBetaPremium(): boolean {
 
   console.log('🎯 Creating new beta premium session for first time...');
   createBetaPremiumSession();
+
+  // Remove the beta parameter from URL to prevent infinite loops
+  const cleanUrlParams = new URLSearchParams(window.location.search);
+  cleanUrlParams.delete('beta');
+  const newUrl = window.location.pathname + (cleanUrlParams.toString() ? '?' + cleanUrlParams.toString() : '');
+  window.history.replaceState({}, '', newUrl);
+
   return true;
 }
 
@@ -179,6 +186,12 @@ export function checkAndActivatePersonalAI(): boolean {
   if (urlParams.get('beta') === 'personalAI') {
     localStorage.setItem('personalAI_beta', 'true');
     console.log('Personal AI mode activated');
+
+    // Remove the beta parameter from URL to prevent infinite loops
+    urlParams.delete('beta');
+    const newUrl = window.location.pathname + (urlParams.toString() ? '?' + urlParams.toString() : '');
+    window.history.replaceState({}, '', newUrl);
+
     return true;
   }
 
