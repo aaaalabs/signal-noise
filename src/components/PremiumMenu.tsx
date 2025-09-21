@@ -19,56 +19,108 @@ function createPostCommitmentAchievements(data: AppData) {
     ? getCompletedSignalsAfterCommitment(data.tasks, data.settings.commitModeActivatedAt)
     : 0;
 
-  return [
-    {
-      id: 'signal_master',
-      icon: '⚡',
-      name: 'Signal Master',
-      earned: data.badges.includes('signal_master')
-    },
+  // Progressive shipping challenges - show ONLY the next big challenge
+  const getCurrentShippingChallenge = () => {
+    // Determine which challenge user is currently working on
+    if (completedSignals < 100) {
+      return {
+        id: '100_shipped',
+        icon: '🎯',
+        name: '100 Shipped',
+        earned: false,
+        target: 100,
+        current: completedSignals
+      };
+    } else if (completedSignals < 200) {
+      return {
+        id: '200_shipped',
+        icon: '🎯',
+        name: '200 Shipped',
+        earned: false,
+        target: 200,
+        current: completedSignals
+      };
+    } else if (completedSignals < 500) {
+      return {
+        id: '500_shipped',
+        icon: '📍',
+        name: '500 Shipped',
+        earned: false,
+        target: 500,
+        current: completedSignals
+      };
+    } else if (completedSignals < 1000) {
+      return {
+        id: '1000_shipped',
+        icon: '🚀',
+        name: '1000 Shipped',
+        earned: false,
+        target: 1000,
+        current: completedSignals
+      };
+    } else if (completedSignals < 2000) {
+      return {
+        id: '2000_shipped',
+        icon: '⭐',
+        name: '2000 Shipped',
+        earned: false,
+        target: 2000,
+        current: completedSignals
+      };
+    } else {
+      // Beyond 2000 - show achievement as completed
+      return {
+        id: '2000_shipped',
+        icon: '⭐',
+        name: '2000+ Shipped',
+        earned: true,
+        target: 2000,
+        current: completedSignals
+      };
+    }
+  };
+
+  // Build final achievement list: only earned kept achievements + current shipping challenge
+  const keptAchievements = [
     {
       id: 'perfect_day',
       icon: '💎',
       name: 'Perfect Day',
-      earned: data.badges.includes('perfect_day')
+      earned: data.badges.includes('perfect_day'),
+      target: undefined,
+      current: undefined
+    },
+    {
+      id: 'signal_master',
+      icon: '⚡',
+      name: 'Signal Master',
+      earned: data.badges.includes('signal_master'),
+      target: undefined,
+      current: undefined
     },
     {
       id: 'week_warrior',
       icon: '🔥',
       name: '7 Day Streak',
-      earned: data.badges.includes('week_warrior')
+      earned: data.badges.includes('week_warrior'),
+      target: undefined,
+      current: undefined
     },
     {
       id: 'month_hero',
       icon: '🏆',
       name: '30 Day Hero',
-      earned: data.badges.includes('month_hero')
-    },
-    {
-      id: '200_shipped',
-      icon: '🎯',
-      name: '200 Signals Shipped',
-      earned: completedSignals >= 200
-    },
-    {
-      id: '500_shipped',
-      icon: '📍',
-      name: '500 Signals Shipped',
-      earned: completedSignals >= 500
-    },
-    {
-      id: '1000_shipped',
-      icon: '🚀',
-      name: '1000 Signals Shipped',
-      earned: completedSignals >= 1000
-    },
-    {
-      id: '2000_shipped',
-      icon: '⭐',
-      name: '2000 Signals Shipped',
-      earned: completedSignals >= 2000
+      earned: data.badges.includes('month_hero'),
+      target: undefined,
+      current: undefined
     }
   ];
+
+  // Only show earned kept achievements + current shipping challenge
+  const earnedKeptAchievements = keptAchievements.filter(a => a.earned);
+  const currentChallenge = getCurrentShippingChallenge();
+
+  return [...earnedKeptAchievements, currentChallenge];
 }
 
 // Extended achievement type that includes both regular achievements and commitment mode
@@ -80,6 +132,9 @@ type ExtendedAchievement = {
   icon?: string;
   condition?: () => boolean;
   earned?: boolean;
+  // Shipping achievement properties
+  target?: number;
+  current?: number;
   // Commitment mode specific properties
   isCommitmentMode?: boolean;
   canActivate?: boolean;
@@ -174,7 +229,9 @@ export default function PremiumMenu({
     allAchievements = postCommitmentAchievements
       .map(achievement => ({
         ...achievement,
-        progress: achievement.earned ? 100 : 0
+        progress: achievement.target ?
+          Math.min((achievement.current! / achievement.target) * 100, 100) :
+          (achievement.earned ? 100 : 0)
       }))
       .filter(achievement => achievement.progress > 0)
       .sort((a, b) => b.progress - a.progress);
@@ -449,7 +506,9 @@ export default function PremiumMenu({
                   }}>
                     {achievement.isCommitmentMode ?
                       (achievement.isActivated ? 'Active' : achievement.canActivate ? 'Ready' : `${earnedCount}/6`) :
-                      `${Math.round(achievement.progress)}%`
+                      achievement.target ?
+                        `${achievement.current}/${achievement.target}` :
+                        `${Math.round(achievement.progress)}%`
                     }
                   </span>
                 </div>
