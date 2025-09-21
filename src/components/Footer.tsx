@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import AboutModal from './AboutModal';
+import { Link } from 'react-router-dom';
 import FAQModal from './FAQModal';
 import FeedbackModal from './FeedbackModal';
 import { checkPremiumStatus } from '../services/premiumService';
@@ -185,7 +185,6 @@ const LegalContent = () => (
 export default function Footer({ onFoundationClick }: { onFoundationClick?: () => void }) {
   const [showLegal, setShowLegal] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
-  const [showAbout, setShowAbout] = useState(false);
   const [showFAQ, setShowFAQ] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
   const [isPremium, setIsPremium] = useState(false);
@@ -231,21 +230,19 @@ export default function Footer({ onFoundationClick }: { onFoundationClick?: () =
             justifyContent: 'center',
             gap: '16px'
           }}>
-            <button
-              onClick={() => setShowAbout(true)}
+            <Link
+              to="/blog"
               style={{
-                background: 'none',
-                border: 'none',
                 color: '#666',
                 fontSize: '12px',
-                cursor: 'pointer',
+                textDecoration: 'none',
                 transition: 'color 0.2s'
               }}
-              onMouseEnter={(e) => (e.target as HTMLButtonElement).style.color = '#999'}
-              onMouseLeave={(e) => (e.target as HTMLButtonElement).style.color = '#666'}
+              onMouseEnter={(e) => e.currentTarget.style.color = '#999'}
+              onMouseLeave={(e) => e.currentTarget.style.color = '#666'}
             >
-              About
-            </button>
+              Blog
+            </Link>
             <button
               onClick={() => setShowFAQ(true)}
               style={{
@@ -326,9 +323,6 @@ export default function Footer({ onFoundationClick }: { onFoundationClick?: () =
           )}
         </div>
       </footer>
-
-      {/* About Modal */}
-      <AboutModal show={showAbout} onClose={() => setShowAbout(false)} />
 
       {/* FAQ Modal */}
       <FAQModal show={showFAQ} onClose={() => setShowFAQ(false)} isPremium={isPremium} />

@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import type { Task, AppData } from './types';
 import { useTranslation } from './contexts/LanguageContext';
 import AboutPage from './components/AboutPage';
+import BlogIndex from './components/BlogIndex';
+import BlogArticle from './components/BlogArticle';
 import RatioDisplay from './components/RatioDisplay';
 import TaskInput from './components/TaskInput';
 import TaskGrid from './components/TaskGrid';
@@ -1605,6 +1607,8 @@ function App() {
       <LanguageProvider>
         <Routes>
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/blog" element={<BlogIndex />} />
+          <Route path="/blog/:slug" element={<BlogArticle />} />
           <Route path="/*" element={<AppContent />} />
         </Routes>
         <VercelAnalytics />
