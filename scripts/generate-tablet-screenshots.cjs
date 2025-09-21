@@ -78,7 +78,7 @@ const tabletConfigs = [
     deviceScaleFactor: 2,
     isMobile: false,
     hasTouch: true,
-    outputDir: 'screenshots-7inch-tablet'
+    outputDir: '../dev_app/screenshots/screenshots-7inch-tablet'
   },
   {
     name: '10-inch-tablet',
@@ -87,7 +87,7 @@ const tabletConfigs = [
     deviceScaleFactor: 2,
     isMobile: false,
     hasTouch: true,
-    outputDir: 'screenshots-10inch-tablet'
+    outputDir: '../dev_app/screenshots/screenshots-10inch-tablet'
   }
 ];
 
@@ -301,8 +301,8 @@ async function generateTabletScreenshots() {
 
   console.log('\n✅ Tablet screenshots generated successfully!');
   console.log('\n📁 Output directories:');
-  console.log('   - screenshots-7inch-tablet/');
-  console.log('   - screenshots-10inch-tablet/');
+  console.log('   - ../dev_app/screenshots/screenshots-7inch-tablet/');
+  console.log('   - ../dev_app/screenshots/screenshots-10inch-tablet/');
 }
 
 // Run the generator

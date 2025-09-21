@@ -250,21 +250,21 @@ async function generateRefinedScreenshots() {
       viewport: { width: 1170, height: 2532 }, // iPhone 14 Pro
       deviceScaleFactor: 3,
       zoom: 1.35, // More zoom as requested
-      folder: 'screenshots-refined-iphone'
+      folder: '../dev_app/screenshots/screenshots-refined-iphone'
     },
     {
       name: 'pixel',
       viewport: { width: 1080, height: 2400 }, // Pixel 7
       deviceScaleFactor: 2.5,
       zoom: 1.3,
-      folder: 'screenshots-refined-android'
+      folder: '../dev_app/screenshots/screenshots-refined-android'
     },
     {
       name: 'ipad',
       viewport: { width: 2048, height: 2732 }, // iPad Pro 12.9"
       deviceScaleFactor: 2,
       zoom: 1.1,
-      folder: 'screenshots-refined-tablet'
+      folder: '../dev_app/screenshots/screenshots-refined-tablet'
     }
   ];
 

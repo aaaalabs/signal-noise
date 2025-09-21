@@ -241,7 +241,7 @@ async function generateScreenshots() {
   console.log('📉 Balanced: More noise in early days');
   console.log('━'.repeat(60) + '\n');
 
-  const dir = path.join(__dirname, 'screenshots-final');
+  const dir = path.join(__dirname, '../dev_app/screenshots/screenshots-final');
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }
@@ -344,7 +344,7 @@ async function generateScreenshots() {
   console.log('   Week 3: 4-5 signal, 1-2 noise daily (70-78%)');
   console.log('   Week 4: 4-5 signal, 1 noise daily (78-85%)');
   console.log('\n   Today: 5 signal, 1 noise = 85% productive!');
-  console.log('\n📁 Screenshots in: screenshots-final/\n');
+  console.log('\n📁 Screenshots in: ../dev_app/screenshots/screenshots-final/\n');
 }
 
 // Run

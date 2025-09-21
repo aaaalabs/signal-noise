@@ -19,7 +19,7 @@ const DEVICES = {
     deviceScaleFactor: 2,
     isMobile: true,
     hasTouch: true,
-    folder: 'screenshots/phone'
+    folder: '../dev_app/screenshots/screenshots/phone'
   },
   tablet7: {
     width: 1600,
@@ -27,7 +27,7 @@ const DEVICES = {
     deviceScaleFactor: 2,
     isMobile: true,
     hasTouch: true,
-    folder: 'screenshots/tablet7'
+    folder: '../dev_app/screenshots/screenshots/tablet7'
   }
 };
 
@@ -483,7 +483,7 @@ async function generateFeatureGraphic() {
   await page.setContent(html);
   await page.waitForTimeout(1000);
 
-  const dir = path.join(__dirname, 'screenshots/feature-graphic');
+  const dir = path.join(__dirname, '../dev_app/screenshots/screenshots/feature-graphic');
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }
@@ -509,9 +509,9 @@ async function generateFeatureGraphic() {
 
     console.log('\n✨ All screenshots generated successfully!');
     console.log('\n📁 Assets saved to:');
-    console.log('  - screenshots/phone/');
-    console.log('  - screenshots/tablet7/');
-    console.log('  - screenshots/feature-graphic/');
+    console.log('  - ../dev_app/screenshots/screenshots/phone/');
+    console.log('  - ../dev_app/screenshots/screenshots/tablet7/');
+    console.log('  - ../dev_app/screenshots/screenshots/feature-graphic/');
 
     console.log('\n📋 Manual steps required:');
     console.log('1. Review and select best 2-8 screenshots');

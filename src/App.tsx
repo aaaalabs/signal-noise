@@ -15,6 +15,7 @@ import SuccessPage from './components/SuccessPage';
 import SuccessModal from './components/SuccessModal';
 import InvoicePage from './components/InvoicePage';
 import FoundationModal from './components/FoundationModal';
+import CommitmentModeModal from './components/CommitmentModeModal';
 import VerifyMagicLink from './components/VerifyMagicLink';
 import Footer from './components/Footer';
 import BrandIcon from './components/BrandIcon';
@@ -84,6 +85,7 @@ function AppContent() {
   const [showSplashTester, setShowSplashTester] = useState(false);
   const [showAboutModal, setShowAboutModal] = useState(false);
   const [showPrivacyModal, setShowPrivacyModal] = useState(false);
+  const [showCommitmentModal, setShowCommitmentModal] = useState(false);
 
   // Load data from localStorage on mount
   useEffect(() => {
@@ -1082,6 +1084,29 @@ function AppContent() {
     }
   };
 
+  const handleCommitmentModeActivation = () => {
+    const activationTimestamp = new Date().toISOString();
+
+    setData(prev => ({
+      ...prev,
+      settings: {
+        ...prev.settings,
+        commitModeActivatedAt: activationTimestamp
+      }
+    }));
+
+    setShowCommitmentModal(false);
+
+    // Show success whisper
+    setWhisperMessage('Commitment Mode activated!');
+    setShowWhisper(true);
+
+    // Haptic feedback
+    if (navigator.vibrate) {
+      navigator.vibrate(20);
+    }
+  };
+
   const handleOneTimeSyncToCloud = async (sessionData: SessionData) => {
     try {
       console.log('🔄 Starting one-time sync to cloud storage...');
@@ -1325,11 +1350,7 @@ function AppContent() {
   };
 
   const calculateRatio = (): number => {
-    const todayTasks = getTodayTasks();
-    // All tasks now count toward ratio - no completed state
-    const signals = todayTasks.filter(task => task.type === 'signal').length;
-
-    return todayTasks.length > 0 ? Math.round((signals / todayTasks.length) * 100) : 0;
+    return getTodayRatio(data.tasks, data.settings.commitModeActivatedAt);
   };
 
   const currentRatio = calculateRatio();
@@ -1460,6 +1481,13 @@ function AppContent() {
         }}
       />
 
+      {/* Commitment Mode Modal */}
+      <CommitmentModeModal
+        show={showCommitmentModal}
+        onClose={() => setShowCommitmentModal(false)}
+        onActivate={handleCommitmentModeActivation}
+      />
+
       {/* Main app content - only show when both loading and splash are complete */}
       {isLoaded && splashCompleted && (
         <div className="container" style={{ position: 'relative' }}>
@@ -1495,6 +1523,7 @@ function AppContent() {
             data={data}
             earnedCount={earnedCount}
             hasAchievement={hasAchievement}
+            onCommitmentModeClick={() => setShowCommitmentModal(true)}
             onDataUpdate={(newData) => {
               setData(newData);
               // Update sync tracker version from server

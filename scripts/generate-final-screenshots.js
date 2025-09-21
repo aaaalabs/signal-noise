@@ -391,14 +391,14 @@ async function generateScreenshots(overlays, folderSuffix, zoomLevel) {
       viewport: { width: 1170, height: 2532 },
       deviceScaleFactor: 3,
       zoom: zoomLevel, // Dynamic zoom level
-      folder: `screenshots-${folderSuffix}-iphone`
+      folder: `../dev_app/screenshots/screenshots-${folderSuffix}-iphone`
     },
     {
       name: 'android',
       viewport: { width: 1080, height: 2400 },
       deviceScaleFactor: 2.5,
       zoom: zoomLevel * 0.95, // Slightly less for Android
-      folder: `screenshots-${folderSuffix}-android`
+      folder: `../dev_app/screenshots/screenshots-${folderSuffix}-android`
     }
   ];
 

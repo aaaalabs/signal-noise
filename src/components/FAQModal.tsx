@@ -4,6 +4,7 @@ import { useTranslation } from '../contexts/LanguageContext';
 interface FAQModalProps {
   show: boolean;
   onClose: () => void;
+  isPremium?: boolean;
 }
 
 interface FAQItem {
@@ -11,7 +12,7 @@ interface FAQItem {
   answer: string;
 }
 
-export default function FAQModal({ show, onClose }: FAQModalProps) {
+export default function FAQModal({ show, onClose, isPremium = false }: FAQModalProps) {
   const [openItems, setOpenItems] = useState<number[]>([]);
   const t = useTranslation();
 
@@ -25,7 +26,19 @@ export default function FAQModal({ show, onClose }: FAQModalProps) {
     );
   };
 
-  const faqs: FAQItem[] = (t as any).faqItems || [];
+  // Filter FAQ items based on premium status
+  const allFaqs: FAQItem[] = (t as any).faqItems || [];
+  const faqs = allFaqs.filter(faq => {
+    // Hide pricing question for premium users
+    if (isPremium && (faq.question.includes('premium features and pricing') || faq.question.includes('Premium-Features und Preise'))) {
+      return false;
+    }
+    // Show Commitment Mode question only for premium users
+    if (faq.question.includes('Commitment Mode') && !isPremium) {
+      return false;
+    }
+    return true;
+  });
 
   return (
     <div

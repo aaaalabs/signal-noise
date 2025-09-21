@@ -331,7 +331,7 @@ export default function Footer({ onFoundationClick }: { onFoundationClick?: () =
       <AboutModal show={showAbout} onClose={() => setShowAbout(false)} />
 
       {/* FAQ Modal */}
-      <FAQModal show={showFAQ} onClose={() => setShowFAQ(false)} />
+      <FAQModal show={showFAQ} onClose={() => setShowFAQ(false)} isPremium={isPremium} />
 
       {/* Feedback Modal */}
       <FeedbackModal show={showFeedback} onClose={() => setShowFeedback(false)} />

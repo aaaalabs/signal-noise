@@ -466,7 +466,7 @@ async function generateMarketingVisuals() {
   console.log('Strategy: Alex Hormozi value × Jony Ive aesthetics');
   console.log('━'.repeat(60) + '\n');
 
-  const dir = path.join(__dirname, 'screenshots-marketing');
+  const dir = path.join(__dirname, '../dev_app/screenshots/screenshots-marketing');
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }

@@ -173,3 +173,90 @@ Custom Domain: https://signal-noise.app (DNS setup needed)
 **Status:** ✅ **ERFOLG**
 
 Das Projekt ist **100% bereit für Go-Live**. Nur noch API Keys setzen und deployen!
+
+---
+
+# 🚀 Signal/Noise Future Features Roadmap
+
+## Near-Term Future Features
+
+### 🤖 AI Coach Private/Personal Mode
+**Enhanced AI Coaching with Task Content Analysis**
+
+- **Content Access**: AI gets read access to actual task text and completion status
+- **Personalized Analysis**: Deep understanding of user's specific Signal/Noise habits
+- **Content-Aware Coaching**: AI can reference specific tasks and patterns in advice
+- **Motivational Context**: Personal encouragement based on actual work being done
+- **Privacy Controls**: Users can enable/disable content sharing for AI analysis
+- **Implementation**: Extend existing Groq integration with task content payload
+
+### 🌅 Smart Morning Notifications
+**Automatic Planning Prompts**
+
+- **Timing**: 5 minutes before user's average first daily task time
+- **Content**: "Was steht heute an? Was sind deine 3-5 Dinge, die heute erledigt werden müssen?"
+- **Learning Algorithm**: Analyzes historical data to determine optimal notification time
+- **Adaptive Scheduling**: Adjusts based on weekday/weekend patterns
+- **Implementation**: Browser notifications API + pattern analysis from task timestamps
+
+### 🌙 Smart Evening Review Notifications
+**Automatic Day Reflection**
+
+- **Timing**: 5 minutes before user's average last daily activity time
+- **Content**: "Heute hast du [X signals completed/Y ratio achieved]... [personalized reflection]"
+- **Completion Summary**: Review of what was accomplished vs planned
+- **Pattern Insights**: Brief mention of trends or achievements
+- **Encouragement**: Positive reinforcement or gentle motivation for tomorrow
+- **Implementation**: Similar to morning notifications with completion analysis
+
+## Long-Term Future Features
+
+### 👥 Signal-Buddy (Accountability Partnership)
+**Mutual Accountability Experiment System**
+
+- **Partner Matching**: Find 1 person for mutual accountability
+- **Commitment Locking**: Both users lock in consequences for missed commitments
+- **Agreement System**: Define specific, measurable commitments together
+- **Status Monitoring**: Real-time updates on partner's progress and commitment status
+- **Consequence Enforcement**: Automated tracking and notification of locked consequences
+- **Motivation Engine**: Cross-notifications and encouragement between partners
+- **Privacy Balance**: Share commitment status without revealing personal task content
+- **Implementation**: Separate Redis namespace for buddy relationships and commitments
+
+#### Signal-Buddy Features Detail:
+- **Buddy Discovery**: Opt-in matching system based on commitment level and timezone
+- **Consequence Types**: Financial donations, social media posts, workout penalties, etc.
+- **Verification System**: Photo/video proof for certain commitment types
+- **Buddy Dashboard**: See partner's ratio, streaks, and commitment status
+- **Escape Clauses**: Mutual agreement system to modify commitments
+- **Success Celebrations**: Shared achievements and milestone recognition
+
+## Technical Implementation Notes
+
+### Data Privacy Considerations
+- **AI Personal Mode**: All task content analysis happens with explicit user consent
+- **Notifications**: All processing happens locally, no cloud storage of notification timing
+- **Signal-Buddy**: Minimal data sharing - status only, not content
+- **User Control**: Granular privacy settings for each feature
+
+### Architecture Extensions
+- **Notification Service**: Browser Push API integration with service worker
+- **Pattern Analysis**: Enhanced local analytics for timing predictions
+- **Buddy System**: Separate microservice architecture for partnership management
+- **AI Enhancement**: Expanded Groq payload with optional task content
+
+### Development Priorities
+1. **Phase 1**: AI Personal Mode (enhances existing premium feature)
+2. **Phase 2**: Smart Notifications (increases daily engagement)
+3. **Phase 3**: Signal-Buddy (creates network effects and retention)
+
+## Design Philosophy Continuity
+
+All future features must maintain the core Signal/Noise principles:
+- **Jony Ive Minimalism**: No UI clutter, elegant interactions
+- **Privacy First**: User data control and transparency
+- **SLC Approach**: Simple, Lovable, Complete implementations
+- **No Fallbacks**: Fail fast and fix what's broken
+- **Behavioral Focus**: Features that drive real productivity change, not just engagement
+
+This roadmap ensures Signal/Noise evolves from a personal productivity tool into a comprehensive system for sustainable behavior change and accountability.

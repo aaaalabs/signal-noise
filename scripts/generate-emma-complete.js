@@ -190,7 +190,7 @@ async function generateScreenshots() {
   console.log('📱 Optimized zoom for mobile viewing');
   console.log('━'.repeat(60) + '\n');
 
-  const dir = path.join(__dirname, 'screenshots-play-store');
+  const dir = path.join(__dirname, '../dev_app/screenshots/screenshots-play-store');
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }
@@ -323,7 +323,7 @@ async function generateScreenshots() {
   console.log('   • Natural progression from chaos to mastery');
   console.log('   • Mixed red/green bars showing real struggle');
   console.log('   • Mobile-optimized zoom (115%)');
-  console.log('\n📁 Screenshots in: screenshots-play-store/\n');
+  console.log('\n📁 Screenshots in: ../dev_app/screenshots/screenshots-play-store/\n');
 }
 
 // Run

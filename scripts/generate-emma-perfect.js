@@ -208,7 +208,7 @@ async function generateScreenshots() {
   console.log('📈 Story: From chaos to mastery with natural patterns');
   console.log('━'.repeat(60) + '\n');
 
-  const dir = path.join(__dirname, 'screenshots-emma-final');
+  const dir = path.join(__dirname, '../dev_app/screenshots/screenshots-emma-final');
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }
@@ -328,7 +328,7 @@ async function generateScreenshots() {
   console.log('   Week 2: "Emergency production incident" → Learning from chaos');
   console.log('   Week 3: "OKR planning" → Building momentum');
   console.log('   Week 4: "€500k enterprise deal" → Peak performance');
-  console.log('\n📁 Screenshots saved to: screenshots-emma-final/\n');
+  console.log('\n📁 Screenshots saved to: ../dev_app/screenshots/screenshots-emma-final/\n');
 }
 
 // Run

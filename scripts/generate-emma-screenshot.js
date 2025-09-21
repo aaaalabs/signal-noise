@@ -314,7 +314,7 @@ async function generatePerfectScreenshot() {
   console.log('Story: Realistic transformation with natural patterns');
   console.log('━'.repeat(60) + '\n');
 
-  const dir = path.join(__dirname, 'screenshots-emma');
+  const dir = path.join(__dirname, '../dev_app/screenshots/screenshots-emma');
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }
@@ -405,7 +405,7 @@ async function generatePerfectScreenshot() {
     await browser.close();
   }
 
-  console.log('📁 Screenshot saved to: screenshots-emma/\n');
+  console.log('📁 Screenshot saved to: ../dev_app/screenshots/screenshots-emma/\n');
   console.log('Next steps: Review and approve, then generate remaining screenshots.\n');
 }
 

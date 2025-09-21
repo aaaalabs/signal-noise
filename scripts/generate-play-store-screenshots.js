@@ -23,21 +23,21 @@ const SCREENSHOT_CONFIGS = [
     width: 1080,
     height: 1920,
     deviceScaleFactor: 2,
-    folder: 'screenshots/phone'
+    folder: '../dev_app/screenshots/screenshots-play-store/phone'
   },
   {
     name: 'tablet7',
     width: 1600,
     height: 2560,
     deviceScaleFactor: 2,
-    folder: 'screenshots/tablet7'
+    folder: '../dev_app/screenshots/screenshots-play-store/tablet7'
   },
   {
     name: 'tablet10',
     width: 1600,
     height: 2560,
     deviceScaleFactor: 2,
-    folder: 'screenshots/tablet10'
+    folder: '../dev_app/screenshots/screenshots-play-store/tablet10'
   }
 ];
 

@@ -53,7 +53,7 @@ export function getAverageRatio(tasks: Task[], days: number): number {
   return ratios.length > 0 ? Math.round(ratios.reduce((a, b) => a + b, 0) / ratios.length) : 0;
 }
 
-export function getTodayRatio(tasks: Task[]): number {
+export function getTodayRatio(tasks: Task[], commitModeActivatedAt?: string | null): number {
   const today = new Date().toDateString();
   const todayTasks = tasks.filter(t =>
     new Date(t.timestamp).toDateString() === today
@@ -61,21 +61,51 @@ export function getTodayRatio(tasks: Task[]): number {
 
   if (todayTasks.length === 0) return 0;
 
-  // Count signals with weighted completion
-  let signalWeight = 0;
-  let totalWeight = 0;
+  // Before commitment mode - use current behavior
+  if (!commitModeActivatedAt) {
+    // Count signals with weighted completion
+    let signalWeight = 0;
+    let totalWeight = 0;
+
+    todayTasks.forEach(task => {
+      if (task.type === 'signal') {
+        signalWeight += task.completed ? 1.0 : 1.0; // Completed signals count at full weight
+        totalWeight += 1.0;
+      } else {
+        // Noise tasks
+        totalWeight += task.completed ? 0.2 : 1.0; // Completed noise counts at 20% weight
+      }
+    });
+
+    return totalWeight > 0 ? Math.round((signalWeight / totalWeight) * 100) : 0;
+  }
+
+  // After commitment - only completed signals count for new tasks
+  const commitTime = new Date(commitModeActivatedAt);
+  let signalCount = 0;
+  let totalCount = 0;
 
   todayTasks.forEach(task => {
-    if (task.type === 'signal') {
-      signalWeight += task.completed ? 1.0 : 1.0; // Completed signals count at full weight
-      totalWeight += 1.0;
+    const taskTime = new Date(task.timestamp);
+
+    if (taskTime < commitTime) {
+      // Pre-commitment tasks: count all signals (honor the past)
+      if (task.type === 'signal') signalCount++;
+      totalCount++;
     } else {
-      // Noise tasks
-      totalWeight += task.completed ? 0.2 : 1.0; // Completed noise counts at 20% weight
+      // Post-commitment tasks: only completed signals count
+      if (task.type === 'signal' && task.completed) {
+        signalCount++;
+        totalCount++;
+      } else if (task.type === 'noise') {
+        // Noise tasks always count as noise
+        totalCount++;
+      }
+      // Uncompleted signals after commitment don't count at all
     }
   });
 
-  return totalWeight > 0 ? Math.round((signalWeight / totalWeight) * 100) : 0;
+  return totalCount > 0 ? Math.round((signalCount / totalCount) * 100) : 0;
 }
 
 export function hasTaskBefore(tasks: Task[], hour: number): boolean {
@@ -141,7 +171,7 @@ export function createBadgeDefinitions(data: AppData): BadgeDefinition[] {
       id: 'perfect_day',
       icon: badges.perfect_day.icon,
       name: badges.perfect_day.name,
-      condition: () => getTodayRatio(data.tasks) === 100 && getTodayTasks(data.tasks).length >= 3
+      condition: () => getTodayRatio(data.tasks, data.settings.commitModeActivatedAt) === 100 && getTodayTasks(data.tasks).length >= 3
     },
     {
       id: 'month_hero',

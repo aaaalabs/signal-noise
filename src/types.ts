@@ -47,6 +47,7 @@ export interface AppData {
     targetRatio: number;
     notifications: boolean;
     firstName?: string;
+    commitModeActivatedAt?: string | null;
   };
   signal_ratio?: number;
 }

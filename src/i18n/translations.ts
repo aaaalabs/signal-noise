@@ -131,6 +131,7 @@ const translations = {
     // FAQ Modal
     faqTitle: "FAQ",
     faqSubtitle: "Häufige Fragen & versteckte Features",
+    faqPremiumOnly: "(Premium)",
     faqClose: "Schließen",
     faqItems: [
       {
@@ -152,6 +153,10 @@ const translations = {
       {
         question: "Wie funktionieren Datenschutz und Sync?",
         answer: "Alles wird lokal im Browser gespeichert. <strong>Premium-Nutzer erhalten Cloud-Sync für die Nutzung auf mehreren Geräten</strong> - deine Daten sind automatisch auf Handy, Laptop und Tablet synchron. Der <svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='#00ff88' style='display: inline; vertical-align: middle; margin: 0 2px;'><path stroke='none' d='M0 0h24v24H0z' fill='none'/><path d='M12 7a5 5 0 1 1 -4.995 5.217l-.005 -.217l.005 -.217a5 5 0 0 1 4.995 -4.783z' /></svg> neben dem Sprachschalter zeigt die Verbindung. Deine Privatsphäre ist immer geschützt - kein Tracking, keine Analyse, kein Data Mining."
+      },
+      {
+        question: "Was ist Commitment Mode? (Premium)",
+        answer: "Nach 6 erreichten Achievements wird der <strong>Commitment Mode</strong> freigeschaltet - ein irreversibler Produktivitätsmodus. Steve Jobs sagte: 'Real artists ship.' Im Commitment Mode zählen nur <strong>erledigte</strong> Signals zu deiner Ratio. Dies verwandelt Absichten in echte Resultate und eliminiert Selbsttäuschung über Produktivität. Einmal aktiviert, gibt es kein Zurück - nur echter Fortschritt zählt."
       },
       {
         question: "Welche Interface-Features gibt es?",
@@ -260,6 +265,7 @@ const translations = {
     // FAQ Modal
     faqTitle: "FAQ",
     faqSubtitle: "Frequently asked questions & hidden features",
+    faqPremiumOnly: "(Premium)",
     faqClose: "Close",
     faqItems: [
       {
@@ -281,6 +287,10 @@ const translations = {
       {
         question: "How does data privacy and sync work?",
         answer: "Everything is stored locally in your browser. <strong>Premium users get cloud sync for use across multiple devices</strong> - your data automatically stays in sync across phone, laptop, and tablet. The <svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='#00ff88' style='display: inline; vertical-align: middle; margin: 0 2px;'><path stroke='none' d='M0 0h24v24H0z' fill='none'/><path d='M12 7a5 5 0 1 1 -4.995 5.217l-.005 -.217l.005 -.217a5 5 0 0 1 4.995 -4.783z' /></svg> next to the language switcher shows connection status. Your privacy is always protected - no tracking, no analytics, no data mining."
+      },
+      {
+        question: "What is Commitment Mode? (Premium)",
+        answer: "After earning 6 achievements, <strong>Commitment Mode</strong> unlocks - an irreversible productivity mode. As Steve Jobs said: 'Real artists ship.' In Commitment Mode, only <strong>completed</strong> signals count toward your ratio. This transforms intentions into actual results and eliminates productivity self-deception. Once activated, there's no going back - only real progress counts."
       },
       {
         question: "What interface features are available?",
