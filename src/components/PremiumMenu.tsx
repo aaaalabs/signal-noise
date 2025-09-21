@@ -288,26 +288,65 @@ export default function PremiumMenu({
                   {achievement.isCommitmentMode ? (
                     // Special lock icon for Commitment Mode
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '20px' }}>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="10"
-                        height="10"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke={achievement.isActivated ? '#00ff88' : achievement.canActivate ? '#00ff88' : '#666'}
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        style={{
-                          opacity: achievement.canActivate || achievement.isActivated ? 1 : 0.6,
-                          animation: achievement.canActivate && !achievement.isActivated ? 'lockPulse 2s infinite' : 'none'
-                        }}
-                      >
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6z" />
-                        <path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
-                        <path d="M8 11v-4a4 4 0 1 1 8 0v4" />
-                      </svg>
+{achievement.isActivated ? (
+                        // Locked padlock (green) - commitment is active/locked in
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="10"
+                          height="10"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="#00ff88"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                          <path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6z" />
+                          <path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
+                          <path d="M8 11v-4a4 4 0 1 1 8 0v4" />
+                        </svg>
+                      ) : achievement.canActivate ? (
+                        // Unlocked padlock (green, pulsing) - ready to activate
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="10"
+                          height="10"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="#00ff88"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          style={{
+                            animation: 'lockPulse 2s infinite'
+                          }}
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                          <path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6z" />
+                          <path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
+                          <path d="M8 11v-5a4 4 0 0 1 7 0" />
+                        </svg>
+                      ) : (
+                        // Locked padlock (grey) - not yet eligible
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="10"
+                          height="10"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="#666"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          style={{ opacity: 0.6 }}
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                          <path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6z" />
+                          <path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
+                          <path d="M8 11v-4a4 4 0 1 1 8 0v4" />
+                        </svg>
+                      )}
                     </div>
                   ) : (
                     <ProgressBar progress={achievement.progress} />
