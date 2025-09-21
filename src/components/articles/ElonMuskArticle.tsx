@@ -238,7 +238,7 @@ export default function ElonMuskArticle({ isGerman }: ArticleProps) {
           border: '1px solid #222'
         }}>
           <iframe
-            src="https://www.youtube.com/embed/XTpLbBJTOM0"
+            src="https://www.youtube.com/embed/t705r8ICkRw?start=796"
             title="Elon Musk on Time Management and Productivity"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
