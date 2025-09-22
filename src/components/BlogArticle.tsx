@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import SteveJobsArticle from './articles/SteveJobsArticle';
 import SeventyFivePercentArticle from './articles/SeventyFivePercentArticle';
 import ElonMuskArticle from './articles/ElonMuskArticle';
+import KevinOLearyArticle from './articles/KevinOLearyArticle';
 
 // Import blog posts configuration
 import { blogPosts } from './BlogIndex';
@@ -47,6 +48,15 @@ const articles: Record<string, ArticleContent> = {
     descriptionDe: 'Elon Musk arbeitet laut Kevin O\'Leary bei 100% Signal. Entdecke seine 5-Minuten-Timeboxing-Methode und den wahren Preis der Eliminierung aller Ablenkungen.',
     keywords: ['elon musk productivity', '100% focus', 'time boxing', 'deep work', 'extreme productivity'],
     publishDate: '2025-09-07'
+  },
+  'kevin-oleary-was-right': {
+    component: KevinOLearyArticle,
+    title: 'Kevin O\'Leary Was Right About Productivity: The Shark Tank Formula',
+    titleDe: 'Kevin O\'Leary hatte Recht über Produktivität: Die Shark Tank Formel',
+    description: 'Kevin O\'Leary worked directly with Steve Jobs and revealed the brutal 80/20 Signal vs Noise formula that transformed Apple. Learn the productivity secrets from Shark Tank\'s "Mr. Wonderful".',
+    descriptionDe: 'Kevin O\'Leary arbeitete direkt mit Steve Jobs und enthüllte die brutale 80/20 Signal vs Noise Formel, die Apple transformierte. Lerne die Produktivitätsgeheimnisse von Shark Tanks "Mr. Wonderful".',
+    keywords: ['kevin oleary productivity', 'shark tank productivity', 'steve jobs signal noise', '80/20 productivity', 'entrepreneurial focus'],
+    publishDate: '2025-09-29'
   }
 };
 
