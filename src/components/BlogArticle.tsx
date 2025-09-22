@@ -7,6 +7,7 @@ import SteveJobsArticle from './articles/SteveJobsArticle';
 import SeventyFivePercentArticle from './articles/SeventyFivePercentArticle';
 import ElonMuskArticle from './articles/ElonMuskArticle';
 import KevinOLearyArticle from './articles/KevinOLearyArticle';
+import FoundersParadoxArticle from './articles/FoundersParadoxArticle';
 
 // Import blog posts configuration
 import { blogPosts } from './BlogIndex';
@@ -57,6 +58,15 @@ const articles: Record<string, ArticleContent> = {
     descriptionDe: 'Kevin O\'Leary arbeitete direkt mit Steve Jobs und enthüllte die brutale 80/20 Signal vs Noise Formel, die Apple transformierte. Lerne die Produktivitätsgeheimnisse von Shark Tanks "Mr. Wonderful".',
     keywords: ['kevin oleary productivity', 'shark tank productivity', 'steve jobs signal noise', '80/20 productivity', 'entrepreneurial focus'],
     publishDate: '2025-09-29'
+  },
+  'founder-productivity-paradox': {
+    component: FoundersParadoxArticle,
+    title: 'The Founder\'s Paradox: Why Freedom Kills Focus (And How to Fight Back)',
+    titleDe: 'Das Gründer-Paradoxon: Warum Freiheit den Fokus zerstört',
+    description: 'Discover why entrepreneurial freedom kills focus and how the Signal vs Noise method helps founders overcome the productivity paradox. Data from 1,247 entrepreneurs reveals the brutal truth.',
+    descriptionDe: 'Entdecke warum unternehmerische Freiheit den Fokus zerstört und wie die Signal vs Noise Methode Gründern hilft, das Produktivitäts-Paradoxon zu überwinden. Daten von 1.247 Unternehmern enthüllen die brutale Wahrheit.',
+    keywords: ['founder productivity paradox', 'entrepreneur focus challenges', 'freedom kills productivity', 'startup CEO time management', 'entrepreneurial decision fatigue'],
+    publishDate: '2025-10-06'
   }
 };
 

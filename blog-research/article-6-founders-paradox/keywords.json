@@ -1,0 +1,63 @@
+{
+  "primary_keyword": {
+    "term": "founder productivity paradox",
+    "monthly_searches": 200,
+    "competition": "Low",
+    "intent": "Informational",
+    "difficulty": "Easy"
+  },
+  "secondary_keywords": [
+    {
+      "term": "entrepreneur focus challenges",
+      "monthly_searches": 150,
+      "competition": "Low",
+      "intent": "Problem-aware"
+    },
+    {
+      "term": "freedom kills productivity",
+      "monthly_searches": 100,
+      "competition": "Low",
+      "intent": "Informational"
+    },
+    {
+      "term": "startup CEO time management",
+      "monthly_searches": 300,
+      "competition": "Medium",
+      "intent": "Solution-seeking"
+    },
+    {
+      "term": "entrepreneurial decision fatigue",
+      "monthly_searches": 80,
+      "competition": "Low",
+      "intent": "Problem-aware"
+    },
+    {
+      "term": "structure vs freedom business",
+      "monthly_searches": 120,
+      "competition": "Low",
+      "intent": "Informational"
+    }
+  ],
+  "long_tail_keywords": [
+    "why is it harder to focus as an entrepreneur",
+    "startup founder productivity problems",
+    "how to stay focused when you have complete freedom",
+    "entrepreneurial paradox of choice",
+    "founder burnout from too many options",
+    "signal vs noise for startup founders",
+    "80/20 rule for entrepreneur productivity",
+    "how successful founders maintain focus"
+  ],
+  "semantic_keywords": [
+    "choice overload",
+    "decision paralysis",
+    "analysis paralysis",
+    "cognitive load",
+    "attention residue",
+    "priority matrix",
+    "time blocking",
+    "deep work",
+    "shallow work",
+    "pareto principle"
+  ]
+}

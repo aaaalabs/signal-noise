@@ -1,0 +1,47 @@
+[
+  {
+    "title": "The Founders Productivity Challenge",
+    "url": "https://youtu.be/YEgm2jxuoEs?si=ByJbHqySzzJWwu3r",
+    "estimated_topic": "Entrepreneur productivity challenges and focus strategies",
+    "relevance": "High - directly addresses founder productivity issues",
+    "embed_timestamp": "0:00",
+    "content_type": "Long form video",
+    "integration_plan": "Main section on founder-specific productivity challenges"
+  },
+  {
+    "title": "Business Focus Strategy Short",
+    "url": "https://youtube.com/shorts/ggkOqyDbpN8?si=4h0dk57HaPHIc46j",
+    "estimated_topic": "Quick business focus tip or strategy",
+    "relevance": "Medium - likely contains actionable focus advice",
+    "embed_timestamp": "0:00",
+    "content_type": "YouTube Short",
+    "integration_plan": "Quick tip section or sidebar content"
+  },
+  {
+    "title": "Decision Making Strategy Short",
+    "url": "https://youtube.com/shorts/Fy9nTbZAoWw?si=H2mPqmAdY8Okudk3",
+    "estimated_topic": "Business decision-making or priority setting",
+    "relevance": "Medium - likely relates to decision fatigue theme",
+    "embed_timestamp": "0:00",
+    "content_type": "YouTube Short",
+    "integration_plan": "Decision fatigue section as supporting evidence"
+  },
+  {
+    "title": "Entrepreneurial Focus Method",
+    "url": "https://youtu.be/W-OfQnENVaI?si=ONTs7SVP_Xm86KIo",
+    "estimated_topic": "Specific methods for maintaining entrepreneurial focus",
+    "relevance": "High - directly addresses solutions to founder paradox",
+    "embed_timestamp": "0:00",
+    "content_type": "Long form video",
+    "integration_plan": "Solutions section - practical frameworks for founders"
+  },
+  {
+    "title": "Business Strategy and Focus",
+    "url": "https://youtu.be/CqUx-GjMnUg?si=tZSkT7dKL3RsWLpO",
+    "estimated_topic": "Strategic focus and business prioritization",
+    "relevance": "High - strategy and focus intersection for entrepreneurs",
+    "embed_timestamp": "0:00",
+    "content_type": "Long form video",
+    "integration_plan": "Strategic framework section with embedded examples"
+  }
+]

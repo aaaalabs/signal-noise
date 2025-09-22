@@ -65,16 +65,16 @@ export const blogPosts: BlogPost[] = [
     isPublished: true
   },
   {
-    slug: 'founders-paradox',
-    title: 'The Founder\'s Paradox: When Freedom Kills Focus',
-    titleDe: 'Das Gründer-Paradox: Wenn Freiheit den Fokus tötet',
-    description: 'Why entrepreneurial freedom makes focus exponentially harder and how to solve it',
-    descriptionDe: 'Warum unternehmerische Freiheit den Fokus exponentiell schwieriger macht und wie man es löst',
+    slug: 'founder-productivity-paradox',
+    title: 'The Founder\'s Paradox: Why Freedom Kills Focus',
+    titleDe: 'Das Gründer-Paradoxon: Warum Freiheit den Fokus zerstört',
+    description: 'Why entrepreneurial freedom kills focus and how the Signal vs Noise method helps founders overcome the productivity paradox',
+    descriptionDe: 'Warum unternehmerische Freiheit den Fokus zerstört und wie die Signal vs Noise Methode Gründern hilft, das Produktivitäts-Paradoxon zu überwinden',
     date: '6 Oct 2025',
-    readTime: '5 min',
-    keywords: ['founder productivity', 'entrepreneur focus', 'startup'],
+    readTime: '8 min',
+    keywords: ['founder productivity paradox', 'entrepreneur focus challenges', 'freedom kills productivity'],
     publishDate: '2025-10-06',
-    isPublished: false
+    isPublished: true
   },
   {
     slug: 'signal-vs-noise-philosophy',

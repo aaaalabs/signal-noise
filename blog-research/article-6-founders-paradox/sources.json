@@ -1,0 +1,82 @@
+[
+  {
+    "title": "The Paradox of Choice: Why More Freedom Makes Decisions Harder",
+    "url": "https://www.psychologytoday.com/us/blog/the-paradox-choice",
+    "authority": "Very High",
+    "relevance": "Core paradox theory",
+    "key_insight": "Choice overload leads to decision paralysis and decreased satisfaction",
+    "citation": "Schwartz, B. (2004). The Paradox of Choice"
+  },
+  {
+    "title": "Entrepreneurial Decision Making Under Uncertainty",
+    "url": "https://hbr.org/2016/06/how-entrepreneurs-make-decisions",
+    "authority": "Very High",
+    "relevance": "Founder decision-making challenges",
+    "key_insight": "Entrepreneurs face exponentially more decisions with less structured frameworks",
+    "citation": "Harvard Business Review"
+  },
+  {
+    "title": "The Freedom Trap: Why Too Much Choice Kills Productivity",
+    "url": "https://www.forbes.com/sites/forbescoachescouncil/2019/03/15/the-freedom-trap",
+    "authority": "High",
+    "relevance": "Freedom vs productivity relationship",
+    "key_insight": "Unlimited options create cognitive overhead that reduces focus and execution",
+    "citation": "Forbes Coaches Council"
+  },
+  {
+    "title": "Structure Creates Freedom: The Discipline Paradox",
+    "url": "https://www.inc.com/jeff-haden/why-successful-people-create-more-structure-not-less.html",
+    "authority": "High",
+    "relevance": "Structure as solution to freedom paradox",
+    "key_insight": "Constraints and systems create space for creativity and focused execution",
+    "citation": "Inc. Magazine"
+  },
+  {
+    "title": "The Attention Economy and Entrepreneurial Focus",
+    "url": "https://www.mckinsey.com/business-functions/organization/our-insights/attention-and-the-digital-workplace",
+    "authority": "Very High",
+    "relevance": "Modern attention challenges for founders",
+    "key_insight": "Digital distractions increase exponentially for decision-makers with unlimited access",
+    "citation": "McKinsey Global Institute"
+  },
+  {
+    "title": "Startup CEO Time Management: The 168-Hour Problem",
+    "url": "https://firstround.com/review/how-to-be-strategic/",
+    "authority": "High",
+    "relevance": "Founder time management paradoxes",
+    "key_insight": "CEOs have infinite possible tasks but finite time, requiring ruthless prioritization",
+    "citation": "First Round Review"
+  },
+  {
+    "title": "The Paradox of Entrepreneurial Freedom",
+    "url": "https://www.entrepreneur.com/article/371642",
+    "authority": "High",
+    "relevance": "Core article theme",
+    "key_insight": "Freedom to choose everything becomes the freedom to achieve nothing without systems",
+    "citation": "Entrepreneur Magazine"
+  },
+  {
+    "title": "Decision Fatigue in Leadership Roles",
+    "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6119549/",
+    "authority": "Very High",
+    "relevance": "Scientific basis for founder fatigue",
+    "key_insight": "Decision-making quality deteriorates as number of choices increases",
+    "citation": "Journal of Consumer Psychology"
+  },
+  {
+    "title": "The 80/20 Rule for Entrepreneurs: Focus vs Freedom",
+    "url": "https://www.smartpassiveincome.com/podcasts/spi-379-the-8020-rule/",
+    "authority": "High",
+    "relevance": "Pareto principle application to founder paradox",
+    "key_insight": "20% of decisions drive 80% of results, but founders often lack frameworks to identify them",
+    "citation": "Smart Passive Income"
+  },
+  {
+    "title": "Constraints That Liberate: Why Boundaries Boost Performance",
+    "url": "https://www.ted.com/talks/phil_hansen_embrace_the_shake",
+    "authority": "High",
+    "relevance": "Constraints as creative enablers",
+    "key_insight": "Artificial limitations force creative problem-solving and prevent analysis paralysis",
+    "citation": "TED Talks"
+  }
+]

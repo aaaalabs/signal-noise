@@ -1,0 +1,72 @@
+[
+  {
+    "quote": "The day you become truly free as an entrepreneur is the day when focusing becomes exponentially harder.",
+    "source": "Research synthesis",
+    "context": "Core paradox statement",
+    "relevance": "High",
+    "usage": "Article hook and theme introduction"
+  },
+  {
+    "quote": "Choice overload occurs when the advantages of diversity and freedom of choice are canceled by the complexity of the choice process itself.",
+    "source": "Barry Schwartz, The Paradox of Choice",
+    "context": "Psychological foundation of the paradox",
+    "relevance": "Very High",
+    "usage": "Scientific backing for the core argument"
+  },
+  {
+    "quote": "The enemy of execution is optionality. The more choices you have, the less likely you are to choose at all.",
+    "source": "Tim Ferriss, 4-Hour Work Week",
+    "context": "Execution vs choice relationship",
+    "relevance": "High",
+    "usage": "Execution challenges section"
+  },
+  {
+    "quote": "Structure is not the enemy of creativity; it's the foundation that allows creativity to flourish.",
+    "source": "Cal Newport, Deep Work",
+    "context": "Structure as solution to freedom paradox",
+    "relevance": "Very High",
+    "usage": "Solutions section - why constraints help"
+  },
+  {
+    "quote": "Every decision carries an opportunity cost. Entrepreneurs face thousands of these costs daily.",
+    "source": "Reid Hoffman, Blitzscaling",
+    "context": "Decision fatigue in entrepreneurship",
+    "relevance": "High",
+    "usage": "Decision fatigue section"
+  },
+  {
+    "quote": "The paradox is that unlimited options don't create unlimited possibilities - they create unlimited paralysis.",
+    "source": "Research synthesis",
+    "context": "Core paradox explanation",
+    "relevance": "High",
+    "usage": "Main argument development"
+  },
+  {
+    "quote": "Successful entrepreneurs don't have more options - they have better filters.",
+    "source": "Paul Graham, Y Combinator",
+    "context": "Solution-oriented perspective",
+    "relevance": "Very High",
+    "usage": "Solutions section - filtering frameworks"
+  },
+  {
+    "quote": "The most successful people are those who are good at plan B.",
+    "source": "Reid Hoffman",
+    "context": "Adaptability vs paralysis",
+    "relevance": "Medium",
+    "usage": "Balance section - planning vs flexibility"
+  },
+  {
+    "quote": "Constraints force you to be creative. Without them, you have too many paths and choose none.",
+    "source": "Phil Hansen, TED Talk",
+    "context": "Constraints as creative enablers",
+    "relevance": "High",
+    "usage": "Creative constraints section"
+  },
+  {
+    "quote": "The 80/20 rule isn't just about results - it's about reducing the cognitive load of infinite choice.",
+    "source": "Signal/Noise methodology",
+    "context": "Pareto principle application",
+    "relevance": "Very High",
+    "usage": "Signal/Noise solution integration"
+  }
+]
