@@ -7,6 +7,9 @@ import SteveJobsArticle from './articles/SteveJobsArticle';
 import SeventyFivePercentArticle from './articles/SeventyFivePercentArticle';
 import ElonMuskArticle from './articles/ElonMuskArticle';
 
+// Import blog posts configuration
+import { blogPosts } from './BlogIndex';
+
 interface ArticleContent {
   component: React.ComponentType<{ isGerman: boolean }>;
   title: string;
@@ -53,6 +56,10 @@ export default function BlogArticle() {
   const isGerman = currentLanguage === 'de';
 
   const article = slug ? articles[slug] : null;
+  const blogPost = blogPosts.find(post => post.slug === slug);
+
+  // Check if article is published
+  const isArticlePublished = blogPost?.isPublished ?? false;
 
   useEffect(() => {
     if (article) {
@@ -97,7 +104,7 @@ export default function BlogArticle() {
     }
   }, [article, isGerman]);
 
-  if (!article) {
+  if (!article || !isArticlePublished) {
     return <Navigate to="/blog" replace />;
   }
 

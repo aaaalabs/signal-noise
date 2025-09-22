@@ -32,6 +32,10 @@
     {
       "path": "/api/cron/weekly-report",
       "schedule": "0 5 * * 0"
+    },
+    {
+      "path": "/api/cron/publish-articles",
+      "schedule": "0 9 * * 1"
     }
   ]
 }

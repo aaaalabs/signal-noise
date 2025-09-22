@@ -11,9 +11,11 @@ interface BlogPost {
   date: string;
   readTime: string;
   keywords: string[];
+  publishDate: string;
+  isPublished?: boolean;
 }
 
-const blogPosts: BlogPost[] = [
+export const blogPosts: BlogPost[] = [
   {
     slug: 'steve-jobs-method',
     title: 'Steve Jobs\' Productivity Method',
@@ -22,7 +24,9 @@ const blogPosts: BlogPost[] = [
     descriptionDe: 'Die Entstehungsgeschichte von Signal vs Noise',
     date: '21 Sept 2025',
     readTime: '3 min',
-    keywords: ['steve jobs', 'productivity', '80/20']
+    keywords: ['steve jobs', 'productivity', '80/20'],
+    publishDate: '2025-09-21',
+    isPublished: true
   },
   {
     slug: '75-percent-tasks',
@@ -32,7 +36,9 @@ const blogPosts: BlogPost[] = [
     descriptionDe: 'Daten von 1.247 Gründern',
     date: '14 Sept 2025',
     readTime: '5 min',
-    keywords: ['productivity', 'tasks', 'founders']
+    keywords: ['productivity', 'tasks', 'founders'],
+    publishDate: '2025-09-14',
+    isPublished: true
   },
   {
     slug: 'elon-musk-100-signal',
@@ -42,7 +48,93 @@ const blogPosts: BlogPost[] = [
     descriptionDe: 'Wie man vollständigen Fokus erreicht',
     date: '7 Sept 2025',
     readTime: '4 min',
-    keywords: ['elon musk', 'focus', 'productivity']
+    keywords: ['elon musk', 'focus', 'productivity'],
+    publishDate: '2025-09-07',
+    isPublished: true
+  },
+  {
+    slug: 'kevin-oleary-was-right',
+    title: 'Kevin O\'Leary Was Right About Productivity',
+    titleDe: 'Kevin O\'Leary hatte Recht über Produktivität',
+    description: 'Shark Tank investor\'s brutal truth about productivity from working with Steve Jobs',
+    descriptionDe: 'Die brutale Wahrheit des Shark Tank Investors über Produktivität aus der Arbeit mit Steve Jobs',
+    date: '29 Sept 2025',
+    readTime: '4 min',
+    keywords: ['kevin oleary', 'shark tank', 'productivity'],
+    publishDate: '2025-09-29',
+    isPublished: false
+  },
+  {
+    slug: 'founders-paradox',
+    title: 'The Founder\'s Paradox: When Freedom Kills Focus',
+    titleDe: 'Das Gründer-Paradox: Wenn Freiheit den Fokus tötet',
+    description: 'Why entrepreneurial freedom makes focus exponentially harder and how to solve it',
+    descriptionDe: 'Warum unternehmerische Freiheit den Fokus exponentiell schwieriger macht und wie man es löst',
+    date: '6 Oct 2025',
+    readTime: '5 min',
+    keywords: ['founder productivity', 'entrepreneur focus', 'startup'],
+    publishDate: '2025-10-06',
+    isPublished: false
+  },
+  {
+    slug: 'signal-vs-noise-philosophy',
+    title: 'Signal vs Noise: A Philosophy for Modern Life',
+    titleDe: 'Signal vs Noise: Eine Philosophie für das moderne Leben',
+    description: 'How information theory revolutionizes productivity and decision-making',
+    descriptionDe: 'Wie die Informationstheorie Produktivität und Entscheidungsfindung revolutioniert',
+    date: '13 Oct 2025',
+    readTime: '6 min',
+    keywords: ['signal vs noise', 'philosophy', 'information theory'],
+    publishDate: '2025-10-13',
+    isPublished: false
+  },
+  {
+    slug: 'tracked-ratio-90-days',
+    title: 'I Tracked My Signal Ratio for 90 Days',
+    titleDe: 'Ich habe mein Signal-Verhältnis 90 Tage lang verfolgt',
+    description: 'Personal experiment revealing surprising patterns in signal vs noise productivity',
+    descriptionDe: 'Persönliches Experiment enthüllt überraschende Muster in Signal vs Noise Produktivität',
+    date: '20 Oct 2025',
+    readTime: '7 min',
+    keywords: ['productivity tracking', '90 day challenge', 'signal ratio'],
+    publishDate: '2025-10-20',
+    isPublished: false
+  },
+  {
+    slug: 'focus-age-distraction',
+    title: 'Maintaining Focus in the Age of Distraction',
+    titleDe: 'Fokus bewahren im Zeitalter der Ablenkung',
+    description: 'Cal Newport\'s frameworks for maintaining focus in technology-saturated world',
+    descriptionDe: 'Cal Newports Frameworks für die Aufrechterhaltung des Fokus in einer technologiegesättigten Welt',
+    date: '27 Oct 2025',
+    readTime: '5 min',
+    keywords: ['digital minimalism', 'deep work', 'focus'],
+    publishDate: '2025-10-27',
+    isPublished: false
+  },
+  {
+    slug: 'mathematics-productivity',
+    title: 'The Mathematics of Productivity: Why 80/20 Works',
+    titleDe: 'Die Mathematik der Produktivität: Warum 80/20 funktioniert',
+    description: 'Mathematical proof behind why 80% of results come from 20% of effort',
+    descriptionDe: 'Mathematischer Beweis dafür, warum 80% der Ergebnisse aus 20% des Aufwands stammen',
+    date: '3 Nov 2025',
+    readTime: '8 min',
+    keywords: ['pareto principle', '80/20 rule', 'mathematics'],
+    publishDate: '2025-11-03',
+    isPublished: false
+  },
+  {
+    slug: 'building-signal-noise-story',
+    title: 'Building Signal/Noise: From Crisis to App',
+    titleDe: 'Building Signal/Noise: Von der Krise zur App',
+    description: 'Founder journey from personal productivity struggles to app creation',
+    descriptionDe: 'Gründerreise von persönlichen Produktivitätsproblemen zur App-Erstellung',
+    date: '10 Nov 2025',
+    readTime: '6 min',
+    keywords: ['startup story', 'app development', 'founder journey'],
+    publishDate: '2025-11-10',
+    isPublished: false
   }
 ];
 
@@ -105,7 +197,7 @@ export default function BlogIndex() {
       }}>
         {/* Articles List */}
         <div style={{ marginTop: '3rem' }}>
-          {blogPosts.map((post, index) => (
+          {blogPosts.filter(post => post.isPublished).map((post, index) => (
             <article key={post.slug} style={{ marginBottom: '3rem' }}>
               {index > 0 && (
                 <div style={{

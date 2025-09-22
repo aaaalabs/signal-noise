@@ -46,12 +46,42 @@
     <priority>0.8</priority>
   </url>
 
-  <!-- API Documentation (if public) -->
+  <!-- Blog Index -->
   <url>
-    <loc>https://signal-noise.app/docs</loc>
-    <lastmod>2025-01-13</lastmod>
+    <loc>https://signal-noise.app/blog</loc>
+    <lastmod>2025-09-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://signal-noise.app/blog" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://signal-noise.app/blog" />
+  </url>
+
+  <!-- Blog Articles -->
+  <url>
+    <loc>https://signal-noise.app/blog/steve-jobs-method</loc>
+    <lastmod>2025-09-21</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://signal-noise.app/blog/steve-jobs-method" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://signal-noise.app/blog/steve-jobs-method" />
+  </url>
+
+  <url>
+    <loc>https://signal-noise.app/blog/75-percent-tasks</loc>
+    <lastmod>2025-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://signal-noise.app/blog/75-percent-tasks" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://signal-noise.app/blog/75-percent-tasks" />
+  </url>
+
+  <url>
+    <loc>https://signal-noise.app/blog/elon-musk-100-signal</loc>
+    <lastmod>2025-09-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://signal-noise.app/blog/elon-musk-100-signal" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://signal-noise.app/blog/elon-musk-100-signal" />
   </url>
 
 </urlset>
