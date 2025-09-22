@@ -8,6 +8,10 @@ import SeventyFivePercentArticle from './articles/SeventyFivePercentArticle';
 import ElonMuskArticle from './articles/ElonMuskArticle';
 import KevinOLearyArticle from './articles/KevinOLearyArticle';
 import FoundersParadoxArticle from './articles/FoundersParadoxArticle';
+import SignalVsNoisePhilosophyArticle from './articles/SignalVsNoisePhilosophyArticle';
+import NinetyDayTrackingArticle from './articles/NinetyDayTrackingArticle';
+import FocusAgeDistractionArticle from './articles/FocusAgeDistractionArticle';
+import MathematicsProductivityArticle from './articles/MathematicsProductivityArticle';
 
 // Import blog posts configuration
 import { blogPosts } from './BlogIndex';
@@ -67,6 +71,42 @@ const articles: Record<string, ArticleContent> = {
     descriptionDe: 'Entdecke warum unternehmerische Freiheit den Fokus zerstört und wie die Signal vs Noise Methode Gründern hilft, das Produktivitäts-Paradoxon zu überwinden. Daten von 1.247 Unternehmern enthüllen die brutale Wahrheit.',
     keywords: ['founder productivity paradox', 'entrepreneur focus challenges', 'freedom kills productivity', 'startup CEO time management', 'entrepreneurial decision fatigue'],
     publishDate: '2025-10-06'
+  },
+  'signal-vs-noise-philosophy': {
+    component: SignalVsNoisePhilosophyArticle,
+    title: 'Signal vs Noise: A Philosophy for Modern Life',
+    titleDe: 'Signal vs Noise: Eine Philosophie für das moderne Leben',
+    description: 'How information theory became the secret weapon of history\'s most focused achievers. Discover binary thinking for breakthrough productivity and decision-making clarity.',
+    descriptionDe: 'Wie die Informationstheorie zur Geheimwaffe der fokussiertesten Menschen der Geschichte wurde. Entdecke binäres Denken für Durchbruch-Produktivität und Entscheidungsklarheit.',
+    keywords: ['signal vs noise meaning', 'information theory productivity', 'binary decision making', 'claude shannon productivity', 'focus philosophy'],
+    publishDate: '2025-10-13'
+  },
+  '90-day-tracking-experiment': {
+    component: NinetyDayTrackingArticle,
+    title: 'My 90-Day Signal vs Noise Experiment: Shocking Results',
+    titleDe: 'Mein 90-Tage Signal vs Noise Experiment: Schockierende Ergebnisse',
+    description: 'Personal case study: How I went from 23% to 81% signal ratio—and why day 47 changed everything. Real data from a 90-day productivity tracking experiment.',
+    descriptionDe: 'Persönliche Fallstudie: Wie ich von 23% auf 81% Signal-Verhältnis kam—und warum Tag 47 alles veränderte. Echte Daten aus einem 90-tägigen Produktivitäts-Tracking-Experiment.',
+    keywords: ['productivity tracking 90 day challenge', 'signal ratio experiment', 'personal productivity case study', 'tracking productivity results', '90 day productivity transformation'],
+    publishDate: '2025-10-20'
+  },
+  'focus-age-distraction': {
+    component: FocusAgeDistractionArticle,
+    title: 'Focus in the Age of Distraction: The New Digital Reality',
+    titleDe: 'Fokus im Zeitalter der Ablenkung: Die neue digitale Realität',
+    description: 'Cal Newport\'s digital minimalism meets Signal vs Noise thinking. Learn to maintain focus in a world designed to fragment your attention.',
+    descriptionDe: 'Cal Newports digitaler Minimalismus trifft auf Signal vs Noise Denken. Lerne, Fokus in einer Welt zu bewahren, die darauf ausgelegt ist, deine Aufmerksamkeit zu fragmentieren.',
+    keywords: ['digital minimalism focus', 'cal newport deep work', 'attention economy resistance', 'focus in distraction age', 'technology boundaries productivity'],
+    publishDate: '2025-10-27'
+  },
+  'mathematics-productivity': {
+    component: MathematicsProductivityArticle,
+    title: 'The Mathematics of Productivity: Why 80% of Your Tasks Don\'t Matter',
+    titleDe: 'Die Mathematik der Produktivität: Warum 80% Ihrer Aufgaben unwichtig sind',
+    description: 'Mathematical proof behind the Pareto Principle: How power law distributions explain why most tasks generate little value and how to optimize accordingly.',
+    descriptionDe: 'Mathematischer Beweis hinter dem Pareto-Prinzip: Wie Potenzgesetz-Verteilungen erklären, warum die meisten Aufgaben wenig Wert erzeugen und wie man entsprechend optimiert.',
+    keywords: ['pareto principle mathematics', '80/20 rule mathematical proof', 'power law productivity', 'mathematical optimization productivity', 'task value distribution'],
+    publishDate: '2025-11-03'
   }
 };
 

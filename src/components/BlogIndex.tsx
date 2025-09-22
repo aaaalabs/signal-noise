@@ -86,43 +86,43 @@ export const blogPosts: BlogPost[] = [
     readTime: '6 min',
     keywords: ['signal vs noise', 'philosophy', 'information theory'],
     publishDate: '2025-10-13',
-    isPublished: false
+    isPublished: true
   },
   {
-    slug: 'tracked-ratio-90-days',
-    title: 'I Tracked My Signal Ratio for 90 Days',
-    titleDe: 'Ich habe mein Signal-Verhältnis 90 Tage lang verfolgt',
-    description: 'Personal experiment revealing surprising patterns in signal vs noise productivity',
-    descriptionDe: 'Persönliches Experiment enthüllt überraschende Muster in Signal vs Noise Produktivität',
+    slug: '90-day-tracking-experiment',
+    title: 'My 90-Day Signal vs Noise Experiment: Shocking Results',
+    titleDe: 'Mein 90-Tage Signal vs Noise Experiment: Schockierende Ergebnisse',
+    description: 'Personal case study: How I went from 23% to 81% signal ratio—and why day 47 changed everything',
+    descriptionDe: 'Persönliche Fallstudie: Wie ich von 23% auf 81% Signal-Verhältnis kam—und warum Tag 47 alles veränderte',
     date: '20 Oct 2025',
-    readTime: '7 min',
-    keywords: ['productivity tracking', '90 day challenge', 'signal ratio'],
+    readTime: '8 min',
+    keywords: ['productivity tracking 90 day challenge', 'signal ratio experiment', 'personal productivity case study'],
     publishDate: '2025-10-20',
-    isPublished: false
+    isPublished: true
   },
   {
     slug: 'focus-age-distraction',
-    title: 'Maintaining Focus in the Age of Distraction',
-    titleDe: 'Fokus bewahren im Zeitalter der Ablenkung',
-    description: 'Cal Newport\'s frameworks for maintaining focus in technology-saturated world',
-    descriptionDe: 'Cal Newports Frameworks für die Aufrechterhaltung des Fokus in einer technologiegesättigten Welt',
+    title: 'Focus in the Age of Distraction: The New Digital Reality',
+    titleDe: 'Fokus im Zeitalter der Ablenkung: Die neue digitale Realität',
+    description: 'Cal Newport\'s digital minimalism meets Signal vs Noise thinking for the attention economy',
+    descriptionDe: 'Cal Newports digitaler Minimalismus trifft auf Signal vs Noise Denken für die Aufmerksamkeitsökonomie',
     date: '27 Oct 2025',
-    readTime: '5 min',
-    keywords: ['digital minimalism', 'deep work', 'focus'],
+    readTime: '7 min',
+    keywords: ['digital minimalism focus', 'cal newport deep work', 'attention economy resistance'],
     publishDate: '2025-10-27',
-    isPublished: false
+    isPublished: true
   },
   {
     slug: 'mathematics-productivity',
-    title: 'The Mathematics of Productivity: Why 80/20 Works',
-    titleDe: 'Die Mathematik der Produktivität: Warum 80/20 funktioniert',
-    description: 'Mathematical proof behind why 80% of results come from 20% of effort',
-    descriptionDe: 'Mathematischer Beweis dafür, warum 80% der Ergebnisse aus 20% des Aufwands stammen',
+    title: 'The Mathematics of Productivity: Why 80% of Your Tasks Don\'t Matter',
+    titleDe: 'Die Mathematik der Produktivität: Warum 80% Ihrer Aufgaben unwichtig sind',
+    description: 'Mathematical proof behind the Pareto Principle and power law distributions in productivity',
+    descriptionDe: 'Mathematischer Beweis hinter dem Pareto-Prinzip und Potenzgesetz-Verteilungen in der Produktivität',
     date: '3 Nov 2025',
-    readTime: '8 min',
-    keywords: ['pareto principle', '80/20 rule', 'mathematics'],
+    readTime: '9 min',
+    keywords: ['pareto principle mathematics', '80/20 rule mathematical proof', 'power law productivity'],
     publishDate: '2025-11-03',
-    isPublished: false
+    isPublished: true
   },
   {
     slug: 'building-signal-noise-story',
