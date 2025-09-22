@@ -12,6 +12,7 @@ import SignalVsNoisePhilosophyArticle from './articles/SignalVsNoisePhilosophyAr
 import NinetyDayTrackingArticle from './articles/NinetyDayTrackingArticle';
 import FocusAgeDistractionArticle from './articles/FocusAgeDistractionArticle';
 import MathematicsProductivityArticle from './articles/MathematicsProductivityArticle';
+import BuildingSignalNoiseStoryArticle from './articles/BuildingSignalNoiseStoryArticle';
 
 // Import blog posts configuration
 import { blogPosts } from './BlogIndex';
@@ -107,6 +108,15 @@ const articles: Record<string, ArticleContent> = {
     descriptionDe: 'Mathematischer Beweis hinter dem Pareto-Prinzip: Wie Potenzgesetz-Verteilungen erklären, warum die meisten Aufgaben wenig Wert erzeugen und wie man entsprechend optimiert.',
     keywords: ['pareto principle mathematics', '80/20 rule mathematical proof', 'power law productivity', 'mathematical optimization productivity', 'task value distribution'],
     publishDate: '2025-11-03'
+  },
+  'building-signal-noise-story': {
+    component: BuildingSignalNoiseStoryArticle,
+    title: 'Building Signal/Noise: From Crisis to App',
+    titleDe: 'Building Signal/Noise: Von der Krise zur App',
+    description: 'Founder journey from personal productivity struggles to app creation. The authentic story behind the Signal vs Noise method and how a 3:47 AM crisis became a productivity revolution.',
+    descriptionDe: 'Gründerreise von persönlichen Produktivitätsproblemen zur App-Erstellung. Die authentische Geschichte hinter der Signal vs Noise Methode und wie eine 3:47 Uhr Krise zu einer Produktivitäts-Revolution wurde.',
+    keywords: ['startup story', 'app development', 'founder journey', 'productivity crisis', 'signal noise app creation'],
+    publishDate: '2025-11-10'
   }
 };
 

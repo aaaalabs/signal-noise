@@ -138,4 +138,13 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://signal-noise.app/blog/mathematics-productivity" />
   </url>
 
+  <url>
+    <loc>https://signal-noise.app/blog/building-signal-noise-story</loc>
+    <lastmod>2025-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://signal-noise.app/blog/building-signal-noise-story" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://signal-noise.app/blog/building-signal-noise-story" />
+  </url>
+
 </urlset>
