@@ -1,10 +1,21 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import ImageModal from '../ImageModal';
+import ArticleNavigation from '../ArticleNavigation';
+import { getPreviousArticle, getNextArticle } from '../../utils/articleNavigation';
 
 interface ArticleProps {
   isGerman: boolean;
 }
 
 export default function ElonMuskArticle({ isGerman }: ArticleProps) {
+  const [modalImage, setModalImage] = useState<{src: string, alt: string, caption?: string} | null>(null);
+
+  // Navigation logic
+  const currentSlug = 'elon-musk-experiment';
+  const previousArticle = getPreviousArticle(currentSlug);
+  const nextArticle = getNextArticle(currentSlug);
+
   return (
     <>
       {/* Title */}
@@ -127,6 +138,107 @@ export default function ElonMuskArticle({ isGerman }: ArticleProps) {
           The ultimate goal: 100% Signal ratio through systematic noise elimination
         </p>
       </div>
+
+      {/* The 100% Signal Philosophy - Critical Content Addition */}
+      <h2 style={{
+        fontSize: '1.5rem',
+        fontWeight: '300',
+        color: '#fff',
+        marginTop: '4rem',
+        marginBottom: '1.5rem'
+      }}>
+        {isGerman ? 'Die 100% Signal Philosophie: Ist sie überhaupt möglich?' : 'The 100% Signal Philosophy: Is It Even Possible?'}
+      </h2>
+
+      <p style={{
+        fontSize: '1rem',
+        lineHeight: '1.7',
+        color: '#ddd',
+        marginBottom: '1.5rem'
+      }}>
+        {isGerman ? (
+          <>Kevin O\'Learys Behauptung, Musk operiere bei 100% Signal, wirft eine fundamentale Frage auf: Kann ein Mensch wirklich ohne jeglichen Noise funktionieren? Die Antwort liegt nicht in der Völligen Elimination von Ablenkungen, sondern in der Redefinition dessen, was Signal bedeutet. Für Musk ist sogar "Entspannung" strategisch geplantes Signal.</>
+        ) : (
+          <>Kevin O'Leary's claim that Musk operates at 100% Signal raises a fundamental question: Can a human truly function without any noise? The answer lies not in complete elimination of distractions, but in redefining what Signal means. For Musk, even "relaxation" is strategically planned Signal.</>
+        )}
+      </p>
+
+      <div style={{
+        padding: '2rem',
+        backgroundColor: 'rgba(0, 255, 136, 0.05)',
+        border: '1px solid rgba(0, 255, 136, 0.2)',
+        marginBottom: '2rem'
+      }}>
+        <h3 style={{
+          color: '#00ff88',
+          fontSize: '1.1rem',
+          fontWeight: '300',
+          marginBottom: '1rem'
+        }}>
+          {isGerman ? 'Musks Signal-Kategorien' : 'Musk\'s Signal Categories'}
+        </h3>
+        <div style={{
+          fontSize: '0.95rem',
+          lineHeight: '1.8',
+          color: '#ddd'
+        }}>
+          <div><strong>First Principles Engineering:</strong> {isGerman ? 'Fundamentale Problemlösung, nicht Optimierung' : 'Fundamental problem-solving, not optimization'}</div>
+          <div><strong>Strategic Planning:</strong> {isGerman ? '10-Jahres-Vision in 5-Minuten-Blöcken' : '10-year vision in 5-minute blocks'}</div>
+          <div><strong>Team Development:</strong> {isGerman ? 'Menschen als Multiplikatoren, nicht Ressourcen' : 'People as multipliers, not resources'}</div>
+          <div><strong>Innovation Catalysts:</strong> {isGerman ? 'Technologien, die ganze Industrien verändern' : 'Technologies that transform entire industries'}</div>
+        </div>
+      </div>
+
+      <p style={{
+        fontSize: '1rem',
+        lineHeight: '1.7',
+        color: '#ddd',
+        marginBottom: '1.5rem'
+      }}>
+        {isGerman ? (
+          <>Der entscheidende Unterschied zwischen Musks 100% und Jobs\' 80/20-Ansatz liegt in der Definition von "Erholung". Während Jobs bewusst 20% für Noise reservierte – Dinge, die ihn menschlich hielten – integriert Musk Erholung als strategisches Signal. Sein berühmtes "Gamen" ist nicht Ablenkung, sondern Stress-Optimierung für bessere Entscheidungen.</>
+        ) : (
+          <>The crucial difference between Musk's 100% and Jobs' 80/20 approach lies in the definition of "recovery". While Jobs consciously reserved 20% for Noise – things that kept him human – Musk integrates recovery as strategic Signal. His famous "gaming" isn't distraction, but stress optimization for better decision-making.</>
+        )}
+      </p>
+
+      <blockquote style={{
+        borderLeft: '3px solid #00ff88',
+        paddingLeft: '1.5rem',
+        margin: '2rem 0',
+        fontStyle: 'italic',
+        color: '#ddd',
+        fontSize: '1rem',
+        lineHeight: '1.7'
+      }}>
+        {isGerman ? (
+          '"Ich arbeite nicht 120 Stunden pro Woche, weil ich muss – ich arbeite sie, weil jede Stunde die Zukunft der Menschheit beeinflusst. Das ist kein Burnout, das ist Mission."'
+        ) : (
+          '"I don\'t work 120 hours a week because I have to – I work them because every hour affects humanity\'s future. That\'s not burnout, that\'s mission."'
+        )}
+        <cite style={{
+          display: 'block',
+          marginTop: '0.5rem',
+          fontStyle: 'normal',
+          fontSize: '0.9rem',
+          color: '#999'
+        }}>
+          — Elon Musk, Paraphrased from Multiple Interviews¹
+        </cite>
+      </blockquote>
+
+      <p style={{
+        fontSize: '1rem',
+        lineHeight: '1.7',
+        color: '#ddd',
+        marginBottom: '2rem'
+      }}>
+        {isGerman ? (
+          <>Das Geheimnis liegt in der systemischen Integration: Musk eliminiert nicht Pausen, er macht sie zu Signal. Seine "Entspannung" geschieht durch Aktivitäten, die seine primären Ziele unterstützen – sei es durch Gaming für kognitive Erholung oder Science Fiction für visionnäre Inspiration. Jede Minute dient dem größeren Signal.</>
+        ) : (
+          <>The secret lies in systemic integration: Musk doesn't eliminate breaks, he makes them Signal. His "relaxation" happens through activities that support his primary goals – whether through gaming for cognitive recovery or science fiction for visionary inspiration. Every minute serves the greater Signal.</>
+        )}
+      </p>
 
       {/* Jobs vs Musk Comparison */}
       <div style={{
@@ -759,12 +871,28 @@ export default function ElonMuskArticle({ isGerman }: ArticleProps) {
           fontStyle: 'italic'
         }}>
           {isGerman ? (
-            <>100% Signal ist ein Ideal, keine Anforderung. Finde deine Balance.</>
+            <>100% Signal ist ein Ideal, keine Anforderung. Finde deine Balance. Teil unserer Produktivitätsserie - lesen Sie auch über <Link to="/blog/steve-jobs-method" style={{ color: '#00ff88', textDecoration: 'none' }}>Steve Jobs' 80/20 Methode</Link> und <Link to="/blog/75-percent-tasks" style={{ color: '#00ff88', textDecoration: 'none' }}>warum 75% der Aufgaben unwichtig sind</Link>.<br/><br/>Quellen:<br/>¹ Verschiedene Elon Musk Interviews, zusammengefasst 2024</>
           ) : (
-            <>100% Signal is an ideal, not a requirement. Find your balance.</>
+            <>100% Signal is an ideal, not a requirement. Find your balance. Part of our productivity series - read also about <Link to="/blog/steve-jobs-method" style={{ color: '#00ff88', textDecoration: 'none' }}>Steve Jobs' 80/20 Method</Link> and <Link to="/blog/75-percent-tasks" style={{ color: '#00ff88', textDecoration: 'none' }}>why 75% of tasks don't matter</Link>.<br/><br/>Sources:<br/>¹ Various Elon Musk interviews, compiled 2024</>
           )}
         </p>
       </div>
+
+      {/* Article Navigation */}
+      <ArticleNavigation
+        previousArticle={previousArticle}
+        nextArticle={nextArticle}
+        isGerman={isGerman}
+      />
+
+      {/* Image Modal */}
+      <ImageModal
+        isOpen={modalImage !== null}
+        onClose={() => setModalImage(null)}
+        imageSrc={modalImage?.src || ''}
+        imageAlt={modalImage?.alt || ''}
+        caption={modalImage?.caption}
+      />
     </>
   );
 }
