@@ -5,7 +5,7 @@
   <!-- Main App -->
   <url>
     <loc>https://signal-noise.app/</loc>
-    <lastmod>2025-01-13</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://signal-noise.app/" />
@@ -15,7 +15,7 @@
   <!-- About Page (SEO-optimized information page) -->
   <url>
     <loc>https://signal-noise.app/about</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://signal-noise.app/about" />
@@ -25,7 +25,7 @@
   <!-- Success Page (for completed purchases) -->
   <url>
     <loc>https://signal-noise.app/success</loc>
-    <lastmod>2025-01-13</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -33,7 +33,7 @@
   <!-- Invoice Routes (dynamic but crawlable pattern) -->
   <url>
     <loc>https://signal-noise.app/invoice/</loc>
-    <lastmod>2025-01-13</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -41,7 +41,7 @@
   <!-- Alternative URL patterns (if accessed directly) -->
   <url>
     <loc>https://signal-noise.app/app</loc>
-    <lastmod>2025-01-13</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -49,14 +49,14 @@
   <!-- Blog Index -->
   <url>
     <loc>https://signal-noise.app/blog</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://signal-noise.app/blog" />
     <xhtml:link rel="alternate" hreflang="de" href="https://signal-noise.app/blog" />
   </url>
 
-  <!-- Blog Articles -->
+  <!-- Blog Articles (Only Published) -->
   <url>
     <loc>https://signal-noise.app/blog/steve-jobs-method</loc>
     <lastmod>2025-09-21</lastmod>
@@ -65,7 +65,6 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://signal-noise.app/blog/steve-jobs-method" />
     <xhtml:link rel="alternate" hreflang="de" href="https://signal-noise.app/blog/steve-jobs-method" />
   </url>
-
   <url>
     <loc>https://signal-noise.app/blog/75-percent-tasks</loc>
     <lastmod>2025-09-14</lastmod>
@@ -74,7 +73,6 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://signal-noise.app/blog/75-percent-tasks" />
     <xhtml:link rel="alternate" hreflang="de" href="https://signal-noise.app/blog/75-percent-tasks" />
   </url>
-
   <url>
     <loc>https://signal-noise.app/blog/elon-musk-100-signal</loc>
     <lastmod>2025-09-07</lastmod>
@@ -82,69 +80,6 @@
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://signal-noise.app/blog/elon-musk-100-signal" />
     <xhtml:link rel="alternate" hreflang="de" href="https://signal-noise.app/blog/elon-musk-100-signal" />
-  </url>
-
-  <url>
-    <loc>https://signal-noise.app/blog/kevin-oleary-was-right</loc>
-    <lastmod>2025-09-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://signal-noise.app/blog/kevin-oleary-was-right" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://signal-noise.app/blog/kevin-oleary-was-right" />
-  </url>
-
-  <url>
-    <loc>https://signal-noise.app/blog/founder-productivity-paradox</loc>
-    <lastmod>2025-10-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://signal-noise.app/blog/founder-productivity-paradox" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://signal-noise.app/blog/founder-productivity-paradox" />
-  </url>
-
-  <url>
-    <loc>https://signal-noise.app/blog/signal-vs-noise-philosophy</loc>
-    <lastmod>2025-10-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://signal-noise.app/blog/signal-vs-noise-philosophy" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://signal-noise.app/blog/signal-vs-noise-philosophy" />
-  </url>
-
-  <url>
-    <loc>https://signal-noise.app/blog/90-day-tracking-experiment</loc>
-    <lastmod>2025-10-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://signal-noise.app/blog/90-day-tracking-experiment" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://signal-noise.app/blog/90-day-tracking-experiment" />
-  </url>
-
-  <url>
-    <loc>https://signal-noise.app/blog/focus-age-distraction</loc>
-    <lastmod>2025-10-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://signal-noise.app/blog/focus-age-distraction" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://signal-noise.app/blog/focus-age-distraction" />
-  </url>
-
-  <url>
-    <loc>https://signal-noise.app/blog/mathematics-productivity</loc>
-    <lastmod>2025-11-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://signal-noise.app/blog/mathematics-productivity" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://signal-noise.app/blog/mathematics-productivity" />
-  </url>
-
-  <url>
-    <loc>https://signal-noise.app/blog/building-signal-noise-story</loc>
-    <lastmod>2025-11-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://signal-noise.app/blog/building-signal-noise-story" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://signal-noise.app/blog/building-signal-noise-story" />
   </url>
 
 </urlset>

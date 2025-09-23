@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "node scripts/generate-sitemap.js && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
+    "generate:sitemap": "node scripts/generate-sitemap.js",
     "test:redis": "node test-redis.js",
     "test:stripe": "node test-api-logic.js",
     "test:webhook": "node test-stripe-webhook.js",
