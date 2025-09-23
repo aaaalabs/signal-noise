@@ -1,0 +1,104 @@
+{
+  "mathematical_concepts_for_visualization": [
+    {
+      "concept": "Pareto Distribution Power Law",
+      "visual_type": "Graph/Chart",
+      "description": "Power law curve showing 80/20 distribution",
+      "data_points": "X-axis: Input effort (0-100%), Y-axis: Output results (0-100%)",
+      "key_elements": [
+        "Steep curve showing exponential relationship",
+        "80% marker on Y-axis, 20% marker on X-axis",
+        "Comparison with normal distribution curve",
+        "Mathematical formula: α = log45 ≈ 1.16"
+      ],
+      "color_scheme": "Signal green (#00ff88) for curve, gray for normal distribution",
+      "usage": "Primary visualization for mathematical foundation section"
+    },
+    {
+      "concept": "Task Value Distribution",
+      "visual_type": "Bar Chart / Histogram",
+      "description": "Distribution of task values showing concentration in top 20%",
+      "data_simulation": [
+        "100 tasks with varying value scores",
+        "Top 20 tasks = 80% of total value",
+        "Bottom 80 tasks = 20% of total value"
+      ],
+      "visual_elements": [
+        "Tasks ranked by value (descending)",
+        "Color coding: High value (green), Low value (gray)",
+        "Cumulative percentage line overlay",
+        "Clear 80/20 division marker"
+      ],
+      "usage": "Practical demonstration of Pareto Principle in task management"
+    },
+    {
+      "concept": "Signal vs Noise Ratio Visualization",
+      "visual_type": "Pie Chart / Donut Chart",
+      "description": "Visual representation of 80% Signal, 20% Noise time allocation",
+      "design_specs": [
+        "Large green section (80%) labeled 'Signal'",
+        "Small gray section (20%) labeled 'Noise'",
+        "Clean, minimal design matching app aesthetics",
+        "Percentage labels with clear typography"
+      ],
+      "variations": [
+        "Comparison charts: 30% vs 80% signal ratios",
+        "Before/after productivity transformation",
+        "Industry benchmarks vs optimized ratios"
+      ],
+      "usage": "Article header image and methodology explanation"
+    },
+    {
+      "concept": "Productivity Optimization Graph",
+      "visual_type": "Line Graph",
+      "description": "Performance improvement over time with Signal vs Noise methodology",
+      "time_series_data": [
+        "X-axis: Days/Weeks of implementation",
+        "Y-axis: Productivity score or signal percentage",
+        "Multiple lines for different implementation strategies"
+      ],
+      "visual_features": [
+        "Upward trending curve showing improvement",
+        "Milestone markers (7 days, 30 days, 90 days)",
+        "Confidence intervals or error bars",
+        "Comparison with baseline productivity"
+      ],
+      "mathematical_backing": "Real data points from productivity studies",
+      "usage": "Supporting evidence for methodology effectiveness"
+    }
+  ],
+  "technical_specifications": [
+    {
+      "format": "SVG for scalability",
+      "dimensions": "1200x800px standard, responsive variants",
+      "color_palette": ["#00ff88", "#ffffff", "#666666", "#000000"],
+      "typography": "Sans-serif, matching Signal/Noise app font stack",
+      "accessibility": "High contrast, screen reader compatible"
+    }
+  ],
+  "creation_methods": [
+    {
+      "tool": "Data visualization libraries (D3.js, Chart.js)",
+      "benefits": "Interactive elements, precise mathematical accuracy",
+      "implementation": "Code-generated charts with real mathematical formulas"
+    },
+    {
+      "tool": "Design software (Figma, Adobe Illustrator)",
+      "benefits": "Professional visual quality, brand consistency",
+      "implementation": "Static designs optimized for web display"
+    },
+    {
+      "tool": "Python/R mathematical plotting",
+      "benefits": "Scientific accuracy, complex mathematical relationships",
+      "implementation": "Generated from actual Pareto distribution calculations"
+    }
+  ],
+  "integration_strategy": [
+    {
+      "article_placement": "Mathematical concepts section - inline with explanations",
+      "user_experience": "Visual learning for complex mathematical concepts",
+      "mobile_optimization": "Responsive design, readable on all devices",
+      "load_performance": "Optimized file sizes, lazy loading for images"
+    }
+  ]
+}

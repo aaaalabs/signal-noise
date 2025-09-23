@@ -1,0 +1,66 @@
+{
+  "source": "Wikipedia - Steve Jobs Article",
+  "extraction_date": "2024-09-22",
+  "license_type": "Wikimedia Commons / Fair Use",
+  "available_images": [
+    {
+      "title": "Steve Jobs Headshot (2010)",
+      "location": "Article infobox",
+      "description": "Cropped portrait photo from 2010",
+      "usage_context": "Primary portrait for article header",
+      "license": "Wikimedia Commons",
+      "quality": "High resolution available",
+      "attribution": "Wikipedia / Wikimedia Commons"
+    },
+    {
+      "title": "Jobs with Macintosh (January 1984)",
+      "photographer": "Bernard Gotfryd",
+      "description": "Iconic photo of Jobs standing next to early Macintosh computer",
+      "usage_context": "Historical productivity methodology context",
+      "significance": "Demonstrates focus on single revolutionary product",
+      "license": "Likely Fair Use / Wikimedia Commons",
+      "attribution": "Bernard Gotfryd / Wikipedia"
+    },
+    {
+      "title": "Early Macintosh Prototype (c. 1981)",
+      "location": "Computer History Museum, Mountain View, California",
+      "description": "Early development model of the Macintosh",
+      "usage_context": "Innovation and focus methodology",
+      "significance": "Shows iterative design process",
+      "license": "Museum documentation / Fair Use"
+    },
+    {
+      "title": "Homestead High School Yearbook (1972)",
+      "description": "Young Jobs with longer hair during counterculture period",
+      "usage_context": "Early influences and thinking evolution",
+      "significance": "Shows personal development trajectory",
+      "license": "Public Domain / Historical documentation"
+    },
+    {
+      "title": "Jobs with Wendell Brown (January 1984)",
+      "description": "Software launch event in professional setting",
+      "usage_context": "Business leadership and product focus",
+      "significance": "Demonstrates presentation and leadership style",
+      "license": "Fair Use / Historical documentation"
+    },
+    {
+      "title": "Steve Jobs Signature",
+      "location": "Article infobox",
+      "description": "Graphical representation of his signature",
+      "usage_context": "Personal branding and identity",
+      "license": "Public Domain / Fair Use"
+    }
+  ],
+  "download_instructions": {
+    "step_1": "Visit specific Wikimedia Commons pages for full resolution",
+    "step_2": "Check individual image licensing on description pages",
+    "step_3": "Download highest available resolution",
+    "step_4": "Document proper attribution requirements"
+  },
+  "usage_compliance": {
+    "attribution_required": true,
+    "commercial_use": "Generally allowed with proper attribution",
+    "modification_allowed": "Check specific license terms",
+    "credit_format": "[Photographer] / Wikipedia / Wikimedia Commons"
+  }
+}

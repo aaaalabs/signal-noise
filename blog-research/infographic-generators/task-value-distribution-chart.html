@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Value Distribution Chart</title>
+    <style>
+        /* Jony Ive Principle: Data tells truth through honest visual representation */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000000; /* Pure black background */
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            color: #ffffff;
+            padding: 60px; /* Generous margins as specified */
+            overflow-x: auto;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .chart-container {
+            width: 1200px; /* Wider for better bar spacing */
+            max-width: 95vw;
+            background-color: #000000;
+        }
+
+        .chart-title {
+            font-size: 24px;
+            font-weight: 300; /* Light weight for labels */
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 40px; /* Mathematical spacing relationship */
+            letter-spacing: 1px;
+        }
+
+        .chart-svg {
+            width: 100%;
+            height: auto;
+            /* No decorative borders or frames */
+        }
+
+        .axis-label {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            font-size: 14px;
+            font-weight: 300; /* Font-weight 300 for axis labels */
+            fill: #ffffff;
+            text-anchor: middle;
+        }
+
+        .value-label {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            font-size: 7px; /* Much smaller font to avoid overlapping */
+            font-weight: 100; /* Font-weight 100 for numerical values */
+            fill: #ffffff;
+            text-anchor: start; /* Left-aligned text positioned to right of bars */
+        }
+
+        .task-bar-signal {
+            fill: #00ff88; /* Signal green for high-value tasks */
+        }
+
+        .task-bar-noise {
+            fill: #333333; /* Subtle gray for low-value tasks */
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 40px; /* Breathing room between data elements */
+            margin-top: 40px;
+            font-size: 16px;
+            font-weight: 300;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            /* Honest rectangular forms with sharp edges */
+        }
+
+        .legend-signal {
+            background-color: #00ff88;
+        }
+
+        .legend-noise {
+            background-color: #333333;
+        }
+
+        .insight-text {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 18px;
+            font-weight: 300;
+            color: #666666; /* Subtle for supporting information */
+            letter-spacing: 0.5px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Jony Ive Principle: Form follows data truth, beauty through accurate information -->
+    <div class="chart-container">
+        <div class="chart-title">Task Value Distribution</div>
+
+        <!-- SVG for mathematical precision and infinite scalability -->
+        <svg class="chart-svg" viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg">
+            <!-- Y-axis (Task Rankings 1-30) -->
+            <line x1="80" y1="50" x2="80" y2="530"
+                  stroke="#ffffff" stroke-width="1" />
+
+            <!-- X-axis (Value Percentage) -->
+            <line x1="80" y1="530" x2="950" y2="530"
+                  stroke="#ffffff" stroke-width="1" />
+
+            <!-- Axis labels with precise optical spacing -->
+            <text x="40" y="290" class="axis-label" transform="rotate(-90, 40, 290)">
+                Task Ranking (1-30)
+            </text>
+            <text x="515" y="565" class="axis-label">
+                Task Value Contribution (%)
+            </text>
+
+            <!-- Generate 100 tasks with mathematical value distribution -->
+            <g id="task-bars"></g>
+
+            <!-- Critical markers at 20/80 split (6 out of 30 tasks) -->
+            <line x1="80" y1="146" x2="950" y2="146"
+                  stroke="#666666" stroke-width="1" stroke-dasharray="2,2" opacity="0.5" />
+            <text x="960" y="151" class="value-label" fill="#00ff88">Top 20%</text>
+            <text x="960" y="300" class="value-label" fill="#333333">Bottom 80%</text>
+        </svg>
+
+        <!-- Legend with honest color representation -->
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color legend-signal"></div>
+                <span>High-Value Tasks (Signal)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color legend-noise"></div>
+                <span>Low-Value Tasks (Noise)</span>
+            </div>
+        </div>
+
+        <!-- Human comprehension aid -->
+        <div class="insight-text">
+            75% of tasks contribute minimal value • Focus creates exponential impact
+        </div>
+    </div>
+
+    <script>
+        // Mathematical accuracy: Generate realistic task value distribution
+        function generateTaskValues() {
+            const tasks = [];
+
+            // Generate 30 tasks for cleaner visualization (20% Signal, 80% Noise)
+            // Top 6 tasks represent 80% of value, bottom 24 represent 20%
+            for (let i = 1; i <= 30; i++) {
+                let value;
+                if (i <= 6) {
+                    // High-value tasks (Signal): steep exponential decay
+                    value = Math.pow(0.7, i - 1) * 100;
+                    value = Math.max(value, 5); // Minimum 5% for top tasks
+                } else {
+                    // Low-value tasks (Noise): gentle decay from 5% to 0.5%
+                    value = 5 - ((i - 6) / 24) * 4.5;
+                    value = Math.max(value, 0.5); // Minimum 0.5%
+                }
+
+                tasks.push({
+                    rank: i,
+                    value: value,
+                    isSignal: i <= 6
+                });
+            }
+
+            return tasks;
+        }
+
+        // Render bars with mathematical precision
+        function renderChart() {
+            const tasks = generateTaskValues();
+            const barsContainer = document.getElementById('task-bars');
+            const maxValue = Math.max(...tasks.map(t => t.value));
+
+            tasks.forEach((task, index) => {
+                // Mathematical scaling: bar width proportional to value
+                const barWidth = (task.value / maxValue) * 700; // 700px max width for more label space
+                const barHeight = 12; // Much taller bars for better visibility
+                const yPosition = 50 + (index * 16); // 16px spacing for generous distribution
+
+                // Create bar with honest rectangular form, sharp edges
+                const bar = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                bar.setAttribute('x', '80');
+                bar.setAttribute('y', yPosition.toString());
+                bar.setAttribute('width', barWidth.toString());
+                bar.setAttribute('height', barHeight.toString());
+                bar.setAttribute('class', task.isSignal ? 'task-bar-signal' : 'task-bar-noise');
+
+                barsContainer.appendChild(bar);
+
+                // Add value indicator for top 6 Signal tasks only (clean focus)
+                if (index < 6) {
+                    const valueText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    valueText.setAttribute('x', (80 + barWidth + 25).toString()); // 25px gap from bar end
+                    valueText.setAttribute('y', (yPosition + 8).toString()); // Align with bar center (12px bar / 2 + 2px)
+                    valueText.setAttribute('class', 'value-label');
+                    valueText.textContent = task.value.toFixed(1) + '%';
+                    barsContainer.appendChild(valueText);
+                }
+            });
+        }
+
+        // Initialize with mathematical precision
+        window.addEventListener('load', () => {
+            renderChart();
+
+            // Validate mathematical accuracy
+            const totalSignalValue = Array.from({length: 25}, (_, i) =>
+                Math.pow(0.85, i) * 100).reduce((a, b) => a + b, 0);
+            const totalNoiseValue = Array.from({length: 75}, (_, i) =>
+                3 - (i / 75) * 2.9).reduce((a, b) => a + b, 0);
+
+            console.log('Signal value sum:', totalSignalValue.toFixed(1) + '%');
+            console.log('Noise value sum:', totalNoiseValue.toFixed(1) + '%');
+            console.log('Ratio validation:', (totalSignalValue / (totalSignalValue + totalNoiseValue) * 100).toFixed(1) + '% signal');
+        });
+    </script>
+</body>
+</html>

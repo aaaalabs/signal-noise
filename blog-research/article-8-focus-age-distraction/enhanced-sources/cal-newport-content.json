@@ -1,0 +1,35 @@
+{
+  "source": "Cal Newport - calnewport.com",
+  "fetched_date": "2024-09-22",
+  "content_type": "Website content extraction",
+  "relevance": "Primary authority for Focus in Age of Distraction article",
+  "key_concepts": [
+    {
+      "concept": "Digital Minimalism Philosophy",
+      "description": "Advocates choosing a focused life in a noisy world",
+      "application": "Foundation for Signal vs Noise methodology in digital contexts"
+    },
+    {
+      "concept": "Deep Work Strategies",
+      "description": "Promotes focused success in a distracted world",
+      "application": "Specific tactics for maintaining signal focus"
+    }
+  ],
+  "actionable_quotes": [
+    "Deep Work: Rules for Focused Success in a Distracted World",
+    "A World Without Email: Reimagining Work in an Age of Communication Overload",
+    "choosing a focused life in a noisy world"
+  ],
+  "core_recommendations": [
+    "Critically examine digital technology's role in your life",
+    "Create deliberate practices to maintain concentration",
+    "Develop systems that protect deep, meaningful work",
+    "Reduce communication overload",
+    "Be intentional about technology consumption"
+  ],
+  "article_integration": {
+    "usage_context": "Primary framework for digital age focus strategies",
+    "connection_to_signal_noise": "Technology as potential noise source requiring intentional filtering",
+    "practical_applications": "Structured environments, communication systems, deep work blocks"
+  }
+}

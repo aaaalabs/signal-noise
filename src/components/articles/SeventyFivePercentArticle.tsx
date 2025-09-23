@@ -1,10 +1,21 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import ImageModal from '../ImageModal';
+import ArticleNavigation from '../ArticleNavigation';
+import { getPreviousArticle, getNextArticle } from '../../utils/articleNavigation';
 
 interface ArticleProps {
   isGerman: boolean;
 }
 
 export default function SeventyFivePercentArticle({ isGerman }: ArticleProps) {
+  const [modalImage, setModalImage] = useState<{src: string, alt: string, caption?: string} | null>(null);
+
+  // Navigation logic
+  const currentSlug = '75-percent-tasks';
+  const previousArticle = getPreviousArticle(currentSlug);
+  const nextArticle = getNextArticle(currentSlug);
+
   return (
     <>
       {/* Title */}
@@ -85,6 +96,81 @@ export default function SeventyFivePercentArticle({ isGerman }: ArticleProps) {
             <strong>Result: 8.7% of planned tasks create value</strong>
           </div>
         </div>
+      </div>
+
+      {/* Task Value Distribution Visualization */}
+      <div style={{
+        margin: '4rem 0',
+        textAlign: 'center',
+        clear: 'both'
+      }}>
+        <img
+          src="/blog-images/article-2-75-percent/task-value-distribution-wide.webp"
+          alt="Task value distribution chart showing dramatic 75/25 split - why most tasks contribute minimal value to productivity"
+          style={{
+            width: '100%',
+            maxWidth: '800px',
+            height: 'auto',
+            borderRadius: '12px',
+            border: '1px solid #333',
+            cursor: 'pointer',
+            transition: 'transform 0.2s'
+          }}
+          onClick={() => setModalImage({
+            src: "/blog-images/article-2-75-percent/task-value-distribution-wide.webp",
+            alt: "Task value distribution chart showing dramatic 75/25 split - why most tasks contribute minimal value to productivity",
+            caption: "Shocking reality: Top 20% of tasks generate 80% of value while bottom 80% contribute minimal impact"
+          })}
+          onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
+          onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+        />
+        <p style={{
+          fontSize: '0.8rem',
+          color: '#666',
+          marginTop: '1rem',
+          fontStyle: 'italic',
+          maxWidth: '700px',
+          margin: '1rem auto 0'
+        }}>
+          Shocking reality: Top 20% of tasks generate 80% of value while bottom 80% contribute minimal impact
+        </p>
+      </div>
+
+      {/* Overwhelmed Professional Context */}
+      <div style={{
+        float: 'right',
+        marginLeft: '2rem',
+        marginBottom: '1rem',
+        maxWidth: '280px'
+      }}>
+        <img
+          src="/blog-images/article-2-75-percent/overwhelmed-professional.jpg"
+          alt="Professional overwhelmed by multiple tasks, papers, and devices - authentic representation of productivity challenges"
+          style={{
+            width: '100%',
+            height: 'auto',
+            border: '1px solid #333',
+            borderRadius: '8px',
+            cursor: 'pointer',
+            transition: 'opacity 0.2s'
+          }}
+          onClick={() => setModalImage({
+            src: "/blog-images/article-2-75-percent/overwhelmed-professional.jpg",
+            alt: "Professional overwhelmed by multiple tasks, papers, and devices - authentic representation of productivity challenges",
+            caption: "The reality: most professionals struggle with task overload"
+          })}
+          onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
+          onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+        />
+        <p style={{
+          fontSize: '0.75rem',
+          color: '#666',
+          marginTop: '0.5rem',
+          textAlign: 'center',
+          fontStyle: 'italic'
+        }}>
+          The reality: most professionals struggle with task overload
+        </p>
       </div>
 
       {/* Harvard Study */}
@@ -530,6 +616,22 @@ export default function SeventyFivePercentArticle({ isGerman }: ArticleProps) {
           )}
         </p>
       </div>
+
+      {/* Article Navigation */}
+      <ArticleNavigation
+        previousArticle={previousArticle}
+        nextArticle={nextArticle}
+        isGerman={isGerman}
+      />
+
+      {/* Image Modal */}
+      <ImageModal
+        isOpen={modalImage !== null}
+        onClose={() => setModalImage(null)}
+        imageSrc={modalImage?.src || ''}
+        imageAlt={modalImage?.alt || ''}
+        caption={modalImage?.caption}
+      />
     </>
   );
 }

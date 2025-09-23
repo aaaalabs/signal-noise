@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Founder Journey: From Crisis to Signal/Noise App</title>
+    <style>
+        /* Jony Ive Principle: Honest documentation of creative process */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000000;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px;
+        }
+
+        .timeline-container {
+            width: 1400px;
+            max-width: 95vw;
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 60px;
+            letter-spacing: 1px;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg,
+                #ff6b6b 0% 20%,     /* Crisis phase */
+                #ffaa00 20% 40%,    /* Discovery phase */
+                #00ff88 40% 100%    /* Success phase */
+            );
+            transform: translateY(-50%);
+        }
+
+        .timeline-events {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .event {
+            background-color: #111111;
+            border-radius: 12px;
+            padding: 25px 20px;
+            text-align: center;
+            border: 2px solid transparent;
+            position: relative;
+        }
+
+        .event-crisis { border-color: #ff6b6b; }
+        .event-discovery { border-color: #ffaa00; }
+        .event-success { border-color: #00ff88; }
+
+        .event-date {
+            font-size: 12px;
+            font-weight: 300;
+            color: #666666;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .event-title {
+            font-size: 16px;
+            font-weight: 400;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .crisis-title { color: #ff6b6b; }
+        .discovery-title { color: #ffaa00; }
+        .success-title { color: #00ff88; }
+
+        .event-description {
+            font-size: 13px;
+            font-weight: 300;
+            color: #cccccc;
+            line-height: 1.5;
+        }
+
+        .signal-ratio {
+            font-size: 24px;
+            font-weight: 100;
+            margin-top: 15px;
+            padding: 8px;
+            border-radius: 6px;
+        }
+
+        .crisis-ratio {
+            color: #ff6b6b;
+            background-color: rgba(255, 107, 107, 0.1);
+        }
+
+        .discovery-ratio {
+            color: #ffaa00;
+            background-color: rgba(255, 170, 0, 0.1);
+        }
+
+        .success-ratio {
+            color: #00ff88;
+            background-color: rgba(0, 255, 136, 0.1);
+        }
+
+        .metrics-summary {
+            background-color: #111111;
+            border-radius: 12px;
+            padding: 40px;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .summary-title {
+            font-size: 22px;
+            font-weight: 300;
+            color: #00ff88;
+            margin-bottom: 30px;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .metric-box {
+            background-color: #0a0a0a;
+            border: 1px solid #333333;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .metric-value {
+            font-size: 32px;
+            font-weight: 100;
+            color: #00ff88;
+            margin-bottom: 8px;
+        }
+
+        .metric-label {
+            font-size: 12px;
+            font-weight: 300;
+            color: #999999;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .insight-text {
+            font-size: 16px;
+            font-weight: 300;
+            color: #666666;
+            margin-top: 30px;
+            line-height: 1.6;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="timeline-container">
+        <div class="title">From Productivity Crisis to Signal/Noise Methodology</div>
+
+        <div class="timeline">
+            <div class="timeline-line"></div>
+
+            <div class="timeline-events">
+                <!-- Crisis Phase -->
+                <div class="event event-crisis">
+                    <div class="event-date">Day 0</div>
+                    <div class="event-title crisis-title">The 3:47 AM Crisis</div>
+                    <div class="event-description">
+                        Overwhelmed by endless task lists, constant context switching, productivity paralysis
+                    </div>
+                    <div class="signal-ratio crisis-ratio">23%</div>
+                </div>
+
+                <!-- Discovery Phase -->
+                <div class="event event-discovery">
+                    <div class="event-date">Day 14</div>
+                    <div class="event-title discovery-title">Kevin O'Leary Interview</div>
+                    <div class="event-description">
+                        Discovery of Steve Jobs' 80/20 Signal vs Noise methodology through DOAC podcast
+                    </div>
+                    <div class="signal-ratio discovery-ratio">34%</div>
+                </div>
+
+                <div class="event event-discovery">
+                    <div class="event-date">Day 47</div>
+                    <div class="event-title discovery-title">The Breakthrough</div>
+                    <div class="event-description">
+                        First 80%+ signal day achieved through binary task classification system
+                    </div>
+                    <div class="signal-ratio success-ratio">82%</div>
+                </div>
+
+                <!-- Development Phase -->
+                <div class="event event-success">
+                    <div class="event-date">Day 90</div>
+                    <div class="event-title success-title">Consistent Mastery</div>
+                    <div class="event-description">
+                        90-day experiment complete, methodology proven, app development begins
+                    </div>
+                    <div class="signal-ratio success-ratio">87%</div>
+                </div>
+
+                <!-- Launch Phase -->
+                <div class="event event-success">
+                    <div class="event-date">Day 180</div>
+                    <div class="event-title success-title">Signal/Noise Launch</div>
+                    <div class="event-description">
+                        App launched, methodology shared with founders community
+                    </div>
+                    <div class="signal-ratio success-ratio">92%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Metrics -->
+        <div class="metrics-summary">
+            <div class="summary-title">Transformation Metrics</div>
+
+            <div class="metrics-grid">
+                <div class="metric-box">
+                    <div class="metric-value">+280%</div>
+                    <div class="metric-label">Productivity Increase</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-value">47→4</div>
+                    <div class="metric-label">Daily Interruptions</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-value">0.5→3.8</div>
+                    <div class="metric-label">Deep Work Hours</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-value">92%</div>
+                    <div class="metric-label">Final Signal Ratio</div>
+                </div>
+            </div>
+
+            <div class="insight-text">
+                "The day I stopped managing tasks and started classifying signals was the day my productivity transformed from chaos to clarity"
+            </div>
+        </div>
+    </div>
+</body>
+</html>

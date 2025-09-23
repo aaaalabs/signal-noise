@@ -71,6 +71,35 @@ export default function NinetyDayTrackingArticle({ isGerman }: ArticleProps) {
         )}
       </p>
 
+      {/* Before vs After Transformation */}
+      <div style={{
+        margin: '4rem 0',
+        textAlign: 'center',
+        clear: 'both'
+      }}>
+        <img
+          src="/blog-images/article-5-90-day/productivity-before-after-comparison.webp"
+          alt="90-day Signal vs Noise transformation showing dramatic improvement from 23% to 81% signal ratio with detailed metrics"
+          style={{
+            width: '100%',
+            maxWidth: '900px',
+            height: 'auto',
+            borderRadius: '12px',
+            border: '1px solid #333'
+          }}
+        />
+        <p style={{
+          fontSize: '0.8rem',
+          color: '#666',
+          marginTop: '1rem',
+          fontStyle: 'italic',
+          maxWidth: '700px',
+          margin: '1rem auto 0'
+        }}>
+          90-day transformation: From productivity chaos to systematic focus methodology
+        </p>
+      </div>
+
       <p style={{
         fontSize: '1rem',
         lineHeight: '1.7',

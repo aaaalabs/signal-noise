@@ -161,6 +161,63 @@ export default function SignalVsNoisePhilosophyArticle({ isGerman }: ArticleProp
         )}
       </p>
 
+      {/* Signal vs Noise Waveform Visualization */}
+      <div style={{
+        margin: '4rem 0',
+        textAlign: 'center',
+        clear: 'both'
+      }}>
+        <img
+          src="/blog-images/article-4-philosophy/signal-noise-waveform-wide.webp"
+          alt="Information theory visualization showing pure signal wave versus noise interference and combined reality"
+          style={{
+            width: '100%',
+            maxWidth: '800px',
+            height: 'auto',
+            borderRadius: '12px',
+            border: '1px solid #333'
+          }}
+        />
+        <p style={{
+          fontSize: '0.8rem',
+          color: '#666',
+          marginTop: '1rem',
+          fontStyle: 'italic',
+          maxWidth: '700px',
+          margin: '1rem auto 0'
+        }}>
+          Claude Shannon's breakthrough: distinguishing pure signal from noise interference in communication systems
+        </p>
+      </div>
+
+      {/* Claude Shannon Portrait */}
+      <div style={{
+        float: 'right',
+        marginLeft: '2rem',
+        marginBottom: '1rem',
+        maxWidth: '280px'
+      }}>
+        <img
+          src="/blog-images/article-4-philosophy/claude-shannon-tribute.jpg"
+          alt="Claude Shannon, Bell Labs engineer and father of information theory, mathematical foundation of Signal vs Noise"
+          style={{
+            width: '100%',
+            height: 'auto',
+            border: '1px solid #333',
+            borderRadius: '8px'
+          }}
+        />
+        <p style={{
+          fontSize: '0.75rem',
+          color: '#666',
+          marginTop: '0.5rem',
+          textAlign: 'center',
+          fontStyle: 'italic'
+        }}>
+          Claude Shannon: Information theory pioneer, Bell Labs
+        </p>
+      </div>
+
       {/* Section: Information Theory Origins */}
       <h2 style={{
         fontSize: '1.6rem',

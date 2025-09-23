@@ -71,6 +71,35 @@ export default function FocusAgeDistractionArticle({ isGerman }: ArticleProps) {
         )}
       </p>
 
+      {/* Focus vs Distraction Comparison */}
+      <div style={{
+        margin: '4rem 0',
+        textAlign: 'center',
+        clear: 'both'
+      }}>
+        <img
+          src="/blog-images/article-8-focus/focus-vs-distraction-comparison.webp"
+          alt="Focus vs distraction comparison showing attention economy statistics and deep work versus fragmented attention"
+          style={{
+            width: '100%',
+            maxWidth: '900px',
+            height: 'auto',
+            borderRadius: '12px',
+            border: '1px solid #333'
+          }}
+        />
+        <p style={{
+          fontSize: '0.8rem',
+          color: '#666',
+          marginTop: '1rem',
+          fontStyle: 'italic',
+          maxWidth: '700px',
+          margin: '1rem auto 0'
+        }}>
+          The attention economy: 45+ minutes deep focus vs 11 seconds fragmented attention
+        </p>
+      </div>
+
       <p style={{
         fontSize: '1rem',
         lineHeight: '1.7',

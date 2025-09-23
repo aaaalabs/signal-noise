@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus vs Distraction: The Attention Economy</title>
+    <style>
+        /* Jony Ive Principle: Truth about human-technology interaction */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000000;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px;
+        }
+
+        .focus-container {
+            width: 1200px;
+            max-width: 95vw;
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 50px;
+            letter-spacing: 1px;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 50px;
+        }
+
+        .focus-side {
+            text-align: center;
+        }
+
+        .side-title {
+            font-size: 20px;
+            font-weight: 400;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        .focus-title { color: #00ff88; }
+        .distraction-title { color: #ff6b6b; }
+
+        .visual-element {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .focus-visual {
+            background: radial-gradient(circle, #00ff88 20%, transparent 21%);
+            background-size: 40px 40px;
+            background-position: center;
+        }
+
+        .distraction-visual {
+            background:
+                radial-gradient(circle at 20% 30%, #ff6b6b 8%, transparent 9%),
+                radial-gradient(circle at 70% 20%, #ff6b6b 6%, transparent 7%),
+                radial-gradient(circle at 40% 70%, #ff6b6b 7%, transparent 8%),
+                radial-gradient(circle at 80% 80%, #ff6b6b 5%, transparent 6%),
+                radial-gradient(circle at 10% 80%, #ff6b6b 6%, transparent 7%),
+                radial-gradient(circle at 90% 40%, #ff6b6b 4%, transparent 5%);
+        }
+
+        .stats-list {
+            text-align: left;
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid #222222;
+        }
+
+        .focus-stat { color: #00ff88; }
+        .distraction-stat { color: #ff6b6b; }
+
+        .methodology-section {
+            background-color: #111111;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .methodology-title {
+            font-size: 22px;
+            font-weight: 300;
+            color: #00ff88;
+            margin-bottom: 20px;
+        }
+
+        .methodology-text {
+            font-size: 16px;
+            font-weight: 300;
+            color: #cccccc;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .action-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .step-card {
+            background-color: #0a0a0a;
+            border: 1px solid #333333;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .step-number {
+            font-size: 24px;
+            font-weight: 100;
+            color: #00ff88;
+            margin-bottom: 10px;
+        }
+
+        .step-text {
+            font-size: 14px;
+            font-weight: 300;
+            color: #cccccc;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="focus-container">
+        <div class="title">The Attention Economy: Focus vs Distraction</div>
+
+        <div class="comparison-grid">
+            <!-- Focus Side -->
+            <div class="focus-side">
+                <div class="side-title focus-title">DEEP FOCUS</div>
+                <div class="visual-element focus-visual"></div>
+
+                <div class="stats-list">
+                    <div class="stat-row">
+                        <span>Attention Span</span>
+                        <span class="focus-stat">45+ minutes</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Task Switching</span>
+                        <span class="focus-stat">2-3 times/day</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Notification Checks</span>
+                        <span class="focus-stat">6 times/day</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Deep Work Quality</span>
+                        <span class="focus-stat">95% accuracy</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Mental Fatigue</span>
+                        <span class="focus-stat">Low</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Creative Output</span>
+                        <span class="focus-stat">4x baseline</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Distraction Side -->
+            <div class="focus-side">
+                <div class="side-title distraction-title">FRAGMENTED ATTENTION</div>
+                <div class="visual-element distraction-visual"></div>
+
+                <div class="stats-list">
+                    <div class="stat-row">
+                        <span>Attention Span</span>
+                        <span class="distraction-stat">11 seconds</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Task Switching</span>
+                        <span class="distraction-stat">300+ times/day</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Notification Checks</span>
+                        <span class="distraction-stat">150+ times/day</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Deep Work Quality</span>
+                        <span class="distraction-stat">40% accuracy</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Mental Fatigue</span>
+                        <span class="distraction-stat">Chronic</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Creative Output</span>
+                        <span class="distraction-stat">0.3x baseline</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Signal vs Noise Solution -->
+        <div class="methodology-section">
+            <div class="methodology-title">Signal vs Noise Solution</div>
+            <div class="methodology-text">
+                Binary classification system that cuts through digital overwhelm.<br>
+                Transform fragmented attention into sustained focus through systematic noise elimination.
+            </div>
+
+            <div class="action-steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-text">Identify your primary signal for today</div>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-text">Classify each task as Signal or Noise</div>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-text">Protect Signal time from Noise intrusion</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add dynamic visualization effects
+        window.addEventListener('load', () => {
+            // Animate progress bar
+            const progressFill = document.querySelector('.progress-fill');
+            progressFill.style.width = '0%';
+            setTimeout(() => {
+                progressFill.style.width = '87%';
+            }, 1000);
+
+            // Log productivity statistics
+            console.log('Focus statistics vs Distraction statistics:');
+            console.log('Attention span: 45+ min vs 11 seconds');
+            console.log('Task switching: 2-3/day vs 300+/day');
+            console.log('Creative output: 4x vs 0.3x baseline');
+            console.log('Signal vs Noise methodology provides solution framework');
+        });
+    </script>
+</body>
+</html>

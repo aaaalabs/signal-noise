@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Signal Ratio Dashboard</title>
+    <style>
+        /* Jony Ive Principle: Interface serves user without drawing attention to itself */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000000;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px;
+        }
+
+        .dashboard-container {
+            width: 1000px;
+            max-width: 95vw;
+            background-color: #111111;
+            border-radius: 16px;
+            padding: 40px;
+        }
+
+        .dashboard-title {
+            font-size: 24px;
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+        }
+
+        .main-metric {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .signal-percentage {
+            font-size: 96px;
+            font-weight: 100;
+            color: #00ff88;
+            line-height: 1;
+            letter-spacing: -3px;
+        }
+
+        .metric-label {
+            font-size: 16px;
+            font-weight: 300;
+            color: #999999;
+            margin-top: 10px;
+            letter-spacing: 2px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background-color: #0a0a0a;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #333333;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 100;
+            color: #00ff88;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            font-weight: 300;
+            color: #999999;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: #333333;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #00ff88;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .weekly-trend {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            height: 100px;
+            margin-top: 30px;
+            padding: 0 20px;
+        }
+
+        .day-bar {
+            width: 20px;
+            background-color: #333333;
+            border-radius: 2px 2px 0 0;
+            position: relative;
+            transition: background-color 0.3s ease;
+        }
+
+        .day-label {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 10px;
+            color: #666666;
+            font-weight: 300;
+        }
+
+        .achievement-badge {
+            background-color: #00ff88;
+            color: #000000;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 500;
+            margin: 20px auto;
+            display: block;
+            width: fit-content;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="dashboard-title">Today's Signal Ratio</div>
+
+        <!-- Main Signal Percentage -->
+        <div class="main-metric">
+            <div class="signal-percentage">87%</div>
+            <div class="metric-label">SIGNAL ACHIEVED</div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 87%;"></div>
+            </div>
+        </div>
+
+        <!-- Key Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">4</div>
+                <div class="stat-label">Signal Tasks</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">1</div>
+                <div class="stat-label">Noise Tasks</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">3.2h</div>
+                <div class="stat-label">Deep Work</div>
+            </div>
+        </div>
+
+        <!-- Weekly Trend -->
+        <div class="weekly-trend">
+            <div class="day-bar" style="height: 45px; background-color: #666666;">
+                <div class="day-label">Mon</div>
+            </div>
+            <div class="day-bar" style="height: 60px; background-color: #888888;">
+                <div class="day-label">Tue</div>
+            </div>
+            <div class="day-bar" style="height: 75px; background-color: #00ff88;">
+                <div class="day-label">Wed</div>
+            </div>
+            <div class="day-bar" style="height: 85px; background-color: #00ff88;">
+                <div class="day-label">Thu</div>
+            </div>
+            <div class="day-bar" style="height: 90px; background-color: #00ff88;">
+                <div class="day-label">Fri</div>
+            </div>
+            <div class="day-bar" style="height: 95px; background-color: #00ff88;">
+                <div class="day-label">Sat</div>
+            </div>
+            <div class="day-bar" style="height: 100px; background-color: #00ff88;">
+                <div class="day-label">Sun</div>
+            </div>
+        </div>
+
+        <div class="achievement-badge">7-Day Streak: Signal Mastery</div>
+    </div>
+
+    <script>
+        // Add subtle animation on load
+        window.addEventListener('load', () => {
+            const progressFill = document.querySelector('.progress-fill');
+            progressFill.style.width = '0%';
+            setTimeout(() => {
+                progressFill.style.width = '87%';
+            }, 500);
+
+            console.log('Signal ratio: 87%');
+            console.log('Weekly improvement trend visible');
+            console.log('Achievement: 7-day streak maintained');
+        });
+    </script>
+</body>
+</html>

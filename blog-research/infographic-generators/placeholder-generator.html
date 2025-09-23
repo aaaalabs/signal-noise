@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placeholder Image Generator</title>
+    <style>
+        /* Jony Ive Principle: Honest placeholder without deception */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000000;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .placeholder-container {
+            width: 400px;
+            height: 300px;
+            background-color: #111111;
+            border: 2px dashed #333333;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .placeholder-icon {
+            font-size: 48px;
+            color: #333333;
+            margin-bottom: 20px;
+        }
+
+        .placeholder-title {
+            font-size: 18px;
+            font-weight: 300;
+            color: #00ff88;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .placeholder-description {
+            font-size: 12px;
+            font-weight: 300;
+            color: #666666;
+            line-height: 1.4;
+            max-width: 280px;
+            margin-bottom: 20px;
+        }
+
+        .coming-soon {
+            font-size: 10px;
+            font-weight: 300;
+            color: #444444;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Different placeholder types */
+        .portrait-placeholder {
+            width: 300px;
+            height: 400px;
+        }
+
+        .landscape-placeholder {
+            width: 500px;
+            height: 300px;
+        }
+
+        .square-placeholder {
+            width: 350px;
+            height: 350px;
+        }
+    </style>
+</head>
+<body>
+    <!-- This will be dynamically updated via JavaScript -->
+    <div id="placeholder" class="placeholder-container">
+        <div class="placeholder-icon">📷</div>
+        <div class="placeholder-title">Image Placeholder</div>
+        <div class="placeholder-description">
+            Professional image coming soon
+        </div>
+        <div class="coming-soon">Signal/Noise Blog</div>
+    </div>
+
+    <script>
+        // Placeholder configurations for each needed image
+        const placeholders = [
+            // Article 1: Steve Jobs
+            {
+                name: 'steve-jobs-portrait',
+                title: 'Steve Jobs Portrait',
+                description: 'Contemplative leader in black turtleneck, minimalist workspace',
+                type: 'portrait-placeholder'
+            },
+            {
+                name: 'apple-minimalist-workspace',
+                title: 'Apple Workspace',
+                description: 'Clean desk with single laptop, natural lighting, focus environment',
+                type: 'landscape-placeholder'
+            },
+            {
+                name: 'stanford-speech-moment',
+                title: 'Stanford Speech',
+                description: 'Commencement address, inspirational moment, life wisdom',
+                type: 'landscape-placeholder'
+            },
+
+            // Article 2: 75% Tasks
+            {
+                name: 'overwhelmed-professional',
+                title: 'Overwhelmed Professional',
+                description: 'Multiple tasks, papers scattered, authentic work stress',
+                type: 'portrait-placeholder'
+            },
+            {
+                name: 'productivity-statistics',
+                title: 'Productivity Statistics',
+                description: 'Workplace efficiency data, research insights, shocking numbers',
+                type: 'landscape-placeholder'
+            },
+
+            // Article 3: Elon Musk
+            {
+                name: 'elon-musk-portrait',
+                title: 'Elon Musk Portrait',
+                description: 'Technology leader, intense focus, high-tech workspace',
+                type: 'portrait-placeholder'
+            },
+            {
+                name: 'time-blocking-visual',
+                title: 'Time Blocking Method',
+                description: '5-minute blocks, extreme efficiency, calendar optimization',
+                type: 'landscape-placeholder'
+            },
+
+            // Article 4: Philosophy
+            {
+                name: 'claude-shannon-tribute',
+                title: 'Claude Shannon Tribute',
+                description: 'Information theory pioneer, Bell Labs, mathematical foundation',
+                type: 'portrait-placeholder'
+            },
+            {
+                name: 'information-theory-diagram',
+                title: 'Information Theory',
+                description: 'Signal processing, noise filtering, communication systems',
+                type: 'landscape-placeholder'
+            },
+
+            // Article 5: 90-Day Tracking
+            {
+                name: '90-day-calendar',
+                title: '90-Day Calendar',
+                description: 'Progress tracking, daily improvements, habit formation',
+                type: 'square-placeholder'
+            },
+            {
+                name: 'tracking-experiment-setup',
+                title: 'Tracking Setup',
+                description: 'Personal experiment, data collection, methodology testing',
+                type: 'landscape-placeholder'
+            },
+
+            // Article 6: Founders Paradox
+            {
+                name: 'jeff-bezos-portrait',
+                title: 'Jeff Bezos Portrait',
+                description: 'Entrepreneur, innovative workspace, strategic thinking',
+                type: 'portrait-placeholder'
+            },
+            {
+                name: 'freedom-vs-structure',
+                title: 'Freedom vs Structure',
+                description: 'Chaos vs order, entrepreneurial challenge, decision fatigue',
+                type: 'landscape-placeholder'
+            },
+
+            // Article 7: Kevin O'Leary
+            {
+                name: 'kevin-oleary-portrait',
+                title: 'Kevin O\'Leary Portrait',
+                description: 'Business authority, Shark Tank investor, executive presence',
+                type: 'portrait-placeholder'
+            },
+            {
+                name: 'shark-tank-meeting',
+                title: 'Executive Meeting',
+                description: 'Business discussion, strategic planning, corporate environment',
+                type: 'landscape-placeholder'
+            },
+
+            // Article 8: Focus Age Distraction
+            {
+                name: 'digital-overwhelm-scene',
+                title: 'Digital Overwhelm',
+                description: 'Multiple screens, notifications, modern work challenges',
+                type: 'landscape-placeholder'
+            },
+            {
+                name: 'digital-minimalism-workspace',
+                title: 'Minimalism Workspace',
+                description: 'Single device, natural light, peaceful productivity',
+                type: 'landscape-placeholder'
+            },
+
+            // Article 9: Mathematics
+            {
+                name: 'mathematical-researcher',
+                title: 'Mathematical Researcher',
+                description: 'Scientist, whiteboard formulas, academic environment',
+                type: 'portrait-placeholder'
+            },
+            {
+                name: 'power-law-visualization',
+                title: 'Power Law Visual',
+                description: 'Statistical distribution, mathematical proof, academic chart',
+                type: 'landscape-placeholder'
+            },
+
+            // Article 10: Building Story
+            {
+                name: 'startup-founder-scene',
+                title: 'Startup Founder',
+                description: 'Authentic work moment, app development, entrepreneurial journey',
+                type: 'portrait-placeholder'
+            },
+            {
+                name: 'app-development-screen',
+                title: 'App Development',
+                description: 'Code interface, Signal/Noise app creation, technical work',
+                type: 'landscape-placeholder'
+            }
+        ];
+
+        // Generate placeholder for current configuration
+        function generatePlaceholder(config) {
+            const container = document.getElementById('placeholder');
+            container.className = `placeholder-container ${config.type}`;
+
+            container.innerHTML = `
+                <div class="placeholder-icon">📷</div>
+                <div class="placeholder-title">${config.title}</div>
+                <div class="placeholder-description">${config.description}</div>
+                <div class="coming-soon">Signal/Noise Blog</div>
+            `;
+        }
+
+        // Set which placeholder to generate (will be controlled externally)
+        const currentPlaceholder = placeholders[0]; // Default to first one
+        window.addEventListener('load', () => {
+            generatePlaceholder(currentPlaceholder);
+        });
+
+        // Make placeholders array available globally for external control
+        window.placeholderConfigs = placeholders;
+    </script>
+</body>
+</html>

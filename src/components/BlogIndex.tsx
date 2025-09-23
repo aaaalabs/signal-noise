@@ -62,7 +62,7 @@ export const blogPosts: BlogPost[] = [
     readTime: '4 min',
     keywords: ['kevin oleary', 'shark tank', 'productivity'],
     publishDate: '2025-09-29',
-    isPublished: true
+    isPublished: false
   },
   {
     slug: 'founder-productivity-paradox',
@@ -74,7 +74,7 @@ export const blogPosts: BlogPost[] = [
     readTime: '8 min',
     keywords: ['founder productivity paradox', 'entrepreneur focus challenges', 'freedom kills productivity'],
     publishDate: '2025-10-06',
-    isPublished: true
+    isPublished: false
   },
   {
     slug: 'signal-vs-noise-philosophy',
@@ -86,7 +86,7 @@ export const blogPosts: BlogPost[] = [
     readTime: '6 min',
     keywords: ['signal vs noise', 'philosophy', 'information theory'],
     publishDate: '2025-10-13',
-    isPublished: true
+    isPublished: false
   },
   {
     slug: '90-day-tracking-experiment',
@@ -98,7 +98,7 @@ export const blogPosts: BlogPost[] = [
     readTime: '8 min',
     keywords: ['productivity tracking 90 day challenge', 'signal ratio experiment', 'personal productivity case study'],
     publishDate: '2025-10-20',
-    isPublished: true
+    isPublished: false
   },
   {
     slug: 'focus-age-distraction',
@@ -110,7 +110,7 @@ export const blogPosts: BlogPost[] = [
     readTime: '7 min',
     keywords: ['digital minimalism focus', 'cal newport deep work', 'attention economy resistance'],
     publishDate: '2025-10-27',
-    isPublished: true
+    isPublished: false
   },
   {
     slug: 'mathematics-productivity',
@@ -122,7 +122,7 @@ export const blogPosts: BlogPost[] = [
     readTime: '9 min',
     keywords: ['pareto principle mathematics', '80/20 rule mathematical proof', 'power law productivity'],
     publishDate: '2025-11-03',
-    isPublished: true
+    isPublished: false
   },
   {
     slug: 'building-signal-noise-story',

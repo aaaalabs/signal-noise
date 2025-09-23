@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productivity Transformation: Before vs After</title>
+    <style>
+        /* Jony Ive Principle: Honest representation of transformation */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000000;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px;
+        }
+
+        .comparison-container {
+            width: 1200px;
+            max-width: 95vw;
+            display: grid;
+            grid-template-columns: 1fr 80px 1fr;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .before-section, .after-section {
+            background-color: #111111;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 300;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        .before-title { color: #ff6b6b; }
+        .after-title { color: #00ff88; }
+
+        .ratio-display {
+            font-size: 72px;
+            font-weight: 100;
+            margin-bottom: 10px;
+            letter-spacing: -2px;
+        }
+
+        .before-ratio { color: #ff6b6b; }
+        .after-ratio { color: #00ff88; }
+
+        .ratio-label {
+            font-size: 14px;
+            font-weight: 300;
+            color: #999999;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        .metrics-list {
+            text-align: left;
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.8;
+            color: #cccccc;
+        }
+
+        .metric-item {
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .metric-value-before { color: #ff6b6b; }
+        .metric-value-after { color: #00ff88; }
+
+        .arrow-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 48px;
+            color: #00ff88;
+            font-weight: 100;
+        }
+
+        .transformation-insight {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-top: 40px;
+            font-size: 16px;
+            font-weight: 300;
+            color: #666666;
+            line-height: 1.6;
+        }
+
+        .improvement-badge {
+            background-color: #00ff88;
+            color: #000000;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-top: 20px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="comparison-container">
+        <!-- Before State -->
+        <div class="before-section">
+            <div class="section-title before-title">BEFORE</div>
+            <div class="ratio-display before-ratio">23%</div>
+            <div class="ratio-label">SIGNAL RATIO</div>
+
+            <div class="metrics-list">
+                <div class="metric-item">
+                    <span>Productive Hours/Day</span>
+                    <span class="metric-value-before">2.8h</span>
+                </div>
+                <div class="metric-item">
+                    <span>Tasks Completed</span>
+                    <span class="metric-value-before">12</span>
+                </div>
+                <div class="metric-item">
+                    <span>Deep Work Sessions</span>
+                    <span class="metric-value-before">0.5</span>
+                </div>
+                <div class="metric-item">
+                    <span>Email Checks/Day</span>
+                    <span class="metric-value-before">47</span>
+                </div>
+                <div class="metric-item">
+                    <span>Meetings/Week</span>
+                    <span class="metric-value-before">23</span>
+                </div>
+                <div class="metric-item">
+                    <span>Focus Score</span>
+                    <span class="metric-value-before">3.2/10</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Arrow -->
+        <div class="arrow-container">→</div>
+
+        <!-- After State -->
+        <div class="after-section">
+            <div class="section-title after-title">AFTER</div>
+            <div class="ratio-display after-ratio">81%</div>
+            <div class="ratio-label">SIGNAL RATIO</div>
+
+            <div class="metrics-list">
+                <div class="metric-item">
+                    <span>Productive Hours/Day</span>
+                    <span class="metric-value-after">6.5h</span>
+                </div>
+                <div class="metric-item">
+                    <span>Tasks Completed</span>
+                    <span class="metric-value-after">5</span>
+                </div>
+                <div class="metric-item">
+                    <span>Deep Work Sessions</span>
+                    <span class="metric-value-after">3</span>
+                </div>
+                <div class="metric-item">
+                    <span>Email Checks/Day</span>
+                    <span class="metric-value-after">4</span>
+                </div>
+                <div class="metric-item">
+                    <span>Meetings/Week</span>
+                    <span class="metric-value-after">6</span>
+                </div>
+                <div class="metric-item">
+                    <span>Focus Score</span>
+                    <span class="metric-value-after">8.7/10</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Insight -->
+        <div class="transformation-insight">
+            90-Day Signal vs Noise Methodology Implementation
+            <div class="improvement-badge">+252% Productivity Increase</div>
+            <br><br>
+            <em>Fewer tasks, deeper focus, exponential results</em>
+        </div>
+    </div>
+</body>
+</html>

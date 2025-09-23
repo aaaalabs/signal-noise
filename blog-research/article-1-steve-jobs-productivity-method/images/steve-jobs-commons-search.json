@@ -1,0 +1,42 @@
+{
+  "source": "Wikimedia Commons - Steve Jobs Category",
+  "search_date": "2024-09-22",
+  "total_media_files": 21,
+  "license_type": "Creative Commons / Public Domain",
+  "image_recommendations": [
+    {
+      "title": "Steve Jobs Headshot 2010",
+      "dimensions": "250px x 250px minimum",
+      "license": "Creative Commons",
+      "usage": "Professional portrait for article hero image",
+      "quality": "High-resolution available",
+      "context": "iPhone 4 era professional photography"
+    },
+    {
+      "title": "TNW Conference 2010",
+      "description": "Steve Jobs presenting at technology conference",
+      "license": "Creative Commons",
+      "usage": "Keynote presentation context",
+      "relevance": "Shows Jobs in productivity/presentation mode"
+    },
+    {
+      "title": "Apple Museum Photos",
+      "description": "Historical photos of Jobs with Apple products",
+      "license": "Creative Commons / Fair Use",
+      "usage": "Historical context for productivity methodology",
+      "relevance": "Product focus and simplicity demonstrations"
+    }
+  ],
+  "download_strategy": {
+    "step_1": "Browse Media in category section",
+    "step_2": "Click individual image thumbnails for full resolution",
+    "step_3": "Check specific licensing on description pages",
+    "step_4": "Download high-resolution versions with proper attribution"
+  },
+  "usage_compliance": {
+    "attribution_required": true,
+    "commercial_use": "Check individual licenses",
+    "modification_allowed": "Varies by specific license",
+    "credit_format": "Wikimedia Commons / [Photographer Name] / CC License"
+  }
+}

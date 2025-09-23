@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jobs vs Musk: Signal Methodology Comparison</title>
+    <style>
+        /* Jony Ive Principle: Honest comparison without bias */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000000;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px;
+        }
+
+        .comparison-container {
+            width: 1200px;
+            max-width: 95vw;
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 50px;
+            letter-spacing: 1px;
+        }
+
+        .leaders-comparison {
+            display: grid;
+            grid-template-columns: 1fr 80px 1fr;
+            gap: 30px;
+            margin-bottom: 50px;
+            align-items: start;
+        }
+
+        .leader-profile {
+            background-color: #111111;
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .leader-name {
+            font-size: 22px;
+            font-weight: 400;
+            margin-bottom: 10px;
+            color: #00ff88;
+        }
+
+        .leader-title {
+            font-size: 14px;
+            font-weight: 300;
+            color: #999999;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        .signal-ratio-large {
+            font-size: 64px;
+            font-weight: 100;
+            margin-bottom: 10px;
+            letter-spacing: -2px;
+        }
+
+        .jobs-ratio { color: #00ff88; }
+        .musk-ratio { color: #00aaff; }
+
+        .ratio-label {
+            font-size: 14px;
+            font-weight: 300;
+            color: #cccccc;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        .methodology-list {
+            text-align: left;
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        .method-item {
+            margin-bottom: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid #222222;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .vs-separator {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 32px;
+            color: #666666;
+            font-weight: 100;
+        }
+
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .insight-card {
+            background-color: #111111;
+            border-radius: 12px;
+            padding: 30px;
+        }
+
+        .insight-title {
+            font-size: 18px;
+            font-weight: 400;
+            margin-bottom: 20px;
+            color: #00ff88;
+        }
+
+        .insight-text {
+            font-size: 15px;
+            font-weight: 300;
+            color: #cccccc;
+            line-height: 1.6;
+        }
+
+        .quote {
+            font-style: italic;
+            color: #ffffff;
+            font-size: 16px;
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #0a0a0a;
+            border-left: 3px solid #00ff88;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .attribution {
+            font-size: 12px;
+            color: #999999;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="comparison-container">
+        <div class="title">Productivity Legends: Methodology Comparison</div>
+
+        <div class="leaders-comparison">
+            <!-- Steve Jobs Profile -->
+            <div class="leader-profile">
+                <div class="leader-name">Steve Jobs</div>
+                <div class="leader-title">Apple CEO, Design Visionary</div>
+
+                <div class="signal-ratio-large jobs-ratio">80%</div>
+                <div class="ratio-label">SIGNAL RATIO</div>
+
+                <div class="methodology-list">
+                    <div class="method-item">
+                        <span>Daily Focus</span>
+                        <span>3-5 critical tasks</span>
+                    </div>
+                    <div class="method-item">
+                        <span>Time Window</span>
+                        <span>18-hour cycles</span>
+                    </div>
+                    <div class="method-item">
+                        <span>Product Strategy</span>
+                        <span>Radical simplification</span>
+                    </div>
+                    <div class="method-item">
+                        <span>Meeting Style</span>
+                        <span>Decision-focused</span>
+                    </div>
+                    <div class="method-item">
+                        <span>Communication</span>
+                        <span>Direct, minimal</span>
+                    </div>
+                    <div class="method-item">
+                        <span>Philosophy</span>
+                        <span>Perfection through reduction</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VS Separator -->
+            <div class="vs-separator">VS</div>
+
+            <!-- Elon Musk Profile -->
+            <div class="leader-profile">
+                <div class="leader-name">Elon Musk</div>
+                <div class="leader-title">Tesla/SpaceX CEO, Innovation Leader</div>
+
+                <div class="signal-ratio-large musk-ratio">100%</div>
+                <div class="ratio-label">SIGNAL RATIO</div>
+
+                <div class="methodology-list">
+                    <div class="method-item">
+                        <span>Daily Focus</span>
+                        <span>5-minute time blocks</span>
+                    </div>
+                    <div class="method-item">
+                        <span>Time Window</span>
+                        <span>80-120 hour weeks</span>
+                    </div>
+                    <div class="method-item">
+                        <span>Product Strategy</span>
+                        <span>First principles thinking</span>
+                    </div>
+                    <div class="method-item">
+                        <span>Meeting Style</span>
+                        <span>Standing, rapid-fire</span>
+                    </div>
+                    <div class="method-item">
+                        <span>Communication</span>
+                        <span>Extreme efficiency</span>
+                    </div>
+                    <div class="method-item">
+                        <span>Philosophy</span>
+                        <span>Zero noise tolerance</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Insights -->
+        <div class="insights-grid">
+            <div class="insight-card">
+                <div class="insight-title">Jobs Methodology: Sustainable Excellence</div>
+                <div class="insight-text">
+                    Steve Jobs achieved 80% signal through systematic noise elimination.
+                    His approach emphasized quality over quantity, deep focus over busy work.
+                    The 18-hour window allowed for both signal execution and essential recovery.
+                </div>
+                <div class="quote">
+                    "Jobs' vision of Signal was the top 3 to 5 things you have to get done in the next 18 hours"
+                    <div class="attribution">— Kevin O'Leary, The Diary of a CEO</div>
+                </div>
+            </div>
+
+            <div class="insight-card">
+                <div class="insight-title">Musk Methodology: Maximum Intensity</div>
+                <div class="insight-text">
+                    Elon Musk operates at 100% signal through extreme time optimization.
+                    5-minute time boxing eliminates all noise, but requires exceptional discipline.
+                    This approach maximizes output but demands sustainable personal systems.
+                </div>
+                <div class="quote">
+                    "The geniuses of their time were close to 100% signal"
+                    <div class="attribution">— Kevin O'Leary, The Diary of a CEO</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('load', () => {
+            console.log('Jobs Signal Ratio: 80% (sustainable excellence)');
+            console.log('Musk Signal Ratio: 100% (maximum intensity)');
+            console.log('Both methodologies prove Signal vs Noise effectiveness');
+            console.log('Signal/Noise app enables either approach based on personal preference');
+        });
+    </script>
+</body>
+</html>

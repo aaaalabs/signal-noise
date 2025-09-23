@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>80/20 Signal vs Noise Visualization</title>
+    <style>
+        /* Jony Ive Design Principles: Honest materials, functional beauty, no decoration */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000000; /* Pure black background matching Signal/Noise app */
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif; /* San Francisco font */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .visualization-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            /* Mathematical golden ratio spacing */
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .signal-noise-circle {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            /* Mathematical precision: 80% Signal green, 20% gray */
+            background: conic-gradient(
+                #00ff88 0deg 288deg,  /* 80% = 288 degrees */
+                #333333 288deg 360deg /* 20% = 72 degrees */
+            );
+            margin-bottom: 60px; /* Generous whitespace as specified */
+        }
+
+        .circle-center-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #000000; /* Black text on colored background for contrast */
+        }
+
+        .percentage-large {
+            font-size: 72px;
+            font-weight: 100; /* Ultra-light as specified */
+            line-height: 1;
+            margin-bottom: 8px;
+            letter-spacing: -2px; /* Optical spacing for large numbers */
+        }
+
+        .signal-label {
+            font-size: 24px;
+            font-weight: 300; /* Light weight for labels */
+            letter-spacing: 2px; /* Generous letter spacing for clarity */
+            color: #ffffff; /* White text on black background */
+            margin-bottom: 80px; /* Mathematical spacing relationship */
+        }
+
+        .methodology-label {
+            font-size: 18px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            color: #666666; /* Subtle gray for secondary information */
+            text-align: center;
+        }
+
+        /* Ensure perfect centering and optical spacing */
+        .labels-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px; /* Mathematical relationships in spacing */
+        }
+
+        .ratio-breakdown {
+            display: flex;
+            gap: 60px; /* Generous spacing between elements */
+            align-items: center;
+        }
+
+        .ratio-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .ratio-number {
+            font-size: 48px;
+            font-weight: 100; /* Ultra-light for numbers */
+            letter-spacing: -1px;
+        }
+
+        .signal-number {
+            color: #00ff88; /* Signal green */
+        }
+
+        .noise-number {
+            color: #333333; /* Neutral gray */
+        }
+
+        .ratio-label {
+            font-size: 16px;
+            font-weight: 300; /* Light weight for labels */
+            letter-spacing: 1px;
+            color: #ffffff;
+        }
+
+        /* Responsive behavior for different aspect ratios */
+        @media (max-width: 600px) {
+            .signal-noise-circle {
+                width: 300px;
+                height: 300px;
+            }
+
+            .percentage-large {
+                font-size: 54px;
+            }
+
+            .signal-label {
+                font-size: 20px;
+            }
+        }
+
+        /* High contrast for accessibility (WCAG compliance) */
+        @media (prefers-contrast: high) {
+            .signal-noise-circle {
+                background: conic-gradient(
+                    #00ff88 0deg 288deg,
+                    #ffffff 288deg 360deg /* White instead of gray for higher contrast */
+                );
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Jony Ive Principle: Essential elements only, beauty through mathematical precision -->
+    <div class="visualization-container">
+        <!-- Primary Signal vs Noise Circle -->
+        <div class="signal-noise-circle">
+            <div class="circle-center-text">
+                <!-- No center text - clean geometric form speaks for itself -->
+            </div>
+        </div>
+
+        <!-- Information hierarchy: Most important first -->
+        <div class="labels-container">
+            <!-- Mathematical ratio breakdown -->
+            <div class="ratio-breakdown">
+                <div class="ratio-item">
+                    <div class="ratio-number signal-number">80%</div>
+                    <div class="ratio-label">SIGNAL</div>
+                </div>
+                <div class="ratio-item">
+                    <div class="ratio-number noise-number">20%</div>
+                    <div class="ratio-label">NOISE</div>
+                </div>
+            </div>
+
+            <!-- Methodology context -->
+            <div class="methodology-label">
+                Signal vs Noise Productivity Methodology
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mathematical precision validation
+        // Verify the conic-gradient creates exact 80/20 split
+        const signalDegrees = 360 * 0.8; // 288 degrees
+        const noiseDegrees = 360 * 0.2;  // 72 degrees
+
+        console.log('Signal degrees:', signalDegrees);
+        console.log('Noise degrees:', noiseDegrees);
+        console.log('Total:', signalDegrees + noiseDegrees);
+
+        // Ensure perfect mathematical accuracy
+        if (signalDegrees + noiseDegrees !== 360) {
+            console.error('Mathematical error in circle proportions');
+        }
+
+        // Optional: Add subtle entrance animation respecting Jony Ive principles
+        // (Only if motion serves function, not decoration)
+        window.addEventListener('load', () => {
+            document.querySelector('.signal-noise-circle').style.opacity = '1';
+            document.querySelector('.labels-container').style.opacity = '1';
+        });
+    </script>
+</body>
+</html>

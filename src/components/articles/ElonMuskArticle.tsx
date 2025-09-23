@@ -30,29 +30,31 @@ export default function ElonMuskArticle({ isGerman }: ArticleProps) {
         7 September 2025
       </div>
 
-      {/* Elon Musk Photo from Wikipedia via Firecrawl */}
+      {/* Elon Musk Portrait */}
       <div style={{
         float: 'right',
         marginLeft: '2rem',
         marginBottom: '1rem',
-        maxWidth: '200px'
+        maxWidth: '280px'
       }}>
         <img
-          src="/elon-musk-2022.jpg"
-          alt="Elon Musk in 2022"
+          src="/blog-images/article-3-elon-musk/elon-musk-portrait.jpg"
+          alt="Elon Musk-inspired technology leader demonstrating intense focus and innovation methodology"
           style={{
             width: '100%',
             height: 'auto',
-            border: '1px solid #333'
+            border: '1px solid #333',
+            borderRadius: '8px'
           }}
         />
         <p style={{
           fontSize: '0.75rem',
           color: '#666',
           marginTop: '0.5rem',
-          textAlign: 'center'
+          textAlign: 'center',
+          fontStyle: 'italic'
         }}>
-          Elon Musk, 2022
+          Technology leadership through extreme focus methodology
         </p>
       </div>
 
@@ -96,6 +98,63 @@ export default function ElonMuskArticle({ isGerman }: ArticleProps) {
           — Kevin O'Leary, The Diary of a CEO
         </cite>
       </blockquote>
+
+      {/* 100% Signal Achievement Visualization */}
+      <div style={{
+        margin: '4rem 0',
+        textAlign: 'center',
+        clear: 'both'
+      }}>
+        <img
+          src="/blog-images/article-3-elon-musk/100-percent-signal-square.webp"
+          alt="100% Signal achievement indicator showing complete focus methodology as demonstrated by Elon Musk"
+          style={{
+            width: '100%',
+            maxWidth: '400px',
+            height: 'auto',
+            borderRadius: '12px',
+            border: '1px solid #333'
+          }}
+        />
+        <p style={{
+          fontSize: '0.8rem',
+          color: '#666',
+          marginTop: '1rem',
+          fontStyle: 'italic',
+          maxWidth: '500px',
+          margin: '1rem auto 0'
+        }}>
+          The ultimate goal: 100% Signal ratio through systematic noise elimination
+        </p>
+      </div>
+
+      {/* Jobs vs Musk Comparison */}
+      <div style={{
+        margin: '4rem 0',
+        textAlign: 'center'
+      }}>
+        <img
+          src="/blog-images/article-3-elon-musk/jobs-musk-comparison-comparison.webp"
+          alt="Steve Jobs vs Elon Musk productivity methodology comparison - 80% sustainable vs 100% intensity approaches"
+          style={{
+            width: '100%',
+            maxWidth: '900px',
+            height: 'auto',
+            borderRadius: '12px',
+            border: '1px solid #333'
+          }}
+        />
+        <p style={{
+          fontSize: '0.8rem',
+          color: '#666',
+          marginTop: '1rem',
+          fontStyle: 'italic',
+          maxWidth: '700px',
+          margin: '1rem auto 0'
+        }}>
+          Two productivity legends: Jobs' sustainable 80% vs Musk's extreme 100% signal methodology
+        </p>
+      </div>
 
       {/* The Schedule */}
       <h2 style={{

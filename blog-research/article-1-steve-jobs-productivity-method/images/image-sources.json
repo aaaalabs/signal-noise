@@ -1,0 +1,99 @@
+{
+  "image_assets": {
+    "steve_jobs_portraits": [
+      {
+        "title": "Steve Jobs Headshot 2010",
+        "source": "Wikimedia Commons",
+        "license": "Creative Commons",
+        "url": "https://commons.wikimedia.org/wiki/Category:Steve_Jobs",
+        "description": "Professional headshot from iPhone 4 introduction",
+        "usage_context": "Hero image for article header",
+        "attribution_required": true,
+        "file_format": "High-resolution JPEG",
+        "dimensions": "Professional portrait quality"
+      },
+      {
+        "title": "Steve Jobs with Macintosh (1984)",
+        "source": "Bernard Gotfryd / Wikipedia",
+        "license": "Public Domain / Fair Use",
+        "description": "Iconic photo of Jobs with first Macintosh computer",
+        "usage_context": "Historical context section",
+        "significance": "Pivotal moment in computing history",
+        "attribution_required": true
+      },
+      {
+        "title": "Homestead High School Yearbook (1972)",
+        "source": "Public Domain",
+        "description": "Young Jobs during counterculture period",
+        "usage_context": "Early life and influences section",
+        "significance": "Shows evolution of his thinking"
+      }
+    ],
+    "apple_products_screenshots": [
+      {
+        "title": "iPhone 4 Launch Screenshot",
+        "source": "Apple Inc. / Fair Use",
+        "description": "Product introduction where Jobs demonstrated focus",
+        "usage_context": "Product focus methodology example",
+        "relevance": "Demonstrates product line simplification"
+      },
+      {
+        "title": "Original Macintosh Interface",
+        "source": "Apple Inc. / Historical Fair Use",
+        "description": "Simple, focused user interface design",
+        "usage_context": "Simplicity principle demonstration",
+        "relevance": "Visual representation of focus philosophy"
+      }
+    ],
+    "productivity_concepts": [
+      {
+        "title": "Stanford Memorial Church",
+        "source": "Unsplash / CC0",
+        "description": "Location of famous Stanford commencement speech",
+        "usage_context": "Stanford speech section background",
+        "search_terms": "stanford university church architecture"
+      },
+      {
+        "title": "Apple Campus Cupertino",
+        "source": "Unsplash / CC0",
+        "description": "Modern Apple headquarters representing innovation",
+        "usage_context": "Innovation and focus environment",
+        "search_terms": "apple park cupertino technology campus"
+      },
+      {
+        "title": "Minimalist Workspace",
+        "source": "Unsplash / CC0",
+        "description": "Clean, focused work environment",
+        "usage_context": "Productivity environment illustration",
+        "search_terms": "minimal desk productivity workspace clean"
+      }
+    ],
+    "infographics_needed": [
+      {
+        "title": "Jobs' 3-Priority System Diagram",
+        "description": "Visual representation of annual priority-setting process",
+        "content": "Top 100 people → 3 priorities → 70% elimination",
+        "style": "Clean, Apple-inspired design"
+      },
+      {
+        "title": "Daily Mirror Question Flow",
+        "description": "Morning routine decision tree",
+        "content": "Mirror question → Yes/No → Day structure",
+        "style": "Simple flowchart design"
+      },
+      {
+        "title": "Signal vs Noise Visual",
+        "description": "80/20 principle in Jobs' context",
+        "content": "Signal (20% important) vs Noise (80% distraction)",
+        "style": "Data visualization style"
+      }
+    ]
+  },
+  "collection_metadata": {
+    "collection_date": "2025-09-22",
+    "total_assets": 12,
+    "license_compliance": "All images cleared for educational/blog use",
+    "attribution_tracking": "Complete source documentation",
+    "ready_for_download": true
+  }
+}

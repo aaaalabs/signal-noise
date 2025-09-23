@@ -1,0 +1,60 @@
+{
+  "source": "Stanford News - Steve Jobs 2005 Commencement Speech",
+  "extraction_date": "2024-09-22",
+  "speech_date": "June 12, 2005",
+  "relevance": "Core productivity philosophy and focus methodology",
+  "key_productivity_quotes": [
+    {
+      "quote": "Your time is limited, so don't waste it living someone else's life.",
+      "context": "Time management and focus priorities",
+      "signal_noise_application": "Perfect embodiment of Signal vs Noise - eliminate other people's priorities to focus on your own",
+      "usage": "Opening quote for productivity methodology section"
+    },
+    {
+      "quote": "I'm convinced that the only thing that kept me going was that I loved what I did.",
+      "context": "Passion as productivity driver",
+      "signal_noise_application": "Love for work creates natural signal identification",
+      "usage": "Supporting evidence for intrinsic motivation in productivity"
+    }
+  ],
+  "philosophical_insights": [
+    {
+      "concept": "Connecting the dots retrospectively",
+      "description": "Trust in life's unpredictable experiences forming meaningful patterns",
+      "productivity_application": "Focus on current signal without worrying about perfect long-term planning",
+      "signal_noise_relevance": "Present-moment clarity more important than distant future optimization"
+    },
+    {
+      "concept": "Following your inner voice",
+      "description": "Pursue work you're passionate about despite unclear paths",
+      "productivity_application": "Personal signal identification requires introspection and authenticity",
+      "signal_noise_relevance": "Individual signal definition based on personal values and interests"
+    },
+    {
+      "concept": "Setbacks as opportunities",
+      "description": "Being fired from Apple led to personal and professional growth",
+      "productivity_application": "Noise periods can redirect toward more authentic signal",
+      "signal_noise_relevance": "System failures help refine signal identification accuracy"
+    }
+  ],
+  "personal_anecdotes": [
+    {
+      "story": "Calligraphy course influence on Mac design",
+      "lesson": "Following curiosity and interest leads to unexpected value creation",
+      "productivity_insight": "Seemingly unproductive activities can become high-value signal",
+      "application": "Importance of allowing exploration within signal definition"
+    },
+    {
+      "story": "Dropping out but continuing selective course attendance",
+      "lesson": "Eliminating noise (irrelevant requirements) while maintaining signal (genuine interest)",
+      "productivity_insight": "Personal education curation based on interest rather than external structure",
+      "application": "Signal vs Noise approach to learning and skill development"
+    }
+  ],
+  "article_integration": {
+    "primary_usage": "Philosophical foundation for Signal vs Noise methodology",
+    "supporting_evidence": "Historical validation of focus and priority principles",
+    "quote_placement": "Opening section to establish authority and relevance",
+    "narrative_connection": "Personal story supporting productivity methodology effectiveness"
+  }
+}

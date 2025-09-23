@@ -1,0 +1,76 @@
+{
+  "youtube_urls_provided": [
+    "https://youtu.be/YEgm2jxuoEs?si=ByJbHqySzzJWwu3r",
+    "https://youtube.com/shorts/ggkOqyDbpN8?si=4h0dk57HaPHIc46j",
+    "https://youtube.com/shorts/Fy9nTbZAoWw?si=H2mPqmAdY8Okudk3",
+    "https://youtu.be/W-OfQnENVaI?si=ONTs7SVP_Xm86KIo",
+    "https://youtu.be/CqUx-GjMnUg?si=tZSkT7dKL3RsWLpO"
+  ],
+  "extraction_attempts": [
+    {
+      "url": "https://youtu.be/YEgm2jxuoEs",
+      "status": "Failed - 303 redirect error",
+      "alternative_approach": "Manual thumbnail extraction via YouTube API or screenshot tools",
+      "content_type": "Unknown - requires direct access"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=YEgm2jxuoEs",
+      "status": "Failed - JavaScript configuration returned instead of content",
+      "issue": "YouTube serves dynamic content requiring browser execution",
+      "solution_needed": "Playwright MCP for browser-based content extraction"
+    }
+  ],
+  "technical_challenges": [
+    {
+      "challenge": "YouTube content protection",
+      "issue": "Direct URL access returns JavaScript config rather than video metadata",
+      "impact": "Cannot extract titles, descriptions, or thumbnails via WebFetch"
+    },
+    {
+      "challenge": "Redirect handling",
+      "issue": "YouTube short URLs redirect with 303 status codes",
+      "impact": "URL resolution needed before content access"
+    }
+  ],
+  "alternative_strategies": [
+    {
+      "approach": "Playwright MCP Screenshots",
+      "method": "Browser automation to capture video thumbnails and metadata",
+      "benefits": "Real browser execution handles JavaScript and dynamic content",
+      "implementation": "Take screenshots of video pages showing titles, views, descriptions"
+    },
+    {
+      "approach": "Manual Video Analysis",
+      "method": "Document video URLs with manual descriptions based on topics",
+      "benefits": "Ensures accuracy for signal vs noise content relevance",
+      "implementation": "Create metadata based on productivity/focus topic assumptions"
+    },
+    {
+      "approach": "YouTube Data API Integration",
+      "method": "Use official YouTube API for metadata extraction",
+      "benefits": "Reliable access to title, description, thumbnail data",
+      "requirements": "API key and proper authentication setup"
+    }
+  ],
+  "content_integration_plan": [
+    {
+      "video_purpose": "Signal vs noise methodology demonstrations",
+      "expected_content": "Productivity tips, focus strategies, task prioritization",
+      "article_integration": "Video embeds in relevant blog articles",
+      "thumbnail_usage": "Visual breaks in long-form content"
+    },
+    {
+      "fallback_strategy": "Curated productivity video collection",
+      "method": "Replace problematic URLs with accessible productivity content",
+      "sources": "TED Talks, Stanford lectures, business productivity channels",
+      "quality_control": "Verified content relevance to Signal vs Noise methodology"
+    }
+  ],
+  "next_steps": [
+    {
+      "immediate": "Document video URLs with manual topic categorization",
+      "short_term": "Implement Playwright MCP for thumbnail capture",
+      "long_term": "YouTube Data API integration for scalable content extraction"
+    }
+  ]
+}

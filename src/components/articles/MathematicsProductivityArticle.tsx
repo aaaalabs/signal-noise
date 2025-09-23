@@ -196,6 +196,35 @@ export default function MathematicsProductivityArticle({ isGerman }: ArticleProp
         </p>
       </div>
 
+      {/* Pareto Distribution Mathematical Proof */}
+      <div style={{
+        margin: '4rem 0',
+        textAlign: 'center',
+        clear: 'both'
+      }}>
+        <img
+          src="/blog-images/article-9-mathematics/pareto-mathematical-proof-academic.webp"
+          alt="Pareto distribution mathematical curve showing power law formula α = log₄₅ ≈ 1.16 and precise 80/20 relationship"
+          style={{
+            width: '100%',
+            maxWidth: '900px',
+            height: 'auto',
+            borderRadius: '12px',
+            border: '1px solid #333'
+          }}
+        />
+        <p style={{
+          fontSize: '0.8rem',
+          color: '#666',
+          marginTop: '1rem',
+          fontStyle: 'italic',
+          maxWidth: '700px',
+          margin: '1rem auto 0'
+        }}>
+          Mathematical proof: The Pareto distribution curve demonstrates why 80% of results consistently come from 20% of efforts
+        </p>
+      </div>
+
       {/* Section: Power Laws vs Normal Distribution */}
       <h2 style={{
         fontSize: '1.6rem',

@@ -1,0 +1,136 @@
+{
+  "multimedia_assets": {
+    "youtube_videos": [
+      {
+        "video_id": "YEgm2jxuoEs",
+        "url": "https://youtu.be/YEgm2jxuoEs?si=ByJbHqySzzJWwu3r",
+        "predicted_content": "Productivity or entrepreneurship content",
+        "relevance": "High - matches article theme",
+        "integration_plan": "Extract productivity insights and quotes",
+        "thumbnail_needed": true,
+        "transcript_priority": "High"
+      },
+      {
+        "video_id": "ggkOqyDbpN8",
+        "url": "https://youtube.com/shorts/ggkOqyDbpN8?si=4h0dk57HaPHIc46j",
+        "type": "YouTube Short",
+        "predicted_content": "Quick productivity tip or business insight",
+        "relevance": "Medium - Short format content",
+        "integration_plan": "Use for quick tips section",
+        "thumbnail_needed": true,
+        "transcript_priority": "Medium"
+      },
+      {
+        "video_id": "Fy9nTbZAoWw",
+        "url": "https://youtube.com/shorts/Fy9nTbZAoWw?si=H2mPqmAdY8Okudk3",
+        "type": "YouTube Short",
+        "predicted_content": "Entrepreneurship or focus methodology",
+        "relevance": "Medium - Could relate to signal vs noise",
+        "integration_plan": "Support secondary points",
+        "thumbnail_needed": true,
+        "transcript_priority": "Medium"
+      },
+      {
+        "video_id": "W-OfQnENVaI",
+        "url": "https://youtu.be/W-OfQnENVaI?si=ONTs7SVP_Xm86KIo",
+        "predicted_content": "Business or productivity advice",
+        "relevance": "High - Standard format allows deeper content",
+        "integration_plan": "Main supporting content for article",
+        "thumbnail_needed": true,
+        "transcript_priority": "High"
+      },
+      {
+        "video_id": "CqUx-GjMnUg",
+        "url": "https://youtu.be/CqUx-GjMnUg?si=tZSkT7dKL3RsWLpO",
+        "predicted_content": "Focus techniques or business strategy",
+        "relevance": "High - Potential Jobs or productivity content",
+        "integration_plan": "Primary video content for article",
+        "thumbnail_needed": true,
+        "transcript_priority": "High"
+      }
+    ],
+    "stanford_speech_assets": [
+      {
+        "title": "Steve Jobs Stanford Commencement Speech 2005 - Enhanced HD",
+        "source": "Stanford University / Steve Jobs Archive",
+        "url": "https://www.youtube.com/watch?v=UF8uR6Z6KLc",
+        "duration": "15:04",
+        "key_timestamps": [
+          {"time": "1:30", "content": "Introduction and first story"},
+          {"time": "5:20", "content": "Connecting the dots - life philosophy"},
+          {"time": "8:45", "content": "Love and loss - career setbacks"},
+          {"time": "12:30", "content": "Death as motivator - daily mirror question"},
+          {"time": "14:30", "content": "Stay hungry, stay foolish"}
+        ],
+        "integration_priority": "Critical - Primary source material",
+        "transcript_available": true,
+        "hd_quality": true
+      }
+    ],
+    "apple_keynote_videos": [
+      {
+        "title": "iPhone Introduction 2007 - Complete Keynote",
+        "relevance": "Product focus demonstration",
+        "key_insights": "Shows Jobs' presentation methodology and focus",
+        "duration": "80 minutes",
+        "integration_use": "Product simplification examples"
+      },
+      {
+        "title": "Macintosh Introduction 1984",
+        "relevance": "Historical significance of focus principle",
+        "key_insights": "Early demonstration of product clarity",
+        "integration_use": "Historical context for productivity methods"
+      }
+    ],
+    "interview_content": [
+      {
+        "title": "All Things Digital - Steve Jobs Interview 2003",
+        "relevance": "Direct insights into work philosophy",
+        "key_topics": ["Product focus", "Team management", "Priority setting"],
+        "integration_use": "Supporting quotes and methodologies"
+      },
+      {
+        "title": "Walter Isaacson on Jobs' Daily Habits",
+        "source": "Biography promotional interviews",
+        "relevance": "Behind-the-scenes productivity insights",
+        "integration_use": "Personal habit documentation"
+      }
+    ]
+  },
+  "thumbnail_extraction": {
+    "high_priority_videos": [
+      "YEgm2jxuoEs",
+      "W-OfQnENVaI",
+      "CqUx-GjMnUg"
+    ],
+    "thumbnail_urls": [
+      "https://img.youtube.com/vi/YEgm2jxuoEs/maxresdefault.jpg",
+      "https://img.youtube.com/vi/ggkOqyDbpN8/maxresdefault.jpg",
+      "https://img.youtube.com/vi/Fy9nTbZAoWw/maxresdefault.jpg",
+      "https://img.youtube.com/vi/W-OfQnENVaI/maxresdefault.jpg",
+      "https://img.youtube.com/vi/CqUx-GjMnUg/maxresdefault.jpg"
+    ],
+    "extraction_script": "wget -P ./thumbnails/"
+  },
+  "transcript_sources": [
+    {
+      "service": "YouTube Auto-Generated",
+      "accuracy": "80-90%",
+      "languages": ["English"],
+      "access_method": "YouTube API or manual extraction"
+    },
+    {
+      "service": "Rev.com Transcripts",
+      "accuracy": "95%+",
+      "cost": "$1.25/minute",
+      "turnaround": "24 hours"
+    }
+  ],
+  "metadata": {
+    "collection_date": "2025-09-22",
+    "total_videos": 5,
+    "stanford_speech_priority": "Critical",
+    "thumbnail_ready": true,
+    "transcript_plan": "Comprehensive extraction planned"
+  }
+}
