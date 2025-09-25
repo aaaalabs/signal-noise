@@ -1,10 +1,21 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import ImageModal from '../ImageModal';
+import ArticleNavigation from '../ArticleNavigation';
+import { getPreviousArticle, getNextArticle } from '../../utils/articleNavigation';
 
 interface ArticleProps {
   isGerman: boolean;
 }
 
 export default function MathematicsProductivityArticle({ isGerman }: ArticleProps) {
+  const [modalImage, setModalImage] = useState<{src: string, alt: string, caption?: string} | null>(null);
+
+  // Navigation logic
+  const currentSlug = 'mathematics-productivity';
+  const previousArticle = getPreviousArticle(currentSlug);
+  const nextArticle = getNextArticle(currentSlug);
+
   return (
     <>
       {/* Title */}
@@ -210,8 +221,17 @@ export default function MathematicsProductivityArticle({ isGerman }: ArticleProp
             maxWidth: '900px',
             height: 'auto',
             borderRadius: '12px',
-            border: '1px solid #333'
+            border: '1px solid #333',
+            cursor: 'pointer',
+            transition: 'transform 0.2s'
           }}
+          onClick={() => setModalImage({
+            src: "/blog-images/article-9-mathematics/pareto-mathematical-proof-academic.webp",
+            alt: "Pareto distribution mathematical curve showing power law formula α = log₄₅ ≈ 1.16 and precise 80/20 relationship",
+            caption: "Mathematical proof: The Pareto distribution curve demonstrates why 80% of results consistently come from 20% of efforts"
+          })}
+          onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
+          onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
         />
         <p style={{
           fontSize: '0.8rem',
@@ -1051,6 +1071,22 @@ export default function MathematicsProductivityArticle({ isGerman }: ArticleProp
           </Link>
         </div>
       </div>
+
+      {/* Article Navigation */}
+      <ArticleNavigation
+        previousArticle={previousArticle}
+        nextArticle={nextArticle}
+        isGerman={isGerman}
+      />
+
+      {/* Image Modal */}
+      <ImageModal
+        isOpen={modalImage !== null}
+        onClose={() => setModalImage(null)}
+        imageSrc={modalImage?.src || ''}
+        imageAlt={modalImage?.alt || ''}
+        caption={modalImage?.caption}
+      />
     </>
   );
 }

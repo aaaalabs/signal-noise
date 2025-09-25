@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elon Musk 5-Minute Time Blocking Method</title>
+    <style>
+        /* Jony Ive Principle: Honest representation of extreme time management */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000000;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px;
+        }
+
+        .schedule-container {
+            width: 800px;
+            max-width: 95vw;
+            background-color: #111111;
+            border-radius: 12px;
+            padding: 40px;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        .time-header {
+            font-size: 18px;
+            font-weight: 400;
+            color: #00ff88;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .time-block {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2px;
+            min-height: 32px;
+            border-radius: 4px;
+            padding: 8px 12px;
+            transition: background-color 0.2s;
+        }
+
+        .time-block:hover {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .time-slot {
+            width: 80px;
+            font-size: 11px;
+            font-weight: 100;
+            color: #666666;
+            text-align: right;
+            margin-right: 16px;
+            font-family: 'SF Mono', monospace;
+        }
+
+        .task-content {
+            flex: 1;
+            font-size: 13px;
+            font-weight: 300;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .task-name {
+            color: #ffffff;
+        }
+
+        .signal-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-left: 12px;
+        }
+
+        .signal-high { background-color: #00ff88; }
+        .signal-medium { background-color: #ffaa00; }
+        .signal-low { background-color: #666666; }
+
+        .session-divider {
+            margin: 20px 0;
+            height: 1px;
+            background-color: #333333;
+            position: relative;
+        }
+
+        .session-label {
+            position: absolute;
+            left: 50%;
+            top: -8px;
+            transform: translateX(-50%);
+            background-color: #111111;
+            padding: 0 12px;
+            font-size: 10px;
+            color: #666666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            font-size: 12px;
+            font-weight: 300;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .insight {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+            font-weight: 300;
+            color: #666666;
+            line-height: 1.5;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="schedule-container">
+        <div class="title">Musk's 5-Minute Time Blocking Method</div>
+
+        <div class="time-header">9:00 AM - 10:00 AM Sample Hour</div>
+
+        <!-- First principles engineering session -->
+        <div class="time-block">
+            <div class="time-slot">9:00</div>
+            <div class="task-content">
+                <span class="task-name">SpaceX: Raptor engine efficiency review</span>
+                <div class="signal-indicator signal-high"></div>
+            </div>
+        </div>
+
+        <div class="time-block">
+            <div class="time-slot">9:05</div>
+            <div class="task-content">
+                <span class="task-name">Tesla: Battery chemistry breakthrough</span>
+                <div class="signal-indicator signal-high"></div>
+            </div>
+        </div>
+
+        <div class="time-block">
+            <div class="time-slot">9:10</div>
+            <div class="task-content">
+                <span class="task-name">Engineering standup (key decisions only)</span>
+                <div class="signal-indicator signal-high"></div>
+            </div>
+        </div>
+
+        <div class="time-block">
+            <div class="time-slot">9:15</div>
+            <div class="task-content">
+                <span class="task-name">Strategic email responses</span>
+                <div class="signal-indicator signal-medium"></div>
+            </div>
+        </div>
+
+        <div class="time-block">
+            <div class="time-slot">9:20</div>
+            <div class="task-content">
+                <span class="task-name">Manufacturing bottleneck call</span>
+                <div class="signal-indicator signal-high"></div>
+            </div>
+        </div>
+
+        <div class="session-divider">
+            <div class="session-label">Strategic Planning</div>
+        </div>
+
+        <div class="time-block">
+            <div class="time-slot">9:25</div>
+            <div class="task-content">
+                <span class="task-name">Mars mission timeline review</span>
+                <div class="signal-indicator signal-high"></div>
+            </div>
+        </div>
+
+        <div class="time-block">
+            <div class="time-slot">9:30</div>
+            <div class="task-content">
+                <span class="task-name">FSD neural network architecture</span>
+                <div class="signal-indicator signal-high"></div>
+            </div>
+        </div>
+
+        <div class="time-block">
+            <div class="time-slot">9:35</div>
+            <div class="task-content">
+                <span class="task-name">Neuralink clinical trial data</span>
+                <div class="signal-indicator signal-high"></div>
+            </div>
+        </div>
+
+        <div class="time-block">
+            <div class="time-slot">9:40</div>
+            <div class="task-content">
+                <span class="task-name">xAI model training progress</span>
+                <div class="signal-indicator signal-high"></div>
+            </div>
+        </div>
+
+        <div class="time-block">
+            <div class="time-slot">9:45</div>
+            <div class="task-content">
+                <span class="task-name">Strategic partnership evaluation</span>
+                <div class="signal-indicator signal-medium"></div>
+            </div>
+        </div>
+
+        <div class="session-divider">
+            <div class="session-label">Innovation Catalyst</div>
+        </div>
+
+        <div class="time-block">
+            <div class="time-slot">9:50</div>
+            <div class="task-content">
+                <span class="task-name">Next breakthrough technology scan</span>
+                <div class="signal-indicator signal-high"></div>
+            </div>
+        </div>
+
+        <div class="time-block">
+            <div class="time-slot">9:55</div>
+            <div class="task-content">
+                <span class="task-name">Team performance optimization</span>
+                <div class="signal-indicator signal-high"></div>
+            </div>
+        </div>
+
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-dot signal-high"></div>
+                <span>Mission-Critical Signal</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot signal-medium"></div>
+                <span>Strategic Signal</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot signal-low"></div>
+                <span>Operational Noise</span>
+            </div>
+        </div>
+
+        <div class="insight">
+            12 distinct tasks × 5-minute precision = 60 minutes of pure signal<br>
+            "Context switching costs eliminated through extreme compartmentalization"
+        </div>
+    </div>
+
+    <script>
+        // Add subtle loading animation
+        window.addEventListener('load', () => {
+            const blocks = document.querySelectorAll('.time-block');
+            blocks.forEach((block, index) => {
+                setTimeout(() => {
+                    block.style.opacity = '1';
+                    block.style.transform = 'translateX(0)';
+                }, index * 50);
+            });
+
+            console.log('5-minute time blocking visualization loaded');
+            console.log('12 tasks in 60 minutes = extreme efficiency');
+            console.log('Signal indicators show priority distribution');
+        });
+
+        // Initialize with fade-in effect
+        document.addEventListener('DOMContentLoaded', () => {
+            const blocks = document.querySelectorAll('.time-block');
+            blocks.forEach(block => {
+                block.style.opacity = '0';
+                block.style.transform = 'translateX(-10px)';
+                block.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            });
+        });
+    </script>
+</body>
+</html>

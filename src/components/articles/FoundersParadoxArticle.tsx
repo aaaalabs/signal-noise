@@ -1,10 +1,21 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import ImageModal from '../ImageModal';
+import ArticleNavigation from '../ArticleNavigation';
+import { getPreviousArticle, getNextArticle } from '../../utils/articleNavigation';
 
 interface ArticleProps {
   isGerman: boolean;
 }
 
 export default function FoundersParadoxArticle({ isGerman }: ArticleProps) {
+  const [modalImage, setModalImage] = useState<{src: string, alt: string, caption?: string} | null>(null);
+
+  // Navigation logic
+  const currentSlug = 'founder-productivity-paradox';
+  const previousArticle = getPreviousArticle(currentSlug);
+  const nextArticle = getNextArticle(currentSlug);
+
   return (
     <>
       {/* Title */}
@@ -963,6 +974,22 @@ export default function FoundersParadoxArticle({ isGerman }: ArticleProps) {
           )}
         </p>
       </div>
+
+      {/* Article Navigation */}
+      <ArticleNavigation
+        previousArticle={previousArticle}
+        nextArticle={nextArticle}
+        isGerman={isGerman}
+      />
+
+      {/* Image Modal */}
+      <ImageModal
+        isOpen={modalImage !== null}
+        onClose={() => setModalImage(null)}
+        imageSrc={modalImage?.src || ''}
+        imageAlt={modalImage?.alt || ''}
+        caption={modalImage?.caption}
+      />
     </>
   );
 }

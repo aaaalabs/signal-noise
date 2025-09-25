@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG to PNG Converter for ProductHunt</title>
+    <style>
+        /* Convert existing SVG logos to ProductHunt 240x240 format */
+        body {
+            background-color: #f5f5f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .logo-variant {
+            width: 240px;
+            height: 240px;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-black-bg {
+            background-color: #000000;
+        }
+
+        .logo-white-bg {
+            background-color: #ffffff;
+        }
+
+        .logo-gradient-bg {
+            background: linear-gradient(135deg, #000000 0%, #111111 100%);
+        }
+
+        .logo-svg {
+            width: 120px;
+            height: 120px;
+        }
+
+        .logo-label {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            color: #666666;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Variant 1: Green logo on black background -->
+    <div class="logo-variant logo-black-bg" id="logo-green-black">
+        <svg class="logo-svg" viewBox="0 0 554 558" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 557V1H553V317.562L312.41 557H1Z" fill="#00ff88" stroke="#00ff88"/>
+        </svg>
+        <div class="logo-label">Green on Black<br>(Primary)</div>
+    </div>
+
+    <!-- Variant 2: White logo on black background -->
+    <div class="logo-variant logo-black-bg" id="logo-white-black">
+        <svg class="logo-svg" viewBox="0 0 554 558" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 557V1H553V317.562L312.41 557H1Z" fill="#ffffff" stroke="#ffffff"/>
+        </svg>
+        <div class="logo-label">White on Black<br>(Alternative)</div>
+    </div>
+
+    <!-- Variant 3: Green logo on white background -->
+    <div class="logo-variant logo-white-bg" id="logo-green-white">
+        <svg class="logo-svg" viewBox="0 0 554 558" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 557V1H553V317.562L312.41 557H1Z" fill="#00ff88" stroke="#00ff88"/>
+        </svg>
+        <div class="logo-label">Green on White<br>(Light Mode)</div>
+    </div>
+
+    <!-- Variant 4: Outline green on black -->
+    <div class="logo-variant logo-black-bg" id="logo-outline-black">
+        <svg class="logo-svg" viewBox="0 0 554 558" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 557V1H553V317.562L312.41 557H1Z" fill="transparent" stroke="#00ff88" stroke-width="2"/>
+        </svg>
+        <div class="logo-label">Outline Green<br>(Minimal)</div>
+    </div>
+
+    <script>
+        // ProductHunt logo specifications
+        console.log('ProductHunt Logo Assets Generated:');
+        console.log('Size: 240x240px (ProductHunt standard)');
+        console.log('Border radius: 20px (modern app icon)');
+        console.log('Variants: 4 different background/color combinations');
+        console.log('');
+        console.log('Usage recommendations:');
+        console.log('- Green on Black: Primary ProductHunt thumbnail');
+        console.log('- White on Black: High contrast alternative');
+        console.log('- Green on White: Light mode compatibility');
+        console.log('- Outline Green: Minimal, sophisticated option');
+        console.log('');
+        console.log('Ready for Playwright screenshot capture');
+    </script>
+</body>
+</html>

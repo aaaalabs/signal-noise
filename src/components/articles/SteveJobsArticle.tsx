@@ -181,6 +181,43 @@ export default function SteveJobsArticle({ isGerman }: ArticleProps) {
         )}
       </p>
 
+      {/* Stanford Speech Photo */}
+      <div style={{
+        float: 'right',
+        marginLeft: '2rem',
+        marginBottom: '1rem',
+        maxWidth: '320px'
+      }}>
+        <img
+          src="/blog-images/article-1-steve-jobs/stanford-speech-moment.jpg"
+          alt="Steve Jobs delivering Stanford Commencement address in 2005, revealing time as ultimate resource philosophy"
+          style={{
+            width: '100%',
+            height: 'auto',
+            border: '1px solid #333',
+            borderRadius: '8px',
+            cursor: 'pointer',
+            transition: 'opacity 0.2s'
+          }}
+          onClick={() => setModalImage({
+            src: "/blog-images/article-1-steve-jobs/stanford-speech-moment.jpg",
+            alt: "Steve Jobs delivering Stanford Commencement address in 2005, revealing time as ultimate resource philosophy",
+            caption: "Stanford Commencement 2005: 'Your time is limited, so don't waste it living someone else's life'"
+          })}
+          onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
+          onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+        />
+        <p style={{
+          fontSize: '0.75rem',
+          color: '#666',
+          marginTop: '0.5rem',
+          textAlign: 'center',
+          fontStyle: 'italic'
+        }}>
+          Stanford Commencement Address, June 12, 2005
+        </p>
+      </div>
+
       <blockquote style={{
         borderLeft: '3px solid #00ff88',
         paddingLeft: '1.5rem',
@@ -232,70 +269,6 @@ export default function SteveJobsArticle({ isGerman }: ArticleProps) {
         )}
       </p>
 
-      {/* Kevin O'Leary Interview Video */}
-      <div style={{
-        float: 'right',
-        marginLeft: '1.5rem',
-        marginBottom: '1rem',
-        marginTop: '1rem',
-        maxWidth: '280px'
-      }}>
-        <a
-          href="https://www.youtube.com/watch?v=mpAZehPviLQ&t=538s"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            display: 'block',
-            position: 'relative'
-          }}
-        >
-          <img
-            src="/kevin-oleary-doac.jpg"
-            alt="Kevin O'Leary on Diary of a CEO"
-            style={{
-              width: '100%',
-              height: 'auto',
-              border: '1px solid #333',
-              display: 'block'
-            }}
-          />
-          {/* Play button overlay */}
-          <div style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '48px',
-            height: '48px',
-            backgroundColor: 'rgba(0, 0, 0, 0.7)',
-            borderRadius: '50%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            transition: 'background-color 0.2s'
-          }}
-          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(0, 255, 136, 0.9)'}
-          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.7)'}
-          >
-            <div style={{
-              width: 0,
-              height: 0,
-              borderLeft: '16px solid #fff',
-              borderTop: '10px solid transparent',
-              borderBottom: '10px solid transparent',
-              marginLeft: '3px'
-            }} />
-          </div>
-        </a>
-        <p style={{
-          fontSize: '0.75rem',
-          color: '#666',
-          marginTop: '0.5rem',
-          textAlign: 'center'
-        }}>
-          The Diary of a CEO
-        </p>
-      </div>
 
       {/* YouTube Video */}
       <div style={{ margin: '3rem 0' }}>
@@ -786,9 +759,9 @@ export default function SteveJobsArticle({ isGerman }: ArticleProps) {
           fontStyle: 'italic'
         }}>
           {isGerman ? (
-            <>Dieser Artikel ist Teil unserer Serie über Produktivitätsmethoden erfolgreicher Gründer. Lesen Sie auch unseren Artikel über <Link to="/blog/elon-musk-experiment" style={{ color: '#00ff88', textDecoration: 'none' }}>Elon Musks 100% Signal Experiment</Link>.<br/><br/>Quellen:<br/>¹ Stanford University, Commencement Address, June 12, 2005<br/>² Apple Worldwide Developers Conference, May 1997</>
+            <>Dieser Artikel ist Teil unserer Serie über Produktivitätsmethoden erfolgreicher Gründer. Lesen Sie auch unseren Artikel über <Link to="/blog/elon-musk-experiment" style={{ color: '#00ff88', textDecoration: 'none' }}>Elon Musks 100% Signal Experiment</Link>.<br/><br/>Quellen:<br/>¹ <a href="https://news.stanford.edu/2005/06/14/jobs-061505/" target="_blank" rel="noopener noreferrer" style={{ color: '#00ff88', textDecoration: 'none' }}>Stanford University, Commencement Address, 12. Juni 2005</a><br/>² <a href="https://developer.apple.com/videos/wwdc1997/" target="_blank" rel="noopener noreferrer" style={{ color: '#00ff88', textDecoration: 'none' }}>Apple Worldwide Developers Conference, Mai 1997</a></>
           ) : (
-            <>This article is part of our series on productivity methods of successful founders. Read also our article about <Link to="/blog/elon-musk-experiment" style={{ color: '#00ff88', textDecoration: 'none' }}>Elon Musk's 100% Signal Experiment</Link>.<br/><br/>Sources:<br/>¹ Stanford University, Commencement Address, June 12, 2005<br/>² Apple Worldwide Developers Conference, May 1997</>
+            <>This article is part of our series on productivity methods of successful founders. Read also our article about <Link to="/blog/elon-musk-experiment" style={{ color: '#00ff88', textDecoration: 'none' }}>Elon Musk's 100% Signal Experiment</Link>.<br/><br/>Sources:<br/>¹ <a href="https://news.stanford.edu/2005/06/14/jobs-061505/" target="_blank" rel="noopener noreferrer" style={{ color: '#00ff88', textDecoration: 'none' }}>Stanford University, Commencement Address, June 12, 2005</a><br/>² <a href="https://developer.apple.com/videos/wwdc1997/" target="_blank" rel="noopener noreferrer" style={{ color: '#00ff88', textDecoration: 'none' }}>Apple Worldwide Developers Conference, May 1997</a></>
           )}
         </p>
       </div>

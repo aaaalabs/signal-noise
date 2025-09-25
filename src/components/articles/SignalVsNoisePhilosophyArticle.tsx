@@ -1,10 +1,21 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import ImageModal from '../ImageModal';
+import ArticleNavigation from '../ArticleNavigation';
+import { getPreviousArticle, getNextArticle } from '../../utils/articleNavigation';
 
 interface ArticleProps {
   isGerman: boolean;
 }
 
 export default function SignalVsNoisePhilosophyArticle({ isGerman }: ArticleProps) {
+  const [modalImage, setModalImage] = useState<{src: string, alt: string, caption?: string} | null>(null);
+
+  // Navigation logic
+  const currentSlug = 'signal-vs-noise-philosophy';
+  const previousArticle = getPreviousArticle(currentSlug);
+  const nextArticle = getNextArticle(currentSlug);
+
   return (
     <>
       {/* Title */}
@@ -175,8 +186,17 @@ export default function SignalVsNoisePhilosophyArticle({ isGerman }: ArticleProp
             maxWidth: '800px',
             height: 'auto',
             borderRadius: '12px',
-            border: '1px solid #333'
+            border: '1px solid #333',
+            cursor: 'pointer',
+            transition: 'transform 0.2s'
           }}
+          onClick={() => setModalImage({
+            src: "/blog-images/article-4-philosophy/signal-noise-waveform-wide.webp",
+            alt: "Information theory visualization showing pure signal wave versus noise interference and combined reality",
+            caption: "Claude Shannon's breakthrough: distinguishing pure signal from noise interference in communication systems"
+          })}
+          onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
+          onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
         />
         <p style={{
           fontSize: '0.8rem',
@@ -204,8 +224,17 @@ export default function SignalVsNoisePhilosophyArticle({ isGerman }: ArticleProp
             width: '100%',
             height: 'auto',
             border: '1px solid #333',
-            borderRadius: '8px'
+            borderRadius: '8px',
+            cursor: 'pointer',
+            transition: 'opacity 0.2s'
           }}
+          onClick={() => setModalImage({
+            src: "/blog-images/article-4-philosophy/claude-shannon-tribute.jpg",
+            alt: "Claude Shannon, Bell Labs engineer and father of information theory, mathematical foundation of Signal vs Noise",
+            caption: "Claude Shannon: Information theory pioneer, Bell Labs"
+          })}
+          onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
+          onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
         />
         <p style={{
           fontSize: '0.75rem',
@@ -837,6 +866,22 @@ export default function SignalVsNoisePhilosophyArticle({ isGerman }: ArticleProp
           </Link>
         </div>
       </div>
+
+      {/* Article Navigation */}
+      <ArticleNavigation
+        previousArticle={previousArticle}
+        nextArticle={nextArticle}
+        isGerman={isGerman}
+      />
+
+      {/* Image Modal */}
+      <ImageModal
+        isOpen={modalImage !== null}
+        onClose={() => setModalImage(null)}
+        imageSrc={modalImage?.src || ''}
+        imageAlt={modalImage?.alt || ''}
+        caption={modalImage?.caption}
+      />
     </>
   );
 }

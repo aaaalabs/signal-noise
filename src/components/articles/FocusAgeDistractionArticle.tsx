@@ -1,10 +1,21 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import ImageModal from '../ImageModal';
+import ArticleNavigation from '../ArticleNavigation';
+import { getPreviousArticle, getNextArticle } from '../../utils/articleNavigation';
 
 interface ArticleProps {
   isGerman: boolean;
 }
 
 export default function FocusAgeDistractionArticle({ isGerman }: ArticleProps) {
+  const [modalImage, setModalImage] = useState<{src: string, alt: string, caption?: string} | null>(null);
+
+  // Navigation logic
+  const currentSlug = 'focus-age-distraction';
+  const previousArticle = getPreviousArticle(currentSlug);
+  const nextArticle = getNextArticle(currentSlug);
+
   return (
     <>
       {/* Title */}
@@ -85,8 +96,17 @@ export default function FocusAgeDistractionArticle({ isGerman }: ArticleProps) {
             maxWidth: '900px',
             height: 'auto',
             borderRadius: '12px',
-            border: '1px solid #333'
+            border: '1px solid #333',
+            cursor: 'pointer',
+            transition: 'transform 0.2s'
           }}
+          onClick={() => setModalImage({
+            src: "/blog-images/article-8-focus/focus-vs-distraction-comparison.webp",
+            alt: "Focus vs distraction comparison showing attention economy statistics and deep work versus fragmented attention",
+            caption: "The attention economy: 45+ minutes deep focus vs 11 seconds fragmented attention"
+          })}
+          onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
+          onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
         />
         <p style={{
           fontSize: '0.8rem',
@@ -966,6 +986,22 @@ export default function FocusAgeDistractionArticle({ isGerman }: ArticleProps) {
           </Link>
         </div>
       </div>
+
+      {/* Article Navigation */}
+      <ArticleNavigation
+        previousArticle={previousArticle}
+        nextArticle={nextArticle}
+        isGerman={isGerman}
+      />
+
+      {/* Image Modal */}
+      <ImageModal
+        isOpen={modalImage !== null}
+        onClose={() => setModalImage(null)}
+        imageSrc={modalImage?.src || ''}
+        imageAlt={modalImage?.alt || ''}
+        caption={modalImage?.caption}
+      />
     </>
   );
 }

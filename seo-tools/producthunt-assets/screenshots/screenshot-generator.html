@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signal/Noise ProductHunt Screenshots Generator</title>
+    <style>
+        /* Jony Ive Principle: Authentic app representation */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .phone-mockup {
+            width: 300px;
+            height: 600px;
+            background-color: #000000;
+            border-radius: 30px;
+            padding: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-interface {
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #ffffff;
+        }
+
+        .app-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .app-title {
+            font-size: 24px;
+            font-weight: 100;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .app-subtitle {
+            font-size: 12px;
+            font-weight: 300;
+            color: #666666;
+            letter-spacing: 1px;
+        }
+
+        .signal-ratio-display {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .ratio-number {
+            font-size: 72px;
+            font-weight: 100;
+            color: #00ff88;
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+
+        .ratio-label {
+            font-size: 14px;
+            font-weight: 300;
+            color: #666666;
+            letter-spacing: 2px;
+        }
+
+        .task-input-section {
+            margin-bottom: 30px;
+        }
+
+        .input-field {
+            width: 100%;
+            background-color: #111111;
+            border: 1px solid #333333;
+            border-radius: 8px;
+            padding: 15px;
+            color: #ffffff;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .classification-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .signal-button {
+            background-color: #00ff88;
+            color: #000000;
+            border: none;
+            border-radius: 8px;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .noise-button {
+            background-color: #333333;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .recent-tasks {
+            flex: 1;
+        }
+
+        .task-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #222222;
+        }
+
+        .task-name {
+            font-size: 14px;
+            color: #cccccc;
+            font-weight: 300;
+        }
+
+        .task-type {
+            font-size: 10px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .signal-tag {
+            background-color: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+        }
+
+        .noise-tag {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #999999;
+        }
+
+        .achievement-notification {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 255, 136, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 2px solid rgba(0, 255, 136, 0.8);
+            border-radius: 16px;
+            padding: 25px 30px;
+            text-align: center;
+            display: none;
+            box-shadow:
+                0 8px 32px rgba(0, 255, 136, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+
+        .achievement-text {
+            font-size: 16px;
+            color: #00ff88;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .achievement-subtitle {
+            font-size: 12px;
+            color: #666666;
+        }
+
+        .callout-annotation {
+            position: absolute;
+            background: rgba(255, 170, 0, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: #000000;
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 13px;
+            font-weight: 600;
+            z-index: 10;
+            white-space: nowrap;
+            box-shadow:
+                0 4px 20px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Different screenshot versions */
+        .screenshot-1 { /* Hero Interface */ }
+        .screenshot-2 { /* Task Classification */ }
+        .screenshot-3 { /* Analytics */ }
+        .screenshot-4 { /* Achievement */ }
+        .screenshot-5 { /* AI Coach */ }
+    </style>
+</head>
+<body>
+    <!-- iPhone Mockup for ProductHunt Screenshots -->
+    <div class="phone-mockup">
+        <div class="app-interface" id="app-screen">
+
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <span>9:41</span>
+                <span>●●●○○</span>
+                <span>100%</span>
+            </div>
+
+            <!-- App Header -->
+            <div class="app-header">
+                <div class="app-title">Signal/Noise</div>
+                <div class="app-subtitle">PRODUCTIVITY METHOD</div>
+            </div>
+
+            <!-- Main Signal Ratio Display -->
+            <div class="signal-ratio-display">
+                <div class="ratio-number" id="ratio-display">87%</div>
+                <div class="ratio-label">SIGNAL ACHIEVED</div>
+            </div>
+
+            <!-- Task Input Section -->
+            <div class="task-input-section">
+                <input type="text" class="input-field" id="task-input" placeholder="What are you working on?" value="Finish ProductHunt launch">
+
+                <div class="classification-buttons">
+                    <button class="signal-button" id="signal-btn">SIGNAL</button>
+                    <button class="noise-button" id="noise-btn">NOISE</button>
+                </div>
+            </div>
+
+            <!-- Recent Tasks -->
+            <div class="recent-tasks">
+                <div class="task-item">
+                    <span class="task-name">Write blog article</span>
+                    <span class="task-type signal-tag">SIGNAL</span>
+                </div>
+                <div class="task-item">
+                    <span class="task-name">Product demo video</span>
+                    <span class="task-type signal-tag">SIGNAL</span>
+                </div>
+                <div class="task-item">
+                    <span class="task-name">Team standup</span>
+                    <span class="task-type signal-tag">SIGNAL</span>
+                </div>
+                <div class="task-item">
+                    <span class="task-name">Check social media</span>
+                    <span class="task-type noise-tag">NOISE</span>
+                </div>
+                <div class="task-item">
+                    <span class="task-name">Organize desktop</span>
+                    <span class="task-type noise-tag">NOISE</span>
+                </div>
+            </div>
+
+            <!-- Callout Annotations (frosted glass with proper positioning) -->
+            <div class="callout-annotation" id="callout-1" style="top: 80px; right: 30px; display: none;">
+                🎯 87% Signal!
+            </div>
+
+            <div class="callout-annotation" id="callout-2" style="bottom: 160px; left: 30px; display: none;">
+                📱 Binary Choice
+            </div>
+
+            <div class="callout-annotation" id="callout-3" style="top: 180px; left: 50%; transform: translateX(-50%); display: none;">
+                📊 Live Tracking
+            </div>
+
+            <!-- Achievement Notification -->
+            <div class="achievement-notification" id="achievement">
+                <div class="achievement-text">🎯 Signal Streak: 7 Days!</div>
+                <div class="achievement-subtitle">Consistency builds momentum</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Screenshot configurations for different ProductHunt needs
+        const screenshots = {
+            hero: {
+                ratio: '87%',
+                input: 'Product demo',
+                callouts: ['callout-1'],
+                achievement: false,
+                title: 'Hero Interface - Main Signal Ratio Display'
+            },
+            classification: {
+                ratio: '67%',
+                input: 'Email check',
+                callouts: ['callout-2'],
+                achievement: false,
+                title: 'Task Classification - Binary Decision Making'
+            },
+            achievement: {
+                ratio: '89%',
+                input: '',
+                callouts: [],
+                achievement: true,
+                title: 'Achievement System - Streak Notification'
+            },
+            analytics: {
+                ratio: '81%',
+                input: 'Team meeting',
+                callouts: ['callout-3'],
+                achievement: false,
+                title: 'Analytics View - Progress Tracking'
+            }
+        };
+
+        let currentScreenshot = 'hero';
+
+        function updateScreenshot(type) {
+            const config = screenshots[type];
+
+            // Update ratio display
+            document.getElementById('ratio-display').textContent = config.ratio;
+
+            // Update input field
+            document.getElementById('task-input').value = config.input;
+
+            // Hide all callouts
+            document.querySelectorAll('.callout-annotation').forEach(el => {
+                el.style.display = 'none';
+            });
+
+            // Show relevant callouts
+            config.callouts.forEach(calloutId => {
+                document.getElementById(calloutId).style.display = 'block';
+            });
+
+            // Toggle achievement
+            document.getElementById('achievement').style.display =
+                config.achievement ? 'block' : 'none';
+
+            console.log(`Screenshot configuration: ${config.title}`);
+            console.log(`Signal ratio: ${config.ratio}`);
+            console.log('Ready for Playwright capture');
+        }
+
+        // Keyboard controls for easy screenshot generation
+        document.addEventListener('keydown', (e) => {
+            switch(e.key) {
+                case '1':
+                    updateScreenshot('hero');
+                    currentScreenshot = 'hero';
+                    break;
+                case '2':
+                    updateScreenshot('classification');
+                    currentScreenshot = 'classification';
+                    break;
+                case '3':
+                    updateScreenshot('analytics');
+                    currentScreenshot = 'analytics';
+                    break;
+                case '4':
+                    updateScreenshot('achievement');
+                    currentScreenshot = 'achievement';
+                    break;
+            }
+        });
+
+        // Initialize with hero screenshot
+        window.addEventListener('load', () => {
+            updateScreenshot('hero');
+            console.log('Screenshot generator ready');
+            console.log('Press 1-4 to switch between screenshot configurations');
+            console.log('1 = Hero Interface');
+            console.log('2 = Task Classification');
+            console.log('3 = Analytics View');
+            console.log('4 = Achievement System');
+        });
+
+        // Make screenshot configs available globally
+        window.screenshotConfigs = screenshots;
+    </script>
+</body>
+</html>

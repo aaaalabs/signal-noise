@@ -369,7 +369,7 @@ export default function SeventyFivePercentArticle({ isGerman }: ArticleProps) {
         {isGerman ? (
           <>Atlassian fand heraus, dass der durchschnittliche Mitarbeiter 31 Stunden pro Monat in unproduktiven Meetings verbringt. Das sind $37 Milliarden jährlich an verschwendeter Zeit - allein in den USA.</>
         ) : (
-          <>Atlassian found that the average employee spends 31 hours per month in unproductive meetings. That's $37 billion annually in wasted time - in the US alone.</>
+          <>Atlassian found that the average employee spends 31 hours per month in unproductive meetings. That's $37 billion annually in wasted time - in the US alone.<br></br><br></br><br></br><br></br></>
         )}
       </p>
 
@@ -711,9 +711,9 @@ export default function SeventyFivePercentArticle({ isGerman }: ArticleProps) {
           fontStyle: 'italic'
         }}>
           {isGerman ? (
-            <>Basierend auf Daten von 1,247 Startup-Gründern weltweit, erhoben 2024-2025. Teil unserer Produktivitätsserie - lesen Sie auch über <Link to="/blog/steve-jobs-method" style={{ color: '#00ff88', textDecoration: 'none' }}>Steve Jobs' 80/20 Methode</Link> und <Link to="/blog/elon-musk-experiment" style={{ color: '#00ff88', textDecoration: 'none' }}>Elon Musks 100% Signal Experiment</Link>.<br/><br/>Quellen:<br/>¹ Harvard Business Review, "Productivity Research", 2024<br/>² Atlassian, "Meeting Statistics Report", 2024</>
+            <>Basierend auf Daten von 1,247 Startup-Gründern weltweit, erhoben 2024-2025. Teil unserer Produktivitätsserie - lesen Sie auch über <Link to="/blog/steve-jobs-method" style={{ color: '#00ff88', textDecoration: 'none' }}>Steve Jobs' 80/20 Methode</Link> und <Link to="/blog/elon-musk-experiment" style={{ color: '#00ff88', textDecoration: 'none' }}>Elon Musks 100% Signal Experiment</Link>.<br/><br/>Quellen:<br/>¹ <a href="https://hbr.org/topic/productivity" target="_blank" rel="noopener noreferrer" style={{ color: '#00ff88', textDecoration: 'none' }}>Harvard Business Review, "Productivity Research", 2024</a><br/>² <a href="https://www.atlassian.com/time-wasting-at-work-infographic" target="_blank" rel="noopener noreferrer" style={{ color: '#00ff88', textDecoration: 'none' }}>Atlassian, "Meeting Statistics Report", 2024</a></>
           ) : (
-            <>Based on data from 1,247 startup founders worldwide, collected 2024-2025. Part of our productivity series - read also about <Link to="/blog/steve-jobs-method" style={{ color: '#00ff88', textDecoration: 'none' }}>Steve Jobs' 80/20 Method</Link> and <Link to="/blog/elon-musk-experiment" style={{ color: '#00ff88', textDecoration: 'none' }}>Elon Musk's 100% Signal Experiment</Link>.<br/><br/>Sources:<br/>¹ Harvard Business Review, "Productivity Research", 2024<br/>² Atlassian, "Meeting Statistics Report", 2024</>
+            <>Based on data from 1,247 startup founders worldwide, collected 2024-2025. Part of our productivity series - read also about <Link to="/blog/steve-jobs-method" style={{ color: '#00ff88', textDecoration: 'none' }}>Steve Jobs' 80/20 Method</Link> and <Link to="/blog/elon-musk-experiment" style={{ color: '#00ff88', textDecoration: 'none' }}>Elon Musk's 100% Signal Experiment</Link>.<br/><br/>Sources:<br/>¹ <a href="https://hbr.org/topic/productivity" target="_blank" rel="noopener noreferrer" style={{ color: '#00ff88', textDecoration: 'none' }}>Harvard Business Review, "Productivity Research", 2024</a><br/>² <a href="https://www.atlassian.com/time-wasting-at-work-infographic" target="_blank" rel="noopener noreferrer" style={{ color: '#00ff88', textDecoration: 'none' }}>Atlassian, "Meeting Statistics Report", 2024</a></>
           )}
         </p>
       </div>

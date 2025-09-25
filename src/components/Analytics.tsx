@@ -25,7 +25,7 @@ export default function Analytics({ tasks }: AnalyticsProps) {
 
   const calculateDailyRatios = (): number[] => {
     const ratios: number[] = [];
-    for (let i = 29; i >= 0; i--) {
+    for (let i = 0; i <= 29; i++) {
       const date = new Date();
       date.setDate(date.getDate() - i);
       const dayTasks = tasks.filter(task =>

@@ -1,0 +1,32 @@
+{
+  "generated_date": "2025-09-23T03:46:42.998Z",
+  "total_assets": 11,
+  "asset_categories": {
+    "logo": {
+      "static": "logo/signal-noise-logo-240x240.png",
+      "animated_frame": "logo/signal-noise-logo-animated-frame1.png",
+      "usage": "ProductHunt thumbnail and branding"
+    },
+    "screenshots": {
+      "hero": "screenshots/signal-noise-hero-interface.png",
+      "classification": "screenshots/signal-noise-task-classification.png",
+      "analytics": "screenshots/signal-noise-analytics-view.png",
+      "achievement": "screenshots/signal-noise-achievement-system.png",
+      "usage": "ProductHunt gallery and social media"
+    },
+    "demo_frames": {
+      "frame_1": "demo-gifs/demo-step-1-initial.png",
+      "frame_2": "demo-gifs/demo-step-2-typing.png",
+      "frame_3": "demo-gifs/demo-step-3-noise-classified.png",
+      "frame_4": "demo-gifs/demo-step-4-signal-task.png",
+      "frame_5": "demo-gifs/demo-step-5-improved-ratio.png",
+      "usage": "Combine into animated GIF for ProductHunt demo"
+    }
+  },
+  "next_steps": [
+    "Create animated GIF from demo frames",
+    "Generate social media variants",
+    "Prepare press kit materials",
+    "Create ProductHunt maker profile"
+  ]
+}

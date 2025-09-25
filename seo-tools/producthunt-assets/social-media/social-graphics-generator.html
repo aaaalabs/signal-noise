@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProductHunt Social Media Graphics Generator</title>
+    <style>
+        /* Jony Ive Principle: Clear communication without noise */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .social-card {
+            width: 1200px;
+            height: 630px; /* Twitter/LinkedIn optimal ratio */
+            background: linear-gradient(135deg, #000000 0%, #111111 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-section {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .launch-announcement {
+            font-size: 16px;
+            color: #00ff88;
+            font-weight: 500;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .main-headline {
+            font-size: 48px;
+            font-weight: 300;
+            color: #ffffff;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .headline-accent {
+            color: #00ff88;
+            font-weight: 400;
+        }
+
+        .description {
+            font-size: 20px;
+            color: #cccccc;
+            line-height: 1.5;
+            margin-bottom: 30px;
+            max-width: 500px;
+        }
+
+        .cta-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .cta-button {
+            background: rgba(0, 255, 136, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: #000000;
+            padding: 18px 35px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            box-shadow:
+                0 4px 20px rgba(0, 255, 136, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+
+        .cta-text {
+            font-size: 14px;
+            color: #666666;
+        }
+
+        .visual-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .phone-preview {
+            width: 200px;
+            height: 400px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 15px;
+            box-shadow:
+                0 20px 60px rgba(0, 255, 136, 0.2),
+                0 0 0 1px rgba(255, 255, 255, 0.05);
+        }
+
+        .app-preview {
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .preview-logo {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 20px;
+        }
+
+        .preview-ratio {
+            font-size: 36px;
+            font-weight: 100;
+            color: #00ff88;
+            margin-bottom: 5px;
+        }
+
+        .preview-label {
+            font-size: 10px;
+            color: #666666;
+            letter-spacing: 1px;
+        }
+
+        .stats-overlay {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            background: rgba(0, 255, 136, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 255, 136, 0.6);
+            border-radius: 12px;
+            padding: 20px 25px;
+            text-align: center;
+            box-shadow:
+                0 8px 32px rgba(0, 255, 136, 0.2),
+                0 0 0 1px rgba(255, 255, 255, 0.05);
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: 100;
+            color: #00ff88;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            color: #666666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Different social media formats */
+        .twitter-card {
+            width: 1200px;
+            height: 628px;
+        }
+
+        .linkedin-card {
+            width: 1200px;
+            height: 630px;
+        }
+
+        .instagram-card {
+            width: 1080px;
+            height: 1080px;
+            flex-direction: column;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Twitter/LinkedIn Launch Card -->
+    <div class="social-card twitter-card" id="social-card">
+        <!-- Content Section -->
+        <div class="content-section">
+            <div class="launch-announcement">🚀 Now Live on ProductHunt</div>
+
+            <h1 class="main-headline">
+                <span class="headline-accent">Steve Jobs'</span><br>
+                Productivity Method<br>
+                in App Form
+            </h1>
+
+            <p class="description">
+                The 80/20 Signal vs Noise methodology that transformed Apple from bankruptcy to world's most valuable company.
+            </p>
+
+            <div class="cta-section">
+                <a href="#" class="cta-button">Try Free Today</a>
+                <span class="cta-text">Join 1,200+ founders</span>
+            </div>
+        </div>
+
+        <!-- Visual Section -->
+        <div class="visual-section">
+            <!-- Phone Preview -->
+            <div class="phone-preview">
+                <div class="app-preview">
+                    <!-- Logo -->
+                    <svg class="preview-logo" viewBox="0 0 554 558" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 557V1H553V317.562L312.41 557H1Z" fill="#00ff88" stroke="#00ff88"/>
+                    </svg>
+
+                    <!-- Signal Ratio Display -->
+                    <div class="preview-ratio">87%</div>
+                    <div class="preview-label">SIGNAL</div>
+                </div>
+            </div>
+
+            <!-- Stats Overlay -->
+            <div class="stats-overlay">
+                <div class="stat-number">+252%</div>
+                <div class="stat-label">Productivity Increase</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Social media card configurations
+        const socialFormats = {
+            twitter: {
+                width: '1200px',
+                height: '628px',
+                title: 'Twitter Launch Card'
+            },
+            linkedin: {
+                width: '1200px',
+                height: '630px',
+                title: 'LinkedIn Launch Card'
+            },
+            instagram: {
+                width: '1080px',
+                height: '1080px',
+                title: 'Instagram Square Card'
+            }
+        };
+
+        function switchFormat(format) {
+            const card = document.getElementById('social-card');
+            const config = socialFormats[format];
+
+            card.style.width = config.width;
+            card.style.height = config.height;
+
+            if (format === 'instagram') {
+                card.classList.add('instagram-card');
+            } else {
+                card.classList.remove('instagram-card');
+            }
+
+            console.log(`Switched to ${config.title}`);
+            console.log(`Dimensions: ${config.width} × ${config.height}`);
+        }
+
+        // Keyboard controls
+        document.addEventListener('keydown', (e) => {
+            switch(e.key) {
+                case '1':
+                    switchFormat('twitter');
+                    break;
+                case '2':
+                    switchFormat('linkedin');
+                    break;
+                case '3':
+                    switchFormat('instagram');
+                    break;
+            }
+        });
+
+        // Initialize
+        window.addEventListener('load', () => {
+            console.log('ProductHunt Social Media Graphics Generator');
+            console.log('Press 1 = Twitter, 2 = LinkedIn, 3 = Instagram');
+            console.log('Using existing Signal/Noise SVG logo assets');
+            console.log('Ready for Playwright screenshot capture');
+        });
+    </script>
+</body>
+</html>

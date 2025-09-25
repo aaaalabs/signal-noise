@@ -1,20 +1,57 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from '../contexts/LanguageContext';
+import type { Task } from '../types';
 
 interface TaskInputProps {
   onAdd: (text: string, type: 'signal' | 'noise') => void;
+  todaySignalCount: number;
+  tasks: Task[];
 }
 
-export default function TaskInput({ onAdd }: TaskInputProps) {
+export default function TaskInput({ onAdd, todaySignalCount, tasks }: TaskInputProps) {
   const t = useTranslation();
   const [inputValue, setInputValue] = useState('');
   const [showButtons, setShowButtons] = useState(false);
   const [selectedType, setSelectedType] = useState<'signal' | 'noise'>('signal'); // Default to Signal (matches visual hierarchy)
+  const [suggestion, setSuggestion] = useState('');
+  const [showSuggestion, setShowSuggestion] = useState(true);
+  const [isLocked, setIsLocked] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const tabCount = useRef(0);
+
+  // Find best matching previous task for autocomplete
+  const findSuggestion = (input: string): string => {
+    if (input.length < 2) return '';
+
+    // Sort tasks by recency and get unique texts
+    const recentTexts = tasks
+      .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+      .map(t => t.text);
+    const uniqueTexts = [...new Set(recentTexts)];
+
+    // Find first match (case-insensitive prefix)
+    return uniqueTexts.find(text =>
+      text.toLowerCase().startsWith(input.toLowerCase())
+    ) || '';
+  };
+
+  // Update lock state when signal count changes
+  useEffect(() => {
+    setIsLocked(todaySignalCount >= 8);
+  }, [todaySignalCount]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setInputValue(value);
-    setShowButtons(value.trim().length > 0);
+    setShowButtons(value.trim().length > 0 && !isLocked);
+
+    // Update suggestion
+    const newSuggestion = findSuggestion(value);
+    setSuggestion(newSuggestion);
+    setShowSuggestion(true); // Show suggestion when typing
+
+    // Reset tab count when input changes
+    tabCount.current = 0;
   };
 
   const handleAddTask = (type: 'signal' | 'noise') => {
@@ -26,14 +63,30 @@ export default function TaskInput({ onAdd }: TaskInputProps) {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Tab' && showButtons) {
-      // Switch selection between Signal and Noise
+    if (e.key === 'Tab') {
       e.preventDefault();
-      setSelectedType(prev => prev === 'signal' ? 'noise' : 'signal');
+      tabCount.current++;
 
-      // Haptic feedback on mobile
-      if (navigator.vibrate) {
-        navigator.vibrate(5);
+      if (tabCount.current === 1 && suggestion && showSuggestion) {
+        // First Tab: Accept autocomplete
+        setInputValue(suggestion);
+        setShowSuggestion(false); // Hide suggestion after acceptance
+        setShowButtons(!isLocked); // Show buttons if not locked
+        tabCount.current = 0; // Reset for next interaction
+
+        // Haptic feedback
+        if (navigator.vibrate) {
+          navigator.vibrate(5);
+        }
+      } else if ((tabCount.current === 2 || (tabCount.current === 1 && !suggestion)) && showButtons) {
+        // Second Tab (or first if no suggestion): Switch selection
+        setSelectedType(prev => prev === 'signal' ? 'noise' : 'signal');
+        tabCount.current = 0; // Reset after switching
+
+        // Haptic feedback
+        if (navigator.vibrate) {
+          navigator.vibrate(5);
+        }
       }
     } else if (e.key === 'ArrowLeft' && showButtons) {
       // Navigate to Signal
@@ -55,18 +108,60 @@ export default function TaskInput({ onAdd }: TaskInputProps) {
     }
   };
 
+  // Handle click on locked input
+  const handleInputClick = () => {
+    if (isLocked && inputRef.current) {
+      // Trigger shake animation
+      inputRef.current.classList.add('shake-locked');
+      setTimeout(() => {
+        inputRef.current?.classList.remove('shake-locked');
+      }, 300);
+
+      // Haptic feedback
+      if (navigator.vibrate) {
+        navigator.vibrate(10);
+      }
+    }
+  };
+
   return (
     <div className="input-section">
-      <div className="input-wrapper">
+      <div className="input-wrapper" style={{ position: 'relative' }}>
         <input
+          ref={inputRef}
           type="text"
           value={inputValue}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
-          placeholder={t.inputPlaceholder}
-          className="task-input"
+          onClick={handleInputClick}
+          placeholder={isLocked
+            ? "8 signals reached today. Move some to noise first."
+            : t.inputPlaceholder
+          }
+          className={`task-input ${isLocked ? 'input-locked' : ''}`}
+          disabled={isLocked}
           autoComplete="off"
         />
+        {/* Autocomplete suggestion overlay */}
+        {suggestion && showSuggestion && inputValue.length >= 2 && !isLocked && (
+          <div
+            className="suggestion-overlay"
+            style={{
+              position: 'absolute',
+              right: '12px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              color: '#ff9f0a',
+              opacity: 0.6,
+              pointerEvents: 'none',
+              fontWeight: 100,
+              transition: 'opacity 0.2s ease',
+              fontSize: 'inherit'
+            }}
+          >
+            {suggestion.slice(inputValue.length)}
+          </div>
+        )}
       </div>
 
       <div className={`decision-buttons ${showButtons ? 'active' : ''}`}>

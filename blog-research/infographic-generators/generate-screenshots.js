@@ -112,6 +112,16 @@ const infographics = [
       { name: 'wide', width: 1400, height: 900 },
       { name: 'standard', width: 1000, height: 700 }
     ]
+  },
+  {
+    name: '5min-time-blocking',
+    htmlFile: '5min-time-blocking.html',
+    description: 'Elon Musk 5-Minute Time Blocking Visualization',
+    aspectRatios: [
+      { name: 'standard', width: 800, height: 900 },
+      { name: 'wide', width: 1000, height: 1000 },
+      { name: 'compact', width: 600, height: 800 }
+    ]
   }
 ];
 

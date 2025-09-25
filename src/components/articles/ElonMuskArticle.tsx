@@ -110,34 +110,6 @@ export default function ElonMuskArticle({ isGerman }: ArticleProps) {
         </cite>
       </blockquote>
 
-      {/* 100% Signal Achievement Visualization */}
-      <div style={{
-        margin: '4rem 0',
-        textAlign: 'center',
-        clear: 'both'
-      }}>
-        <img
-          src="/blog-images/article-3-elon-musk/100-percent-signal-square.webp"
-          alt="100% Signal achievement indicator showing complete focus methodology as demonstrated by Elon Musk"
-          style={{
-            width: '100%',
-            maxWidth: '400px',
-            height: 'auto',
-            borderRadius: '12px',
-            border: '1px solid #333'
-          }}
-        />
-        <p style={{
-          fontSize: '0.8rem',
-          color: '#666',
-          marginTop: '1rem',
-          fontStyle: 'italic',
-          maxWidth: '500px',
-          margin: '1rem auto 0'
-        }}>
-          The ultimate goal: 100% Signal ratio through systematic noise elimination
-        </p>
-      </div>
 
       {/* The 100% Signal Philosophy - Critical Content Addition */}
       <h2 style={{
@@ -324,6 +296,142 @@ export default function ElonMuskArticle({ isGerman }: ArticleProps) {
         </div>
       </div>
 
+      {/* 5-Minute Time Blocking Visualization */}
+      <div style={{
+        margin: '4rem 0',
+        textAlign: 'center',
+        clear: 'both'
+      }}>
+        <img
+          src="/blog-images/article-3-elon-musk/5min-time-blocking-standard.webp"
+          alt="Elon Musk 5-minute time blocking methodology showing extreme time compartmentalization and signal classification"
+          style={{
+            width: '100%',
+            maxWidth: '600px',
+            height: 'auto',
+            borderRadius: '12px',
+            border: '1px solid #333',
+            cursor: 'pointer',
+            transition: 'transform 0.2s'
+          }}
+          onClick={() => setModalImage({
+            src: "/blog-images/article-3-elon-musk/5min-time-blocking-standard.webp",
+            alt: "Elon Musk 5-minute time blocking methodology showing extreme time compartmentalization and signal classification",
+            caption: "Theoretical 5-minute time blocking: 12 distinct tasks with signal classification in 60 minutes"
+          })}
+          onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
+          onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+        />
+        <p style={{
+          fontSize: '0.8rem',
+          color: '#666',
+          marginTop: '1rem',
+          fontStyle: 'italic',
+          maxWidth: '500px',
+          margin: '1rem auto 0'
+        }}>
+          The theory behind extreme time precision: every 5 minutes classified and optimized
+        </p>
+      </div>
+
+      {/* Reddit Community Perspective */}
+      <h2 style={{
+        fontSize: '1.5rem',
+        fontWeight: '300',
+        color: '#fff',
+        marginTop: '4rem',
+        marginBottom: '1.5rem'
+      }}>
+        {isGerman ? 'Die Community-Perspektive: Kritische Stimmen' : 'The Community Perspective: Critical Voices'}
+      </h2>
+
+      <p style={{
+        fontSize: '1rem',
+        lineHeight: '1.7',
+        color: '#ddd',
+        marginBottom: '1.5rem'
+      }}>
+        {isGerman ? (
+          <>Die Produktivitäts-Community auf Reddit hat intensive Diskussionen über Musks 5-Minuten-Methode geführt. Die Reaktionen sind gemischt – von Bewunderung bis zu praktischer Skepsis. Ein Kommentar bringt es auf den Punkt:</>
+        ) : (
+          <>The productivity community on Reddit has engaged in intense discussions about Musk's 5-minute method. Reactions are mixed – from admiration to practical skepticism. One comment hits the nail:</>
+        )}
+      </p>
+
+      <blockquote style={{
+        borderLeft: '3px solid #ffaa00',
+        paddingLeft: '1.5rem',
+        margin: '2rem 0',
+        fontStyle: 'italic',
+        color: '#ddd',
+        fontSize: '1rem',
+        lineHeight: '1.7'
+      }}>
+        {isGerman ? (
+          '"Kontextwechsel alle 5 Minuten ist das Gegenteil von Produktivität. Elon Musk macht das nur für Meetings, um die Botschaft zu kondensieren. Für Deep Work braucht man 90+ Minuten-Blöcke für Flow State."'
+        ) : (
+          '"Context switching every 5 minutes is the antithesis of productivity. Elon Musk only does this for meetings to condense the message. For deep work you need 90+ minute blocks for flow state."'
+        )}
+        <cite style={{
+          display: 'block',
+          marginTop: '0.5rem',
+          fontStyle: 'normal',
+          fontSize: '0.9rem',
+          color: '#999'
+        }}>
+          — Reddit r/productivity community discussion³
+        </cite>
+      </blockquote>
+
+      <p style={{
+        fontSize: '1rem',
+        lineHeight: '1.7',
+        color: '#ddd',
+        marginBottom: '1.5rem'
+      }}>
+        {isGerman ? (
+          <>Ein weiterer wichtiger Punkt: "Elon Musk würde seine Zeit nicht selbst verwalten, zumindest nicht bis auf 5-Minuten-Blöcke. Diese granulare Planung würde von einem Assistenten gemacht. Seine Zeit ist so wertvoll, dass selbst ein Vollzeit-Planer einen positiven ROI bringen würde."</>
+        ) : (
+          <>Another crucial point: "Elon Musk would not manage his own time, not down to 5-minute blocks anyway. This level of granular planning would be done by an assistant. His time is so valuable that even if somebody had a full-time job planning his 5-minute blocks it would provide a positive ROI."</>
+        )}
+      </p>
+
+      <div style={{
+        backgroundColor: '#0a1a0a',
+        border: '1px solid #ffaa00',
+        borderRadius: '8px',
+        padding: '1.5rem',
+        margin: '2rem 0'
+      }}>
+        <h4 style={{
+          fontSize: '1rem',
+          color: '#ffaa00',
+          marginBottom: '0.5rem',
+          fontWeight: '500'
+        }}>
+          {isGerman ? 'Community-Erkenntnisse:' : 'Community Insights:'}
+        </h4>
+        <ul style={{
+          fontSize: '0.95rem',
+          color: '#ccc',
+          lineHeight: '1.7',
+          paddingLeft: '1.5rem'
+        }}>
+          <li style={{ marginBottom: '0.5rem' }}>
+            {isGerman ? '5-Minuten-Blöcke funktionieren nur für Meetings, nicht für Deep Work' : '5-minute blocks only work for meetings, not deep work'}
+          </li>
+          <li style={{ marginBottom: '0.5rem' }}>
+            {isGerman ? 'Assistenten verwalten die granulare Zeitplanung' : 'Assistants handle granular time planning'}
+          </li>
+          <li style={{ marginBottom: '0.5rem' }}>
+            {isGerman ? '25-50 Minuten-Blöcke sind für normale Menschen praktischer' : '25-50 minute blocks are more practical for regular people'}
+          </li>
+          <li style={{ marginBottom: '0' }}>
+            {isGerman ? 'Kontextwechsel-Kosten überwiegen oft die Effizienzgewinne' : 'Context switching costs often outweigh efficiency gains'}
+          </li>
+        </ul>
+      </div>
+
       {/* The Key Principles */}
       <h2 style={{
         fontSize: '1.5rem',
@@ -416,69 +524,7 @@ export default function ElonMuskArticle({ isGerman }: ArticleProps) {
         </div>
       </div>
 
-      {/* Interview Video - Lex Fridman */}
-      <div style={{
-        float: 'left',
-        marginRight: '1.5rem',
-        marginBottom: '1rem',
-        maxWidth: '280px'
-      }}>
-        <a
-          href="https://www.youtube.com/watch?v=DxREm3s1scA"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            display: 'block',
-            position: 'relative'
-          }}
-        >
-          <img
-            src="/elon-lex-clean.jpg"
-            alt="Elon Musk with Lex Fridman"
-            style={{
-              width: '100%',
-              height: 'auto',
-              border: '1px solid #333',
-              display: 'block'
-            }}
-          />
-          {/* Play button overlay */}
-          <div style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '48px',
-            height: '48px',
-            backgroundColor: 'rgba(0, 0, 0, 0.7)',
-            borderRadius: '50%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            transition: 'background-color 0.2s'
-          }}
-          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(0, 255, 136, 0.9)'}
-          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.7)'}
-          >
-            <div style={{
-              width: 0,
-              height: 0,
-              borderLeft: '16px solid #fff',
-              borderTop: '10px solid transparent',
-              borderBottom: '10px solid transparent',
-              marginLeft: '3px'
-            }} />
-          </div>
-        </a>
-        <p style={{
-          fontSize: '0.75rem',
-          color: '#666',
-          marginTop: '0.5rem',
-          textAlign: 'center'
-        }}>
-          Lex Fridman Podcast
-        </p>
-      </div>
+      
 
       {/* Visual Break - Factory Floor Story */}
       <div style={{
@@ -583,67 +629,126 @@ export default function ElonMuskArticle({ isGerman }: ArticleProps) {
       </blockquote>
 
 
-      {/* TED Interview Video */}
-      <div style={{
-        float: 'right',
-        marginLeft: '1.5rem',
-        marginBottom: '1rem',
-        maxWidth: '280px'
-      }}>
-        <a
-          href="https://www.youtube.com/watch?v=cdZZpaB2kDM&t=1620s"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            display: 'block',
-            position: 'relative'
-          }}
-        >
-          <img
-            src="/elon-ted-2022.jpg"
-            alt="Elon Musk at TED 2022"
+      {/* TED 2022 Interview Video - Manufacturing Focus */}
+      <div style={{ margin: '3rem 0', clear: 'both' }}>
+        <h2 style={{
+          fontSize: '1.5rem',
+          fontWeight: '300',
+          color: '#fff',
+          marginBottom: '1.5rem'
+        }}>
+          {isGerman ? 'TED 2022: Extreme Arbeits-Philosophie' : 'TED 2022: Extreme Work Philosophy'}
+        </h2>
+
+        <div style={{
+          position: 'relative',
+          paddingBottom: '56.25%',
+          height: 0,
+          backgroundColor: '#111',
+          border: '1px solid #222',
+          borderRadius: '8px',
+          overflow: 'hidden'
+        }}>
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/cdZZpaB2kDM?si=TED2022FactoryFloor&start=2024"
+            title="Elon Musk talks Tesla factory floor dedication and extreme work methodology — TED2022"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
             style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
               width: '100%',
-              height: 'auto',
-              border: '1px solid #333',
-              display: 'block'
+              height: '100%'
             }}
           />
-          {/* Play button overlay */}
-          <div style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '48px',
-            height: '48px',
-            backgroundColor: 'rgba(0, 0, 0, 0.7)',
-            borderRadius: '50%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            transition: 'background-color 0.2s'
-          }}
-          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(0, 255, 136, 0.9)'}
-          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.7)'}
-          >
-            <div style={{
-              width: 0,
-              height: 0,
-              borderLeft: '16px solid #fff',
-              borderTop: '10px solid transparent',
-              borderBottom: '10px solid transparent',
-              marginLeft: '3px'
-            }} />
-          </div>
-        </a>
+        </div>
         <p style={{
-          fontSize: '0.75rem',
           color: '#666',
+          fontSize: '0.85rem',
           marginTop: '0.5rem',
+          fontStyle: 'italic',
           textAlign: 'center'
         }}>
-          TED 2022 Interview
+          TED2022 (33:44): "I lived in the factories for three years... I slept on the floor" - Manufacturing leadership
+        </p>
+      </div>
+
+      <blockquote style={{
+        borderLeft: '3px solid #00ff88',
+        paddingLeft: '1.5rem',
+        margin: '2rem 0',
+        fontStyle: 'italic',
+        color: '#ddd',
+        fontSize: '1rem',
+        lineHeight: '1.7'
+      }}>
+        {isGerman ? (
+          '"Ich lebte drei Jahre lang in den Fabriken von Fremont und Nevada, reparierte die Produktionslinie, rannte wie ein Wahnsinniger herum... Ich schlief auf dem Boden, damit das Team wusste, dass ich nicht in einem Elfenbeinturm saß."'
+        ) : (
+          '"I lived in the Fremont and Nevada factories for three years, fixing that production line, running around like a maniac... I slept on the floor, so the team knew that I was not in some ivory tower."'
+        )}
+        <cite style={{
+          display: 'block',
+          marginTop: '0.5rem',
+          fontStyle: 'normal',
+          fontSize: '0.9rem',
+          color: '#999'
+        }}>
+          — Elon Musk, TED2022 Live Interview⁴
+        </cite>
+      </blockquote>
+
+      {/* Lex Friedman Podcast - Deep Dive Interview */}
+      <div style={{ margin: '4rem 0', clear: 'both' }}>
+        <h2 style={{
+          fontSize: '1.5rem',
+          fontWeight: '300',
+          color: '#fff',
+          marginBottom: '1.5rem'
+        }}>
+          {isGerman ? 'Lex Friedman Podcast: Produktivitäts-Tiefenanalyse' : 'Lex Friedman Podcast: Deep Productivity Analysis'}
+        </h2>
+
+        <div style={{
+          position: 'relative',
+          paddingBottom: '56.25%',
+          height: 0,
+          backgroundColor: '#111',
+          border: '1px solid #222',
+          borderRadius: '8px',
+          overflow: 'hidden'
+        }}>
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/DxREm3s1scA?si=v9MB52VU6RVttgpE&start=1077"
+            title="Elon Musk on Lex Friedman - Time Management and Productivity Philosophy Deep Dive"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%'
+            }}
+          />
+        </div>
+        <p style={{
+          color: '#666',
+          fontSize: '0.85rem',
+          marginTop: '0.5rem',
+          fontStyle: 'italic',
+          textAlign: 'center'
+        }}>
+          Lex Friedman Podcast (17:57): Deep philosophical discussion on time management and productivity methodology
         </p>
       </div>
 
@@ -871,9 +976,9 @@ export default function ElonMuskArticle({ isGerman }: ArticleProps) {
           fontStyle: 'italic'
         }}>
           {isGerman ? (
-            <>100% Signal ist ein Ideal, keine Anforderung. Finde deine Balance. Teil unserer Produktivitätsserie - lesen Sie auch über <Link to="/blog/steve-jobs-method" style={{ color: '#00ff88', textDecoration: 'none' }}>Steve Jobs' 80/20 Methode</Link> und <Link to="/blog/75-percent-tasks" style={{ color: '#00ff88', textDecoration: 'none' }}>warum 75% der Aufgaben unwichtig sind</Link>.<br/><br/>Quellen:<br/>¹ Verschiedene Elon Musk Interviews, zusammengefasst 2024</>
+            <>100% Signal ist ein Ideal, keine Anforderung. Finde deine Balance. Teil unserer Produktivitätsserie - lesen Sie auch über <Link to="/blog/steve-jobs-method" style={{ color: '#00ff88', textDecoration: 'none' }}>Steve Jobs' 80/20 Methode</Link> und <Link to="/blog/75-percent-tasks" style={{ color: '#00ff88', textDecoration: 'none' }}>warum 75% der Aufgaben unwichtig sind</Link>.<br/><br/>Quellen:<br/>¹ <a href="https://www.tesla.com/blog" target="_blank" rel="noopener noreferrer" style={{ color: '#00ff88', textDecoration: 'none' }}>Verschiedene Elon Musk Interviews und Tesla Blog, zusammengefasst 2024</a><br/>² <a href="https://www.youtube.com/watch?v=mpAZehPviLQ&t=538s" target="_blank" rel="noopener noreferrer" style={{ color: '#00ff88', textDecoration: 'none' }}>Kevin O'Leary, The Diary of a CEO Interview</a><br/>³ <a href="https://www.reddit.com/r/productivity/comments/lc65wd/elon_musks_5min_time_blocks/" target="_blank" rel="noopener noreferrer" style={{ color: '#00ff88', textDecoration: 'none' }}>Reddit r/productivity: Diskussion über Elon Musks 5-Minuten-Zeitblöcke</a><br/>⁴ <a href="https://www.ted.com/talks/elon_musk_elon_musk_talks_twitter_tesla_and_how_his_brain_works_live_at_ted2022/transcript" target="_blank" rel="noopener noreferrer" style={{ color: '#00ff88', textDecoration: 'none' }}>TED2022 Live Interview Transkript</a><br/>⁵ <a href="https://www.youtube.com/watch?v=DxREm3s1scA" target="_blank" rel="noopener noreferrer" style={{ color: '#00ff88', textDecoration: 'none' }}>Lex Friedman Podcast - Elon Musk Interview</a></>
           ) : (
-            <>100% Signal is an ideal, not a requirement. Find your balance. Part of our productivity series - read also about <Link to="/blog/steve-jobs-method" style={{ color: '#00ff88', textDecoration: 'none' }}>Steve Jobs' 80/20 Method</Link> and <Link to="/blog/75-percent-tasks" style={{ color: '#00ff88', textDecoration: 'none' }}>why 75% of tasks don't matter</Link>.<br/><br/>Sources:<br/>¹ Various Elon Musk interviews, compiled 2024</>
+            <>100% Signal is an ideal, not a requirement. Find your balance. Part of our productivity series - read also about <Link to="/blog/steve-jobs-method" style={{ color: '#00ff88', textDecoration: 'none' }}>Steve Jobs' 80/20 Method</Link> and <Link to="/blog/75-percent-tasks" style={{ color: '#00ff88', textDecoration: 'none' }}>why 75% of tasks don't matter</Link>.<br/><br/>Sources:<br/>¹ <a href="https://www.tesla.com/blog" target="_blank" rel="noopener noreferrer" style={{ color: '#00ff88', textDecoration: 'none' }}>Various Elon Musk interviews and Tesla Blog, compiled 2024</a><br/>² <a href="https://www.youtube.com/watch?v=mpAZehPviLQ&t=538s" target="_blank" rel="noopener noreferrer" style={{ color: '#00ff88', textDecoration: 'none' }}>Kevin O'Leary, The Diary of a CEO Interview</a><br/>³ <a href="https://www.reddit.com/r/productivity/comments/lc65wd/elon_musks_5min_time_blocks/" target="_blank" rel="noopener noreferrer" style={{ color: '#00ff88', textDecoration: 'none' }}>Reddit r/productivity: Elon Musk's 5-min time blocks discussion</a><br/>⁴ <a href="https://www.ted.com/talks/elon_musk_elon_musk_talks_twitter_tesla_and_how_his_brain_works_live_at_ted2022/transcript" target="_blank" rel="noopener noreferrer" style={{ color: '#00ff88', textDecoration: 'none' }}>TED2022 Live Interview Transcript</a><br/>⁵ <a href="https://www.youtube.com/watch?v=DxREm3s1scA" target="_blank" rel="noopener noreferrer" style={{ color: '#00ff88', textDecoration: 'none' }}>Lex Friedman Podcast - Elon Musk Interview</a></>
           )}
         </p>
       </div>

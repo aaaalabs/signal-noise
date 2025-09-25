@@ -1090,14 +1090,28 @@ function AppContent() {
 
   const handleCommitmentModeActivation = () => {
     const activationTimestamp = new Date().toISOString();
+    const today = new Date().toDateString();
 
-    setData(prev => ({
-      ...prev,
-      settings: {
-        ...prev.settings,
-        commitModeActivatedAt: activationTimestamp
-      }
-    }));
+    setData(prev => {
+      // Auto-complete today's noise tasks
+      const updatedTasks = prev.tasks.map(task => {
+        if (task.type === 'noise' &&
+            new Date(task.timestamp).toDateString() === today &&
+            !task.completed) {
+          return { ...task, completed: true };
+        }
+        return task;
+      });
+
+      return {
+        ...prev,
+        tasks: updatedTasks,
+        settings: {
+          ...prev.settings,
+          commitModeActivatedAt: activationTimestamp
+        }
+      };
+    });
 
     setShowCommitmentModal(false);
 
@@ -1236,6 +1250,15 @@ function AppContent() {
     } catch (e) {
       // Widget update not critical, fail silently
     }
+  };
+
+  // Helper function to count today's signal tasks
+  const getTodaySignalCount = (): number => {
+    const today = new Date().toDateString();
+    return data.tasks.filter(task =>
+      task.type === 'signal' &&
+      new Date(task.timestamp).toDateString() === today
+    ).length; // Count ALL signals from today, regardless of completion status
   };
 
   const addTask = (text: string, type: 'signal' | 'noise') => {
@@ -1558,7 +1581,11 @@ function AppContent() {
         </header>
 
         {/* Input Section */}
-        <TaskInput onAdd={addTask} />
+        <TaskInput
+          onAdd={addTask}
+          todaySignalCount={getTodaySignalCount()}
+          tasks={data.tasks}
+        />
 
         {/* Temporal Fold - Historical Tasks */}
         <TemporalFold tasks={data.tasks} />
