@@ -141,11 +141,15 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
 
     // Handle double tap for completion
     if (currentTapCount === 2) {
-      // Second tap - trigger completion toggle
+      // Second tap - trigger completion toggle immediately
+      // Hide tap feedback before triggering to prevent flash
+      setShowTapFeedback(false);
+      setTapCount(0);
+      // Small delay for animation to start hiding
       setTimeout(() => {
         onToggleComplete(task.id);
         resetTapState();
-      }, 100);
+      }, 50);
     } else {
       // Set timeout to reset tap count
       tapTimeoutId.current = window.setTimeout(resetTapState, 1000);
