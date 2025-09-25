@@ -347,6 +347,7 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
       {/* Completion indicator - appears on second tap */}
       {showTapFeedback && tapCount === 2 && !isSwipingData && (
         <div
+          className="completion-indicator"
           style={{
             position: 'absolute',
             top: '50%',
@@ -356,7 +357,7 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
             color: task.completed ? '#666' : 'var(--signal)',
             fontWeight: 600,
             zIndex: 2,
-            animation: 'pulseArrow 0.2s ease-out'
+            animation: 'elegantFadeCheck 0.6s ease-out forwards'
           }}
         >
           {task.completed ? '↺' : '✓'}
@@ -547,6 +548,25 @@ export default function TaskGrid({ tasks, onTransfer, onDelete, onToggleComplete
           100% {
             opacity: 1;
             transform: translateY(-50%) scale(1);
+          }
+        }
+
+        @keyframes elegantFadeCheck {
+          0% {
+            opacity: 0;
+            transform: translateY(-50%) scale(0.6);
+          }
+          40% {
+            opacity: 1;
+            transform: translateY(-50%) scale(1.1);
+          }
+          60% {
+            opacity: 1;
+            transform: translateY(-50%) scale(1);
+          }
+          100% {
+            opacity: 0;
+            transform: translateY(-50%) scale(0.9);
           }
         }
 
