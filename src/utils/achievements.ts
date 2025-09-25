@@ -69,16 +69,16 @@ export function getTodayRatio(tasks: Task[], commitModeActivatedAt?: string | nu
     return totalCount > 0 ? Math.round((signalCount / totalCount) * 100) : 0;
   }
 
-  // Commitment mode - only completed tasks count
-  // At end of day, only what you actually DID matters
-  const completedTasks = todayTasks.filter(t => t.completed);
+  // Commitment mode - only signals matter, noise is just confession
+  // Ratio = completed signals / total signals (noise doesn't affect percentage)
+  const signalTasks = todayTasks.filter(t => t.type === 'signal');
 
-  if (completedTasks.length === 0) return 0;
+  if (signalTasks.length === 0) return 100; // No signals = perfect day by default
 
-  const completedSignals = completedTasks.filter(t => t.type === 'signal').length;
-  const completedTotal = completedTasks.length;
+  const completedSignals = signalTasks.filter(t => t.completed).length;
+  const totalSignals = signalTasks.length;
 
-  return completedTotal > 0 ? Math.round((completedSignals / completedTotal) * 100) : 0;
+  return Math.round((completedSignals / totalSignals) * 100);
 }
 
 export function hasTaskBefore(tasks: Task[], hour: number): boolean {
