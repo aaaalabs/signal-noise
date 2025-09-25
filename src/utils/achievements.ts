@@ -61,51 +61,24 @@ export function getTodayRatio(tasks: Task[], commitModeActivatedAt?: string | nu
 
   if (todayTasks.length === 0) return 0;
 
-  // Before commitment mode - use current behavior
+  // Normal mode - simple equal weight calculation
+  // Everything counts: signals vs noise, regardless of completion
   if (!commitModeActivatedAt) {
-    // Count signals with weighted completion
-    let signalWeight = 0;
-    let totalWeight = 0;
-
-    todayTasks.forEach(task => {
-      if (task.type === 'signal') {
-        signalWeight += task.completed ? 1.0 : 1.0; // Completed signals count at full weight
-        totalWeight += 1.0;
-      } else {
-        // Noise tasks
-        totalWeight += task.completed ? 0.2 : 1.0; // Completed noise counts at 20% weight
-      }
-    });
-
-    return totalWeight > 0 ? Math.round((signalWeight / totalWeight) * 100) : 0;
+    const signalCount = todayTasks.filter(t => t.type === 'signal').length;
+    const totalCount = todayTasks.length;
+    return totalCount > 0 ? Math.round((signalCount / totalCount) * 100) : 0;
   }
 
-  // After commitment - only completed signals count for new tasks
-  const commitTime = new Date(commitModeActivatedAt);
-  let signalCount = 0;
-  let totalCount = 0;
+  // Commitment mode - only completed tasks count
+  // At end of day, only what you actually DID matters
+  const completedTasks = todayTasks.filter(t => t.completed);
 
-  todayTasks.forEach(task => {
-    const taskTime = new Date(task.timestamp);
+  if (completedTasks.length === 0) return 0;
 
-    if (taskTime < commitTime) {
-      // Pre-commitment tasks: count all signals (honor the past)
-      if (task.type === 'signal') signalCount++;
-      totalCount++;
-    } else {
-      // Post-commitment tasks: only completed signals count
-      if (task.type === 'signal' && task.completed) {
-        signalCount++;
-        totalCount++;
-      } else if (task.type === 'noise') {
-        // Noise tasks always count as noise
-        totalCount++;
-      }
-      // Uncompleted signals after commitment don't count at all
-    }
-  });
+  const completedSignals = completedTasks.filter(t => t.type === 'signal').length;
+  const completedTotal = completedTasks.length;
 
-  return totalCount > 0 ? Math.round((signalCount / totalCount) * 100) : 0;
+  return completedTotal > 0 ? Math.round((completedSignals / completedTotal) * 100) : 0;
 }
 
 export function hasTaskBefore(tasks: Task[], hour: number): boolean {
