@@ -221,7 +221,7 @@ export default function Analytics({ tasks }: AnalyticsProps) {
         >
           {dailyRatios.map((ratio, index) => {
             // Determine if this is a future day (no data possible yet)
-            const dayOffset = 29 - index;
+            const dayOffset = index;  // Now index 0 = today, 1 = yesterday, etc.
             const targetDate = new Date();
             targetDate.setDate(targetDate.getDate() - dayOffset);
             const isFutureDay = targetDate > new Date();
