@@ -498,7 +498,23 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
       >
         {formatTaskTime(task.timestamp).text}
         {formatTaskTime(task.timestamp).isLocked && (
-          <span style={{ fontSize: '10px', opacity: 0.7 }}>🔒</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="10"
+            height="10"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#666"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            style={{ opacity: 0.7, marginLeft: '2px' }}
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M3 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M9 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
+            <path d="M13 11v-4a4 4 0 1 1 8 0v4" />
+          </svg>
         )}
       </div>
     </div>
