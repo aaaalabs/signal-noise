@@ -17,7 +17,6 @@ export default function TaskInput({ onAdd, todaySignalCount, tasks }: TaskInputP
   const [showSuggestion, setShowSuggestion] = useState(true);
   const [isLocked, setIsLocked] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const tabCount = useRef(0);
 
   // Find best matching previous task for autocomplete
   const findSuggestion = (input: string): string => {
@@ -50,8 +49,7 @@ export default function TaskInput({ onAdd, todaySignalCount, tasks }: TaskInputP
     setSuggestion(newSuggestion);
     setShowSuggestion(true); // Show suggestion when typing
 
-    // Reset tab count when input changes
-    tabCount.current = 0;
+    // No need to reset tab count anymore since we removed the counter
   };
 
   const handleAddTask = (type: 'signal' | 'noise') => {
@@ -65,23 +63,20 @@ export default function TaskInput({ onAdd, todaySignalCount, tasks }: TaskInputP
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Tab') {
       e.preventDefault();
-      tabCount.current++;
 
-      if (tabCount.current === 1 && suggestion && showSuggestion) {
-        // First Tab: Accept autocomplete
+      if (suggestion && showSuggestion && inputValue.length >= 2) {
+        // Accept autocomplete
         setInputValue(suggestion);
         setShowSuggestion(false); // Hide suggestion after acceptance
         setShowButtons(!isLocked); // Show buttons if not locked
-        tabCount.current = 0; // Reset for next interaction
 
         // Haptic feedback
         if (navigator.vibrate) {
           navigator.vibrate(5);
         }
-      } else if ((tabCount.current === 2 || (tabCount.current === 1 && !suggestion)) && showButtons) {
-        // Second Tab (or first if no suggestion): Switch selection
+      } else if (showButtons) {
+        // Switch selection with single Tab
         setSelectedType(prev => prev === 'signal' ? 'noise' : 'signal');
-        tabCount.current = 0; // Reset after switching
 
         // Haptic feedback
         if (navigator.vibrate) {
@@ -142,7 +137,7 @@ export default function TaskInput({ onAdd, todaySignalCount, tasks }: TaskInputP
           disabled={isLocked}
           autoComplete="off"
         />
-        {/* Autocomplete suggestion overlay */}
+        {/* Autocomplete suggestion overlay - Full word */}
         {suggestion && showSuggestion && inputValue.length >= 2 && !isLocked && (
           <div
             className="suggestion-overlay"
@@ -151,15 +146,23 @@ export default function TaskInput({ onAdd, todaySignalCount, tasks }: TaskInputP
               right: '12px',
               top: '50%',
               transform: 'translateY(-50%)',
+              padding: '8px 12px',
+              backgroundColor: 'rgba(255, 159, 10, 0.08)',
+              border: '1px solid rgba(255, 159, 10, 0.3)',
+              borderRadius: '6px',
               color: '#ff9f0a',
-              opacity: 0.6,
+              opacity: 0.8,
               pointerEvents: 'none',
               fontWeight: 100,
               transition: 'opacity 0.2s ease',
-              fontSize: 'inherit'
+              fontSize: '14px',
+              maxWidth: '60%',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap'
             }}
           >
-            {suggestion.slice(inputValue.length)}
+            {suggestion}
           </div>
         )}
       </div>
