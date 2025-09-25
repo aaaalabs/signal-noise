@@ -39,21 +39,42 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const formatTaskTime = (timestamp: string): string => {
+  // Check if task is locked (30+ minutes old)
+  const isTaskLocked = (timestamp: string): boolean => {
+    const date = new Date(timestamp);
+    const now = new Date();
+    const diffMinutes = Math.floor((now.getTime() - date.getTime()) / 60000);
+    return diffMinutes >= 30;
+  };
+
+  const formatTaskTime = (timestamp: string): { text: string; isLocked: boolean } => {
     const date = new Date(timestamp);
     const now = new Date();
     const diff = now.getTime() - date.getTime();
     const minutes = Math.floor(diff / 60000);
+    const locked = minutes >= 30;
 
-    if (minutes < 1) return t.timeJustNow;
-    if (minutes < 60) return formatTime('timeMinutesAgo', { n: minutes });
-    if (minutes < 1440) return formatTime('timeHoursAgo', { n: Math.floor(minutes / 60) });
-    return date.toLocaleDateString();
+    let timeText: string;
+    if (minutes < 1) timeText = t.timeJustNow;
+    else if (minutes < 60) timeText = formatTime('timeMinutesAgo', { n: minutes });
+    else if (minutes < 1440) timeText = formatTime('timeHoursAgo', { n: Math.floor(minutes / 60) });
+    else timeText = date.toLocaleDateString();
+
+    return { text: timeText, isLocked: locked };
   };
 
   const HOLD_DURATION = 2500; // 2.5 seconds to complete deletion
+  const taskLocked = isTaskLocked(task.timestamp);
 
   const startDeleteProgress = () => {
+    // Don't allow deletion if task is locked
+    if (taskLocked) {
+      // Vibrate to indicate locked
+      if (navigator.vibrate) {
+        navigator.vibrate([50, 30, 50]); // Double vibrate pattern
+      }
+      return;
+    }
     deleteStartTime.current = performance.now();
     setIsDeleting(true);
     setDeleteProgress(0);
@@ -159,6 +180,13 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
   const handlePressStart = (e: React.MouseEvent | React.TouchEvent) => {
     e.preventDefault();
 
+    // For locked tasks, only allow completion toggle on double tap
+    if (taskLocked) {
+      // Don't start deletion or swipe for locked tasks
+      setIsPressed(true);
+      return;
+    }
+
     // Record touch start position for swipe detection
     if (e.type === 'touchstart') {
       const touch = (e as React.TouchEvent).touches[0];
@@ -215,8 +243,8 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
       if (!isValidDirection) return; // Ignore wrong direction swipes
     }
 
-    // Start dragging mode if moved more than 10px horizontally
-    if (absDeltaX > 10 && !isDragging.current) {
+    // Start dragging mode if moved more than 10px horizontally (unless locked)
+    if (absDeltaX > 10 && !isDragging.current && !taskLocked) {
       isDragging.current = true;
       setIsSwipingData(true);
 
@@ -244,8 +272,8 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
       (task.type === 'signal' && swipeOffset > 0) ||
       (task.type === 'noise' && swipeOffset < 0);
 
-    if (isDragging.current && Math.abs(swipeOffset) > 50 && isValidSwipe) {
-      // Swipe completed - trigger transfer
+    if (isDragging.current && Math.abs(swipeOffset) > 50 && isValidSwipe && !taskLocked) {
+      // Swipe completed - trigger transfer (unless locked)
       setIsTransferring(true);
 
       setTimeout(() => {
@@ -460,10 +488,18 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
           paddingLeft: isMobile && isSwipingData && Math.abs(swipeOffset) > 20
             ? `${Math.min(32, Math.abs(swipeOffset) * 0.8)}px`
             : undefined,
-          transition: 'padding 0.1s ease'
+          transition: 'padding 0.1s ease',
+          color: formatTaskTime(task.timestamp).isLocked ? '#666' : '#00ff88',
+          opacity: formatTaskTime(task.timestamp).isLocked ? 0.8 : 0.9,
+          display: 'flex',
+          alignItems: 'center',
+          gap: '4px'
         }}
       >
-        {formatTaskTime(task.timestamp)}
+        {formatTaskTime(task.timestamp).text}
+        {formatTaskTime(task.timestamp).isLocked && (
+          <span style={{ fontSize: '10px', opacity: 0.7 }}>🔒</span>
+        )}
       </div>
     </div>
   );
