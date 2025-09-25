@@ -130,7 +130,7 @@ export default function TaskInput({ onAdd, todaySignalCount, tasks }: TaskInputP
           onKeyDown={handleKeyDown}
           onClick={handleInputClick}
           placeholder={isLocked
-            ? "8 signals reached today. Move some to noise first."
+            ? "Max signals reached. Move to noise."
             : t.inputPlaceholder
           }
           className={`task-input ${isLocked ? 'input-locked' : ''}`}
