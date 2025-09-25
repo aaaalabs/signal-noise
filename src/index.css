@@ -185,10 +185,10 @@ body {
 }
 
 .btn-noise.selected {
-    background: rgba(255, 159, 10, 0.12);
-    box-shadow: 0 0 0 2px #ff9f0a, 0 0 25px rgba(255, 159, 10, 0.2);
-    border-color: #ff9f0a;
-    color: #ff9f0a;
+    background: rgba(102, 102, 102, 0.15);
+    box-shadow: 0 0 0 2px #666, 0 0 15px rgba(102, 102, 102, 0.2);
+    border-color: #666;
+    color: #999;
     transform: scale(1.03);
     font-weight: 500;
 }
