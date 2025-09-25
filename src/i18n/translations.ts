@@ -140,7 +140,7 @@ const translations = {
       },
       {
         question: "Wie benutze ich Signal/Noise effektiv?",
-        answer: "Füge Aufgaben hinzu und kategorisiere sie als Signal (wichtig) oder Noise (Ablenkungen). Nutze Tab für schnellen Wechsel zwischen Kategorien. <strong>Doppelt tippen auf eine Aufgabe</strong> markiert sie als erledigt. <strong>Horizontal wischen</strong> verschiebt Aufgaben zwischen Signal/Noise-Spalten mit visueller Rückmeldung und Richtungspfeilen. <strong>3 Sekunden lang halten</strong> löscht eine Aufgabe mit Fortschrittsbalken. Drücke Cmd+E (Mac) oder Ctrl+E (Windows) zum Datenexport."
+        answer: "<strong>Neues Limit: Maximal 8 Signals pro Tag</strong> für optimale Fokussierung. Während des Tippens erscheinen <span style='color: #ff9f0a'>orange Vorschläge</span> aus deinen vorherigen Aufgaben - Tab zum Akzeptieren. <strong>Doppelt tippen</strong> markiert Aufgaben als erledigt. <strong>Horizontal wischen</strong> verschiebt zwischen Signal/Noise. <strong>3 Sekunden halten</strong> löscht. Die Ratio-Berechnung ist jetzt transparent: Normale Mode = Signals ÷ Gesamt-Aufgaben."
       },
       {
         question: "Wie funktionieren Erfolge und Fortschritt?",
@@ -156,7 +156,7 @@ const translations = {
       },
       {
         question: "Was ist Commitment Mode? (Premium)",
-        answer: "Nach 6 erreichten Achievements wird der <strong>Commitment Mode</strong> freigeschaltet - ein irreversibler Produktivitätsmodus. Steve Jobs sagte: 'Real artists ship.' Im Commitment Mode zählen nur <strong>erledigte</strong> Signals zu deiner Ratio. Dies verwandelt Absichten in echte Resultate und eliminiert Selbsttäuschung über Produktivität. Einmal aktiviert, gibt es kein Zurück - nur echter Fortschritt zählt."
+        answer: "Nach 6 erreichten Achievements wird der <strong>Commitment Mode</strong> freigeschaltet. Die Ratio-Berechnung ändert sich: <strong>Nur Signals zählen</strong> - erledigte Signals ÷ Gesamt-Signals. Noise wird weiterhin getrackt zur Selbstreflektion, beeinflusst aber nicht deine Prozentzahl. 100% bedeutet: Du hast alle deine Signals erledigt. Noise ist nur noch ein Beichtstuhl ohne mathematische Strafe."
       },
       {
         question: "Welche Interface-Features gibt es?",
@@ -274,7 +274,7 @@ const translations = {
       },
       {
         question: "How do I use Signal/Noise effectively?",
-        answer: "Add tasks and classify them as Signal (important) or Noise (distractions). Use Tab to quickly switch between categories. <strong>Double-tap any task</strong> to mark it as completed. <strong>Swipe horizontally</strong> to move tasks between Signal/Noise columns with visual feedback and directional arrows. <strong>Hold any task for 3 seconds</strong> to delete it with a progress bar. Press Cmd+E (Mac) or Ctrl+E (Windows) to export your data."
+        answer: "<strong>New limit: Maximum 8 signals per day</strong> for optimal focus. While typing, <span style='color: #ff9f0a'>orange suggestions</span> appear from your previous tasks - Tab to accept. <strong>Double-tap</strong> marks tasks completed. <strong>Swipe horizontally</strong> moves between Signal/Noise. <strong>Hold 3 seconds</strong> deletes. The ratio calculation is now transparent: Normal mode = Signals ÷ Total tasks."
       },
       {
         question: "How do achievements and progress tracking work?",
@@ -290,7 +290,7 @@ const translations = {
       },
       {
         question: "What is Commitment Mode? (Premium)",
-        answer: "After earning 6 achievements, <strong>Commitment Mode</strong> unlocks - an irreversible productivity mode. As Steve Jobs said: 'Real artists ship.' In Commitment Mode, only <strong>completed</strong> signals count toward your ratio. This transforms intentions into actual results and eliminates productivity self-deception. Once activated, there's no going back - only real progress counts."
+        answer: "After earning 6 achievements, <strong>Commitment Mode</strong> unlocks. The ratio calculation changes: <strong>Only signals matter</strong> - completed signals ÷ total signals. Noise is still tracked for self-reflection but doesn't affect your percentage. 100% means: you completed all your signals. Noise becomes a confession booth without mathematical punishment."
       },
       {
         question: "What interface features are available?",
