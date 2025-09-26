@@ -213,8 +213,8 @@ export default function BlogArticle() {
   return (
     <div style={{
       minHeight: '100vh',
-      backgroundColor: '#000',
-      color: '#fff',
+      backgroundColor: '#0a0a0a', // Softer than pure black
+      color: '#e8e8e8', // Softer than pure white
       fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
       padding: '2rem'
     }}>

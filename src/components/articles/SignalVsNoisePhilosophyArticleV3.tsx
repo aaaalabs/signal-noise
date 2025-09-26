@@ -686,67 +686,113 @@ export default function SignalVsNoisePhilosophyArticleV3({ isGerman }: ArticlePr
       {/* Comprehensive Comparison Table for Featured Snippets */}
       <div style={{
         overflowX: 'auto',
-        marginBottom: '2rem'
+        marginBottom: '2rem',
+        borderRadius: '12px',
+        backgroundColor: '#0f0f0f',
+        padding: '2px'
       }}>
         <table style={{
           width: '100%',
-          borderCollapse: 'collapse',
-          backgroundColor: '#111',
-          border: '1px solid #333',
-          borderRadius: '8px',
-          overflow: 'hidden'
+          borderCollapse: 'separate',
+          borderSpacing: '0',
+          fontSize: '0.95rem'
         }}>
           <thead>
-            <tr style={{ backgroundColor: '#0a2818' }}>
-              <th style={{ padding: '12px', textAlign: 'left', color: '#00ff88', borderBottom: '1px solid #333' }}>Method</th>
-              <th style={{ padding: '12px', textAlign: 'left', color: '#00ff88', borderBottom: '1px solid #333' }}>Core Principle</th>
-              <th style={{ padding: '12px', textAlign: 'left', color: '#00ff88', borderBottom: '1px solid #333' }}>Complexity</th>
-              <th style={{ padding: '12px', textAlign: 'left', color: '#00ff88', borderBottom: '1px solid #333' }}>Best For</th>
-              <th style={{ padding: '12px', textAlign: 'left', color: '#00ff88', borderBottom: '1px solid #333' }}>Signal/Noise Advantage</th>
+            <tr style={{ backgroundColor: '#0a1f14' }}>
+              <th style={{
+                padding: '14px 16px',
+                textAlign: 'left',
+                color: '#00ff88',
+                fontWeight: '500',
+                fontSize: '0.85rem',
+                textTransform: 'uppercase',
+                letterSpacing: '0.5px',
+                borderBottom: '2px solid #242424'
+              }}>Method</th>
+              <th style={{
+                padding: '14px 16px',
+                textAlign: 'left',
+                color: '#00ff88',
+                fontWeight: '500',
+                fontSize: '0.85rem',
+                textTransform: 'uppercase',
+                letterSpacing: '0.5px',
+                borderBottom: '2px solid #242424'
+              }}>Core Principle</th>
+              <th style={{
+                padding: '14px 16px',
+                textAlign: 'left',
+                color: '#00ff88',
+                fontWeight: '500',
+                fontSize: '0.85rem',
+                textTransform: 'uppercase',
+                letterSpacing: '0.5px',
+                borderBottom: '2px solid #242424'
+              }}>Complexity</th>
+              <th style={{
+                padding: '14px 16px',
+                textAlign: 'left',
+                color: '#00ff88',
+                fontWeight: '500',
+                fontSize: '0.85rem',
+                textTransform: 'uppercase',
+                letterSpacing: '0.5px',
+                borderBottom: '2px solid #242424'
+              }}>Best For</th>
+              <th style={{
+                padding: '14px 16px',
+                textAlign: 'left',
+                color: '#00ff88',
+                fontWeight: '500',
+                fontSize: '0.85rem',
+                textTransform: 'uppercase',
+                letterSpacing: '0.5px',
+                borderBottom: '2px solid #242424'
+              }}>Signal/Noise Advantage</th>
             </tr>
           </thead>
           <tbody>
-            <tr style={{ borderBottom: '1px solid #222' }}>
-              <td style={{ padding: '12px', color: '#00ff88', fontWeight: '500' }}>Signal vs Noise</td>
-              <td style={{ padding: '12px', color: '#ccc' }}>Binary classification</td>
-              <td style={{ padding: '12px', color: '#ccc' }}>Very Low</td>
-              <td style={{ padding: '12px', color: '#ccc' }}>Everyone</td>
-              <td style={{ padding: '12px', color: '#00ff88' }}>Simplest decision-making</td>
-            </tr>
-            <tr style={{ borderBottom: '1px solid #222' }}>
-              <td style={{ padding: '12px', color: '#ccc' }}>GTD</td>
-              <td style={{ padding: '12px', color: '#ccc' }}>Capture everything</td>
-              <td style={{ padding: '12px', color: '#ccc' }}>High</td>
-              <td style={{ padding: '12px', color: '#ccc' }}>Detail-oriented</td>
-              <td style={{ padding: '12px', color: '#ccc' }}>80% less overhead</td>
-            </tr>
-            <tr style={{ borderBottom: '1px solid #222' }}>
-              <td style={{ padding: '12px', color: '#ccc' }}>Time Blocking</td>
-              <td style={{ padding: '12px', color: '#ccc' }}>Calendar allocation</td>
-              <td style={{ padding: '12px', color: '#ccc' }}>Medium</td>
-              <td style={{ padding: '12px', color: '#ccc' }}>Structured workers</td>
-              <td style={{ padding: '12px', color: '#ccc' }}>Flexible, energy-based</td>
-            </tr>
-            <tr style={{ borderBottom: '1px solid #222' }}>
-              <td style={{ padding: '12px', color: '#ccc' }}>Pomodoro</td>
-              <td style={{ padding: '12px', color: '#ccc' }}>25-min intervals</td>
-              <td style={{ padding: '12px', color: '#ccc' }}>Low</td>
-              <td style={{ padding: '12px', color: '#ccc' }}>Task execution</td>
-              <td style={{ padding: '12px', color: '#ccc' }}>Focuses on what matters</td>
-            </tr>
-            <tr style={{ borderBottom: '1px solid #222' }}>
-              <td style={{ padding: '12px', color: '#ccc' }}>Eisenhower Matrix</td>
-              <td style={{ padding: '12px', color: '#ccc' }}>Urgent/Important grid</td>
-              <td style={{ padding: '12px', color: '#ccc' }}>Medium</td>
-              <td style={{ padding: '12px', color: '#ccc' }}>Managers</td>
-              <td style={{ padding: '12px', color: '#ccc' }}>Binary is clearer</td>
+            <tr style={{ backgroundColor: '#0d0d0d' }}>
+              <td style={{ padding: '12px 16px', color: '#00ff88', fontWeight: '500', borderBottom: '1px solid #1f1f1f' }}>Signal vs Noise</td>
+              <td style={{ padding: '12px 16px', color: '#b8b8b8', borderBottom: '1px solid #1f1f1f' }}>Binary classification</td>
+              <td style={{ padding: '12px 16px', color: '#b8b8b8', borderBottom: '1px solid #1f1f1f' }}>Very Low</td>
+              <td style={{ padding: '12px 16px', color: '#b8b8b8', borderBottom: '1px solid #1f1f1f' }}>Everyone</td>
+              <td style={{ padding: '12px 16px', color: '#00ff88', borderBottom: '1px solid #1f1f1f' }}>Simplest decision-making</td>
             </tr>
             <tr>
-              <td style={{ padding: '12px', color: '#ccc' }}>2-Minute Rule</td>
-              <td style={{ padding: '12px', color: '#ccc' }}>Quick task clearing</td>
-              <td style={{ padding: '12px', color: '#ccc' }}>Low</td>
-              <td style={{ padding: '12px', color: '#ccc' }}>Busy people</td>
-              <td style={{ padding: '12px', color: '#ccc' }}>Protects signal time</td>
+              <td style={{ padding: '12px 16px', color: '#b8b8b8', borderBottom: '1px solid #1f1f1f' }}>GTD</td>
+              <td style={{ padding: '12px 16px', color: '#b8b8b8', borderBottom: '1px solid #1f1f1f' }}>Capture everything</td>
+              <td style={{ padding: '12px 16px', color: '#ff8800', borderBottom: '1px solid #1f1f1f' }}>High</td>
+              <td style={{ padding: '12px 16px', color: '#b8b8b8', borderBottom: '1px solid #1f1f1f' }}>Detail-oriented</td>
+              <td style={{ padding: '12px 16px', color: '#b8b8b8', borderBottom: '1px solid #1f1f1f' }}>80% less overhead</td>
+            </tr>
+            <tr style={{ backgroundColor: '#0d0d0d' }}>
+              <td style={{ padding: '12px 16px', color: '#b8b8b8', borderBottom: '1px solid #1f1f1f' }}>Time Blocking</td>
+              <td style={{ padding: '12px 16px', color: '#b8b8b8', borderBottom: '1px solid #1f1f1f' }}>Calendar allocation</td>
+              <td style={{ padding: '12px 16px', color: '#ffbb33', borderBottom: '1px solid #1f1f1f' }}>Medium</td>
+              <td style={{ padding: '12px 16px', color: '#b8b8b8', borderBottom: '1px solid #1f1f1f' }}>Structured workers</td>
+              <td style={{ padding: '12px 16px', color: '#b8b8b8', borderBottom: '1px solid #1f1f1f' }}>Flexible, energy-based</td>
+            </tr>
+            <tr>
+              <td style={{ padding: '12px 16px', color: '#b8b8b8', borderBottom: '1px solid #1f1f1f' }}>Pomodoro</td>
+              <td style={{ padding: '12px 16px', color: '#b8b8b8', borderBottom: '1px solid #1f1f1f' }}>25-min intervals</td>
+              <td style={{ padding: '12px 16px', color: '#00ff88', borderBottom: '1px solid #1f1f1f' }}>Low</td>
+              <td style={{ padding: '12px 16px', color: '#b8b8b8', borderBottom: '1px solid #1f1f1f' }}>Task execution</td>
+              <td style={{ padding: '12px 16px', color: '#b8b8b8', borderBottom: '1px solid #1f1f1f' }}>Focuses on what matters</td>
+            </tr>
+            <tr style={{ backgroundColor: '#0d0d0d' }}>
+              <td style={{ padding: '12px 16px', color: '#b8b8b8', borderBottom: '1px solid #1f1f1f' }}>Eisenhower Matrix</td>
+              <td style={{ padding: '12px 16px', color: '#b8b8b8', borderBottom: '1px solid #1f1f1f' }}>Urgent/Important grid</td>
+              <td style={{ padding: '12px 16px', color: '#ffbb33', borderBottom: '1px solid #1f1f1f' }}>Medium</td>
+              <td style={{ padding: '12px 16px', color: '#b8b8b8', borderBottom: '1px solid #1f1f1f' }}>Managers</td>
+              <td style={{ padding: '12px 16px', color: '#b8b8b8', borderBottom: '1px solid #1f1f1f' }}>Binary is clearer</td>
+            </tr>
+            <tr>
+              <td style={{ padding: '12px 16px', color: '#b8b8b8', borderBottom: '1px solid #1f1f1f' }}>2-Minute Rule</td>
+              <td style={{ padding: '12px 16px', color: '#b8b8b8', borderBottom: '1px solid #1f1f1f' }}>Quick task clearing</td>
+              <td style={{ padding: '12px 16px', color: '#00ff88', borderBottom: '1px solid #1f1f1f' }}>Low</td>
+              <td style={{ padding: '12px 16px', color: '#b8b8b8', borderBottom: '1px solid #1f1f1f' }}>Busy people</td>
+              <td style={{ padding: '12px 16px', color: '#b8b8b8', borderBottom: '1px solid #1f1f1f' }}>Protects signal time</td>
             </tr>
           </tbody>
         </table>
