@@ -142,6 +142,9 @@ export default function BlogIndex() {
   const { currentLanguage } = useLanguage();
   const isGerman = currentLanguage === 'de';
 
+  // Check for preview mode via URL parameter
+  const isPreviewMode = new URLSearchParams(window.location.search).has('preview');
+
   useEffect(() => {
     // SEO meta tags
     document.title = isGerman
@@ -195,9 +198,24 @@ export default function BlogIndex() {
         maxWidth: '680px',
         margin: '0 auto'
       }}>
+        {/* Preview Mode Indicator */}
+        {isPreviewMode && (
+          <div style={{
+            backgroundColor: '#ff6b6b',
+            color: '#000',
+            padding: '0.5rem 1rem',
+            borderRadius: '6px',
+            marginBottom: '2rem',
+            fontWeight: '500',
+            textAlign: 'center'
+          }}>
+            📝 Preview Mode: Showing unpublished drafts
+          </div>
+        )}
+
         {/* Articles List */}
         <div style={{ marginTop: '3rem' }}>
-          {blogPosts.filter(post => post.isPublished).map((post, index) => (
+          {blogPosts.filter(post => isPreviewMode || post.isPublished).map((post, index) => (
             <article key={post.slug} style={{ marginBottom: '3rem' }}>
               {index > 0 && (
                 <div style={{

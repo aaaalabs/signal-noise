@@ -128,8 +128,12 @@ export default function BlogArticle() {
   const article = slug ? articles[slug] : null;
   const blogPost = blogPosts.find(post => post.slug === slug);
 
-  // Check if article is published
+  // Check for preview mode via URL parameter
+  const isPreviewMode = new URLSearchParams(window.location.search).has('preview');
+
+  // Check if article is published or in preview mode
   const isArticlePublished = blogPost?.isPublished ?? false;
+  const canViewArticle = isArticlePublished || isPreviewMode;
 
   useEffect(() => {
     if (article) {
@@ -174,7 +178,7 @@ export default function BlogArticle() {
     }
   }, [article, isGerman]);
 
-  if (!article || !isArticlePublished) {
+  if (!article || !canViewArticle) {
     return <Navigate to="/blog" replace />;
   }
 
@@ -188,6 +192,23 @@ export default function BlogArticle() {
       fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
       padding: '2rem'
     }}>
+      {/* Preview Mode Indicator */}
+      {isPreviewMode && !isArticlePublished && (
+        <div style={{
+          backgroundColor: '#ff6b6b',
+          color: '#000',
+          padding: '0.5rem 1rem',
+          borderRadius: '6px',
+          marginBottom: '2rem',
+          fontWeight: '500',
+          textAlign: 'center',
+          maxWidth: '680px',
+          margin: '0 auto 2rem'
+        }}>
+          📝 Preview Mode: This article is unpublished
+        </div>
+      )}
+
       {/* Navigation */}
       <nav style={{
         maxWidth: '680px',
