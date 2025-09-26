@@ -4,12 +4,12 @@ import { checkPremiumStatus } from './premiumService';
 
 export interface CoachResponse {
   message: string;
-  type: 'motivation' | 'warning' | 'celebration' | 'insight' | 'challenge' | 'buddy_check';
+  type: 'motivation' | 'warning' | 'celebration' | 'insight' | 'challenge';
   suggestions?: Array<{
     action: string;
     reasoning: string;
   }>;
-  emotionalTone: 'encouraging' | 'challenging' | 'celebratory' | 'supportive' | 'direct' | 'buddy';
+  emotionalTone: 'encouraging' | 'challenging' | 'celebratory' | 'supportive' | 'direct';
 }
 
 export async function getCoachAdvice(
@@ -26,7 +26,7 @@ export async function getCoachAdvice(
   // Use different system prompt for Personal AI mode
   const systemPrompt = options?.isPersonalMode
     ? getPersonalAISystemPrompt()
-    : currentLang === 'de'
+    : (currentLang === 'de'
     ? `Du bist ein persönlicher Productivity Coach für die Signal/Noise App. Deine Aufgabe ist es, Nutzer dabei zu unterstützen, ihr optimales Signal-zu-Noise-Verhältnis von 80:20 zu erreichen.
 
 WICHTIGE CHARAKTERISTIKA:
@@ -62,11 +62,11 @@ Return your response as JSON with:
   "type": "motivation|warning|celebration|insight|challenge",
   "suggestions": [{"action": "Concrete action", "reasoning": "Brief reasoning"}],
   "emotionalTone": "encouraging|challenging|celebratory|supportive|direct"
-}`;
+}`);
 
   const userPrompt = options?.isPersonalMode
     ? buildPersonalAIPrompt(payload, currentLang)
-    : currentLang === 'de'
+    : (currentLang === 'de'
     ? `Analysiere diese Produktivitätsdaten für ${payload.firstName}:
 
 KONTEXT:
@@ -94,7 +94,7 @@ METRICS:
 - Trend: ${payload.patterns.trendDirection}
 - Best Hour: ${payload.patterns.bestHour} o'clock
 
-Return a personalized coaching message.`;
+Return a personalized coaching message.`);
 
   try {
     // Create messages for the secure API endpoint
@@ -123,10 +123,31 @@ Return a personalized coaching message.`;
 
     const data = await response.json();
 
-    // Try to parse the coach response as JSON
+    // Try to parse the coach response as JSON (especially important for Personal AI)
     try {
-      return typeof data.message === 'string' ? JSON.parse(data.message) : data;
-    } catch {
+      const responseText = data.message || data.choices?.[0]?.message?.content;
+
+      // Try to parse as JSON first
+      if (typeof responseText === 'string') {
+        // Clean up any JSON that might be wrapped in text
+        const jsonMatch = responseText.match(/\{[\s\S]*\}/);
+        if (jsonMatch) {
+          const parsedResponse = JSON.parse(jsonMatch[0]);
+          console.log('✅ Successfully parsed Personal AI JSON response');
+          return parsedResponse;
+        }
+
+        // If no JSON found, treat as plain text response
+        return {
+          message: responseText,
+          type: 'insight',
+          emotionalTone: 'supportive'
+        };
+      }
+
+      return data;
+    } catch (parseError) {
+      console.error('JSON parsing failed:', parseError);
       // Fallback if JSON parsing fails
       return {
         message: data.message || 'No response available',
@@ -168,131 +189,120 @@ Return a personalized coaching message.`;
 }
 
 /**
- * Personal AI Buddy System Prompt - Smart friend who understands your patterns
+ * Personal AI System Prompt - Deep task analysis with completion psychology
  */
 function getPersonalAISystemPrompt(): string {
-  return `Du bist der smarteste Buddy, der die wahre Bedeutung hinter Tasks versteht und immer den perfekten Zeitpunkt für Aktionen kennt.
+  return `You are an elite performance psychologist with FULL visibility into the user's actual tasks and completion patterns.
 
-DEIN STYLE:
-- Kurz, prägnant, wertvoll (max 3 Sätze)
-- Du sprichst wie ein kluger Kumpel, nicht wie ein Coach
-- Du erkennst Muster und verstehst die Meta-Ziele
-- Du würdigst IMMER zuerst was schon geschafft wurde
+CRITICAL SYSTEM RULES:
+- Tasks CANNOT be marked complete retroactively (no backdating)
+- If a task is open from yesterday/older = it was NOT completed
+- Proof of procrastination: Same task appearing on multiple days = avoidance pattern
+- Focus: ONE clear action, not lengthy explanations
 
-KONTEXT-AWARENESS:
-- Aktuelle Uhrzeit beachten (Morgen: "Guter Start", Mittag: "Momentum", Abend: "Endspurt")
-- Wochentag matters (Montag: Fresh Energy, Freitag: Wrap-up Mode)
-- Task-Timing deuten ("Customer Call" um 9 Uhr = wichtig, um 17 Uhr = Pflichttermin)
+YOU SEE EVERYTHING:
+- The exact text of every task they've written
+- Which signals they completed vs abandoned (in real-time, no cheating)
+- How many days each task has been waiting
+- Recurring tasks that reveal avoidance patterns
 
-TASK-DEUTUNG:
-- "Finalize X" = Perfektionismus-Falle
-- "Review Y" = Prokrastination getarnt als Sorgfalt
-- "Call Client" = Umsatz-Fokus oder Angst?
-- "Documentation" = Notwendiges Übel oder Vermeidung?
-- Lange Task-Namen = Überforderung
-- Viele kleine Tasks = Fragmentierung
+CORE ANALYSIS (Always address these):
 
-DEINE ANALYSE:
-1. ACKNOWLEDGE: "Nice, [Name]! Du hast [konkrete Erledigung] durchgezogen."
-2. PATTERN: "Ich sehe du [Muster/Tendenz]."
-3. NUDGE: "[Konkreter nächster Schritt] - [Warum es jetzt Sinn macht]."
+1. THE COMPLETION TRUTH
+"Your real completion rate for signals is X%, not the Y% shown before commitment mode."
+"You have N signals marked but uncompleted, some for over D days."
 
-ZEITBASIERTE INSIGHTS:
-- 6-9 Uhr: "Early bird mode - perfekt für [wichtigste Task]"
-- 9-12 Uhr: "Peak Performance Zeit - [schwierigste Task] jetzt"
-- 12-14 Uhr: "Post-Lunch Dip - admin stuff oder Pause"
-- 14-17 Uhr: "Second Wind - [kreative Tasks]"
-- 17-20 Uhr: "Wrap-up Zeit - morgen vorbereiten"
-- Nach 20 Uhr: "Brain off - nur noch Noise oder echte Deadline?"
+2. SPECIFIC TASK CALLOUTS
+Always mention 1-2 specific tasks by name:
+"'[Exact task text]' has been sitting for X days. What's really stopping you?"
+"You completed '[task]' immediately but '[other task]' is collecting dust. Notice the pattern?"
 
-RESPONSE FORMAT:
+3. PSYCHOLOGICAL PATTERN (Pick the most relevant):
+- Perfectionism: "Tasks with 'finalize', 'perfect', 'complete' have 20% lower completion"
+- Avoidance: "Client-facing tasks sit 3x longer than internal work"
+- Overwhelm: "When you write tasks longer than 10 words, completion drops 40%"
+- Fantasy Planning: "You create more signals than hours in your day"
+
+4. THE INTERVENTION
+Cut to the chase:
+- Name ONE specific oldest task (you cannot delete or complete old tasks)
+- Give ONE 2-minute action to start it TODAY
+- Accept the procrastination evidence - no system workarounds possible
+
+MANDATORY FORMAT:
 {
-  "message": "[Acknowledge] + [Pattern-Insight] + [Action-Nudge]",
-  "type": "buddy_check",
-  "suggestions": [{
-    "action": "[Super konkrete 2-Min Aktion]",
-    "reasoning": "[Warum genau jetzt]"
-  }],
-  "emotionalTone": "buddy"
-}`;
+  "message": "[Name], '[specific task]' sits [N] days. [Direct action command].",
+  "type": "reality_check",
+  "suggestions": [
+    {
+      "action": "[Specific 2-minute starter step]",
+      "reasoning": "[One sentence why this works]"
+    }
+  ],
+  "emotionalTone": "direct_but_caring"
+}
+
+EXAMPLE:
+{
+  "message": "Tom, 'Lead Outreach' sits 5 days. Open LinkedIn now.",
+  "type": "reality_check",
+  "suggestions": [{"action": "Find one warm contact on LinkedIn", "reasoning": "Breaks the avoidance pattern immediately"}],
+  "emotionalTone": "direct_but_caring"
+}
+
+ALWAYS include suggestions array. Max 2 sentences in message.`;
 }
 
 /**
- * Build Personal AI Buddy prompt with time-aware context
+ * Build Personal AI user prompt with full task visibility
  */
 function buildPersonalAIPrompt(payload: any, language: string): string {
   const { firstName, deepTaskAnalysis } = payload;
   const { allTasks, completionReality } = deepTaskAnalysis;
 
-  // Time-aware context
-  const now = new Date();
-  const hour = now.getHours();
-  const dayOfWeek = now.toLocaleDateString('de-DE', { weekday: 'long' });
-  const timeOfDay = hour < 9 ? 'Morgen' : hour < 14 ? 'Mittag' : hour < 18 ? 'Nachmittag' : 'Abend';
-
-  // Completed tasks today (for acknowledgment)
-  const todayCompleted = allTasks.filter((t: any) => {
-    const taskDate = new Date(t.timestamp || new Date()).toDateString();
-    const today = new Date().toDateString();
-    return taskDate === today && t.completed;
-  });
-
-  // Task pattern analysis
-  const longTasks = allTasks.filter((t: any) => t.text.length > 50);
-  const clientTasks = allTasks.filter((t: any) => /client|customer|kunde|termin/i.test(t.text));
-  const perfectTasks = allTasks.filter((t: any) => /finalize|complete|perfect|abschließen/i.test(t.text));
-
   const abandonedTasksList = completionReality.abandonedSignals
-    .map((t: any) => `- "${t.text}" (${t.ageInDays}d)`)
+    .map((t: any) => `- "${t.text}" - ${t.ageInDays} days old`)
     .join('\n');
 
-  const completedToday = todayCompleted
-    .map((t: any) => `- "${t.text}"`)
+  const allTasksList = allTasks
+    .map((t: any) => `- [${t.type}] "${t.text}" ${t.completed ? 'DONE' : `(${t.ageInDays}d)`}`)
     .join('\n');
 
   if (language === 'de') {
-    return `Buddy Check für ${firstName} - ${dayOfWeek} ${timeOfDay} (${hour} Uhr):
+    return `Analysiere ${firstName}'s ECHTE Performance:
 
-WAS HEUTE SCHON GESCHAFFT:
-${completedToday || 'Noch nichts erledigt heute'}
+COMPLETION REALITÄT:
+- Behauptet ${completionReality.totalSignals} Signals
+- Tatsächlich erledigt: ${completionReality.completedSignals}
+- Echte Completion Rate: ${completionReality.completionRate}%
 
-COMPLETION REALITY:
-- ${completionReality.totalSignals} Signals geplant
-- ${completionReality.completedSignals} wirklich erledigt (${completionReality.completionRate}%)
+VERLASSENE SIGNALS (>3 Tage alt):
+${abandonedTasksList}
 
-LIEGEN GEBLIEBEN (>3 Tage):
-${abandonedTasksList || 'Keine alten Tasks'}
+ÄLTESTE UNERLEDIGTE SIGNAL:
+"${completionReality.oldestUncompletedSignal?.text}" - ${completionReality.oldestUncompletedSignal?.ageInDays} Tage alt
 
-ÄLTESTE BAUSTELLE:
-"${completionReality.oldestUncompletedSignal?.text}" - seit ${completionReality.oldestUncompletedSignal?.ageInDays} Tagen
+ALLE AKTUELLEN TASKS:
+${allTasksList}
 
-PATTERN INSIGHTS:
-- ${longTasks.length} überlange Tasks (Complexity Trap)
-- ${clientTasks.length} Client-Tasks (Stress-Indikator?)
-- ${perfectTasks.length} "Perfect"-Tasks (Perfektionismus?)
-
-Gib ${firstName} einen buddy-haften Reality Check mit konkretem nächsten Schritt.`;
+Gib direktes, spezifisches Coaching das echte Tasks beim Namen nennt.`;
   } else {
-    return `Buddy Check for ${firstName} - ${dayOfWeek} ${timeOfDay} (${hour} o'clock):
-
-WHAT'S ALREADY DONE TODAY:
-${completedToday || 'Nothing completed today yet'}
+    return `Analyze ${firstName}'s ACTUAL performance:
 
 COMPLETION REALITY:
-- ${completionReality.totalSignals} signals planned
-- ${completionReality.completedSignals} actually done (${completionReality.completionRate}%)
+- Claims ${completionReality.totalSignals} signals
+- Actually completed: ${completionReality.completedSignals}
+- Real completion rate: ${completionReality.completionRate}%
 
-ABANDONED (>3 days):
-${abandonedTasksList || 'No old tasks'}
+ABANDONED SIGNALS (>3 days old):
+${abandonedTasksList}
 
-OLDEST ISSUE:
+OLDEST UNCOMPLETED SIGNAL:
 "${completionReality.oldestUncompletedSignal?.text}" - ${completionReality.oldestUncompletedSignal?.ageInDays} days old
 
-PATTERN INSIGHTS:
-- ${longTasks.length} overlong tasks (Complexity Trap)
-- ${clientTasks.length} client tasks (Stress indicator?)
-- ${perfectTasks.length} "perfect" tasks (Perfectionism?)
+ALL CURRENT TASKS:
+${allTasksList}
 
-Give ${firstName} a buddy reality check with concrete next step.`;
+Provide direct, specific coaching that names actual tasks.`;
   }
 }
