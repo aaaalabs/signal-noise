@@ -592,7 +592,7 @@ export default function FoundersParadoxArticle({ isGerman }: ArticleProps) {
             fontWeight: '300',
             marginBottom: '0.5rem'
           }}>
-            80% Signal - Die 3-5 kritischen Aufgaben
+            {isGerman ? '80% Signal - Die 3-5 kritischen Aufgaben' : '80% Signal - The 3-5 Critical Tasks'}
           </h3>
           <p style={{
             color: '#ddd',
@@ -600,7 +600,7 @@ export default function FoundersParadoxArticle({ isGerman }: ArticleProps) {
             lineHeight: '1.6'
           }}>
             {isGerman
-              ? '• Aufgaben, die das Unternehmen in den nächsten 18 Stunden voranbringen\n• Direkt messbare Auswirkungen auf Revenue oder Product\n• Können nicht delegiert werden (nur du kannst sie machen)\n• Bewegen die Nadel in Richtung Vision\n• Erschaffen langfristigen Wert'
+              ? '• Aufgaben, die das Unternehmen in den nächsten 18 Stunden voranbringen\n• Direkt messbare Auswirkungen auf Umsatz oder Produkt\n• Können nicht delegiert werden (nur du kannst sie machen)\n• Bewegen die Nadel in Richtung deiner Vision\n• Erschaffen langfristigen Wert'
               : '• Tasks that move the company forward in the next 18 hours\n• Directly measurable impact on revenue or product\n• Cannot be delegated (only you can do them)\n• Move the needle toward your vision\n• Create long-term value'}
           </p>
         </div>
@@ -617,7 +617,7 @@ export default function FoundersParadoxArticle({ isGerman }: ArticleProps) {
             fontWeight: '300',
             marginBottom: '0.5rem'
           }}>
-            20% Noise - Alles andere
+            {isGerman ? '20% Noise - Alles andere' : '20% Noise - Everything Else'}
           </h3>
           <p style={{
             color: '#ddd',
@@ -625,7 +625,7 @@ export default function FoundersParadoxArticle({ isGerman }: ArticleProps) {
             lineHeight: '1.6'
           }}>
             {isGerman
-              ? '• E-Mails und administrative Aufgaben\n• Networking Events ohne klaren ROI\n• "Wichtige" Meetings ohne konkrete Outcomes\n• Social Media und Content Creation\n• Perfektionierung bereits funktionierender Systeme'
+              ? '• E-Mails und administrative Aufgaben\n• Networking-Veranstaltungen ohne klaren Nutzen\n• "Wichtige" Meetings ohne konkrete Ergebnisse\n• Social Media und Inhaltserstellung\n• Perfektionierung bereits funktionierender Systeme'
               : '• Emails and administrative tasks\n• Networking events without clear ROI\n• "Important" meetings without concrete outcomes\n• Social media and content creation\n• Perfecting already-working systems'}
           </p>
         </div>
