@@ -16,9 +16,9 @@ import {
 import PremiumModal from './PremiumModal';
 import FoundationModal from './FoundationModal';
 import FirstNameModal from './FirstNameModal';
-import PersonalAICoach from './PersonalAICoach';
+import { getPersonalCoaching } from './PersonalAICoach';
 import { checkPremiumStatus } from '../services/premiumService';
-import { hasPersonalAIAccess } from '../services/personalAIService';
+// hasPersonalAIAccess replaced with checkAndActivatePersonalAI
 import { checkAndActivateBetaPremium, checkAndActivatePersonalAI } from '../utils/betaPremiumHack'; // TODO: Remove in production
 
 import type { AppData } from '../types';
@@ -165,6 +165,18 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
     setShowCoach(true);
 
     try {
+      // Smart AI Selection: Use Personal AI for premium users, Pattern AI for others
+      if (checkAndActivatePersonalAI()) {
+        console.log('✨ Using Personal AI for enhanced insights');
+        const personalResponse = await getPersonalCoaching(tasks, currentRatio, userName, data);
+        if (personalResponse) {
+          setCoachResponse(personalResponse);
+          return;
+        }
+        console.log('📊 Personal AI failed, falling back to Pattern AI');
+      } else {
+        console.log('📊 Using Pattern AI (no Personal AI access)');
+      }
       // Calculate real metrics and patterns
       const currentStreak = calculateStreak(tasks);
       const averageRatio7Days = getAverageRatio(tasks, 7);
@@ -307,18 +319,7 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
         onSave={handleNameSave}
       />
 
-      {/* PersonalAI Coach - Separate Component */}
-      {hasPersonalAIAccess() && (
-        <div style={{ marginBottom: '8px' }}>
-          <PersonalAICoach
-            tasks={tasks}
-            currentRatio={currentRatio}
-            firstName={firstName}
-            onNameUpdate={onNameUpdate}
-            data={data}
-          />
-        </div>
-      )}
+      {/* PersonalAI Coach logic now integrated into main AI Coach button */}
 
       {!showCoach && hasEnoughDataForCoaching() && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
