@@ -62,7 +62,7 @@ export const blogPosts: BlogPost[] = [
     readTime: '4 min',
     keywords: ['kevin oleary', 'shark tank', 'productivity'],
     publishDate: '2025-09-29',
-    isPublished: true
+    isPublished: false
   },
   {
     slug: 'founder-productivity-paradox',
@@ -201,15 +201,31 @@ export default function BlogIndex() {
         {/* Preview Mode Indicator */}
         {isPreviewMode && (
           <div style={{
-            backgroundColor: '#ff6b6b',
+            backgroundColor: '#00ff88',
             color: '#000',
-            padding: '0.5rem 1rem',
+            padding: '0.8rem 1.5rem',
             borderRadius: '6px',
             marginBottom: '2rem',
             fontWeight: '500',
-            textAlign: 'center'
+            textAlign: 'center',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: '1rem'
           }}>
-            📝 Preview Mode: Showing unpublished drafts
+            <span>📝 Preview Mode: Showing all drafts</span>
+            <a
+              href="/blog"
+              style={{
+                color: '#000',
+                fontSize: '0.85rem',
+                textDecoration: 'underline',
+                fontWeight: '400'
+              }}
+            >
+              Exit Preview →
+            </a>
           </div>
         )}
 
@@ -229,7 +245,7 @@ export default function BlogIndex() {
               )}
 
               <Link
-                to={`/blog/${post.slug}`}
+                to={`/blog/${post.slug}${isPreviewMode ? '?preview' : ''}`}
                 style={{
                   textDecoration: 'none',
                   color: 'inherit',

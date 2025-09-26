@@ -205,17 +205,33 @@ export default function BlogArticle() {
       {/* Preview Mode Indicator */}
       {isPreviewMode && !isArticlePublished && (
         <div style={{
-          backgroundColor: '#ff6b6b',
+          backgroundColor: '#00ff88',
           color: '#000',
-          padding: '0.5rem 1rem',
+          padding: '0.8rem 1.5rem',
           borderRadius: '6px',
           marginBottom: '2rem',
           fontWeight: '500',
           textAlign: 'center',
           maxWidth: '680px',
-          margin: '0 auto 2rem'
+          margin: '0 auto 2rem',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: '1rem'
         }}>
-          📝 Preview Mode: This article is unpublished
+          <span>📝 Draft Article (Unpublished)</span>
+          <a
+            href={`/blog${isPreviewMode ? '?preview' : ''}`}
+            style={{
+              color: '#000',
+              fontSize: '0.85rem',
+              textDecoration: 'underline',
+              fontWeight: '400'
+            }}
+          >
+            Back to all drafts →
+          </a>
         </div>
       )}
 
@@ -226,7 +242,7 @@ export default function BlogArticle() {
         display: 'flex',
         justifyContent: 'center'
       }}>
-        <Link to="/blog" style={{
+        <Link to={`/blog${isPreviewMode ? '?preview' : ''}`} style={{
           color: '#666',
           textDecoration: 'none',
           fontSize: '0.95rem',
