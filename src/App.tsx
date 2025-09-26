@@ -2,7 +2,6 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import type { Task, AppData } from './types';
 import { useTranslation } from './contexts/LanguageContext';
-import AboutPage from './components/AboutPage';
 import BlogIndex from './components/BlogIndex';
 import BlogArticle from './components/BlogArticle';
 import RatioDisplay from './components/RatioDisplay';
@@ -98,8 +97,8 @@ function AppContent() {
     const hash = window.location.hash;
 
     // Check for direct links that should skip splash screen
-    const isDirectLink = pathname === '/about' || pathname === '/privacy' ||
-                        hash === '#about' || hash === '#privacy';
+    const isDirectLink = pathname === '/privacy' || pathname === '/blog' || pathname.startsWith('/blog/') ||
+                        hash === '#privacy';
 
     if (isDirectLink) {
       // Skip splash screen for direct links
@@ -113,10 +112,7 @@ function AppContent() {
       body: JSON.stringify({ path: pathname })
     }).catch(() => {}); // Silent fail
 
-    // Handle /about routing
-    if (pathname === '/about' || hash === '#about') {
-      setShowAboutModal(true);
-    }
+    // About page removed - replaced by blog
 
     // Handle /privacy routing
     if (pathname === '/privacy' || hash === '#privacy') {
@@ -1633,7 +1629,6 @@ function App() {
     <BrowserRouter>
       <LanguageProvider>
         <Routes>
-          <Route path="/about" element={<AboutPage />} />
           <Route path="/blog" element={<BlogIndex />} />
           <Route path="/blog/:slug" element={<BlogArticle />} />
           <Route path="/*" element={<AppContent />} />
