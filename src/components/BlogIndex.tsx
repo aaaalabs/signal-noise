@@ -215,7 +215,10 @@ export default function BlogIndex() {
 
         {/* Articles List */}
         <div style={{ marginTop: '3rem' }}>
-          {blogPosts.filter(post => isPreviewMode || post.isPublished).map((post, index) => (
+          {blogPosts
+            .filter(post => isPreviewMode || post.isPublished)
+            .sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime())
+            .map((post, index) => (
             <article key={post.slug} style={{ marginBottom: '3rem' }}>
               {index > 0 && (
                 <div style={{
