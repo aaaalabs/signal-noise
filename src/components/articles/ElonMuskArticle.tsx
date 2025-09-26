@@ -3,6 +3,7 @@ import { useState } from 'react';
 import ImageModal from '../ImageModal';
 import ArticleNavigation from '../ArticleNavigation';
 import { getPreviousArticle, getNextArticle } from '../../utils/articleNavigation';
+import ProductivityQuiz from '../widgets/ProductivityQuiz';
 
 interface ArticleProps {
   isGerman: boolean;
@@ -295,6 +296,9 @@ export default function ElonMuskArticle({ isGerman }: ArticleProps) {
           <div><strong>1:00 AM</strong> - Sleep (sometimes)</div>
         </div>
       </div>
+
+      {/* Interactive Productivity Method Quiz */}
+      <ProductivityQuiz isGerman={isGerman} />
 
       {/* 5-Minute Time Blocking Visualization */}
       <div style={{

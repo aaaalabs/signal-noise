@@ -45,7 +45,7 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
       }
     });
 
-    return historicalTasks.sort((a, b) => a.daysAgo - b.daysAgo);
+    return historicalTasks.sort((a, b) => b.daysAgo - a.daysAgo);
   };
 
   const handleToggle = () => {
@@ -120,7 +120,7 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
                   // Sort groups by daysAgo (newest first)
                   const firstTaskA = a[1][0];
                   const firstTaskB = b[1][0];
-                  return firstTaskA.daysAgo - firstTaskB.daysAgo;
+                  return firstTaskB.daysAgo - firstTaskA.daysAgo;
                 })
                 .map(([date, dateTasks]) => (
                 <div key={date} className="fold-date-group">

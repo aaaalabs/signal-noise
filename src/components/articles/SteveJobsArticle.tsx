@@ -3,6 +3,7 @@ import { useState } from 'react';
 import ImageModal from '../ImageModal';
 import ArticleNavigation from '../ArticleNavigation';
 import { getPreviousArticle, getNextArticle } from '../../utils/articleNavigation';
+import SignalRatioCalculator from '../widgets/SignalRatioCalculator';
 
 interface ArticleProps {
   isGerman: boolean;
@@ -414,6 +415,9 @@ export default function SteveJobsArticle({ isGerman }: ArticleProps) {
         </p>
       </div>
 
+      {/* Interactive Signal Ratio Calculator Widget */}
+      <SignalRatioCalculator isGerman={isGerman} />
+
       {/* Apple Turnaround Case Study - Strategic Content Addition */}
       <h2 style={{
         fontSize: '1.5rem',
@@ -535,32 +539,51 @@ export default function SteveJobsArticle({ isGerman }: ArticleProps) {
       </blockquote>
 
       {/* Apple Minimalist Workspace */}
-      <div style={{
+      <style dangerouslySetInnerHTML={{__html: `
+        @media (max-width: 767px) {
+          .apple-workspace-container {
+            float: none !important;
+            margin-right: 0 !important;
+            max-width: 100% !important;
+            width: 100% !important;
+            margin-bottom: 2rem !important;
+          }
+        }
+      `}} />
+      <div className="apple-workspace-container" style={{
         float: 'left',
         marginRight: '2rem',
         marginBottom: '1rem',
         marginTop: '1rem',
         maxWidth: '300px'
       }}>
-        <img
-          src="/blog-images/article-1-steve-jobs/apple-minimalist-workspace.jpg"
-          alt="Minimalist Apple workspace demonstrating focus through environmental design and simplicity"
-          style={{
-            width: '100%',
-            height: 'auto',
-            border: '1px solid #333',
-            borderRadius: '8px',
-            cursor: 'pointer',
-            transition: 'opacity 0.2s'
-          }}
-          onClick={() => setModalImage({
-            src: "/blog-images/article-1-steve-jobs/apple-minimalist-workspace.jpg",
-            alt: "Minimalist Apple workspace demonstrating focus through environmental design and simplicity",
-            caption: "Apple's design philosophy: focus through environmental simplicity"
-          })}
-          onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
-          onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
-        />
+        <picture>
+          {/* Desktop: 9:18 tall format */}
+          <source
+            media="(min-width: 768px)"
+            srcSet="/blog-images/article-1-steve-jobs/apple-minimalist-workspace-tall.jpg"
+          />
+          {/* Mobile: 16:9 wide format */}
+          <img
+            src="/blog-images/article-1-steve-jobs/apple-minimalist-workspace-wide.jpg"
+            alt="Minimalist Apple workspace demonstrating focus through environmental design and simplicity"
+            style={{
+              width: '100%',
+              height: 'auto',
+              border: '1px solid #333',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              transition: 'opacity 0.2s'
+            }}
+            onClick={() => setModalImage({
+              src: "/blog-images/article-1-steve-jobs/apple-minimalist-workspace-tall.jpg",
+              alt: "Minimalist Apple workspace demonstrating focus through environmental design and simplicity",
+              caption: "Apple's design philosophy: focus through environmental simplicity"
+            })}
+            onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
+            onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+          />
+        </picture>
         <p style={{
           fontSize: '0.75rem',
           color: '#666',
@@ -592,75 +615,162 @@ export default function SteveJobsArticle({ isGerman }: ArticleProps) {
         <div style={{
           padding: '1.5rem',
           backgroundColor: 'rgba(0, 255, 136, 0.05)',
-          border: '1px solid rgba(0, 255, 136, 0.2)'
+          border: '1px solid rgba(0, 255, 136, 0.2)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '1rem'
         }}>
-          <h3 style={{
-            color: '#00ff88',
-            fontSize: '1.1rem',
-            fontWeight: '300',
-            marginBottom: '0.5rem'
+          <div style={{
+            flexShrink: 0
           }}>
-            Steve Jobs - 80% Signal
-          </h3>
-          <p style={{
-            color: '#ddd',
-            fontSize: '0.95rem',
-            lineHeight: '1.6'
-          }}>
-            {isGerman
-              ? '3-5 kritische Aufgaben pro 18 Stunden. Alles andere ist Ablenkung.'
-              : '3-5 critical tasks per 18 hours. Everything else is distraction.'}
-          </p>
+            <img
+              src="/blog-images/article-1-steve-jobs/steve-jobs-visionaries.jpg"
+              alt="Steve Jobs demonstrating 80% Signal methodology and focused leadership"
+              style={{
+                width: '80px',
+                height: '80px',
+                objectFit: 'cover',
+                border: '1px solid #00ff88',
+                borderRadius: '6px',
+                cursor: 'pointer',
+                transition: 'opacity 0.2s'
+              }}
+              onClick={() => setModalImage({
+                src: "/blog-images/article-1-steve-jobs/steve-jobs-visionaries.jpg",
+                alt: "Steve Jobs demonstrating 80% Signal methodology and focused leadership",
+                caption: "Steve Jobs: 3-5 critical tasks per 18 hours"
+              })}
+              onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
+              onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+            />
+          </div>
+          <div style={{ flex: 1 }}>
+            <h3 style={{
+              color: '#00ff88',
+              fontSize: '1.1rem',
+              fontWeight: '300',
+              marginBottom: '0.5rem'
+            }}>
+              Steve Jobs - 80% Signal
+            </h3>
+            <p style={{
+              color: '#ddd',
+              fontSize: '0.95rem',
+              lineHeight: '1.6'
+            }}>
+              {isGerman
+                ? '3-5 kritische Aufgaben pro 18 Stunden. Alles andere ist Ablenkung.'
+                : '3-5 critical tasks per 18 hours. Everything else is distraction.'}
+            </p>
+          </div>
         </div>
 
         {/* Elon Musk */}
         <div style={{
           padding: '1.5rem',
           backgroundColor: 'rgba(255, 255, 255, 0.02)',
-          border: '1px solid #333'
+          border: '1px solid #333',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '1rem'
         }}>
-          <h3 style={{
-            color: '#fff',
-            fontSize: '1.1rem',
-            fontWeight: '300',
-            marginBottom: '0.5rem'
+          <div style={{
+            flexShrink: 0
           }}>
-            Elon Musk - 100% Signal
-          </h3>
-          <p style={{
-            color: '#ddd',
-            fontSize: '0.95rem',
-            lineHeight: '1.6'
-          }}>
-            {isGerman
-              ? 'Keine Ablenkungen. 80-120 Stunden pro Woche. Jede Minute zählt.'
-              : 'No distractions. 80-120 hours per week. Every minute counts.'}
-          </p>
+            <img
+              src="/blog-images/article-1-steve-jobs/elon-musk-visionaries.jpg"
+              alt="Elon Musk demonstrating 100% Signal intensity and extreme focus methodology"
+              style={{
+                width: '80px',
+                height: '80px',
+                objectFit: 'cover',
+                border: '1px solid #333',
+                borderRadius: '6px',
+                cursor: 'pointer',
+                transition: 'opacity 0.2s'
+              }}
+              onClick={() => setModalImage({
+                src: "/blog-images/article-1-steve-jobs/elon-musk-visionaries.jpg",
+                alt: "Elon Musk demonstrating 100% Signal intensity and extreme focus methodology",
+                caption: "Elon Musk: No distractions, every minute counts"
+              })}
+              onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
+              onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+            />
+          </div>
+          <div style={{ flex: 1 }}>
+            <h3 style={{
+              color: '#fff',
+              fontSize: '1.1rem',
+              fontWeight: '300',
+              marginBottom: '0.5rem'
+            }}>
+              Elon Musk - 100% Signal
+            </h3>
+            <p style={{
+              color: '#ddd',
+              fontSize: '0.95rem',
+              lineHeight: '1.6'
+            }}>
+              {isGerman
+                ? 'Keine Ablenkungen. 80-120 Stunden pro Woche. Jede Minute zählt.'
+                : 'No distractions. 80-120 hours per week. Every minute counts.'}
+            </p>
+          </div>
         </div>
 
         {/* Jeff Bezos */}
         <div style={{
           padding: '1.5rem',
           backgroundColor: 'rgba(255, 255, 255, 0.02)',
-          border: '1px solid #333'
+          border: '1px solid #333',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '1rem'
         }}>
-          <h3 style={{
-            color: '#fff',
-            fontSize: '1.1rem',
-            fontWeight: '300',
-            marginBottom: '0.5rem'
+          <div style={{
+            flexShrink: 0
           }}>
-            Jeff Bezos - Morning Signal
-          </h3>
-          <p style={{
-            color: '#ddd',
-            fontSize: '0.95rem',
-            lineHeight: '1.6'
-          }}>
-            {isGerman
-              ? 'Wichtige Entscheidungen nur vor 10 Uhr morgens.'
-              : 'Important decisions only before 10 AM.'}
-          </p>
+            <img
+              src="/blog-images/article-1-steve-jobs/jeff-bezos.jpg"
+              alt="Jeff Bezos demonstrating morning productivity optimization approach"
+              style={{
+                width: '80px',
+                height: '80px',
+                objectFit: 'cover',
+                border: '1px solid #333',
+                borderRadius: '6px',
+                cursor: 'pointer',
+                transition: 'opacity 0.2s'
+              }}
+              onClick={() => setModalImage({
+                src: "/blog-images/article-1-steve-jobs/jeff-bezos.jpg",
+                alt: "Jeff Bezos demonstrating morning productivity optimization approach",
+                caption: "Jeff Bezos: Strategic decisions in morning peak hours"
+              })}
+              onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
+              onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+            />
+          </div>
+          <div style={{ flex: 1 }}>
+            <h3 style={{
+              color: '#fff',
+              fontSize: '1.1rem',
+              fontWeight: '300',
+              marginBottom: '0.5rem'
+            }}>
+              Jeff Bezos - Morning Signal
+            </h3>
+            <p style={{
+              color: '#ddd',
+              fontSize: '0.95rem',
+              lineHeight: '1.6'
+            }}>
+              {isGerman
+                ? 'Wichtige Entscheidungen nur vor 10 Uhr morgens.'
+                : 'Important decisions only before 10 AM.'}
+            </p>
+          </div>
         </div>
       </div>
 

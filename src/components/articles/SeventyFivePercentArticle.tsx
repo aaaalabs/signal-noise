@@ -3,6 +3,7 @@ import { useState } from 'react';
 import ImageModal from '../ImageModal';
 import ArticleNavigation from '../ArticleNavigation';
 import { getPreviousArticle, getNextArticle } from '../../utils/articleNavigation';
+import DailyTaskPrioritizer from '../widgets/DailyTaskPrioritizer';
 
 interface ArticleProps {
   isGerman: boolean;
@@ -323,31 +324,9 @@ export default function SeventyFivePercentArticle({ isGerman }: ArticleProps) {
         </cite>
       </blockquote>
 
-      {/* Jeff Bezos Photo */}
-      <div style={{
-        float: 'left',
-        marginRight: '1.5rem',
-        marginBottom: '1rem',
-        maxWidth: '180px'
-      }}>
-        <img
-          src="/jeff-bezos.jpg"
-          alt="Jeff Bezos"
-          style={{
-            width: '100%',
-            height: 'auto',
-            border: '1px solid #333'
-          }}
-        />
-        <p style={{
-          fontSize: '0.75rem',
-          color: '#666',
-          marginTop: '0.5rem',
-          textAlign: 'center'
-        }}>
-          Jeff Bezos, Amazon founder
-        </p>
-      </div>
+
+      {/* Interactive Daily Task Prioritizer Widget */}
+      <DailyTaskPrioritizer isGerman={isGerman} />
 
       {/* The Meeting Problem */}
       <h2 style={{
@@ -369,7 +348,7 @@ export default function SeventyFivePercentArticle({ isGerman }: ArticleProps) {
         {isGerman ? (
           <>Atlassian fand heraus, dass der durchschnittliche Mitarbeiter 31 Stunden pro Monat in unproduktiven Meetings verbringt. Das sind $37 Milliarden jährlich an verschwendeter Zeit - allein in den USA.</>
         ) : (
-          <>Atlassian found that the average employee spends 31 hours per month in unproductive meetings. That's $37 billion annually in wasted time - in the US alone.<br></br><br></br><br></br><br></br></>
+          <>Atlassian found that the average employee spends 31 hours per month in unproductive meetings. That's $37 billion annually in wasted time - in the US alone.</>
         )}
       </p>
 

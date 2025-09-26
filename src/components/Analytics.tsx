@@ -219,7 +219,7 @@ export default function Analytics({ tasks }: AnalyticsProps) {
             boxSizing: 'border-box'
           }}
         >
-          {dailyRatios.map((ratio, index) => {
+          {dailyRatios.reverse().map((ratio, index) => {
             // Determine if this is a future day (no data possible yet)
             const dayOffset = index;  // Now index 0 = today, 1 = yesterday, etc.
             const targetDate = new Date();
@@ -254,7 +254,7 @@ export default function Analytics({ tasks }: AnalyticsProps) {
                   stiffness: 38,
                   damping: 24,
                   mass: 1.5,
-                  delay: index * 0.008,  // Subtle wave effect (8ms)
+                  delay: (29-index) * 0.008,  // Subtle wave effect (8ms)
                   restDelta: 0.01
                 }}
                 style={{
