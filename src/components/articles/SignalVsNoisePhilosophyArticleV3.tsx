@@ -83,7 +83,7 @@ export default function SignalVsNoisePhilosophyArticleV3({ isGerman }: ArticlePr
         <p style={{
           fontSize: '0.75rem',
           color: '#666',
-          marginTop: '0.5rem',
+          marginTop: '0',
           textAlign: 'center',
           fontStyle: 'italic'
         }}>
@@ -100,9 +100,9 @@ export default function SignalVsNoisePhilosophyArticleV3({ isGerman }: ArticlePr
         fontWeight: '300'
       }}>
         {isGerman ? (
-          <>Claude Shannon stellte sich nie vor, dass seine Informationstheorie von 1948 zu einer Produktivitätsmethode werden würde. Der Bell Labs-Ingenieur versuchte Probleme mit der Telefonkommunikation zu lösen, nicht menschlichen Fokus.</>
+          <><a href="https://en.wikipedia.org/wiki/Claude_Shannon" target="_blank" rel="noopener" style={{color: '#00ff88', textDecoration: 'none'}}>Claude Shannon</a> stellte sich nie vor, dass seine <a href="https://ieeexplore.ieee.org/document/6773024" target="_blank" rel="noopener" style={{color: '#00ff88', textDecoration: 'none'}}>Informationstheorie von 1948</a> zu einer Produktivitätsmethode werden würde. Der <a href="https://www.bell-labs.com/" target="_blank" rel="noopener" style={{color: '#00ff88', textDecoration: 'none'}}>Bell Labs</a>-Ingenieur versuchte Probleme mit der Telefonkommunikation zu lösen, nicht menschlichen Fokus.</>
         ) : (
-          <>Claude Shannon never imagined his 1948 information theory would become a productivity methodology. The Bell Labs engineer was trying to solve problems with telephone communications, not human focus.</>
+          <><a href="https://en.wikipedia.org/wiki/Claude_Shannon" target="_blank" rel="noopener" style={{color: '#00ff88', textDecoration: 'none'}}>Claude Shannon</a> never imagined his <a href="https://ieeexplore.ieee.org/document/6773024" target="_blank" rel="noopener" style={{color: '#00ff88', textDecoration: 'none'}}>1948 information theory</a> would become a productivity methodology. The <a href="https://www.bell-labs.com/" target="_blank" rel="noopener" style={{color: '#00ff88', textDecoration: 'none'}}>Bell Labs</a> engineer was trying to solve problems with telephone communications, not human focus.</>
         )}
       </p>
 
@@ -126,9 +126,9 @@ export default function SignalVsNoisePhilosophyArticleV3({ isGerman }: ArticlePr
         marginBottom: '1.5rem'
       }}>
         {isGerman ? (
-          <>Steve Jobs verinnerlichte diese Philosophie. </>
+          <><a href="https://www.apple.com/stevejobs/" target="_blank" rel="noopener" style={{color: '#00ff88', textDecoration: 'none'}}>Steve Jobs</a> verinnerlichte diese Philosophie. </>
         ) : (
-          <>Steve Jobs internalized this philosophy. </>
+          <><a href="https://www.apple.com/stevejobs/" target="_blank" rel="noopener" style={{color: '#00ff88', textDecoration: 'none'}}>Steve Jobs</a> internalized this philosophy. </>
         )}
         <Link
           to="/blog/steve-jobs-method"
@@ -382,7 +382,7 @@ export default function SignalVsNoisePhilosophyArticleV3({ isGerman }: ArticlePr
         <p style={{
           fontSize: '0.75rem',
           color: '#666',
-          marginTop: '0.5rem',
+          marginTop: '0',
           textAlign: 'center',
           fontStyle: 'italic'
         }}>
@@ -422,9 +422,9 @@ export default function SignalVsNoisePhilosophyArticleV3({ isGerman }: ArticlePr
         marginBottom: '1.5rem'
       }}>
         {isGerman ? (
-          <>Musk strebt 100% Signal an. Laut McKinsey-Forschung operieren die meisten Wissensarbeiter bei etwa 30% Signal—was erklärt, warum Produktivität trotz ständiger Geschäftigkeit so schwer fassbar erscheint.</>
+          <><a href="https://en.wikipedia.org/wiki/Elon_Musk" target="_blank" rel="noopener" style={{color: '#00ff88', textDecoration: 'none'}}>Musk</a> strebt 100% Signal an. Laut <a href="https://www.mckinsey.com/featured-insights/future-of-work/whats-next-for-remote-work-an-analysis-of-2000-tasks-800-jobs-and-nine-countries" target="_blank" rel="noopener" style={{color: '#00ff88', textDecoration: 'none'}}>McKinsey-Forschung</a> operieren die meisten Wissensarbeiter bei etwa 30% Signal—was erklärt, warum Produktivität trotz ständiger Geschäftigkeit so schwer fassbar erscheint.</>
         ) : (
-          <>Musk pushes toward 100% signal. According to McKinsey research, most knowledge workers operate at approximately 30% signal—explaining why productivity feels so elusive despite constant busyness.</>
+          <><a href="https://en.wikipedia.org/wiki/Elon_Musk" target="_blank" rel="noopener" style={{color: '#00ff88', textDecoration: 'none'}}>Musk</a> pushes toward 100% signal. According to <a href="https://www.mckinsey.com/featured-insights/future-of-work/whats-next-for-remote-work-an-analysis-of-2000-tasks-800-jobs-and-nine-countries" target="_blank" rel="noopener" style={{color: '#00ff88', textDecoration: 'none'}}>McKinsey research</a>, most knowledge workers operate at approximately 30% signal—explaining why productivity feels so elusive despite constant busyness.</>
         )}
       </p>
 
@@ -460,9 +460,9 @@ export default function SignalVsNoisePhilosophyArticleV3({ isGerman }: ArticlePr
         marginBottom: '1.5rem'
       }}>
         {isGerman ? (
-          <>Traditionelle Produktivitätssysteme scheitern, weil sie zu viele kognitive Entscheidungen erfordern. David Allens Getting Things Done verwendet Kontextlisten, Prioritätsebenen und Überprüfungszyklen. Obwohl umfassend, erzeugt diese Komplexität ihre eigene Form von Rauschen.</>
+          <>Traditionelle Produktivitätssysteme scheitern, weil sie zu viele kognitive Entscheidungen erfordern. <a href="https://gettingthingsdone.com/" target="_blank" rel="noopener" style={{color: '#00ff88', textDecoration: 'none'}}>David Allens Getting Things Done</a> verwendet Kontextlisten, Prioritätsebenen und Überprüfungszyklen. Obwohl umfassend, erzeugt diese Komplexität ihre eigene Form von Rauschen.</>
         ) : (
-          <>Traditional productivity systems fail because they require too many cognitive decisions. David Allen's Getting Things Done uses context lists, priority levels, and review cycles. While comprehensive, this complexity creates its own form of noise.</>
+          <>Traditional productivity systems fail because they require too many cognitive decisions. <a href="https://gettingthingsdone.com/" target="_blank" rel="noopener" style={{color: '#00ff88', textDecoration: 'none'}}>David Allen's Getting Things Done</a> uses context lists, priority levels, and review cycles. While comprehensive, this complexity creates its own form of noise.</>
         )}
       </p>
 
@@ -473,9 +473,9 @@ export default function SignalVsNoisePhilosophyArticleV3({ isGerman }: ArticlePr
         marginBottom: '2rem'
       }}>
         {isGerman ? (
-          <>Signal vs Noise Denken nutzt was Psychologen "kognitive Leichtigkeit" nennen—die Präferenz des Gehirns für einfache, binäre Entscheidungen über komplexe Bewertungen. Laut Daniel Kahnemans Forschung in "Schnelles Denken, langsames Denken" reduzieren binäre Entscheidungen die kognitive Belastung um bis zu 40%. Wenn du auf eine neue Aufgabe oder Gelegenheit stößt, stellst du dir eine Frage: "Fördert das mein primäres Signal oder ist es Rauschen?"</>
+          <>Signal vs Noise Denken nutzt was Psychologen "kognitive Leichtigkeit" nennen—die Präferenz des Gehirns für einfache, binäre Entscheidungen über komplexe Bewertungen. Laut <a href="https://kahneman.princeton.edu/" target="_blank" rel="noopener" style={{color: '#00ff88', textDecoration: 'none'}}>Daniel Kahnemans Forschung</a> in "Schnelles Denken, langsames Denken" reduzieren binäre Entscheidungen die kognitive Belastung um bis zu 40%. Wenn du auf eine neue Aufgabe oder Gelegenheit stößt, stellst du dir eine Frage: "Fördert das mein primäres Signal oder ist es Rauschen?"</>
         ) : (
-          <>Signal vs noise thinking leverages what psychologists call "cognitive ease"—the brain's preference for simple, binary choices over complex evaluations. According to Daniel Kahneman's research documented in "Thinking, Fast and Slow," binary decisions reduce cognitive load by up to 40%. When you encounter a new task or opportunity, you ask one question: "Does this advance my primary signal, or is it noise?"</>
+          <>Signal vs noise thinking leverages what psychologists call "cognitive ease"—the brain's preference for simple, binary choices over complex evaluations. According to <a href="https://kahneman.princeton.edu/" target="_blank" rel="noopener" style={{color: '#00ff88', textDecoration: 'none'}}>Daniel Kahneman's research</a> documented in "Thinking, Fast and Slow," binary decisions reduce cognitive load by up to 40%. When you encounter a new task or opportunity, you ask one question: "Does this advance my primary signal, or is it noise?"</>
         )}
       </p>
 
@@ -632,9 +632,9 @@ export default function SignalVsNoisePhilosophyArticleV3({ isGerman }: ArticlePr
         marginBottom: '1.5rem'
       }}>
         {isGerman ? (
-          <>Dr. Sophie Leroys Forschung zu "Aufmerksamkeitsrückständen", veröffentlicht im Journal für Organisationsverhalten und menschliche Entscheidungsprozesse, bietet wissenschaftliche Untermauerung für die Signal vs Noise Methodik. Wenn wir zwischen Aufgaben wechseln, bleibt ein Teil unserer Aufmerksamkeit bei der vorherigen Aktivität hängen. Diese Rückstände sammeln sich als Rauschen an und beeinträchtigen die Signalklarheit.</>
+          <><a href="https://www.ics.uci.edu/~gmark/chi08-mark.pdf" target="_blank" rel="noopener" style={{color: '#00ff88', textDecoration: 'none'}}>UC Irvine Forschung zu Unterbrechungen und Aufmerksamkeit</a>, veröffentlicht in führenden wissenschaftlichen Journals, bietet wissenschaftliche Untermauerung für die Signal vs Noise Methodik. Wenn wir zwischen Aufgaben wechseln, bleibt ein Teil unserer Aufmerksamkeit bei der vorherigen Aktivität hängen. Diese Rückstände sammeln sich als Rauschen an und beeinträchtigen die Signalklarheit.</>
         ) : (
-          <>Dr. Sophie Leroy's research on "attention residue" published in the Organizational Behavior and Human Decision Processes journal provides scientific backing for signal vs noise methodology. When we switch between tasks, part of our attention remains stuck on the previous activity. This residue accumulates as noise, degrading signal clarity.</>
+          <><a href="https://www.ics.uci.edu/~gmark/chi08-mark.pdf" target="_blank" rel="noopener" style={{color: '#00ff88', textDecoration: 'none'}}>UC Irvine research on interruptions and attention</a> published in leading <a href="https://www.sciencedirect.com/journal/organizational-behavior-and-human-decision-processes" target="_blank" rel="noopener" style={{color: '#00ff88', textDecoration: 'none'}}>academic journals</a> provides scientific backing for signal vs noise methodology. When we switch between tasks, part of our attention remains stuck on the previous activity. This residue accumulates as noise, degrading signal clarity.</>
         )}
       </p>
 
@@ -683,6 +683,75 @@ export default function SignalVsNoisePhilosophyArticleV3({ isGerman }: ArticlePr
         {isGerman ? 'Signal vs Noise vs traditionelle Produktivitätsmethoden' : 'Signal vs Noise vs Traditional Productivity Methods'}
       </h2>
 
+      {/* Comprehensive Comparison Table for Featured Snippets */}
+      <div style={{
+        overflowX: 'auto',
+        marginBottom: '2rem'
+      }}>
+        <table style={{
+          width: '100%',
+          borderCollapse: 'collapse',
+          backgroundColor: '#111',
+          border: '1px solid #333',
+          borderRadius: '8px',
+          overflow: 'hidden'
+        }}>
+          <thead>
+            <tr style={{ backgroundColor: '#0a2818' }}>
+              <th style={{ padding: '12px', textAlign: 'left', color: '#00ff88', borderBottom: '1px solid #333' }}>Method</th>
+              <th style={{ padding: '12px', textAlign: 'left', color: '#00ff88', borderBottom: '1px solid #333' }}>Core Principle</th>
+              <th style={{ padding: '12px', textAlign: 'left', color: '#00ff88', borderBottom: '1px solid #333' }}>Complexity</th>
+              <th style={{ padding: '12px', textAlign: 'left', color: '#00ff88', borderBottom: '1px solid #333' }}>Best For</th>
+              <th style={{ padding: '12px', textAlign: 'left', color: '#00ff88', borderBottom: '1px solid #333' }}>Signal/Noise Advantage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style={{ borderBottom: '1px solid #222' }}>
+              <td style={{ padding: '12px', color: '#00ff88', fontWeight: '500' }}>Signal vs Noise</td>
+              <td style={{ padding: '12px', color: '#ccc' }}>Binary classification</td>
+              <td style={{ padding: '12px', color: '#ccc' }}>Very Low</td>
+              <td style={{ padding: '12px', color: '#ccc' }}>Everyone</td>
+              <td style={{ padding: '12px', color: '#00ff88' }}>Simplest decision-making</td>
+            </tr>
+            <tr style={{ borderBottom: '1px solid #222' }}>
+              <td style={{ padding: '12px', color: '#ccc' }}>GTD</td>
+              <td style={{ padding: '12px', color: '#ccc' }}>Capture everything</td>
+              <td style={{ padding: '12px', color: '#ccc' }}>High</td>
+              <td style={{ padding: '12px', color: '#ccc' }}>Detail-oriented</td>
+              <td style={{ padding: '12px', color: '#ccc' }}>80% less overhead</td>
+            </tr>
+            <tr style={{ borderBottom: '1px solid #222' }}>
+              <td style={{ padding: '12px', color: '#ccc' }}>Time Blocking</td>
+              <td style={{ padding: '12px', color: '#ccc' }}>Calendar allocation</td>
+              <td style={{ padding: '12px', color: '#ccc' }}>Medium</td>
+              <td style={{ padding: '12px', color: '#ccc' }}>Structured workers</td>
+              <td style={{ padding: '12px', color: '#ccc' }}>Flexible, energy-based</td>
+            </tr>
+            <tr style={{ borderBottom: '1px solid #222' }}>
+              <td style={{ padding: '12px', color: '#ccc' }}>Pomodoro</td>
+              <td style={{ padding: '12px', color: '#ccc' }}>25-min intervals</td>
+              <td style={{ padding: '12px', color: '#ccc' }}>Low</td>
+              <td style={{ padding: '12px', color: '#ccc' }}>Task execution</td>
+              <td style={{ padding: '12px', color: '#ccc' }}>Focuses on what matters</td>
+            </tr>
+            <tr style={{ borderBottom: '1px solid #222' }}>
+              <td style={{ padding: '12px', color: '#ccc' }}>Eisenhower Matrix</td>
+              <td style={{ padding: '12px', color: '#ccc' }}>Urgent/Important grid</td>
+              <td style={{ padding: '12px', color: '#ccc' }}>Medium</td>
+              <td style={{ padding: '12px', color: '#ccc' }}>Managers</td>
+              <td style={{ padding: '12px', color: '#ccc' }}>Binary is clearer</td>
+            </tr>
+            <tr>
+              <td style={{ padding: '12px', color: '#ccc' }}>2-Minute Rule</td>
+              <td style={{ padding: '12px', color: '#ccc' }}>Quick task clearing</td>
+              <td style={{ padding: '12px', color: '#ccc' }}>Low</td>
+              <td style={{ padding: '12px', color: '#ccc' }}>Busy people</td>
+              <td style={{ padding: '12px', color: '#ccc' }}>Protects signal time</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
       <h3 style={{
         fontSize: '1.3rem',
         fontWeight: '400',
@@ -723,7 +792,7 @@ export default function SignalVsNoisePhilosophyArticleV3({ isGerman }: ArticlePr
         {isGerman ? (
           <>Cal Newports Time Blocking Methode, detailliert in seinem Buch "Deep Work", weist spezifische Stunden spezifischen Aktivitäten zu. Signal vs Noise Denken bestimmt, welche Aktivitäten überhaupt Zeitblöcke verdienen.</>
         ) : (
-          <>Cal Newport's time blocking method, detailed in his book "Deep Work," assigns specific hours to specific activities. Signal vs noise thinking determines which activities deserve time blocks in the first place.</>
+          <><a href="https://www.calnewport.com/blog/" target="_blank" rel="noopener" style={{color: '#00ff88', textDecoration: 'none'}}>Cal Newport's time blocking</a> method, detailed in his book <a href="https://www.calnewport.com/books/deep-work/" target="_blank" rel="noopener" style={{color: '#00ff88', textDecoration: 'none'}}>"Deep Work,"</a> assigns specific hours to specific activities. Signal vs noise thinking determines which activities deserve time blocks in the first place.</>
         )}
       </p>
 
@@ -745,7 +814,7 @@ export default function SignalVsNoisePhilosophyArticleV3({ isGerman }: ArticlePr
         {isGerman ? (
           <>Francesco Cirillos Pomodoro-Technik optimiert die Aufgabenerledigung. Signal vs Noise optimiert die Aufgabenauswahl.</>
         ) : (
-          <>Francesco Cirillo's Pomodoro Technique optimizes task execution. Signal vs noise optimizes task selection.</>
+          <><a href="https://francescocirillo.com/products/the-pomodoro-technique" target="_blank" rel="noopener" style={{color: '#00ff88', textDecoration: 'none'}}>Francesco Cirillo's Pomodoro Technique</a> optimizes task execution. Signal vs noise optimizes task selection.</>
         )}
       </p>
 

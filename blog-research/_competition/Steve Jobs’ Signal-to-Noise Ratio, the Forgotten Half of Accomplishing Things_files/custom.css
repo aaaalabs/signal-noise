@@ -1,0 +1,21 @@
+.hide {
+    display:none;
+}
+#menu-item-6064 .sub-menu {
+    width: 815px !important;
+    right: 22% !important;
+    background: #fff;
+    
+}
+.genesis-nav-menu .sub-menu a {
+    border:0px !important;
+}
+/*@media only screen and (max-width: 600px) {*/
+/*#wprmenu_menu_ul .sub-menu li {*/
+/*    max-width: 55px;*/
+/*    display: inline-block;*/
+/*}*/
+/*.genesis-nav-menu .sub-menu a {*/
+/*    padding: 13px 7px;*/
+/*}*/
+/*}*/

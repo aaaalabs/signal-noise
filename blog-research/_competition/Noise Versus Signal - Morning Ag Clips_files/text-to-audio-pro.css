@@ -1,0 +1,818 @@
+#tts_button_should_float {
+	margin: 0;
+	font-size: var(--bs-body-font-size);
+	font-weight: var(--bs-body-font-weight);
+	line-height: var(--bs-body-line-height);
+	color: var(--bs-body-color);
+	background-color: var(--bs-body-bg);
+	-webkit-text-size-adjust: 100%;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	border-radius: 8px;
+	border: 1px solid #dee2e6 !important;
+}
+
+.tts__position-relative svg {
+	vertical-align: middle;
+	font-size: 2rem;
+}
+
+.tts__d-flex {
+	display: flex !important;
+}
+
+.tts__position-relative {
+	position: relative !important;
+}
+
+.tts__gap-3 {
+	gap: 1rem !important;
+}
+
+.tts__justify-content-between {
+	justify-content: space-between !important;
+}
+
+.tts__align-items-center {
+	align-items: center !important;
+}
+
+.tts__position-relative {
+	position: relative !important;
+}
+
+.tts__px-3 {
+	padding-right: 1rem !important;
+	padding-left: 1rem !important;
+}
+
+.tts__mx-auto {
+	margin-right: auto !important;
+	margin-left: auto !important;
+}
+
+.tts__ps-3 {
+	padding-left: 1rem !important;
+}
+
+.tts__shadow-custom {
+	box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px,
+		rgba(17, 17, 26, 0.1) 0px 0px 8px;
+	border-radius: 8px;
+}
+
+.tts__custom-hover:hover {
+	background-color: #f2f2f2;
+	cursor: pointer;
+}
+
+.tts__audio-controls {
+	display: grid;
+	grid-template-columns: 1fr 30fr 1fr;
+	gap: 20px;
+	align-items: center;
+}
+
+.tts__progress {
+	background-color: #e1e1e1;
+}
+
+.tts__cursor-pointer {
+	cursor: pointer;
+}
+
+.tts__audio-progress {
+	height: 5px;
+	margin-top: 3px;
+}
+
+.tts__audio-progress .progress-bar {
+	background-color: black;
+}
+.tts__custom-position2 {
+	position: fixed;
+	bottom: 3%;
+	left: 5%;
+	width: 455px;
+}
+.tts__adjusted-position {
+	position: relative;
+	top: -300px;
+	width: 300px;
+	height: 300px;
+	overflow: scroll;
+}
+.tts__adjusted-position1 {
+	position: relative;
+	top: -300px;
+	width: 300px;
+	height: 70px;
+	overflow: hidden;
+}
+.tts__adjusted-position1 {
+	position: relative;
+	top: -300px;
+	width: 300px;
+	height: 70px;
+	overflow: hidden;
+}
+.tts__custom-font-size {
+	font-size: 10px;
+}
+.tts__custom-content {
+	padding: 10px;
+	background-color: whitesmoke;
+	cursor: pointer;
+}
+.tts__custom-content:hover {
+	background-color: rgb(113, 113, 108);
+	color: rgb(242, 243, 243);
+}
+.tts__verticle-align {
+	transform: rotate(90deg);
+}
+.tts__normal-background {
+	background-color: rgb(94, 222, 94);
+}
+.tts__fast-background {
+	background-color: rgb(255, 136, 0);
+}
+.tts__very-fast-background {
+	background-color: rgb(240, 14, 14);
+}
+.tts__slow-background {
+	background-color: rgb(145, 158, 44);
+}
+
+.tts__audio-time-start,
+.tts__audio-time-end {
+	white-space: nowrap;
+}
+
+/*=====================================*/
+.tts__custom-position_bottom_right,
+.tts__custom-position_bottom_left,
+.tts__custom-position_bottom_center,
+.tts__custom-position_bottom_fixed {
+	position: fixed;
+	bottom: 3%;
+	width: 455px;
+	z-index: 9999;
+	border-radius: 2px;
+	overflow: visible !important;
+}
+.tts__custom-position_bottom_right {
+	right: 5%;
+}
+
+.tts__custom-position_bottom_left {
+	left: 5%;
+}
+
+.tts__custom-position_bottom_center {
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.tts__custom-position_bottom_fixed {
+	right: 5%;
+	left: 5%;
+	margin: 0 auto;
+}
+@media (max-width: 575.98px) {
+	.tts__custom-position_bottom_right {
+		right: 1%;
+		width: 98%;
+	}
+
+	.tts__custom-position_bottom_left {
+		left: 1%;
+		width: 98%;
+	}
+
+	.tts__custom-position_bottom_center {
+		left: 1%;
+		right: 1%;
+		width: 98%;
+		transform: none;
+	}
+
+	.tts__custom-position_bottom_fixed {
+		left: 1%;
+		right: 1%;
+		width: 98%;
+		margin: 0;
+	}
+}
+@media (min-width: 576px) and (max-width: 767.98px) {
+	.tts__custom-position_bottom_right {
+		right: 2%;
+		width: 380px;
+	}
+
+	.tts__custom-position_bottom_left {
+		left: 2%;
+		width: 380px;
+	}
+
+	.tts__custom-position_bottom_center {
+		left: 50%;
+		width: 380px;
+		transform: translateX(-50%);
+	}
+
+	.tts__custom-position_bottom_fixed {
+		left: 2%;
+		right: 2%;
+		width: calc(100% - 4%);
+		margin: 0 auto;
+	}
+}
+@media (min-width: 768px) and (max-width: 1199.98px) {
+	.tts__custom-position_bottom_right {
+		right: 2%;
+		width: 420px;
+	}
+
+	.tts__custom-position_bottom_left {
+		left: 2%;
+		width: 420px;
+	}
+
+	.tts__custom-position_bottom_center {
+		left: 50%;
+		width: 420px;
+		transform: translateX(-50%);
+	}
+
+	.tts__custom-position_bottom_fixed {
+		left: 2%;
+		right: 2%;
+		width: calc(100% - 4%);
+		margin: 0 auto;
+	}
+}
+@media (min-width: 1200px) {
+	.tts__custom-position_bottom_right {
+		right: 5%;
+		width: 455px;
+	}
+
+	.tts__custom-position_bottom_left {
+		left: 5%;
+		width: 455px;
+	}
+
+	.tts__custom-position_bottom_center {
+		left: 50%;
+		width: 455px;
+		transform: translateX(-50%);
+	}
+
+	.tts__custom-position_bottom_fixed {
+		left: 5%;
+		right: 5%;
+		width: calc(100% - 10%);
+		margin: 0 auto;
+	}
+}
+
+/*======================================*/
+
+
+/*#tts_pro_progress_bar {*/
+/*	width: 100%;*/
+/*	background-color: grey;*/
+/*}*/
+
+/*#tts_pro_bar {*/
+/*	width: 1%;*/
+/*	height: 50px;*/
+/*	background-color: green;*/
+/*}*/
+
+/*@import url(https://fonts.googleapis.com/css?family=Roboto);*/
+/* ----------------------------------------------------- Pure CSS Progress Bars GitHub Project: https://github.com/rkchauhan/pure-css-progress-bars/ By: Ravikumar Chauhan Find me on - Twitter: https://twitter.com/rkchauhan01 Facebook: https://www.facebook.com/ravi032chauhan GitHub: https://github.com/rkchauhan CodePen: https://codepen.io/rkchauhan -------------------------------------------------------- */
+/* ----------------------------------------------------- CSS Progress Bars -------------------------------------------------------- */
+.cssProgress {
+	width: 100%;
+	margin-bottom: 20px;
+}
+.cssProgress .progress {
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	font-family: "Roboto", sans-serif;
+}
+.cssProgress .cssProgress-bar {
+	display: block;
+	float: left;
+	width: 0%;
+	height: 100%;
+	background: #3798d9;
+	box-shadow: inset 0px -1px 2px rgba(0, 0, 0, 0.1);
+	transition: width 0.8s ease-in-out;
+	border-radius: 5px;
+}
+.cssProgress .cssProgress-label {
+	position: absolute;
+	overflow: hidden;
+	left: 0px;
+	right: 0px;
+	color: rgba(0, 0, 0, 0.6);
+	font-size: 0.8em;
+	text-align: center;
+	font-weight: bold;
+	text-shadow: 0px 1px rgba(0, 0, 0, 0.3);
+}
+.cssProgress .cssProgress-info {
+	background-color: #9575cd !important;
+}
+.cssProgress .cssProgress-danger {
+	background-color: #ef5350 !important;
+}
+.cssProgress .cssProgress-success {
+	background-color: #66bb6a !important;
+}
+.cssProgress .cssProgress-warning {
+	background-color: #ffb74d !important;
+}
+.cssProgress .cssProgress-right {
+	float: right !important;
+}
+.cssProgress .cssProgress-label-left {
+	margin-left: 10px;
+	text-align: left !important;
+}
+.cssProgress .cssProgress-label-right {
+	margin-right: 10px;
+	text-align: right !important;
+}
+/*.cssProgress .cssProgress-label2 {*/
+/*	display: block;*/
+/*	margin: 2px 0;*/
+/*	padding: 0 8px;*/
+/*	font-size: 0.8em;*/
+/*}*/
+/*.cssProgress .cssProgress-label2.cssProgress-label2-right {*/
+/*	text-align: right;*/
+/*}*/
+/*.cssProgress .cssProgress-label2.cssProgress-label2-center {*/
+/*	text-align: center;*/
+/*}*/
+.cssProgress .cssProgress-stripes, .cssProgress .cssProgress-active, .cssProgress .cssProgress-active-right {
+	background-image: linear-gradient(-45deg, rgba(255, 255, 255, .125) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .125) 50%, rgba(255, 255, 255, .125) 75%, transparent 75%, transparent);
+	background-size: 35px 35px;
+}
+.cssProgress .cssProgress-active {
+	-webkit-animation: cssProgressActive 2s linear infinite;
+	-moz-animation: cssProgressActive 2s linear infinite;
+	-ms-animation: cssProgressActive 2s linear infinite;
+	-o-animation: cssProgressActive 2s linear infinite;
+	animation: cssProgressActive 2s linear infinite;
+}
+.cssProgress .cssProgress-active-right {
+	-webkit-animation: cssProgressActiveRight 2s linear infinite;
+	-moz-animation: cssProgressActiveRight 2s linear infinite;
+	-ms-animation: cssProgressActiveRight 2s linear infinite;
+	-o-animation: cssProgressActiveRight 2s linear infinite;
+	animation: cssProgressActiveRight 2s linear infinite;
+}
+@-webkit-keyframes cssProgressActive {
+	0% {
+		background-position: 0 0;
+	}
+	100% {
+		background-position: 35px 35px;
+	}
+}
+@-moz-keyframes cssProgressActive {
+	0% {
+		background-position: 0 0;
+	}
+	100% {
+		background-position: 35px 35px;
+	}
+}
+@-ms-keyframes cssProgressActive {
+	0% {
+		background-position: 0 0;
+	}
+	100% {
+		background-position: 35px 35px;
+	}
+}
+@-o-keyframes cssProgressActive {
+	0% {
+		background-position: 0 0;
+	}
+	100% {
+		background-position: 35px 35px;
+	}
+}
+@keyframes cssProgressActive {
+	0% {
+		background-position: 0 0;
+	}
+	100% {
+		background-position: 35px 35px;
+	}
+}
+@-webkit-keyframes cssProgressActiveRight {
+	0% {
+		background-position: 0 0;
+	}
+	100% {
+		background-position: -35px -35px;
+	}
+}
+@-moz-keyframes cssProgressActiveRight {
+	0% {
+		background-position: 0 0;
+	}
+	100% {
+		background-position: -35px -35px;
+	}
+}
+@-ms-keyframes cssProgressActiveRight {
+	0% {
+		background-position: 0 0;
+	}
+	100% {
+		background-position: -35px -35px;
+	}
+}
+@-o-keyframes cssProgressActiveRight {
+	0% {
+		background-position: 0 0;
+	}
+	100% {
+		background-position: -35px -35px;
+	}
+}
+@keyframes cssProgressActiveRight {
+	0% {
+		background-position: 0 0;
+	}
+	100% {
+		background-position: -35px -35px;
+	}
+}
+/* ----------------------------------------------------- Progress Bar 1 -------------------------------------------------------- */
+.progress {
+	background-color: #eee;
+	box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.2);
+}
+.progress .cssProgress-bar {
+	height: 18px;
+}
+.progress .cssProgress-label {
+	line-height: 18px;
+}
+/* ----------------------------------------------------- Progress Bar 4 -------------------------------------------------------- */
+/*.progress4 {*/
+/*	position: relative;*/
+/*	width: 100%;*/
+/*	background-color: #eee;*/
+/*}*/
+/*.progress4.cssProgress-bg {*/
+/*	background-color: #bbdefb !important;*/
+/*}*/
+/*.progress4.cssProgress-bg-info {*/
+/*	background-color: #d1c4e9 !important;*/
+/*}*/
+/*.progress4.cssProgress-bg-danger {*/
+/*	background-color: #ffcdd2 !important;*/
+/*}*/
+/*.progress4.cssProgress-bg-success {*/
+/*	background-color: #c8e6c9 !important;*/
+/*}*/
+/*.progress4.cssProgress-bg-warning {*/
+/*	background-color: #ffecb3 !important;*/
+/*}*/
+/*.progress4 .cssProgress-bar {*/
+/*	display: block;*/
+/*	float: none;*/
+/*	width: 0%;*/
+/*	height: 4px;*/
+/*	background: #3798d9;*/
+/*}*/
+/*.progress4 .cssProgress-bar.cssProgress-lg {*/
+/*	height: 6px;*/
+/*}*/
+/*.progress4 .cssProgress-bar.cssProgress-2x {*/
+/*	height: 8px;*/
+/*}*/
+/*.progress4 .cssProgress-bar.cssProgress-3x {*/
+/*	height: 10px;*/
+/*}*/
+/*.progress4 .cssProgress-bar.cssProgress-4x {*/
+/*	height: 12px;*/
+/*}*/
+/*.progress4 .cssProgress-bar.cssProgress-5x {*/
+/*	height: 14px;*/
+/*}*/
+/*.progress4 .cssProgress-bar.cssProgress-glow {*/
+/*	box-shadow: 5px 0px 15px 0px #3798d9;*/
+/*}*/
+/*.progress4 .cssProgress-bar.cssProgress-glow.cssProgress-info {*/
+/*	box-shadow: 5px 0px 15px 0px #9575cd;*/
+/*}*/
+/*.progress4 .cssProgress-bar.cssProgress-glow.cssProgress-danger {*/
+/*	box-shadow: 5px 0px 15px 0px #ef5350;*/
+/*}*/
+/*.progress4 .cssProgress-bar.cssProgress-glow.cssProgress-success {*/
+/*	box-shadow: 5px 0px 15px 0px #66bb6a;*/
+/*}*/
+/*.progress4 .cssProgress-bar.cssProgress-glow.cssProgress-warning {*/
+/*	box-shadow: 5px 0px 15px 0px #ffb74d;*/
+/*}*/
+/*.progress4 .cssProgress-bar.cssProgress-glow-active {*/
+/*	-webkit-animation: cssProgressGlowActive1 3s linear infinite;*/
+/*	-moz-animation: cssProgressGlowActive1 3s linear infinite;*/
+/*	-ms-animation: cssProgressGlowActive1 3s linear infinite;*/
+/*	-o-animation: cssProgressGlowActive1 3s linear infinite;*/
+/*	animation: cssProgressGlowActive1 3s linear infinite;*/
+/*}*/
+/*.progress4 .cssProgress-bar.cssProgress-glow-active.cssProgress-info {*/
+/*	-webkit-animation: cssProgressGlowActive2 3s linear infinite;*/
+/*	-moz-animation: cssProgressGlowActive2 3s linear infinite;*/
+/*	-ms-animation: cssProgressGlowActive2 3s linear infinite;*/
+/*	-o-animation: cssProgressGlowActive2 3s linear infinite;*/
+/*	animation: cssProgressGlowActive2 3s linear infinite;*/
+/*}*/
+/*.progress4 .cssProgress-bar.cssProgress-glow-active.cssProgress-danger {*/
+/*	-webkit-animation: cssProgressGlowActive3 3s linear infinite;*/
+/*	-moz-animation: cssProgressGlowActive3 3s linear infinite;*/
+/*	-ms-animation: cssProgressGlowActive3 3s linear infinite;*/
+/*	-o-animation: cssProgressGlowActive3 3s linear infinite;*/
+/*	animation: cssProgressGlowActive3 3s linear infinite;*/
+/*}*/
+/*.progress4 .cssProgress-bar.cssProgress-glow-active.cssProgress-success {*/
+/*	-webkit-animation: cssProgressGlowActive4 3s linear infinite;*/
+/*	-moz-animation: cssProgressGlowActive4 3s linear infinite;*/
+/*	-ms-animation: cssProgressGlowActive4 3s linear infinite;*/
+/*	-o-animation: cssProgressGlowActive4 3s linear infinite;*/
+/*	animation: cssProgressGlowActive4 3s linear infinite;*/
+/*}*/
+/*.progress4 .cssProgress-bar.cssProgress-glow-active.cssProgress-warning {*/
+/*	-webkit-animation: cssProgressGlowActive5 3s linear infinite;*/
+/*	-moz-animation: cssProgressGlowActive5 3s linear infinite;*/
+/*	-ms-animation: cssProgressGlowActive5 3s linear infinite;*/
+/*	-o-animation: cssProgressGlowActive5 3s linear infinite;*/
+/*	animation: cssProgressGlowActive5 3s linear infinite;*/
+/*}*/
+@-webkit-keyframes cssProgressGlowActive1 {
+	0%, 100% {
+		box-shadow: 5px 0px 15px 0px #3798D9;
+	}
+	45% {
+		box-shadow: 1px 0px 4px 0px #3798D9;
+	}
+}
+@-moz-keyframes cssProgressGlowActive1 {
+	0%, 100% {
+		box-shadow: 5px 0px 15px 0px #3798D9;
+	}
+	45% {
+		box-shadow: 1px 0px 4px 0px #3798D9;
+	}
+}
+@-ms-keyframes cssProgressGlowActive1 {
+	0%, 100% {
+		box-shadow: 5px 0px 15px 0px #3798D9;
+	}
+	45% {
+		box-shadow: 1px 0px 4px 0px #3798D9;
+	}
+}
+@-o-keyframes cssProgressGlowActive1 {
+	0%, 100% {
+		box-shadow: 5px 0px 15px 0px #3798D9;
+	}
+	45% {
+		box-shadow: 1px 0px 4px 0px #3798D9;
+	}
+}
+@keyframes cssProgressGlowActive1 {
+	0%, 100% {
+		box-shadow: 5px 0px 15px 0px #3798D9;
+	}
+	45% {
+		box-shadow: 1px 0px 4px 0px #3798D9;
+	}
+}
+/*@-webkit-keyframes cssProgressGlowActive2 {*/
+/*	0%, 100% {*/
+/*		box-shadow: 5px 0px 15px 0px #9575cd;*/
+/*	}*/
+/*	45% {*/
+/*		box-shadow: 1px 0px 4px 0px #9575cd;*/
+/*	}*/
+/*}*/
+/*@-moz-keyframes cssProgressGlowActive2 {*/
+/*	0%, 100% {*/
+/*		box-shadow: 5px 0px 15px 0px #9575cd;*/
+/*	}*/
+/*	45% {*/
+/*		box-shadow: 1px 0px 4px 0px #9575cd;*/
+/*	}*/
+/*}*/
+/*@-ms-keyframes cssProgressGlowActive2 {*/
+/*	0%, 100% {*/
+/*		box-shadow: 5px 0px 15px 0px #9575cd;*/
+/*	}*/
+/*	45% {*/
+/*		box-shadow: 1px 0px 4px 0px #9575cd;*/
+/*	}*/
+/*}*/
+/*@-o-keyframes cssProgressGlowActive2 {*/
+/*	0%, 100% {*/
+/*		box-shadow: 5px 0px 15px 0px #9575cd;*/
+/*	}*/
+/*	45% {*/
+/*		box-shadow: 1px 0px 4px 0px #9575cd;*/
+/*	}*/
+/*}*/
+/*@keyframes cssProgressGlowActive2 {*/
+/*	0%, 100% {*/
+/*		box-shadow: 5px 0px 15px 0px #9575cd;*/
+/*	}*/
+/*	45% {*/
+/*		box-shadow: 1px 0px 4px 0px #9575cd;*/
+/*	}*/
+/*}*/
+/*@-webkit-keyframes cssProgressGlowActive3 {*/
+/*	0%, 100% {*/
+/*		box-shadow: 5px 0px 15px 0px #ef5350;*/
+/*	}*/
+/*	45% {*/
+/*		box-shadow: 1px 0px 4px 0px #ef5350;*/
+/*	}*/
+/*}*/
+/*@-moz-keyframes cssProgressGlowActive3 {*/
+/*	0%, 100% {*/
+/*		box-shadow: 5px 0px 15px 0px #ef5350;*/
+/*	}*/
+/*	45% {*/
+/*		box-shadow: 1px 0px 4px 0px #ef5350;*/
+/*	}*/
+/*}*/
+/*@-ms-keyframes cssProgressGlowActive3 {*/
+/*	0%, 100% {*/
+/*		box-shadow: 5px 0px 15px 0px #ef5350;*/
+/*	}*/
+/*	45% {*/
+/*		box-shadow: 1px 0px 4px 0px #ef5350;*/
+/*	}*/
+/*}*/
+/*@-o-keyframes cssProgressGlowActive3 {*/
+/*	0%, 100% {*/
+/*		box-shadow: 5px 0px 15px 0px #ef5350;*/
+/*	}*/
+/*	45% {*/
+/*		box-shadow: 1px 0px 4px 0px #ef5350;*/
+/*	}*/
+/*}*/
+/*@keyframes cssProgressGlowActive3 {*/
+/*	0%, 100% {*/
+/*		box-shadow: 5px 0px 15px 0px #ef5350;*/
+/*	}*/
+/*	45% {*/
+/*		box-shadow: 1px 0px 4px 0px #ef5350;*/
+/*	}*/
+/*}*/
+/*@-webkit-keyframes cssProgressGlowActive4 {*/
+/*	0%, 100% {*/
+/*		box-shadow: 5px 0px 15px 0px #66bb6a;*/
+/*	}*/
+/*	45% {*/
+/*		box-shadow: 1px 0px 4px 0px #66bb6a;*/
+/*	}*/
+/*}*/
+/*@-moz-keyframes cssProgressGlowActive4 {*/
+/*	0%, 100% {*/
+/*		box-shadow: 5px 0px 15px 0px #66bb6a;*/
+/*	}*/
+/*	45% {*/
+/*		box-shadow: 1px 0px 4px 0px #66bb6a;*/
+/*	}*/
+/*}*/
+/*@-ms-keyframes cssProgressGlowActive4 {*/
+/*	0%, 100% {*/
+/*		box-shadow: 5px 0px 15px 0px #66bb6a;*/
+/*	}*/
+/*	45% {*/
+/*		box-shadow: 1px 0px 4px 0px #66bb6a;*/
+/*	}*/
+/*}*/
+/*@-o-keyframes cssProgressGlowActive4 {*/
+/*	0%, 100% {*/
+/*		box-shadow: 5px 0px 15px 0px #66bb6a;*/
+/*	}*/
+/*	45% {*/
+/*		box-shadow: 1px 0px 4px 0px #66bb6a;*/
+/*	}*/
+/*}*/
+/*@keyframes cssProgressGlowActive4 {*/
+/*	0%, 100% {*/
+/*		box-shadow: 5px 0px 15px 0px #66bb6a;*/
+/*	}*/
+/*	45% {*/
+/*		box-shadow: 1px 0px 4px 0px #66bb6a;*/
+/*	}*/
+/*}*/
+/*@-webkit-keyframes cssProgressGlowActive5 {*/
+/*	0%, 100% {*/
+/*		box-shadow: 5px 0px 15px 0px #ffb74d;*/
+/*	}*/
+/*	45% {*/
+/*		box-shadow: 1px 0px 4px 0px #ffb74d;*/
+/*	}*/
+/*}*/
+/*@-moz-keyframes cssProgressGlowActive5 {*/
+/*	0%, 100% {*/
+/*		box-shadow: 5px 0px 15px 0px #ffb74d;*/
+/*	}*/
+/*	45% {*/
+/*		box-shadow: 1px 0px 4px 0px #ffb74d;*/
+/*	}*/
+/*}*/
+/*@-ms-keyframes cssProgressGlowActive5 {*/
+/*	0%, 100% {*/
+/*		box-shadow: 5px 0px 15px 0px #ffb74d;*/
+/*	}*/
+/*	45% {*/
+/*		box-shadow: 1px 0px 4px 0px #ffb74d;*/
+/*	}*/
+/*}*/
+/*@-o-keyframes cssProgressGlowActive5 {*/
+/*	0%, 100% {*/
+/*		box-shadow: 5px 0px 15px 0px #ffb74d;*/
+/*	}*/
+/*	45% {*/
+/*		box-shadow: 1px 0px 4px 0px #ffb74d;*/
+/*	}*/
+/*}*/
+/*@keyframes cssProgressGlowActive5 {*/
+/*	0%, 100% {*/
+/*		box-shadow: 5px 0px 15px 0px #ffb74d;*/
+/*	}*/
+/*	45% {*/
+/*		box-shadow: 1px 0px 4px 0px #ffb74d;*/
+/*	}*/
+/*}*/
+
+
+/* #player_content_1::after, #player_content_2::after, #player_content_3::after, #player_content_4::after {
+    content: "Converting Text to Speech, please wait...\00000a It may take one or two minutes. It depends on content length.";
+    font-size: 0.8em !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align-last: center;
+    white-space: pre-line;
+} */
+
+
+.tts__custom-position {
+	position: fixed;
+	bottom: 3%;
+	right: 5%;
+	width: 455px;
+	z-index: 9999;
+	border-radius: 2px;
+	overflow: visible !important;
+}
+
+/* X-Small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+	.tts__custom-position {
+		position: fixed;
+		right: 1%;
+		width: 98%;
+		z-index: 9999;
+		bottom: 3%;
+	}
+}
+
+/* Small devices (landscape phones, less than 768px) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+	.tts__custom-position {
+		position: fixed;
+		bottom: 3%;
+		right: 2%;
+		width: 380px;
+		z-index: 9999;
+	}
+}
+
+/* Medium devices (tablets, less than 1200px) */
+@media (min-width: 768px) and (max-width: 1199.98px) {
+	.tts__custom-position {
+		position: fixed;
+		bottom: 3%;
+		right: 2%;
+		width: 420px;
+		z-index: 9999;
+	}
+}

@@ -1,0 +1,572 @@
+video {
+    max-width: 100%;
+    vertical-align: bottom;
+}
+.ub-unloaded {
+    display: none;
+}
+.ub-loaded {
+    display: flex;
+    justify-content: center;
+}
+#ubvideoFrame {
+    margin-bottom: 15px !important;
+}
+.pcFrame iframe #unibots-video {
+    display: none !important;
+}
+#unibots-video {
+    /* disable below code so to take value from dashboard */
+    /* margin:auto !important; */
+    z-index: 2147483999 !important;
+    margin-top: 24px !important;
+    max-width: 640px !important; 
+}
+/* fix for player coming in large size on initial load */
+.vjs-poster > img{
+    width: 100% !important;
+}
+.ubsticky_right {
+    position: fixed; 
+    right: 5px;
+    bottom:0px;
+    z-index: 2147483647 !important;
+    /*transform: translateX(100%);*/
+    animation: fade-in-up 0.6s ease-in-out forwards;
+}
+.ubsticky_left {
+    position: fixed;
+    left: 5px;
+    bottom:0px;
+    z-index: 2147483647 !important;
+    /*transform: translateY(100%);*/
+    animation: fade-in-up 0.6s ease-in-out forwards;
+}
+.unsticky{
+    transform: translateZ(50%);
+    animation: fade-in-d 0.6s ease forwards;
+}
+@keyframes fade-in-up {
+    0% {
+        opacity: 0;
+   }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+   }
+}
+@keyframes fade-in-d {
+    0% {
+        opacity: 0;
+   }
+    100% {
+        transform: translateZ(0);
+        opacity: 1;
+   }
+}
+.ubClose-left{ left: 0!important; }
+.ubClose-right{ right: 0!important; }
+
+.video-js .vjs-control.vjs-close-button {
+    top: -20px !important;
+    height: 2em !important;
+    width: 4em !important;
+    background: url(https://unibots.b-cdn.net/ubplayer/logo/new/logo_2.svg) !important;
+    left: 0px;
+    background-repeat: no-repeat !important;
+}
+
+.video-js .vjs-control.vjs-close-button .vjs-icon-placeholder:before,
+.vjs-icon-cancel:before {
+    display: none;
+    /* color: black !important;
+    top: -4px;
+    font-size: 14px;
+    font-weight: 700;
+    content: "\2716" !important; */
+}
+
+/* #ubp_logo {
+    position: absolute;
+    padding: 0px 0px 0px 0px;
+    right: 0px !important;
+    bottom: 35px ;
+    top : -21px;
+    width: 120px ;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    transition: bottom 0.4s ease-in-out;
+    height: 14.5px !important;
+    font-size: 10px;
+    box-sizing: content-box !important;
+    line-height: 11px !important;
+}
+#ubp_logo img {
+    margin: 0px !important;
+    box-shadow: none !important;
+    border-radius: 0px !important;
+    padding: 0px !important;
+    width: 100% !important;
+    height: 21px !important;
+    height: 28px !important;
+    object-fit: unset !important;
+    border: none !important;
+} */
+
+
+#ubp_logo {
+    position: absolute;
+    padding: 0px 0px 0px 0px;
+    right: 0px;
+    top: -19px;
+    /* bottom: 35px; */
+    width: 120px !important;
+    transition: bottom 0.4s ease-in-out;
+    height: 20px !important;
+    font-size: 10px;
+    box-sizing: content-box !important;
+    line-height: 11px !important;
+}
+
+#ubp_logo img {
+    margin: 0px !important;
+    box-shadow: none !important;
+    border-radius: 0px !important;
+    padding: 0px !important;
+    width: 100% !important;
+    height: 20px !important;
+    object-fit: unset !important;
+    border: none !important;
+}
+
+/* @media (max-width: 481px) {
+    #ubp_logo {
+         height: 13px !important; 
+         top: -13px
+    }
+    #ubp_logo img {
+         height: 13px !important;   
+    }
+}
+
+@media (min-width: 481px) {
+    #ubp_logo {
+         height: 20px !important;  
+         top: -20px;
+    }
+    #ubp_logo img {
+         height: 20px !important;   
+    }   
+} */
+
+
+
+.ubp-cbutton {
+    height: 30px !important;
+    border: solid 1px;
+    width: 26% !important;
+    position: absolute !important;
+    background-image: -webkit-linear-gradient(
+      top,
+      rgba(0, 0, 0, 0.8),
+      rgba(0, 0, 0, 0.7) 40%,
+      rgba(0, 0, 0, 0) 99%
+    ) !important;
+    color: #fff !important;
+    cursor: pointer !important;
+    display: inline-block !important;
+    font-family: arial, sans-serif !important;
+    font-weight: normal !important;
+    font-size: 14px !important;
+    line-height: normal !important;
+    padding: 5px !important;
+    top: 0;
+}
+.videoAdUi-mobile .raisedSkipButton.videoAdUiSkipWidgetV2 .videoAdUiPreSkipContainer, .videoAdUi-mobile .raisedSkipButton.videoAdUiSkipWidgetV2 .videoAdUiSkipContainer{
+    bottom:20px !important;
+}
+div.vast-skip-button {
+    display: block;
+    position: absolute;
+    bottom: 20%;
+    right: 0;
+    background-color: #000;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    width: auto;
+    padding: 8px;
+    z-index: 1;
+    border: 1px solid #fff;
+    border-right: none;
+}
+
+.vast-skip-button.enabled {
+    cursor: pointer;
+    color: #fff;
+}
+
+.vast-skip-button.enabled:after {
+    content: ">>";
+    position: relative;
+    top: 1px;
+    margin-left: 8px;
+}
+.vjs-ads-label{
+    width: 8em !important;
+    padding-top: 9px !important;
+}
+
+/* flaoting play btn css */
+.muted-play {
+    position: absolute;
+    /* bottom: 100px; */
+    bottom: 113px;
+    /* width: 98px;*/ 
+    /*commented above line as it takes auto width */
+    height: 29px;
+    /* margin-left: 10px; */
+    margin-left: 3px;
+    padding: 0 7px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background-color: rgba(20,20,20,.8);
+    /* background-color: red; */
+    color: #fff;
+    text-align: right;
+    font-size: 11px;
+    /* font-weight: 400; */
+    font-weight: 550;
+    /* line-height: 30px; */
+    line-height: 26px;
+    z-index: 9995;
+    cursor: pointer;
+    transition: opacity 0.3s ease-in; 
+    /* transition: width 2s, opacity 0.3s ease-in; */
+
+
+}
+
+
+
+div#ubVideo .muted-play.vjs-icon-volume-high, .muted-play.vjs-icon-volume-mute{
+    top:10px!important;
+}
+
+/* -----------non linaer changes------------ */
+
+/*pc=> nonlinear bottom changes  */
+/* #nonlinearad div{
+    position: absolute;
+    bottom: 5em;
+    right: 16em;
+} */
+
+
+
+#nonlinearad div{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
+#nonlinearad > :first-child {
+    position: absolute;
+    /* left: 10.5em !important; */
+    /* left: 48.5em !important; */
+    right: 0px !important;
+    bottom:6em !important;
+    /* background: red !important; */
+    border: solid 2px white;
+    padding: 12px 18px !important;
+}
+
+
+button.nonLinearAdIcon.show {
+    font-size:12px !important;
+}
+
+
+/* css for mob non-linear ad  */
+@media (max-width: 481px) {
+
+    /* skip btn mob */
+    #nonlinearad > :first-child {
+        position:absolute !important;
+        /* left: 0em !important;
+        top: 10em !important; */
+    }
+
+
+   /* skip and close btn pos for mob */
+   #content_video > button:nth-child(8):not(#keepWatchingBtn) {
+    top: 10em !important;
+    left: 3.4em !important;
+   }
+
+    #content_video > button:nth-child(9) {
+        bottom:3.6em !important;
+        right:1em !important;
+    }
+
+
+    #nonlinearad div{
+        position: absolute;
+        bottom: 1em!important;
+        /* right: 10em !important; */
+        right: unset !important;
+
+    }
+    
+    }
+
+
+/* -----------Keep watching feat css---------- */
+ /* ----------------- keep watching css --------------- */
+ svg#ubTimer, button#keepWatchingBtn {
+    position: absolute;
+    color:white !important;
+    /* right: 0px !important; */
+    bottom: 31px !important;
+    /* background: red !important; */
+}
+
+
+button#keepWatchingBtn {
+    font-size: 11px;
+    font-family: sans-serif;
+    /* background-color: #29303a; */
+    background-color: #636870;
+    line-height: 2em;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+div#timerBox {
+    padding-top: 20px!important;
+}
+
+
+div#timerBox * {
+    z-index: 1112 !important;
+}
+
+/* ----------------------new css for keepwatching---------------- */
+    .vjs-icon-next-item:before {
+        font-family: 'VideoJS' !important;
+        bottom: -0.1em;
+        position: relative;
+    }
+
+
+/* -----end of keepwatching----- */
+
+    #ubVideo #content_video_ima-ad-container > :first-child {
+        width: 100% !important;
+        height: 100% !important;
+    }
+    #ubVideo iframe{
+        width: 100% !important;
+        height: 100% !important;   
+    }
+    
+    #unibots-video .video-js .vjs-control.vjs-close-button {
+        border-radius: 0px !important;
+    }
+
+
+
+/* vjs---playlist */
+    .vjs-playlist {
+        float: inline-end;
+        overflow-y: scroll !important;
+        overflow-x: hidden !important;
+        height: 360px !important;
+        width: 160px !important;
+        position: relative !important;
+        scrollbar-width: thin;
+        scrollbar-color: #635e5e #444;
+        /* for smooth scrolling around y-axis */
+        scroll-snap-type: y mandatory;
+        /* background: transparent; */
+        /* background:#21282f; */
+    }
+    
+    .vjs-playlist-button {
+        margin-top: -9px;
+    }
+    
+    
+    
+    .vjs-playlist img {
+        height: 5em !important;
+        border-radius: 6px !important;
+    }
+    
+    
+    .vjs-playlist li span {
+        text-align: end !important;
+        /* font-size: 10px !important; */
+        font-size: 10px !important;
+        margin-top: -50px !important;
+        color: currentColor;
+    }
+    
+    
+    .video-js .vjs-playlist-button:before {
+        content: "\f10e" !important;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, .8)
+    }
+    
+    .video-js .vjs-playlist-button {
+        content: "\f10e" !important;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, .8)
+    }
+    
+    .video-js .vjs-playlist-button {
+        background: transparent;
+        border: 0;
+        color: #fff;
+        cursor: pointer;
+        font-family: VideoJS;
+        font-size: 25px;
+        height: 45px;
+        opacity: .85;
+        padding: 10px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 45px;
+        z-index: 4
+    }
+    
+    .vjs-airplay-button .vjs-icon-placeholder:before {
+        content: "\e92c"
+    }
+    
+    .video-js .vjs-playlist-button:before {
+        content: "\f00a";
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, .8)
+    }
+    
+    .toggle-playlist {
+        position: absolute;
+        top: 5px;
+        right: 210px;
+        z-index: 100;
+        cursor: pointer;
+        padding: 5px 10px;
+        background: #000;
+        color: #fff;
+        border: none;
+    }
+    
+    
+    button.toggle-playlist {
+        right: 150px;
+    }
+    
+    @media (max-width: 481px) {
+    
+        .vjs-playlist {
+            max-height: 225px !important;
+            max-width: 128px !important;
+        }
+    
+        .vjs-playlist li h3 {
+            text-align: end !important;
+            font-size: 10px !important;
+            margin-top: -13px !important;
+            color: currentColor;
+        }
+    
+    
+        span.vjs-playlist-item-status {
+            margin-top: -48px !important;
+    
+        }
+    }
+    
+    .vjs-playlist-now-playing,
+    .vjs-playlist-upcoming {
+        font-weight: bold;
+    }
+    
+    
+    .vjs-playlist-upcoming {
+        color: #ffffff;
+    }
+    
+    span.vjs-playlist-item-status {
+        border-radius: 5px !important;
+        color: rgb(255, 255, 255) !important;
+        font-size: 11px !important;
+        display: block;
+        position: absolute;
+        background: rgb(0 0 0 / 68%);
+        box-sizing: border-box;
+        margin-top: -62px;
+        left: 28%;
+        padding: 4px;
+    
+    }
+    
+    
+    .vjs-playlist {
+        background: unset;
+    }
+    
+    
+    @keyframes slideInFromRight {
+        from {
+            transform: translateX(-1%);
+        }
+    
+        to {
+            transform: translateX(0);
+        }
+    }
+    
+    .vjs-playlist {
+        animation: slideInFromRight 0.4s ease-out forwards;
+    }
+    
+    
+    
+    .vjs-playlist-item-info {
+        z-index: 1112 !important;
+        position: relative !important;
+        margin-top: -34px;
+    }
+    
+    .vjs-playlist-item-info {
+        position: relative;
+        margin-top: -27px;
+        height: 38.15px;
+        left: 0px;
+        border-radius: 5px;
+        background: linear-gradient(0deg, rgb(0 0 0 / 50%) 30%, rgba(255, 255, 255, 0) 100%) !important;
+        margin-bottom: 5px;
+    }
+    
+    
+    
+    
+    h4#h4-title {
+        color: white !important;
+        bottom: -13px !important;
+        font-size: 10px;
+        text-align: end;
+        position: relative;
+    }
+        
+    .vjs-playlist li h3 {text-align: start;margin-top: 2px;color: #ffffff;font-size: 17px !important;font-family:sans-serif !important;bottom: -15px;position: relative;}
+
+
+
+
+#ubVideo #nonlinearad iframe {
+        height:45vh !important;
+}

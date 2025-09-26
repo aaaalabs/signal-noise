@@ -1,0 +1,785 @@
+body {
+	padding: 20px 0;
+	margin: 0;
+	color: #333;
+  background: #fff url(/assets/topbluefade.gif) repeat-x;
+	background-color: #fff;
+  text-align: center;
+  font-family: verdana, sans-serif;
+}
+
+table, td {
+  font-size: 12px;
+  font-family: verdana, sans-serif;
+}
+
+a:link { color: #000; }
+a:visited { color: #666; }
+a:hover { color: #fff; background-color: #000; }
+
+a.image:hover { background: none; border: none; }
+a.image img { border: none; }
+
+form {
+  margin: 0; padding: 0;
+}
+
+pre {
+  position: relative;
+  font-size: 11px;
+  color: #000;
+}
+
+div#Container {
+  margin: 0 auto;
+	width: 800px;
+  text-align: left;
+}
+
+div#Masthead {
+  margin-bottom: 40px;
+}
+
+div#Content {
+	width: 470px;
+	float: left;
+  margin-right: 50px;
+}
+
+strong {
+	color: #000;
+}
+
+div#Sidebar {
+	font-family: "lucida grande", verdana, arial, helvetica, sans-serif;
+	width: 245px;
+	float: right;
+	text-align: center;
+}
+
+div#Footer {
+  clear: left;
+  border-top: 1px dotted #ccc;
+  padding-top: 10px;
+  margin-top: 40px;
+}
+
+div#AdBox {
+  border-top: 1px dotted #ccc;
+  padding: 10px 0;
+}
+
+/*-------------------------------------------------
+MASTHEAD
+-------------------------------------------------*/
+
+div#Masthead img {
+	float: right;
+}
+
+div#Masthead h1 {
+  font-family: verdana;
+  font-size: 12px;
+  line-height: 1.4em;
+  color: #333;
+  width: 450px;
+	font-weight: normal;
+}
+
+div#Masthead h1 span {
+	font-size: 10px;
+}
+
+div#Masthead h1 span a:link, div#Masthead h1 span a:visited {
+	color: #666;
+}
+
+div#Masthead h1 a:link,
+div#Masthead h1 a:visited {
+  color: #A873B8;
+  color: #393;
+}
+
+div#Masthead h1 a:hover {
+  background: none;
+}
+
+
+/*-------------------------------------------------
+CONTENT: POSTS
+-------------------------------------------------*/
+
+div.post {
+  clear: left;
+  margin: 0 0 40px 0;
+}
+
+div.post div.post_header h2,
+div.post div.post_header h2 a:link,
+div.post div.post_header h2 a:visited { /* post title */
+  font-size: 28px;
+  font-family: helvetica, arial, sans-serif;
+  line-height: 30px;
+  letter-spacing: -1px;
+  padding: 0;
+  margin: 0;
+  color: #393;
+  text-decoration: none;
+}
+
+div.post div.post_header h2 a:hover {
+  text-decoration: underline;
+  background: none;
+}
+
+div.post div.post_header h2 span.nobreak {
+  white-space: nowrap;
+}
+
+div.post div.post_header h2 span.author,
+div.post div.post_header h2 span.date {
+  text-transform: none;
+  font-size: 24px;
+}
+
+div.post div.post_header h2 span.author {
+  color: #c9c;
+}
+
+div.post div.post_header h2 span.date {
+  color: #ddd;
+  font-weight: normal;
+}
+
+div.post div.post_header h3 { /* comment line */
+  font-family: helvetica, arial, sans-serif;
+  line-height: 30px;
+  letter-spacing: normal;
+  color: #aaa;
+  background: url('/assets/comment.gif') no-repeat 0 50%;
+  font-size: 12px;
+  padding: 0 0 0 29px;
+  margin: 0 0 5px 0;
+  font-weight: normal;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+div.post div.post_header h3 strong { /* the name of the last person to comment */
+  color: #999;
+}
+
+div.post div.post_header h3 a:link,
+div.post div.post_header h3 a:visited {
+  font-weight: bold;
+  font-size: 12px;
+  color: #A873B8;
+  text-decoration: none;
+  border-bottom: 1px solid #ebe;
+  margin-right: 3px;
+}
+
+div.post div.post_header h3 a:visited {
+  color: #aaa;
+  font-weight: normal;
+  border-bottom: 1px solid #ccc;
+}
+
+div.post div.post_header h3 a:hover {
+  background: none;
+}
+
+div.post div.post_header h3 a.latestcomment:link,
+div.post div.post_header h3 a.latestcomment:visited {
+  color: #aaa;
+  font-weight: normal;
+  margin: 0;
+  border-bottom: 1px solid #eee;
+}
+
+div.post h2,
+div.post h4 {
+  font-size: 14px;
+  margin: 0 0 3px 0;
+  padding: 0;
+  border: 0;
+}
+
+div.post img {
+  padding: 1px;
+  border: 1px solid #996;
+  margin: 3px 0;
+}
+
+div.post img.image_marker {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+div.post p {
+  font-size: 13px;
+  line-height: 18px;
+  color: #222;
+  padding: 0;
+  margin: 0 0 15px 0;
+}
+
+div.post p strong {
+  color: #444;
+}
+
+div.post h3 {
+  color: #444;
+  font-size: 20px;
+  font-family: helvetica, arial, sans-serif;
+  letter-spacing: -1px;
+  margin: 30px 0 15px 0;
+  padding: 0;
+  line-height: 18px;
+}
+
+div.post blockquote {
+  background: url('/assets/blockquote.gif') no-repeat 0 2px;
+  font-size: 12px;
+  line-height: 18px;
+  color: #333;
+  padding-left: 23px;
+  margin: 0 40px 15px 0px;
+}
+
+div.post ul, div.post ol {
+  margin: 0 0 15px 0;
+  padding-left: 35px;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+div.post ul li {
+  list-style-type: square;
+}
+
+.perma div.post {
+  margin-bottom: 40px;
+}
+
+div.post dl {
+  font-size: 13px;
+  line-height: 18px;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+div.post dd {
+	margin: 0 0 18px 0;
+}
+
+
+/*-------------------------------------------------
+CONTENT: COMMENTS
+-------------------------------------------------*/
+
+div.troll {
+  background: url('/assets/troll.gif') no-repeat top left;
+  padding-left: 35px;
+  color: #999;
+  min-height: 40px;
+  margin-bottom: 20px;
+}
+
+div.royalty {
+  background: url('/assets/royalty_32.gif') no-repeat top left;
+  padding-left: 35px;
+  min-height: 40px;
+  margin-bottom: 20px;
+}
+
+div.comments {
+  margin-bottom: 50px;
+}
+
+div.comments div.preview {
+  background: #ffc;
+  border: 2px solid #fff;
+}
+
+div.commentsbg, div.postacomment {
+  background: #F2F7FE url('/assets/comment-bg.gif') bottom repeat-x;
+  margin-bottom: 15px;
+}
+
+div.comments h2 {
+  background: #fff;
+  padding: 3px;
+  font-family: helvetica, arial, sans-serif;
+  font-size: 14px;
+  letter-spacing: normal;
+  color: #A873B8;
+  border-bottom: 1px dotted #ccc;
+  margin: 0 0 10px 0;
+}
+
+div.comments h2 span.jumptolatest {
+  font-size: 12px;
+  color: #aaa;
+  font-weight: normal;
+}
+
+div.comments h2 span.jumptolatest a:link,
+div.comments h2 span.jumptolatest a:visited {
+  color: #aaa;
+  margin: 0 2px;
+  text-decoration: none;
+  border-bottom: 1px solid #ddd;
+}
+
+div.comments h2 span.jumptolatest a:hover {
+  background: none;
+}
+
+div.comment {
+  margin: 0 5px;
+  padding: 5px 5px 1px 5px;
+  font-size: 12px;
+  line-height: 18px;
+  overflow: hidden;
+}
+
+div.comment h3 {
+  font-family: helvetica, arial, sans-serif;
+  font-size: 14px;
+  letter-spacing: normal;
+  margin: 0 0 3px 0;
+}
+
+div.comment h3 span.author {
+  color: #393;
+}
+
+div.author_comment {
+  background: #fff;
+  border: 1px solid #c9c;
+  border-color: #92c899;
+  margin-bottom: 10px;
+}
+
+div.comment h3 span.author a:link,
+div.comment h3 span.author a:visited {
+  color: #393;
+  text-decoration: underline;
+}
+
+div.comment h3 span.author a:hover {
+  background: none;
+}
+
+div.comment h3 span.date {
+  color: #ccc;
+  font-weight: normal;
+  letter-spacing: -1px;
+}
+
+div.comment p {
+  margin: 0 0 15px 0;
+}
+
+div.comment blockquote {
+  font-size: 12px;
+  line-height: 18px;
+  color: #666;
+  margin: 0 40px 15px 15px;
+}
+
+div.comment li {
+  margin: 0 0 5px 0;
+  padding: 0;
+}
+
+div.comment ul,
+div.comment ol {
+  font-size: 12px;
+  line-height: 14px;
+}
+
+
+/*-------------------------------------------------
+CONTENT: POST A COMMENT
+-------------------------------------------------*/
+
+div.postacomment dl {
+  margin: 15px 15px; padding: 0;
+}
+
+div.postacomment dt,
+div.postacomment dd {
+  margin: 0; padding: 0;
+}
+
+div.postacomment dt {
+  font-family: helvetica, arial, sans-serif;
+  color: #333;
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+}
+
+div.postacomment dt span {
+  color: #999;
+  font-size: 11px;
+}
+
+div.postacomment dd {
+  margin-bottom: 10px;
+}
+
+div.postacomment dt.inline { /* the first three fields are each on one line */
+  float: left;
+  width: 35px;
+  text-align: right;
+  clear: left;
+  padding-top: 7px;
+}
+
+div.postacomment dd.inline {
+  margin-left: 45px;
+}
+
+div.postacomment dd input#author,
+div.postacomment dd input#email,
+div.postacomment dd input#url {
+  font-family: verdana, sans-serif;
+  font-size: 12px;
+  width: 275px;
+  padding: 2px;
+}
+
+div.postacomment dt.textarealabel {
+  clear: left;
+  margin-top: 20px;
+}
+
+div.postacomment dd textarea {
+  font-family: verdana, sans-serif;
+  font-size: 12px;
+  width: 400px;
+  padding: 3px;
+}
+
+
+/*-------------------------------------------------
+CONTENT: ARCHIVES
+-------------------------------------------------*/
+
+p#archiveslink {
+  font-size: 13px;
+}
+
+div#ArchiveList h3 {
+  font-size: 26px;
+  font-family: helvetica, arial, sans-serif;
+  line-height: 30px;
+  letter-spacing: -1px;
+  padding: 0;
+  margin: 0 0 5px 0;
+  color: #393;
+  text-decoration: none;
+}
+
+div#ArchiveList ul {
+  margin: 0 0 30px 0; padding: 0;
+  list-style: none;
+}
+
+div#ArchiveList ul li {
+  margin: 0 0 3px 0; padding: 0;
+  font-size: 13px;
+}
+
+/*-------------------------------------------------
+SIDEBAR
+-------------------------------------------------*/
+
+div#Sidebar div.box {
+	background-color: #F0EDDA;
+  padding: 3px;
+}
+
+div#Sidebar div.box div.inner {
+  padding: 8px;
+  border: 1px solid #fff;
+	background-color: #F7F5E7;
+}
+
+
+
+/*-------------------------------------------------
+ROUND RECT FORM
+-------------------------------------------------*/
+
+.round_rect-1 {
+  background: #F7F5E7 url(/svn/images/round_rect-bottom-left.gif) no-repeat left bottom;
+}
+
+.round_rect-2 {
+  background: url(/svn/images/round_rect-bottom-right.gif) no-repeat right bottom;
+  padding-bottom: 8px;
+}
+
+.round_rect-3 {
+  background: url(/svn/images/round_rect-top-left.gif) no-repeat left top;
+}
+
+.round_rect-4 {
+  background: url(/svn/images/round_rect-top-right.gif) no-repeat right top;
+  padding: 10px 12px 5px 12px;
+}
+
+
+div#Sidebar h2 {
+  color: #996;
+  text-transform: uppercase;
+  font-size: 9px;
+  margin: 0 0 3px 0;
+  padding: 0;
+}
+
+div#Sidebar h2.red {
+  color: #c00;
+}
+
+div#Sidebar p {
+  margin: 0 0 10px 0;
+  font-size: 11px;
+}
+
+div#Sidebar div.products {
+  margin: 15px 0 0 0;
+  text-align: left;
+}
+
+div#Sidebar div.products img {
+  margin: 0 7px 30px 0;
+  border: 0;
+  background: #fff;
+}
+
+div#Sidebar div.products h2 {
+  margin-bottom: 10px;
+}
+
+div#Sidebar div.products h3 {
+  font-family: helvetica, arial, sans-serif;
+  font-size: 12px;
+  margin: 0;
+}
+
+div#Sidebar div.products h3 a:link,
+div#Sidebar div.products h3 a:visited {
+  color: #000;
+}
+
+div#Sidebar div.products h3 a:hover {
+  color: #fff;
+}
+
+div#Sidebar div.products p {
+  margin-bottom: 20px;
+}
+
+/*-------------------------------------------------
+FOOTER
+-------------------------------------------------*/
+
+div#Footer p {
+  font-family: verdana, sans-serif;
+  font-size: 10px;
+  font-weight: normal;
+  color: #333;
+  letter-spacing: 0;
+  width: 450px;
+  margin: 0;
+}
+
+/*-------------------------------------------------
+AD
+-------------------------------------------------*/
+
+div.ad {
+	font-size: 10px;
+	margin-bottom: 15px;
+}
+
+div.ad h4 {
+	font-size: 9px;
+	margin-bottom: 5px;
+	border-bottom: 1px solid #efefef;
+	padding-bottom: 3px;
+	color: #666;
+}
+
+div.ad img.ad {
+	margin-bottom: 5px;
+	padding: 1px;
+}
+
+div.ad a:hover {
+	background-color: #fff;
+}
+
+div.ad p a:hover {
+	background-color: #000;
+	color: #fff;
+}
+
+
+/*-------------------------------------------------
+CHAT GLOBALS & GENERAL CASES
+-------------------------------------------------*/
+
+
+code, pre	{
+	font-family: "Bitstream Vera Sans Mono", monaco, "Courier New", courier, monospace;
+	background: inherit;
+	color: #333;
+	font-size: 11px;
+}
+
+table { border-collapse: collapse; }
+
+/*-------------------------------------------------
+CHAT TABLE
+-------------------------------------------------*/
+
+#narrow_table {
+  width: 465px;
+}
+
+#chat-wrapper {
+  overflow: hidden;
+  margin-bottom: 15px;
+  width: 465px;
+}
+
+table.chat {
+  font-size: 12px;
+  margin-bottom: 1px;
+  font-family: "Lucida Grande", verdana, arial, helvetica, sans-serif;
+}
+
+table.chat td {
+  padding: 5px;
+  border-bottom: 1px solid #efefef;
+  border-left: 1px solid #dcdcdc;
+}
+
+table.chat tr.outofwindow td {
+  color: #aaa;
+  border-bottom: 1px solid #f2f2f2;
+  border-left: 1px solid #eee;
+}
+
+table.chat td.person {
+  width: 1%;
+  font-weight: bold;
+  text-align: right;
+  white-space: nowrap;
+  vertical-align: top;
+  background-color: #efefef;
+  border-left: none;
+}
+
+table.chat tr.advertisement_message td {
+	background-color: #fff;
+	border-top: 2px solid #000;
+	border-bottom: 2px solid #000;
+	color: #000;
+	font-size: 10px;
+	font-weight: normal;
+}
+
+table.chat tr.advertisement_message td.person {
+  text-align: left;
+}
+
+table.chat tr.advertisement_message td p {
+	margin: 7px 0 0 0;
+}
+
+table.chat tr.advertisement_message td.body small {
+	color: #999;
+	font-size: 9px;
+}
+
+table.chat tr.outofwindow td.person {
+  background-color: #f5f5f5;
+}
+
+table.chat tr.you td {
+  background-color: #ffc;
+}
+
+table.chat tr.chat_red td.person {
+  color: #900;
+}
+
+table.chat tr.chat_blue td.person {
+  color: #009;
+}
+
+table.chat tr.chat_purple td.person {
+  color: #606;
+}
+
+table.chat tr.chat_green td.person {
+  color: #363;
+}
+
+table.chat tr.chat_gold td.person {
+  color: #660;
+}
+
+table.chat tr.chat_orange td.person {
+  color: #D56C14;
+}
+
+table.chat tr.chat_indigo td.person {
+  color: #A96B91;
+}
+
+
+table.chat tr.break td {
+  border: none;
+}
+
+#todays_transcript {
+  font-size: 12px;
+  font-weight: normal;
+  padding-top: 15px;
+  border-bottom: 1px solid #dcdcdc;
+  color: #666;
+  padding: 5px 0;
+}
+
+/*-------------------------------------------------
+JOB BOARD INCLUDE
+-------------------------------------------------*/
+
+div.jobInclude {
+	padding: 10px;
+	background-color: #ffc;
+	margin: 30px 0;
+	font-size: 11px;
+	border-bottom: 1px dotted #ccc;
+	border-top: 1px dotted #ccc;
+}
+
+div.jobInclude table td {
+	padding-right: 10px;
+}
+
+div.jobInclude table td h2 {
+	font-size: 16px;
+	font-family: helvetica;
+	color: #000;
+	margin: 0; padding: 0;
+}

@@ -1,0 +1,283 @@
+ (function () {
+    class EventModel {
+      constructor(
+        eventName = '',
+        eventType = '',
+        eventAction = '',
+        eventEffect = '',
+        eventPosition = 1,
+        eventTimestamp = new Date()
+      ) {
+        this.name = eventName;
+        this.type = eventType;
+        this.action = eventAction;
+        this.effect = eventEffect;
+        this.position = eventPosition;
+        this.timestamp = eventTimestamp;
+      }
+
+      // TODO: Implement any neccesary setters and getters!
+      addTrackingAttributes(attributes = {}) {
+        Object.entries(attributes).forEach(function(attribute) {
+          const attributeName = attribute[0];
+          const attributeValue = attribute[1];
+          this[attributeName] = attributeValue;
+        }.bind(this));
+      }
+
+      getTrackingObject() {
+        const returnObject = {};
+
+        Object.entries(this).forEach(function(attribute) {
+          const attributeName = attribute[0];
+          const attributeValue = attribute[1];
+
+          returnObject[attributeName] = attributeValue;
+        });
+
+        return returnObject;
+      }
+
+      triggerTrackingEvent(eventTrigger, eventDetails){
+        var target = document.querySelector('body');
+        var event = new CustomEvent(eventTrigger, {
+          detail: eventDetails
+        });
+
+        // Update the data layer events array
+        var dataLayerEvent = window.digitalData.events || [];
+        dataLayerEvent.push({
+          eventName: event.detail.name || 'unknown event',
+          eventType: event.type || 'unknown type',
+          eventInfo: event.detail || {}
+        });
+        window.digitalData.events = dataLayerEvent;
+
+        // Fire the event
+        target.dispatchEvent(event);
+      }
+    }
+
+    tp = window["tp"] || [];
+
+    /* Checkout related */
+    /**
+     * Event properties
+     *
+     * chargeAmount - amount of purchase
+     * chargeCurrency
+     * uid
+     * email
+     * expires
+     * rid
+     * startedAt
+     * termConversionId
+     * termId
+     * promotionId
+     * token_list
+     * cookie_domain
+     * user_token
+     *
+     */
+    function onCheckoutComplete(event) {
+      const termId = event.termId || 'unknown-term';
+
+      const checkoutEvent = new EventModel(
+        'Confirmation Modal-Subs',
+        'piano – OTERFAUTP9NV',
+        'puchase success',
+        'confirmation view',
+        '5 | 5'
+      );
+      checkoutEvent.addTrackingAttributes({
+        id: event.offerId || 'none',
+        flow: 'OTM9MLV5J6M9',
+        product: [
+          {
+            productInfo: {
+              productID: event.rid || 'none',
+              productName: event.term || 'none',
+              productTerm: event.termId || 'none',
+              productOffer: event.offerId || 'none',
+              productBasePrice: event.chargeAmount || 'none',
+              transaction: event.termConversionId || 'none',
+              price: event.chargeAmount || 'none',
+            }
+          }
+        ]
+      });
+      checkoutEvent.triggerTrackingEvent(
+        'purchased-modal',
+        checkoutEvent.getTrackingObject()
+      );
+    }
+
+    function onCheckoutExternalEvent(event) {
+      if (event && event.eventName === "close_icon_confirmation_screen") {
+        console.info("[Piano] [Info] Dashboard composer script : onCheckoutExternalEvent")
+        window.location.reload();
+      }
+    }
+
+    function onCheckoutClose(event) {
+        /* Default behavior is to refresh the page on successful checkout */
+        if (event && event.state == "checkoutCompleted") {
+            // location.reload();
+        }
+    }
+
+    function onCheckoutCancel() {
+    }
+
+    function onCheckoutError() {
+    }
+
+    function onCheckoutSubmitPayment() {
+    }
+
+    /* Meter callback */
+    function onMeterExpired(meterData) {
+      if (meterData) {
+        tp.inc_meterExpired_viewsLeft = meterData.viewsLeft;
+      }
+    }
+
+    /* Meter callback */
+    function onMeterActive() {
+    }
+
+    /* Callback executed when a user must login */
+    function onLoginRequired() {
+        // this is a reference implementation only
+        // your own custom login/registration implementation would
+        // need to return the tinypass-compatible userRef inside the callback
+
+        // mysite.showLoginRegistration(function (tinypassUserRef)
+        // tp.push(["setUserRef", tinypassUserRef]); // tp.offer.startCheckout(params); // }
+        // this will prevent the tinypass error screen from displaying
+
+        return false;
+    }
+
+    /* Callback executed after a tinypassAccounts login */
+    function onLoginSuccess(data) {
+      checkUserAccess();
+    }
+
+    /* Callback executed after an experience executed successfully */
+    function onExperienceExecute(event) {
+    }
+
+    /* Callback executed if experience execution has been failed */
+    function onExperienceExecutionFailed(event) {
+    }
+
+    /* Callback executed if external checkout has been completed successfully */
+    function onExternalCheckoutComplete(event) {
+        /* Default behavior is to refresh the page on successful checkout */
+        location.reload();
+    }
+
+    function checkUserAccess() {
+      tp.api.callApi('/access/list', { aid: 'AezVxbkgJt' }, response => {
+        const returnData = response.data;
+
+        if (returnData && returnData[0] && returnData[0].resource) {
+          tp.inc_userAccess = returnData[0].resource.rid;
+          // start_date is Unix seconds; blueconic uses miliseconds;
+          if (returnData[0].start_date * 1000) {
+            tp.inc_userAccessDate = returnData[0].start_date * 1000;
+          }
+          // expire_date is Unix seconds; blueconic uses miliseconds;
+          if (returnData[0].expire_date * 1000) {
+            tp.inc_userAccessEndDate = returnData[0].expire_date * 1000;
+          }
+          
+          
+          // Detect and handle renewal flow
+          if ('inc_userAccessDate' in tp && 'inc_userAccessEndDate' in tp) {
+            const TIME_TO_RENEW_THRESHOLD = 14; // Threshold in days
+
+            const startDate = new Date(tp.inc_userAccessDate);
+            const endDate = new Date(tp.inc_userAccessEndDate);
+
+            const timeDiff = Math.abs(endDate.getTime() - startDate.getTime());
+            const differenceInDays = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+
+            if (differenceInDays <= TIME_TO_RENEW_THRESHOLD) {
+              // alert("THRESHOLD MET, TIME TO RENEW");
+              tp.setCustomVariable("time_to_renew","true");
+              tp.setCustomVariable("days_left", differenceInDays);
+            } else {
+              tp.setCustomVariable("time_to_renew","false");
+              tp.setCustomVariable("days_left", "");
+            }
+          }
+          
+        } else {
+          tp.inc_userAccess = "no access";
+        }
+        
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            "event": "inc_userAccess_ready",
+            "inc_userAccess": tp.inc_userAccess
+        });
+      });
+    }
+
+    tp.push(["setAid", 'AezVxbkgJt']);
+	tp.push(["setCxenseSiteId", "1141973672851684455"])
+    tp.push(["setEndpoint", 'https://buy.tinypass.com/api/v3']);
+    tp.push(["setUseTinypassAccounts", false ]);
+    tp.push(["setUsePianoIdUserProvider", true ]);
+
+    /* checkout related events */
+    tp.push(["addHandler", "checkoutComplete", onCheckoutComplete]);
+    tp.push(["addHandler", "checkoutClose", onCheckoutClose]);
+    tp.push(["addHandler", "checkoutCustomEvent", onCheckoutExternalEvent]);
+    tp.push(["addHandler", "checkoutCancel", onCheckoutCancel]);
+    tp.push(["addHandler", "checkoutError", onCheckoutError]);
+    tp.push(["addHandler", "checkoutSubmitPayment", onCheckoutSubmitPayment]);
+	tp.push(["addHandler",  "checkoutStateChange", function(event){
+      	switch (event.stateName){
+          case "alreadyHasAccess":
+            tp.offer.close();
+            break;
+        }
+    }])
+
+    /* user login events */
+    tp.push(["addHandler", "loginRequired", onLoginRequired]);
+    tp.push(["addHandler", "loginSuccess", onLoginSuccess]);
+
+	/* user registration event */
+	tp.push(["addHandler", "registrationSuccess", function(event) {
+	  dataLayer.push({
+	    'event': 'PianoEvent_registration',
+    	'userId': event.user.sub
+	  });
+	}]);
+
+    /* meter related */
+    tp.push(["addHandler", "meterExpired", onMeterExpired]);
+    tp.push(["addHandler", "meterActive", onMeterActive]);
+
+    tp.push(["addHandler", "experienceExecute", onExperienceExecute]);
+    tp.push(["addHandler", "experienceExecutionFailed", onExperienceExecutionFailed]);
+
+    /* external checkout related events */
+    tp.push(["addHandler", "externalCheckoutComplete", onExternalCheckoutComplete]);
+	/* reload the page after a successful credit redemption */
+	tp.push(["addHandler", "manualCreditRedeemed", function() { location.reload(); }]);
+    tp.push(["init", function () {
+        tp.experience.init()
+        checkUserAccess()
+    }]);
+})();
+
+
+    // do not change this section
+    // |BEGIN INCLUDE TINYPASS JS|
+    (function(src){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src=src;var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)})("//cdn.tinypass.com/api/tinypass.min.js");
+    // |END   INCLUDE TINYPASS JS|

@@ -8,7 +8,7 @@ import SeventyFivePercentArticle from './articles/SeventyFivePercentArticle';
 import ElonMuskArticle from './articles/ElonMuskArticle';
 import KevinOLearyArticle from './articles/KevinOLearyArticle';
 import FoundersParadoxArticle from './articles/FoundersParadoxArticle';
-import SignalVsNoisePhilosophyArticle from './articles/SignalVsNoisePhilosophyArticle';
+import SignalVsNoisePhilosophyArticle from './articles/SignalVsNoisePhilosophyArticleV3';
 import NinetyDayTrackingArticle from './articles/NinetyDayTrackingArticle';
 import FocusAgeDistractionArticle from './articles/FocusAgeDistractionArticle';
 import MathematicsProductivityArticle from './articles/MathematicsProductivityArticle';

@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<!-- saved from url=(0118)https://scottmautz.com/issue-209-steve-jobs-signal-to-noise-ratio-the-forgotten-half-of-accomplishing-things-and-more/ -->
+<html lang="en-US" xmlns:fb="https://www.facebook.com/2008/fbml" xmlns:addthis="https://www.addthis.com/help/api-spec" class=" js "><plasmo-csui id="ff-overlay-container"><template shadowrootmode="open"><style>#plasmo-shadow-container > div {
+  pointer-events: none !important;
+  background: none !important;
+  position: fixed !important;
+  inset: 0 !important;
+}
+
+.main_top_container_ff {
+  width: 400px;
+}
+
+.popup_container_wrapper_ff {
+  background-color: #fff;
+}
+
+.popup_container_wrapper_ff * {
+  font-family: PoppinsRegular;
+}
+
+.popup_container_wrapper_ff img {
+  background-color: #0000;
+}
+
+.popup_container_ff {
+  box-shadow: 0 5px 20px #1e1e2212;
+}
+
+.popup_div_ff {
+  box-sizing: border-box;
+  background-color: #fff;
+  width: 100%;
+  padding: 24px;
+}
+
+.main_component_ff {
+  width: 100%;
+  padding-bottom: 0 !important;
+}
+
+.popup_top_icon_div_ff {
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  display: flex;
+}
+
+.popup_top_icon_div_ff .btn_canvas_ff {
+  display: inline-flex;
+}
+
+.popup_top_icon_div_ff .ff_popup_top_image {
+  z-index: 0;
+  width: 100%;
+  height: auto;
+  position: absolute;
+  inset: 0 0 auto;
+}
+
+.popup_top_icon_btn_ff {
+  cursor: pointer;
+  z-index: 1;
+  background: none;
+  border: none;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  font-size: 20px;
+  display: inline-flex;
+}
+
+.popup_top_icon_btn_ff img {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.popup_top_icon_btn_ff:focus {
+  outline: none;
+}
+
+.dot_ff {
+  background-color: red;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+}
+
+.dot_ff-top-right {
+  position: absolute;
+  top: 33%;
+  right: 16px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dot_ff {
+    animation: none;
+  }
+}
+
+.topbar_cross_icon_ff {
+  cursor: pointer;
+  background: #eaeaea;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  display: flex;
+}
+
+.topbar_cross_icon_ff img {
+  width: 12px;
+  height: 12px;
+}
+
+.btn_canvas_ff .topbar_detail_submit_btn_ff {
+  cursor: pointer;
+  color: #6e75ff;
+  background: #f0f0ff;
+  border: none;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  min-width: 108px;
+  min-height: 40px;
+  margin: 0;
+  padding: 10px 30px;
+  font-family: PoppinsRegular;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  display: flex;
+}
+
+.btn_canvas_ff .topbar_detail_submit_btn_ff:hover {
+  box-shadow: none;
+  color: #fff;
+  cursor: pointer;
+  background: #6e75ff;
+  border: none;
+  outline: none;
+}
+
+.btn_canvas_ff .topbar_detail_okay_btn_ff {
+  cursor: pointer;
+  color: #555;
+  background: #eee;
+  border: none;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  min-width: 108px;
+  min-height: 40px;
+  margin: 0;
+  padding: 10px 30px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  display: flex;
+}
+
+.btn_canvas_ff .topbar_detail_okay_btn_ff:hover, .btn_canvas_ff .topbar_detail_okay_btn_ff:focus {
+  box-shadow: none;
+  color: #eee;
+  cursor: pointer;
+  background: #555;
+  border: none;
+  outline: none;
+}
+
+.btn_canvas_ff .topbar_detail_submit_btn_ff:disabled, .btn_canvas_ff .topbar_detail_okay_btn_ff:disabled {
+  color: #696969 !important;
+  background-color: #d3d3d3 !important;
+}
+
+.spaced_icon_ff {
+  margin-left: 5px;
+  background-color: #0000 !important;
+}
+
+.toggle_btn_ff {
+  justify-content: center;
+  align-items: center;
+  padding: 6px 0 18px;
+  display: flex;
+  position: relative;
+}
+
+.create_notification_container_ff {
+  cursor: auto;
+  box-sizing: border-box;
+  z-index: 99999;
+  pointer-events: initial;
+  background-color: #fff;
+  border: none;
+  border-radius: 8px;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 512px;
+  margin-top: 16px;
+  padding: 24px;
+  position: absolute;
+  inset: 20px 100px auto auto;
+  box-shadow: 0 0 10px;
+}
+
+plasmo-csui#ff-overlay-container, plasmo-csui#real-time-panel {
+  z-index: 999;
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+}
+
+.ff_input_container {
+  background: none;
+  border: none;
+  border-radius: 4px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: -webkit-fill-available;
+  display: flex;
+}
+
+.ff_input_container .input_input {
+  resize: none;
+  background: none;
+  border: 1px solid #f2f4f7;
+  border-radius: 8px;
+  width: -webkit-fill-available;
+  height: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  box-shadow: none !important;
+  color: #475467 !important;
+  padding: 8px 16px !important;
+  font-family: Roboto !important;
+  font-size: 14px !important;
+}
+
+.ff_input_container .input_input:focus-visible {
+  outline: none;
+}
+
+.ff_input_container .input_label {
+  letter-spacing: -.01em;
+  color: #101828;
+  background-color: #0000;
+  padding-bottom: 8px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.ff_input_container .input_description {
+  letter-spacing: -.01em;
+  color: #878f97;
+  background-color: #0000;
+  margin: 0;
+  padding-bottom: 8px;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.input_icon_container {
+  border: 1px solid #f2f4f7;
+  border-radius: 8px;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  width: -webkit-fill-available;
+  padding-left: 16px;
+  display: flex;
+  border-bottom-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+
+.input_icon_container .input_input {
+  border: none;
+  padding-left: 0 !important;
+}
+
+.ff_select_container {
+  background: none;
+  border: none;
+  border-radius: 4px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: -webkit-fill-available;
+  display: flex;
+  position: relative;
+}
+
+.ff_select_option_list_container {
+  z-index: 1;
+  background: #fff;
+  border: 1px solid #f2f4f7;
+  border-top: 0;
+  border-radius: 0 0 8px 8px;
+  width: -webkit-fill-available;
+  max-height: 80px;
+  margin: 0;
+  padding: 10px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  overflow-y: scroll;
+}
+
+.ff_select_option_list {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: hidden;
+}
+
+.ff_select_option_item {
+  color: #475467;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  align-self: stretch;
+  align-items: center;
+  gap: 8px;
+  min-height: 16px;
+  padding: 8px;
+  display: flex;
+  overflow: hidden;
+}
+
+.ff_select_option_item:hover, .ff_select_option_item:focus {
+  background: #f9fafb;
+  border-radius: 8px;
+}
+
+.ff_select_option_item span {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  background: none;
+  overflow: hidden;
+}
+
+.ff_select_search {
+  border-bottom-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+
+.ff_select_dropdown_container {
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 55px;
+  display: flex;
+  position: relative;
+}
+
+.topbar_heading_box_ff {
+  flex-direction: row;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.topbar_icon_ff {
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  display: flex;
+}
+
+.topbar_middle_icon_ff {
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 1rem;
+  display: flex;
+}
+
+.topbar_detail_head_ff {
+  text-align: left;
+  letter-spacing: -.01em;
+  color: #22262a;
+  border: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: PoppinsRegular;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  font-family: PoppinsMedium !important;
+}
+
+.topbar_detail_body_ff {
+  letter-spacing: 0;
+  align-items: flex-start;
+  margin: 16px 0 17px;
+  padding: 0;
+  display: flex;
+}
+
+.topbar_detail_para_ff {
+  width: 100%;
+  margin: 0;
+}
+
+.topbar_detail_para_ff .topbar_detail_text {
+  color: #484f56;
+  letter-spacing: -.01em;
+  margin: 0;
+  padding: 0;
+  font-family: PoppinsRegular;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+}
+
+.topbar_detail_para_ff .topbar_detail_text_last {
+  color: #878f97;
+  letter-spacing: -.01em;
+  margin: 0;
+  padding-top: 8px;
+  padding-bottom: 2px;
+  font-family: PoppinsRegular;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.topbar_detail_static_arrow_ff {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+}
+
+.topbar_detail_static_arrow_ff img {
+  width: 24px;
+  height: 26px;
+  display: inline;
+}
+
+.topbar_detail_btns_ff {
+  justify-content: space-between;
+  width: 100%;
+  display: flex;
+}
+
+.narrow_btns_ff {
+  width: 70% !important;
+}
+
+.review_btns_ff {
+  gap: 1rem;
+  justify-content: flex-start !important;
+  width: 70% !important;
+}
+
+.topbar_detail_submit_btn_ff, .topbar_detail_okay_btn_ff {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 150px;
+  overflow: hidden;
+}
+
+.dot_ff {
+  border-radius: 50%;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  width: 8px;
+  height: 8px;
+  display: flex;
+}
+
+.success_dot_ff {
+  background-color: #12b76a !important;
+}
+
+.warning_dot_ff {
+  background-color: #f08c00 !important;
+}
+
+.error_dot_ff {
+  background-color: red !important;
+}
+
+.large_dot_ff {
+  width: 12px !important;
+  height: 12px !important;
+}
+
+.medium_dot_ff {
+  width: 10px !important;
+  height: 10px !important;
+}
+
+.small_dot_ff {
+  width: 6px !important;
+  height: 6px !important;
+}
+
+</style><div id="plasmo-shadow-container" style="z-index: 2147483647; position: relative;"><div id="plasmo-overlay-0" class="plasmo-csui-container" style="display: flex; position: absolute; top: 0px; left: 0px;"></div></div></template></plasmo-csui><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="user-scalable=no, width=device-width, maximum-scale=1, minimum-scale=1">
+<link href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/css2" rel="stylesheet"><link href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/css2(1)" rel="stylesheet"><meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+	<style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
+	
+	<!-- This site is optimized with the Yoast SEO plugin v26.0 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things</title>
+	<meta name="description" content="Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things, and More">
+	<link rel="canonical" href="https://scottmautz.com/issue-209-steve-jobs-signal-to-noise-ratio-the-forgotten-half-of-accomplishing-things-and-more/">
+	<meta property="og:locale" content="en_US">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things">
+	<meta property="og:description" content="Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things, and More">
+	<meta property="og:url" content="https://scottmautz.com/issue-209-steve-jobs-signal-to-noise-ratio-the-forgotten-half-of-accomplishing-things-and-more/">
+	<meta property="og:site_name" content="Scott Mautz">
+	<meta property="article:publisher" content="https://www.facebook.com/ScottMautzPP/">
+	<meta property="article:published_time" content="2025-08-06T09:45:00+00:00">
+	<meta property="og:image" content="https://scottmautz.com/wp-content/uploads/2025/06/Zoomed-in-3rd-spot.jpeg">
+	<meta property="og:image:width" content="1280">
+	<meta property="og:image:height" content="683">
+	<meta property="og:image:type" content="image/jpeg">
+	<meta name="author" content="Scott Mautz">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:creator" content="@scott_mautz">
+	<meta name="twitter:site" content="@scott_mautz">
+	<meta name="twitter:label1" content="Written by">
+	<meta name="twitter:data1" content="Scott Mautz">
+	<meta name="twitter:label2" content="Est. reading time">
+	<meta name="twitter:data2" content="4 minutes">
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://scottmautz.com/issue-209-steve-jobs-signal-to-noise-ratio-the-forgotten-half-of-accomplishing-things-and-more/#article","isPartOf":{"@id":"https://scottmautz.com/issue-209-steve-jobs-signal-to-noise-ratio-the-forgotten-half-of-accomplishing-things-and-more/"},"author":{"name":"Scott Mautz","@id":"https://scottmautz.com/#/schema/person/240330f31118e2317a055eb726501e2e"},"headline":"Issue #209: Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things, and More","datePublished":"2025-08-06T09:45:00+00:00","mainEntityOfPage":{"@id":"https://scottmautz.com/issue-209-steve-jobs-signal-to-noise-ratio-the-forgotten-half-of-accomplishing-things-and-more/"},"wordCount":793,"commentCount":0,"publisher":{"@id":"https://scottmautz.com/#organization"},"image":{"@id":"https://scottmautz.com/issue-209-steve-jobs-signal-to-noise-ratio-the-forgotten-half-of-accomplishing-things-and-more/#primaryimage"},"thumbnailUrl":"https://scottmautz.com/wp-content/uploads/2025/06/Zoomed-in-3rd-spot.jpeg","keywords":["Steve Jobs","rise","run","structure","Signal to Noise Ratio","accomplishing","navigate","disciplined","intensity","prioritization","Apple","distractions","resilience","mentally strong","focus","tasks","Research","fear","productivity","commitment","habits"],"articleSection":["Leadership Growth","Leadership Development"],"inLanguage":"en-US","potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://scottmautz.com/issue-209-steve-jobs-signal-to-noise-ratio-the-forgotten-half-of-accomplishing-things-and-more/#respond"]}]},{"@type":"WebPage","@id":"https://scottmautz.com/issue-209-steve-jobs-signal-to-noise-ratio-the-forgotten-half-of-accomplishing-things-and-more/","url":"https://scottmautz.com/issue-209-steve-jobs-signal-to-noise-ratio-the-forgotten-half-of-accomplishing-things-and-more/","name":"Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things","isPartOf":{"@id":"https://scottmautz.com/#website"},"primaryImageOfPage":{"@id":"https://scottmautz.com/issue-209-steve-jobs-signal-to-noise-ratio-the-forgotten-half-of-accomplishing-things-and-more/#primaryimage"},"image":{"@id":"https://scottmautz.com/issue-209-steve-jobs-signal-to-noise-ratio-the-forgotten-half-of-accomplishing-things-and-more/#primaryimage"},"thumbnailUrl":"https://scottmautz.com/wp-content/uploads/2025/06/Zoomed-in-3rd-spot.jpeg","datePublished":"2025-08-06T09:45:00+00:00","description":"Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things, and More","breadcrumb":{"@id":"https://scottmautz.com/issue-209-steve-jobs-signal-to-noise-ratio-the-forgotten-half-of-accomplishing-things-and-more/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://scottmautz.com/issue-209-steve-jobs-signal-to-noise-ratio-the-forgotten-half-of-accomplishing-things-and-more/"]}]},{"@type":"ImageObject","inLanguage":"en-US","@id":"https://scottmautz.com/issue-209-steve-jobs-signal-to-noise-ratio-the-forgotten-half-of-accomplishing-things-and-more/#primaryimage","url":"https://scottmautz.com/wp-content/uploads/2025/06/Zoomed-in-3rd-spot.jpeg","contentUrl":"https://scottmautz.com/wp-content/uploads/2025/06/Zoomed-in-3rd-spot.jpeg","width":1280,"height":683},{"@type":"BreadcrumbList","@id":"https://scottmautz.com/issue-209-steve-jobs-signal-to-noise-ratio-the-forgotten-half-of-accomplishing-things-and-more/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://scottmautz.com/"},{"@type":"ListItem","position":2,"name":"Issue #209: Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things, and More"}]},{"@type":"WebSite","@id":"https://scottmautz.com/#website","url":"https://scottmautz.com/","name":"Scott Mautz","description":"I help you IGNITE PROFOUND PERFORMANCE™","publisher":{"@id":"https://scottmautz.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://scottmautz.com/?s={search_term_string}"},"query-input":{"@type":"PropertyValueSpecification","valueRequired":true,"valueName":"search_term_string"}}],"inLanguage":"en-US"},{"@type":"Organization","@id":"https://scottmautz.com/#organization","name":"Scott Mautz","url":"https://scottmautz.com/","logo":{"@type":"ImageObject","inLanguage":"en-US","@id":"https://scottmautz.com/#/schema/logo/image/","url":"https://scottmautz.com/wp-content/uploads/2018/09/Scott-Mautz-pic-profile.jpg","contentUrl":"https://scottmautz.com/wp-content/uploads/2018/09/Scott-Mautz-pic-profile.jpg","width":510,"height":340,"caption":"Scott Mautz"},"image":{"@id":"https://scottmautz.com/#/schema/logo/image/"},"sameAs":["https://www.facebook.com/ScottMautzPP/","https://x.com/scott_mautz","https://www.linkedin.com/in/scottmautz/"]},{"@type":"Person","@id":"https://scottmautz.com/#/schema/person/240330f31118e2317a055eb726501e2e","name":"Scott Mautz","image":{"@type":"ImageObject","inLanguage":"en-US","@id":"https://scottmautz.com/#/schema/person/image/","url":"https://secure.gravatar.com/avatar/8580c92d5f1fd640bd69d837a94f93f5c15f14b42fe9dca98ddfda104788d52c?s=96&d=mm&r=g","contentUrl":"https://secure.gravatar.com/avatar/8580c92d5f1fd640bd69d837a94f93f5c15f14b42fe9dca98ddfda104788d52c?s=96&d=mm&r=g","caption":"Scott Mautz"},"url":"https://scottmautz.com/author/scottmautz/"}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel="dns-prefetch" href="https://www.googletagmanager.com/">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="https://maxcdn.bootstrapcdn.com/">
+<link rel="alternate" type="application/rss+xml" title="Scott Mautz » Feed" href="https://scottmautz.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="Scott Mautz » Comments Feed" href="https://scottmautz.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Scott Mautz » Issue #209: Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things, and More Comments Feed" href="https://scottmautz.com/issue-209-steve-jobs-signal-to-noise-ratio-the-forgotten-half-of-accomplishing-things-and-more/feed/">
+<script type="text/javascript">
+/* <![CDATA[ */
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16.0.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16.0.1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/scottmautz.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.8.2"}};
+/*! This file is auto-generated */
+!function(s,n){var o,i,e;function c(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function p(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data),a=(e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0),new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data));return t.every(function(e,t){return e===a[t]})}function u(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);for(var n=e.getImageData(16,16,1,1),a=0;a<n.data.length;a++)if(0!==n.data[a])return!1;return!0}function f(e,t,n,a){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!a(e,"\ud83e\udedf")}return!1}function g(e,t,n,a){var r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):s.createElement("canvas"),o=r.getContext("2d",{willReadFrequently:!0}),i=(o.textBaseline="top",o.font="600 32px Arial",{});return e.forEach(function(e){i[e]=t(o,e,n,a)}),i}function t(e){var t=s.createElement("script");t.src=e,t.defer=!0,s.head.appendChild(t)}"undefined"!=typeof Promise&&(o="wpEmojiSettingsSupports",i=["flag","emoji"],n.supports={everything:!0,everythingExceptFlag:!0},e=new Promise(function(e){s.addEventListener("DOMContentLoaded",e,{once:!0})}),new Promise(function(t){var n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+g.toString()+"("+[JSON.stringify(i),f.toString(),p.toString(),u.toString()].join(",")+"));",a=new Blob([e],{type:"text/javascript"}),r=new Worker(URL.createObjectURL(a),{name:"wpTestEmojiSupports"});return void(r.onmessage=function(e){c(n=e.data),r.terminate(),t(n)})}catch(e){}c(n=g(i,f,p,u))}t(n)}).then(function(e){for(var t in e)n.supports[t]=e[t],n.supports.everything=n.supports.everything&&n.supports[t],"flag"!==t&&(n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&n.supports[t]);n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&!n.supports.flag,n.DOMReady=!1,n.readyCallback=function(){n.DOMReady=!0}}).then(function(){return e}).then(function(){var e;n.supports.everything||(n.readyCallback(),(e=n.source||{}).concatemoji?t(e.concatemoji):e.wpemoji&&e.twemoji&&(t(e.twemoji),t(e.wpemoji)))}))}((window,document),window._wpemojiSettings);
+/* ]]> */
+</script>
+<link rel="stylesheet" id="scoot-mautz-theme-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/style.css" type="text/css" media="all">
+<style id="wp-emoji-styles-inline-css" type="text/css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+</style>
+<link rel="stylesheet" id="wp-block-library-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/style.min.css" type="text/css" media="all">
+<style id="classic-theme-styles-inline-css" type="text/css">
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id="global-styles-inline-css" type="text/css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+:root :where(.wp-block-pullquote){font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel="stylesheet" id="layerslider-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/layerslider.css" type="text/css" media="all">
+<link rel="stylesheet" id="ls-user-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/layerslider.custom.css" type="text/css" media="all">
+<link rel="stylesheet" id="ls-google-fonts-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/css" type="text/css" media="all">
+<link rel="stylesheet" id="tm_clicktotweet-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/styles.css" type="text/css" media="all">
+<link rel="stylesheet" id="menu-image-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/menu-image.css" type="text/css" media="all">
+<link rel="stylesheet" id="dashicons-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/dashicons.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="smls-fontawesome-style-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/font-awesome.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="smls-google-fonts-sans-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/css(1)" type="text/css" media="all">
+<link rel="stylesheet" id="smls-google-fonts-roboto-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/css(2)" type="text/css" media="all">
+<link rel="stylesheet" id="smls-google-fonts-lato-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/css(3)" type="text/css" media="all">
+<link rel="stylesheet" id="smls-google-fonts-montserrat-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/css(4)" type="text/css" media="all">
+<link rel="stylesheet" id="smls-google-fonts-merriweather-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/css(5)" type="text/css" media="all">
+<link rel="stylesheet" id="smls-google-fonts-droid-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/css(6)" type="text/css" media="all">
+<link rel="stylesheet" id="smls-google-fonts-oxygen-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/css(7)" type="text/css" media="all">
+<link rel="stylesheet" id="smls-google-fonts-raleway-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/css(8)" type="text/css" media="all">
+<link rel="stylesheet" id="smls-owl-style-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/owl.carousel.css" type="text/css" media="all">
+<link rel="stylesheet" id="smls-tooltip-style-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/tooltipster.bundle.css" type="text/css" media="all">
+<link rel="stylesheet" id="smls-frontend-style-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/smls-frontend-style.css" type="text/css" media="all">
+<link rel="stylesheet" id="smls-responsive-style-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/smls-responsive.css" type="text/css" media="all">
+<link rel="stylesheet" id="rt-fontawsome-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/font-awesome(1).min.css" type="text/css" media="all">
+<link rel="stylesheet" id="rt-tpg-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/thepostgrid.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="logo_showcase_slick_style-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/slick.css" type="text/css" media="all">
+<link rel="stylesheet" id="logo_showcase_style-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/logo-showcase.css" type="text/css" media="all">
+<link rel="stylesheet" id="hamburger.css-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/wpr-hamburger.css" type="text/css" media="all">
+<link rel="stylesheet" id="wprmenu.css-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/wprmenu.css" type="text/css" media="all">
+<style id="wprmenu.css-inline-css" type="text/css">
+@media only screen and ( max-width: 870px ) {html body div.wprm-wrapper {overflow: scroll;}#wprmenu_bar {background-image: url();background-size: cover ;background-repeat: repeat;}#wprmenu_bar {background-color: #0d0d0d;}html body div#mg-wprm-wrap .wpr_submit .icon.icon-search {color: #ffffff;}#wprmenu_bar .menu_title,#wprmenu_bar .wprmenu_icon_menu,#wprmenu_bar .menu_title a {color: #f2f2f2;}#wprmenu_bar .menu_title a {font-size: 20px;font-weight: normal;}#mg-wprm-wrap li.menu-item a {font-size: 15px;text-transform: uppercase;font-weight: normal;}#mg-wprm-wrap li.menu-item-has-children ul.sub-menu a {font-size: 15px;text-transform: uppercase;font-weight: normal;}#mg-wprm-wrap li.current-menu-item > a {background: #d53f3f;}#mg-wprm-wrap li.current-menu-item > a,#mg-wprm-wrap li.current-menu-item span.wprmenu_icon{color: #ffffff !important;}#mg-wprm-wrap {background-color: #2e2e2e;}.cbp-spmenu-push-toright,.cbp-spmenu-push-toright .mm-slideout {left: 50% ;}.cbp-spmenu-push-toleft {left: -50% ;}#mg-wprm-wrap.cbp-spmenu-right,#mg-wprm-wrap.cbp-spmenu-left,#mg-wprm-wrap.cbp-spmenu-right.custom,#mg-wprm-wrap.cbp-spmenu-left.custom,.cbp-spmenu-vertical {width: 50%;max-width: 400px;}#mg-wprm-wrap ul#wprmenu_menu_ul li.menu-item a,div#mg-wprm-wrap ul li span.wprmenu_icon {color: #cfcfcf;}#mg-wprm-wrap ul#wprmenu_menu_ul li.menu-item:valid ~ a{color: #ffffff;}#mg-wprm-wrap ul#wprmenu_menu_ul li.menu-item a:hover {background: #d53f3f;color: #606060 !important;}div#mg-wprm-wrap ul>li:hover>span.wprmenu_icon {color: #606060 !important;}.wprmenu_bar .hamburger-inner,.wprmenu_bar .hamburger-inner::before,.wprmenu_bar .hamburger-inner::after {background: #ffffff;}.wprmenu_bar .hamburger:hover .hamburger-inner,.wprmenu_bar .hamburger:hover .hamburger-inner::before,.wprmenu_bar .hamburger:hover .hamburger-inner::after {background: #ffffff;}#wprmenu_menu.left {width:50%;left: -50%;right: auto;}#wprmenu_menu.right {width:50%;right: -50%;left: auto;}.wprmenu_bar .hamburger {float: right;}.wprmenu_bar #custom_menu_icon.hamburger {top: 0px;right: 0px;float: right;background-color: #cccccc;}html body div#wprmenu_bar {height : 42px;}#mg-wprm-wrap.cbp-spmenu-left,#mg-wprm-wrap.cbp-spmenu-right,#mg-widgetmenu-wrap.cbp-spmenu-widget-left,#mg-widgetmenu-wrap.cbp-spmenu-widget-right {top: 42px !important;}.wpr_custom_menu #custom_menu_icon {display: block;}html { padding-top: 42px !important; }#wprmenu_bar,#mg-wprm-wrap { display: block; }div#wpadminbar { position: fixed; }}
+</style>
+<link rel="stylesheet" id="wpr_icons-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/wpr-icons.css" type="text/css" media="all">
+<link rel="stylesheet" id="font-awesome-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/font-awesome(2).min.css" type="text/css" media="all">
+<link rel="stylesheet" id="google-fonts-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/css(9)" type="text/css" media="all">
+<link rel="stylesheet" id="newsletter-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/style(1).css" type="text/css" media="all">
+<link rel="stylesheet" id="js_composer_custom_css-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/custom.css" type="text/css" media="all">
+<link rel="stylesheet" id="ms-main-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/masterslider.main.css" type="text/css" media="all">
+<link rel="stylesheet" id="ms-custom-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/custom(1).css" type="text/css" media="all">
+<link rel="stylesheet" id="addthis_all_pages-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/addthis_wordpress_public.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="bsf-Defaults-css" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/Defaults.css" type="text/css" media="all">
+<script type="text/javascript" src="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/jquery.min.js" id="jquery-core-js"></script>
+<script type="text/javascript" src="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/jquery-migrate.min.js" id="jquery-migrate-js"></script>
+<script type="text/javascript" src="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/layerslider.kreaturamedia.jquery.js" id="layerslider-js"></script>
+<script type="text/javascript" src="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/greensock.js" id="greensock-js"></script>
+<script type="text/javascript" src="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/layerslider.transitions.js" id="layerslider-transitions-js"></script>
+<script type="text/javascript" src="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/layerslider.custom.transitions.js" id="ls-user-transitions-js"></script>
+<script type="text/javascript" src="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/owl.carousel.js" id="smls-owl-script-js"></script>
+<script type="text/javascript" src="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/tooltipster.bundle.js" id="smls-tooltip-script-js"></script>
+<script type="text/javascript" src="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/smls-frontend-script.js" id="smls-frontend-script-js"></script>
+<script type="text/javascript" src="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/modernizr.custom.js" id="modernizr-js"></script>
+<script type="text/javascript" src="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/touchSwipe.js" id="touchSwipe-js"></script>
+<script type="text/javascript" id="wprmenu.js-js-extra">
+/* <![CDATA[ */
+var wprmenu = {"zooming":"","from_width":"870","push_width":"400","menu_width":"50","parent_click":"","swipe":"","enable_overlay":"","wprmenuDemoId":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/wprmenu.js" id="wprmenu.js-js"></script>
+<script type="text/javascript" src="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/script.js" id="effects-js"></script>
+<script type="text/javascript" src="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/jquery.iframetracker.js" id="iframetracker-js"></script>
+
+<!-- Google Analytics snippet added by Site Kit -->
+<script type="text/javascript" src="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/js" id="google_gtagjs-js" async=""></script>
+<script type="text/javascript" id="google_gtagjs-js-after">
+/* <![CDATA[ */
+window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}
+gtag('set', 'linker', {"domains":["scottmautz.com"]} );
+gtag("js", new Date());
+gtag("set", "developer_id.dZTNiMT", true);
+gtag("config", "GT-NCTDQG3");
+/* ]]> */
+</script>
+
+<!-- End Google Analytics snippet added by Site Kit -->
+<link rel="https://api.w.org/" href="https://scottmautz.com/wp-json/"><link rel="alternate" title="JSON" type="application/json" href="https://scottmautz.com/wp-json/wp/v2/posts/6674"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://scottmautz.com/xmlrpc.php?rsd">
+<link rel="shortlink" href="https://scottmautz.com/?p=6674">
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://scottmautz.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fscottmautz.com%2Fissue-209-steve-jobs-signal-to-noise-ratio-the-forgotten-half-of-accomplishing-things-and-more%2F">
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://scottmautz.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fscottmautz.com%2Fissue-209-steve-jobs-signal-to-noise-ratio-the-forgotten-half-of-accomplishing-things-and-more%2F&amp;format=xml">
+<meta name="generator" content="Site Kit by Google 1.122.0">    <style type="text/css">
+        You can write your custom CSS here.        .lsp_main_slider {
+            background-color: ;
+            width: 1200px;
+            height: 90px;
+            padding: 8px;
+            position: relative;
+            margin-bottom: 24px;
+        }
+
+        .lsp_slider_controls {
+            position: relative;
+            top: 50%;
+            margin-top: -20px;
+        }
+
+        .lsp_next_btn {
+            background: url(https://scottmautz.com/wp-content/plugins/logo-slider/ls_arrows/lsp_arrow1_next.png) no-repeat center;
+            float: right;
+            width: 40px;
+            height: 40px;
+            display: inline-block;
+            text-indent: -9000px;
+            cursor: pointer;
+        }
+
+        .lsp_prev_btn {
+            background: url(https://scottmautz.com/wp-content/plugins/logo-slider/ls_arrows/lsp_arrow1_prev.png) no-repeat center;
+            float: float;
+            width: 40px;
+            height: 40px;
+            display: inline-block;
+            text-indent: -9000px;
+            cursor: pointer;
+        }
+
+        .lsp_slider_img {
+            height: auto;
+            margin-top: -45px;
+            overflow: hidden;
+            position: absolute;
+            top: 50%;
+            left: 6%;
+         text-align: center;
+         width: 1110px;
+/*            margin-left: -*//*px;*/
+        }
+
+        #logo-slider {
+            height: auto;
+            margin-top: -45px;
+            overflow: hidden;
+            position: absolute;
+            top: 50%;
+            left: 6%;
+         text-align: center;
+        width: 1110px;
+            /* margin-left: -*//*px;*/
+        }
+
+        .lsp_img_div {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Visibilties */
+        .visible_phone {
+            visibility: hidden;
+            display: none;
+        }
+
+        .visible_desktop {
+            visibility: visible;
+        }
+
+        /* ============================= */
+        /* ! Layout for phone version   */
+        /* ============================= */
+
+        /*Rsponsive layout 1024*/
+        @media screen and (min-width: 801px) and (max-width: 1024px) {
+
+            .visible_phone {
+                visibility: visible;
+                display: inherit;
+            }
+
+            .visible_desktop {
+                visibility: hidden;
+                display: none;
+            }
+
+            .lsp_main_slider {
+                background-color: ;
+                height: 90px;
+                padding: 8px;
+                position: relative;
+                width: 100%;
+                margin-bottom: 24px;
+            }
+
+            .lsp_slider_img {
+            height: auto;
+            margin-left: -334px;
+            margin-top: -65px;
+            overflow: hidden;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 668px;
+             text-align: center;
+                        }
+
+            #logo-slider {
+                height: auto;
+                margin-left: -334px;
+                margin-top: -65px;
+                overflow: hidden;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 668px;
+             text-align: center;
+                        }
+
+        }
+
+        /*Rsponsive layout 768*/
+        @media screen and (min-width: 641px) and (max-width: 800px) {
+
+            .visible_phone {
+                visibility: visible;
+                display: inherit;
+            }
+
+            .visible_desktop {
+                visibility: hidden;
+                display: none;
+            }
+
+            .lsp_main_slider {
+                background-color: ;
+                height: 90px;
+                padding: 8px;
+                position: relative;
+                width: 100%;
+                margin-bottom: 24px;
+            }
+
+            .lsp_slider_img {
+            height: auto;
+            margin-left: -256px;
+            margin-top: -65px;
+            overflow: hidden;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 512px;
+             text-align: center;
+                        }
+
+            #logo-slider {
+                height: auto;
+                margin-left: -256px;
+                margin-top: -65px;
+                overflow: hidden;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 512px;
+             text-align: center;
+                        }
+
+        }
+
+        /*Rsponsive layout 640*/
+        @media screen and (min-width: 481px) and (max-width: 640px) {
+
+            .visible_phone {
+                visibility: visible;
+                display: inherit;
+            }
+
+            .visible_desktop {
+                visibility: hidden;
+                display: none;
+            }
+
+            .lsp_main_slider {
+                background-color: ;
+                height: 90px;
+                padding: 8px;
+                position: relative;
+                width: 100%;
+                margin-bottom: 24px;
+            }
+
+            .lsp_slider_img {
+                height: auto;
+                margin-left: -176px;
+                margin-top: -65px;
+                overflow: hidden;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 346px;
+             text-align: center;
+                        }
+
+            #logo-slider {
+                height: auto;
+                margin-left: -176px;
+                margin-top: -65px;
+                overflow: hidden;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 346px;
+             text-align: center;
+                        }
+
+        }
+
+        /*Rsponsive layout 480*/
+        @media screen and (min-width: 320px) and (max-width: 480px) {
+            .visible_phone {
+                visibility: visible;
+                display: inherit;
+            }
+
+            .visible_desktop {
+                visibility: hidden;
+                display: none;
+            }
+
+            .lsp_main_slider {
+                background-color: ;
+                height: 90px;
+                padding: 8px;
+                position: relative;
+                width: 100%;
+                margin-bottom: 24px;
+            }
+
+            .lsp_slider_img {
+                height: auto;
+                margin-left: -91px;
+                margin-top: -65px;
+                overflow: hidden;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 185px;
+            text-align: center;
+                        }
+
+            #logo-slider {
+                height: auto;
+                margin-left: -91px;
+                margin-top: -65px;
+                overflow: hidden;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 185px;
+             text-align: center;
+                        }
+
+        }
+    </style>
+	<script>var ms_grabbing_curosr='https://scottmautz.com/wp-content/plugins/masterslider/public/assets/css/common/grabbing.cur',ms_grab_curosr='https://scottmautz.com/wp-content/plugins/masterslider/public/assets/css/common/grab.cur';</script>
+<meta name="generator" content="MasterSlider 2.15.0 - Responsive Touch Image Slider">
+        <style>
+            :root {
+                --tpg-primary-color: #0d6efd;
+                --tpg-secondary-color: #0654c4;
+                --tpg-primary-light: #c4d0ff
+            }
+
+                    </style>
+		<link rel="icon" href="https://scottmautz.com/wp-content/themes/scottmautz/images/favicon.ico">
+<link rel="pingback" href="https://scottmautz.com/xmlrpc.php">
+<!-- All in one Favicon 4.8 --><link rel="shortcut icon" href="https://scottmautz.com/wp-content/uploads/2016/10/favicon.png">
+<link rel="icon" href="https://scottmautz.com/wp-content/uploads/2016/10/favicon.png" type="image/gif">
+<link rel="icon" href="https://scottmautz.com/wp-content/uploads/2016/10/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="https://scottmautz.com/wp-content/uploads/2016/10/favicon.png">
+<meta name="generator" content="Powered by WPBakery Page Builder - drag and drop page builder for WordPress.">
+<!-- Custom CSS -->
+<style>
+.ebook-link {
+    color: #000;
+    font-family: Lato, Arial, Helvetica, sans-serif;
+    border: 2px solid #000000;
+    padding: 15px 30px;
+    background: #f7704d;
+	display: block;  
+}
+.ebook-link:hover {
+    color: #000;
+    border: 2px solid #fff;
+    background: #fff;
+    transition: all 0.2s ease;
+}
+.blog-submit input {
+    background-color: #f7704d;
+    border: 3px solid #000;
+    color: #000;
+}
+.blog-submit input:hover {
+    background-color: #fff;
+    border: 3px solid #fff;
+    color: #000;
+}
+
+span.read-more {
+    border: 1px solid #000 !important;
+    background: #f7704d !important;
+}
+span.read-more:hover {
+    border: 1px solid #fff !important;
+    background: #fff !important;
+}
+span.read-more a {
+    color: #000;
+}
+.post-2531 .entry-content {
+    padding: 0 50px 0 15px;
+}
+.page-id-1754 header.entry-header {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+a.button-ebook {
+    border: 3px solid #f7704d;
+    background: #f7704d;
+    padding: 10px;
+    color: #000;
+}
+a.button-ebook:hover {
+    border: 3px solid #fff;
+    background: #fff;
+    color: #000;
+}
+.book-left a {
+    font-family: Lato, Arial, Helvetica, sans-serif;
+    color: #000;
+    border: 2px solid #000000;
+    padding: 15px 25px;
+    background: #f7704d;
+}
+.book-left a:hover {
+    color: #000;
+    border: 2px solid #fff;
+    background: #fff;
+}
+.quote-link {
+    color: #000;
+    border: 2px solid #000000;
+    font-family: Lato, Arial, Helvetica, sans-serif;
+    padding: 10px 25px;
+    background: #f7704d;
+}
+.quote-link:hover {
+    color: #000;
+    border: 2px solid #fff;
+    background: #fff;
+}
+.hire-link {
+    border: 2px solid #000000;
+    color: #000;
+    padding: 30px 0;
+    width: 40%;
+    margin: 0 auto 100px auto;
+    background: #f7704d;
+}
+.hire-link:hover {
+    border: 2px solid #000000;
+    transition: all 0.2s ease;
+    background: #fff;
+}
+.hire-link a {
+    color: #000;
+}
+.hire-link:hover a {
+    transition: all 0.2s ease;
+    color: #000;
+}
+.hire-link:hover span {
+    transition: all 0.2s ease;
+    color: #000;
+}
+span#input_6_4_3_container label {
+    display: none;
+}
+input#gform_submit_button_6 {
+    background-color: #f7704d;
+    color: #000;
+}
+article.post.entry {
+    max-width: 1100px;
+    margin: 0 auto;
+  	padding:50px 0;
+}
+.home .site-inner,
+.page-id-11 .site-inner,
+.page-id-1315 .site-inner,
+.page-id-39 .site-inner,
+.page-id-464 .site-inner,
+.page-id-47 .site-inner,
+.page-id-49 .site-inner,
+.page-id-51 .site-inner {
+    max-width: 100%;
+}
+.page-template-page_blog .site-inner {
+    max-width: 1100px;
+    margin:0 auto !important;
+}
+.home-blog-link {
+    font-family: Lato, Arial, Helvetica, sans-serif;
+    color: #000;
+    border: 2px solid #000000;
+    padding: 10px 25px;
+    background: #F7704D;
+}
+.home-blog-link:hover {
+    border: 2px solid #000000;
+    color: #000;
+    background: #fff;
+}
+button, input[type="button"], input[type="reset"], input[type="submit"], .button {
+    background-color: #F7704D;
+    border: 2px solid #000000;
+    color: #000;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 300;
+    padding: 16px 24px;
+    text-transform: uppercase;
+    width: auto;
+}
+button:hover, input:hover[type="button"], input:hover[type="reset"], input:hover[type="submit"], .button:hover {
+    background-color: #fff;
+    color: #000;
+}
+.entry-content .button:hover {
+    color: #000;
+}
+.popup-form>.gform_footer>input {
+    font-family: Lato, Arial, Helvetica, sans-serif;
+    background: #F7704D !important;
+    color: #fff !important;
+}
+.popup-form>.gform_footer>input:hover {
+    background: #fff !important;
+    color: #000 !important;
+}
+
+
+.admin-bar .nav-primary {
+    background-color: #fff;
+    top: 75px;
+    position: fixed;
+    width: 100%;
+    z-index: 99;
+    border-bottom: 0px solid black;
+}
+
+.nav-secondary {
+    background-color: #fff;
+    color: #4d4d4d !important;
+    top: 44px !important;
+    position: fixed;
+    width: 50%;
+    z-index: 99;
+    border-bottom: 0px solid black;
+    right: 0;
+    text-align: right;
+}
+
+.gform_fields {
+    margin-left: 0 !important;
+}
+
+.gform_fields li {
+    list-style-type: none !important;
+}
+
+.addthis_toolbox:before {
+  display: block;
+  content: "Share this post!";
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+
+
+
+/* - Tate - 03/28/17 - updating OL formatting */
+.entry-content ol > li {
+  font-weight: normal;
+  padding-bottom: 20px;
+  font-weight: 300;
+}
+
+
+article.post.entry {
+  padding: 70px 20px;
+}
+
+
+#mg-wprm-wrap ul#wprmenu_menu_ul li.menu-item a.menu-image-not-hovered:hover {
+    background: transparent; 
+}
+</style>
+<!-- Generated by https://wordpress.org/plugins/theme-junkie-custom-css/ -->
+			<!-- Easy Columns 2.1.1 by Pat Friedl http://www.patrickfriedl.com -->
+			<link rel="stylesheet" href="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/easy-columns.css" type="text/css" media="screen, projection">
+			<noscript><style> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript><style>@font-face { font-family: DMSans; src: url('chrome-extension://meimoidfecamngeoanhnpdjjdcefoldn/assets/fonts/DMSans-Regular.ttf'); }@font-face { font-family: PoppinsMedium; src: url('chrome-extension://meimoidfecamngeoanhnpdjjdcefoldn/assets/fonts/Poppins-Medium.otf'); }@font-face { font-family: PoppinsRegular; src: url('chrome-extension://meimoidfecamngeoanhnpdjjdcefoldn/assets/fonts/Poppins-Regular.otf'); }@font-face { font-family: Roboto; src: url('chrome-extension://meimoidfecamngeoanhnpdjjdcefoldn/assets/fonts/Roboto-Regular.ttf'); }@font-face { font-family: Inter; src: url('chrome-extension://meimoidfecamngeoanhnpdjjdcefoldn/assets/fonts/Inter-Regular.ttf'); }</style></head>
+<body class="wp-singular post-template-default single single-post postid-6674 single-format-standard wp-theme-genesis wp-child-theme-scottmautz _masterslider _msp_version_2.15.0 rttpg rttpg-7.8.4 radius-frontend rttpg-body-wrap rttpg-flaticon full-width-content genesis-breadcrumbs-hidden genesis-footer-widgets-visible wpb-js-composer js-comp-ver-6.1 vc_responsive cbp-spmenu-push"><div class="site-container"><div class="before-header widget-area"><div class="wrap"><section id="text-2" class="widget widget_text"><div class="widget-wrap">			<div class="textwidget"><div class="before-header-left">
+	<ul>
+		<li><a href="https://www.facebook.com/ScottMautzPP/" target="_blank&quot;"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+		<li><a href="https://twitter.com/scott_mautz" target="_blank&quot;"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+		<li><a href="https://www.linkedin.com/in/scottmautz" target="_blank&quot;"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+		<li><a href="https://www.youtube.com/channel/UCESjWJrnWegel9lAlhXDS3A" target="_blank&quot;"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
+		<li><a href="https://www.instagram.com/scottmautz/" target="_blank&quot;"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+	</ul>
+</div>
+<div class="before-header-right">513.309.2919</div></div>
+		</div></section>
+</div></div><header class="site-header"><div class="wrap"><div class="title-area"><p class="site-title"><a href="https://scottmautz.com/">Scott Mautz</a></p></div><div class="widget-area header-widget-area"></div></div></header><nav class="nav-primary" aria-label="Main"><div class="wrap"><ul id="menu-menu-1" class="menu genesis-nav-menu menu-primary"><li id="menu-item-4082" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-4082"><a href="https://scottmautz.com/about-2/"><span>ABOUT</span></a>
+<ul class="sub-menu">
+	<li id="menu-item-4080" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4080"><a href="https://scottmautz.com/about-2/"><span>About Scott</span></a></li>
+	<li id="menu-item-4079" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4079"><a href="https://scottmautz.com/credentials/"><span>Credentials</span></a></li>
+</ul>
+</li>
+<li id="menu-item-4088" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-4088"><a href="https://scottmautz.com/keynote-topics/"><span>SPEAKING</span></a>
+<ul class="sub-menu">
+	<li id="menu-item-4084" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4084"><a href="https://scottmautz.com/keynote-topics/"><span>Keynote Topics</span></a></li>
+	<li id="menu-item-4083" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4083"><a href="https://scottmautz.com/scott-in-action/"><span>See Scott in Action</span></a></li>
+	<li id="menu-item-4086" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4086"><a href="https://scottmautz.com/testimonials-2/"><span>Clients and Testimonials</span></a></li>
+	<li id="menu-item-6487" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6487"><a href="https://scottmautz.com/speaking/virtual-keynotes/"><span>Virtual Keynotes</span></a></li>
+	<li id="menu-item-4087" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4087"><a href="https://scottmautz.com/meeting-planners/"><span>A Message for Meeting Planners</span></a></li>
+</ul>
+</li>
+<li id="menu-item-6421" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6421"><a href="https://scottmautz.com/workshops-2/"><span>WORKSHOPS</span></a></li>
+<li id="menu-item-6417" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6417"><a href="https://scottmautz.com/linkedin-learning-courses/"><span>COURSES</span></a></li>
+</ul></div></nav><nav class="nav-secondary" aria-label="Secondary"><div class="wrap"><ul id="menu-menu-2" class="menu genesis-nav-menu menu-secondary"><li id="menu-item-6064" class="booksmenu menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-6064"><a href="https://scottmautz.com/issue-209-steve-jobs-signal-to-noise-ratio-the-forgotten-half-of-accomplishing-things-and-more/#"><span>BOOKS</span></a>
+<ul class="sub-menu">
+	<li id="menu-item-6450" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6450"><a class="menu-image-title-hide menu-image-not-hovered" href="https://scottmautz.com/mentallystrongbook/"><span><span class="menu-image-title-hide menu-image-title">Mentally Strong Book</span><img width="363" height="596" src="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/mentallystrongleader-600w-e1708539488728.webp" class="menu-image menu-image-title-hide" alt="The Mentally Strong Leader Book by Scott Mautz" decoding="async" fetchpriority="high"></span></a></li>
+	<li id="menu-item-6072" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6072"><a class="menu-image-title-hide menu-image-not-hovered" href="https://scottmautz.com/find-the-fire-book/leading-from-the-middle/"><span><span class="menu-image-title-hide menu-image-title">Leading From the Middle</span><img width="169" height="238" src="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/LeadingFromTheMiddle3d-menu.webp" class="menu-image menu-image-title-hide" alt="" decoding="async"></span></a></li>
+	<li id="menu-item-6065" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6065"><a class="menu-image-title-hide menu-image-not-hovered" href="https://scottmautz.com/find-the-fire-book/find-the-fire-book/"><span><span class="menu-image-title-hide menu-image-title">Find the Fire</span><img width="165" height="238" src="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/menu-1.webp" class="menu-image menu-image-title-hide" alt="" decoding="async"></span></a></li>
+	<li id="menu-item-6069" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6069"><a class="menu-image-title-hide menu-image-not-hovered" href="https://scottmautz.com/books/make-it-matter/"><span><span class="menu-image-title-hide menu-image-title">Make It Matter</span><img width="203" height="300" src="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/make-matter-203x300-1.webp" class="menu-image menu-image-title-hide" alt="" decoding="async"></span></a></li>
+</ul>
+</li>
+<li id="menu-item-6424" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6424"><a href="https://scottmautz.com/mentallystrong/"><span>SELF-ASSESSMENT</span></a></li>
+<li id="menu-item-6077" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6077"><a href="https://scottmautz.com/lead-on/"><span>BLOG</span></a></li>
+<li id="menu-item-6063" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6063"><a href="https://scottmautz.com/contact/"><span>CONTACT</span></a></li>
+</ul></div></nav><div class="site-inner"><div class="content-sidebar-wrap"><main class="content"><article class="post-6674 post type-post status-publish format-standard has-post-thumbnail category-leadership-growth category-leadership-development tag-steve-jobs tag-rise tag-run tag-structure tag-signal-to-noise-ratio tag-accomplishing tag-navigate tag-disciplined tag-intensity tag-prioritization tag-apple tag-distractions tag-resilience tag-mentally-strong tag-focus tag-tasks tag-research tag-fear tag-productivity tag-commitment tag-habits entry" aria-label="Issue #209: Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things, and More"><header class="entry-header"><h1 class="entry-title">Issue #209: Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things, and More</h1><h4></h4>
+<p class="entry-meta"><time class="entry-time">August 6, 2025</time> <span class="entry-comments-link"><a href="https://scottmautz.com/issue-209-steve-jobs-signal-to-noise-ratio-the-forgotten-half-of-accomplishing-things-and-more/#respond">Leave a Comment</a></span> </p></header><div class="entry-content"><div class="at-above-post addthis_tool" data-url="https://scottmautz.com/issue-209-steve-jobs-signal-to-noise-ratio-the-forgotten-half-of-accomplishing-things-and-more/"></div>
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="546" src="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/Zoomed-in-3rd-spot-1024x546.jpeg" alt="" class="wp-image-6661" srcset="https://scottmautz.com/wp-content/uploads/2025/06/Zoomed-in-3rd-spot-1024x546.jpeg 1024w, https://scottmautz.com/wp-content/uploads/2025/06/Zoomed-in-3rd-spot-300x160.jpeg 300w, https://scottmautz.com/wp-content/uploads/2025/06/Zoomed-in-3rd-spot-768x410.jpeg 768w, https://scottmautz.com/wp-content/uploads/2025/06/Zoomed-in-3rd-spot-24x13.jpeg 24w, https://scottmautz.com/wp-content/uploads/2025/06/Zoomed-in-3rd-spot-36x19.jpeg 36w, https://scottmautz.com/wp-content/uploads/2025/06/Zoomed-in-3rd-spot-48x26.jpeg 48w, https://scottmautz.com/wp-content/uploads/2025/06/Zoomed-in-3rd-spot-500x267.jpeg 500w, https://scottmautz.com/wp-content/uploads/2025/06/Zoomed-in-3rd-spot.jpeg 1280w" sizes="auto, (max-width: 1024px) 100vw, 1024px"></figure>
+
+
+
+<p><strong><u>INSIGHTS</u></strong>&nbsp;(on leadership/self-leadership)</p>
+
+
+
+<p>Few people are more associated with productivity than Steve Jobs. The Apple founder was legendary for his intensity, ability to focus, and for how much he prioritized prioritization. One of his most powerful concepts on this front&nbsp;<a rel="noreferrer noopener" target="_blank" href="https://na01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DmpAZehPviLQ&amp;data=05%7C02%7C%7Cde69bd9c34304319203708ddd392e5da%7C84df9e7fe9f640afb435aaaaaaaaaaaa%7C1%7C0%7C638899350127712142%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&amp;sdata=%2Fva0WdqYUW7%2FjTX%2F%2F%2BMdja9tUqHq8p0f1Wk9nND8LFY%3D&amp;reserved=0">recently resurfaced</a>, known as&nbsp;<strong>the&nbsp;<em>Signal-to-Noise Ratio</em>&nbsp;– Jobs’ approach for achieving the extraordinary level of results&nbsp;</strong>that he’s remembered and revered for. &nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+
+
+<p>It’s deceptively simple. Jobs aimed to accomplish an 80/20 split: 80 percent of his time was dedicated to critical tasks (signal), and no more than 20 percent on distractions or less important tasks (noise).</p>
+
+
+
+<p>To make this more concrete, Jobs concentrated on three to five tasks that needed to be completed each day to fulfill his mission, aiming to finish them&nbsp;<em>within 18 hours</em>. Period. Anything else was a distraction. To eliminate distractions, he was brutal. He was often perceived as overly blunt or even rude in his communication style, having very little patience for thoughts or ideas that didn’t align with what was most important.</p>
+
+
+
+<p>His belief in the signal-to-noise ratio carried over in everything he did. He made design decisions that emphasized simplicity and the most important functionality features, while discarding the rest. The 80/20 split dominated everything he touched, whether it was strategy, presentations, or meetings.</p>
+
+
+
+<p>Here’s the thing. You instinctively understand this, even if you haven’t heard the term “signal-to-noise ratio.” In fact, I conducted thousands of executive interviews for my LinkedIn Learning course,&nbsp;<a rel="noreferrer noopener" target="_blank" href="https://na01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.linkedin.com%2Flearning%2Ftop-ten-overlooked-productivity-hacks%2Fthe-best-productivity-tips-you-probably-missed%3Fresume%3Dfalse&amp;data=05%7C02%7C%7Cde69bd9c34304319203708ddd392e5da%7C84df9e7fe9f640afb435aaaaaaaaaaaa%7C1%7C0%7C638899350127725120%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&amp;sdata=JxM9k4fs5NLTjlYd7x4J%2FYeX%2FP6ljGxmYPpD9p2EgRs%3D&amp;reserved=0"><em>Top Ten Overlooked Productivity Hacks</em></a>, and it soon became clear that everyone gets this rule.</p>
+
+
+
+<p>So, if it’s something we all know, why are some so much more productive than others?</p>
+
+
+
+<p>Commitment to the cause.</p>
+
+
+
+<p>How disciplined are you in staying focused on the 80 percent? Do you have any mechanisms in place to help you stay focused? For example, one client of mine is such a believer in the signal-to-noise ratio that they structure their annual employee reviews around it. (As part of the review, they assess how well the employee did on spending their time in the “signal” column versus the “noise” column that year). You don’t have to go this far, but it does beg the following question:</p>
+
+
+
+<p><em>How might you put structures, procedures, or habits in place to help you be more “signal” focused?</em></p>
+
+
+
+<p><strong><u>IMPERFECTIONS</u></strong>&nbsp;(a mistake many make)</p>
+
+
+
+<p>I write a lot about being mentally strong (I even have a book titled,&nbsp;<a rel="noreferrer noopener" target="_blank" href="https://na01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fscottmautz.com%2Fmentallystrongbook%2F&amp;data=05%7C02%7C%7Cde69bd9c34304319203708ddd392e5da%7C84df9e7fe9f640afb435aaaaaaaaaaaa%7C1%7C0%7C638899350127737921%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&amp;sdata=ukYb5N1knB9NfQpQoW4bEtGukOjZBCOYjIBDY93iqcE%3D&amp;reserved=0"><em>The Mentally Strong Leader</em></a>), and I want to discuss a mistake many make.</p>
+
+
+
+<p>Most people would say that to be able&nbsp;<strong>to accomplish something</strong>, you need resilience. You need to know how to push through until you reach the finish line. And, yes, of course, that’s important. But if you really want to get better at accomplishing more, you have to remember this:</p>
+
+
+
+<p><em>It’s as much about getting to the starting line as it is getting to the finish line.</em></p>
+
+
+
+<p><a rel="noreferrer noopener" target="_blank" href="https://na01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fahead-app.com%2Fblog%2Fprocrastination%2Fthe-science-of-task-initiation-why-starting-is-half-the-battle-against-procrastination-20250219-060552&amp;data=05%7C02%7C%7Cde69bd9c34304319203708ddd392e5da%7C84df9e7fe9f640afb435aaaaaaaaaaaa%7C1%7C0%7C638899350127753822%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&amp;sdata=JYaBKT6bq5lhCKUrnTsr6%2BSe41U4OsI%2FjIFbNcQPLK0%3D&amp;reserved=0">Research</a>&nbsp;is clear on the importance of just getting started on something, and why it’s so difficult to do so. It’s what brain scientists call&nbsp;<em>cognitive load theory</em>, which says that “your brain uses far more energy when initiating a task than when you’re already in the flow.” It’s kind of like jump-starting a dead car battery on a cold morning.</p>
+
+
+
+<p>So, what’s the key to just getting started, then?</p>
+
+
+
+<p>Getting better at navigating&nbsp;<em>the moment before</em>&nbsp;the work.</p>
+
+
+
+<p>It’s about identifying a transition point that would lead you directly into the work that you want to get started on, then powering through that transition point without overthinking it.</p>
+
+
+
+<p>For example, exercise is important to me, but that doesn’t mean I’m always in the mood for it. Sometimes, I dread hitting the weight machine (which I do before cardio). So, I identified a transition point; putting on my exercise sneakers, filling my water bottle, and snapping off the first set of repetitions. I don’t think about it. I don’t let the sense of dread build up. I just execute that transition point mindlessly, and before you know it, I’m off and running.</p>
+
+
+
+<p>Think about something you want to get done but are dreading starting. Now think of the moment before the work, that transition point. What might it be, and how could you power through it to get you going?</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="576" src="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/astart-1024x576.png" alt="" class="wp-image-6676" srcset="https://scottmautz.com/wp-content/uploads/2025/08/astart-1024x576.png 1024w, https://scottmautz.com/wp-content/uploads/2025/08/astart-300x169.png 300w, https://scottmautz.com/wp-content/uploads/2025/08/astart-768x432.png 768w, https://scottmautz.com/wp-content/uploads/2025/08/astart-1536x864.png 1536w, https://scottmautz.com/wp-content/uploads/2025/08/astart-24x14.png 24w, https://scottmautz.com/wp-content/uploads/2025/08/astart-36x20.png 36w, https://scottmautz.com/wp-content/uploads/2025/08/astart-48x27.png 48w, https://scottmautz.com/wp-content/uploads/2025/08/astart-500x281.png 500w, https://scottmautz.com/wp-content/uploads/2025/08/astart.png 1999w" sizes="auto, (max-width: 1024px) 100vw, 1024px"></figure>
+
+
+
+<p><strong><u>IMPLEMENTATION</u></strong>&nbsp;(one research-backed strategy, tip, or tool)</p>
+
+
+
+<p>Here’s the simplest of tools for this week’s “Implementation” section.</p>
+
+
+
+<p><strong>FEAR can stand for two things</strong>.</p>
+
+
+
+<p>Forget Everything And Run</p>
+
+
+
+<p>or,</p>
+
+
+
+<p>Face Everything And Rise</p>
+
+
+
+<p>Which definition will you choose?</p>
+<!-- AddThis Advanced Settings above via filter on the_content --><!-- AddThis Advanced Settings below via filter on the_content --><!-- AddThis Advanced Settings generic via filter on the_content --><!-- AddThis Share Buttons above via filter on the_content --><!-- AddThis Share Buttons below via filter on the_content --><div class="at-below-post addthis_tool" data-url="https://scottmautz.com/issue-209-steve-jobs-signal-to-noise-ratio-the-forgotten-half-of-accomplishing-things-and-more/"></div><!-- AddThis Share Buttons generic via filter on the_content --><!--<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+			xmlns:dc="http://purl.org/dc/elements/1.1/"
+			xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+		<rdf:Description rdf:about="https://scottmautz.com/issue-209-steve-jobs-signal-to-noise-ratio-the-forgotten-half-of-accomplishing-things-and-more/"
+    dc:identifier="https://scottmautz.com/issue-209-steve-jobs-signal-to-noise-ratio-the-forgotten-half-of-accomplishing-things-and-more/"
+    dc:title="Issue #209: Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things, and More"
+    trackback:ping="https://scottmautz.com/issue-209-steve-jobs-signal-to-noise-ratio-the-forgotten-half-of-accomplishing-things-and-more/trackback/" />
+</rdf:RDF>-->
+</div><footer class="entry-footer"><p class="entry-meta"><span class="entry-categories">Filed Under: <a href="https://scottmautz.com/category/leadership-growth/" rel="category tag">Leadership Growth</a>, <a href="https://scottmautz.com/category/leadership-development/" rel="category tag">Leadership Development</a></span> <span class="entry-tags">Tagged With: <a href="https://scottmautz.com/tag/steve-jobs/" rel="tag">Steve Jobs</a>, <a href="https://scottmautz.com/tag/rise/" rel="tag">rise</a>, <a href="https://scottmautz.com/tag/run/" rel="tag">run</a>, <a href="https://scottmautz.com/tag/structure/" rel="tag">structure</a>, <a href="https://scottmautz.com/tag/signal-to-noise-ratio/" rel="tag">Signal to Noise Ratio</a>, <a href="https://scottmautz.com/tag/accomplishing/" rel="tag">accomplishing</a>, <a href="https://scottmautz.com/tag/navigate/" rel="tag">navigate</a>, <a href="https://scottmautz.com/tag/disciplined/" rel="tag">disciplined</a>, <a href="https://scottmautz.com/tag/intensity/" rel="tag">intensity</a>, <a href="https://scottmautz.com/tag/prioritization/" rel="tag">prioritization</a>, <a href="https://scottmautz.com/tag/apple/" rel="tag">Apple</a>, <a href="https://scottmautz.com/tag/distractions/" rel="tag">distractions</a>, <a href="https://scottmautz.com/tag/resilience/" rel="tag">resilience</a>, <a href="https://scottmautz.com/tag/mentally-strong/" rel="tag">mentally strong</a>, <a href="https://scottmautz.com/tag/focus/" rel="tag">focus</a>, <a href="https://scottmautz.com/tag/tasks/" rel="tag">tasks</a>, <a href="https://scottmautz.com/tag/research/" rel="tag">Research</a>, <a href="https://scottmautz.com/tag/fear/" rel="tag">fear</a>, <a href="https://scottmautz.com/tag/productivity/" rel="tag">productivity</a>, <a href="https://scottmautz.com/tag/commitment/" rel="tag">commitment</a>, <a href="https://scottmautz.com/tag/habits/" rel="tag">habits</a></span></p></footer></article>	<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="https://scottmautz.com/issue-209-steve-jobs-signal-to-noise-ratio-the-forgotten-half-of-accomplishing-things-and-more/#respond" style="display:none;">Cancel reply</a></small></h3><form action="https://scottmautz.com/wp-comments-post.php?wpe-comment-post=scottmautz" method="post" id="commentform" class="comment-form"><p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> <span class="required-field-message">Required fields are marked <span class="required">*</span></span></p><p class="comment-form-comment"><label for="comment">Comment <span class="required">*</span></label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required=""></textarea></p><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" autocomplete="name" required=""></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" autocomplete="email" required=""></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="url" value="" size="30" maxlength="200" autocomplete="url"></p>
+<p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes"> <label for="wp-comment-cookies-consent">Save my name, email, and website in this browser for the next time I comment.</label></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment"> <input type="hidden" name="comment_post_ID" value="6674" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="4deccb694c"></p><p style="display: none !important;" class="akismet-fields-container" data-prefix="ak_"><label>Δ<textarea name="ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_1" name="ak_js" value="1758857871562"><script>document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTime() );</script></p></form>	</div><!-- #respond -->
+	</main></div></div><div class="footer-widgets"><div class="wrap"><div class="widget-area footer-widgets-1 footer-widget-area"><section id="custom_html-3" class="widget_text widget widget_custom_html"><div class="widget_text widget-wrap"><div class="textwidget custom-html-widget"><div class=" ubtn-ctn-center "><a class="ubtn-link ult-adjust-bottom-margin ubtn-center ubtn-custom " href="https://scottmautz.com/contact"><button type="button" id="ubtn-h8785" class="ubtn ult-adjust-bottom-margin ult-responsive ubtn-custom ubtn-fade-bg  none  ubtn-center   tooltip-5bb4ce9766a10" data-hover="#e37658" data-border-color="" data-bg="#e37658" data-hover-bg="#e6e7e8" data-border-hover="" data-shadow-hover="" data-shadow-click="none" data-shadow="" data-shd-shadow="" data-ultimate-target="#ubtn-h8785" data-responsive-json-new="{&quot;font-size&quot;:&quot;desktop:32px;&quot;,&quot;line-height&quot;:&quot;&quot;}" style="font-weight:normal;width:260px;min-height:70px;padding:px px;border:none;font-size:21px;background: #e37658;color: #ffffff;"><span class="ubtn-hover" style="background: rgb(230, 231, 232);"></span><span class="ubtn-data ubtn-text ">BOOK SCOTT</span></button></a></div></div></div></section>
+<section id="text-19" class="widget widget_text"><div class="widget-wrap">			<div class="textwidget"><div class="footer-divider"></div></div>
+		</div></section>
+<section id="text-12" class="widget widget_text"><div class="widget-wrap">			<div class="textwidget"><div class="footer-header">Thanks for visiting. I hope to help you<br>
+	Ignite Profound Performance™.</div>
+<ul class="footer-social">
+	<li><a href="https://www.facebook.com/ScottMautzPP/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+	<li><a href="https://twitter.com/scott_mautz" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+	<li><a href="https://www.linkedin.com/in/scottmautz" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+	<li><a href="https://www.youtube.com/channel/UCESjWJrnWegel9lAlhXDS3A" target="_blank"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
+	<li><a href="https://www.instagram.com/scottmautz/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+</ul>
+<div class="footer-note">Call (513) 309-2919 or click <span><a style="color: #e37658 !important; text-decoration: underline;" href="https://scottmautz.com/contact/">here</a></span> to connect with Scott.</div></div>
+		</div></section>
+</div></div></div><footer class="site-footer"><div class="wrap"></div></footer></div><script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"\/*"},{"not":{"href_matches":["\/wp-*.php","\/wp-admin\/*","\/wp-content\/uploads\/*","\/wp-content\/*","\/wp-content\/plugins\/*","\/wp-content\/themes\/scottmautz\/*","\/wp-content\/themes\/genesis\/*","\/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+
+			<div class="wprm-wrapper">
+        
+        <!-- Overlay Starts here -->
+			         <!-- Overlay Ends here -->
+			
+			         <div id="wprmenu_bar" class="wprmenu_bar bodyslide left">
+  <div class="hamburger hamburger--slider">
+    <span class="hamburger-box">
+      <span class="hamburger-inner"></span>
+    </span>
+  </div>
+  <div class="menu_title">
+      <a href="https://scottmautz.com/">
+          </a>
+      </div>
+</div>			 
+			<div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left default " id="mg-wprm-wrap">
+				
+				
+				<ul id="wprmenu_menu_ul">
+  
+  <li id="menu-item-4114" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-4114 wprmenu_parent_item_li"><span class="wprmenu_icon wprmenu_icon_par icon_default"></span> <a href="https://scottmautz.com/about-2/" class="wprmenu_parent_item">ABOUT</a>
+<ul class="sub-menu" style="display: none;">
+	<li id="menu-item-4115" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4115"><a href="https://scottmautz.com/about-2/">About Scott</a></li>
+	<li id="menu-item-4116" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4116"><a href="https://scottmautz.com/credentials/">Credentials</a></li>
+</ul>
+</li>
+<li id="menu-item-4121" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-4121 wprmenu_parent_item_li"><span class="wprmenu_icon wprmenu_icon_par icon_default"></span> <a href="https://scottmautz.com/keynote-topics/" class="wprmenu_parent_item">SPEAKING</a>
+<ul class="sub-menu" style="display: none;">
+	<li id="menu-item-6427" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6427"><a href="https://scottmautz.com/keynote-topics/">Keynote Topics</a></li>
+	<li id="menu-item-4120" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4120"><a href="https://scottmautz.com/scott-in-action/">See Scott in Action</a></li>
+	<li id="menu-item-4123" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4123"><a href="https://scottmautz.com/testimonials-2/">Clients and Testimonials</a></li>
+	<li id="menu-item-6486" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6486"><a href="https://scottmautz.com/speaking/virtual-keynotes/">Virtual Keynotes</a></li>
+	<li id="menu-item-4124" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4124"><a href="https://scottmautz.com/meeting-planners/">A Message for Meeting Planners</a></li>
+</ul>
+</li>
+<li id="menu-item-6428" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6428"><a href="https://scottmautz.com/workshops-2/">WORKSHOPS</a></li>
+<li id="menu-item-4125" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4125"><a href="https://scottmautz.com/issue-209-steve-jobs-signal-to-noise-ratio-the-forgotten-half-of-accomplishing-things-and-more/#">COURSES</a></li>
+<li id="menu-item-4129" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-4129 wprmenu_parent_item_li"><span class="wprmenu_icon wprmenu_icon_par icon_default"></span> <a href="https://scottmautz.com/issue-209-steve-jobs-signal-to-noise-ratio-the-forgotten-half-of-accomplishing-things-and-more/#" class="wprmenu_parent_item">BOOKS</a>
+<ul class="sub-menu" style="display: none;">
+	<li id="menu-item-6451" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6451"><a class="menu-image-title-hide menu-image-not-hovered" href="https://scottmautz.com/mentallystrongbook/"><span class="menu-image-title-hide menu-image-title">Mentally Strong Book</span><img width="363" height="596" src="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/mentallystrongleader-600w-e1708539488728.webp" class="menu-image menu-image-title-hide" alt="The Mentally Strong Leader Book by Scott Mautz" decoding="async" loading="lazy"></a></li>
+	<li id="menu-item-5083" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5083"><a class="menu-image-title-hide menu-image-not-hovered" href="https://scottmautz.com/find-the-fire-book/leading-from-the-middle/"><span class="menu-image-title-hide menu-image-title">Leading from the Middle</span><img width="169" height="238" src="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/LeadingFromTheMiddle3d-menu(1).webp" class="menu-image menu-image-title-hide" alt="" decoding="async" loading="lazy"></a></li>
+	<li id="menu-item-4130" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4130"><a class="menu-image-title-hide menu-image-not-hovered" href="https://scottmautz.com/find-the-fire-book/find-the-fire-book/"><span class="menu-image-title-hide menu-image-title">Find the Fire</span><img width="165" height="238" src="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/FindtheFire-menu.webp" class="menu-image menu-image-title-hide" alt="" decoding="async" loading="lazy"></a></li>
+	<li id="menu-item-4131" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4131"><a class="menu-image-title-hide menu-image-not-hovered" href="https://scottmautz.com/find-the-fire-book/make-it-matter/"><span class="menu-image-title-hide menu-image-title">Make it Matter</span><img width="203" height="300" src="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/make-matter-203x300.png" class="menu-image menu-image-title-hide" alt="" decoding="async" loading="lazy"></a></li>
+</ul>
+</li>
+<li id="menu-item-6429" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6429"><a href="https://scottmautz.com/mentallystrong/">SELF-ASSESSMENT</a></li>
+<li id="menu-item-5084" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5084"><a href="https://scottmautz.com/lead-on/">BLOG</a></li>
+<li id="menu-item-60" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-60"><a href="https://scottmautz.com/contact/">CONTACT</a></li>
+        <li>
+          <div class="wpr_search search_top">
+            <form role="search" method="get" class="wpr-search-form" action="https://scottmautz.com/">
+  <label for="search-form-68d6022d92636"></label>
+  <input type="search" class="wpr-search-field" placeholder="Search..." value="" name="s" title="Search...">
+  <button type="submit" class="wpr_submit">
+    <i class="wpr-icon-search"></i>
+  </button>
+</form>          </div>
+        </li>
+        
+     
+</ul>
+				
+				</div>
+			</div>
+			<script type="text/javascript">
+jQuery( document ).ready( function(e) {
+jQuery('html').css('margin-top', '0 !important');
+});
+</script><script data-cfasync="false" type="text/javascript">if (window.addthis_product === undefined) { window.addthis_product = "wpp"; } if (window.wp_product_version === undefined) { window.wp_product_version = "wpp-6.2.6"; } if (window.addthis_share === undefined) { window.addthis_share = {}; } if (window.addthis_config === undefined) { window.addthis_config = {"data_track_clickback":true,"ignore_server_config":true,"ui_atversion":"300"}; } if (window.addthis_layers === undefined) { window.addthis_layers = {}; } if (window.addthis_layers_tools === undefined) { window.addthis_layers_tools = [{"sharetoolbox":{"numPreferredServices":5,"counts":"one","size":"32px","style":"fixed","shareCountThreshold":0,"elements":".addthis_inline_share_toolbox_below,.at-below-post"}}]; } else { window.addthis_layers_tools.push({"sharetoolbox":{"numPreferredServices":5,"counts":"one","size":"32px","style":"fixed","shareCountThreshold":0,"elements":".addthis_inline_share_toolbox_below,.at-below-post"}});  } if (window.addthis_plugin_info === undefined) { window.addthis_plugin_info = {"info_status":"enabled","cms_name":"WordPress","plugin_name":"Share Buttons by AddThis","plugin_version":"6.2.6","plugin_mode":"WordPress","anonymous_profile_id":"wp-13e0290082a079b9f21e8c29da76f24b","page_info":{"template":"posts","post_type":""},"sharing_enabled_on_post_via_metabox":false}; } 
+                    (function() {
+                      var first_load_interval_id = setInterval(function () {
+                        if (typeof window.addthis !== 'undefined') {
+                          window.clearInterval(first_load_interval_id);
+                          if (typeof window.addthis_layers !== 'undefined' && Object.getOwnPropertyNames(window.addthis_layers).length > 0) {
+                            window.addthis.layers(window.addthis_layers);
+                          }
+                          if (Array.isArray(window.addthis_layers_tools)) {
+                            for (i = 0; i < window.addthis_layers_tools.length; i++) {
+                              window.addthis.layers(window.addthis_layers_tools[i]);
+                            }
+                          }
+                        }
+                     },1000)
+                    }());
+                </script> <script data-cfasync="false" type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=wp-13e0290082a079b9f21e8c29da76f24b" async="async"></script><script type="text/javascript" src="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/comment-reply.min.js" id="comment-reply-js" async="async" data-wp-strategy="async"></script>
+<script type="text/javascript" id="newsletter-js-extra">
+/* <![CDATA[ */
+var newsletter_data = {"action_url":"https:\/\/scottmautz.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/main.js" id="newsletter-js"></script>
+<script defer="" type="text/javascript" src="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/akismet-frontend.js" id="akismet-frontend-js"></script>
+<script type="text/javascript" src="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/lsp_jquery.cycle2.js" id="jquery_cycle2-js"></script>
+<script type="text/javascript" src="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/lsp_jquery.cycle2.carousel.min.js" id="jquery_cycle2_carousel_min-js"></script>
+<script type="text/javascript" src="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/lsp_jquery_shuffle.js" id="jquery_cycle2_shuffle-js"></script>
+<script type="text/javascript" src="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/lsp_jquery.easing.js" id="jquery_cycle2_easing-js"></script>
+<script type="text/javascript" src="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/lsp_jquery_tile.js" id="jquery_cycle2_tile-js"></script>
+
+<!-- Shortcodes Ultimate custom CSS - start -->
+<style type="text/css">
+.su-button-style-ghost {
+    margin: 10px 0px;
+}
+
+.su-button-style-flat {
+	border: 2px solid #000000;
+}
+</style>
+<!-- Shortcodes Ultimate custom CSS - end -->
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'984fb995f9aabd78',t:'MTc1ODg1Nzg3MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border: none; visibility: hidden;" src="./Steve Jobs’ Signal-to-Noise Ratio, the Forgotten Half of Accomplishing Things_files/saved_resource.html"></iframe>
+<div style="position:fixed; top:0; left:0; overflow:hidden;"><input style="position:absolute; left:-300px;" type="text" value="" id="focus_retriever" readonly="true"></div></body></html>

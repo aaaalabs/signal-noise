@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signal/Noise Articles Preview</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #000;
+            color: #fff;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #00ff88;
+            margin-bottom: 40px;
+            font-weight: 100;
+            font-size: 3rem;
+        }
+        .articles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .article-card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 30px;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .article-card:hover {
+            transform: translateY(-5px);
+            border-color: #00ff88;
+        }
+        .article-number {
+            color: #00ff88;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-weight: 300;
+            font-size: 1.5rem;
+        }
+        .description {
+            color: #999;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .keywords {
+            margin-bottom: 20px;
+        }
+        .keyword {
+            display: inline-block;
+            background: #00ff88;
+            color: #000;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .enhancements {
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+        .enhancements h3 {
+            color: #00ff88;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            font-weight: 400;
+        }
+        .enhancement-list {
+            list-style: none;
+        }
+        .enhancement-list li {
+            color: #ccc;
+            padding-left: 20px;
+            position: relative;
+            margin-bottom: 5px;
+        }
+        .enhancement-list li:before {
+            content: "✓";
+            color: #00ff88;
+            position: absolute;
+            left: 0;
+        }
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        .btn {
+            background: #00ff88;
+            color: #000;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: opacity 0.3s;
+            display: inline-block;
+        }
+        .btn:hover {
+            opacity: 0.8;
+        }
+        .btn-secondary {
+            background: transparent;
+            color: #00ff88;
+            border: 1px solid #00ff88;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat-value {
+            color: #00ff88;
+            font-size: 1.5rem;
+            font-weight: 100;
+        }
+        .stat-label {
+            color: #666;
+            font-size: 0.8rem;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Signal/Noise Article Collection</h1>
+
+        <div class="articles">
+            <!-- Article 1 -->
+            <div class="article-card">
+                <div class="article-number">ARTICLE 1 - FOUNDATION</div>
+                <h2>Steve Jobs' Secret Productivity Method</h2>
+                <p class="description">
+                    Discover how the Apple founder's revolutionary approach to focus transformed productivity—and how you can apply it today.
+                </p>
+                <div class="keywords">
+                    <span class="keyword">steve jobs productivity</span>
+                    <span class="keyword">80/20 principle</span>
+                    <span class="keyword">signal to noise</span>
+                </div>
+                <div class="enhancements">
+                    <h3>SEO Enhancements</h3>
+                    <ul class="enhancement-list">
+                        <li>Kevin O'Leary exclusive video</li>
+                        <li>4 interactive infographics</li>
+                        <li>Jobs vs Musk comparison table</li>
+                        <li>Pull-quote formatted quotes</li>
+                        <li>Stanford speech imagery</li>
+                    </ul>
+                </div>
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-value">1,200</div>
+                        <div class="stat-label">Monthly Searches</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">15+</div>
+                        <div class="stat-label">Authority Links</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">10</div>
+                        <div class="stat-label">FAQs</div>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <a href="/seo-tools/article-steve-jobs-productivity-method.md" class="btn">View Article</a>
+                </div>
+            </div>
+
+            <!-- Article 2/4 -->
+            <div class="article-card">
+                <div class="article-number">ARTICLE 4 - PHILOSOPHY</div>
+                <h2>Signal vs Noise: The Philosophy</h2>
+                <p class="description">
+                    How information theory became the secret weapon of history's most focused achievers—and why binary thinking might be your breakthrough.
+                </p>
+                <div class="keywords">
+                    <span class="keyword">signal vs noise</span>
+                    <span class="keyword">productivity philosophy</span>
+                    <span class="keyword">claude shannon</span>
+                </div>
+                <div class="enhancements">
+                    <h3>SEO Enhancements</h3>
+                    <ul class="enhancement-list">
+                        <li>10-method comparison table</li>
+                        <li>Full HTML version ready</li>
+                        <li>Schema markup implemented</li>
+                        <li>Waveform visualizations</li>
+                        <li>FAQ schema for snippets</li>
+                    </ul>
+                </div>
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-value">600</div>
+                        <div class="stat-label">Monthly Searches</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">HTML</div>
+                        <div class="stat-label">Ready</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">10</div>
+                        <div class="stat-label">FAQs</div>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <a href="/blog-signal-vs-noise-philosophy.html" class="btn">View HTML</a>
+                    <a href="/seo-tools/article-signal-vs-noise-philosophy.md" class="btn btn-secondary">View MD</a>
+                </div>
+            </div>
+
+            <!-- Article 3 -->
+            <div class="article-card">
+                <div class="article-number">ARTICLE 3 - MATHEMATICS</div>
+                <h2>The Mathematics of Productivity</h2>
+                <p class="description">
+                    How the Pareto Principle became the mathematical foundation for Steve Jobs' success—and why power laws explain productivity.
+                </p>
+                <div class="keywords">
+                    <span class="keyword">80/20 rule</span>
+                    <span class="keyword">pareto principle</span>
+                    <span class="keyword">mathematical productivity</span>
+                </div>
+                <div class="enhancements">
+                    <h3>SEO Enhancements</h3>
+                    <ul class="enhancement-list">
+                        <li>Interactive calculator widget</li>
+                        <li>Mathematical proof visuals</li>
+                        <li>Power law vs normal table</li>
+                        <li>Task distribution charts</li>
+                        <li>Before/after comparisons</li>
+                    </ul>
+                </div>
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-value">1,800</div>
+                        <div class="stat-label">Monthly Searches</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">CALC</div>
+                        <div class="stat-label">Interactive</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">5</div>
+                        <div class="stat-label">Infographics</div>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <a href="/seo-tools/article-80-20-mathematics-productivity.md" class="btn">View Article</a>
+                </div>
+            </div>
+
+            <!-- Article 11 -->
+            <div class="article-card">
+                <div class="article-number">ARTICLE 11 - NEW NICHE</div>
+                <h2>ADHD Professional's Guide</h2>
+                <p class="description">
+                    Why the Steve Jobs productivity method actually aligns with ADHD brain patterns—and why your "disorder" might be a competitive advantage.
+                </p>
+                <div class="keywords">
+                    <span class="keyword">ADHD productivity</span>
+                    <span class="keyword">neurodivergent</span>
+                    <span class="keyword">ADHD focus</span>
+                </div>
+                <div class="enhancements">
+                    <h3>SEO Enhancements</h3>
+                    <ul class="enhancement-list">
+                        <li>NO competition (unique)</li>
+                        <li>Neuroscience backing</li>
+                        <li>ADHD-specific schedule</li>
+                        <li>Dopamine calculations</li>
+                        <li>Real case studies</li>
+                    </ul>
+                </div>
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-value">800</div>
+                        <div class="stat-label">Monthly Searches</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">ZERO</div>
+                        <div class="stat-label">Competition</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">10</div>
+                        <div class="stat-label">FAQs</div>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <a href="/seo-tools/article-11-adhd-signal-vs-noise.md" class="btn">View Article</a>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 60px;">
+            <h2 style="color: #00ff88; margin-bottom: 20px;">Ready to Publish?</h2>
+            <p style="color: #999; margin-bottom: 30px;">All articles are SEO-optimized with competitive advantages built in</p>
+            <div style="display: flex; gap: 20px; justify-content: center;">
+                <a href="/blog-signal-vs-noise-philosophy.html" class="btn" style="font-size: 1.2rem; padding: 15px 40px;">
+                    View Published Article 4
+                </a>
+                <a href="/seo-tools/" class="btn btn-secondary" style="font-size: 1.2rem; padding: 15px 40px;">
+                    Browse All Articles
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

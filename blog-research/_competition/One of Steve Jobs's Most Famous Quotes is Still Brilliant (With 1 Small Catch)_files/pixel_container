@@ -1,0 +1,10 @@
+(function(){(function(){function encode(data){var params=[];for(var key in data){if(data.hasOwnProperty(key)){params.push(encodeURIComponent(key)+'='+encodeURIComponent(data[key]));}}
+return params.join('&');}
+var data={api_token:"213963bc75433ae32af0530e7f1fd41e",cid:"941dc996-efed-46e6-af87-c0b012adc5d5",sub1:"656de5bb71ab7dcf9d10c5e3",sub2:"25900336efb04fccb9deaadb4c98bd8e",ua:navigator.userAgent,url:window.location.href,ip:"209.198.159.42",};var img=new Image();img.src="https://i.liadm.com/s/80912?"+encode(data);img.border="0";img.width="1";img.height="1";})();var cookieName='encKJASd73';function setCookie(name,value,days){var expires="";if(days){var date=new Date();date.setTime(date.getTime()+(days*24*60*60*1000));expires="; expires="+date.toUTCString();}
+document.cookie=name+"="+(value||"")+expires+"; path=/";}
+function getCookie(name){var nameEQ=name+"=";var ca=document.cookie.split(';');for(var i=0;i<ca.length;i++){var c=ca[i];while(c.charAt(0)==' ')c=c.substring(1,c.length);if(c.indexOf(nameEQ)==0)return c.substring(nameEQ.length,c.length);}
+return null;}
+var userId=getCookie(cookieName);if(!userId){userId=[...crypto.getRandomValues(new Uint8Array(16))].map(b=>b.toString(16).padStart(2,'0')).join('');setCookie(cookieName,userId,365);}
+function encodeData(data){var params=[];for(var key in data){if(data.hasOwnProperty(key)){params.push(encodeURIComponent(key)+'='+encodeURIComponent(data[key]));}}
+return params.join('&');}
+var S1='941dc996-efed-46e6-af87-c0b012adc5d5'!==''?'941dc996-efed-46e6-af87-c0b012adc5d5':window.S1||'';var S2='656de5bb71ab7dcf9d10c5e3'!==''?'656de5bb71ab7dcf9d10c5e3':window.S2||'';var S3='25900336efb04fccb9deaadb4c98bd8e'!==''?'25900336efb04fccb9deaadb4c98bd8e':window.S3||'';var ip='209.198.159.42'!==''?'209.198.159.42':window.IP||'';var data={uuid:userId,pid:'93'!==''?93:0,url:window.location.href,referrer:document.referrer,ua:navigator.userAgent,s1:S1,s2:S2,s3:S3,ip:ip,};var img=new Image();img.src='https://tmpxl.com/pixel?'+encodeData(data);})();

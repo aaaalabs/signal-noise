@@ -78,15 +78,15 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'signal-vs-noise-philosophy',
-    title: 'Signal vs Noise: A Philosophy for Modern Life',
-    titleDe: 'Signal vs Noise: Eine Philosophie für das moderne Leben',
-    description: 'How information theory revolutionizes productivity and decision-making',
-    descriptionDe: 'Wie die Informationstheorie Produktivität und Entscheidungsfindung revolutioniert',
-    date: '13 Oct 2025',
-    readTime: '6 min',
-    keywords: ['signal vs noise', 'philosophy', 'information theory'],
-    publishDate: '2025-10-13',
-    isPublished: false
+    title: 'Signal vs Noise: The Productivity Philosophy That Changes Everything',
+    titleDe: 'Signal vs Noise: Die Produktivitätsphilosophie, die alles verändert',
+    description: 'How information theory became the secret weapon of history\'s most focused achievers',
+    descriptionDe: 'Wie die Informationstheorie zur Geheimwaffe der fokussiertesten Leistungsträger wurde',
+    date: '26 Sept 2025',
+    readTime: '12 min',
+    keywords: ['signal vs noise', 'philosophy', 'information theory', 'claude shannon', 'steve jobs'],
+    publishDate: '2025-09-26',
+    isPublished: true
   },
   {
     slug: '90-day-tracking-experiment',

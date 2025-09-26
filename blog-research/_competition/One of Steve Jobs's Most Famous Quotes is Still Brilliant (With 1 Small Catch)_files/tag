@@ -1,0 +1,24 @@
+(function(w, d) {
+  try {
+    d = w.top.document || d; w = w.top.document ? w.top : w;
+  } catch (e) {}
+  var ttag = function() {
+    var _tt_articles = window.top.document.querySelectorAll('.article-body');
+var _tt_slots = _tt_articles[_tt_articles.length - 1].querySelectorAll('p:not(.sc-AxheI)');
+var minSlot = 6;
+if (window.screen.width < 768){minSlot = 2;}
+    w.teads.page(12927).placement(27037, {slider: {allow_corner_position: false, allow_top_position: false}, "css":"margin: 16px auto 0; max-width: 550px;","callbacks":{"AdError":function () {var content = "<script>var unruly = window.unruly || {};unruly.native = unruly.native || {};unruly.native.siteId = 1002683;<\/script><script src=\"//video.unrulymedia.com/native/native-loader.js\"><\/script><img src=\"https://static.mvdigitalmedia.com/pixel.gif\">";
+var tti = window.top.document.createElement('div'); tti.id = "UnrulyPassback"; tti.style.display = "none"; tti.innerHTML = content;
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(tti, s);}},"format":"inread","slot":{"avoid":{"selector":".wp-caption","distance":20},"selector":_tt_slots,"minimum":minSlot}}).passback(function passback() {var content = "<script>var unruly = window.unruly || {};unruly.native = unruly.native || {};unruly.native.siteId = 1002683;<\/script><script src=\"//video.unrulymedia.com/native/native-loader.js\"><\/script><img src=\"https://static.mvdigitalmedia.com/pixel.gif\">";
+var tti = window.top.document.createElement('div'); tti.id = "UnrulyPassback"; tti.style.display = "none"; tti.innerHTML = content;
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(tti, s);}).serve();
+  };
+  if (w.teads && w.teads.page) { ttag(); }
+  else if (!w.teadsscript) {
+    var s = document.createElement('script');
+    s.src = 'https://static.teads.tv/static/master/media/format/v3/teads-format.min.js';
+    s.async = true; s.onload = ttag; w.teadsscript = d.getElementsByTagName('head')[0].appendChild(s);
+  } else {
+    w.teadsscript.addEventListener('load', ttag);
+  }
+})(window, document);

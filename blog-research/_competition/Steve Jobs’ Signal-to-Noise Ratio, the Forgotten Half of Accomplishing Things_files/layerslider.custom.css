@@ -1,0 +1,38 @@
+/* You can type here any CSS code that will be loaded both on your admin and front-end pages.
+Let us help you by giving a few exmaple CSS classes: */
+
+/* Front-end sliders & preview */
+
+.ls-container { /* The slider itself */
+
+}
+
+.ls-slide { 
+
+}
+
+.ls-slide a:hover {
+	color: blue;
+	text-decoration: underline;
+}
+
+.ls-slide #yourID {
+
+}
+
+.ls-slide .yourClass {
+
+}
+
+/* Side color of 3D objects */
+.ls-3d-box div { background: #777; }
+
+
+.ls-v5 .ls-nav-next {
+    top: 58% !important;
+}
+
+.ls-v5 .ls-nav-prev, .ls-v5 .ls-nav-next {
+    display: block !important;
+    z-index: 9 !important;
+}

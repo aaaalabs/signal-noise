@@ -16,6 +16,9 @@ The Pareto Principle isn't just an observation—it's rooted in power law mathem
 
 **The mathematical formula**: If the Pareto index α = log₄5 ≈ 1.16, then exactly 80% of effects come from 20% of causes.
 
+![Pareto Mathematical Proof](/blog-research/infographic-generators/pareto-mathematical-proof.html)
+*Interactive visualization: The mathematical proof of the 80/20 principle*
+
 This relationship appears throughout nature:
 - 80% of earthquake damage comes from 20% of earthquakes
 - 80% of wealth is held by 20% of the population
@@ -24,9 +27,22 @@ This relationship appears throughout nature:
 
 **Why 80/20 specifically?** The ratio emerges from the mathematical properties of power law distributions. While the exact percentages vary (sometimes 70/30, sometimes 90/10), the underlying pattern remains consistent: a small minority of causes generates the vast majority of effects.
 
+![Task Value Distribution](/blog-research/infographic-generators/task-value-distribution-chart.html)
+*How task value actually distributes: A power law visualization*
+
 ## Power Laws vs Normal Distributions in Productivity
 
 Most people intuitively think productivity follows a normal distribution—that all tasks contribute roughly equally to results. This assumption drives traditional time management advice: organize everything, prioritize systematically, work harder across the board.
+
+### Power Law vs Normal Distribution: A Comparison
+
+| Aspect | Normal Distribution (Bell Curve) | Power Law (Pareto) |
+|--------|----------------------------------|--------------------|
+| **Task Value** | Most tasks have average value | Few tasks have extreme value |
+| **Effort ROI** | Linear returns on effort | Exponential returns on right tasks |
+| **Strategy** | Do everything well | Do the right things exceptionally |
+| **Example** | Height, IQ scores | Wealth, earthquake magnitude |
+| **Productivity Impact** | 1:1 effort to result | 1:5+ effort to result on key tasks |
 
 But productivity actually follows a power law distribution. A few tasks generate massive value. Most tasks generate little value. Some tasks actively subtract value by consuming time that could be allocated to high-impact activities.
 
@@ -104,6 +120,29 @@ The Signal/Noise app operationalizes Pareto Principle mathematics through real-t
 ### Core Mathematical Framework
 **Daily Productivity Score = (Signal Hours / Total Hours) × 100**
 
+<div style="background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
+<h4>📊 Calculate Your Signal-to-Noise Ratio</h4>
+<p>Enter your daily hours to see your productivity score:</p>
+<div id="calculator">
+  <label>Signal Hours (high-value work): <input type="number" id="signal" min="0" max="24" step="0.5" placeholder="e.g., 6"></label><br>
+  <label>Noise Hours (low-value work): <input type="number" id="noise" min="0" max="24" step="0.5" placeholder="e.g., 2"></label><br>
+  <button onclick="calculate()">Calculate Ratio</button>
+  <div id="result"></div>
+</div>
+<script>
+function calculate() {
+  const signal = parseFloat(document.getElementById('signal').value);
+  const noise = parseFloat(document.getElementById('noise').value);
+  const total = signal + noise;
+  if (total > 0) {
+    const ratio = (signal / total * 100).toFixed(1);
+    let level = ratio >= 90 ? 'Expert' : ratio >= 80 ? 'Advanced' : ratio >= 70 ? 'Intermediate' : 'Beginner';
+    document.getElementById('result').innerHTML = `<strong>Your Signal Ratio: ${ratio}%</strong><br>Level: ${level}`;
+  }
+}
+</script>
+</div>
+
 **Target Optimization**:
 - Beginner: 60% signal (3:2 ratio)
 - Intermediate: 70% signal (7:3 ratio)
@@ -112,6 +151,9 @@ The Signal/Noise app operationalizes Pareto Principle mathematics through real-t
 
 ### Compound Effect Mathematics
 Small improvements in signal ratio generate exponential productivity gains due to power law effects:
+
+![Productivity Before and After](/blog-research/infographic-generators/productivity-before-after.html)
+*The compound effect: How signal ratio improvements multiply results*
 
 **Example Calculation**:
 - User A: 50% signal ratio = 4 hours signal work daily
