@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 interface ArticleProps {
   isGerman: boolean;
 }
 
 export default function KevinOLearyArticle({ isGerman }: ArticleProps) {
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   return (
     <>
       {/* Title */}
@@ -76,18 +78,95 @@ export default function KevinOLearyArticle({ isGerman }: ArticleProps) {
         margin: '3rem 0',
         textAlign: 'center'
       }}>
-        <video
-          width="100%"
-          controls
-          style={{
-            maxWidth: '800px',
-            borderRadius: '8px',
-            border: '1px solid #333'
-          }}
-        >
-          <source src="/blog-images/article-5-kevin-oleary/KevinOleary_2m.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+        {!isVideoPlaying ? (
+          // Thumbnail with play button overlay
+          <div
+            style={{
+              position: 'relative',
+              maxWidth: '800px',
+              margin: '0 auto',
+              cursor: 'pointer',
+              borderRadius: '8px',
+              overflow: 'hidden',
+              border: '1px solid #333'
+            }}
+            onClick={() => setIsVideoPlaying(true)}
+          >
+            <img
+              src="/blog-images/article-5-kevin-oleary/clip_thumbnail.jpg"
+              alt="Kevin O'Leary discusses productivity"
+              style={{
+                width: '100%',
+                display: 'block',
+                filter: 'brightness(0.85)'
+              }}
+            />
+            {/* Play Button Overlay */}
+            <div style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: '80px',
+              height: '80px',
+              backgroundColor: 'rgba(0, 255, 136, 0.9)',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              transition: 'all 0.2s ease',
+              boxShadow: '0 4px 20px rgba(0, 255, 136, 0.4)'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'rgba(0, 255, 136, 1)';
+              e.currentTarget.style.transform = 'translate(-50%, -50%) scale(1.1)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'rgba(0, 255, 136, 0.9)';
+              e.currentTarget.style.transform = 'translate(-50%, -50%) scale(1)';
+            }}
+            >
+              {/* Play Icon (Triangle) */}
+              <div style={{
+                width: 0,
+                height: 0,
+                borderLeft: '25px solid #000',
+                borderTop: '15px solid transparent',
+                borderBottom: '15px solid transparent',
+                marginLeft: '5px'
+              }} />
+            </div>
+            {/* Duration Badge */}
+            <div style={{
+              position: 'absolute',
+              bottom: '12px',
+              right: '12px',
+              backgroundColor: 'rgba(0, 0, 0, 0.8)',
+              color: '#fff',
+              padding: '4px 8px',
+              borderRadius: '4px',
+              fontSize: '0.85rem',
+              fontWeight: '500'
+            }}>
+              2:00
+            </div>
+          </div>
+        ) : (
+          // Video Player
+          <video
+            width="100%"
+            controls
+            autoPlay
+            style={{
+              maxWidth: '800px',
+              borderRadius: '8px',
+              border: '1px solid #333'
+            }}
+          >
+            <source src="/blog-images/article-5-kevin-oleary/KevinOleary_2m.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        )}
         <p style={{
           fontSize: '0.85rem',
           color: '#666',
