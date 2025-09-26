@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 interface BlogPost {
   slug: string;
@@ -143,7 +143,27 @@ export default function BlogIndex() {
   const isGerman = currentLanguage === 'de';
 
   // Check for preview mode via URL parameter
-  const isPreviewMode = new URLSearchParams(window.location.search).has('preview');
+  const [isPreviewMode, setIsPreviewMode] = useState(new URLSearchParams(window.location.search).has('preview'));
+
+  // Check if admin user or localhost
+  const userEmail = localStorage.getItem('userEmail');
+  const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+  const isAdmin = userEmail === 'thomas.seiger@gmail.com' || isLocalhost;
+
+  // Toggle preview mode
+  const togglePreview = () => {
+    const newPreviewMode = !isPreviewMode;
+    setIsPreviewMode(newPreviewMode);
+
+    // Update URL
+    const url = new URL(window.location.href);
+    if (newPreviewMode) {
+      url.searchParams.set('preview', 'true');
+    } else {
+      url.searchParams.delete('preview');
+    }
+    window.history.pushState({}, '', url);
+  };
 
   useEffect(() => {
     // SEO meta tags
@@ -185,11 +205,40 @@ export default function BlogIndex() {
           ← {isGerman ? 'App' : 'App'}
         </Link>
         <div style={{
-          fontSize: '0.9rem',
-          color: '#666',
-          fontWeight: '100'
+          display: 'flex',
+          alignItems: 'center',
+          gap: '1rem'
         }}>
-          Signal/Blog
+          <div style={{
+            fontSize: '0.9rem',
+            color: '#666',
+            fontWeight: '100'
+          }}>
+            Signal/Blog
+          </div>
+          {/* Admin Preview Toggle */}
+          {isAdmin && (
+            <button
+              onClick={togglePreview}
+              style={{
+                backgroundColor: isPreviewMode ? '#ff8800' : 'transparent',
+                color: isPreviewMode ? '#000' : '#ff8800',
+                border: `1px solid #ff8800`,
+                borderRadius: '4px',
+                padding: '0.25rem 0.5rem',
+                fontSize: '0.75rem',
+                fontWeight: '400',
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+                opacity: isPreviewMode ? 1 : 0.6
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
+              onMouseLeave={(e) => e.currentTarget.style.opacity = isPreviewMode ? '1' : '0.6'}
+              title={isPreviewMode ? 'Exit preview mode' : 'Show draft articles'}
+            >
+              {isPreviewMode ? 'PREVIEW ON' : 'PREVIEW OFF'}
+            </button>
+          )}
         </div>
       </nav>
 
@@ -198,36 +247,6 @@ export default function BlogIndex() {
         maxWidth: '680px',
         margin: '0 auto'
       }}>
-        {/* Preview Mode Indicator */}
-        {isPreviewMode && (
-          <div style={{
-            backgroundColor: '#00ff88',
-            color: '#000',
-            padding: '0.8rem 1.5rem',
-            borderRadius: '6px',
-            marginBottom: '2rem',
-            fontWeight: '500',
-            textAlign: 'center',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-            gap: '1rem'
-          }}>
-            <span>📝 Preview Mode: Showing all drafts</span>
-            <a
-              href="/blog"
-              style={{
-                color: '#000',
-                fontSize: '0.85rem',
-                textDecoration: 'underline',
-                fontWeight: '400'
-              }}
-            >
-              Exit Preview →
-            </a>
-          </div>
-        )}
 
         {/* Articles List */}
         <div style={{ marginTop: '3rem' }}>
