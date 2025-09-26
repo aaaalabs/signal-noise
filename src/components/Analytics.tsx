@@ -25,7 +25,7 @@ export default function Analytics({ tasks }: AnalyticsProps) {
 
   const calculateDailyRatios = (): number[] => {
     const ratios: number[] = [];
-    for (let i = 0; i <= 29; i++) {
+    for (let i = 29; i >= 0; i--) {
       const date = new Date();
       date.setDate(date.getDate() - i);
       const dayTasks = tasks.filter(task =>
@@ -219,9 +219,9 @@ export default function Analytics({ tasks }: AnalyticsProps) {
             boxSizing: 'border-box'
           }}
         >
-          {dailyRatios.reverse().map((ratio, index) => {
+          {dailyRatios.map((ratio, index) => {
             // Determine if this is a future day (no data possible yet)
-            const dayOffset = index;  // Now index 0 = today, 1 = yesterday, etc.
+            const dayOffset = 29 - index;  // Now index 0 = 30 days ago, index 29 = today
             const targetDate = new Date();
             targetDate.setDate(targetDate.getDate() - dayOffset);
             const isFutureDay = targetDate > new Date();
@@ -254,7 +254,7 @@ export default function Analytics({ tasks }: AnalyticsProps) {
                   stiffness: 38,
                   damping: 24,
                   mass: 1.5,
-                  delay: (29-index) * 0.008,  // Subtle wave effect (8ms)
+                  delay: index * 0.008,  // Subtle wave effect (8ms)
                   restDelta: 0.01
                 }}
                 style={{
