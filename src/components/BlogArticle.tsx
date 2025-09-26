@@ -135,6 +135,16 @@ export default function BlogArticle() {
   const isArticlePublished = blogPost?.isPublished ?? false;
   const canViewArticle = isArticlePublished || isPreviewMode;
 
+  // Debug logging
+  if (!article && slug) {
+    console.log('Article not found for slug:', slug);
+    console.log('Available articles:', Object.keys(articles));
+  }
+  if (!blogPost && slug) {
+    console.log('Blog post not found for slug:', slug);
+    console.log('Available blog posts:', blogPosts.map(p => p.slug));
+  }
+
   useEffect(() => {
     if (article) {
       // Update page title
