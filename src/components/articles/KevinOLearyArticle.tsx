@@ -71,6 +71,35 @@ export default function KevinOLearyArticle({ isGerman }: ArticleProps) {
         </cite>
       </blockquote>
 
+      {/* Kevin O'Leary Video Clip */}
+      <div style={{
+        margin: '3rem 0',
+        textAlign: 'center'
+      }}>
+        <video
+          width="100%"
+          controls
+          style={{
+            maxWidth: '800px',
+            borderRadius: '8px',
+            border: '1px solid #333'
+          }}
+        >
+          <source src="/blog-images/article-5-kevin-oleary/KevinOleary_2m.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <p style={{
+          fontSize: '0.85rem',
+          color: '#666',
+          marginTop: '0.5rem',
+          fontStyle: 'italic'
+        }}>
+          {isGerman
+            ? 'Kevin O\'Leary erklärt Steve Jobs\' Signal vs Noise Methodik im Diary of a CEO Podcast'
+            : 'Kevin O\'Leary explains Steve Jobs\' Signal vs Noise methodology on The Diary of a CEO podcast'}
+        </p>
+      </div>
+
       {/* Kevin O'Leary Photo */}
       <div style={{
         float: 'right',

@@ -65,7 +65,7 @@ ADHD hyperfocus isn't a bug—it's a feature. When you identify true signal, you
 Steve Jobs demonstrated similar patterns. Kevin O'Leary noted: "He would lock onto something and nothing else existed. That's not normal focus—that's something different."
 
 <video width="100%" controls style="max-width: 800px; margin: 20px 0;">
-  <source src="/blog-images/article-1-steve-jobs/KevinOleary_2m.mp4" type="video/mp4">
+  <source src="/blog-images/article-5-kevin-oleary/KevinOleary_2m.mp4" type="video/mp4">
   <p>Kevin O'Leary discusses Steve Jobs' intense focus patterns</p>
 </video>
 

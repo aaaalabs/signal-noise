@@ -9,7 +9,7 @@ In 2024, [Kevin O'Leary](https://www.kevinoleary.com/) sat across from Steven Ba
 "For Steve Jobs, it was 80 signal, 20 noise," O'Leary explained. "He was right. He was right."
 
 <video width="100%" controls style="max-width: 800px; margin: 20px 0;">
-  <source src="/blog-images/article-1-steve-jobs/KevinOleary_2m.mp4" type="video/mp4">
+  <source src="/blog-images/article-5-kevin-oleary/KevinOleary_2m.mp4" type="video/mp4">
   <p>Kevin O'Leary discusses Steve Jobs' Signal-to-Noise methodology on The Diary of a CEO podcast.</p>
 </video>
 

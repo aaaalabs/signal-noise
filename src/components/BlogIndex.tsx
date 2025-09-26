@@ -62,7 +62,7 @@ export const blogPosts: BlogPost[] = [
     readTime: '4 min',
     keywords: ['kevin oleary', 'shark tank', 'productivity'],
     publishDate: '2025-09-29',
-    isPublished: false
+    isPublished: true
   },
   {
     slug: 'founder-productivity-paradox',
