@@ -156,6 +156,22 @@ export default function BlogArticle() {
         metaDescription.setAttribute('content', isGerman ? article.descriptionDe : article.description);
       }
 
+      // Add hreflang tags for SEO
+      const existingHreflang = document.querySelectorAll('link[rel="alternate"][hreflang]');
+      existingHreflang.forEach(tag => tag.remove());
+
+      const hreflangDe = document.createElement('link');
+      hreflangDe.rel = 'alternate';
+      hreflangDe.hreflang = 'de';
+      hreflangDe.href = window.location.href;
+      document.head.appendChild(hreflangDe);
+
+      const hreflangEn = document.createElement('link');
+      hreflangEn.rel = 'alternate';
+      hreflangEn.hreflang = 'en';
+      hreflangEn.href = window.location.href;
+      document.head.appendChild(hreflangEn);
+
       // Add article structured data
       const structuredData = {
         "@context": "https://schema.org",
