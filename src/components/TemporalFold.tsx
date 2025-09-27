@@ -25,9 +25,17 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
 
     tasks.forEach(task => {
       const taskDate = new Date(task.timestamp);
+      const today = new Date().toDateString();
+      const taskDateString = taskDate.toDateString();
+
+      // Skip today's tasks (they appear in main TaskGrid)
+      if (taskDateString === today) {
+        return;
+      }
+
       const daysDiff = Math.floor((now.getTime() - taskDate.getTime()) / (1000 * 60 * 60 * 24));
 
-      if (daysDiff > 0 && daysDiff <= 30) {
+      if (daysDiff <= 30) {
         let dateLabel = '';
         if (daysDiff === 1) {
           dateLabel = t.yesterday || 'Yesterday';
