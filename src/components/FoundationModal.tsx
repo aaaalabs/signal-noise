@@ -34,6 +34,8 @@ export default function FoundationModal({ show, onClose, startInLoginMode = fals
   const [checkingUser, setCheckingUser] = useState(false);
   const [magicLinkSent, setMagicLinkSent] = useState(false);
   const [isLoginMode, setIsLoginMode] = useState(false);
+  const [promoCode, setPromoCode] = useState('');
+  const [promoActivated, setPromoActivated] = useState(false);
 
   useEffect(() => {
     if (show) {
@@ -41,6 +43,44 @@ export default function FoundationModal({ show, onClose, startInLoginMode = fals
       setIsLoginMode(startInLoginMode);
     }
   }, [show, startInLoginMode]);
+
+  const handlePromoCode = () => {
+    if (promoCode.toUpperCase().trim() === 'PH-PRELAUNCH') {
+      // Create session data for free premium until Oct 31st
+      const sessionData = {
+        email: email || 'ph-user@signal-noise.app',
+        firstName: firstName || 'Product Hunt User',
+        token: 'ph-promo-' + Date.now(),
+        sessionToken: 'ph-session-' + Date.now(),
+        created: Date.now(),
+        lastActive: Date.now(),
+        expires: new Date('2025-10-31 23:59:59').getTime(),
+        tier: 'ph_prelaunch',
+        paymentType: 'promo_code',
+        syncedFromLocal: null
+      };
+
+      // Store session data
+      localStorage.setItem('sessionData', JSON.stringify(sessionData));
+      localStorage.setItem('userEmail', sessionData.email);
+      if (firstName) {
+        localStorage.setItem('userFirstName', firstName);
+      }
+
+      setPromoActivated(true);
+
+      // Trigger premium session update event
+      window.dispatchEvent(new CustomEvent('premiumSessionUpdated', {
+        detail: { source: 'promo_code', tier: 'ph_prelaunch' }
+      }));
+
+      // Close modal after success
+      setTimeout(() => {
+        onClose();
+        window.location.reload(); // Refresh to activate premium features
+      }, 2000);
+    }
+  };
 
   const fetchFoundationStats = async () => {
     // Simple: Development = preview mode, Production = live data
