@@ -1,4 +1,13 @@
 /* Demo Component Styles - Jony Ive Inspired */
+.demo-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: #000000;
+}
+
 .demo-container {
   max-width: 400px;
   width: 100%;

@@ -50,7 +50,8 @@ const Demo: React.FC = () => {
   };
 
   return (
-    <div className="demo-container">
+    <div className="demo-wrapper">
+      <div className="demo-container">
       {/* State 1: Introduction */}
       <div className={`demo-state ${currentState === 1 ? 'active' : ''}`}>
         <div className="logo">Signal/Noise</div>
@@ -129,6 +130,7 @@ const Demo: React.FC = () => {
         >
           Try Beta App
         </a>
+      </div>
       </div>
     </div>
   );
