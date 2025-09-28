@@ -122,9 +122,11 @@ export default function RatioDisplay({ ratio, totalTasks, data, earnedCount, has
     );
     const noiseTasksToday = todayTasks.filter(task => task.type === 'noise').length;
 
-    // If no noise tasks chosen yet → user made no bad decisions → neutral
+    // If no noise tasks chosen yet → contextual colors based on signal progress
     if (noiseTasksToday === 0) {
-      return 'neutral'; // Grey - honest state: no poor choices made yet
+      if (ratio >= 80) return 'optimal';   // Green - reward good choices even without noise
+      if (ratio >= 50) return 'warning';   // Orange - encourage progress at 50%+
+      return 'neutral';                    // Grey - starting state, no punishment
     }
 
     // Standard ratio colors when actual choices between signal/noise were made
