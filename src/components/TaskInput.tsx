@@ -142,8 +142,8 @@ export default function TaskInput({ onAdd, todaySignalCount, tasks }: TaskInputP
           <div
             className="suggestion-overlay"
             onClick={() => {
-              setInput(suggestion);
-              setSuggestion(null);
+              setInputValue(suggestion);
+              setSuggestion('');
               setShowSuggestion(false);
               // Focus back to input for immediate submission
               if (inputRef.current) {
