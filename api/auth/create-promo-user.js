@@ -1,7 +1,7 @@
 import { Redis } from '@upstash/redis';
 import { randomBytes } from 'crypto';
 import { setUser } from '../redis-helper.js';
-import { sendWelcomeEmail } from '../email-helper.js';
+import { sendPromoWelcomeEmail } from '../email-helper.js';
 
 const redis = new Redis({
   url: process.env.KV_REST_API_URL,
@@ -71,13 +71,14 @@ export default async function handler(req, res) {
     const storedUser = await redis.hgetall(`sn:u:${email}`);
     console.log('🔍 Verification - Promo user stored:', storedUser);
 
-    // Send welcome email with magic link (same as Stripe users)
+    // Send promo-specific welcome email (without invoice)
     try {
       const tierName = 'Product Hunt Early Access';
-      await sendWelcomeEmail(email, firstName, tierName, 'PROMO', accessToken);
-      console.log('✅ Welcome email sent to promo user');
+      const expiryDate = 'October 31, 2025';
+      await sendPromoWelcomeEmail(email, firstName, tierName, expiryDate);
+      console.log('✅ Promo welcome email sent to user');
     } catch (error) {
-      console.error('❌ Failed to send welcome email:', error);
+      console.error('❌ Failed to send promo welcome email:', error);
       // Don't fail the entire request for email issues
     }
 
