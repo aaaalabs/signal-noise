@@ -255,6 +255,55 @@ export default function FeedbackModal({ show, onClose }: FeedbackModalProps) {
               Interested? Please drop me a DM via WhatsApp or Email above 📱
             </p>
           </div>
+
+          {/* Product Hunt Badge */}
+          <div style={{
+            marginTop: '1.5rem',
+            paddingTop: '1.5rem',
+            borderTop: '1px solid #374151',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '0.75rem'
+          }}>
+            <p style={{
+              color: '#9ca3af',
+              fontSize: '0.8rem',
+              fontWeight: '300',
+              textAlign: 'center',
+              marginBottom: '0.5rem'
+            }}>
+              Support us on Product Hunt
+            </p>
+            <a
+              href="https://www.producthunt.com/products/signal-noise?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-signal-noise"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-block',
+                transition: 'transform 0.2s ease, opacity 0.2s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'scale(1.05)';
+                e.currentTarget.style.opacity = '0.9';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'scale(1)';
+                e.currentTarget.style.opacity = '1';
+              }}
+            >
+              <img
+                src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1020772&theme=dark&t=1759083915755"
+                alt="Signal/Noise - The productivity method that saved Apple | Product Hunt"
+                style={{
+                  width: '250px',
+                  height: '54px'
+                }}
+                width="250"
+                height="54"
+              />
+            </a>
+          </div>
         </div>
       </div>
     </div>
