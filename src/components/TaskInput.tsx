@@ -137,10 +137,19 @@ export default function TaskInput({ onAdd, todaySignalCount, tasks }: TaskInputP
           disabled={isLocked}
           autoComplete="off"
         />
-        {/* Autocomplete suggestion overlay - Full word */}
+        {/* Autocomplete suggestion overlay - Clickable on all devices */}
         {suggestion && showSuggestion && inputValue.length >= 2 && !isLocked && (
           <div
             className="suggestion-overlay"
+            onClick={() => {
+              setInput(suggestion);
+              setSuggestion(null);
+              setShowSuggestion(false);
+              // Focus back to input for immediate submission
+              if (inputRef.current) {
+                inputRef.current.focus();
+              }
+            }}
             style={{
               position: 'absolute',
               right: '12px',
@@ -152,7 +161,7 @@ export default function TaskInput({ onAdd, todaySignalCount, tasks }: TaskInputP
               borderRadius: '6px',
               color: '#ff9f0a',
               opacity: 0.8,
-              pointerEvents: 'none',
+              cursor: 'pointer',
               fontWeight: 100,
               transition: 'opacity 0.2s ease',
               fontSize: '14px',
@@ -161,6 +170,8 @@ export default function TaskInput({ onAdd, todaySignalCount, tasks }: TaskInputP
               textOverflow: 'ellipsis',
               whiteSpace: 'nowrap'
             }}
+            onMouseEnter={(e) => (e.currentTarget.style.opacity = '1')}
+            onMouseLeave={(e) => (e.currentTarget.style.opacity = '0.8')}
           >
             {suggestion}
           </div>

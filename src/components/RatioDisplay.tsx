@@ -114,9 +114,23 @@ export default function RatioDisplay({ ratio, totalTasks, data, earnedCount, has
 
   const getRatioClass = () => {
     if (totalTasks === 0) return '';
-    if (ratio >= 80) return 'optimal';
-    if (ratio >= 60) return 'warning';
-    return 'critical';
+
+    // Context-aware colors: Only show red when user actually made poor choices
+    const today = new Date().toDateString();
+    const todayTasks = data.tasks.filter(task =>
+      new Date(task.timestamp).toDateString() === today
+    );
+    const noiseTasksToday = todayTasks.filter(task => task.type === 'noise').length;
+
+    // If no noise tasks chosen yet → user made no bad decisions → neutral
+    if (noiseTasksToday === 0) {
+      return 'neutral'; // Grey - honest state: no poor choices made yet
+    }
+
+    // Standard ratio colors when actual choices between signal/noise were made
+    if (ratio >= 80) return 'optimal';   // Green
+    if (ratio >= 60) return 'warning';   // Orange
+    return 'critical';                   // Red (honest poor performance)
   };
 
   const displayText = totalTasks > 0 ? `${ratio}%` : '—';

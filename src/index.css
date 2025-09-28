@@ -54,6 +54,10 @@ body {
     color: #ffaa00;
 }
 
+.ratio-display.neutral {
+    color: #999;
+}
+
 .ratio-display.critical {
     color: #ff4444;
 }
