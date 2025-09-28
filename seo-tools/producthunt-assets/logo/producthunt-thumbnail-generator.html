@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Hunt Thumbnail Generator - Signal/Noise</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #111;
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .thumbnail-canvas {
+            width: 240px;
+            height: 240px;
+            background: #000000;
+            border: 2px solid #333;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border-radius: 20px;
+        }
+
+        .logo-container {
+            width: 160px;
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sn-logo {
+            width: 140px;
+            height: 140px;
+        }
+
+        .controls {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .controls button {
+            background: #00ff88;
+            border: none;
+            color: black;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .controls button:hover {
+            background: #00cc6a;
+        }
+
+        .instructions {
+            background: #222;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .preview-text {
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        #downloadCanvas {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Product Hunt Thumbnail Generator</h1>
+        <p>Generate the perfect 240x240px thumbnail for Signal/Noise Product Hunt launch</p>
+
+        <div class="thumbnail-canvas" id="thumbnail">
+            <div class="logo-container">
+                <svg class="sn-logo" viewBox="0 0 554 558" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 557V1H553V317.562L312.41 557H1Z" fill="#00ff88" stroke="#00ff88"/>
+                </svg>
+            </div>
+        </div>
+
+        <div class="preview-text">240x240px - Product Hunt Thumbnail Preview</div>
+
+        <div class="controls">
+            <button onclick="adjustLogoSize('smaller')">Smaller Logo</button>
+            <button onclick="adjustLogoSize('larger')">Larger Logo</button>
+            <button onclick="downloadThumbnail()">Download PNG</button>
+            <button onclick="copyToClipboard()">Copy to Clipboard</button>
+        </div>
+
+        <div class="instructions">
+            <h3>Instructions:</h3>
+            <ul>
+                <li><strong>Adjust size</strong> using the buttons above</li>
+                <li><strong>Download PNG</strong> to get the exact 240x240px file</li>
+                <li><strong>Copy to Clipboard</strong> for quick pasting</li>
+                <li>The logo is centered on pure black background (#000000)</li>
+                <li>20px border radius matches Product Hunt design standards</li>
+            </ul>
+
+            <h3>Product Hunt Requirements:</h3>
+            <ul>
+                <li>✅ Exactly 240x240 pixels</li>
+                <li>✅ PNG format with transparency support</li>
+                <li>✅ High contrast for mobile visibility</li>
+                <li>✅ Clean, professional appearance</li>
+                <li>✅ Matches Signal/Noise brand identity</li>
+            </ul>
+        </div>
+
+        <canvas id="downloadCanvas" width="240" height="240"></canvas>
+    </div>
+
+    <script>
+        let logoSize = 140;
+
+        function adjustLogoSize(direction) {
+            const logo = document.querySelector('.sn-logo');
+
+            if (direction === 'smaller' && logoSize > 80) {
+                logoSize -= 20;
+            } else if (direction === 'larger' && logoSize < 200) {
+                logoSize += 20;
+            }
+
+            logo.style.width = logoSize + 'px';
+            logo.style.height = logoSize + 'px';
+        }
+
+        function downloadThumbnail() {
+            const canvas = document.getElementById('downloadCanvas');
+            const ctx = canvas.getContext('2d');
+
+            // Clear canvas
+            ctx.clearRect(0, 0, 240, 240);
+
+            // Fill black background with rounded corners
+            ctx.fillStyle = '#000000';
+            roundRect(ctx, 0, 0, 240, 240, 20);
+            ctx.fill();
+
+            // Create SVG data URL
+            const svgData = `
+                <svg width="${logoSize}" height="${logoSize}" viewBox="0 0 554 558" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 557V1H553V317.562L312.41 557H1Z" fill="#00ff88" stroke="#00ff88"/>
+                </svg>
+            `;
+
+            const svgBlob = new Blob([svgData], {type: 'image/svg+xml'});
+            const url = URL.createObjectURL(svgBlob);
+
+            const img = new Image();
+            img.onload = function() {
+                // Center the logo
+                const x = (240 - logoSize) / 2;
+                const y = (240 - logoSize) / 2;
+
+                ctx.drawImage(img, x, y, logoSize, logoSize);
+
+                // Download
+                const link = document.createElement('a');
+                link.download = 'signal-noise-producthunt-thumbnail-240x240.png';
+                link.href = canvas.toDataURL();
+                link.click();
+
+                URL.revokeObjectURL(url);
+            };
+            img.src = url;
+        }
+
+        async function copyToClipboard() {
+            const canvas = document.getElementById('downloadCanvas');
+            const ctx = canvas.getContext('2d');
+
+            // Clear canvas
+            ctx.clearRect(0, 0, 240, 240);
+
+            // Fill black background with rounded corners
+            ctx.fillStyle = '#000000';
+            roundRect(ctx, 0, 0, 240, 240, 20);
+            ctx.fill();
+
+            // Create SVG data URL
+            const svgData = `
+                <svg width="${logoSize}" height="${logoSize}" viewBox="0 0 554 558" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 557V1H553V317.562L312.41 557H1Z" fill="#00ff88" stroke="#00ff88"/>
+                </svg>
+            `;
+
+            const svgBlob = new Blob([svgData], {type: 'image/svg+xml'});
+            const url = URL.createObjectURL(svgBlob);
+
+            const img = new Image();
+            img.onload = async function() {
+                // Center the logo
+                const x = (240 - logoSize) / 2;
+                const y = (240 - logoSize) / 2;
+
+                ctx.drawImage(img, x, y, logoSize, logoSize);
+
+                // Copy to clipboard
+                try {
+                    canvas.toBlob(async (blob) => {
+                        const item = new ClipboardItem({ 'image/png': blob });
+                        await navigator.clipboard.write([item]);
+                        alert('Thumbnail copied to clipboard!');
+                    });
+                } catch (err) {
+                    console.error('Failed to copy: ', err);
+                    alert('Copy failed. Use download instead.');
+                }
+
+                URL.revokeObjectURL(url);
+            };
+            img.src = url;
+        }
+
+        function roundRect(ctx, x, y, width, height, radius) {
+            ctx.beginPath();
+            ctx.moveTo(x + radius, y);
+            ctx.lineTo(x + width - radius, y);
+            ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+            ctx.lineTo(x + width, y + height - radius);
+            ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+            ctx.lineTo(x + radius, y + height);
+            ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+            ctx.lineTo(x, y + radius);
+            ctx.quadraticCurveTo(x, y, x + radius, y);
+            ctx.closePath();
+        }
+    </script>
+</body>
+</html>

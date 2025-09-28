@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signal/Noise - Interactive Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .demo-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 300;
+            margin-bottom: 10px;
+            color: #00ff88;
+        }
+
+        .tagline {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .ratio-display {
+            background: #111;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            border: 1px solid #222;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ratio-number {
+            font-size: 48px;
+            font-weight: 100;
+            color: #00ff88;
+            margin-bottom: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .ratio-label {
+            font-size: 14px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: #00ff88;
+            transition: width 0.5s ease;
+            border-radius: 0 0 12px 12px;
+        }
+
+        .task-input {
+            margin-bottom: 20px;
+        }
+
+        .input-field {
+            width: 100%;
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 16px;
+            color: white;
+            font-size: 16px;
+            margin-bottom: 15px;
+            transition: border-color 0.2s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #00ff88;
+        }
+
+        .input-field::placeholder {
+            color: #666;
+        }
+
+        .classification-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .classify-btn {
+            flex: 1;
+            padding: 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .signal-btn {
+            background: #00ff88;
+            color: #000;
+        }
+
+        .signal-btn:hover {
+            background: #00cc6a;
+            transform: translateY(-1px);
+        }
+
+        .noise-btn {
+            background: #333;
+            color: #fff;
+            border: 1px solid #555;
+        }
+
+        .noise-btn:hover {
+            background: #444;
+            transform: translateY(-1px);
+        }
+
+        .tasks-list {
+            flex: 1;
+            margin-bottom: 20px;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: #111;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            border-left: 3px solid transparent;
+            animation: slideIn 0.3s ease;
+        }
+
+        .task-item.signal {
+            border-left-color: #00ff88;
+        }
+
+        .task-item.noise {
+            border-left-color: #666;
+        }
+
+        .task-text {
+            font-size: 14px;
+            flex: 1;
+        }
+
+        .task-type {
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .task-type.signal {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+        }
+
+        .task-type.noise {
+            background: rgba(102, 102, 102, 0.2);
+            color: #666;
+        }
+
+        .achievement {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background: #00ff88;
+            color: #000;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+
+        .achievement.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .cta {
+            text-align: center;
+            padding: 20px;
+            background: #111;
+            border-radius: 12px;
+            border: 1px solid #222;
+        }
+
+        .cta-text {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 15px;
+        }
+
+        .cta-button {
+            background: #00ff88;
+            color: #000;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.2s ease;
+        }
+
+        .cta-button:hover {
+            background: #00cc6a;
+        }
+
+        .demo-hint {
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: rgba(0, 255, 136, 0.05);
+            border-radius: 6px;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .pulse {
+            animation: pulse 0.5s ease-in-out;
+        }
+
+        .disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        @media (max-width: 480px) {
+            .demo-container {
+                padding: 15px;
+            }
+
+            .ratio-number {
+                font-size: 40px;
+            }
+
+            .input-field, .classify-btn {
+                padding: 14px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="header">
+            <div class="logo">Signal/Noise</div>
+            <div class="tagline">Steve Jobs' 80/20 productivity method</div>
+        </div>
+
+        <div class="demo-hint">
+            📱 Interactive Demo: Try adding and classifying a task below
+        </div>
+
+        <div class="ratio-display">
+            <div class="ratio-number" id="ratioNumber">47%</div>
+            <div class="ratio-label">Signal Today</div>
+            <div class="progress-bar" id="progressBar" style="width: 47%;"></div>
+        </div>
+
+        <div class="task-input">
+            <input
+                type="text"
+                class="input-field"
+                id="taskInput"
+                placeholder="What are you working on?"
+                maxlength="50"
+            >
+            <div class="classification-buttons">
+                <button class="classify-btn signal-btn" id="signalBtn">Signal</button>
+                <button class="classify-btn noise-btn" id="noiseBtn">Noise</button>
+            </div>
+        </div>
+
+        <div class="tasks-list" id="tasksList">
+            <div class="task-item signal">
+                <span class="task-text">Review Q4 strategy deck</span>
+                <span class="task-type signal">Signal</span>
+            </div>
+            <div class="task-item noise">
+                <span class="task-text">Check Instagram stories</span>
+                <span class="task-type noise">Noise</span>
+            </div>
+            <div class="task-item signal">
+                <span class="task-text">Fix critical bug in app</span>
+                <span class="task-type signal">Signal</span>
+            </div>
+            <div class="task-item noise">
+                <span class="task-text">Organize desk drawer</span>
+                <span class="task-type noise">Noise</span>
+            </div>
+            <div class="task-item signal">
+                <span class="task-text">Call top prospect client</span>
+                <span class="task-type signal">Signal</span>
+            </div>
+            <div class="task-item noise">
+                <span class="task-text">Browse tech news</span>
+                <span class="task-type noise">Noise</span>
+            </div>
+        </div>
+
+        <div class="cta">
+            <div class="cta-text">Experience the full Signal/Noise methodology</div>
+            <a href="https://signal-noise.app" class="cta-button" target="_blank">Try Beta App</a>
+        </div>
+    </div>
+
+    <div class="achievement" id="achievement">🎯 Signal Ratio Improved!</div>
+
+    <script>
+        class SignalNoiseDemo {
+            constructor() {
+                this.tasks = [
+                    { text: "Review Q4 strategy deck", type: "signal" },
+                    { text: "Check Instagram stories", type: "noise" },
+                    { text: "Fix critical bug in app", type: "signal" },
+                    { text: "Organize desk drawer", type: "noise" },
+                    { text: "Call top prospect client", type: "signal" },
+                    { text: "Browse tech news", type: "noise" }
+                ];
+
+                this.signalCount = 3;
+                this.totalTasks = 6;
+                this.currentRatio = 47;
+
+                this.initializeEventListeners();
+                this.updateRatioDisplay();
+            }
+
+            initializeEventListeners() {
+                const taskInput = document.getElementById('taskInput');
+                const signalBtn = document.getElementById('signalBtn');
+                const noiseBtn = document.getElementById('noiseBtn');
+
+                // Enable classification buttons only when there's text
+                taskInput.addEventListener('input', () => {
+                    const hasText = taskInput.value.trim().length > 0;
+                    signalBtn.classList.toggle('disabled', !hasText);
+                    noiseBtn.classList.toggle('disabled', !hasText);
+                });
+
+                // Handle task classification
+                signalBtn.addEventListener('click', () => {
+                    if (!signalBtn.classList.contains('disabled')) {
+                        this.addTask('signal');
+                    }
+                });
+
+                noiseBtn.addEventListener('click', () => {
+                    if (!noiseBtn.classList.contains('disabled')) {
+                        this.addTask('noise');
+                    }
+                });
+
+                // Enter key support
+                taskInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter' && taskInput.value.trim()) {
+                        // Auto-classify based on keywords for demo purposes
+                        const text = taskInput.value.toLowerCase();
+                        const signalKeywords = ['strategy', 'client', 'revenue', 'product', 'launch', 'meeting', 'proposal', 'deadline', 'goal'];
+                        const isSignal = signalKeywords.some(keyword => text.includes(keyword));
+                        this.addTask(isSignal ? 'signal' : 'noise');
+                    }
+                });
+
+                // Initial button state
+                signalBtn.classList.add('disabled');
+                noiseBtn.classList.add('disabled');
+            }
+
+            addTask(type) {
+                const taskInput = document.getElementById('taskInput');
+                const taskText = taskInput.value.trim();
+
+                if (!taskText) return;
+
+                // Add to tasks array
+                this.tasks.unshift({ text: taskText, type: type });
+                this.totalTasks++;
+
+                if (type === 'signal') {
+                    this.signalCount++;
+                }
+
+                // Update UI
+                this.addTaskToList(taskText, type);
+                this.updateRatio();
+                this.clearInput();
+                this.showAchievementIfImproved(type);
+            }
+
+            addTaskToList(text, type) {
+                const tasksList = document.getElementById('tasksList');
+                const taskItem = document.createElement('div');
+                taskItem.className = `task-item ${type}`;
+                taskItem.innerHTML = `
+                    <span class="task-text">${text}</span>
+                    <span class="task-type ${type}">${type}</span>
+                `;
+
+                tasksList.insertBefore(taskItem, tasksList.firstChild);
+
+                // Remove last task if more than 8 to keep demo clean
+                if (tasksList.children.length > 8) {
+                    tasksList.removeChild(tasksList.lastChild);
+                }
+            }
+
+            updateRatio() {
+                const oldRatio = this.currentRatio;
+                this.currentRatio = Math.round((this.signalCount / this.totalTasks) * 100);
+
+                this.updateRatioDisplay();
+
+                return this.currentRatio > oldRatio;
+            }
+
+            updateRatioDisplay() {
+                const ratioNumber = document.getElementById('ratioNumber');
+                const progressBar = document.getElementById('progressBar');
+
+                ratioNumber.textContent = `${this.currentRatio}%`;
+                progressBar.style.width = `${this.currentRatio}%`;
+
+                // Add pulse animation for visual feedback
+                ratioNumber.classList.add('pulse');
+                setTimeout(() => ratioNumber.classList.remove('pulse'), 500);
+            }
+
+            showAchievementIfImproved(type) {
+                if (type === 'signal' && this.currentRatio >= 50) {
+                    const achievement = document.getElementById('achievement');
+                    achievement.classList.add('show');
+
+                    setTimeout(() => {
+                        achievement.classList.remove('show');
+                    }, 2000);
+                }
+            }
+
+            clearInput() {
+                const taskInput = document.getElementById('taskInput');
+                const signalBtn = document.getElementById('signalBtn');
+                const noiseBtn = document.getElementById('noiseBtn');
+
+                taskInput.value = '';
+                signalBtn.classList.add('disabled');
+                noiseBtn.classList.add('disabled');
+            }
+        }
+
+        // Initialize demo when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new SignalNoiseDemo();
+        });
+
+        // Add some demo suggestions after a delay
+        setTimeout(() => {
+            const taskInput = document.getElementById('taskInput');
+            const suggestions = [
+                "Review quarterly strategy",
+                "Check social media",
+                "Call potential client",
+                "Organize email inbox",
+                "Prepare product demo",
+                "Browse tech blogs"
+            ];
+
+            let suggestionIndex = 0;
+            taskInput.addEventListener('focus', () => {
+                if (!taskInput.value) {
+                    taskInput.placeholder = suggestions[suggestionIndex % suggestions.length];
+                    suggestionIndex++;
+                }
+            });
+        }, 2000);
+    </script>
+</body>
+</html>

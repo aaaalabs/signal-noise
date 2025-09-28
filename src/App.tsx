@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import type { Task, AppData } from './types';
 import { useTranslation } from './contexts/LanguageContext';
 import BlogIndex from './components/BlogIndex';
@@ -28,6 +28,7 @@ import SplashScreenTester from './components/SplashScreenTester';
 import LoadingSplash from './components/LoadingSplash';
 import AboutModal from './components/AboutModal';
 import PrivacyModal from './components/PrivacyModal';
+import Demo from './components/Demo';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { checkAchievements, getTodayRatio } from './utils/achievements';
 import { handleStripeReturn, getSessionData, type SessionData } from './services/premiumService';
@@ -52,6 +53,8 @@ const initialData: AppData = {
 
 function AppContent() {
   const t = useTranslation();
+  const location = useLocation();
+  const isDemoRoute = location.pathname === '/demo';
   const [data, setData] = useState<AppData>(initialData);
   const [isLoaded, setIsLoaded] = useState(false);
   const [splashCompleted, setSplashCompleted] = useState(false);
@@ -98,7 +101,7 @@ function AppContent() {
 
     // Check for direct links that should skip splash screen
     const isDirectLink = pathname === '/privacy' || pathname === '/blog' || pathname.startsWith('/blog/') ||
-                        hash === '#privacy';
+                        pathname === '/demo' || hash === '#privacy';
 
     if (isDirectLink) {
       // Skip splash screen for direct links
@@ -1438,9 +1441,9 @@ function AppContent() {
 
   return (
     <>
-      {/* Loading Splash - Blueprint Reveal during Redis sync */}
+      {/* Loading Splash - Blueprint Reveal during Redis sync (skip for demo route) */}
       <LoadingSplash
-        show={(!isLoaded || !splashCompleted) && !showOnboarding && !showVerifyMagicLink && !showInvoicePage && !showSuccessPage && !showSplashTester}
+        show={(!isLoaded || !splashCompleted) && !showOnboarding && !showVerifyMagicLink && !showInvoicePage && !showSuccessPage && !showSplashTester && !isDemoRoute}
         onComplete={() => setSplashCompleted(true)}
       />
 
@@ -1623,19 +1626,43 @@ function AppContent() {
   );
 }
 
-// Main App component that provides the LanguageProvider
+// Main App component with blog routes
+function MainApp() {
+  return (
+    <Routes>
+      <Route path="/blog" element={<BlogIndex />} />
+      <Route path="/blog/:slug" element={<BlogArticle />} />
+      <Route path="/*" element={<AppContent />} />
+    </Routes>
+  );
+}
+
+// Router wrapper component
 function App() {
   return (
     <BrowserRouter>
-      <LanguageProvider>
-        <Routes>
-          <Route path="/blog" element={<BlogIndex />} />
-          <Route path="/blog/:slug" element={<BlogArticle />} />
-          <Route path="/*" element={<AppContent />} />
-        </Routes>
-        <VercelAnalytics />
-      </LanguageProvider>
+      <AppRoutes />
     </BrowserRouter>
+  );
+}
+
+// Routes component
+function AppRoutes() {
+  const location = useLocation();
+  const isDemoRoute = location.pathname === '/demo';
+
+  return (
+    <div className={`app ${isDemoRoute ? 'demo-mode' : ''}`}>
+      <Routes>
+        <Route path="/demo" element={<Demo />} />
+        <Route path="/*" element={
+          <LanguageProvider>
+            <MainApp />
+            <VercelAnalytics />
+          </LanguageProvider>
+        } />
+      </Routes>
+    </div>
   );
 }
 
