@@ -11,12 +11,13 @@ const Demo: React.FC = () => {
   const [signalCount, setSignalCount] = useState(3);
   const [totalTasks, setTotalTasks] = useState(6);
   const [currentTaskIndex] = useState(0);
+  const [lastChoiceWasCorrect, setLastChoiceWasCorrect] = useState(true);
 
   const tasks: Task[] = [
-    { text: "Check Instagram stories", correct: "noise" },
-    { text: "Review quarterly strategy", correct: "signal" },
-    { text: "Organize email inbox", correct: "noise" },
-    { text: "Call potential client", correct: "signal" }
+    { text: "Browse social media for 30 minutes", correct: "noise" },
+    { text: "Call your biggest potential client", correct: "signal" },
+    { text: "Reorganize your desk drawer", correct: "noise" },
+    { text: "Review this quarter's revenue strategy", correct: "signal" }
   ];
 
   const maxState = 4;
@@ -28,10 +29,28 @@ const Demo: React.FC = () => {
   };
 
   const makeChoice = (choice: 'signal' | 'noise') => {
-    if (choice === 'signal') {
-      setSignalCount(signalCount + 1);
+    const task = tasks[currentTaskIndex];
+    const isCorrectChoice = choice === task.correct;
+    setLastChoiceWasCorrect(isCorrectChoice);
+
+    if (isCorrectChoice) {
+      // Reward correct choices - this teaches the methodology
+      if (choice === 'signal') {
+        setSignalCount(signalCount + 1);
+      }
+      setTotalTasks(totalTasks + 1);
+    } else {
+      // Consequence for wrong choices - but still count the task
+      if (choice === 'signal') {
+        // Wrong Signal choice hurts ratio more
+        setSignalCount(signalCount + 1);
+        setTotalTasks(totalTasks + 2); // Penalty: count as if 2 tasks added
+      } else {
+        // Wrong Noise choice
+        setTotalTasks(totalTasks + 1);
+        // Signal count stays same, so ratio drops
+      }
     }
-    setTotalTasks(totalTasks + 1);
 
     // Clean transition to ratio revelation
     setTimeout(() => {
@@ -46,7 +65,14 @@ const Demo: React.FC = () => {
   const calculateImprovement = () => {
     const newRatio = calculateRatio();
     const improvement = newRatio - 47;
-    return improvement > 0 ? `+${improvement}% improvement` : `${improvement}% change`;
+
+    if (improvement > 0) {
+      return `+${improvement}% improvement`;
+    } else if (improvement < 0) {
+      return `${improvement}% decline`;
+    } else {
+      return "No change";
+    }
   };
 
   return (
@@ -69,6 +95,9 @@ const Demo: React.FC = () => {
         <div className="task-presentation">
           <div className="task-label">Your Task</div>
           <div className="task-text">{tasks[currentTaskIndex]?.text}</div>
+          <div className="methodology-hint">
+            Does this move your most important goals forward?
+          </div>
         </div>
         <div className="binary-choice">
           <button
@@ -92,6 +121,11 @@ const Demo: React.FC = () => {
           <div className="ratio-label">Your Signal Ratio</div>
           <div className="ratio-number">{calculateRatio()}%</div>
           <div className="ratio-improvement">{calculateImprovement()}</div>
+          <div className="educational-message">
+            {lastChoiceWasCorrect
+              ? "✓ Perfect! That's how Jobs would classify it."
+              : "Think again: Does browsing social media drive your biggest goals?"}
+          </div>
         </div>
         <button className="continue-button" onClick={nextState}>
           Continue

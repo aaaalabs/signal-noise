@@ -97,9 +97,17 @@
   font-size: 24px;
   font-weight: 300;
   color: #ffffff;
-  margin-bottom: 60px;
+  margin-bottom: 20px;
   line-height: 1.4;
   padding: 0 20px;
+}
+
+.methodology-hint {
+  font-size: 14px;
+  color: #666;
+  font-style: italic;
+  margin-bottom: 40px;
+  opacity: 0.8;
 }
 
 .binary-choice {
@@ -193,7 +201,16 @@
 .ratio-improvement {
   font-size: 16px;
   color: #888;
+  margin-bottom: 20px;
+}
+
+.educational-message {
+  font-size: 14px;
+  color: var(--signal, #00ff88);
+  font-style: italic;
   margin-bottom: 40px;
+  padding: 0 20px;
+  line-height: 1.4;
 }
 
 .continue-button {
