@@ -44,41 +44,50 @@ export default function FoundationModal({ show, onClose, startInLoginMode = fals
     }
   }, [show, startInLoginMode]);
 
-  const handlePromoCode = () => {
+  const handlePromoCode = async () => {
     if (promoCode.toUpperCase().trim() === 'PH-PRELAUNCH') {
-      // Create session data for free premium until Oct 31st
-      const sessionData = {
-        email: email || 'ph-user@signal-noise.app',
-        firstName: firstName || 'Product Hunt User',
-        token: 'ph-promo-' + Date.now(),
-        sessionToken: 'ph-session-' + Date.now(),
-        created: Date.now(),
-        lastActive: Date.now(),
-        expires: new Date('2025-10-31 23:59:59').getTime(),
-        tier: 'ph_prelaunch',
-        paymentType: 'promo_code',
-        syncedFromLocal: null
-      };
+      setLoading(true);
 
-      // Store session data
-      localStorage.setItem('sessionData', JSON.stringify(sessionData));
-      localStorage.setItem('userEmail', sessionData.email);
-      if (firstName) {
-        localStorage.setItem('userFirstName', firstName);
+      try {
+        // Create proper Redis user account with magic link
+        const response = await fetch('/api/auth/create-promo-user', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: email.trim(),
+            firstName: firstName.trim(),
+            promoCode: promoCode.toUpperCase().trim(),
+            tier: 'ph_prelaunch'
+          }),
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          console.log('✅ Promo user created:', result);
+
+          setPromoActivated(true);
+          setLoading(false);
+
+          // Set to magic link sent state (user will receive email)
+          setTimeout(() => {
+            setMagicLinkSent(true);
+          }, 1000);
+
+        } else {
+          const error = await response.json();
+          console.error('❌ Promo activation failed:', error);
+          alert('Promo code activation failed. Please try again.');
+          setLoading(false);
+        }
+      } catch (error) {
+        console.error('❌ Promo code error:', error);
+        alert('Network error. Please try again.');
+        setLoading(false);
       }
-
-      setPromoActivated(true);
-
-      // Trigger premium session update event
-      window.dispatchEvent(new CustomEvent('premiumSessionUpdated', {
-        detail: { source: 'promo_code', tier: 'ph_prelaunch' }
-      }));
-
-      // Close modal after success
-      setTimeout(() => {
-        onClose();
-        window.location.reload(); // Refresh to activate premium features
-      }, 2000);
+    } else {
+      alert('Invalid promo code. Try "PH-PRELAUNCH"');
     }
   };
 
@@ -462,11 +471,86 @@ export default function FoundationModal({ show, onClose, startInLoginMode = fals
                 fontSize: '14px',
                 fontWeight: 300,
                 borderRadius: '6px',
-                outline: 'none'
+                outline: 'none',
+                marginBottom: '12px'
               }}
               onFocus={(e) => e.target.style.borderColor = '#555'}
               onBlur={(e) => e.target.style.borderColor = '#333'}
             />
+          )}
+
+          {/* Promo Code Section - only show in purchase mode for new users */}
+          {!isLoginMode && (!userStatus?.exists || !userStatus.isActive) && !magicLinkSent && (
+            <div style={{ marginBottom: '16px' }}>
+              <input
+                type="text"
+                value={promoCode}
+                onChange={(e) => setPromoCode(e.target.value)}
+                placeholder="Promo code (optional)"
+                style={{
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: '#222',
+                  border: '1px solid #333',
+                  borderRadius: '6px',
+                  color: 'white',
+                  fontSize: '14px',
+                  fontWeight: 300,
+                  marginBottom: '8px',
+                  outline: 'none'
+                }}
+                onFocus={(e) => e.target.style.borderColor = '#555'}
+                onBlur={(e) => e.target.style.borderColor = '#333'}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter' && promoCode.trim()) {
+                    handlePromoCode();
+                  }
+                }}
+              />
+              {promoCode.trim() && !promoActivated && (
+                <button
+                  onClick={handlePromoCode}
+                  disabled={loading || !email.trim()}
+                  style={{
+                    width: '100%',
+                    padding: '8px',
+                    background: '#00ff88',
+                    color: '#000',
+                    border: 'none',
+                    borderRadius: '6px',
+                    fontSize: '12px',
+                    fontWeight: '500',
+                    cursor: loading ? 'not-allowed' : 'pointer',
+                    opacity: loading || !email.trim() ? 0.5 : 1
+                  }}
+                >
+                  {loading ? 'Activating...' : 'Apply Promo Code'}
+                </button>
+              )}
+            </div>
+          )}
+
+          {/* Promo Success Message - Jony Ive conscious transition */}
+          {promoActivated && !magicLinkSent && (
+            <div style={{
+              background: 'rgba(0, 255, 136, 0.1)',
+              border: '1px solid #00ff88',
+              borderRadius: '8px',
+              padding: '20px',
+              marginBottom: '20px',
+              textAlign: 'center'
+            }}>
+              <div style={{ color: '#00ff88', fontWeight: '500', marginBottom: '8px', fontSize: '16px' }}>
+                🎉 Product Hunt Access Granted!
+              </div>
+              <div style={{ color: '#ccc', fontSize: '13px', marginBottom: '12px', lineHeight: '1.4' }}>
+                You now have premium access until October 31st, including:<br/>
+                AI Coach • Cloud Sync • Premium Analytics
+              </div>
+              <div style={{ color: '#888', fontSize: '11px' }}>
+                Check your email for secure cloud access
+              </div>
+            </div>
           )}
         </div>
 
