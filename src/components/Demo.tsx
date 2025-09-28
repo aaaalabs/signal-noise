@@ -93,8 +93,8 @@ const Demo: React.FC = () => {
       {/* State 2: The Choice */}
       <div className={`demo-state ${currentState === 2 ? 'active' : ''}`}>
         <div className="task-presentation">
-          <div className="task-label">Your Task</div>
-          <div className="task-text">{tasks[currentTaskIndex]?.text}</div>
+          <div className="demo-task-label">Your Task</div>
+          <div className="demo-task-text">{tasks[currentTaskIndex]?.text}</div>
           <div className="methodology-hint">
             Does this move your most important goals forward?
           </div>

@@ -85,7 +85,7 @@
   margin-bottom: 60px;
 }
 
-.task-label {
+.demo-task-label {
   font-size: 14px;
   color: #666;
   margin-bottom: 20px;
@@ -93,7 +93,7 @@
   letter-spacing: 1px;
 }
 
-.task-text {
+.demo-task-text {
   font-size: 24px;
   font-weight: 300;
   color: #ffffff;
@@ -295,7 +295,7 @@
     margin-bottom: 40px;
   }
 
-  .task-text {
+  .demo-task-text {
     font-size: 20px;
     margin-bottom: 40px;
   }
