@@ -266,6 +266,93 @@ export default function FoundationModal({ show, onClose, startInLoginMode = fals
     }
   };
 
+  // Minimal promo email verification modal (Jony Ive style)
+  if (promoActivated && magicLinkSent) {
+    return (
+      <div
+        style={{
+          position: 'fixed',
+          inset: 0,
+          background: 'rgba(0, 0, 0, 0.9)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 2000,
+          backdropFilter: 'blur(12px)'
+        }}
+        onClick={onClose}
+      >
+        <div
+          style={{
+            background: '#000',
+            border: '1px solid #333',
+            borderRadius: '16px',
+            padding: '48px 32px',
+            maxWidth: '320px',
+            width: '90%',
+            textAlign: 'center'
+          }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Clean header */}
+          <div style={{
+            fontSize: '24px',
+            fontWeight: 300,
+            color: '#fff',
+            marginBottom: '32px',
+            letterSpacing: '1px'
+          }}>
+            Check Your Email
+          </div>
+
+          {/* User's email confirmation */}
+          <div style={{
+            fontSize: '14px',
+            color: '#00ff88',
+            marginBottom: '16px',
+            fontWeight: 300,
+            padding: '12px 16px',
+            background: 'rgba(0, 255, 136, 0.1)',
+            borderRadius: '8px',
+            border: '1px solid rgba(0, 255, 136, 0.2)'
+          }}>
+            {email}
+          </div>
+
+          {/* Simple explanation */}
+          <div style={{
+            fontSize: '13px',
+            color: '#888',
+            lineHeight: '1.5',
+            marginBottom: '32px'
+          }}>
+            We sent your premium access link.<br/>
+            Click it to activate your Signal/Noise cloud account.
+          </div>
+
+          {/* Clean close */}
+          <button
+            onClick={onClose}
+            style={{
+              background: 'transparent',
+              border: '1px solid #333',
+              color: '#666',
+              padding: '12px 24px',
+              borderRadius: '8px',
+              fontSize: '12px',
+              fontWeight: 400,
+              cursor: 'pointer',
+              textTransform: 'uppercase',
+              letterSpacing: '0.5px'
+            }}
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   if (!stats) {
     return (
       <div
