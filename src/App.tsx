@@ -53,8 +53,6 @@ const initialData: AppData = {
 
 function AppContent() {
   const t = useTranslation();
-  const location = useLocation();
-  const isDemoRoute = location.pathname === '/demo';
   const [data, setData] = useState<AppData>(initialData);
   const [isLoaded, setIsLoaded] = useState(false);
   const [splashCompleted, setSplashCompleted] = useState(false);
@@ -101,7 +99,7 @@ function AppContent() {
 
     // Check for direct links that should skip splash screen
     const isDirectLink = pathname === '/privacy' || pathname === '/blog' || pathname.startsWith('/blog/') ||
-                        pathname === '/demo' || hash === '#privacy';
+                        hash === '#privacy';
 
     if (isDirectLink) {
       // Skip splash screen for direct links
@@ -1441,9 +1439,9 @@ function AppContent() {
 
   return (
     <>
-      {/* Loading Splash - Blueprint Reveal during Redis sync (skip for demo route) */}
+      {/* Loading Splash - Blueprint Reveal during Redis sync */}
       <LoadingSplash
-        show={(!isLoaded || !splashCompleted) && !showOnboarding && !showVerifyMagicLink && !showInvoicePage && !showSuccessPage && !showSplashTester && !isDemoRoute}
+        show={(!isLoaded || !splashCompleted) && !showOnboarding && !showVerifyMagicLink && !showInvoicePage && !showSuccessPage && !showSplashTester}
         onComplete={() => setSplashCompleted(true)}
       />
 
@@ -1626,16 +1624,7 @@ function AppContent() {
   );
 }
 
-// Main App component with blog routes
-function MainApp() {
-  return (
-    <Routes>
-      <Route path="/blog" element={<BlogIndex />} />
-      <Route path="/blog/:slug" element={<BlogArticle />} />
-      <Route path="/*" element={<AppContent />} />
-    </Routes>
-  );
-}
+// Main App component with blog routes - removed, integrated directly into AppRoutes
 
 // Router wrapper component
 function App() {
@@ -1651,17 +1640,26 @@ function AppRoutes() {
   const location = useLocation();
   const isDemoRoute = location.pathname === '/demo';
 
+  // Completely isolate demo route from main app logic
+  if (isDemoRoute) {
+    return (
+      <div className="app demo-mode">
+        <Demo />
+      </div>
+    );
+  }
+
+  // Main app with full initialization for all other routes
   return (
-    <div className={`app ${isDemoRoute ? 'demo-mode' : ''}`}>
-      <Routes>
-        <Route path="/demo" element={<Demo />} />
-        <Route path="/*" element={
-          <LanguageProvider>
-            <MainApp />
-            <VercelAnalytics />
-          </LanguageProvider>
-        } />
-      </Routes>
+    <div className="app">
+      <LanguageProvider>
+        <Routes>
+          <Route path="/blog" element={<BlogIndex />} />
+          <Route path="/blog/:slug" element={<BlogArticle />} />
+          <Route path="/*" element={<AppContent />} />
+        </Routes>
+        <VercelAnalytics />
+      </LanguageProvider>
     </div>
   );
 }
