@@ -269,14 +269,10 @@ CRITICAL: Never mention "X days old" or "sitting for N days" - focus on ACTION T
  */
 function buildPersonalAIPrompt(payload: any, language: string): string {
   const { firstName, deepTaskAnalysis } = payload;
-  const { allTasks, completionReality } = deepTaskAnalysis;
+  const { completionReality } = deepTaskAnalysis;
 
   const abandonedTasksList = completionReality.abandonedSignals
-    .map((t: any) => `- "${t.text}" - ${t.ageInDays} days old`)
-    .join('\n');
-
-  const allTasksList = allTasks
-    .map((t: any) => `- [${t.type}] "${t.text}" ${t.completed ? 'DONE' : `(${t.ageInDays}d)`}`)
+    .map((t: any) => `- "${t.text}" (taucht wiederholt auf)`)
     .join('\n');
 
   if (language === 'de') {
