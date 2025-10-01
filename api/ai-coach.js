@@ -49,7 +49,6 @@ export default async function handler(req, res) {
     }
 
     // Call Groq API
-    // Messages array already includes system prompt from groqService.ts
     const groqResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -58,8 +57,14 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         model: process.env.GROQ_MODEL || 'llama-3.3-70b-versatile',
-        messages: messages, // Pass through messages as-is
-        max_tokens: 500, // Increased for detailed Personal AI responses
+        messages: [
+          {
+            role: 'system',
+            content: `You are a personal productivity coach for Signal/Noise app. Be encouraging, specific, and actionable. Address the user personally but keep responses under 200 words. Focus on the 80/20 principle - help them identify what truly matters (Signal) vs distractions (Noise).`
+          },
+          ...messages
+        ],
+        max_tokens: 300,
         temperature: 0.7,
       }),
     });
