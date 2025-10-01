@@ -36,8 +36,8 @@ const blogPosts = [
   },
   {
     slug: 'signal-vs-noise-philosophy',
-    publishDate: '2025-10-13',
-    isPublished: false
+    publishDate: '2025-09-26',
+    isPublished: true
   },
   {
     slug: '90-day-tracking-experiment',
