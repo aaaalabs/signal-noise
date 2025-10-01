@@ -202,9 +202,44 @@ export default function FoundersParadoxArticle({ isGerman }: ArticleProps) {
         marginBottom: '1.5rem'
       }}>
         {isGerman ? (
-          <>Barry Schwartz' bahnbrechende Forschung zum "Paradox of Choice" erklärt, warum Sarah - und Millionen von Gründern wie sie - in der Falle sitzen. Unser Gehirn wurde für eine Welt mit begrenzten Optionen entwickelt. Wenn wir mit unbegrenzten Möglichkeiten konfrontiert werden, überlastet unser kognitives System.</>
+          <>Barry Schwartz' bahnbrechende Forschung zum{' '}
+          <a
+            href="https://www.ted.com/talks/barry_schwartz_the_paradox_of_choice"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color: '#00ff88',
+              textDecoration: 'none',
+              borderBottom: '1px solid rgba(0, 255, 136, 0.3)'
+            }}
+          >
+            "Paradox of Choice"
+          </a>{' '}erklärt, warum Sarah - und Millionen von Gründern wie sie - in der Falle sitzen. Unser Gehirn wurde für eine Welt mit begrenzten Optionen entwickelt. Wenn wir mit unbegrenzten Möglichkeiten konfrontiert werden, überlastet unser kognitives System.</>
         ) : (
-          <>Barry Schwartz's groundbreaking research on the "Paradox of Choice" explains why Sarah - and millions of founders like her - are trapped. Our brains evolved for a world of limited options. When confronted with unlimited possibilities, our cognitive system overloads.</>
+          <><a
+            href="https://www.ted.com/talks/barry_schwartz_the_paradox_of_choice"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color: '#00ff88',
+              textDecoration: 'none',
+              borderBottom: '1px solid rgba(0, 255, 136, 0.3)'
+            }}
+          >
+            Barry Schwartz's
+          </a>{' '}groundbreaking research on the{' '}
+          <a
+            href="https://www.amazon.com/Paradox-Choice-Why-More-Less/dp/0060005696"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color: '#00ff88',
+              textDecoration: 'none',
+              borderBottom: '1px solid rgba(0, 255, 136, 0.3)'
+            }}
+          >
+            "Paradox of Choice"
+          </a>{' '}explains why Sarah - and millions of founders like her - are trapped. Our brains evolved for a world of limited options. When confronted with unlimited possibilities, our cognitive system overloads.</>
         )}
       </p>
 
@@ -278,9 +313,32 @@ export default function FoundersParadoxArticle({ isGerman }: ArticleProps) {
         marginBottom: '1.5rem'
       }}>
         {isGerman ? (
-          <>Die Columbia University Studie bestätigte dies dramatisch: Menschen, die zwischen 24 Marmeladesorten wählen konnten, kauften 10x seltener als Menschen mit nur 6 Optionen. Bei Gründern ist der Effekt noch extremer - sie wechseln durchschnittlich alle 11 Minuten die Aufgabe, verglichen mit 23 Minuten bei Angestellten.</>
+          <>Die{' '}
+          <a
+            href="https://faculty.washington.edu/jdb/345/345%20Articles/Iyengar%20&%20Lepper%20(2000).pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color: '#00ff88',
+              textDecoration: 'none',
+              borderBottom: '1px solid rgba(0, 255, 136, 0.3)'
+            }}
+          >
+            Columbia University Studie
+          </a>{' '}bestätigte dies dramatisch: Menschen, die zwischen 24 Marmeladesorten wählen konnten, kauften 10x seltener als Menschen mit nur 6 Optionen. Bei Gründern ist der Effekt noch extremer - sie wechseln durchschnittlich alle 11 Minuten die Aufgabe, verglichen mit 23 Minuten bei Angestellten.</>
         ) : (
-          <>Columbia University's study confirmed this dramatically: people choosing between 24 jam varieties were 10x less likely to buy than those with only 6 options. For founders, the effect is even more extreme - they switch tasks every 11 minutes on average, compared to 23 minutes for employees.</>
+          <><a
+            href="https://faculty.washington.edu/jdb/345/345%20Articles/Iyengar%20&%20Lepper%20(2000).pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color: '#00ff88',
+              textDecoration: 'none',
+              borderBottom: '1px solid rgba(0, 255, 136, 0.3)'
+            }}
+          >
+            Columbia University's study
+          </a>{' '}confirmed this dramatically: people choosing between 24 jam varieties were 10x less likely to buy than those with only 6 options. For founders, the effect is even more extreme - they switch tasks every 11 minutes on average, compared to 23 minutes for employees.</>
         )}
       </p>
 
@@ -355,9 +413,31 @@ export default function FoundersParadoxArticle({ isGerman }: ArticleProps) {
         marginBottom: '1.5rem'
       }}>
         {isGerman ? (
-          <>Reid Hoffman fasst es perfekt zusammen: "Jede Entscheidung trägt Opportunitätskosten. Unternehmer stehen täglich Tausenden dieser Kosten gegenüber." Während ein Product Manager zwischen 3-5 vordefinierten Optionen wählt, steht ein Gründer vor praktisch unbegrenzten Möglichkeiten.</>
+          <><a
+            href="https://www.reidhoffman.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color: '#00ff88',
+              textDecoration: 'none',
+              borderBottom: '1px solid rgba(0, 255, 136, 0.3)'
+            }}
+          >
+            Reid Hoffman
+          </a>{' '}fasst es perfekt zusammen: "Jede Entscheidung trägt Opportunitätskosten. Unternehmer stehen täglich Tausenden dieser Kosten gegenüber." Während ein Product Manager zwischen 3-5 vordefinierten Optionen wählt, steht ein Gründer vor praktisch unbegrenzten Möglichkeiten.</>
         ) : (
-          <>Reid Hoffman captures it perfectly: "Every decision carries an opportunity cost. Entrepreneurs face thousands of these costs daily." While a Product Manager chooses between 3-5 predefined options, a founder faces virtually unlimited possibilities.</>
+          <><a
+            href="https://www.reidhoffman.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color: '#00ff88',
+              textDecoration: 'none',
+              borderBottom: '1px solid rgba(0, 255, 136, 0.3)'
+            }}
+          >
+            Reid Hoffman
+          </a>{' '}captures it perfectly: "Every decision carries an opportunity cost. Entrepreneurs face thousands of these costs daily." While a Product Manager chooses between 3-5 predefined options, a founder faces virtually unlimited possibilities.</>
         )}
       </p>
 
@@ -507,7 +587,32 @@ export default function FoundersParadoxArticle({ isGerman }: ArticleProps) {
           fontSize: '0.9rem',
           color: '#999'
         }}>
-          — Tim Ferriss, 4-Hour Work Week
+          —{' '}
+          <a
+            href="https://tim.blog/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color: '#00ff88',
+              textDecoration: 'none',
+              borderBottom: '1px solid rgba(0, 255, 136, 0.3)'
+            }}
+          >
+            Tim Ferriss
+          </a>
+          ,{' '}
+          <a
+            href="https://www.amazon.com/4-Hour-Workweek-Escape-Live-Anywhere/dp/0307465357"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color: '#00ff88',
+              textDecoration: 'none',
+              borderBottom: '1px solid rgba(0, 255, 136, 0.3)'
+            }}
+          >
+            4-Hour Work Week
+          </a>
         </cite>
       </blockquote>
 
@@ -529,9 +634,33 @@ export default function FoundersParadoxArticle({ isGerman }: ArticleProps) {
         marginBottom: '1.5rem'
       }}>
         {isGerman ? (
-          <>Hier kommt das 80/20-Prinzip ins Spiel - aber nicht wie du es kennst. Cal Newport erklärt es perfekt: "Struktur ist nicht der Feind der Kreativität; sie ist das Fundament, das es der Kreativität ermöglicht zu blühen." Das Signal/Noise-Framework löst das Gründer-Paradoxon, indem es künstliche, aber befreiende Beschränkungen schafft.</>
+          <>Hier kommt das 80/20-Prinzip ins Spiel - aber nicht wie du es kennst.{' '}
+          <a
+            href="https://calnewport.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color: '#00ff88',
+              textDecoration: 'none',
+              borderBottom: '1px solid rgba(0, 255, 136, 0.3)'
+            }}
+          >
+            Cal Newport
+          </a>{' '}erklärt es perfekt: "Struktur ist nicht der Feind der Kreativität; sie ist das Fundament, das es der Kreativität ermöglicht zu blühen." Das Signal/Noise-Framework löst das Gründer-Paradoxon, indem es künstliche, aber befreiende Beschränkungen schafft.</>
         ) : (
-          <>Here's where the 80/20 principle comes in - but not as you know it. Cal Newport explains it perfectly: "Structure is not the enemy of creativity; it's the foundation that allows creativity to flourish." The Signal/Noise framework solves the founder's paradox by creating artificial but liberating constraints.</>
+          <>Here's where the 80/20 principle comes in - but not as you know it.{' '}
+          <a
+            href="https://calnewport.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color: '#00ff88',
+              textDecoration: 'none',
+              borderBottom: '1px solid rgba(0, 255, 136, 0.3)'
+            }}
+          >
+            Cal Newport
+          </a>{' '}explains it perfectly: "Structure is not the enemy of creativity; it's the foundation that allows creativity to flourish." The Signal/Noise framework solves the founder's paradox by creating artificial but liberating constraints.</>
         )}
       </p>
 
@@ -640,9 +769,43 @@ export default function FoundersParadoxArticle({ isGerman }: ArticleProps) {
         marginBottom: '1.5rem'
       }}>
         {isGerman ? (
-          <>Paul Graham von Y Combinator bringt es auf den Punkt: "Erfolgreiche Unternehmer haben nicht mehr Optionen - sie haben bessere Filter." Das Signal/Noise-Framework ist genau das: ein Filter, der das Gründer-Paradoxon löst, indem er die kognitiven Kosten unbegrenzter Wahlmöglichkeiten eliminiert.</>
+          <><a
+            href="https://paulgraham.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color: '#00ff88',
+              textDecoration: 'none',
+              borderBottom: '1px solid rgba(0, 255, 136, 0.3)'
+            }}
+          >
+            Paul Graham
+          </a>{' '}von Y Combinator bringt es auf den Punkt: "Erfolgreiche Unternehmer haben nicht mehr Optionen - sie haben bessere Filter." Das Signal/Noise-Framework ist genau das: ein Filter, der das Gründer-Paradoxon löst, indem er die kognitiven Kosten unbegrenzter Wahlmöglichkeiten eliminiert.</>
         ) : (
-          <>Paul Graham from Y Combinator nails it: "Successful entrepreneurs don't have more options - they have better filters." The Signal/Noise framework is exactly that: a filter that solves the founder's paradox by eliminating the cognitive costs of unlimited choice.</>
+          <><a
+            href="https://paulgraham.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color: '#00ff88',
+              textDecoration: 'none',
+              borderBottom: '1px solid rgba(0, 255, 136, 0.3)'
+            }}
+          >
+            Paul Graham
+          </a>{' '}from{' '}
+          <a
+            href="https://www.ycombinator.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color: '#00ff88',
+              textDecoration: 'none',
+              borderBottom: '1px solid rgba(0, 255, 136, 0.3)'
+            }}
+          >
+            Y Combinator
+          </a>{' '}nails it: "Successful entrepreneurs don't have more options - they have better filters." The Signal/Noise framework is exactly that: a filter that solves the founder's paradox by eliminating the cognitive costs of unlimited choice.</>
         )}
       </p>
 
