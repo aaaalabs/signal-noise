@@ -74,7 +74,7 @@ export const blogPosts: BlogPost[] = [
     readTime: '8 min',
     keywords: ['founder productivity paradox', 'entrepreneur focus challenges', 'freedom kills productivity'],
     publishDate: '2025-10-06',
-    isPublished: false
+    isPublished: true
   },
   {
     slug: 'signal-vs-noise-philosophy',

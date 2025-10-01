@@ -82,6 +82,14 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://signal-noise.app/blog/elon-musk-100-signal" />
   </url>
   <url>
+    <loc>https://signal-noise.app/blog/founder-productivity-paradox</loc>
+    <lastmod>2025-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://signal-noise.app/blog/founder-productivity-paradox" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://signal-noise.app/blog/founder-productivity-paradox" />
+  </url>
+  <url>
     <loc>https://signal-noise.app/blog/signal-vs-noise-philosophy</loc>
     <lastmod>2025-09-26</lastmod>
     <changefreq>monthly</changefreq>

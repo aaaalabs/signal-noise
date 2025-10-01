@@ -32,7 +32,7 @@ const blogPosts = [
   {
     slug: 'founder-productivity-paradox',
     publishDate: '2025-10-06',
-    isPublished: false
+    isPublished: true
   },
   {
     slug: 'signal-vs-noise-philosophy',
