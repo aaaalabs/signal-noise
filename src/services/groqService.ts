@@ -122,10 +122,16 @@ Return a personalized coaching message.`);
     }
 
     const data = await response.json();
+    console.log('🔍 AI Coach API Response:', {
+      hasMessage: !!data.message,
+      hasChoices: !!data.choices,
+      fullResponse: data
+    });
 
     // Try to parse the coach response as JSON (especially important for Personal AI)
     try {
       const responseText = data.message || data.choices?.[0]?.message?.content;
+      console.log('📝 Extracted response text:', responseText);
 
       // Try to parse as JSON first
       if (typeof responseText === 'string') {
@@ -156,7 +162,11 @@ Return a personalized coaching message.`);
       };
     }
   } catch (error) {
-    console.error('Groq API error:', error);
+    console.error('❌ Groq API error - Using fallback:', error);
+    console.error('Error details:', {
+      message: error instanceof Error ? error.message : 'Unknown',
+      type: typeof error
+    });
 
     // Fallback coaching message
     const ratio = payload.context.currentRatio;
