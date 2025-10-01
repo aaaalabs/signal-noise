@@ -172,15 +172,30 @@ export default function FoundersParadoxArticle({ isGerman }: ArticleProps) {
           }}>
             {isGerman ? 'Schockierende Statistiken' : 'Shocking Statistics'}
           </h3>
-          <p style={{
+          <ul style={{
             color: '#ddd',
             fontSize: '0.95rem',
-            lineHeight: '1.6'
+            lineHeight: '1.8',
+            listStyle: 'none',
+            padding: 0,
+            margin: 0
           }}>
-            {isGerman
-              ? '• Gründer treffen 35.000 Entscheidungen täglich (vs. 3.000 bei Angestellten)\n• 73% der Startup-Gründer fühlen sich von der Anzahl verfügbarer Optionen überwältigt\n• 89% gescheiterter Startups nennen "mangelnden Fokus" als Hauptgrund\n• Produktivität sinkt um 40% bei mehr als 10 Optionen'
-              : '• Founders make 35,000 decisions daily (vs. 3,000 for employees)\n• 73% of startup founders feel overwhelmed by available options\n• 89% of failed startups cite "lack of focus" as primary reason\n• Productivity decreases 40% with more than 10 options'}
-          </p>
+            {isGerman ? (
+              <>
+                <li>• Gründer treffen 35.000 Entscheidungen täglich (vs. 3.000 bei Angestellten)</li>
+                <li>• 73% der Startup-Gründer fühlen sich von der Anzahl verfügbarer Optionen überwältigt</li>
+                <li>• 89% gescheiterter Startups nennen "mangelnden Fokus" als Hauptgrund</li>
+                <li>• Produktivität sinkt um 40% bei mehr als 10 Optionen</li>
+              </>
+            ) : (
+              <>
+                <li>• Founders make 35,000 decisions daily (vs. 3,000 for employees)</li>
+                <li>• 73% of startup founders feel overwhelmed by available options</li>
+                <li>• 89% of failed startups cite "lack of focus" as primary reason</li>
+                <li>• Productivity decreases 40% with more than 10 options</li>
+              </>
+            )}
+          </ul>
         </div>
       </div>
 
@@ -464,15 +479,32 @@ export default function FoundersParadoxArticle({ isGerman }: ArticleProps) {
           }}>
             {isGerman ? 'Corporate-Struktur' : 'Corporate Structure'}
           </h3>
-          <p style={{
+          <ul style={{
             color: '#ddd',
             fontSize: '0.95rem',
-            lineHeight: '1.6'
+            lineHeight: '1.8',
+            listStyle: 'none',
+            padding: 0,
+            margin: 0
           }}>
-            {isGerman
-              ? '• Vordefinierte Prioritäten\n• Klare Verantwortlichkeiten\n• Begrenzte Entscheidungsfreiheit\n• Externe Struktur und Kontrolle\n• 3.000 Entscheidungen täglich'
-              : '• Predefined priorities\n• Clear responsibilities\n• Limited decision freedom\n• External structure and control\n• 3,000 decisions daily'}
-          </p>
+            {isGerman ? (
+              <>
+                <li>• Vordefinierte Prioritäten</li>
+                <li>• Klare Verantwortlichkeiten</li>
+                <li>• Begrenzte Entscheidungsfreiheit</li>
+                <li>• Externe Struktur und Kontrolle</li>
+                <li>• 3.000 Entscheidungen täglich</li>
+              </>
+            ) : (
+              <>
+                <li>• Predefined priorities</li>
+                <li>• Clear responsibilities</li>
+                <li>• Limited decision freedom</li>
+                <li>• External structure and control</li>
+                <li>• 3,000 decisions daily</li>
+              </>
+            )}
+          </ul>
         </div>
 
         {/* Entrepreneurial Freedom */}
@@ -489,15 +521,32 @@ export default function FoundersParadoxArticle({ isGerman }: ArticleProps) {
           }}>
             {isGerman ? 'Unternehmerische Freiheit' : 'Entrepreneurial Freedom'}
           </h3>
-          <p style={{
+          <ul style={{
             color: '#ddd',
             fontSize: '0.95rem',
-            lineHeight: '1.6'
+            lineHeight: '1.8',
+            listStyle: 'none',
+            padding: 0,
+            margin: 0
           }}>
-            {isGerman
-              ? '• Unbegrenzte Optionen\n• Vollständige Verantwortung\n• Infinite Entscheidungsfreiheit\n• Selbstorganisation erforderlich\n• 35.000 Entscheidungen täglich'
-              : '• Unlimited options\n• Complete responsibility\n• Infinite decision freedom\n• Self-organization required\n• 35,000 decisions daily'}
-          </p>
+            {isGerman ? (
+              <>
+                <li>• Unbegrenzte Optionen</li>
+                <li>• Vollständige Verantwortung</li>
+                <li>• Infinite Entscheidungsfreiheit</li>
+                <li>• Selbstorganisation erforderlich</li>
+                <li>• 35.000 Entscheidungen täglich</li>
+              </>
+            ) : (
+              <>
+                <li>• Unlimited options</li>
+                <li>• Complete responsibility</li>
+                <li>• Infinite decision freedom</li>
+                <li>• Self-organization required</li>
+                <li>• 35,000 decisions daily</li>
+              </>
+            )}
+          </ul>
         </div>
       </div>
 
@@ -723,15 +772,32 @@ export default function FoundersParadoxArticle({ isGerman }: ArticleProps) {
           }}>
             {isGerman ? '80% Signal - Die 3-5 kritischen Aufgaben' : '80% Signal - The 3-5 Critical Tasks'}
           </h3>
-          <p style={{
+          <ul style={{
             color: '#ddd',
             fontSize: '0.95rem',
-            lineHeight: '1.6'
+            lineHeight: '1.8',
+            listStyle: 'none',
+            padding: 0,
+            margin: 0
           }}>
-            {isGerman
-              ? '• Aufgaben, die das Unternehmen in den nächsten 18 Stunden voranbringen\n• Direkt messbare Auswirkungen auf Umsatz oder Produkt\n• Können nicht delegiert werden (nur du kannst sie machen)\n• Bewegen die Nadel in Richtung deiner Vision\n• Erschaffen langfristigen Wert'
-              : '• Tasks that move the company forward in the next 18 hours\n• Directly measurable impact on revenue or product\n• Cannot be delegated (only you can do them)\n• Move the needle toward your vision\n• Create long-term value'}
-          </p>
+            {isGerman ? (
+              <>
+                <li>• Aufgaben, die das Unternehmen in den nächsten 18 Stunden voranbringen</li>
+                <li>• Direkt messbare Auswirkungen auf Umsatz oder Produkt</li>
+                <li>• Können nicht delegiert werden (nur du kannst sie machen)</li>
+                <li>• Bewegen die Nadel in Richtung deiner Vision</li>
+                <li>• Erschaffen langfristigen Wert</li>
+              </>
+            ) : (
+              <>
+                <li>• Tasks that move the company forward in the next 18 hours</li>
+                <li>• Directly measurable impact on revenue or product</li>
+                <li>• Cannot be delegated (only you can do them)</li>
+                <li>• Move the needle toward your vision</li>
+                <li>• Create long-term value</li>
+              </>
+            )}
+          </ul>
         </div>
 
         {/* Noise */}
@@ -748,15 +814,32 @@ export default function FoundersParadoxArticle({ isGerman }: ArticleProps) {
           }}>
             {isGerman ? '20% Noise - Alles andere' : '20% Noise - Everything Else'}
           </h3>
-          <p style={{
+          <ul style={{
             color: '#ddd',
             fontSize: '0.95rem',
-            lineHeight: '1.6'
+            lineHeight: '1.8',
+            listStyle: 'none',
+            padding: 0,
+            margin: 0
           }}>
-            {isGerman
-              ? '• E-Mails und administrative Aufgaben\n• Networking-Veranstaltungen ohne klaren Nutzen\n• "Wichtige" Meetings ohne konkrete Ergebnisse\n• Social Media und Inhaltserstellung\n• Perfektionierung bereits funktionierender Systeme'
-              : '• Emails and administrative tasks\n• Networking events without clear ROI\n• "Important" meetings without concrete outcomes\n• Social media and content creation\n• Perfecting already-working systems'}
-          </p>
+            {isGerman ? (
+              <>
+                <li>• E-Mails und administrative Aufgaben</li>
+                <li>• Networking-Veranstaltungen ohne klaren Nutzen</li>
+                <li>• "Wichtige" Meetings ohne konkrete Ergebnisse</li>
+                <li>• Social Media und Inhaltserstellung</li>
+                <li>• Perfektionierung bereits funktionierender Systeme</li>
+              </>
+            ) : (
+              <>
+                <li>• Emails and administrative tasks</li>
+                <li>• Networking events without clear ROI</li>
+                <li>• "Important" meetings without concrete outcomes</li>
+                <li>• Social media and content creation</li>
+                <li>• Perfecting already-working systems</li>
+              </>
+            )}
+          </ul>
         </div>
       </div>
 
