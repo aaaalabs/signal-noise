@@ -31,7 +31,7 @@ const blogPosts = [
   },
   {
     slug: 'founder-productivity-paradox',
-    publishDate: '2025-10-06',
+    publishDate: '2024-10-01',
     isPublished: true
   },
   {

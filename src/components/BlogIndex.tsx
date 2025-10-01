@@ -70,10 +70,10 @@ export const blogPosts: BlogPost[] = [
     titleDe: 'Das Gründer-Paradoxon: Warum Freiheit den Fokus zerstört',
     description: 'Why entrepreneurial freedom kills focus and how the Signal vs Noise method helps founders overcome the productivity paradox',
     descriptionDe: 'Warum unternehmerische Freiheit den Fokus zerstört und wie die Signal vs Noise Methode Gründern hilft, das Produktivitäts-Paradoxon zu überwinden',
-    date: '6 Oct 2025',
+    date: '1 Oct 2024',
     readTime: '8 min',
     keywords: ['founder productivity paradox', 'entrepreneur focus challenges', 'freedom kills productivity'],
-    publishDate: '2025-10-06',
+    publishDate: '2024-10-01',
     isPublished: true
   },
   {

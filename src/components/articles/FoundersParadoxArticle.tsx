@@ -38,7 +38,7 @@ export default function FoundersParadoxArticle({ isGerman }: ArticleProps) {
         marginBottom: '3rem',
         fontWeight: '100'
       }}>
-        6 October 2025
+        1 October 2024
       </div>
 
       {/* Opening Hook */}
