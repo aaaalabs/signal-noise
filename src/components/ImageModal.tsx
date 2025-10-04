@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 interface ImageModalProps {
   isOpen: boolean;
@@ -9,6 +9,19 @@ interface ImageModalProps {
 }
 
 export default function ImageModal({ isOpen, onClose, imageSrc, imageAlt, caption }: ImageModalProps) {
+  const [imageSize, setImageSize] = useState<{ width: number; height: number } | null>(null);
+
+  // Load image to get dimensions
+  useEffect(() => {
+    if (isOpen && imageSrc) {
+      const img = new Image();
+      img.onload = () => {
+        setImageSize({ width: img.naturalWidth, height: img.naturalHeight });
+      };
+      img.src = imageSrc;
+    }
+  }, [isOpen, imageSrc]);
+
   // Handle keyboard events (ESC to close)
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -30,6 +43,10 @@ export default function ImageModal({ isOpen, onClose, imageSrc, imageAlt, captio
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;
+
+  // Calculate optimal sizing based on aspect ratio
+  const isVertical = imageSize && imageSize.height > imageSize.width;
+  const isTall = imageSize && imageSize.height > imageSize.width * 1.5;
 
   return (
     <>
@@ -55,9 +72,11 @@ export default function ImageModal({ isOpen, onClose, imageSrc, imageAlt, captio
         <div
           style={{
             position: 'relative',
-            maxWidth: '95vw',
+            maxWidth: isTall ? '60vw' : isVertical ? '75vw' : '95vw',
             maxHeight: '95vh',
-            cursor: 'default'
+            cursor: 'default',
+            display: 'flex',
+            flexDirection: 'column'
           }}
           onClick={(e) => e.stopPropagation()} // Prevent closing when clicking image
         >
@@ -95,15 +114,17 @@ export default function ImageModal({ isOpen, onClose, imageSrc, imageAlt, captio
             src={imageSrc}
             alt={imageAlt}
             style={{
-              width: '100%',
+              width: isTall ? '60vw' : isVertical ? '75vw' : 'auto',
               height: 'auto',
               maxWidth: '95vw',
-              maxHeight: '85vh',
+              maxHeight: '90vh',
               objectFit: 'contain',
               borderRadius: '12px',
               border: '1px solid #333',
-              boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5)' /* Subtle depth without drama */
+              boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5)',
+              cursor: 'zoom-in'
             }}
+            title="Click to view full resolution"
           />
 
           {/* Caption */}

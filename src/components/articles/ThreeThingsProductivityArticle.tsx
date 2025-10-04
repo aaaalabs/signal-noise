@@ -331,7 +331,7 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
         paddingLeft: '1.5rem'
       }}>
         <li><strong>Focus capacity is more limited</strong> than Ivy Lee understood in 1918</li>
-        <li><strong>Deep work</strong> (Cal Newport's research) requires extended, uninterrupted focus blocks</li>
+        <li><strong>Deep work</strong> (Cal Newport's research) requires extended, uninterrupted focus blocks — learn more in our article on <Link to="/blog/focus-age-distraction" style={{ color: '#00ff88', textDecoration: 'underline' }}>focus in the age of distraction</Link></li>
         <li><strong>Decision fatigue</strong> increases with every choice—fewer priority tasks preserve mental energy</li>
       </ul>
 

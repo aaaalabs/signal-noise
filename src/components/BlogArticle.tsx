@@ -1,6 +1,7 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useEffect } from 'react';
+import ArticleSchemas from './ArticleSchemas';
 
 // Import individual article components
 import SteveJobsArticle from './articles/SteveJobsArticle';
@@ -156,15 +157,52 @@ export default function BlogArticle() {
   }
 
   useEffect(() => {
-    if (article) {
+    if (article && slug) {
+      const canonicalUrl = `https://signal-noise.app/blog/${slug}`;
+
       // Update page title
-      document.title = isGerman ? article.titleDe : article.title;
+      document.title = `${isGerman ? article.titleDe : article.title} | Signal/Noise`;
 
       // Update meta description
       const metaDescription = document.querySelector('meta[name="description"]');
       if (metaDescription) {
         metaDescription.setAttribute('content', isGerman ? article.descriptionDe : article.description);
       }
+
+      // Add/update canonical URL
+      let canonical = document.querySelector('link[rel="canonical"]');
+      if (!canonical) {
+        canonical = document.createElement('link');
+        canonical.setAttribute('rel', 'canonical');
+        document.head.appendChild(canonical);
+      }
+      canonical.setAttribute('href', canonicalUrl);
+
+      // Update Open Graph tags
+      const updateOrCreateMeta = (property: string, content: string, isProperty = true) => {
+        const attr = isProperty ? 'property' : 'name';
+        let meta = document.querySelector(`meta[${attr}="${property}"]`);
+        if (!meta) {
+          meta = document.createElement('meta');
+          meta.setAttribute(attr, property);
+          document.head.appendChild(meta);
+        }
+        meta.setAttribute('content', content);
+      };
+
+      updateOrCreateMeta('og:title', isGerman ? article.titleDe : article.title);
+      updateOrCreateMeta('og:description', isGerman ? article.descriptionDe : article.description);
+      updateOrCreateMeta('og:url', canonicalUrl);
+      updateOrCreateMeta('og:type', 'article');
+      updateOrCreateMeta('og:image', `https://signal-noise.app/blog-images/article-11/social-04-three-things-framework.jpg`);
+      updateOrCreateMeta('og:image:width', '1200');
+      updateOrCreateMeta('og:image:height', '630');
+
+      // Twitter Card
+      updateOrCreateMeta('twitter:card', 'summary_large_image', false);
+      updateOrCreateMeta('twitter:title', isGerman ? article.titleDe : article.title, false);
+      updateOrCreateMeta('twitter:description', isGerman ? article.descriptionDe : article.description, false);
+      updateOrCreateMeta('twitter:image', `https://signal-noise.app/blog-images/article-11/social-04-three-things-framework.jpg`, false);
 
       // Add hreflang tags for SEO
       const existingHreflang = document.querySelectorAll('link[rel="alternate"][hreflang]');
@@ -173,46 +211,67 @@ export default function BlogArticle() {
       const hreflangDe = document.createElement('link');
       hreflangDe.rel = 'alternate';
       hreflangDe.hreflang = 'de';
-      hreflangDe.href = window.location.href;
+      hreflangDe.href = `${canonicalUrl}?lang=de`;
       document.head.appendChild(hreflangDe);
 
       const hreflangEn = document.createElement('link');
       hreflangEn.rel = 'alternate';
       hreflangEn.hreflang = 'en';
-      hreflangEn.href = window.location.href;
+      hreflangEn.href = canonicalUrl;
       document.head.appendChild(hreflangEn);
 
-      // Add article structured data
-      const structuredData = {
+      // Enhanced Article structured data
+      const structuredData: any = {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
         "headline": isGerman ? article.titleDe : article.title,
         "description": isGerman ? article.descriptionDe : article.description,
         "keywords": article.keywords.join(', '),
-        "datePublished": article.publishDate,
+        "datePublished": `${article.publishDate}T00:00:00Z`,
+        "dateModified": `${article.publishDate}T00:00:00Z`,
         "author": {
           "@type": "Organization",
-          "name": "Signal/Noise"
+          "name": "Signal/Noise",
+          "url": "https://signal-noise.app"
         },
         "publisher": {
           "@type": "Organization",
-          "name": "Libralab.ai",
-          "url": "https://libralab.ai"
+          "name": "Signal/Noise",
+          "url": "https://signal-noise.app",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://signal-noise.app/icon-512.png"
+          }
+        },
+        "image": `https://signal-noise.app/blog-images/article-11/hero-image.jpg`,
+        "url": canonicalUrl,
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": canonicalUrl
         }
       };
+
+      // Add additional schemas for article-11
+      if (slug === 'three-things-productivity') {
+        structuredData.wordCount = 5200;
+        structuredData.articleBody = "The Three Things Productivity System is a science-backed method for achieving exponential results by focusing on 3 transformational tasks daily instead of 20 maintenance tasks.";
+      }
 
       const script = document.createElement('script');
       script.type = 'application/ld+json';
       script.text = JSON.stringify(structuredData);
+      script.id = 'article-schema';
       document.head.appendChild(script);
 
       return () => {
         if (script.parentNode) {
           script.parentNode.removeChild(script);
         }
+        const canonicalTag = document.querySelector('link[rel="canonical"]');
+        if (canonicalTag) canonicalTag.remove();
       };
     }
-  }, [article, isGerman]);
+  }, [article, isGerman, slug]);
 
   if (!article || !canViewArticle) {
     return <Navigate to="/blog" replace />;
@@ -221,7 +280,11 @@ export default function BlogArticle() {
   const ArticleComponent = article.component;
 
   return (
-    <div style={{
+    <>
+      {/* Additional SEO schemas for specific articles */}
+      <ArticleSchemas slug={slug || ''} />
+
+      <div style={{
       minHeight: '100vh',
       backgroundColor: '#0a0a0a', // Softer than pure black
       color: '#e8e8e8', // Softer than pure white
@@ -289,6 +352,7 @@ export default function BlogArticle() {
       }}>
         <ArticleComponent isGerman={isGerman} />
       </article>
-    </div>
+      </div>
+    </>
   );
 }
