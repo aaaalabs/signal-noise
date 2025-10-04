@@ -13,6 +13,7 @@ import NinetyDayTrackingArticle from './articles/NinetyDayTrackingArticle';
 import FocusAgeDistractionArticle from './articles/FocusAgeDistractionArticle';
 import MathematicsProductivityArticle from './articles/MathematicsProductivityArticle';
 import BuildingSignalNoiseStoryArticle from './articles/BuildingSignalNoiseStoryArticle';
+import ThreeThingsProductivityArticle from './articles/ThreeThingsProductivityArticle';
 
 // Import blog posts configuration
 import { blogPosts } from './BlogIndex';
@@ -117,6 +118,15 @@ const articles: Record<string, ArticleContent> = {
     descriptionDe: 'Gründerreise von persönlichen Produktivitätsproblemen zur App-Erstellung. Die authentische Geschichte hinter der Signal vs Noise Methode und wie eine 3:47 Uhr Krise zu einer Produktivitäts-Revolution wurde.',
     keywords: ['startup story', 'app development', 'founder journey', 'productivity crisis', 'signal noise app creation'],
     publishDate: '2025-11-10'
+  },
+  'three-things-productivity': {
+    component: ThreeThingsProductivityArticle,
+    title: 'The Three Things Productivity System: The Science of Doing Less to Achieve More',
+    titleDe: 'Das Drei-Dinge-Produktivitätssystem: Die Wissenschaft, weniger zu tun und mehr zu erreichen',
+    description: 'Learn the research-backed Three Things productivity method. Focus on 3 transformational tasks daily and achieve exponential results. Based on proven frameworks from Buffett, Bezos, and 100+ years of productivity science.',
+    descriptionDe: 'Lerne die forschungsbasierte Drei-Dinge-Produktivitätsmethode. Fokussiere dich auf 3 transformative Aufgaben täglich und erreiche exponentielle Ergebnisse. Basierend auf bewährten Frameworks von Buffett, Bezos und 100+ Jahren Produktivitätswissenschaft.',
+    keywords: ['three things productivity', 'transformational tasks', 'Ivy Lee method', 'compound effect', 'deep work', 'productivity science'],
+    publishDate: '2025-10-04'
   }
 };
 

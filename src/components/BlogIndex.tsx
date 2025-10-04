@@ -135,6 +135,18 @@ export const blogPosts: BlogPost[] = [
     keywords: ['startup story', 'app development', 'founder journey'],
     publishDate: '2025-11-10',
     isPublished: false
+  },
+  {
+    slug: 'three-things-productivity',
+    title: 'The Three Things Productivity System: Do Less, Achieve More',
+    titleDe: 'Das Drei-Dinge-Produktivitätssystem: Weniger tun, mehr erreichen',
+    description: 'Science-backed productivity method: Focus on 3 transformational tasks daily for 37× improvement. Based on 100+ years of research from Ivy Lee to James Clear.',
+    descriptionDe: 'Wissenschaftlich fundierte Produktivitätsmethode: Fokus auf 3 transformative Aufgaben täglich für 37-fache Verbesserung. Basierend auf 100+ Jahren Forschung von Ivy Lee bis James Clear.',
+    date: '4 Oct 2025',
+    readTime: '20 min',
+    keywords: ['three things productivity', 'transformational tasks', 'Ivy Lee method', 'compound effect', 'deep work'],
+    publishDate: '2025-10-04',
+    isPublished: false
   }
 ];
 
