@@ -27,11 +27,13 @@ You completed 20 tasks yesterday. Responded to 50 emails. Attended 6 meetings. Y
 
 Here's the uncomfortable truth backed by research: **Busy doesn't equal productive.**
 
-According to Harvard Business Review research and data from workplace analytics firm Prodoscore:
+According to [Harvard Business Review research](https://hbr.org/2022/08/how-much-time-and-energy-do-we-waste-toggling-between-applications) and data from workplace analytics firm Prodoscore:
 - Workers toggle between applications roughly **1,200 times each day**
 - This costs nearly **4 hours per week** just reorienting after switching
-- Context switching can reduce productivity by **40%** (American Psychological Association)
+- Context switching can reduce productivity by **40%** ([American Psychological Association](https://www.apa.org/topics/research/multitasking))
 - The U.S. economy loses an estimated **$450 billion annually** to multitasking inefficiency
+
+**Key Research Finding:** A [University of California, Irvine study](https://www.ics.uci.edu/~gmark/chi08-mark.pdf) found it takes an average of **23 minutes and 15 seconds** to fully refocus on a task after an interruption.
 
 **The solution?** A "Three Things" approach rooted in proven productivity science.
 
@@ -91,11 +93,18 @@ Research from the University of California, Irvine and the American Psychologica
 
 ### The Compound Effect
 
-James Clear's research in "Atomic Habits" demonstrates that **improving just 1% daily compounds to 37× improvement over a year** (1.01^365 = 37.78).
+[James Clear's research](https://jamesclear.com/continuous-improvement) in "Atomic Habits" demonstrates that **improving just 1% daily compounds to 37× improvement over a year** (1.01^365 = 37.78).
 
-**The math:**
+**The math of exponential growth:**
+- **1% better daily** = 37.78× improvement in 1 year
+- **1% worse daily** = 0.03 (decline to nearly zero) in 1 year
+- This is compound interest applied to self-improvement
+
+**Applied to the Three Things system:**
 - 3 transformational tasks/day × 365 days = **1,095 high-impact accomplishments annually**
 - vs. 20 maintenance tasks/day that keep you busy but create minimal forward progress
+
+**[Read the full research →](https://jamesclear.com/continuous-improvement)**
 
 ---
 
@@ -151,10 +160,13 @@ Ask: **"Which tasks, if left undone today, will I regret most in 10 years?"**
 
 Maintenance work? You won't remember it. Transformational work? That's what builds careers and legacies.
 
+**Watch Jeff Bezos explain the framework** (classic 2001 interview clip available on YouTube)
+
 **Sources:**
 - Britannica Money: "Regret Minimization Framework: How It Works & Strategies"
 - Aly Juma (Medium): "The Regret Minimization Framework: How Jeff Bezos Made Decisions"
 - FourWeekMBA: "Regret Minimization Framework In A Nutshell"
+- Original interview: CBS 60 Minutes (1999) where Bezos first described this framework
 
 ---
 
@@ -576,52 +588,65 @@ In a year: **1,095 transformational tasks completed**
 
 ---
 
-## **[FINAL CTA: Email Capture]**
+## **[FINAL CTA: Try the App]**
 
-### Get Your Free Three Things Transformation Kit
+### Experience the Three Things System in Action
 
-**Everything you need to implement the system in the next 30 days:**
+**Ready to transform your productivity?** Try Signal/Noise, the minimalist app that implements this exact system.
 
-✅ **Daily Planner PDF** (print or digital)
-✅ **Task Categorization Worksheet** (Level 1/2/3 framework)
-✅ **Protection Protocol Checklist** (bulletproof your focus time)
-✅ **30-Day Tracking Sheet** (measure your transformational tasks)
-✅ **Email Course:** "From Busy to Transformational in 30 Days" (daily guidance)
-✅ **Bonus:** Energy-Task Optimization Guide (match work to your biological rhythms)
+🎯 **Built on the science you just learned:**
+- Daily "Three Things" focus system
+- Task categorization (Signal vs. Noise)
+- Real-time ratio tracking
+- Pattern recognition & insights
 
-[Email capture form]
+**[Try Signal/Noise Now →](https://signal-noise.app)**
+
+---
+
+### Help Us Improve
+
+📣 **Support us on Product Hunt** - Help other busy professionals discover this productivity system
+
+🎁 **Give us feedback** - We're constantly improving based on user insights
+
+**Your support helps us keep the app free and focused on what matters: transformational productivity.**
 
 ---
 
 ## Sources & Further Reading
 
 ### Historical Productivity Methods:
-1. **Cutlip, Scott M. (1994):** "The Unseen Power: Public Relations: A History" (Ivy Lee Method original source)
-2. **James Clear:** "The Ivy Lee Method: The Daily Routine Experts Recommend for Peak Productivity" (jamesclear.com)
+1. **Cutlip, Scott M. (1994):** "The Unseen Power: Public Relations: A History" (Ivy Lee Method original source, pp. 118-119)
+2. **James Clear:** ["The Ivy Lee Method: The Daily Routine Experts Recommend for Peak Productivity"](https://jamesclear.com/ivy-lee) (jamesclear.com)
 
 ### Business Leader Frameworks:
-3. **Goodreads:** Warren Buffett verified quotations database
-4. **Inc.com (Marcel Schwantes, March 2020):** "Warren Buffett's Brilliant 25/5 Rule Was Fake. Here's What He Really Said About Achieving Success"
-5. **Britannica Money:** "Regret Minimization Framework: How It Works & Strategies" (Jeff Bezos method)
-6. **Aly Juma (Medium):** "The Regret Minimization Framework: How Jeff Bezos Made Decisions"
+3. **Goodreads:** [Warren Buffett verified quotations database](https://www.goodreads.com/author/quotes/756.Warren_Buffett)
+4. **Inc.com (Marcel Schwantes, March 2020):** ["Warren Buffett's Brilliant 25/5 Rule Was Fake. Here's What He Really Said About Achieving Success"](https://www.inc.com/marcel-schwantes/warren-buffett-brilliant-25-5-rule-was-fake-heres-what-he-really-said-about-achieving-success.html)
+5. **Britannica Money:** ["Regret Minimization Framework: How It Works & Strategies"](https://www.britannica.com/money/regret-minimization-framework) (Jeff Bezos method)
+6. **Aly Juma (Medium):** ["The Regret Minimization Framework: How Jeff Bezos Made Decisions"](https://alyjuma.medium.com/the-regret-minimization-framework-how-jeff-bezos-made-decisions-4d5a86deaf24)
+7. **Fast Company:** ["Jeff Bezos uses a simple framework for making big decisions"](https://www.fastcompany.com/90662406/jeff-bezos-uses-a-simple-framework-for-making-big-decisions-heres-how-it-works)
 
 ### Neuroscience & Productivity Research:
-7. **American Psychological Association:** "Multitasking: Switching Costs" (context-switching research)
-8. **Harvard Business Review:** "How Much Time and Energy Do We Waste Toggling Between Applications?"
-9. **University of California, Irvine:** Interruption and stress research (Gloria Mark)
-10. **Dr. David Rock (NeuroLeadership Institute):** Focus and cognitive capacity studies
+8. **American Psychological Association:** ["Multitasking: Switching Costs"](https://www.apa.org/topics/research/multitasking) (context-switching research)
+9. **Harvard Business Review:** ["How Much Time and Energy Do We Waste Toggling Between Applications?"](https://hbr.org/2022/08/how-much-time-and-energy-do-we-waste-toggling-between-applications) (1,200 daily app switches study)
+10. **University of California, Irvine:** Interruption and stress research (Gloria Mark - 23 minutes to refocus)
+11. **Dr. David Rock (NeuroLeadership Institute):** [Focus and cognitive capacity studies](https://neuroleadership.com/) (6 hours/week true focus finding)
+12. **Steelcase Research:** ["Neuroleadership and Distractions in the Workplace - David Rock Q&A"](https://www.steelcase.com/research/articles/topics/privacy/q-david-rock/)
 
 ### Deep Work & Focus Research:
-11. **Cal Newport:** "Deep Work: Rules for Focused Success in a Distracted World" (Grand Central Publishing, 2016)
-12. **Gloria Mark, Daniela Gudith, Ulrich Klocke:** "The Cost of Interrupted Work: More Speed and Stress" (CHI 2008)
+13. **Cal Newport:** ["Deep Work: Rules for Focused Success in a Distracted World"](https://calnewport.com/writing/#books) (Grand Central Publishing, 2016)
+14. **Cal Newport (Personal Website):** [Study Hacks Blog](https://calnewport.com/) - Productivity research and writing
+15. **Gloria Mark, Daniela Gudith, Ulrich Klocke:** "The Cost of Interrupted Work: More Speed and Stress" (CHI 2008)
 
 ### Decision-Making & Prioritization:
 13. **Greg McKeown:** "Essentialism: The Disciplined Pursuit of Less" (Crown Business, 2014)
 14. **Eisenhower Matrix:** Original framework from Dwight D. Eisenhower
 
 ### Habit Formation & Compound Effects:
-15. **James Clear:** "Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones" (Avery, 2018)
-16. **BJ Fogg:** "Tiny Habits: The Small Changes That Change Everything" (Houghton Mifflin Harcourt, 2019)
+16. **James Clear:** ["Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones"](https://jamesclear.com/atomic-habits) (Avery, 2018)
+17. **James Clear:** ["Continuous Improvement: How It Works and How to Master It"](https://jamesclear.com/continuous-improvement) (1% daily improvement = 37x in a year)
+18. **BJ Fogg:** "Tiny Habits: The Small Changes That Change Everything" (Houghton Mifflin Harcourt, 2019)
 
 ### Expertise & Deliberate Practice:
 17. **Anders Ericsson & Robert Pool:** "Peak: Secrets from the New Science of Expertise" (Houghton Mifflin Harcourt, 2016)
