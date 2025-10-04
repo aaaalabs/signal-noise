@@ -1,0 +1,240 @@
+{
+  "statistics": [
+    {
+      "id": "stat_001",
+      "claim": "Workers toggle between applications roughly 1,200 times each day",
+      "value": "1,200",
+      "unit": "app switches per day",
+      "source": "Prodoscore + Harvard Business Review",
+      "source_url": "https://hbr.org/2022/08/how-much-time-and-energy-do-we-waste-toggling-between-applications",
+      "year": "2022",
+      "verification_status": "verified",
+      "context": "workplace productivity research",
+      "impact": "high"
+    },
+    {
+      "id": "stat_002",
+      "claim": "Context switching costs nearly 4 hours per week just reorienting",
+      "value": "4",
+      "unit": "hours per week",
+      "source": "Harvard Business Review",
+      "source_url": "https://hbr.org/2022/08/how-much-time-and-energy-do-we-waste-toggling-between-applications",
+      "year": "2022",
+      "verification_status": "verified",
+      "context": "time lost to application switching",
+      "impact": "high"
+    },
+    {
+      "id": "stat_003",
+      "claim": "Context switching can reduce productivity by 40%",
+      "value": "40",
+      "unit": "percent",
+      "source": "American Psychological Association",
+      "source_url": "https://www.apa.org/topics/research/multitasking",
+      "year": "ongoing research",
+      "verification_status": "verified",
+      "context": "multitasking effects on productivity",
+      "impact": "critical"
+    },
+    {
+      "id": "stat_004",
+      "claim": "U.S. economy loses an estimated $450 billion annually to multitasking inefficiency",
+      "value": "450",
+      "unit": "billion USD per year",
+      "source": "Workplace analytics research",
+      "source_url": null,
+      "year": "2023-2024",
+      "verification_status": "cited_estimate",
+      "context": "economic cost of multitasking",
+      "impact": "high"
+    },
+    {
+      "id": "stat_005",
+      "claim": "Takes average of 23 minutes and 15 seconds to fully refocus on a task after interruption",
+      "value": "23.25",
+      "unit": "minutes",
+      "source": "University of California, Irvine (Gloria Mark study)",
+      "source_url": "https://www.ics.uci.edu/~gmark/chi08-mark.pdf",
+      "year": "2008",
+      "verification_status": "verified_peer_reviewed",
+      "context": "interruption recovery time",
+      "impact": "critical"
+    },
+    {
+      "id": "stat_006",
+      "claim": "Ivy Lee's fee from Charles Schwab was $25,000 in 1918",
+      "value": "25000",
+      "unit": "USD (1918)",
+      "source": "Multiple historical sources (James Clear, Business Insider, Cutlip)",
+      "source_url": "https://jamesclear.com/ivy-lee",
+      "year": "1918",
+      "verification_status": "historically_documented",
+      "context": "Ivy Lee Method payment",
+      "impact": "medium"
+    },
+    {
+      "id": "stat_007",
+      "claim": "$25,000 in 1918 equals approximately $400,000 today",
+      "value": "400000",
+      "unit": "USD (inflation-adjusted)",
+      "source": "Inflation calculator",
+      "source_url": null,
+      "year": "2024",
+      "verification_status": "calculated",
+      "context": "Ivy Lee payment modern equivalent",
+      "impact": "medium"
+    },
+    {
+      "id": "stat_008",
+      "claim": "We're truly focused on deep work only 6 hours per week",
+      "value": "6",
+      "unit": "hours per week",
+      "source": "Dr. David Rock, NeuroLeadership Institute",
+      "source_url": "https://neuroleadership.com/",
+      "year": "ongoing research",
+      "verification_status": "expert_cited",
+      "context": "true focus time in 40-hour workweek",
+      "impact": "critical"
+    },
+    {
+      "id": "stat_009",
+      "claim": "Average knowledge worker checks email 36 times per hour",
+      "value": "36",
+      "unit": "times per hour",
+      "source": "McKinsey",
+      "source_url": null,
+      "year": "2010s",
+      "verification_status": "widely_cited",
+      "context": "email checking frequency",
+      "impact": "high"
+    },
+    {
+      "id": "stat_010",
+      "claim": "Improving 1% daily compounds to 37.78x improvement over a year",
+      "value": "37.78",
+      "unit": "multiplier",
+      "source": "James Clear (mathematical formula: 1.01^365)",
+      "source_url": "https://jamesclear.com/continuous-improvement",
+      "year": "2018",
+      "verification_status": "verified_mathematical",
+      "context": "compound effect calculation",
+      "impact": "critical"
+    },
+    {
+      "id": "stat_011",
+      "claim": "Getting 1% worse daily declines to 0.03 (nearly zero) in a year",
+      "value": "0.03",
+      "unit": "multiplier",
+      "source": "James Clear (mathematical formula: 0.99^365)",
+      "source_url": "https://jamesclear.com/continuous-improvement",
+      "year": "2018",
+      "verification_status": "verified_mathematical",
+      "context": "negative compound effect",
+      "impact": "medium"
+    },
+    {
+      "id": "stat_012",
+      "claim": "3 transformational tasks/day x 365 days = 1,095 high-impact accomplishments annually",
+      "value": "1095",
+      "unit": "tasks per year",
+      "source": "Simple multiplication",
+      "source_url": null,
+      "year": "2024",
+      "verification_status": "calculated",
+      "context": "three things annual productivity",
+      "impact": "high"
+    },
+    {
+      "id": "stat_013",
+      "claim": "Heavy multitasking can temporarily drop IQ by 10 points",
+      "value": "10",
+      "unit": "IQ points",
+      "source": "Various cognitive research studies",
+      "source_url": null,
+      "year": "2000s-2010s",
+      "verification_status": "widely_cited",
+      "context": "cognitive impact of multitasking",
+      "impact": "high"
+    },
+    {
+      "id": "stat_014",
+      "claim": "Task switching reduces quality by 40%",
+      "value": "40",
+      "unit": "percent",
+      "source": "University of Michigan",
+      "source_url": null,
+      "year": "2000s",
+      "verification_status": "cited_research",
+      "context": "quality impact of task switching",
+      "impact": "high"
+    },
+    {
+      "id": "stat_015",
+      "claim": "Top performers are interrupted 50% less than average performers",
+      "value": "50",
+      "unit": "percent",
+      "source": "Microsoft research",
+      "source_url": null,
+      "year": "2010s",
+      "verification_status": "corporate_research",
+      "context": "high performer work patterns",
+      "impact": "medium"
+    },
+    {
+      "id": "stat_016",
+      "claim": "New habits solidify around 21-30 days",
+      "value": "21-30",
+      "unit": "days",
+      "source": "BJ Fogg's Behavior Model",
+      "source_url": null,
+      "year": "2019",
+      "verification_status": "behavioral_science",
+      "context": "habit formation timeline",
+      "impact": "medium"
+    },
+    {
+      "id": "stat_017",
+      "claim": "After 30 days: ~90 transformational tasks completed",
+      "value": "90",
+      "unit": "tasks",
+      "source": "Calculated (3 tasks x 30 days)",
+      "source_url": null,
+      "year": "2024",
+      "verification_status": "calculated",
+      "context": "30-day productivity outcome",
+      "impact": "medium"
+    },
+    {
+      "id": "stat_018",
+      "claim": "After 90 days: ~270 transformational tasks completed",
+      "value": "270",
+      "unit": "tasks",
+      "source": "Calculated (3 tasks x 90 days)",
+      "source_url": null,
+      "year": "2024",
+      "verification_status": "calculated",
+      "context": "90-day productivity outcome",
+      "impact": "medium"
+    }
+  ],
+  "summary": {
+    "total_statistics": 18,
+    "verified_count": 8,
+    "peer_reviewed_count": 1,
+    "calculated_count": 5,
+    "cited_estimates_count": 4,
+    "primary_research_areas": [
+      "context switching costs",
+      "multitasking effects",
+      "focus capacity",
+      "compound improvement",
+      "habit formation"
+    ],
+    "most_impactful_stats": [
+      "stat_003",
+      "stat_005",
+      "stat_008",
+      "stat_010"
+    ]
+  }
+}

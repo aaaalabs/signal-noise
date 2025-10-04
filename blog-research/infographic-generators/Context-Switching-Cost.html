@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Context-Switching Cost - The Hidden Productivity Drain</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: #1a1a1a;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 300;
+            margin-bottom: 15px;
+            color: #ff4444;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 300;
+            color: #888;
+            margin-bottom: 50px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, rgba(255, 68, 68, 0.1) 0%, rgba(255, 68, 68, 0.05) 100%);
+            border: 2px solid rgba(255, 68, 68, 0.3);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #ff4444, #ff6666);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(255, 68, 68, 0.2);
+            border-color: rgba(255, 68, 68, 0.5);
+        }
+
+        .stat-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            filter: grayscale(100%) brightness(0.8);
+        }
+
+        .stat-value {
+            font-size: 56px;
+            font-weight: 100;
+            color: #ff4444;
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #ff6666;
+            margin-bottom: 8px;
+        }
+
+        .stat-description {
+            font-size: 14px;
+            font-weight: 300;
+            color: #aaa;
+            line-height: 1.5;
+        }
+
+        .stat-source {
+            font-size: 11px;
+            color: #666;
+            margin-top: 12px;
+            font-style: italic;
+        }
+
+        .visual-impact {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .visual-title {
+            font-size: 24px;
+            font-weight: 500;
+            color: #ffffff;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .switching-visualization {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .day-column {
+            flex: 1;
+            text-align: center;
+        }
+
+        .day-label {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: #888;
+        }
+
+        .task-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            margin-bottom: 15px;
+        }
+
+        .task-bar {
+            height: 12px;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            opacity: 0.3;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .task-bar:hover {
+            opacity: 1;
+            transform: scaleY(1.5);
+        }
+
+        .task-bar.red {
+            background: #ff4444;
+        }
+
+        .task-bar.green {
+            background: #00ff88;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.3;
+            }
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        .switching-count {
+            font-size: 32px;
+            font-weight: 100;
+            margin-top: 15px;
+        }
+
+        .switching-count.bad {
+            color: #ff4444;
+        }
+
+        .switching-count.good {
+            color: #00ff88;
+        }
+
+        .productivity-bar {
+            background: rgba(255, 255, 255, 0.05);
+            height: 40px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            margin-top: 10px;
+        }
+
+        .productivity-fill {
+            height: 100%;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+            font-size: 14px;
+            transition: width 2s ease;
+        }
+
+        .productivity-fill.low {
+            background: linear-gradient(90deg, #ff4444, #ff6666);
+            width: 60%;
+            color: #ffffff;
+        }
+
+        .productivity-fill.high {
+            background: linear-gradient(90deg, #00ff88, #00cc6e);
+            width: 100%;
+            color: #000000;
+        }
+
+        .economic-impact {
+            background: linear-gradient(135deg, rgba(255, 68, 68, 0.15) 0%, rgba(255, 68, 68, 0.05) 100%);
+            border: 2px solid rgba(255, 68, 68, 0.3);
+            border-radius: 12px;
+            padding: 35px;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .economic-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: #ff6666;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .economic-value {
+            font-size: 72px;
+            font-weight: 100;
+            color: #ff4444;
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+
+        .economic-description {
+            font-size: 16px;
+            font-weight: 300;
+            color: #aaa;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .solution-box {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1) 0%, rgba(0, 255, 136, 0.05) 100%);
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 40px;
+        }
+
+        .solution-title {
+            font-size: 22px;
+            font-weight: 500;
+            color: #00ff88;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .solution-text {
+            font-size: 16px;
+            font-weight: 300;
+            color: #ccc;
+            line-height: 1.7;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .solution-highlight {
+            color: #00ff88;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 28px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .switching-visualization {
+                flex-direction: column;
+            }
+
+            .stat-value {
+                font-size: 42px;
+            }
+
+            .economic-value {
+                font-size: 56px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>The Hidden Cost of Context Switching</h1>
+        <p class="subtitle">Why multitasking is destroying your productivity (backed by research)</p>
+
+        <!-- Statistics Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">📱</div>
+                <div class="stat-value">1,200</div>
+                <div class="stat-label">App Switches Per Day</div>
+                <div class="stat-description">
+                    Average knowledge worker toggles between applications 1,200 times daily
+                </div>
+                <div class="stat-source">Source: Harvard Business Review + Prodoscore (2022)</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">⏱️</div>
+                <div class="stat-value">23min</div>
+                <div class="stat-label">Time to Refocus</div>
+                <div class="stat-description">
+                    Average time needed to fully regain focus after a single interruption
+                </div>
+                <div class="stat-source">Source: UC Irvine (Gloria Mark, 2008)</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">📉</div>
+                <div class="stat-value">40%</div>
+                <div class="stat-label">Productivity Loss</div>
+                <div class="stat-description">
+                    Reduction in productivity caused by context switching and multitasking
+                </div>
+                <div class="stat-source">Source: American Psychological Association</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">⏰</div>
+                <div class="stat-value">4hrs</div>
+                <div class="stat-label">Weekly Time Lost</div>
+                <div class="stat-description">
+                    Hours lost per week just reorienting after switching between tasks
+                </div>
+                <div class="stat-source">Source: Harvard Business Review (2022)</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">🧠</div>
+                <div class="stat-value">-10pts</div>
+                <div class="stat-label">IQ Drop (Temporary)</div>
+                <div class="stat-description">
+                    Heavy multitasking can temporarily reduce IQ by approximately 10 points
+                </div>
+                <div class="stat-source">Source: Cognitive research studies</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">🎯</div>
+                <div class="stat-value">6hrs</div>
+                <div class="stat-label">True Focus Per Week</div>
+                <div class="stat-description">
+                    Total hours of actual deep focus in a typical 40-hour workweek
+                </div>
+                <div class="stat-source">Source: NeuroLeadership Institute (Dr. David Rock)</div>
+            </div>
+        </div>
+
+        <!-- Visual Comparison -->
+        <div class="visual-impact">
+            <div class="visual-title">Visual Impact: Typical Day vs. Three Things Day</div>
+
+            <div class="switching-visualization">
+                <div class="day-column">
+                    <div class="day-label">Traditional Multitasking Day</div>
+                    <div class="task-stack">
+                        <div class="task-bar red" style="animation-delay: 0s;"></div>
+                        <div class="task-bar red" style="animation-delay: 0.1s;"></div>
+                        <div class="task-bar red" style="animation-delay: 0.2s;"></div>
+                        <div class="task-bar red" style="animation-delay: 0.3s;"></div>
+                        <div class="task-bar red" style="animation-delay: 0.4s;"></div>
+                        <div class="task-bar red" style="animation-delay: 0.5s;"></div>
+                        <div class="task-bar red" style="animation-delay: 0.6s;"></div>
+                        <div class="task-bar red" style="animation-delay: 0.7s;"></div>
+                        <div class="task-bar red" style="animation-delay: 0.8s;"></div>
+                        <div class="task-bar red" style="animation-delay: 0.9s;"></div>
+                        <div class="task-bar red" style="animation-delay: 1.0s;"></div>
+                        <div class="task-bar red" style="animation-delay: 1.1s;"></div>
+                        <div class="task-bar red" style="animation-delay: 1.2s;"></div>
+                        <div class="task-bar red" style="animation-delay: 1.3s;"></div>
+                        <div class="task-bar red" style="animation-delay: 1.4s;"></div>
+                        <div class="task-bar red" style="animation-delay: 1.5s;"></div>
+                        <div class="task-bar red" style="animation-delay: 1.6s;"></div>
+                        <div class="task-bar red" style="animation-delay: 1.7s;"></div>
+                        <div class="task-bar red" style="animation-delay: 1.8s;"></div>
+                        <div class="task-bar red" style="animation-delay: 1.9s;"></div>
+                    </div>
+                    <div class="switching-count bad">~1,200 switches</div>
+                    <div class="productivity-bar">
+                        <div class="productivity-fill low">60% Effective</div>
+                    </div>
+                </div>
+
+                <div class="day-column">
+                    <div class="day-label">Three Things Focus Day</div>
+                    <div class="task-stack">
+                        <div class="task-bar green" style="height: 100px; animation-delay: 0s;"></div>
+                        <div class="task-bar green" style="height: 100px; animation-delay: 1s;"></div>
+                        <div class="task-bar green" style="height: 100px; animation-delay: 2s;"></div>
+                    </div>
+                    <div class="switching-count good">3 focused blocks</div>
+                    <div class="productivity-bar">
+                        <div class="productivity-fill high">100% Effective</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Economic Impact -->
+        <div class="economic-impact">
+            <div class="economic-title">Annual Economic Cost</div>
+            <div class="economic-value">$450B</div>
+            <div class="economic-description">
+                Estimated annual cost to the U.S. economy from multitasking inefficiency and context-switching productivity drain
+            </div>
+        </div>
+
+        <!-- Solution -->
+        <div class="solution-box">
+            <div class="solution-title">The Three Things Solution</div>
+            <div class="solution-text">
+                By focusing on <span class="solution-highlight">just 3 transformational tasks daily</span> with protected time blocks,
+                you eliminate the 40% productivity drain from context switching. Instead of 1,200 scattered switches creating mental
+                exhaustion and zero progress, you achieve <span class="solution-highlight">100% focus on work that actually compounds</span>.
+                <br><br>
+                <strong>The math is simple:</strong> 6 hours of true deep work on 3 transformational tasks beats 8 hours of
+                fragmented attention across 20 maintenance tasks—every single time.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

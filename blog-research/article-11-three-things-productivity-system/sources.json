@@ -1,0 +1,262 @@
+{
+  "sources": [
+    {
+      "id": "source_001",
+      "title": "How Much Time and Energy Do We Waste Toggling Between Applications?",
+      "url": "https://hbr.org/2022/08/how-much-time-and-energy-do-we-waste-toggling-between-applications",
+      "domain": "hbr.org",
+      "publication": "Harvard Business Review",
+      "type": "research_article",
+      "year": "2022",
+      "credibility": "high",
+      "key_data": ["1,200 app switches/day", "4 hours/week lost to reorienting"]
+    },
+    {
+      "id": "source_002",
+      "title": "Multitasking: Switching Costs",
+      "url": "https://www.apa.org/topics/research/multitasking",
+      "domain": "apa.org",
+      "publication": "American Psychological Association",
+      "type": "research_summary",
+      "year": "ongoing",
+      "credibility": "high",
+      "key_data": ["40% productivity reduction from context switching"]
+    },
+    {
+      "id": "source_003",
+      "title": "The Cost of Interrupted Work: More Speed and Stress",
+      "url": "https://www.ics.uci.edu/~gmark/chi08-mark.pdf",
+      "domain": "ics.uci.edu",
+      "publication": "University of California, Irvine (Gloria Mark)",
+      "type": "peer_reviewed_study",
+      "year": "2008",
+      "credibility": "high",
+      "key_data": ["23 minutes 15 seconds to refocus after interruption"]
+    },
+    {
+      "id": "source_004",
+      "title": "The Ivy Lee Method: The Daily Routine Experts Recommend for Peak Productivity",
+      "url": "https://jamesclear.com/ivy-lee",
+      "domain": "jamesclear.com",
+      "publication": "James Clear",
+      "type": "expert_article",
+      "year": "ongoing",
+      "credibility": "high",
+      "key_data": ["Ivy Lee Method historical documentation", "$25,000 payment to Ivy Lee"]
+    },
+    {
+      "id": "source_005",
+      "title": "Continuous Improvement: How It Works and How to Master It",
+      "url": "https://jamesclear.com/continuous-improvement",
+      "domain": "jamesclear.com",
+      "publication": "James Clear",
+      "type": "expert_article",
+      "year": "2018",
+      "credibility": "high",
+      "key_data": ["1.01^365 = 37.78x improvement", "compound effect mathematics"]
+    },
+    {
+      "id": "source_006",
+      "title": "Warren Buffett Quotes",
+      "url": "https://www.goodreads.com/author/quotes/756.Warren_Buffett",
+      "domain": "goodreads.com",
+      "publication": "Goodreads",
+      "type": "quote_database",
+      "year": "ongoing",
+      "credibility": "medium_high",
+      "key_data": ["Really successful people say no to almost everything"]
+    },
+    {
+      "id": "source_007",
+      "title": "Warren Buffett's Brilliant 25/5 Rule Was Fake. Here's What He Really Said",
+      "url": "https://www.inc.com/marcel-schwantes/warren-buffett-brilliant-25-5-rule-was-fake-heres-what-he-really-said-about-achieving-success.html",
+      "domain": "inc.com",
+      "publication": "Inc.com",
+      "type": "fact_check_article",
+      "year": "2020",
+      "credibility": "high",
+      "key_data": ["Debunks 25/5 Rule", "Buffett: 'I can't recall making a list in my life'"]
+    },
+    {
+      "id": "source_008",
+      "title": "Regret Minimization Framework: How It Works & Strategies",
+      "url": "https://www.britannica.com/money/regret-minimization-framework",
+      "domain": "britannica.com",
+      "publication": "Britannica Money",
+      "type": "encyclopedia_article",
+      "year": "ongoing",
+      "credibility": "high",
+      "key_data": ["Jeff Bezos regret minimization framework", "Project to age 80 decision making"]
+    },
+    {
+      "id": "source_009",
+      "title": "The Regret Minimization Framework: How Jeff Bezos Made Decisions",
+      "url": "https://alyjuma.medium.com/the-regret-minimization-framework-how-jeff-bezos-made-decisions-4d5a86deaf24",
+      "domain": "medium.com",
+      "publication": "Medium (Aly Juma)",
+      "type": "analysis_article",
+      "year": null,
+      "credibility": "medium",
+      "key_data": ["Bezos decision-making framework explanation"]
+    },
+    {
+      "id": "source_010",
+      "title": "Jeff Bezos Uses a Simple Framework for Making Big Decisions",
+      "url": "https://www.fastcompany.com/90662406/jeff-bezos-uses-a-simple-framework-for-making-big-decisions-heres-how-it-works",
+      "domain": "fastcompany.com",
+      "publication": "Fast Company",
+      "type": "business_article",
+      "year": "2021",
+      "credibility": "high",
+      "key_data": ["Regret minimization framework application"]
+    },
+    {
+      "id": "source_011",
+      "title": "Deep Work: Rules for Focused Success in a Distracted World",
+      "url": "https://calnewport.com/writing/#books",
+      "domain": "calnewport.com",
+      "publication": "Cal Newport",
+      "type": "book",
+      "year": "2016",
+      "credibility": "high",
+      "key_data": ["Deep work becoming rare and valuable", "Focused success principles"]
+    },
+    {
+      "id": "source_012",
+      "title": "Study Hacks Blog",
+      "url": "https://calnewport.com/",
+      "domain": "calnewport.com",
+      "publication": "Cal Newport",
+      "type": "blog",
+      "year": "ongoing",
+      "credibility": "high",
+      "key_data": ["Deep work research", "Focus strategies"]
+    },
+    {
+      "id": "source_013",
+      "title": "NeuroLeadership Institute",
+      "url": "https://neuroleadership.com/",
+      "domain": "neuroleadership.com",
+      "publication": "Dr. David Rock",
+      "type": "research_organization",
+      "year": "ongoing",
+      "credibility": "high",
+      "key_data": ["6 hours/week true focus", "Cognitive capacity research"]
+    },
+    {
+      "id": "source_014",
+      "title": "Neuroleadership and Distractions in the Workplace - David Rock Q&A",
+      "url": "https://www.steelcase.com/research/articles/topics/privacy/q-david-rock/",
+      "domain": "steelcase.com",
+      "publication": "Steelcase Research",
+      "type": "interview",
+      "year": null,
+      "credibility": "medium_high",
+      "key_data": ["Workplace distraction research", "Focus capacity"]
+    },
+    {
+      "id": "source_015",
+      "title": "Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones",
+      "url": "https://jamesclear.com/atomic-habits",
+      "domain": "jamesclear.com",
+      "publication": "James Clear",
+      "type": "book",
+      "year": "2018",
+      "credibility": "high",
+      "key_data": ["Compound interest of self-improvement", "1% daily improvement"]
+    },
+    {
+      "id": "source_016",
+      "title": "Essentialism: The Disciplined Pursuit of Less",
+      "url": null,
+      "domain": null,
+      "publication": "Greg McKeown",
+      "type": "book",
+      "year": "2014",
+      "credibility": "high",
+      "key_data": ["If you don't prioritize your life, someone else will", "Essentialism philosophy"]
+    },
+    {
+      "id": "source_017",
+      "title": "Tiny Habits: The Small Changes That Change Everything",
+      "url": null,
+      "domain": null,
+      "publication": "BJ Fogg",
+      "type": "book",
+      "year": "2019",
+      "credibility": "high",
+      "key_data": ["Behavior Model", "21-30 day habit formation"]
+    },
+    {
+      "id": "source_018",
+      "title": "Peak: Secrets from the New Science of Expertise",
+      "url": null,
+      "domain": null,
+      "publication": "Anders Ericsson & Robert Pool",
+      "type": "book",
+      "year": "2016",
+      "credibility": "high",
+      "key_data": ["10,000 hours deliberate practice", "Expertise development"]
+    },
+    {
+      "id": "source_019",
+      "title": "When: The Scientific Secrets of Perfect Timing",
+      "url": null,
+      "domain": null,
+      "publication": "Daniel Pink",
+      "type": "book",
+      "year": "2018",
+      "credibility": "high",
+      "key_data": ["Cognitive performance circadian patterns", "Timing optimization"]
+    },
+    {
+      "id": "source_020",
+      "title": "The Unseen Power: Public Relations: A History",
+      "url": null,
+      "domain": null,
+      "publication": "Scott M. Cutlip",
+      "type": "book",
+      "year": "1994",
+      "credibility": "high",
+      "key_data": ["Ivy Lee Method historical documentation", "Original source on Charles Schwab payment"]
+    },
+    {
+      "id": "source_021",
+      "title": "The Social Economy: Unlocking Value and Productivity Through Social Technologies",
+      "url": null,
+      "domain": null,
+      "publication": "McKinsey Global Institute",
+      "type": "research_report",
+      "year": "2012",
+      "credibility": "high",
+      "key_data": ["Email checking frequency (36 times/hour)"]
+    },
+    {
+      "id": "source_022",
+      "title": "Prodoscore Research Labs",
+      "url": null,
+      "domain": "prodoscore.com",
+      "publication": "Prodoscore",
+      "type": "workplace_analytics",
+      "year": "2023-2024",
+      "credibility": "medium",
+      "key_data": ["Application switching metrics", "Productivity data"]
+    }
+  ],
+  "summary": {
+    "total_sources": 22,
+    "peer_reviewed": 1,
+    "books": 8,
+    "research_articles": 4,
+    "expert_articles": 3,
+    "business_publications": 3,
+    "fact_check_articles": 1,
+    "interviews": 1,
+    "databases": 1,
+    "credibility_breakdown": {
+      "high": 19,
+      "medium_high": 2,
+      "medium": 1
+    }
+  }
+}

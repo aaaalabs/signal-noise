@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compound Effect Chart - Transformational vs. Maintenance Work</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: #1a1a1a;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 300;
+            margin-bottom: 20px;
+            color: #00ff88;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 16px;
+            font-weight: 300;
+            color: #888;
+            margin-bottom: 40px;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 40px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .stat-card.highlight {
+            border-color: #00ff88;
+            background: rgba(0, 255, 136, 0.05);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .stat-value {
+            font-size: 36px;
+            font-weight: 100;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .stat-value.green {
+            color: #00ff88;
+        }
+
+        .stat-value.red {
+            color: #ff4444;
+        }
+
+        .stat-description {
+            font-size: 13px;
+            font-weight: 300;
+            color: #aaa;
+        }
+
+        .comparison-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .comparison-card {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .comparison-card.transformational {
+            border-color: rgba(0, 255, 136, 0.3);
+            background: rgba(0, 255, 136, 0.03);
+        }
+
+        .comparison-card.maintenance {
+            border-color: rgba(136, 136, 136, 0.3);
+            background: rgba(136, 136, 136, 0.03);
+        }
+
+        .comparison-title {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .comparison-title.green {
+            color: #00ff88;
+        }
+
+        .comparison-title.gray {
+            color: #888;
+        }
+
+        .comparison-detail {
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.6;
+            color: #ccc;
+            margin-bottom: 10px;
+        }
+
+        .formula {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .formula-label {
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .formula-text {
+            color: #00ff88;
+            font-size: 16px;
+        }
+
+        .insight-box {
+            background: rgba(0, 255, 136, 0.05);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .insight-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #00ff88;
+            margin-bottom: 10px;
+        }
+
+        .insight-text {
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.6;
+            color: #ccc;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-section {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .chart-container {
+                height: 400px;
+                padding: 20px;
+            }
+
+            .stat-value {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>The Compound Effect: 1 Year of Daily Improvement</h1>
+        <p class="subtitle">Mathematical proof: 3 transformational tasks beat 20 maintenance tasks</p>
+
+        <!-- Key Statistics -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Month 3</div>
+                <div class="stat-value green">3.0×</div>
+                <div class="stat-description">Noticeable progress</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Month 6</div>
+                <div class="stat-value green">6.2×</div>
+                <div class="stat-description">Major breakthroughs</div>
+            </div>
+            <div class="stat-card highlight">
+                <div class="stat-label">Month 12</div>
+                <div class="stat-value green">37.8×</div>
+                <div class="stat-description">Transformational results</div>
+            </div>
+        </div>
+
+        <!-- Chart -->
+        <div class="chart-container">
+            <canvas id="compoundChart"></canvas>
+        </div>
+
+        <!-- Comparison -->
+        <div class="comparison-section">
+            <div class="comparison-card transformational">
+                <div class="comparison-title green">3 Transformational Tasks Daily</div>
+                <div class="comparison-detail"><strong>Strategy:</strong> Deep work on game-changing projects</div>
+                <div class="comparison-detail"><strong>Typical tasks:</strong> Strategic decisions, key relationships, major skills</div>
+                <div class="comparison-detail"><strong>Time investment:</strong> 5-6 hours of focused work</div>
+                <div class="comparison-detail"><strong>Annual total:</strong> 1,095 high-impact accomplishments</div>
+                <div class="formula">
+                    <div class="formula-label">Mathematical Model</div>
+                    <div class="formula-text">1.01³⁶⁵ = 37.78×</div>
+                </div>
+            </div>
+
+            <div class="comparison-card maintenance">
+                <div class="comparison-title gray">20 Maintenance Tasks Daily</div>
+                <div class="comparison-detail"><strong>Strategy:</strong> React to emails, meetings, admin work</div>
+                <div class="comparison-detail"><strong>Typical tasks:</strong> Inbox zero, status updates, routine reports</div>
+                <div class="comparison-detail"><strong>Time investment:</strong> 8 hours scattered across interruptions</div>
+                <div class="comparison-detail"><strong>Annual total:</strong> 7,300 low-impact tasks completed</div>
+                <div class="formula">
+                    <div class="formula-label">Result</div>
+                    <div class="formula-text" style="color: #888;">≈1.0× (no growth)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Insight -->
+        <div class="insight-box">
+            <div class="insight-title">Key Insight from James Clear's Research</div>
+            <div class="insight-text">
+                "If you can get 1% better each day for one year, you'll end up 37 times better by the time you're done."
+                This mathematical reality applies to productivity: improving the <strong>quality</strong> of your daily tasks
+                compounds far more than increasing the <strong>quantity</strong>. Three transformational tasks with 1% daily
+                improvement creates exponential growth. Twenty maintenance tasks with 0% improvement creates stagnation.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('compoundChart').getContext('2d');
+
+        // Generate data points for 12 months
+        const months = [];
+        const transformationalData = [];
+        const maintenanceData = [];
+
+        for (let month = 0; month <= 12; month++) {
+            months.push(month === 0 ? 'Start' : `Month ${month}`);
+
+            // Transformational: 1% daily improvement (1.01^(30*month))
+            transformationalData.push(Math.pow(1.01, 30 * month));
+
+            // Maintenance: essentially flat with tiny variance
+            maintenanceData.push(1.0 + (Math.random() * 0.1 - 0.05));
+        }
+
+        const chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: months,
+                datasets: [
+                    {
+                        label: '3 Transformational Tasks Daily',
+                        data: transformationalData,
+                        borderColor: '#00ff88',
+                        backgroundColor: 'rgba(0, 255, 136, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 5,
+                        pointHoverRadius: 7,
+                        pointBackgroundColor: '#00ff88',
+                        pointBorderColor: '#ffffff',
+                        pointBorderWidth: 2
+                    },
+                    {
+                        label: '20 Maintenance Tasks Daily',
+                        data: maintenanceData,
+                        borderColor: '#888888',
+                        backgroundColor: 'rgba(136, 136, 136, 0.05)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.1,
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        pointBackgroundColor: '#888888',
+                        pointBorderColor: '#ffffff',
+                        pointBorderWidth: 1,
+                        borderDash: [5, 5]
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            color: '#ffffff',
+                            font: {
+                                size: 14,
+                                weight: 300
+                            },
+                            padding: 20,
+                            usePointStyle: true
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        titleColor: '#00ff88',
+                        bodyColor: '#ffffff',
+                        borderColor: 'rgba(255, 255, 255, 0.1)',
+                        borderWidth: 1,
+                        padding: 12,
+                        displayColors: true,
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                label += context.parsed.y.toFixed(2) + '× improvement';
+                                return label;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.05)',
+                            drawBorder: false
+                        },
+                        ticks: {
+                            color: '#888888',
+                            font: {
+                                size: 12,
+                                weight: 300
+                            }
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.05)',
+                            drawBorder: false
+                        },
+                        ticks: {
+                            color: '#888888',
+                            font: {
+                                size: 12,
+                                weight: 300
+                            },
+                            callback: function(value) {
+                                return value.toFixed(1) + '×';
+                            }
+                        }
+                    }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
+                }
+            }
+        });
+    </script>
+</body>
+</html>

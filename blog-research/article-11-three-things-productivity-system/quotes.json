@@ -1,0 +1,192 @@
+{
+  "expert_quotes": [
+    {
+      "id": "quote_001",
+      "quote": "The difference between successful people and really successful people is that really successful people say no to almost everything.",
+      "author": "Warren Buffett",
+      "source": "Multiple verified sources",
+      "source_url": "https://www.goodreads.com/author/quotes/756.Warren_Buffett",
+      "verification_status": "verified_authentic",
+      "context": "Focus and prioritization",
+      "relevance_to_article": "Core principle of Three Things system - ruthless prioritization",
+      "year": null,
+      "use_case": "Opening quote for prioritization section"
+    },
+    {
+      "id": "quote_002",
+      "quote": "I wanted to project myself forward to age 80 and say, 'Okay, now I'm looking back on my life. I want to have minimized the number of regrets I have.' ... The framework I found, which made the decision incredibly easy, was what I called – which only a nerd would call – a 'regret minimization framework.'",
+      "author": "Jeff Bezos",
+      "source": "CBS 60 Minutes interview",
+      "source_url": "https://www.britannica.com/money/regret-minimization-framework",
+      "verification_status": "verified_authentic",
+      "context": "Decision-making framework when leaving Wall Street for Amazon",
+      "relevance_to_article": "Framework for selecting transformational tasks",
+      "year": "1999",
+      "use_case": "Task selection criteria section"
+    },
+    {
+      "id": "quote_003",
+      "quote": "The ability to perform deep work is becoming increasingly rare at exactly the same time it is becoming increasingly valuable in our economy. As a consequence, the few who cultivate this skill, and then make it the core of their working life, will thrive.",
+      "author": "Cal Newport",
+      "source": "Deep Work: Rules for Focused Success in a Distracted World",
+      "source_url": "https://calnewport.com/writing/#books",
+      "verification_status": "verified_published",
+      "context": "Deep work philosophy",
+      "relevance_to_article": "Scientific backing for focusing on transformational tasks",
+      "year": "2016",
+      "use_case": "Protection protocol and deep work blocks"
+    },
+    {
+      "id": "quote_004",
+      "quote": "We're truly focused on our work a mere 6 hours per week, which starkly contrasts our collective buy-in to the 40-hour workweek.",
+      "author": "Dr. David Rock",
+      "source": "NeuroLeadership Institute research",
+      "source_url": "https://neuroleadership.com/",
+      "verification_status": "expert_cited",
+      "context": "Focus capacity research",
+      "relevance_to_article": "Why Three Things maximizes limited focus capacity",
+      "year": null,
+      "use_case": "Neuroscience validation section"
+    },
+    {
+      "id": "quote_005",
+      "quote": "If you don't prioritize your life, someone else will.",
+      "author": "Greg McKeown",
+      "source": "Essentialism: The Disciplined Pursuit of Less",
+      "source_url": null,
+      "verification_status": "verified_published",
+      "context": "Essentialism philosophy",
+      "relevance_to_article": "Taking control of priorities vs. reactive work",
+      "year": "2014",
+      "use_case": "Why most productivity systems fail section"
+    },
+    {
+      "id": "quote_006",
+      "quote": "Habits are the compound interest of self-improvement. Getting 1 percent better every day counts for a lot in the long run.",
+      "author": "James Clear",
+      "source": "Atomic Habits",
+      "source_url": "https://jamesclear.com/atomic-habits",
+      "verification_status": "verified_published",
+      "context": "Compound improvement philosophy",
+      "relevance_to_article": "Mathematical backing for daily transformational work",
+      "year": "2018",
+      "use_case": "Compound effect section"
+    },
+    {
+      "id": "quote_007",
+      "quote": "I can't recall making a list in my life.",
+      "author": "Warren Buffett",
+      "source": "Berkshire Hathaway 2013 shareholder meeting",
+      "source_url": "https://www.inc.com/marcel-schwantes/warren-buffett-brilliant-25-5-rule-was-fake-heres-what-he-really-said-about-achieving-success.html",
+      "verification_status": "verified_debunking",
+      "context": "Debunking the 25/5 Rule myth",
+      "relevance_to_article": "Verification of authentic vs. viral productivity advice",
+      "year": "2013",
+      "use_case": "Fact-checking section on Buffett's actual methods"
+    }
+  ],
+  "research_findings": [
+    {
+      "id": "finding_001",
+      "finding": "80% of consequences come from 20% of causes",
+      "researcher": "Vilfredo Pareto",
+      "principle": "Pareto Principle (80/20 Rule)",
+      "source": "Economic research",
+      "verification_status": "foundational_principle",
+      "relevance_to_article": "Core justification for focusing on 3 tasks vs. 20",
+      "year": "1896"
+    },
+    {
+      "id": "finding_002",
+      "finding": "Ivy Lee Method: At end of day, write 6 most important tasks for tomorrow, prioritize, work sequentially until complete",
+      "researcher": "Ivy Lee",
+      "principle": "Sequential task execution with limited daily focus",
+      "source": "Historical documentation (Cutlip, James Clear, Business Insider)",
+      "verification_status": "historically_verified",
+      "relevance_to_article": "Historical foundation of Three Things system",
+      "year": "1918"
+    },
+    {
+      "id": "finding_003",
+      "finding": "Cognitive performance follows predictable daily patterns based on circadian rhythms",
+      "researcher": "Daniel Pink",
+      "principle": "Chronobiology and productivity timing",
+      "source": "When: The Scientific Secrets of Perfect Timing",
+      "verification_status": "research_synthesized",
+      "relevance_to_article": "Energy-task matching for optimal execution",
+      "year": "2018"
+    },
+    {
+      "id": "finding_004",
+      "finding": "10,000 hours of deliberate practice creates world-class skill - but only if focused, not scattered",
+      "researcher": "Anders Ericsson",
+      "principle": "Deliberate practice theory",
+      "source": "Peak: Secrets from the New Science of Expertise",
+      "verification_status": "peer_reviewed_research",
+      "relevance_to_article": "Quality of focus matters more than quantity of hours",
+      "year": "2016"
+    },
+    {
+      "id": "finding_005",
+      "finding": "Simplicity and consistency predict long-term adherence better than sophistication",
+      "researcher": "Meta-analysis of productivity systems",
+      "principle": "System design for sustainability",
+      "source": "2019 productivity systems study",
+      "verification_status": "meta_research",
+      "relevance_to_article": "Why Three Things works: radical simplicity",
+      "year": "2019"
+    }
+  ],
+  "supporting_frameworks": [
+    {
+      "framework": "Eisenhower Matrix",
+      "creator": "Dwight D. Eisenhower",
+      "categories": [
+        "Urgent + Important: True crises (rare)",
+        "Not Urgent + Important: Transformational work (Three Things)",
+        "Urgent + Not Important: Distractions (delegate/batch)",
+        "Not Urgent + Not Important: Time wasters (eliminate)"
+      ],
+      "relevance": "Task categorization for identifying transformational work"
+    },
+    {
+      "framework": "Zeigarnik Effect",
+      "description": "Completion momentum builds motivation",
+      "relevance": "Why sequential execution (finish Task 1 before Task 2) works"
+    },
+    {
+      "framework": "BJ Fogg's Behavior Model",
+      "description": "Habits solidify around 21-30 days with environmental design",
+      "source": "Tiny Habits",
+      "year": "2019",
+      "relevance": "30-day timeline for Three Things habit formation"
+    }
+  ],
+  "debunked_claims": [
+    {
+      "claim": "Warren Buffett's 25/5 Rule (write 25 goals, circle 5, avoid other 20)",
+      "status": "DEBUNKED",
+      "evidence": "Buffett himself denied this at 2013 Berkshire Hathaway meeting: 'I can't recall making a list in my life.'",
+      "source": "Inc.com (Marcel Schwantes, March 2020)",
+      "relevance": "Article explicitly debunks this viral but false claim"
+    }
+  ],
+  "summary": {
+    "total_quotes": 7,
+    "verified_authentic": 5,
+    "debunking_quotes": 1,
+    "expert_cited": 1,
+    "research_findings": 5,
+    "supporting_frameworks": 3,
+    "debunked_viral_claims": 1,
+    "key_authorities": [
+      "Warren Buffett (investing/focus)",
+      "Jeff Bezos (decision-making)",
+      "Cal Newport (deep work)",
+      "James Clear (habits/compound effect)",
+      "Dr. David Rock (neuroscience)",
+      "Greg McKeown (essentialism)",
+      "Ivy Lee (historical productivity)"
+    ]
+  }
+}
