@@ -185,7 +185,7 @@ METRICS:
 Return a personalized coaching message.`
           }
         ],
-        userEmail: userEmail || 'beta@signal-noise.test',
+        userEmail: 'beta@signal-noise.test', // Always use beta user for benchmarks
         accessToken: 'legacy-token'
       })
     });
@@ -228,7 +228,7 @@ async function callPersonalAI(payload, userEmail) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         payload,
-        userEmail: userEmail || 'personal-ai@signal-noise.test',
+        userEmail: 'personal-ai@signal-noise.test', // Always use PersonalAI beta user
         accessToken: 'legacy-token'
       })
     });
