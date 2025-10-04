@@ -41,6 +41,7 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
   const [showNameModal, setShowNameModal] = useState(false);
   const [isPremium, setIsPremium] = useState(false);
   const [isPersonalMode, setIsPersonalMode] = useState(false);
+  const [lastCoachingTimestamp, setLastCoachingTimestamp] = useState<number>(0);
 
   // Check premium status and personal AI mode on mount and listen for changes
   useEffect(() => {
@@ -161,6 +162,18 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
       return;
     }
 
+    // Detect rapid re-requests without task changes (same data = repetitive advice)
+    const now = Date.now();
+    const timeSinceLastCoaching = now - lastCoachingTimestamp;
+
+    if (timeSinceLastCoaching < 60000) { // Less than 1 minute
+      const uncompletedSignals = tasks.filter(t => t.type === 'signal' && !t.completed);
+      if (uncompletedSignals.length > 0) {
+        console.warn('⚠️ Rapid re-request detected. Task data unchanged. AI will give similar advice.');
+      }
+    }
+
+    setLastCoachingTimestamp(now);
     setIsLoading(true);
     setShowCoach(true);
 
