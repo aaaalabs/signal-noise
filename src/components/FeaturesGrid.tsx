@@ -2,25 +2,21 @@ import { useTranslation } from '../contexts/LanguageContext';
 
 interface Feature {
   icon: string;
-  titleKey: string;
-  descriptionKey: string;
+  key: 'simple' | 'private' | 'focused';
 }
 
 const features: Feature[] = [
   {
     icon: '⚡',
-    titleKey: 'features.simple.title',
-    descriptionKey: 'features.simple.description'
+    key: 'simple'
   },
   {
     icon: '🔒',
-    titleKey: 'features.private.title',
-    descriptionKey: 'features.private.description'
+    key: 'private'
   },
   {
     icon: '🎯',
-    titleKey: 'features.focused.title',
-    descriptionKey: 'features.focused.description'
+    key: 'focused'
   }
 ];
 
@@ -62,7 +58,7 @@ export default function FeaturesGrid() {
               marginBottom: '12px',
               letterSpacing: '0.02em'
             }}>
-              {t[feature.titleKey] || feature.titleKey}
+              {t.features?.[feature.key]?.title || 'Feature'}
             </h3>
             <p style={{
               fontSize: '14px',
@@ -71,7 +67,7 @@ export default function FeaturesGrid() {
               lineHeight: 1.6,
               margin: 0
             }}>
-              {t[feature.descriptionKey] || feature.descriptionKey}
+              {t.features?.[feature.key]?.description || 'Description'}
             </p>
           </div>
         ))}

@@ -29,7 +29,6 @@ import LoadingSplash from './components/LoadingSplash';
 import AboutModal from './components/AboutModal';
 import PrivacyModal from './components/PrivacyModal';
 import Demo from './components/Demo';
-import FeaturesGrid from './components/FeaturesGrid';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { checkAchievements, getTodayRatio } from './utils/achievements';
 import { handleStripeReturn, getSessionData, type SessionData } from './services/premiumService';
@@ -1613,9 +1612,6 @@ function AppContent() {
           tasks={data.tasks}
           history={data.history}
         />
-
-        {/* Features Grid */}
-        <FeaturesGrid />
 
         {/* Footer */}
         <Footer onFoundationClick={() => {
