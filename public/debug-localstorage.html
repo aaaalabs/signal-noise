@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signal/Noise - LocalStorage Inspector</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0a0a0a;
+      color: #e0e0e0;
+      padding: 40px 20px;
+      line-height: 1.6;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+    h1 { font-size: 32px; font-weight: 100; margin-bottom: 30px; color: #00ff88; }
+    h2 { font-size: 20px; font-weight: 300; margin: 30px 0 15px; color: #00ff88; }
+    .data-box {
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+      border: 1px solid #333;
+    }
+    .task {
+      background: #0f0f0f;
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 6px;
+      border-left: 3px solid #00ff88;
+    }
+    .task.completed { opacity: 0.5; border-left-color: #666; }
+    .task.uncompleted { border-left-color: #ff3333; }
+    .task-text { font-weight: 500; margin-bottom: 4px; }
+    .task-meta { font-size: 12px; color: #666; }
+    .highlight { background: #ffaa00; color: #000; padding: 2px 6px; border-radius: 3px; }
+    button {
+      background: #00ff88;
+      color: #000;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-weight: 500;
+      cursor: pointer;
+      margin: 10px 10px 10px 0;
+    }
+    button:hover { background: #00dd77; }
+    button.danger { background: #ff3333; color: #fff; }
+    .warning {
+      background: #331100;
+      border: 1px solid #ff6600;
+      padding: 16px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+    .success {
+      background: #003311;
+      border: 1px solid #00ff88;
+      padding: 16px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+    pre {
+      background: #000;
+      padding: 12px;
+      border-radius: 4px;
+      overflow-x: auto;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔍 LocalStorage Inspector</h1>
+    <p style="color: #666; margin-bottom: 30px;">
+      Diagnostic tool to find why "min 3 personalisiere Lead Outraches" keeps appearing in AI coaching.
+    </p>
+
+    <button onclick="inspectLocalStorage()">🔍 Inspect LocalStorage</button>
+    <button onclick="findSpecificTask()">🎯 Find "Lead Outraches" Task</button>
+    <button onclick="exportData()">📥 Export All Data</button>
+    <button class="danger" onclick="clearSpecificTask()">🗑️ Remove This Task</button>
+
+    <div id="results"></div>
+  </div>
+
+  <script>
+    const TARGET_TASK = "min 3 personalisiere Lead Outraches";
+    const DATA_KEY = 'signal_noise_data';
+
+    function inspectLocalStorage() {
+      const results = document.getElementById('results');
+      const rawData = localStorage.getItem(DATA_KEY);
+
+      if (!rawData) {
+        results.innerHTML = `
+          <div class="warning">
+            <h2>⚠️ No Data Found</h2>
+            <p>localStorage key '${DATA_KEY}' is empty. This shouldn't happen if you're using the app.</p>
+          </div>
+        `;
+        return;
+      }
+
+      try {
+        const data = JSON.parse(rawData);
+        const { tasks, settings } = data;
+
+        const uncompletedSignals = tasks.filter(t => t.type === 'signal' && !t.completed);
+        const hasTargetTask = tasks.some(t => t.text.includes('Lead Outraches'));
+
+        results.innerHTML = `
+          <h2>📊 LocalStorage Data Summary</h2>
+          <div class="data-box">
+            <p><strong>Total Tasks:</strong> ${tasks.length}</p>
+            <p><strong>Uncompleted Signals:</strong> ${uncompletedSignals.length}</p>
+            <p><strong>User Name:</strong> ${settings.firstName || 'Not set'}</p>
+            <p><strong>Target Ratio:</strong> ${settings.targetRatio}%</p>
+          </div>
+
+          ${hasTargetTask ? `
+            <div class="warning">
+              <h2>🎯 FOUND IT!</h2>
+              <p>The task "min 3 personalisiere Lead Outraches" EXISTS in your localStorage.</p>
+              <p>This is why the AI keeps mentioning it!</p>
+            </div>
+          ` : `
+            <div class="success">
+              <h2>✅ Task Not Found</h2>
+              <p>The task "min 3 personalisiere Lead Outraches" is NOT in your current data.</p>
+              <p>The AI might be referencing an old cached response.</p>
+            </div>
+          `}
+
+          <h2>📋 All Uncompleted Signals</h2>
+          ${uncompletedSignals.map(t => {
+            const age = Math.floor((Date.now() - new Date(t.timestamp).getTime()) / (1000 * 60 * 60 * 24));
+            const isTarget = t.text.includes('Lead Outraches');
+            return `
+              <div class="task ${isTarget ? 'highlight' : 'uncompleted'}">
+                <div class="task-text">${isTarget ? '🎯 ' : ''}${t.text}</div>
+                <div class="task-meta">
+                  Age: ${age} days | Type: ${t.type} | Completed: ${t.completed}
+                </div>
+              </div>
+            `;
+          }).join('')}
+        `;
+      } catch (error) {
+        results.innerHTML = `
+          <div class="warning">
+            <h2>❌ Parse Error</h2>
+            <p>Failed to parse localStorage data: ${error.message}</p>
+            <pre>${rawData.substring(0, 500)}...</pre>
+          </div>
+        `;
+      }
+    }
+
+    function findSpecificTask() {
+      const results = document.getElementById('results');
+      const rawData = localStorage.getItem(DATA_KEY);
+
+      if (!rawData) {
+        results.innerHTML = '<div class="warning"><h2>⚠️ No data found</h2></div>';
+        return;
+      }
+
+      const data = JSON.parse(rawData);
+      const matches = data.tasks.filter(t =>
+        t.text.toLowerCase().includes('lead') ||
+        t.text.toLowerCase().includes('outreach') ||
+        t.text.toLowerCase().includes('outrach')
+      );
+
+      results.innerHTML = `
+        <h2>🎯 Tasks Matching "Lead/Outreach"</h2>
+        <div class="data-box">
+          <p><strong>Found:</strong> ${matches.length} tasks</p>
+        </div>
+
+        ${matches.length === 0 ? `
+          <div class="success">
+            <h2>✅ No Matching Tasks</h2>
+            <p>The task is NOT in your current localStorage.</p>
+            <p><strong>Next step:</strong> Check if AI coach response is cached somewhere.</p>
+          </div>
+        ` : ''}
+
+        ${matches.map(t => {
+          const age = Math.floor((Date.now() - new Date(t.timestamp).getTime()) / (1000 * 60 * 60 * 24));
+          const isExactMatch = t.text === TARGET_TASK;
+          return `
+            <div class="task ${t.completed ? 'completed' : 'uncompleted'}" ${isExactMatch ? 'style="border-left-color: #ff3333; border-width: 5px;"' : ''}>
+              <div class="task-text">
+                ${isExactMatch ? '<span class="highlight">EXACT MATCH</span> ' : ''}
+                ${t.text}
+              </div>
+              <div class="task-meta">
+                ID: ${t.id} | Age: ${age} days | Completed: ${t.completed ? '✅' : '❌'}
+                <br>Created: ${new Date(t.timestamp).toLocaleString()}
+              </div>
+              ${!t.completed ? `
+                <button onclick="completeTask(${t.id})" style="margin-top: 8px; padding: 6px 12px; font-size: 12px;">
+                  ✓ Mark as Completed
+                </button>
+                <button class="danger" onclick="deleteTask(${t.id})" style="margin-top: 8px; padding: 6px 12px; font-size: 12px;">
+                  🗑️ Delete Task
+                </button>
+              ` : ''}
+            </div>
+          `;
+        }).join('')}
+      `;
+    }
+
+    function exportData() {
+      const rawData = localStorage.getItem(DATA_KEY);
+      if (!rawData) {
+        alert('No data to export');
+        return;
+      }
+
+      const blob = new Blob([rawData], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `signal-noise-data-${new Date().toISOString()}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+
+      document.getElementById('results').innerHTML = `
+        <div class="success">
+          <h2>✅ Data Exported</h2>
+          <p>Check your Downloads folder for the JSON file.</p>
+          <p>You can inspect it to see ALL your tasks.</p>
+        </div>
+      `;
+    }
+
+    function clearSpecificTask() {
+      if (!confirm(`Are you SURE you want to delete "${TARGET_TASK}"?\n\nThis cannot be undone.`)) {
+        return;
+      }
+
+      const rawData = localStorage.getItem(DATA_KEY);
+      const data = JSON.parse(rawData);
+
+      const before = data.tasks.length;
+      data.tasks = data.tasks.filter(t => t.text !== TARGET_TASK);
+      const after = data.tasks.length;
+
+      localStorage.setItem(DATA_KEY, JSON.stringify(data));
+
+      document.getElementById('results').innerHTML = `
+        <div class="success">
+          <h2>✅ Task Removed</h2>
+          <p>Removed ${before - after} task(s) matching "${TARGET_TASK}"</p>
+          <p><strong>IMPORTANT:</strong> Refresh the main app to see changes.</p>
+          <button onclick="window.location.href='/'">↩️ Return to App</button>
+        </div>
+      `;
+    }
+
+    function completeTask(taskId) {
+      const rawData = localStorage.getItem(DATA_KEY);
+      const data = JSON.parse(rawData);
+
+      const task = data.tasks.find(t => t.id === taskId);
+      if (task) {
+        task.completed = true;
+        localStorage.setItem(DATA_KEY, JSON.stringify(data));
+
+        document.getElementById('results').innerHTML = `
+          <div class="success">
+            <h2>✅ Task Marked Complete</h2>
+            <p>"${task.text}" is now completed.</p>
+            <p><strong>IMPORTANT:</strong> Refresh the main app to see changes.</p>
+            <button onclick="window.location.href='/'">↩️ Return to App</button>
+          </div>
+        `;
+      }
+    }
+
+    function deleteTask(taskId) {
+      if (!confirm('Delete this task? Cannot be undone.')) return;
+
+      const rawData = localStorage.getItem(DATA_KEY);
+      const data = JSON.parse(rawData);
+
+      const taskIndex = data.tasks.findIndex(t => t.id === taskId);
+      if (taskIndex !== -1) {
+        const deletedTask = data.tasks[taskIndex];
+        data.tasks.splice(taskIndex, 1);
+        localStorage.setItem(DATA_KEY, JSON.stringify(data));
+
+        document.getElementById('results').innerHTML = `
+          <div class="success">
+            <h2>🗑️ Task Deleted</h2>
+            <p>"${deletedTask.text}" has been removed.</p>
+            <p><strong>IMPORTANT:</strong> Refresh the main app to see changes.</p>
+            <button onclick="window.location.href='/'">↩️ Return to App</button>
+          </div>
+        `;
+      }
+    }
+
+    // Auto-run on page load
+    window.onload = () => findSpecificTask();
+  </script>
+</body>
+</html>
