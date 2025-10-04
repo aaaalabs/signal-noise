@@ -12,26 +12,32 @@ export const BENCHMARK_CONFIG = {
   ],
 
   // Test scenarios with different task patterns
+  // Based on real user behavior patterns from Redis analysis
   scenarios: [
     {
       id: 'perfectionist_trap',
       name: 'Perfectionist Trap - Many uncompleted "finalize" tasks',
-      description: 'User keeps creating tasks like "finalize report", "complete project" but never marks them done',
+      description: 'Freelancer/consultant keeps creating completion tasks but never marks them done',
       profile: {
-        currentRatio: 65,
-        streak: 5,
-        totalTasks: 45
+        currentRatio: 58,
+        streak: 4,
+        totalTasks: 52
       },
       taskPatterns: [
-        { text: 'Finalize Q4 report', type: 'signal', daysOld: 5, completed: false, occurrences: 3 },
-        { text: 'Complete website redesign', type: 'signal', daysOld: 8, completed: false, occurrences: 2 },
-        { text: 'Perfect pitch deck', type: 'signal', daysOld: 3, completed: false, occurrences: 4 },
-        { text: 'Social media scrolling', type: 'noise', daysOld: 0, completed: true, occurrences: 5 },
-        { text: 'Quick email check', type: 'signal', daysOld: 0, completed: true, occurrences: 8 },
-        { text: 'Review design mockups', type: 'signal', daysOld: 2, completed: true, occurrences: 2 }
+        // Realistic freelancer/consultant tasks (based on real patterns)
+        { text: 'Client A: Wireframe revisions', type: 'signal', daysOld: 11, completed: false, occurrences: 5 },
+        { text: 'Proposal: Enterprise client B', type: 'signal', daysOld: 7, completed: false, occurrences: 4 },
+        { text: 'Portfolio update with recent work', type: 'signal', daysOld: 14, completed: false, occurrences: 6 },
+        { text: 'Client C: Design presentation', type: 'signal', daysOld: 0, completed: true, occurrences: 2 },
+        { text: 'Invoice Client A+B', type: 'signal', daysOld: 1, completed: true, occurrences: 3 },
+        { text: 'Email responses to leads', type: 'signal', daysOld: 0, completed: true, occurrences: 8 },
+        { text: 'LinkedIn profile check', type: 'noise', daysOld: 0, completed: true, occurrences: 6 },
+        { text: 'Industry news reading', type: 'noise', daysOld: 0, completed: true, occurrences: 5 },
+        { text: 'Design inspiration browsing', type: 'noise', daysOld: 0, completed: true, occurrences: 4 }
       ],
       expectedInsights: [
         'should detect perfectionism pattern',
+        'should mention specific task "Client A: Wireframe revisions" or "Portfolio update"',
         'should suggest breaking down large tasks',
         'should reference specific uncompleted tasks by name'
       ]
@@ -114,24 +120,28 @@ export const BENCHMARK_CONFIG = {
     {
       id: 'recurring_avoider',
       name: 'Recurring Avoider - Same task appearing repeatedly',
-      description: 'Specific task keeps reappearing without completion',
+      description: 'Sales/growth role - outbound work keeps appearing but never gets done',
       profile: {
-        currentRatio: 60,
+        currentRatio: 62,
         streak: 7,
-        totalTasks: 54
+        totalTasks: 61
       },
       taskPatterns: [
-        { text: 'Lead Outreach', type: 'signal', daysOld: 8, completed: false, occurrences: 6 },
-        { text: 'Update portfolio', type: 'signal', daysOld: 12, completed: false, occurrences: 5 },
-        { text: 'Daily standup', type: 'signal', daysOld: 0, completed: true, occurrences: 7 },
-        { text: 'Code review', type: 'signal', daysOld: 0, completed: true, occurrences: 6 },
-        { text: 'Slack messages', type: 'noise', daysOld: 0, completed: true, occurrences: 9 },
-        { text: 'Twitter check', type: 'noise', daysOld: 0, completed: true, occurrences: 8 }
+        // Realistic sales/growth pattern - avoidance of outbound work
+        { text: 'Outbound: 10 warm leads this week', type: 'signal', daysOld: 9, completed: false, occurrences: 6 },
+        { text: 'Follow-up: Demo attendees from last week', type: 'signal', daysOld: 5, completed: false, occurrences: 4 },
+        { text: 'LinkedIn content: Share case study', type: 'signal', daysOld: 12, completed: false, occurrences: 5 },
+        { text: 'Close: Enterprise deal final proposal', type: 'signal', daysOld: 1, completed: true, occurrences: 2 },
+        { text: 'Pipeline review meeting', type: 'signal', daysOld: 0, completed: true, occurrences: 7 },
+        { text: 'Demo calls: Inbound leads', type: 'signal', daysOld: 0, completed: true, occurrences: 6 },
+        { text: 'CRM data entry cleanup', type: 'noise', daysOld: 0, completed: true, occurrences: 9 },
+        { text: 'LinkedIn browsing prospects', type: 'noise', daysOld: 0, completed: true, occurrences: 11 },
+        { text: 'Sales Slack channels catch-up', type: 'noise', daysOld: 0, completed: true, occurrences: 8 }
       ],
       expectedInsights: [
-        'should identify recurring task "Lead Outreach"',
+        'should identify recurring task "Outbound: 10 warm leads this week"',
         'should mention task by exact name',
-        'should give specific action for TODAY'
+        'should give specific action for TODAY with NOW/RIGHT NOW'
       ]
     },
 
