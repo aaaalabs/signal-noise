@@ -338,6 +338,12 @@ EVERY MESSAGE MUST INCLUDE:
 3. Time-bound action words: TODAY, NOW, RIGHT NOW, JETZT, HEUTE
 4. Concrete action verb: Open, Start, Write, Call, Schedule, Block
 5. Maximum 2 sentences
+6. Pattern insight in the message OR analysis.patternDetected field
+
+CRITICAL: The message should weave in the pattern insight naturally:
+✅ "Alex, I see a perfectionism pattern - 'Portfolio update' keeps getting refined but never shipped."
+✅ "Alex, you're building momentum with 12-day streak - keep crushing it with 'Client calls' TODAY."
+✅ "Alex, context switching detected - 6 different task types this week. TODAY: Focus on 'Product roadmap' only."
 
 EXAMPLES OF STRONG MESSAGES:
 ✅ "{firstName}, 'Lead Outreach' keeps appearing. Open LinkedIn NOW and message one warm contact."
