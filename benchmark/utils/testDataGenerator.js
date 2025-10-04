@@ -265,7 +265,7 @@ export function buildDeepTaskAnalysis(tasks) {
       abandonedSignals,
       oldestUncompletedSignal: oldestSignal ? {
         text: oldestSignal.text,
-        ageInDays: Math.floor((Date.now() - new Date(t.timestamp).getTime()) / (1000 * 60 * 60 * 24))
+        ageInDays: Math.floor((Date.now() - new Date(oldestSignal.timestamp).getTime()) / (1000 * 60 * 60 * 24))
       } : null
     }
   };
