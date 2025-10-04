@@ -61,7 +61,7 @@ The Personal AI coach has been significantly enhanced with deep knowledge from S
       "transformation": 0
     }
   },
-  "message": "Tom, you're crushing maintenance but missing transformation. Zero of your 10 signals move the needle on your big goals."
+  "message": "{firstName}, you're crushing maintenance but missing transformation. Zero of your 10 signals move the needle on your big goals."
 }
 ```
 
@@ -151,7 +151,7 @@ The comprehensive benchmark system now tests for:
 ```json
 {
   "action": "focus",
-  "message": "Tom, I see 'Lead Outreach' keeps appearing - it clearly matters to you. Open LinkedIn NOW and message one warm contact.",
+  "message": "{firstName}, I see 'Lead Outreach' keeps appearing - it clearly matters to you. Open LinkedIn NOW and message one warm contact.",
 
   "analysis": {
     "patternDetected": "avoidance_pattern",
@@ -200,7 +200,7 @@ The comprehensive benchmark system now tests for:
 ```json
 {
   "action": "warn",
-  "message": "Tom, you're executing well but stuck in maintenance mode. Zero transformation work this week - that's career stagnation.",
+  "message": "{firstName}, you're executing well but stuck in maintenance mode. Zero transformation work this week - that's career stagnation.",
 
   "analysis": {
     "patternDetected": "maintenance_trap",
@@ -248,7 +248,7 @@ The comprehensive benchmark system now tests for:
 #### OLD Personal AI (Pattern Focus):
 ```json
 {
-  "message": "Tom, I see 'Lead Outreach' keeps appearing. Do it today.",
+  "message": "{firstName}, I see 'Lead Outreach' keeps appearing. Do it today.",
   "type": "motivation"
 }
 ```
@@ -261,7 +261,7 @@ The comprehensive benchmark system now tests for:
 #### NEW Personal AI (Transformational Intelligence):
 ```json
 {
-  "message": "Tom, 'Lead Outreach' is Level 3 transformation work you're avoiding. It's your #1 thing for TODAY.",
+  "message": "{firstName}, 'Lead Outreach' is Level 3 transformation work you're avoiding. It's your #1 thing for TODAY.",
 
   "analysis": {
     "patternDetected": "avoidance_pattern",

@@ -247,10 +247,11 @@ MANDATORY FORMAT:
 }
 
 EXAMPLES (Vary your approach - use different angles each time):
+NOTE: Always use the actual {firstName} from the payload - NEVER hardcode a name!
 
 PATTERN RECOGNITION ANGLE:
 {
-  "message": "Tom, I see 'Lead Outreach' keeps appearing in your signals. Open LinkedIn NOW and find one warm contact.",
+  "message": "{firstName}, I see 'Lead Outreach' keeps appearing in your signals. Open LinkedIn NOW and find one warm contact.",
   "type": "motivation",
   "suggestions": [{"action": "Open LinkedIn and message one person you already know", "reasoning": "Starting with warm contacts removes the cold-call resistance"}],
   "emotionalTone": "direct_but_caring"
@@ -258,7 +259,7 @@ PATTERN RECOGNITION ANGLE:
 
 BREAKING IT DOWN ANGLE:
 {
-  "message": "Tom, 'Personalisierte Outreach' keeps showing up - let's make it tiny. TODAY: Draft ONE message.",
+  "message": "{firstName}, 'Personalisierte Outreach' keeps showing up - let's make it tiny. TODAY: Draft ONE message.",
   "type": "motivation",
   "suggestions": [{"action": "Pick one contact and write 3 sentences about why you're reaching out", "reasoning": "One perfect message beats ten mediocre ones"}],
   "emotionalTone": "direct_but_caring"
@@ -266,7 +267,7 @@ BREAKING IT DOWN ANGLE:
 
 MOMENTUM ANGLE:
 {
-  "message": "Tom, you've been circling 'Lead Outreach'. Time to ship. Open LinkedIn right now.",
+  "message": "{firstName}, you've been circling 'Lead Outreach'. Time to ship. Open LinkedIn right now.",
   "type": "challenge",
   "suggestions": [{"action": "Set a timer for 5 minutes and reach out to the first person who comes to mind", "reasoning": "Imperfect action beats perfect planning"}],
   "emotionalTone": "direct_but_caring"
@@ -274,7 +275,7 @@ MOMENTUM ANGLE:
 
 COMPLETION SUCCESS ANGLE:
 {
-  "message": "Tom, I notice you crush [type of completed tasks]. Apply that same energy to 'Lead Outreach' - start NOW.",
+  "message": "{firstName}, I notice you crush [type of completed tasks]. Apply that same energy to 'Lead Outreach' - start NOW.",
   "type": "motivation",
   "suggestions": [{"action": "Treat this like [successful task type]: quick, decisive, done", "reasoning": "You already know how to execute - just apply it here"}],
   "emotionalTone": "encouraging"
@@ -282,7 +283,7 @@ COMPLETION SUCCESS ANGLE:
 
 2-MINUTE START ANGLE:
 {
-  "message": "Tom, 'Outreach' doesn't need to be perfect today. Just open the damn document.",
+  "message": "{firstName}, 'Outreach' doesn't need to be perfect today. Just open the damn document.",
   "type": "challenge",
   "suggestions": [{"action": "Open LinkedIn/email and type one name. That's it.", "reasoning": "Starting is 80% of the battle"}],
   "emotionalTone": "direct_but_caring"
@@ -290,7 +291,7 @@ COMPLETION SUCCESS ANGLE:
 
 ACCOUNTABILITY ANGLE (German):
 {
-  "message": "Tom, 'Lead Outreach' taucht immer wieder auf - du weißt, dass es wichtig ist. HEUTE ist der Tag.",
+  "message": "{firstName}, 'Lead Outreach' taucht immer wieder auf - du weißt, dass es wichtig ist. HEUTE ist der Tag.",
   "type": "motivation",
   "suggestions": [{"action": "5 Minuten Timer setzen und EINE Person anschreiben", "reasoning": "Eine Nachricht heute schlägt zehn Nachricht morgen"}],
   "emotionalTone": "direct_but_caring"
@@ -298,7 +299,7 @@ ACCOUNTABILITY ANGLE (German):
 
 SIMPLICITY ANGLE (German):
 {
-  "message": "Tom, vergiss den perfekten Outreach. Schreib JETZT eine simple Nachricht an eine Person.",
+  "message": "{firstName}, vergiss den perfekten Outreach. Schreib JETZT eine simple Nachricht an eine Person.",
   "type": "challenge",
   "suggestions": [{"action": "LinkedIn öffnen, erste Person die dir einfällt anschreiben - 3 Sätze reichen", "reasoning": "Versenden schlägt Perfektionieren"}],
   "emotionalTone": "direct_but_caring"

@@ -109,27 +109,12 @@ export default async function handler(req, res) {
         throw new Error('Invalid PersonalAI response structure');
       }
     } catch (parseError) {
-      console.error('PersonalAI JSON parsing error:', parseError);
+      console.error('PersonalAI JSON parsing FAILED - keine fallbacks!');
+      console.error('Parse error:', parseError);
       console.error('Failed content:', data.choices[0].message.content);
 
-      // Fallback response with valid action type
-      personalAIResponse = {
-        action: 'focus',
-        priority: 'normal',
-        message: `Hey ${payload.firstName}! I'm analyzing your productivity patterns. Let me give you a quick insight based on your current ${payload.context.currentRatio}% signal ratio.`,
-        analysis: {
-          patternDetected: 'baseline_analysis',
-          completionReality: payload.context.currentRatio,
-          focusLevel: payload.context.currentRatio >= 80 ? 'deep' : payload.context.currentRatio >= 60 ? 'moderate' : 'scattered',
-          timeContext: 'productive'
-        },
-        interventions: [],
-        metrics: {
-          momentumScore: Math.min(payload.context.currentRatio, 100),
-          decisionQuality: Math.round(payload.metrics.averageRatio7Days || 70),
-          predictedSuccess: Math.round((payload.context.currentRatio + (payload.metrics.averageRatio7Days || 70)) / 2)
-        }
-      };
+      // NO FALLBACK - fail early, fail fast
+      throw new Error(`PersonalAI JSON parsing failed: ${parseError.message}. Raw response: ${data.choices[0].message.content.substring(0, 200)}`);
     }
 
     // Log usage for monitoring (in user hash)
@@ -138,10 +123,11 @@ export default async function handler(req, res) {
     res.status(200).json(personalAIResponse);
 
   } catch (error) {
-    console.error('PersonalAI Coach error:', error);
+    console.error('PersonalAI Coach FAILED - keine fallbacks!', error);
+    // NO FALLBACK - return actual error for debugging
     res.status(500).json({
-      error: 'PersonalAI service temporarily unavailable',
-      fallback: true
+      error: error.message || 'PersonalAI service failed',
+      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
     });
   }
 }
@@ -301,7 +287,7 @@ User has 10 Signals, all Level 1 maintenance (email, meetings, reports)
       "transformation": 0
     }
   },
-  "message": "Tom, you're crushing maintenance but missing transformation. Zero of your 10 signals move the needle on your big goals."
+  "message": "{firstName}, you're crushing maintenance but missing transformation. Zero of your 10 signals move the needle on your big goals."
 }
 
 THREE THINGS PRIORITIZATION:
