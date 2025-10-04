@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redis Data Inspector - Signal/Noise</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0a0a0a;
+      color: #e0e0e0;
+      padding: 40px 20px;
+      line-height: 1.6;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+    h1 { font-size: 32px; font-weight: 100; margin-bottom: 10px; color: #00ff88; }
+    .subtitle { color: #666; margin-bottom: 30px; }
+    h2 { font-size: 20px; font-weight: 300; margin: 30px 0 15px; color: #00ff88; }
+    input[type="email"] {
+      background: #1a1a1a;
+      border: 1px solid #333;
+      color: #fff;
+      padding: 12px;
+      border-radius: 6px;
+      width: 100%;
+      max-width: 400px;
+      font-size: 14px;
+      margin: 10px 0;
+    }
+    button {
+      background: #00ff88;
+      color: #000;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-weight: 500;
+      cursor: pointer;
+      margin: 10px 10px 10px 0;
+      font-size: 14px;
+    }
+    button:hover { background: #00dd77; }
+    button.danger { background: #ff3333; color: #fff; }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    .data-box {
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+      border: 1px solid #333;
+    }
+    .task {
+      background: #0f0f0f;
+      padding: 16px;
+      margin: 12px 0;
+      border-radius: 6px;
+      border-left: 4px solid #333;
+    }
+    .task.target { border-left-color: #ff3333; background: #1a0505; }
+    .task.completed { opacity: 0.5; border-left-color: #00ff88; }
+    .task-text { font-weight: 500; font-size: 16px; margin-bottom: 8px; }
+    .task-meta { font-size: 12px; color: #888; }
+    .badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 500;
+      margin-right: 8px;
+      margin-top: 8px;
+    }
+    .badge.uncompleted { background: #330000; color: #ff6666; }
+    .badge.completed { background: #003300; color: #66ff66; }
+    .badge.old { background: #332200; color: #ffaa66; }
+    .warning {
+      background: #331100;
+      border: 2px solid #ff6600;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+    .success {
+      background: #003311;
+      border: 2px solid #00ff88;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+    .loading {
+      background: #111122;
+      border: 2px solid #0088ff;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+      text-align: center;
+    }
+    pre {
+      background: #000;
+      padding: 12px;
+      border-radius: 4px;
+      overflow-x: auto;
+      font-size: 12px;
+      max-height: 400px;
+    }
+    .spinner {
+      border: 3px solid #333;
+      border-top: 3px solid #00ff88;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      animation: spin 1s linear infinite;
+      display: inline-block;
+      margin-right: 10px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔍 Redis Data Inspector</h1>
+    <div class="subtitle">
+      Find out why "min 3 personalisiere Lead Outraches" keeps appearing in your AI coaching
+    </div>
+
+    <div class="data-box">
+      <label for="email" style="display: block; margin-bottom: 8px; color: #aaa;">
+        Your Email (used for premium signup):
+      </label>
+      <input
+        type="email"
+        id="email"
+        placeholder="tom@example.com"
+        value=""
+      />
+      <br>
+      <button onclick="inspectRedis()">🔍 Inspect My Redis Data</button>
+      <button onclick="checkPremiumStatus()">👤 Check Premium Status</button>
+    </div>
+
+    <div id="results"></div>
+  </div>
+
+  <script>
+    const TARGET_TASK = "min 3 personalisiere Lead Outraches";
+
+    async function inspectRedis() {
+      const email = document.getElementById('email').value;
+      if (!email) {
+        alert('Please enter your email');
+        return;
+      }
+
+      const results = document.getElementById('results');
+      results.innerHTML = `
+        <div class="loading">
+          <div class="spinner"></div>
+          <span>Inspecting Redis data for ${email}...</span>
+        </div>
+      `;
+
+      try {
+        const response = await fetch(`/api/debug/inspect-user-data?email=${encodeURIComponent(email)}`);
+        const data = await response.json();
+
+        if (!response.ok) {
+          results.innerHTML = `
+            <div class="warning">
+              <h2>❌ Error</h2>
+              <p>${data.error || 'Failed to inspect data'}</p>
+              ${data.searchedKey ? `<p style="color: #666; margin-top: 8px;">Searched: ${data.searchedKey}</p>` : ''}
+            </div>
+          `;
+          return;
+        }
+
+        const { summary, leadRelatedTasks, uncompletedSignals, recentActivity } = data;
+
+        results.innerHTML = `
+          <h2>📊 Redis Data Summary</h2>
+          <div class="data-box">
+            <p><strong>Email:</strong> ${summary.email}</p>
+            <p><strong>Name:</strong> ${summary.firstName}</p>
+            <p><strong>Tier:</strong> ${summary.tier}</p>
+            <p><strong>Total Tasks:</strong> ${summary.totalTasks}</p>
+            <p><strong>Uncompleted Signals:</strong> ${summary.uncompletedSignals}</p>
+            <p><strong>Recent Tasks (7 days):</strong> ${summary.recentTasks}</p>
+          </div>
+
+          ${summary.hasExactTask ? `
+            <div class="warning">
+              <h2>🎯 FOUND THE PROBLEM!</h2>
+              <p>The task <strong>"min 3 personalisiere Lead Outraches"</strong> EXISTS in your Redis data.</p>
+
+              <div class="data-box" style="margin-top: 16px;">
+                <p><strong>Task ID:</strong> ${summary.exactTaskStatus.id}</p>
+                <p><strong>Status:</strong> ${summary.exactTaskStatus.completed ? '✅ Completed' : '❌ Uncompleted'}</p>
+                <p><strong>Age:</strong> ${summary.exactTaskStatus.ageInDays} days old</p>
+                <p><strong>Created:</strong> ${new Date(summary.exactTaskStatus.timestamp).toLocaleString()}</p>
+              </div>
+
+              ${!summary.exactTaskStatus.completed ? `
+                <button class="danger" onclick="removeTask('${email}')">
+                  🗑️ Remove This Task from Redis
+                </button>
+                <p style="color: #888; margin-top: 12px; font-size: 13px;">
+                  This will permanently delete the task from cloud storage.
+                </p>
+              ` : `
+                <div class="success" style="margin-top: 16px;">
+                  <p>✅ Task is marked as COMPLETED in Redis.</p>
+                  <p>If AI still mentions it, there might be a filtering bug.</p>
+                </div>
+              `}
+            </div>
+          ` : `
+            <div class="success">
+              <h2>✅ Task NOT in Redis</h2>
+              <p>The task "min 3 personalisiere Lead Outraches" is NOT in your cloud storage.</p>
+              <p><strong>If AI still mentions it</strong>, it's showing a cached frontend response.</p>
+              <p>Solution: Clear browser cache and reload the app.</p>
+            </div>
+          `}
+
+          ${leadRelatedTasks.length > 0 ? `
+            <h2>📋 All "Lead/Outreach" Related Tasks</h2>
+            ${leadRelatedTasks.map(t => {
+              const isTarget = t.text === TARGET_TASK;
+              return `
+                <div class="task ${isTarget ? 'target' : ''} ${t.completed ? 'completed' : ''}">
+                  <div class="task-text">${isTarget ? '🎯 ' : ''}${t.text}</div>
+                  <div class="task-meta">
+                    ID: ${t.id} | Age: ${t.ageInDays} days
+                    <br>
+                    <span class="badge ${t.completed ? 'completed' : 'uncompleted'}">
+                      ${t.completed ? '✅ Completed' : '❌ Uncompleted'}
+                    </span>
+                    ${t.ageInDays > 7 ? '<span class="badge old">⏰ >7 days old</span>' : ''}
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          ` : ''}
+
+          <h2>⚠️ All Uncompleted Signals (Top 10)</h2>
+          ${uncompletedSignals.length === 0 ? `
+            <div class="success">
+              <p>🎉 No uncompleted signals! You're crushing it.</p>
+            </div>
+          ` : `
+            <div class="data-box">
+              <p style="margin-bottom: 12px;">These are the tasks the AI sees as needing attention:</p>
+              ${uncompletedSignals.map(t => `
+                <div class="task">
+                  <div class="task-text">${t.text}</div>
+                  <div class="task-meta">
+                    Age: ${t.ageInDays} days
+                    ${t.ageInDays > 7 ? '<span class="badge old">⏰ Old task - might appear in AI coaching</span>' : ''}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          `}
+
+          <h2>📈 Recent Activity (Last 7 Days)</h2>
+          <div class="data-box">
+            <p><strong>Tasks in last 7 days:</strong> ${recentActivity.length}</p>
+            ${recentActivity.length > 0 ? `
+              <div style="margin-top: 12px;">
+                ${recentActivity.slice(0, 10).map(t => `
+                  <div style="padding: 8px 0; border-bottom: 1px solid #222;">
+                    <strong>${t.text}</strong>
+                    <span style="color: #666; margin-left: 12px;">
+                      ${t.type} | ${t.completed ? '✅' : '○'}
+                    </span>
+                  </div>
+                `).join('')}
+              </div>
+            ` : '<p style="color: #888;">No recent activity in last 7 days.</p>'}
+          </div>
+        `;
+      } catch (error) {
+        results.innerHTML = `
+          <div class="warning">
+            <h2>❌ Error</h2>
+            <p>Failed to inspect Redis data: ${error.message}</p>
+            <p style="color: #666; margin-top: 8px;">
+              Make sure you're logged in and the email is correct.
+            </p>
+          </div>
+        `;
+      }
+    }
+
+    async function removeTask(email) {
+      if (!confirm(`Are you SURE you want to delete "${TARGET_TASK}" from Redis?\n\nThis cannot be undone.`)) {
+        return;
+      }
+
+      const results = document.getElementById('results');
+      const originalContent = results.innerHTML;
+
+      results.innerHTML = `
+        <div class="loading">
+          <div class="spinner"></div>
+          <span>Removing task from Redis...</span>
+        </div>
+      `;
+
+      try {
+        const response = await fetch('/api/debug/remove-specific-task', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email,
+            taskText: TARGET_TASK
+          })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          results.innerHTML = `
+            <div class="warning">
+              <h2>❌ Removal Failed</h2>
+              <p>${data.error || 'Unknown error'}</p>
+            </div>
+          ` + originalContent;
+          return;
+        }
+
+        results.innerHTML = `
+          <div class="success">
+            <h2>✅ Task Removed Successfully!</h2>
+            <p>Removed ${data.removed} task(s) from Redis cloud storage.</p>
+            <p style="margin-top: 12px;"><strong>Tasks before:</strong> ${data.tasksBefore}</p>
+            <p><strong>Tasks after:</strong> ${data.tasksAfter}</p>
+
+            <div style="margin-top: 20px; padding: 16px; background: #0a1a0a; border-radius: 6px;">
+              <p style="color: #00ff88; font-weight: 500;">✅ Next Steps:</p>
+              <ol style="margin-top: 8px; margin-left: 20px; line-height: 2;">
+                <li>Refresh the Signal/Noise app</li>
+                <li>Wait 2 minutes for cloud sync</li>
+                <li>Ask AI Coach again</li>
+                <li>Should now mention a DIFFERENT task!</li>
+              </ol>
+            </div>
+
+            <button onclick="location.href='/'">↩️ Return to App</button>
+            <button onclick="inspectRedis()">🔄 Re-Inspect Data</button>
+          </div>
+        `;
+      } catch (error) {
+        results.innerHTML = `
+          <div class="warning">
+            <h2>❌ Error</h2>
+            <p>Failed to remove task: ${error.message}</p>
+          </div>
+        ` + originalContent;
+      }
+    }
+
+    async function checkPremiumStatus() {
+      const email = document.getElementById('email').value;
+      if (!email) {
+        alert('Please enter your email');
+        return;
+      }
+
+      const results = document.getElementById('results');
+      results.innerHTML = `
+        <div class="loading">
+          <div class="spinner"></div>
+          <span>Checking premium status...</span>
+        </div>
+      `;
+
+      try {
+        const response = await fetch(`/api/check-premium?email=${encodeURIComponent(email)}`);
+        const data = await response.json();
+
+        if (data.isPremium) {
+          results.innerHTML = `
+            <div class="success">
+              <h2>✅ Premium Active</h2>
+              <p><strong>Email:</strong> ${email}</p>
+              <p><strong>Tier:</strong> ${data.tier || 'foundation/early_adopter'}</p>
+              <p><strong>Status:</strong> ${data.status}</p>
+              <p style="margin-top: 12px; color: #00ff88;">
+                You have access to AI Coach and cloud sync.
+              </p>
+              <button onclick="inspectRedis()" style="margin-top: 16px;">
+                → Inspect Your Redis Data
+              </button>
+            </div>
+          `;
+        } else {
+          results.innerHTML = `
+            <div class="warning">
+              <h2>⚠️ Not Premium</h2>
+              <p>No premium account found for: ${email}</p>
+              <p style="color: #888; margin-top: 12px;">
+                If you recently purchased, wait a few minutes and try again.
+              </p>
+            </div>
+          `;
+        }
+      } catch (error) {
+        results.innerHTML = `
+          <div class="warning">
+            <h2>❌ Error</h2>
+            <p>Failed to check premium status: ${error.message}</p>
+          </div>
+        `;
+      }
+    }
+
+    // Auto-fill email from URL parameter
+    window.onload = () => {
+      const params = new URLSearchParams(window.location.search);
+      const email = params.get('email');
+      if (email) {
+        document.getElementById('email').value = email;
+        inspectRedis();
+      }
+    };
+  </script>
+</body>
+</html>
