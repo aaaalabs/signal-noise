@@ -529,18 +529,58 @@ ${(() => {
     .join('\n') || '- Not enough recent data to detect focus areas';
 })()}
 
-RECENT RECURRING TASKS (<7 days old, uncompleted):
-${completionReality.abandonedSignals?.filter(t => t.ageInDays <= 7).sort((a, b) => (b.occurrences || 0) - (a.occurrences || 0)).map(t => `- "${t.text}" (${t.ageInDays}d old, ${t.occurrences}x occurrences)`).join('\n') || 'None in recent week'}
+UNCOMPLETED TASKS BY RECENCY (coaching priority order):
 
-OLDER LINGERING TASKS (>7 days, mention only if critical):
-${completionReality.abandonedSignals?.filter(t => t.ageInDays > 7).length || 0} tasks waiting >7 days (deprioritize these unless they're truly transformational)
+**TODAY's Uncompleted Signals** (HIGHEST PRIORITY):
+${(() => {
+  const today = new Date().toDateString();
+  const todayUncompleted = recentTasks.filter(t => {
+    return t.type === 'signal' &&
+           !t.completed &&
+           new Date(t.timestamp).toDateString() === today;
+  });
+  return todayUncompleted.length > 0
+    ? todayUncompleted.map(t => `- "${t.text}" ⭐ COACH ON THIS FIRST!`).join('\n')
+    : '- None (good - no uncompleted tasks from today)';
+})()}
 
-COACHING PRIORITY RULES:
-1. PRIMARY FOCUS: Last 3-7 days of activity patterns and strategy
-2. SECONDARY: Recent recurring tasks (<7 days old, appeared 2+ times)
-3. TERTIARY: Mention old tasks (>7 days) ONLY if they represent strategic transformation work
-4. ALWAYS: Give overall strategic insight about user's focus areas and decision patterns
-5. AVOID: Guilt-tripping about week-old tasks - focus on forward momentum
+**This Week's Uncompleted** (0-7 days old):
+${(() => {
+  const thisWeek = recentTasks.filter(t => {
+    const age = (Date.now() - new Date(t.timestamp).getTime()) / (1000 * 60 * 60 * 24);
+    return t.type === 'signal' && !t.completed && age > 0 && age <= 7;
+  });
+  return thisWeek.length > 0
+    ? thisWeek.map(t => {
+        const age = Math.floor((Date.now() - new Date(t.timestamp).getTime()) / (1000 * 60 * 60 * 24));
+        return `- "${t.text}" (${age}d old)`;
+      }).join('\n')
+    : '- None';
+})()}
+
+**Old Backlog Tasks** (>7 days - DO NOT COACH ON THESE):
+${completionReality.abandonedSignals?.filter(t => t.ageInDays > 7).map(t => `- "${t.text}" (${t.ageInDays}d old)`).join('\n') || 'None'}
+
+═══════════════════════════════════════════════════════════════════
+MANDATORY COACHING RULES
+═══════════════════════════════════════════════════════════════════
+
+TASK SELECTION PRIORITY (STRICT ORDER):
+1. ✅ FIRST: Mention TODAY's uncompleted signals (marked with ⭐)
+2. ✅ SECOND: If no TODAY tasks, mention this week's (0-7 days)
+3. ❌ NEVER: Mention tasks >7 days old UNLESS user has zero recent uncompleted tasks
+
+FORBIDDEN BEHAVIORS:
+❌ DO NOT mention tasks from "Old Backlog Tasks" section
+❌ DO NOT focus on 13-day-old tasks when TODAY has uncompleted signals
+❌ DO NOT guilt-trip about ancient tasks
+❌ DO NOT prioritize by "most recurring" if it's an old task
+
+CORRECT BEHAVIOR:
+✅ Look at "TODAY's Uncompleted Signals" section FIRST
+✅ If any tasks are there, mention ONE of those in your message
+✅ Use recent activity patterns for strategic insight
+✅ Old tasks are historical records - they stay uncompleted as testimonies of the past
 
 CRITICAL ANTI-REPETITION RULE:
 - Timestamp: ${new Date().toISOString()}
