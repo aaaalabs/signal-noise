@@ -41,35 +41,6 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
         October 2025
       </div>
 
-      {/* Disclaimer */}
-      <div style={{
-        padding: '1.5rem',
-        backgroundColor: 'rgba(255, 136, 0, 0.05)',
-        border: '1px solid rgba(255, 136, 0, 0.2)',
-        marginBottom: '3rem'
-      }}>
-        <h3 style={{
-          color: '#ff8800',
-          fontSize: '1rem',
-          fontWeight: '500',
-          marginBottom: '0.75rem'
-        }}>
-          {isGerman ? 'WICHTIGER HINWEIS' : 'IMPORTANT DISCLAIMER'}
-        </h3>
-        <p style={{
-          fontSize: '0.9rem',
-          lineHeight: '1.6',
-          color: '#ddd',
-          fontWeight: '300'
-        }}>
-          {isGerman ? (
-            <>Dieses Produktivitätssystem ist inspiriert von Online-Inhalten, die verschiedenen Wirtschaftsführern zugeschrieben wurden. Wir können nicht alle ursprünglichen Quellen verifizieren. Die hier diskutierten Prinzipien basieren jedoch auf über 100 Jahren verifizierter Produktivitätsforschung, von der Ivy Lee-Methode von 1918 bis zur modernen Neurowissenschaft.</>
-          ) : (
-            <>This productivity system is inspired by content circulating online that has been attributed to various business leaders. We cannot verify all original sources. However, the principles discussed here are grounded in over 100 years of verified productivity research, from the 1918 Ivy Lee Method to modern neuroscience.</>
-          )}
-        </p>
-      </div>
-
       {/* Hero Image */}
       <div style={{
         margin: '3rem 0',
@@ -1698,10 +1669,33 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
         </div>
       </div>
 
+      {/* Disclaimer - Moved to end */}
+      <div style={{
+        padding: '1.5rem',
+        backgroundColor: 'rgba(255, 136, 0, 0.03)',
+        border: '1px solid rgba(255, 136, 0, 0.15)',
+        marginTop: '3rem',
+        marginBottom: '2rem',
+        borderRadius: '8px'
+      }}>
+        <p style={{
+          fontSize: '0.85rem',
+          lineHeight: '1.6',
+          color: '#888',
+          fontWeight: '300',
+          fontStyle: 'italic'
+        }}>
+          {isGerman ? (
+            <><strong style={{ color: '#ff8800' }}>Hinweis zur Quellenherkunft:</strong> Dieses Produktivitätssystem ist inspiriert von Online-Inhalten, die verschiedenen Wirtschaftsführern zugeschrieben wurden. Wir können nicht alle ursprünglichen Quellen verifizieren. Die hier diskutierten Prinzipien basieren jedoch auf über 100 Jahren verifizierter Produktivitätsforschung, von der Ivy Lee-Methode von 1918 bis zur modernen Neurowissenschaft. Alle Behauptungen wurden mit mindestens zwei unabhängigen Quellen gegengeprüft.</>
+          ) : (
+            <><strong style={{ color: '#ff8800' }}>Note on source attribution:</strong> This productivity system is inspired by content circulating online that has been attributed to various business leaders. We cannot verify all original sources. However, the principles discussed here are grounded in over 100 years of verified productivity research, from the 1918 Ivy Lee Method to modern neuroscience. Every claim has been cross-referenced with at least two independent sources.</>
+          )}
+        </p>
+      </div>
+
       {/* Article Info */}
       <div style={{
         borderTop: '1px solid #222',
-        marginTop: '3rem',
         paddingTop: '2rem',
         textAlign: 'center'
       }}>
