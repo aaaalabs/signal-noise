@@ -27,6 +27,27 @@ export default async function handler(req, res) {
       });
     }
 
+    // DIAGNOSTIC LOGGING - Track what data AI actually sees
+    const diagnostics = {
+      timestamp: new Date().toISOString(),
+      userEmail,
+      firstName: payload.firstName,
+      abandonedSignalsCount: payload.deepTaskAnalysis?.completionReality?.abandonedSignals?.length || 0,
+      abandonedSignals: payload.deepTaskAnalysis?.completionReality?.abandonedSignals?.slice(0, 3).map(t => ({
+        text: t.text,
+        ageInDays: t.ageInDays,
+        occurrences: t.occurrences
+      })) || [],
+      recentTasksCount: payload.history?.recentTasks?.length || 0,
+      recentTasks: payload.history?.recentTasks?.slice(0, 5).map(t => ({
+        text: t.text,
+        type: t.type,
+        completed: t.completed
+      })) || []
+    };
+
+    console.log('🔍 PersonalAI Request Diagnostics:', JSON.stringify(diagnostics, null, 2));
+
     // Verify premium access for PersonalAI
     const isDev = process.env.NODE_ENV === 'development' || process.env.VERCEL_ENV !== 'production';
     const isDevUser = userEmail === 'dev@signal-noise.test';
