@@ -432,11 +432,20 @@ ${recentTasks.map(t => `- "${t.text}" (${t.type}) ${t.completed ? '✓' : '○'}
 TODAY COMPLETED:
 ${completedToday.map(t => `- "${t.text}"`).join('\n') || 'Nothing completed yet'}
 
-ABANDONED SIGNALS (>3 days):
-${completionReality.abandonedSignals?.map(t => `- "${t.text}" (${t.ageInDays}d old)`).join('\n') || 'None'}
+ABANDONED SIGNALS (>3 days, sorted by occurrence count):
+${completionReality.abandonedSignals?.sort((a, b) => (b.occurrences || 0) - (a.occurrences || 0)).map(t => `- "${t.text}" (${t.ageInDays}d old, appeared ${t.occurrences || 1}x) ${t.occurrences > 3 ? '⚠️ RECURRING PATTERN!' : ''}`).join('\n') || 'None'}
+
+MOST RECURRING UNCOMPLETED TASK:
+${completionReality.abandonedSignals?.length > 0 ? (() => {
+  const mostRecurring = completionReality.abandonedSignals.sort((a, b) => (b.occurrences || 0) - (a.occurrences || 0))[0];
+  return `"${mostRecurring.text}" - appeared ${mostRecurring.occurrences}x over ${mostRecurring.ageInDays} days (FOCUS HERE!)`;
+})() : 'None'}
 
 OLDEST UNFINISHED:
 ${completionReality.oldestUncompletedSignal ? `"${completionReality.oldestUncompletedSignal.text}" - ${completionReality.oldestUncompletedSignal.ageInDays} days old` : 'None'}
+
+COACHING PRIORITY:
+If you see a RECURRING PATTERN task (appeared 3+times), mention it BY NAME in your message as the primary focus. This is what they're avoiding!
 
 Analyze ${firstName}'s patterns and provide personalized insights with specific interventions for right now (${timeOfDay} at ${hour}:00).`;
 }

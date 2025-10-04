@@ -238,7 +238,8 @@ export function buildDeepTaskAnalysis(tasks) {
     return age > 3;
   }).map(t => ({
     text: t.text,
-    ageInDays: Math.floor((Date.now() - new Date(t.timestamp).getTime()) / (1000 * 60 * 60 * 24))
+    ageInDays: Math.floor((Date.now() - new Date(t.timestamp).getTime()) / (1000 * 60 * 60 * 24)),
+    occurrences: t.metadata?.totalOccurrences || 1
   }));
 
   // Get oldest uncompleted signal
