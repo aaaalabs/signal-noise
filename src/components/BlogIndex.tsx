@@ -146,7 +146,7 @@ export const blogPosts: BlogPost[] = [
     readTime: '20 min',
     keywords: ['three things productivity', 'transformational tasks', 'Ivy Lee method', 'compound effect', 'deep work'],
     publishDate: '2025-10-04',
-    isPublished: false
+    isPublished: true
   }
 ];
 

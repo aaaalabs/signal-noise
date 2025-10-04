@@ -97,5 +97,13 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://signal-noise.app/blog/signal-vs-noise-philosophy" />
     <xhtml:link rel="alternate" hreflang="de" href="https://signal-noise.app/blog/signal-vs-noise-philosophy" />
   </url>
+  <url>
+    <loc>https://signal-noise.app/blog/three-things-productivity</loc>
+    <lastmod>2025-10-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://signal-noise.app/blog/three-things-productivity" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://signal-noise.app/blog/three-things-productivity" />
+  </url>
 
 </urlset>

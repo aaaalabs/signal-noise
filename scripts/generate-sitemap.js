@@ -58,6 +58,11 @@ const blogPosts = [
     slug: 'building-signal-noise-story',
     publishDate: '2025-11-10',
     isPublished: false
+  },
+  {
+    slug: 'three-things-productivity',
+    publishDate: '2025-10-04',
+    isPublished: true
   }
 ];
 
