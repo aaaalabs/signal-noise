@@ -103,8 +103,12 @@ Return a personalized coaching message.`);
       { role: 'user', content: userPrompt }
     ];
 
-    // Call our secure API endpoint instead of Groq directly
-    const response = await fetch('/api/ai-coach', {
+    // Call different API endpoint based on mode
+    const apiEndpoint = options?.isPersonalMode
+      ? '/api/personal-ai-coach'  // Enhanced AI with full task analysis
+      : '/api/ai-coach';            // Pattern AI with simple prompts
+
+    const response = await fetch(apiEndpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -112,7 +116,8 @@ Return a personalized coaching message.`);
       body: JSON.stringify({
         messages,
         userEmail: premiumStatus.email,
-        accessToken: premiumStatus.subscriptionId || 'legacy-token' // Temporary for MVP
+        accessToken: premiumStatus.subscriptionId || 'legacy-token', // Temporary for MVP
+        payload: options?.isPersonalMode ? payload : undefined  // Send full payload for Personal AI
       }),
     });
 
