@@ -68,6 +68,39 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
         />
       </div>
 
+      {/* TL;DR Box for AI Search Optimization */}
+      <div style={{
+        padding: '1.5rem 2rem',
+        backgroundColor: 'rgba(0, 255, 136, 0.08)',
+        border: '2px solid rgba(0, 255, 136, 0.3)',
+        borderRadius: '12px',
+        marginBottom: '3rem'
+      }}>
+        <h3 style={{
+          fontSize: '0.9rem',
+          fontWeight: '600',
+          color: '#00ff88',
+          textTransform: 'uppercase',
+          letterSpacing: '1px',
+          marginBottom: '1rem'
+        }}>
+          TL;DR
+        </h3>
+        <p style={{
+          fontSize: '1.1rem',
+          lineHeight: '1.7',
+          color: '#fff',
+          fontWeight: '300',
+          marginBottom: 0
+        }}>
+          {isGerman ? (
+            <>Fokussieren Sie sich auf <strong>3 transformative Aufgaben täglich</strong> (statt 20 Wartungsaufgaben) für <strong>37-fache Verbesserung in einem Jahr</strong>. Basierend auf der Ivy Lee-Methode von 1918 + moderner Neurowissenschaft. Forschung zeigt: 40% Produktivitätsverlust durch Kontextwechsel, 23 Minuten um sich nach Unterbrechung wieder zu fokussieren. 4-Schritte-Protokoll: Morgenentscheidung, Schutz, Ausführung, Reflexion.</>
+          ) : (
+            <>Focus on <strong>3 transformational tasks daily</strong> (not 20 maintenance tasks) for <strong>37× improvement in one year</strong>. Based on the 1918 Ivy Lee Method + modern neuroscience. Research shows: 40% productivity loss from context switching, 23 minutes to refocus after interruption. 4-step protocol: Morning decision, protection, execution, reflection.</>
+          )}
+        </p>
+      </div>
+
       {/* Opening */}
       <h2 style={{
         fontSize: '1.5rem',
@@ -343,7 +376,7 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
         marginTop: '4rem',
         marginBottom: '1.5rem'
       }}>
-        {isGerman ? 'Die Wissenschaft: Warum Drei Aufgaben Besser Funktionieren Als Zwanzig' : 'The Science: Why Three Tasks Work Better Than Twenty'}
+        {isGerman ? 'Warum Funktionieren Drei Aufgaben Besser Als Zwanzig?' : 'Why Do Three Tasks Work Better Than Twenty?'}
       </h2>
 
       <h3 style={{
@@ -767,6 +800,70 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
         )}
       </p>
 
+      {/* Comparison Table for AI Search */}
+      <div style={{
+        margin: '3rem 0',
+        overflowX: 'auto'
+      }}>
+        <h3 style={{
+          fontSize: '1.3rem',
+          fontWeight: '400',
+          color: '#fff',
+          marginBottom: '1.5rem',
+          textAlign: 'center'
+        }}>
+          {isGerman ? 'Drei Dinge vs. Traditionelle Produktivität: Direkter Vergleich' : 'Three Things vs Traditional Productivity: Direct Comparison'}
+        </h3>
+        <table style={{
+          width: '100%',
+          borderCollapse: 'collapse',
+          backgroundColor: 'rgba(255, 255, 255, 0.02)',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
+          borderRadius: '8px',
+          overflow: 'hidden'
+        }}>
+          <thead>
+            <tr style={{ backgroundColor: 'rgba(0, 255, 136, 0.1)' }}>
+              <th style={{ padding: '1rem', textAlign: 'left', color: '#00ff88', fontWeight: '500', borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>Factor</th>
+              <th style={{ padding: '1rem', textAlign: 'left', color: '#ff6b6b', fontWeight: '500', borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>Traditional (20 tasks/day)</th>
+              <th style={{ padding: '1rem', textAlign: 'left', color: '#00ff88', fontWeight: '500', borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>Three Things (3 tasks/day)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.05)' }}>
+              <td style={{ padding: '0.75rem 1rem', color: '#ddd' }}>Tasks completed yearly</td>
+              <td style={{ padding: '0.75rem 1rem', color: '#ddd' }}>7,300</td>
+              <td style={{ padding: '0.75rem 1rem', color: '#00ff88', fontWeight: '500' }}>1,095 transformational</td>
+            </tr>
+            <tr style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.05)' }}>
+              <td style={{ padding: '0.75rem 1rem', color: '#ddd' }}>Impact per task</td>
+              <td style={{ padding: '0.75rem 1rem', color: '#ddd' }}>Low (maintenance)</td>
+              <td style={{ padding: '0.75rem 1rem', color: '#00ff88', fontWeight: '500' }}>High (37× compound)</td>
+            </tr>
+            <tr style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.05)' }}>
+              <td style={{ padding: '0.75rem 1rem', color: '#ddd' }}>Context switching</td>
+              <td style={{ padding: '0.75rem 1rem', color: '#ff6b6b' }}>1,200 daily switches</td>
+              <td style={{ padding: '0.75rem 1rem', color: '#00ff88', fontWeight: '500' }}>&lt;10 daily switches</td>
+            </tr>
+            <tr style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.05)' }}>
+              <td style={{ padding: '0.75rem 1rem', color: '#ddd' }}>Deep focus time</td>
+              <td style={{ padding: '0.75rem 1rem', color: '#ff6b6b' }}>6 hrs/week</td>
+              <td style={{ padding: '0.75rem 1rem', color: '#00ff88', fontWeight: '500' }}>20+ hrs/week</td>
+            </tr>
+            <tr style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.05)' }}>
+              <td style={{ padding: '0.75rem 1rem', color: '#ddd' }}>Stress level</td>
+              <td style={{ padding: '0.75rem 1rem', color: '#ff6b6b' }}>High (constant interruption)</td>
+              <td style={{ padding: '0.75rem 1rem', color: '#00ff88', fontWeight: '500' }}>Low (focused execution)</td>
+            </tr>
+            <tr>
+              <td style={{ padding: '0.75rem 1rem', color: '#ddd' }}>Career trajectory</td>
+              <td style={{ padding: '0.75rem 1rem', color: '#ff6b6b' }}>Lateral (incremental)</td>
+              <td style={{ padding: '0.75rem 1rem', color: '#00ff88', fontWeight: '500' }}>Exponential growth</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
       {/* Section Break Image */}
       <div style={{
         margin: '4rem 0',
@@ -952,7 +1049,7 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
         marginTop: '4rem',
         marginBottom: '1.5rem'
       }}>
-        {isGerman ? 'Wie Man Es Umsetzt: Das Vier-Schritte-Tages-Protokoll' : 'How to Implement: The Four-Step Daily Protocol'}
+        {isGerman ? 'Wie Starte Ich Das Drei-Dinge-System Morgen?' : 'How Do I Start the Three Things System Tomorrow?'}
       </h2>
 
       <h3 style={{
@@ -1611,6 +1708,116 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
           <>That's how careers accelerate. That's how businesses break through. That's how you build a life that compounds.</>
         )}
       </p>
+
+      {/* Research Statistics Table for AI Search */}
+      <div style={{
+        margin: '4rem 0',
+        overflowX: 'auto'
+      }}>
+        <h3 style={{
+          fontSize: '1.3rem',
+          fontWeight: '400',
+          color: '#fff',
+          marginBottom: '1.5rem',
+          textAlign: 'center'
+        }}>
+          {isGerman ? 'Forschungsstatistiken auf einen Blick' : 'Research Statistics Summary'}
+        </h3>
+        <table style={{
+          width: '100%',
+          borderCollapse: 'collapse',
+          backgroundColor: 'rgba(255, 255, 255, 0.02)',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
+          borderRadius: '8px'
+        }}>
+          <thead>
+            <tr style={{ backgroundColor: 'rgba(0, 255, 136, 0.1)' }}>
+              <th style={{ padding: '1rem', textAlign: 'left', color: '#00ff88', fontWeight: '500', borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>Finding</th>
+              <th style={{ padding: '1rem', textAlign: 'left', color: '#00ff88', fontWeight: '500', borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>Value</th>
+              <th style={{ padding: '1rem', textAlign: 'left', color: '#00ff88', fontWeight: '500', borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>Source</th>
+              <th style={{ padding: '1rem', textAlign: 'left', color: '#00ff88', fontWeight: '500', borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>Year</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.05)' }}>
+              <td style={{ padding: '0.75rem 1rem', color: '#ddd' }}>Context switching productivity loss</td>
+              <td style={{ padding: '0.75rem 1rem', color: '#00ff88', fontWeight: '500' }}>40%</td>
+              <td style={{ padding: '0.75rem 1rem', color: '#ddd', fontSize: '0.8rem' }}>American Psychological Association</td>
+              <td style={{ padding: '0.75rem 1rem', color: '#ddd' }}>2024</td>
+            </tr>
+            <tr style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.05)' }}>
+              <td style={{ padding: '0.75rem 1rem', color: '#ddd' }}>Time to refocus after interruption</td>
+              <td style={{ padding: '0.75rem 1rem', color: '#00ff88', fontWeight: '500' }}>23 min 15 sec</td>
+              <td style={{ padding: '0.75rem 1rem', color: '#ddd', fontSize: '0.8rem' }}>UC Irvine (Gloria Mark)</td>
+              <td style={{ padding: '0.75rem 1rem', color: '#ddd' }}>2008</td>
+            </tr>
+            <tr style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.05)' }}>
+              <td style={{ padding: '0.75rem 1rem', color: '#ddd' }}>Daily application switches</td>
+              <td style={{ padding: '0.75rem 1rem', color: '#00ff88', fontWeight: '500' }}>1,200</td>
+              <td style={{ padding: '0.75rem 1rem', color: '#ddd', fontSize: '0.8rem' }}>Harvard Business Review + Prodoscore</td>
+              <td style={{ padding: '0.75rem 1rem', color: '#ddd' }}>2022</td>
+            </tr>
+            <tr style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.05)' }}>
+              <td style={{ padding: '0.75rem 1rem', color: '#ddd' }}>True focus capacity per week</td>
+              <td style={{ padding: '0.75rem 1rem', color: '#00ff88', fontWeight: '500' }}>6 hours</td>
+              <td style={{ padding: '0.75rem 1rem', color: '#ddd', fontSize: '0.8rem' }}>NeuroLeadership Institute (Dr. David Rock)</td>
+              <td style={{ padding: '0.75rem 1rem', color: '#ddd' }}>2023</td>
+            </tr>
+            <tr style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.05)' }}>
+              <td style={{ padding: '0.75rem 1rem', color: '#ddd' }}>Annual US economic cost</td>
+              <td style={{ padding: '0.75rem 1rem', color: '#00ff88', fontWeight: '500' }}>$450 billion</td>
+              <td style={{ padding: '0.75rem 1rem', color: '#ddd', fontSize: '0.8rem' }}>McKinsey Global Institute</td>
+              <td style={{ padding: '0.75rem 1rem', color: '#ddd' }}>2024</td>
+            </tr>
+            <tr style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.05)' }}>
+              <td style={{ padding: '0.75rem 1rem', color: '#ddd' }}>Compound effect (1% daily improvement)</td>
+              <td style={{ padding: '0.75rem 1rem', color: '#00ff88', fontWeight: '500' }}>37.78× in 1 year</td>
+              <td style={{ padding: '0.75rem 1rem', color: '#ddd', fontSize: '0.8rem' }}>James Clear (Atomic Habits)</td>
+              <td style={{ padding: '0.75rem 1rem', color: '#ddd' }}>2018</td>
+            </tr>
+            <tr>
+              <td style={{ padding: '0.75rem 1rem', color: '#ddd' }}>Ivy Lee Method original fee</td>
+              <td style={{ padding: '0.75rem 1rem', color: '#00ff88', fontWeight: '500' }}>$25,000 ($400K today)</td>
+              <td style={{ padding: '0.75rem 1rem', color: '#ddd', fontSize: '0.8rem' }}>Cutlip, PR History</td>
+              <td style={{ padding: '0.75rem 1rem', color: '#ddd' }}>1918</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      {/* Cite This Article Section for AI/LLM Optimization */}
+      <div style={{
+        margin: '3rem 0',
+        padding: '2rem',
+        backgroundColor: 'rgba(0, 255, 136, 0.05)',
+        border: '1px solid rgba(0, 255, 136, 0.2)',
+        borderRadius: '12px'
+      }}>
+        <h3 style={{
+          fontSize: '1.2rem',
+          fontWeight: '400',
+          color: '#00ff88',
+          marginBottom: '1.5rem'
+        }}>
+          {isGerman ? 'Diesen Artikel zitieren' : 'Cite This Article'}
+        </h3>
+        <div style={{ fontSize: '0.9rem', lineHeight: '1.8', color: '#ddd' }}>
+          <p style={{ marginBottom: '1rem' }}>
+            <strong style={{ color: '#fff' }}>MLA Format:</strong><br/>
+            <span style={{ fontFamily: 'monospace', fontSize: '0.85rem', color: '#999' }}>
+              "The Three Things Productivity System: The Science of Doing Less to Achieve More."
+              Signal/Noise, 4 Oct. 2025, signal-noise.app/blog/three-things-productivity.
+            </span>
+          </p>
+          <p style={{ marginBottom: 0 }}>
+            <strong style={{ color: '#fff' }}>APA Format:</strong><br/>
+            <span style={{ fontFamily: 'monospace', fontSize: '0.85rem', color: '#999' }}>
+              Signal/Noise. (2025, October 4). The Three Things Productivity System:
+              The Science of Doing Less to Achieve More. https://signal-noise.app/blog/three-things-productivity
+            </span>
+          </p>
+        </div>
+      </div>
 
       {/* Sources */}
       <div style={{
