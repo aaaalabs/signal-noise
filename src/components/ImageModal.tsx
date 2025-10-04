@@ -8,7 +8,7 @@ interface ImageModalProps {
   caption?: string;
 }
 
-export default function ImageModal({ isOpen, onClose, imageSrc, imageAlt, caption }: ImageModalProps) {
+export default function ImageModal({ isOpen, onClose, imageSrc, imageAlt }: ImageModalProps) {
   const [imageSize, setImageSize] = useState<{ width: number; height: number } | null>(null);
 
   // Load image to get dimensions
@@ -61,10 +61,11 @@ export default function ImageModal({ isOpen, onClose, imageSrc, imageAlt, captio
           backgroundColor: 'rgba(0, 0, 0, 0.95)', /* Nearly opaque for focus */
           display: 'flex',
           justifyContent: 'center',
-          alignItems: 'center',
+          alignItems: 'flex-start',
           zIndex: 1000,
-          padding: '20px',
-          cursor: 'pointer'
+          padding: '60px 20px 20px',
+          cursor: 'pointer',
+          overflowY: 'auto'
         }}
         onClick={onClose}
       >
@@ -72,11 +73,10 @@ export default function ImageModal({ isOpen, onClose, imageSrc, imageAlt, captio
         <div
           style={{
             position: 'relative',
-            maxWidth: isTall ? '60vw' : isVertical ? '75vw' : '95vw',
-            maxHeight: '95vh',
+            width: isTall ? '70vw' : isVertical ? '80vw' : '95vw',
+            maxWidth: '1200px',
             cursor: 'default',
-            display: 'flex',
-            flexDirection: 'column'
+            margin: '0 auto'
           }}
           onClick={(e) => e.stopPropagation()} // Prevent closing when clicking image
         >
@@ -109,48 +109,19 @@ export default function ImageModal({ isOpen, onClose, imageSrc, imageAlt, captio
             ×
           </button>
 
-          {/* Image */}
+          {/* Image - Full size, scrollable */}
           <img
             src={imageSrc}
             alt={imageAlt}
             style={{
-              width: isTall ? '60vw' : isVertical ? '75vw' : 'auto',
+              width: '100%',
               height: 'auto',
-              maxWidth: '95vw',
-              maxHeight: '90vh',
-              objectFit: 'contain',
+              display: 'block',
               borderRadius: '12px',
               border: '1px solid #333',
-              boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5)',
-              cursor: 'zoom-in'
+              boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5)'
             }}
-            title="Click to view full resolution"
           />
-
-          {/* Caption */}
-          {caption && (
-            <div style={{
-              backgroundColor: 'rgba(0, 0, 0, 0.8)',
-              color: '#ffffff',
-              padding: '15px 20px',
-              borderRadius: '0 0 12px 12px',
-              position: 'absolute',
-              bottom: 0,
-              left: 0,
-              right: 0,
-              textAlign: 'center'
-            }}>
-              <p style={{
-                fontSize: '0.9rem',
-                fontWeight: '300',
-                margin: 0,
-                fontStyle: 'italic',
-                lineHeight: '1.4'
-              }}>
-                {caption}
-              </p>
-            </div>
-          )}
         </div>
       </div>
     </>
