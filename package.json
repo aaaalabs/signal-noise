@@ -15,7 +15,10 @@
     "test:webhook": "node test-stripe-webhook.js",
     "test:scenarios": "node test-stripe-scenarios.js",
     "test:purchase": "node test-complete-purchase.js",
-    "test:all": "npm run test:redis && npm run test:stripe"
+    "test:all": "npm run test:redis && npm run test:stripe",
+    "benchmark": "node benchmark/cli.js",
+    "benchmark:quick": "node benchmark/cli.js --quick",
+    "benchmark:report": "node benchmark/cli.js --report"
   },
   "dependencies": {
     "@mendable/firecrawl-js": "^4.3.5",

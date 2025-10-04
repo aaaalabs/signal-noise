@@ -1,0 +1,6 @@
+# Benchmark results (don't commit test data)
+results/*.json
+results/*.html
+
+# Keep directory structure
+!results/.gitkeep
