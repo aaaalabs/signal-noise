@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delegation Decision Matrix - Signal/Noise</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 15mm;
+        }
+
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            body {
+                margin: 0;
+                padding: 0;
+            }
+
+            .no-print {
+                display: none;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.5;
+            color: #1a1a1a;
+            background: white;
+            font-size: 10pt;
+        }
+
+        .container {
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 15mm;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #00ff88;
+            padding-bottom: 6mm;
+            margin-bottom: 8mm;
+        }
+
+        .header h1 {
+            font-size: 24pt;
+            font-weight: 300;
+            color: #1a1a1a;
+            margin-bottom: 2mm;
+        }
+
+        .header .subtitle {
+            font-size: 10pt;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* Flowchart */
+        .flowchart {
+            margin-bottom: 10mm;
+        }
+
+        .flow-node {
+            margin-bottom: 4mm;
+            page-break-inside: avoid;
+        }
+
+        .question-box {
+            background: linear-gradient(135deg, #f0fff8 0%, #e6f7ff 100%);
+            border: 3px solid #00ff88;
+            border-radius: 3mm;
+            padding: 5mm;
+            margin-bottom: 3mm;
+        }
+
+        .question-number {
+            display: inline-block;
+            width: 8mm;
+            height: 8mm;
+            border-radius: 50%;
+            background: #00ff88;
+            color: #1a1a1a;
+            text-align: center;
+            line-height: 8mm;
+            font-weight: 600;
+            font-size: 11pt;
+            margin-right: 3mm;
+        }
+
+        .question-text {
+            font-size: 14pt;
+            font-weight: 500;
+            color: #1a1a1a;
+            display: inline;
+        }
+
+        .answers {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4mm;
+            margin-top: 4mm;
+        }
+
+        .answer-path {
+            border: 2px solid;
+            border-radius: 2mm;
+            padding: 4mm;
+            text-align: center;
+        }
+
+        .answer-path.yes {
+            border-color: #00ff88;
+            background: #f0fff8;
+        }
+
+        .answer-path.no {
+            border-color: #ff6b6b;
+            background: #fff5f5;
+        }
+
+        .answer-label {
+            font-size: 12pt;
+            font-weight: 600;
+            margin-bottom: 2mm;
+        }
+
+        .answer-path.yes .answer-label {
+            color: #00cc6a;
+        }
+
+        .answer-path.no .answer-label {
+            color: #cc5555;
+        }
+
+        .answer-action {
+            font-size: 9pt;
+            color: #444;
+            margin-bottom: 2mm;
+        }
+
+        .answer-result {
+            font-size: 11pt;
+            font-weight: 600;
+            padding: 2mm;
+            border-radius: 2mm;
+            margin-top: 2mm;
+        }
+
+        .answer-path.yes .answer-result {
+            background: #00ff88;
+            color: #1a1a1a;
+        }
+
+        .answer-path.no .answer-result {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .arrow-down {
+            text-align: center;
+            font-size: 24pt;
+            color: #00ff88;
+            margin: 2mm 0;
+        }
+
+        /* Task Entry */
+        .task-entry {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 3mm;
+            padding: 5mm;
+            margin-bottom: 6mm;
+        }
+
+        .task-entry-title {
+            font-size: 11pt;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 3mm;
+        }
+
+        .task-input-row {
+            display: flex;
+            align-items: center;
+            gap: 3mm;
+            margin-bottom: 3mm;
+        }
+
+        .task-input-label {
+            font-size: 9pt;
+            color: #666;
+            width: 30mm;
+        }
+
+        .task-input-field {
+            flex: 1;
+            border-bottom: 1px solid #ddd;
+            padding: 2mm 0;
+            min-height: 8mm;
+        }
+
+        /* Decision Record */
+        .decision-record {
+            border: 2px solid #00ff88;
+            border-radius: 3mm;
+            padding: 4mm;
+            margin-top: 6mm;
+        }
+
+        .decision-record-title {
+            font-size: 11pt;
+            font-weight: 600;
+            color: #00cc6a;
+            margin-bottom: 3mm;
+        }
+
+        .decision-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3mm;
+        }
+
+        .decision-box {
+            border: 1px solid #e0e0e0;
+            border-radius: 2mm;
+            padding: 3mm;
+        }
+
+        .decision-box-title {
+            font-size: 9pt;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 2mm;
+        }
+
+        .decision-list {
+            font-size: 8pt;
+            color: #666;
+        }
+
+        .decision-list-item {
+            padding: 1mm 0;
+            border-bottom: 1px dotted #e0e0e0;
+        }
+
+        .footer {
+            margin-top: 8mm;
+            padding-top: 3mm;
+            border-top: 1px solid #e0e0e0;
+            text-align: center;
+            font-size: 7pt;
+            color: #999;
+        }
+
+        .footer strong {
+            color: #00ff88;
+        }
+
+        .print-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #00ff88;
+            color: #1a1a1a;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .print-button:hover {
+            background: #00dd77;
+        }
+    </style>
+</head>
+<body>
+    <button class="print-button no-print" onclick="window.print()">📄 Print / Save as PDF</button>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Delegation Decision Matrix</h1>
+            <p class="subtitle">Protect your Three Things by delegating everything else</p>
+        </div>
+
+        <!-- Task to Analyze -->
+        <div class="task-entry">
+            <div class="task-entry-title">📋 Task to Analyze:</div>
+            <div class="task-input-row">
+                <div class="task-input-label">Task name:</div>
+                <div class="task-input-field"></div>
+            </div>
+            <div class="task-input-row">
+                <div class="task-input-label">Current owner:</div>
+                <div class="task-input-field"></div>
+            </div>
+            <div class="task-input-row">
+                <div class="task-input-label">Time required:</div>
+                <div class="task-input-field"></div>
+            </div>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="flow-node">
+            <div class="question-box">
+                <span class="question-number">1</span>
+                <span class="question-text">Can this task be ELIMINATED entirely?</span>
+            </div>
+
+            <div class="answers">
+                <div class="answer-path yes">
+                    <div class="answer-label">✓ YES</div>
+                    <div class="answer-action">This task exists out of habit, not necessity</div>
+                    <div class="answer-result">ELIMINATE IT</div>
+                </div>
+
+                <div class="answer-path no">
+                    <div class="answer-label">✗ NO</div>
+                    <div class="answer-action">Task is genuinely necessary</div>
+                    <div class="answer-result">GO TO Q2 →</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="arrow-down">↓</div>
+
+        <!-- Question 2 -->
+        <div class="flow-node">
+            <div class="question-box">
+                <span class="question-number">2</span>
+                <span class="question-text">Can this task be AUTOMATED with technology?</span>
+            </div>
+
+            <div class="answers">
+                <div class="answer-path yes">
+                    <div class="answer-label">✓ YES</div>
+                    <div class="answer-action">Repetitive, rule-based, or data-driven task</div>
+                    <div class="answer-result">AUTOMATE IT</div>
+                </div>
+
+                <div class="answer-path no">
+                    <div class="answer-label">✗ NO</div>
+                    <div class="answer-action">Requires human judgment</div>
+                    <div class="answer-result">GO TO Q3 →</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="arrow-down">↓</div>
+
+        <!-- Question 3 -->
+        <div class="flow-node">
+            <div class="question-box">
+                <span class="question-number">3</span>
+                <span class="question-text">Can this task be DELEGATED to someone else?</span>
+            </div>
+
+            <div class="answers">
+                <div class="answer-path yes">
+                    <div class="answer-label">✓ YES</div>
+                    <div class="answer-action">Someone else could do this with brief training</div>
+                    <div class="answer-result">DELEGATE IT</div>
+                </div>
+
+                <div class="answer-path no">
+                    <div class="answer-label">✗ NO</div>
+                    <div class="answer-action">Requires your specific expertise</div>
+                    <div class="answer-result">GO TO Q4 →</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="arrow-down">↓</div>
+
+        <!-- Question 4 -->
+        <div class="flow-node">
+            <div class="question-box">
+                <span class="question-number">4</span>
+                <span class="question-text">Can this task be BATCHED with similar tasks?</span>
+            </div>
+
+            <div class="answers">
+                <div class="answer-path yes">
+                    <div class="answer-label">✓ YES</div>
+                    <div class="answer-action">Process multiple similar tasks together efficiently</div>
+                    <div class="answer-result">BATCH IT</div>
+                </div>
+
+                <div class="answer-path no">
+                    <div class="answer-label">✗ NO</div>
+                    <div class="answer-action">Unique task requiring individual attention and your expertise</div>
+                    <div class="answer-result">THIS IS A THREE THINGS CANDIDATE ✓</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Decision Record -->
+        <div class="decision-record">
+            <div class="decision-record-title">✅ Decision Record</div>
+
+            <div class="decision-grid">
+                <div class="decision-box">
+                    <div class="decision-box-title">ELIMINATE (Q1=Yes)</div>
+                    <div class="decision-list">
+                        <div class="decision-list-item">____________________</div>
+                        <div class="decision-list-item">____________________</div>
+                        <div class="decision-list-item">____________________</div>
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-box-title">AUTOMATE (Q2=Yes)</div>
+                    <div class="decision-list">
+                        <div class="decision-list-item">____________________</div>
+                        <div class="decision-list-item">____________________</div>
+                        <div class="decision-list-item">____________________</div>
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-box-title">DELEGATE (Q3=Yes)</div>
+                    <div class="decision-list">
+                        <div class="decision-list-item">____________________</div>
+                        <div class="decision-list-item">____________________</div>
+                        <div class="decision-list-item">____________________</div>
+                    </div>
+                </div>
+
+                <div class="decision-box">
+                    <div class="decision-box-title">BATCH (Q4=Yes)</div>
+                    <div class="decision-list">
+                        <div class="decision-list-item">____________________</div>
+                        <div class="decision-list-item">____________________</div>
+                        <div class="decision-list-item">____________________</div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 5mm; padding: 4mm; background: #00ff88; border-radius: 2mm; text-align: center;">
+                <div style="font-size: 11pt; font-weight: 600; color: #1a1a1a; margin-bottom: 2mm;">
+                    🎯 My Three Things (All Q's = NO)
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 2mm;">
+                    <div style="background: white; padding: 3mm; border-radius: 2mm; text-align: left;">
+                        1. _________________________________________________
+                    </div>
+                    <div style="background: white; padding: 3mm; border-radius: 2mm; text-align: left;">
+                        2. _________________________________________________
+                    </div>
+                    <div style="background: white; padding: 3mm; border-radius: 2mm; text-align: left;">
+                        3. _________________________________________________
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Usage Guide -->
+        <div style="background: #f8f9fa; padding: 5mm; border-radius: 3mm; margin-top: 8mm;">
+            <div style="font-size: 12pt; font-weight: 600; color: #1a1a1a; margin-bottom: 3mm;">
+                💡 How to Use This Matrix
+            </div>
+
+            <div style="font-size: 9pt; color: #444; line-height: 1.6;">
+                <p style="margin-bottom: 3mm;">
+                    <strong>Step 1:</strong> List all tasks competing for your attention
+                </p>
+                <p style="margin-bottom: 3mm;">
+                    <strong>Step 2:</strong> Run each task through the 4 questions in order
+                </p>
+                <p style="margin-bottom: 3mm;">
+                    <strong>Step 3:</strong> Take action based on first "Yes" answer:
+                    <br/>• Q1=Yes → Eliminate (stop doing it)
+                    <br/>• Q2=Yes → Automate (set up system/tool)
+                    <br/>• Q3=Yes → Delegate (assign to team member)
+                    <br/>• Q4=Yes → Batch (schedule specific time block)
+                    <br/>• All No → Transformational work = Your Three Things
+                </p>
+                <p style="margin-bottom: 3mm;">
+                    <strong>Step 4:</strong> Protect your Three Things ruthlessly - everything else has been handled
+                </p>
+            </div>
+        </div>
+
+        <!-- Examples Box -->
+        <div style="border: 2px solid #e0e0e0; border-radius: 3mm; padding: 5mm; margin-top: 6mm;">
+            <div style="font-size: 11pt; font-weight: 600; color: #1a1a1a; margin-bottom: 3mm;">
+                📝 Examples by Category
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; font-size: 8pt;">
+                <div>
+                    <div style="font-weight: 600; color: #ff6b6b; margin-bottom: 2mm;">ELIMINATE:</div>
+                    <div style="color: #666;">
+                        • Meetings without clear purpose<br/>
+                        • Reports nobody reads<br/>
+                        • "FYI" email chains<br/>
+                        • Redundant approval steps
+                    </div>
+                </div>
+
+                <div>
+                    <div style="font-weight: 600; color: #ffd700; margin-bottom: 2mm;">AUTOMATE:</div>
+                    <div style="color: #666;">
+                        • Social media posting<br/>
+                        • Report generation<br/>
+                        • Email filtering/labeling<br/>
+                        • Data entry tasks
+                    </div>
+                </div>
+
+                <div>
+                    <div style="font-weight: 600; color: #00ff88; margin-bottom: 2mm;">DELEGATE:</div>
+                    <div style="color: #666;">
+                        • Routine customer support<br/>
+                        • Meeting notes/summaries<br/>
+                        • Research compilation<br/>
+                        • First-draft writing
+                    </div>
+                </div>
+
+                <div>
+                    <div style="font-weight: 600; color: #6b9dff; margin-bottom: 2mm;">BATCH:</div>
+                    <div style="color: #666;">
+                        • Email responses (2× daily)<br/>
+                        • Admin tasks (Friday PM)<br/>
+                        • Quick decisions (Monday AM)<br/>
+                        • Expense approvals (weekly)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>From the <strong>Three Things Productivity System</strong> | Signal/Noise</p>
+            <p style="margin-top: 2mm;">If it's not transformational, eliminate → automate → delegate → batch. In that order.</p>
+        </div>
+    </div>
+</body>
+</html>

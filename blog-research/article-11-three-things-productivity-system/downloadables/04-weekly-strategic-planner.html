@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Strategic Planner - Signal/Noise</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 15mm;
+        }
+
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            body {
+                margin: 0;
+                padding: 0;
+            }
+
+            .no-print {
+                display: none;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.5;
+            color: #1a1a1a;
+            background: white;
+            font-size: 10pt;
+        }
+
+        .container {
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 15mm;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #00ff88;
+            padding-bottom: 6mm;
+            margin-bottom: 8mm;
+        }
+
+        .header h1 {
+            font-size: 24pt;
+            font-weight: 300;
+            color: #1a1a1a;
+            margin-bottom: 2mm;
+        }
+
+        .week-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 4mm;
+            background: #f8f9fa;
+            border-radius: 2mm;
+            margin-bottom: 8mm;
+        }
+
+        .week-info label {
+            font-size: 9pt;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .week-info .input {
+            font-size: 12pt;
+            font-weight: 500;
+            border-bottom: 1px solid #ddd;
+            padding: 2mm 0;
+            min-width: 50mm;
+        }
+
+        .section {
+            margin-bottom: 8mm;
+        }
+
+        .section-title {
+            font-size: 14pt;
+            font-weight: 500;
+            color: #1a1a1a;
+            margin-bottom: 4mm;
+            padding-bottom: 2mm;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 3mm;
+        }
+
+        .section-icon {
+            font-size: 16pt;
+        }
+
+        /* Weekly Three Things */
+        .weekly-things {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4mm;
+            margin-bottom: 6mm;
+        }
+
+        .weekly-thing-card {
+            border: 2px solid #00ff88;
+            border-radius: 3mm;
+            padding: 4mm;
+            background: #f0fff8;
+        }
+
+        .thing-label {
+            font-size: 9pt;
+            color: #00cc6a;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 2mm;
+        }
+
+        .thing-input {
+            width: 100%;
+            border-bottom: 2px solid #00ff88;
+            padding: 2mm 0;
+            font-size: 11pt;
+            color: #1a1a1a;
+            min-height: 12mm;
+        }
+
+        .thing-hint {
+            font-size: 8pt;
+            color: #666;
+            font-style: italic;
+            margin-top: 2mm;
+        }
+
+        /* Daily Grid */
+        .daily-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 2mm;
+            margin-bottom: 6mm;
+        }
+
+        .day-header {
+            text-align: center;
+            font-size: 8pt;
+            font-weight: 600;
+            color: #666;
+            text-transform: uppercase;
+            padding: 2mm;
+            background: #f8f9fa;
+            border-radius: 2mm 2mm 0 0;
+        }
+
+        .day-content {
+            border: 1px solid #e0e0e0;
+            border-radius: 0 0 2mm 2mm;
+            padding: 3mm 2mm;
+            min-height: 40mm;
+            background: white;
+        }
+
+        .day-date {
+            text-align: center;
+            font-size: 7pt;
+            color: #999;
+            margin-bottom: 3mm;
+            padding-bottom: 2mm;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+
+        .task-slot {
+            display: flex;
+            align-items: center;
+            gap: 1mm;
+            margin-bottom: 2mm;
+        }
+
+        .task-checkbox {
+            width: 3mm;
+            height: 3mm;
+            border: 1px solid #666;
+            border-radius: 0.5mm;
+            flex-shrink: 0;
+        }
+
+        .task-line {
+            flex: 1;
+            border-bottom: 1px solid #ddd;
+            min-height: 4mm;
+            font-size: 7pt;
+        }
+
+        /* Energy Matrix */
+        .energy-matrix {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3mm;
+            margin-bottom: 6mm;
+            padding: 4mm;
+            background: #f8f9fa;
+            border-radius: 2mm;
+        }
+
+        .energy-block {
+            text-align: center;
+            padding: 3mm;
+            border-radius: 2mm;
+        }
+
+        .energy-block.peak {
+            background: #d4f4dd;
+            border: 1px solid #00ff88;
+        }
+
+        .energy-block.moderate {
+            background: #fff9e6;
+            border: 1px solid #ffd700;
+        }
+
+        .energy-block.low {
+            background: #ffe6e6;
+            border: 1px solid #ff6b6b;
+        }
+
+        .energy-label {
+            font-size: 8pt;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 2mm;
+        }
+
+        .energy-block.peak .energy-label { color: #00cc6a; }
+        .energy-block.moderate .energy-label { color: #d4a000; }
+        .energy-block.low .energy-label { color: #cc5555; }
+
+        .energy-time {
+            font-size: 9pt;
+            color: #666;
+            margin-bottom: 2mm;
+        }
+
+        .energy-task {
+            font-size: 7pt;
+            color: #444;
+        }
+
+        /* Weekly Reflection */
+        .reflection {
+            border: 2px solid #e0e0e0;
+            border-radius: 3mm;
+            padding: 4mm;
+        }
+
+        .reflection-title {
+            font-size: 10pt;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 3mm;
+        }
+
+        .reflection-box {
+            border: 1px solid #e0e0e0;
+            border-radius: 2mm;
+            padding: 3mm;
+            margin-bottom: 3mm;
+            min-height: 20mm;
+        }
+
+        .reflection-label {
+            font-size: 8pt;
+            color: #666;
+            margin-bottom: 2mm;
+        }
+
+        .footer {
+            margin-top: 6mm;
+            padding-top: 3mm;
+            border-top: 1px solid #e0e0e0;
+            text-align: center;
+            font-size: 7pt;
+            color: #999;
+        }
+
+        .footer strong {
+            color: #00ff88;
+        }
+
+        .print-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #00ff88;
+            color: #1a1a1a;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .print-button:hover {
+            background: #00dd77;
+        }
+    </style>
+</head>
+<body>
+    <button class="print-button no-print" onclick="window.print()">📄 Print / Save as PDF</button>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Weekly Strategic Planner</h1>
+        </div>
+
+        <!-- Week Info -->
+        <div class="week-info">
+            <div>
+                <label>Week of:</label>
+                <div class="input">___ / ___ / _______</div>
+            </div>
+            <div>
+                <label>Week #:</label>
+                <div class="input">______</div>
+            </div>
+        </div>
+
+        <!-- Weekly Three Things -->
+        <div class="section">
+            <h2 class="section-title"><span class="section-icon">🎯</span> This Week's Three Strategic Priorities</h2>
+
+            <div class="weekly-things">
+                <div class="weekly-thing-card">
+                    <div class="thing-label">1. Major Project/Outcome</div>
+                    <div class="thing-input"></div>
+                    <div class="thing-hint">What would make this week successful?</div>
+                </div>
+
+                <div class="weekly-thing-card">
+                    <div class="thing-label">2. Relationship to Deepen</div>
+                    <div class="thing-input"></div>
+                    <div class="thing-hint">Mentor, client, strategic partner</div>
+                </div>
+
+                <div class="weekly-thing-card">
+                    <div class="thing-label">3. Skill/Knowledge to Develop</div>
+                    <div class="thing-input"></div>
+                    <div class="thing-hint">What compounds over time?</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Energy-Task Matrix -->
+        <div class="section">
+            <h2 class="section-title"><span class="section-icon">⚡</span> Energy-Task Alignment Guide</h2>
+
+            <div class="energy-matrix">
+                <div class="energy-block peak">
+                    <div class="energy-label">Peak Energy</div>
+                    <div class="energy-time">8am - 11am</div>
+                    <div class="energy-task">Most difficult transformational task</div>
+                </div>
+
+                <div class="energy-block moderate">
+                    <div class="energy-label">Moderate</div>
+                    <div class="energy-time">11am - 3pm</div>
+                    <div class="energy-task">Strategic execution tasks</div>
+                </div>
+
+                <div class="energy-block low">
+                    <div class="energy-label">Lower Energy</div>
+                    <div class="energy-time">3pm - 5pm</div>
+                    <div class="energy-task">Batch maintenance work</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Daily Three Things Grid -->
+        <div class="section">
+            <h2 class="section-title"><span class="section-icon">📅</span> Daily Three Things</h2>
+
+            <div class="daily-grid">
+                <!-- Monday -->
+                <div>
+                    <div class="day-header">Mon</div>
+                    <div class="day-content">
+                        <div class="day-date">___ / ___</div>
+                        <div class="task-slot">
+                            <div class="task-checkbox"></div>
+                            <div class="task-line"></div>
+                        </div>
+                        <div class="task-slot">
+                            <div class="task-checkbox"></div>
+                            <div class="task-line"></div>
+                        </div>
+                        <div class="task-slot">
+                            <div class="task-checkbox"></div>
+                            <div class="task-line"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tuesday -->
+                <div>
+                    <div class="day-header">Tue</div>
+                    <div class="day-content">
+                        <div class="day-date">___ / ___</div>
+                        <div class="task-slot">
+                            <div class="task-checkbox"></div>
+                            <div class="task-line"></div>
+                        </div>
+                        <div class="task-slot">
+                            <div class="task-checkbox"></div>
+                            <div class="task-line"></div>
+                        </div>
+                        <div class="task-slot">
+                            <div class="task-checkbox"></div>
+                            <div class="task-line"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wednesday -->
+                <div>
+                    <div class="day-header">Wed</div>
+                    <div class="day-content">
+                        <div class="day-date">___ / ___</div>
+                        <div class="task-slot">
+                            <div class="task-checkbox"></div>
+                            <div class="task-line"></div>
+                        </div>
+                        <div class="task-slot">
+                            <div class="task-checkbox"></div>
+                            <div class="task-line"></div>
+                        </div>
+                        <div class="task-slot">
+                            <div class="task-checkbox"></div>
+                            <div class="task-line"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Thursday -->
+                <div>
+                    <div class="day-header">Thu</div>
+                    <div class="day-content">
+                        <div class="day-date">___ / ___</div>
+                        <div class="task-slot">
+                            <div class="task-checkbox"></div>
+                            <div class="task-line"></div>
+                        </div>
+                        <div class="task-slot">
+                            <div class="task-checkbox"></div>
+                            <div class="task-line"></div>
+                        </div>
+                        <div class="task-slot">
+                            <div class="task-checkbox"></div>
+                            <div class="task-line"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Friday -->
+                <div>
+                    <div class="day-header">Fri</div>
+                    <div class="day-content">
+                        <div class="day-date">___ / ___</div>
+                        <div class="task-slot">
+                            <div class="task-checkbox"></div>
+                            <div class="task-line"></div>
+                        </div>
+                        <div class="task-slot">
+                            <div class="task-checkbox"></div>
+                            <div class="task-line"></div>
+                        </div>
+                        <div class="task-slot">
+                            <div class="task-checkbox"></div>
+                            <div class="task-line"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Saturday -->
+                <div>
+                    <div class="day-header">Sat</div>
+                    <div class="day-content">
+                        <div class="day-date">___ / ___</div>
+                        <div class="task-slot">
+                            <div class="task-checkbox"></div>
+                            <div class="task-line"></div>
+                        </div>
+                        <div class="task-slot">
+                            <div class="task-checkbox"></div>
+                            <div class="task-line"></div>
+                        </div>
+                        <div class="task-slot">
+                            <div class="task-checkbox"></div>
+                            <div class="task-line"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sunday -->
+                <div>
+                    <div class="day-header">Sun</div>
+                    <div class="day-content">
+                        <div class="day-date">___ / ___</div>
+                        <div class="task-slot">
+                            <div class="task-checkbox"></div>
+                            <div class="task-line"></div>
+                        </div>
+                        <div class="task-slot">
+                            <div class="task-checkbox"></div>
+                            <div class="task-line"></div>
+                        </div>
+                        <div class="task-slot">
+                            <div class="task-checkbox"></div>
+                            <div class="task-line"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Weekly Stats -->
+        <div class="section">
+            <h2 class="section-title"><span class="section-icon">📊</span> Weekly Performance</h2>
+
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm; margin-bottom: 5mm;">
+                <div style="text-align: center; padding: 3mm; border: 1px solid #e0e0e0; border-radius: 2mm;">
+                    <div style="font-size: 20pt; font-weight: 300; color: #1a1a1a;">__ / 21</div>
+                    <div style="font-size: 8pt; color: #666;">Tasks Completed</div>
+                </div>
+                <div style="text-align: center; padding: 3mm; border: 1px solid #e0e0e0; border-radius: 2mm;">
+                    <div style="font-size: 20pt; font-weight: 300; color: #1a1a1a;">___%</div>
+                    <div style="font-size: 8pt; color: #666;">Completion Rate</div>
+                </div>
+                <div style="text-align: center; padding: 3mm; border: 1px solid #e0e0e0; border-radius: 2mm;">
+                    <div style="font-size: 20pt; font-weight: 300; color: #1a1a1a;">___ hrs</div>
+                    <div style="font-size: 8pt; color: #666;">Deep Work Time</div>
+                </div>
+                <div style="text-align: center; padding: 3mm; border: 1px solid #e0e0e0; border-radius: 2mm;">
+                    <div style="font-size: 20pt; font-weight: 300; color: #1a1a1a;">___</div>
+                    <div style="font-size: 8pt; color: #666;">Perfect Days (3/3)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Weekly Reflection -->
+        <div class="reflection">
+            <div class="reflection-title">🌟 Weekly Reflection</div>
+
+            <div class="reflection-box">
+                <div class="reflection-label">Biggest win this week:</div>
+            </div>
+
+            <div class="reflection-box">
+                <div class="reflection-label">What tried to derail me? (Patterns to eliminate next week)</div>
+            </div>
+
+            <div class="reflection-box">
+                <div class="reflection-label">Next week's strategic priorities (preview):</div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>From the <strong>Three Things Productivity System</strong> | Signal/Noise</p>
+            <p style="margin-top: 2mm;">21 transformational tasks per week = 1,092 per year. Track daily at signal-noise.app</p>
+        </div>
+    </div>
+</body>
+</html>
