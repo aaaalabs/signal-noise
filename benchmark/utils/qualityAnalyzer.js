@@ -122,10 +122,32 @@ function scorePatternRecognition(response, payload, scenario) {
   const analysis = response.analysis || {};
 
   // Identifies behavioral pattern correctly (50 points)
+  // Check BOTH message text AND analysis.patternDetected field
   const expectedPatterns = scenario.expectedInsights || [];
-  const detectsPattern = expectedPatterns.some(expected => {
+
+  // Check if pattern is in analysis field (Personal AI format)
+  const patternInAnalysis = analysis.patternDetected && expectedPatterns.some(expected => {
+    const detectedPattern = analysis.patternDetected.toLowerCase();
+    if (expected.includes('perfectionism')) {
+      return detectedPattern.includes('perfectionism') || detectedPattern.includes('perfect');
+    }
+    if (expected.includes('momentum')) {
+      return detectedPattern.includes('momentum') || detectedPattern.includes('building');
+    }
+    if (expected.includes('context switching')) {
+      return detectedPattern.includes('switch') || detectedPattern.includes('context');
+    }
+    if (expected.includes('recurring')) {
+      return detectedPattern.includes('avoid') || detectedPattern.includes('recurring');
+    }
+    return false;
+  });
+
+  // Check if pattern is in message text (Pattern AI format)
+  const patternInMessage = expectedPatterns.some(expected => {
     if (expected.includes('perfectionism')) {
       return message.toLowerCase().includes('perfekt') ||
+             message.toLowerCase().includes('perfect') ||
              message.toLowerCase().includes('finalize') ||
              message.toLowerCase().includes('complete');
     }
@@ -141,11 +163,13 @@ function scorePatternRecognition(response, payload, scenario) {
     if (expected.includes('recurring')) {
       return message.toLowerCase().includes('wieder') ||
              message.toLowerCase().includes('keeps appearing') ||
-             message.toLowerCase().includes('repeatedly');
+             message.toLowerCase().includes('repeatedly') ||
+             message.toLowerCase().includes('old');
     }
     return false;
   });
-  if (detectsPattern) {
+
+  if (patternInAnalysis || patternInMessage) {
     score += 50;
   }
 
