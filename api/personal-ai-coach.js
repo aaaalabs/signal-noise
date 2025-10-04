@@ -69,7 +69,7 @@ export default async function handler(req, res) {
           }
         ],
         max_tokens: 1000,
-        temperature: 0.3,
+        temperature: 0.8, // Higher temp for varied responses when data unchanged
         response_format: { type: "json_object" } // Force JSON output
       }),
     });
@@ -446,6 +446,13 @@ ${completionReality.oldestUncompletedSignal ? `"${completionReality.oldestUncomp
 
 COACHING PRIORITY:
 If you see a RECURRING PATTERN task (appeared 3+times), mention it BY NAME in your message as the primary focus. This is what they're avoiding!
+
+CRITICAL ANTI-REPETITION RULE:
+- Timestamp: ${new Date().toISOString()}
+- Request ID: ${Math.random().toString(36).substring(7)}
+- VARY YOUR COACHING ANGLE each time - use different examples from the system prompt
+- NEVER repeat the exact same message structure
+- Change your approach: pattern recognition, breaking down, momentum, 2-min start, accountability, simplicity angles
 
 Analyze ${firstName}'s patterns and provide personalized insights with specific interventions for right now (${timeOfDay} at ${hour}:00).`;
 }
