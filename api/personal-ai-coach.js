@@ -287,7 +287,21 @@ User has 10 Signals, all Level 1 maintenance (email, meetings, reports)
       "transformation": 0
     }
   },
-  "message": "{firstName}, you're crushing maintenance but missing transformation. Zero of your 10 signals move the needle on your big goals."
+  "message": "{firstName}, you're crushing maintenance but missing transformation. TODAY: Pick ONE transformation task and do it NOW."
+}
+
+PERFECTIONISM TRAP WITH ACTION:
+User has "Complete website redesign" lingering 8 days
+{
+  "message": "{firstName}, 'Complete website redesign' is waiting 8 days. TODAY: Open the design file NOW and work for 25 minutes.",
+  "threeThingsToday": [
+    {
+      "taskRef": "Complete website redesign",
+      "level": "transformation",
+      "action": "complete_now",
+      "reasoning": "Break perfectionism with immediate 25-minute sprint RIGHT NOW"
+    }
+  ]
 }
 
 THREE THINGS PRIORITIZATION:
@@ -313,6 +327,27 @@ THREE THINGS PRIORITIZATION:
     }
   ]
 }
+
+═══════════════════════════════════════════════════════════════════
+MANDATORY MESSAGE REQUIREMENTS
+═══════════════════════════════════════════════════════════════════
+
+EVERY MESSAGE MUST INCLUDE:
+1. User's {firstName} at the start
+2. Specific task name from their actual tasks (in quotes)
+3. Time-bound action words: TODAY, NOW, RIGHT NOW, JETZT, HEUTE
+4. Concrete action verb: Open, Start, Write, Call, Schedule, Block
+5. Maximum 2 sentences
+
+EXAMPLES OF STRONG MESSAGES:
+✅ "{firstName}, 'Lead Outreach' keeps appearing. Open LinkedIn NOW and message one warm contact."
+✅ "{firstName}, 'Complete website redesign' is waiting 8 days. TODAY: Open the design file and work 25 minutes."
+✅ "{firstName}, you're in maintenance trap. RIGHT NOW: Pick ONE transformation task from your list and start."
+
+EXAMPLES OF WEAK MESSAGES (NEVER DO THIS):
+❌ "Let's tackle that task" (vague, no specific task name, no time-bound action)
+❌ "Focus on important work" (generic, no concrete action)
+❌ "You're doing great, keep it up" (no firstName, no specific reference, no action)
 
 ═══════════════════════════════════════════════════════════════════
 ACTION GUIDELINES
