@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30-Day Transformation Tracker - Signal/Noise</title>
+    <style>
+        @page {
+            size: A4 landscape;
+            margin: 10mm;
+        }
+
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            body {
+                margin: 0;
+                padding: 0;
+            }
+
+            .no-print {
+                display: none;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.4;
+            color: #1a1a1a;
+            background: white;
+            font-size: 9pt;
+        }
+
+        .container {
+            max-width: 297mm;
+            margin: 0 auto;
+            padding: 10mm;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 6mm;
+            border-bottom: 2px solid #00ff88;
+            padding-bottom: 4mm;
+        }
+
+        .header h1 {
+            font-size: 20pt;
+            font-weight: 300;
+            color: #1a1a1a;
+            margin-bottom: 1mm;
+        }
+
+        .header .dates {
+            font-size: 10pt;
+            color: #666;
+        }
+
+        .header .dates strong {
+            color: #00ff88;
+        }
+
+        /* Legend */
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 8mm;
+            margin-bottom: 6mm;
+            padding: 3mm;
+            background: #f8f9fa;
+            border-radius: 2mm;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 2mm;
+            font-size: 8pt;
+        }
+
+        .legend-icon {
+            width: 5mm;
+            height: 5mm;
+            border-radius: 1mm;
+        }
+
+        .legend-icon.green { background: #00ff88; }
+        .legend-icon.yellow { background: #ffd700; }
+        .legend-icon.red { background: #ff6b6b; }
+        .legend-icon.gray { background: #e0e0e0; }
+
+        /* Weeks Grid */
+        .weeks-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4mm;
+            margin-bottom: 6mm;
+        }
+
+        .week-box {
+            border: 1px solid #e0e0e0;
+            border-radius: 2mm;
+            padding: 3mm;
+        }
+
+        .week-header {
+            font-size: 10pt;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 2mm;
+            padding-bottom: 1mm;
+            border-bottom: 1px solid #00ff88;
+        }
+
+        .week-subtitle {
+            font-size: 7pt;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 3mm;
+        }
+
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1.5mm;
+        }
+
+        .day-cell {
+            aspect-ratio: 1;
+            border: 1px solid #ddd;
+            border-radius: 1mm;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: white;
+        }
+
+        .day-number {
+            font-size: 7pt;
+            color: #999;
+            position: absolute;
+            top: 1mm;
+            left: 1mm;
+        }
+
+        .completion-score {
+            font-size: 10pt;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .completion-text {
+            font-size: 6pt;
+            color: #666;
+        }
+
+        /* Stats Summary */
+        .stats-summary {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 3mm;
+            margin-bottom: 6mm;
+        }
+
+        .stat-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 2mm;
+            padding: 3mm;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 18pt;
+            font-weight: 300;
+            color: #1a1a1a;
+            margin-bottom: 1mm;
+        }
+
+        .stat-label {
+            font-size: 7pt;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        /* Weekly Goals */
+        .weekly-goals {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4mm;
+        }
+
+        .goal-box {
+            border: 1px solid #e0e0e0;
+            border-radius: 2mm;
+            padding: 3mm;
+        }
+
+        .goal-box h3 {
+            font-size: 9pt;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 2mm;
+        }
+
+        .goal-input {
+            border-bottom: 1px solid #ddd;
+            padding: 2mm 0;
+            min-height: 8mm;
+            font-size: 8pt;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 6mm;
+            padding-top: 3mm;
+            border-top: 1px solid #e0e0e0;
+            text-align: center;
+            font-size: 7pt;
+            color: #999;
+        }
+
+        .footer strong {
+            color: #00ff88;
+        }
+
+        /* Print button */
+        .print-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #00ff88;
+            color: #1a1a1a;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .print-button:hover {
+            background: #00dd77;
+        }
+
+        @media print {
+            .print-button {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="print-button no-print" onclick="window.print()">📄 Print / Save as PDF</button>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>30-Day Transformation Tracker</h1>
+            <div class="dates">
+                From: <strong>___ / ___ / _______</strong> &nbsp;&nbsp;→&nbsp;&nbsp; To: <strong>___ / ___ / _______</strong>
+            </div>
+        </div>
+
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-icon green"></div>
+                <span>3/3 Tasks (Perfect Day)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-icon yellow"></div>
+                <span>2/3 Tasks (Good Progress)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-icon red"></div>
+                <span>0-1/3 Tasks (Need Focus)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-icon gray"></div>
+                <span>Not Tracked</span>
+            </div>
+        </div>
+
+        <!-- Stats Summary -->
+        <div class="stats-summary">
+            <div class="stat-card">
+                <div class="stat-value">___</div>
+                <div class="stat-label">Total Tasks Completed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">___%</div>
+                <div class="stat-label">Completion Rate</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">___</div>
+                <div class="stat-label">Perfect Days (3/3)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">___</div>
+                <div class="stat-label">Current Streak</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">___</div>
+                <div class="stat-label">Longest Streak</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">___</div>
+                <div class="stat-label">Deep Work Hours</div>
+            </div>
+        </div>
+
+        <!-- 4 Weeks Grid -->
+        <div class="weeks-container">
+            <!-- Week 1 -->
+            <div class="week-box">
+                <div class="week-header">Week 1: Foundation</div>
+                <div class="week-subtitle">Build the habit, protect your time</div>
+                <div class="days-grid">
+                    <div class="day-cell">
+                        <div class="day-number">1</div>
+                        <div class="completion-score">_/3</div>
+                    </div>
+                    <div class="day-cell">
+                        <div class="day-number">2</div>
+                        <div class="completion-score">_/3</div>
+                    </div>
+                    <div class="day-cell">
+                        <div class="day-number">3</div>
+                        <div class="completion-score">_/3</div>
+                    </div>
+                    <div class="day-cell">
+                        <div class="day-number">4</div>
+                        <div class="completion-score">_/3</div>
+                    </div>
+                    <div class="day-cell">
+                        <div class="day-number">5</div>
+                        <div class="completion-score">_/3</div>
+                    </div>
+                    <div class="day-cell">
+                        <div class="day-number">6</div>
+                        <div class="completion-score">_/3</div>
+                    </div>
+                    <div class="day-cell">
+                        <div class="day-number">7</div>
+                        <div class="completion-score">_/3</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Week 2 -->
+            <div class="week-box">
+                <div class="week-header">Week 2: Optimization</div>
+                <div class="week-subtitle">Refine selection, strengthen boundaries</div>
+                <div class="days-grid">
+                    <div class="day-cell">
+                        <div class="day-number">8</div>
+                        <div class="completion-score">_/3</div>
+                    </div>
+                    <div class="day-cell">
+                        <div class="day-number">9</div>
+                        <div class="completion-score">_/3</div>
+                    </div>
+                    <div class="day-cell">
+                        <div class="day-number">10</div>
+                        <div class="completion-score">_/3</div>
+                    </div>
+                    <div class="day-cell">
+                        <div class="day-number">11</div>
+                        <div class="completion-score">_/3</div>
+                    </div>
+                    <div class="day-cell">
+                        <div class="day-number">12</div>
+                        <div class="completion-score">_/3</div>
+                    </div>
+                    <div class="day-cell">
+                        <div class="day-number">13</div>
+                        <div class="completion-score">_/3</div>
+                    </div>
+                    <div class="day-cell">
+                        <div class="day-number">14</div>
+                        <div class="completion-score">_/3</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Week 3 -->
+            <div class="week-box">
+                <div class="week-header">Week 3: Momentum</div>
+                <div class="week-subtitle">Compounding begins, results visible</div>
+                <div class="days-grid">
+                    <div class="day-cell">
+                        <div class="day-number">15</div>
+                        <div class="completion-score">_/3</div>
+                    </div>
+                    <div class="day-cell">
+                        <div class="day-number">16</div>
+                        <div class="completion-score">_/3</div>
+                    </div>
+                    <div class="day-cell">
+                        <div class="day-number">17</div>
+                        <div class="completion-score">_/3</div>
+                    </div>
+                    <div class="day-cell">
+                        <div class="day-number">18</div>
+                        <div class="completion-score">_/3</div>
+                    </div>
+                    <div class="day-cell">
+                        <div class="day-number">19</div>
+                        <div class="completion-score">_/3</div>
+                    </div>
+                    <div class="day-cell">
+                        <div class="day-number">20</div>
+                        <div class="completion-score">_/3</div>
+                    </div>
+                    <div class="day-cell">
+                        <div class="day-number">21</div>
+                        <div class="completion-score">_/3</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Week 4 -->
+            <div class="week-box">
+                <div class="week-header">Week 4: Transformation</div>
+                <div class="week-subtitle">System solidified, breakthrough achieved</div>
+                <div class="days-grid">
+                    <div class="day-cell">
+                        <div class="day-number">22</div>
+                        <div class="completion-score">_/3</div>
+                    </div>
+                    <div class="day-cell">
+                        <div class="day-number">23</div>
+                        <div class="completion-score">_/3</div>
+                    </div>
+                    <div class="day-cell">
+                        <div class="day-number">24</div>
+                        <div class="completion-score">_/3</div>
+                    </div>
+                    <div class="day-cell">
+                        <div class="day-number">25</div>
+                        <div class="completion-score">_/3</div>
+                    </div>
+                    <div class="day-cell">
+                        <div class="day-number">26</div>
+                        <div class="completion-score">_/3</div>
+                    </div>
+                    <div class="day-cell">
+                        <div class="day-number">27</div>
+                        <div class="completion-score">_/3</div>
+                    </div>
+                    <div class="day-cell">
+                        <div class="day-number">28</div>
+                        <div class="completion-score">_/3</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Final Days (if 30-day month) -->
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 3mm; margin-bottom: 6mm;">
+            <div style="display: flex; gap: 2mm;">
+                <div class="day-cell" style="flex: 1;">
+                    <div class="day-number">29</div>
+                    <div class="completion-score">_/3</div>
+                </div>
+                <div class="day-cell" style="flex: 1;">
+                    <div class="day-number">30</div>
+                    <div class="completion-score">_/3</div>
+                </div>
+            </div>
+
+            <div style="border: 2px solid #00ff88; border-radius: 2mm; padding: 3mm; background: #f0fff8;">
+                <div style="font-size: 9pt; font-weight: 600; color: #1a1a1a; margin-bottom: 2mm;">🎯 30-Day Achievement</div>
+                <div style="font-size: 7pt; color: #666; margin-bottom: 2mm;">Total transformational tasks completed:</div>
+                <div style="font-size: 24pt; font-weight: 300; color: #00ff88; text-align: center;">______</div>
+                <div style="font-size: 7pt; color: #666; text-align: center;">out of 90 possible</div>
+            </div>
+        </div>
+
+        <!-- Weekly Goals Tracking -->
+        <div class="weekly-goals">
+            <div class="goal-box">
+                <h3>📊 Key Metrics Improved</h3>
+                <div style="display: flex; flex-direction: column; gap: 2mm;">
+                    <div class="goal-input"></div>
+                    <div class="goal-input"></div>
+                    <div class="goal-input"></div>
+                </div>
+            </div>
+
+            <div class="goal-box">
+                <h3>💡 Top 3 Learnings</h3>
+                <div style="display: flex; flex-direction: column; gap: 2mm;">
+                    <div class="goal-input"></div>
+                    <div class="goal-input"></div>
+                    <div class="goal-input"></div>
+                </div>
+            </div>
+
+            <div class="goal-box">
+                <h3>🚀 Next 30-Day Goals</h3>
+                <div style="display: flex; flex-direction: column; gap: 2mm;">
+                    <div class="goal-input"></div>
+                    <div class="goal-input"></div>
+                    <div class="goal-input"></div>
+                </div>
+            </div>
+
+            <div class="goal-box">
+                <h3>🎯 Biggest Breakthrough</h3>
+                <div style="display: flex; flex-direction: column; gap: 2mm;">
+                    <div class="goal-input" style="min-height: 20mm;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>From the <strong>Three Things Productivity System</strong> | Signal/Noise</p>
+            <p style="margin-top: 1mm;">90 transformational tasks in 30 days = exponential career growth. Continue tracking at signal-noise.app</p>
+        </div>
+    </div>
+</body>
+</html>
