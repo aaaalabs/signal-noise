@@ -76,7 +76,7 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
         textAlign: 'center'
       }}>
         <img
-          src="/blog-research/article-11-three-things-productivity-system/images/hero-image.jpg"
+          src="/blog-images/article-11/hero-image.jpg"
           alt="Three Things Productivity System: Focus on transformational tasks for exponential results"
           style={{
             width: '100%',
@@ -88,7 +88,7 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
             transition: 'transform 0.2s'
           }}
           onClick={() => setModalImage({
-            src: "/blog-research/article-11-three-things-productivity-system/images/hero-image.jpg",
+            src: "/blog-images/article-11/hero-image.jpg",
             alt: "Three Things Productivity System: Focus on transformational tasks for exponential results",
             caption: "The Three Things System: Do less, achieve more through focused execution"
           })}
@@ -214,7 +214,7 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
         textAlign: 'center'
       }}>
         <img
-          src="/blog-research/article-11-three-things-productivity-system/images/section-01-historical-foundation.jpg"
+          src="/blog-images/article-11/section-01-historical-foundation.jpg"
           alt="Historical foundation of the Three Things system from the 1918 Ivy Lee Method"
           style={{
             width: '100%',
@@ -226,7 +226,7 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
             transition: 'transform 0.2s'
           }}
           onClick={() => setModalImage({
-            src: "/blog-research/article-11-three-things-productivity-system/images/section-01-historical-foundation.jpg",
+            src: "/blog-images/article-11/section-01-historical-foundation.jpg",
             alt: "Historical foundation of the Three Things system from the 1918 Ivy Lee Method",
             caption: "The 1918 Ivy Lee Method: The historical foundation of focused productivity"
           })}
@@ -457,7 +457,7 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
         textAlign: 'center'
       }}>
         <img
-          src="/blog-research/article-11-three-things-productivity-system/images/context-switching-cost.jpg"
+          src="/blog-images/article-11/context-switching-cost.jpg"
           alt="The cognitive cost of context switching: 23 minutes lost per interruption"
           style={{
             width: '100%',
@@ -469,7 +469,7 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
             transition: 'transform 0.2s'
           }}
           onClick={() => setModalImage({
-            src: "/blog-research/article-11-three-things-productivity-system/images/context-switching-cost.jpg",
+            src: "/blog-images/article-11/context-switching-cost.jpg",
             alt: "The cognitive cost of context switching: 23 minutes lost per interruption",
             caption: "Context switching penalty: 23 minutes to refocus after each interruption"
           })}
@@ -548,7 +548,7 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
         textAlign: 'center'
       }}>
         <img
-          src="/blog-research/article-11-three-things-productivity-system/images/compound-effect-chart.jpg"
+          src="/blog-images/article-11/compound-effect-chart.jpg"
           alt="The compound effect of 1% daily improvement over time: exponential growth visualization"
           style={{
             width: '100%',
@@ -560,7 +560,7 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
             transition: 'transform 0.2s'
           }}
           onClick={() => setModalImage({
-            src: "/blog-research/article-11-three-things-productivity-system/images/compound-effect-chart.jpg",
+            src: "/blog-images/article-11/compound-effect-chart.jpg",
             alt: "The compound effect of 1% daily improvement over time: exponential growth visualization",
             caption: "1% daily improvement compounds to 37× improvement over one year"
           })}
@@ -747,7 +747,7 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
         textAlign: 'center'
       }}>
         <img
-          src="/blog-research/article-11-three-things-productivity-system/images/three-levels-pyramid.jpg"
+          src="/blog-images/article-11/three-levels-pyramid.jpg"
           alt="The inverted pyramid: Traditional vs Three Things productivity allocation"
           style={{
             width: '100%',
@@ -759,7 +759,7 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
             transition: 'transform 0.2s'
           }}
           onClick={() => setModalImage({
-            src: "/blog-research/article-11-three-things-productivity-system/images/three-levels-pyramid.jpg",
+            src: "/blog-images/article-11/three-levels-pyramid.jpg",
             alt: "The inverted pyramid: Traditional vs Three Things productivity allocation",
             caption: "Invert the pyramid: Focus 70% on transformation, not 5%"
           })}
@@ -802,7 +802,7 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
         textAlign: 'center'
       }}>
         <img
-          src="/blog-research/article-11-three-things-productivity-system/images/section-02-neuroscience.jpg"
+          src="/blog-images/article-11/section-02-neuroscience.jpg"
           alt="The neuroscience behind why the Three Things system works"
           style={{
             width: '100%',
@@ -814,7 +814,7 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
             transition: 'transform 0.2s'
           }}
           onClick={() => setModalImage({
-            src: "/blog-research/article-11-three-things-productivity-system/images/section-02-neuroscience.jpg",
+            src: "/blog-images/article-11/section-02-neuroscience.jpg",
             alt: "The neuroscience behind why the Three Things system works",
             caption: "Brain science validates the Three Things methodology"
           })}
@@ -952,7 +952,7 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
         textAlign: 'center'
       }}>
         <img
-          src="/blog-research/article-11-three-things-productivity-system/images/section-03-implementation.jpg"
+          src="/blog-images/article-11/section-03-implementation.jpg"
           alt="How to implement the Three Things system in your daily workflow"
           style={{
             width: '100%',
@@ -964,7 +964,7 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
             transition: 'transform 0.2s'
           }}
           onClick={() => setModalImage({
-            src: "/blog-research/article-11-three-things-productivity-system/images/section-03-implementation.jpg",
+            src: "/blog-images/article-11/section-03-implementation.jpg",
             alt: "How to implement the Three Things system in your daily workflow",
             caption: "Implementation guide: Make the Three Things system work for you"
           })}
@@ -1161,7 +1161,7 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
         textAlign: 'center'
       }}>
         <img
-          src="/blog-research/article-11-three-things-productivity-system/images/time-blocking-template.jpg"
+          src="/blog-images/article-11/time-blocking-template.jpg"
           alt="Time blocking template: Energy-task matrix for optimal productivity"
           style={{
             width: '100%',
@@ -1173,7 +1173,7 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
             transition: 'transform 0.2s'
           }}
           onClick={() => setModalImage({
-            src: "/blog-research/article-11-three-things-productivity-system/images/time-blocking-template.jpg",
+            src: "/blog-images/article-11/time-blocking-template.jpg",
             alt: "Time blocking template: Energy-task matrix for optimal productivity",
             caption: "Match your energy levels to task complexity for maximum productivity"
           })}
@@ -1308,7 +1308,7 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
         marginBottom: '3rem'
       }}>
         <a
-          href="/blog-research/article-11-three-things-productivity-system/downloadables/three-things-daily-planner.html"
+          href="/downloads/article-11/Daily-Three-Things-Planner.pdf"
           target="_blank"
           rel="noopener noreferrer"
           style={{
@@ -1346,7 +1346,7 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
         </a>
 
         <a
-          href="/blog-research/article-11-three-things-productivity-system/downloadables/weekly-planner.html"
+          href="/downloads/article-11/Weekly-Strategic-Planner.pdf"
           target="_blank"
           rel="noopener noreferrer"
           style={{
@@ -1384,7 +1384,7 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
         </a>
 
         <a
-          href="/blog-research/article-11-three-things-productivity-system/downloadables/energy-task-matrix.html"
+          href="/downloads/article-11/Task-Categorization-Worksheet.pdf"
           target="_blank"
           rel="noopener noreferrer"
           style={{
@@ -1422,7 +1422,7 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
         </a>
 
         <a
-          href="/blog-research/article-11-three-things-productivity-system/downloadables/delegation-decision-matrix.html"
+          href="/downloads/article-11/Delegation-Decision-Matrix.pdf"
           target="_blank"
           rel="noopener noreferrer"
           style={{
@@ -1460,7 +1460,7 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
         </a>
 
         <a
-          href="/blog-research/article-11-three-things-productivity-system/downloadables/30-day-tracker.html"
+          href="/downloads/article-11/30-Day-Transformation-Tracker.pdf"
           target="_blank"
           rel="noopener noreferrer"
           style={{
