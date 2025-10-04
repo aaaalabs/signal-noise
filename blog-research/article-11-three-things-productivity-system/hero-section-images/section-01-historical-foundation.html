@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historical Foundation - Section Image</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 1200px;
+            height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .timeline {
+            width: 100%;
+            padding: 80px;
+            position: relative;
+        }
+
+        .timeline-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent 0%, #00ff88 50%, transparent 100%);
+            transform: translateY(-50%);
+        }
+
+        .events {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .event {
+            text-align: center;
+            flex: 1;
+        }
+
+        .event-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #00ff88;
+            margin: 0 auto 20px;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+        }
+
+        .event-year {
+            font-size: 48px;
+            font-weight: 100;
+            color: #00ff88;
+            margin-bottom: 15px;
+        }
+
+        .event-title {
+            font-size: 20px;
+            color: white;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .event-desc {
+            font-size: 16px;
+            color: #999;
+            line-height: 1.4;
+        }
+
+        .section-title {
+            position: absolute;
+            top: 40px;
+            left: 80px;
+            font-size: 28px;
+            color: white;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-title-highlight {
+            color: #00ff88;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="timeline">
+        <div class="section-title">
+            <span class="section-title-highlight">100 Years</span> of Productivity Science
+        </div>
+
+        <div class="timeline-line"></div>
+
+        <div class="events">
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-year">1918</div>
+                <div class="event-title">Ivy Lee Method</div>
+                <div class="event-desc">6 priority tasks<br/>$25,000 lesson</div>
+            </div>
+
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-year">1994</div>
+                <div class="event-title">Bezos Framework</div>
+                <div class="event-desc">Regret minimization<br/>Amazon founded</div>
+            </div>
+
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-year">2016</div>
+                <div class="event-title">Deep Work</div>
+                <div class="event-desc">Cal Newport<br/>Focus research</div>
+            </div>
+
+            <div class="event">
+                <div class="event-dot"></div>
+                <div class="event-year">2025</div>
+                <div class="event-title">Three Things</div>
+                <div class="event-desc">3 transformational<br/>tasks daily</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

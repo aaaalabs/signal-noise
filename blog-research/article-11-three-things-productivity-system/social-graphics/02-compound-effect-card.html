@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compound Effect - Social Share</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 1200px;
+            height: 630px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            overflow: hidden;
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+            padding: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .header {
+            text-align: center;
+        }
+
+        .stat-title {
+            font-size: 32px;
+            color: rgba(0, 0, 0, 0.6);
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .main-stat {
+            font-size: 180px;
+            font-weight: 100;
+            color: #1a1a1a;
+            line-height: 1;
+        }
+
+        .stat-suffix {
+            font-size: 80px;
+        }
+
+        .explanation {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 0 80px;
+        }
+
+        .explanation-text {
+            font-size: 28px;
+            color: #1a1a1a;
+            font-weight: 400;
+            line-height: 1.4;
+        }
+
+        .highlight {
+            font-weight: 600;
+            color: #00cc6a;
+        }
+
+        .formula {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #666;
+            font-family: 'Courier New', monospace;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .source {
+            font-size: 18px;
+            color: rgba(0, 0, 0, 0.6);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="header">
+            <div class="stat-title">The Compound Effect</div>
+            <div class="main-stat">37<span class="stat-suffix">×</span></div>
+        </div>
+
+        <div class="explanation">
+            <div class="explanation-text">
+                Getting <span class="highlight">1% better every day</span> for a year makes you <span class="highlight">37 times better</span> than when you started
+            </div>
+            <div class="formula">1.01³⁶⁵ = 37.78</div>
+        </div>
+
+        <div class="footer">
+            <div class="source">James Clear, Atomic Habits</div>
+            <div class="logo">Signal/Noise</div>
+        </div>
+    </div>
+</body>
+</html>

@@ -623,7 +623,7 @@ In a year: **1,095 transformational tasks completed**
 ### Business Leader Frameworks:
 3. **Goodreads:** [Warren Buffett verified quotations database](https://www.goodreads.com/author/quotes/756.Warren_Buffett)
 4. **Inc.com (Marcel Schwantes, March 2020):** ["Warren Buffett's Brilliant 25/5 Rule Was Fake. Here's What He Really Said About Achieving Success"](https://www.inc.com/marcel-schwantes/warren-buffett-brilliant-25-5-rule-was-fake-heres-what-he-really-said-about-achieving-success.html)
-5. **Britannica Money:** ["Regret Minimization Framework: How It Works & Strategies"](https://www.britannica.com/money/regret-minimization-framework) (Jeff Bezos method)
+5. **Britannica Money:** ["Regret Minimization Theory"](https://www.britannica.com/money/regret-minimization-theory) (Jeff Bezos decision-making framework)
 6. **Aly Juma (Medium):** ["The Regret Minimization Framework: How Jeff Bezos Made Decisions"](https://alyjuma.medium.com/the-regret-minimization-framework-how-jeff-bezos-made-decisions-4d5a86deaf24)
 7. **Fast Company:** ["Jeff Bezos uses a simple framework for making big decisions"](https://www.fastcompany.com/90662406/jeff-bezos-uses-a-simple-framework-for-making-big-decisions-heres-how-it-works)
 
