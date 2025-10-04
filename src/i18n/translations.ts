@@ -128,6 +128,22 @@ const translations = {
       comeback: "Nach Pause zurückkehren"
     },
 
+    // Features Grid
+    features: {
+      simple: {
+        title: "Einfach",
+        description: "Ein Klick entscheidet: Signal oder Noise. Keine komplexen Listen oder Kategorien."
+      },
+      private: {
+        title: "Privat",
+        description: "Deine Daten bleiben in deinem Browser. Kein Cloud-Zwang, kein Tracking."
+      },
+      focused: {
+        title: "Fokussiert",
+        description: "80% für das Wichtige, 20% für den Rest. Das Pareto-Prinzip als tägliche Praxis."
+      }
+    },
+
     // FAQ Modal
     faqTitle: "FAQ",
     faqSubtitle: "Häufige Fragen & versteckte Features",
@@ -260,6 +276,22 @@ const translations = {
       early_bird: "Task before 9am",
       decision_maker: "Reach 100 tasks",
       comeback: "Return after break"
+    },
+
+    // Features Grid
+    features: {
+      simple: {
+        title: "Simple",
+        description: "One click decides: Signal or Noise. No complex lists or categories."
+      },
+      private: {
+        title: "Private",
+        description: "Your data stays in your browser. No forced cloud, no tracking."
+      },
+      focused: {
+        title: "Focused",
+        description: "80% for what matters, 20% for the rest. The Pareto principle as daily practice."
+      }
     },
 
     // FAQ Modal
