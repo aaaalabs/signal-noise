@@ -325,7 +325,9 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
       onTouchCancel={handlePressCancel}
       className={`task-item ${task.type}-item ${task.completed ? 'completed' : ''} ${isPressed ? 'pressing' : ''} ${isDeleting ? 'deleting' : ''} ${isTransferring ? 'transferring' : ''} ${isSwipingData ? 'swiping' : ''}`}
       style={{
-        opacity: task.completed ? 0.6 : 1, // Fade completed tasks
+        opacity: task.completed
+          ? (task.type === 'signal' ? 0.85 : 0.5) // Signal done: 85%, Noise done: 50%
+          : (task.type === 'signal' ? 1 : 0.65), // Signal active: 100%, Noise active: 65%
         transform: isSwipingData
           ? isMobile
             ? 'scale(0.98)' // Mobile: just scale, no horizontal movement

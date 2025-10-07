@@ -28,7 +28,7 @@ export default function LanguageSwitcher() {
       style={{
         fontSize: '14px',
         fontWeight: 100,
-        color: hasBeenUsed ? 'rgba(255, 255, 255, 0.15)' : 'rgba(255, 255, 255, 0.25)',
+        color: hasBeenUsed ? 'rgba(255, 255, 255, 0.4)' : 'rgba(255, 255, 255, 0.5)',
         opacity: 0,
         animation: 'fadeInLang 2s ease-out 1.2s forwards',
         cursor: 'pointer',
@@ -38,10 +38,10 @@ export default function LanguageSwitcher() {
         letterSpacing: '0.5px'
       }}
       onMouseEnter={(e) => {
-        (e.target as HTMLElement).style.color = 'rgba(255, 255, 255, 0.4)';
+        (e.target as HTMLElement).style.color = 'rgba(255, 255, 255, 0.7)';
       }}
       onMouseLeave={(e) => {
-        (e.target as HTMLElement).style.color = hasBeenUsed ? 'rgba(255, 255, 255, 0.15)' : 'rgba(255, 255, 255, 0.25)';
+        (e.target as HTMLElement).style.color = hasBeenUsed ? 'rgba(255, 255, 255, 0.4)' : 'rgba(255, 255, 255, 0.5)';
       }}
     >
       {currentLanguage.toUpperCase()}
@@ -52,7 +52,7 @@ export default function LanguageSwitcher() {
             opacity: 0;
           }
           to {
-            opacity: 1;
+            opacity: 0.7;
           }
         }
 
