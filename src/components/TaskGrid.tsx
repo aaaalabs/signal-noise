@@ -326,8 +326,8 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
       className={`task-item ${task.type}-item ${task.completed ? 'completed' : ''} ${isPressed ? 'pressing' : ''} ${isDeleting ? 'deleting' : ''} ${isTransferring ? 'transferring' : ''} ${isSwipingData ? 'swiping' : ''}`}
       style={{
         opacity: task.completed
-          ? (task.type === 'signal' ? 0.85 : 0.5) // Signal done: 85%, Noise done: 50%
-          : (task.type === 'signal' ? 1 : 0.65), // Signal active: 100%, Noise active: 65%
+          ? (task.type === 'signal' ? 0.85 : 0.45) // Signal done: 85%, Noise done: 45%
+          : (task.type === 'signal' ? 1 : 0.75), // Signal active: 100%, Noise active: 75%
         transform: isSwipingData
           ? isMobile
             ? 'scale(0.98)' // Mobile: just scale, no horizontal movement

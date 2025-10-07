@@ -42,7 +42,7 @@ export default function BrandIcon({ onLoginClick }: BrandIconProps) {
             opacity: 0;
           }
           to {
-            opacity: 0.6;
+            opacity: 0.8;
           }
         }
       `}</style>
