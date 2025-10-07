@@ -30,7 +30,7 @@ export default function BrandIcon({ onLoginClick }: BrandIconProps) {
         <path
           d="M1 557V1H553V317.562L312.41 557H1Z"
           fill="none"
-          stroke="rgba(0, 255, 136, 0.15)"
+          stroke="rgba(0, 255, 136, 0.7)"
           strokeWidth="1"
           vectorEffect="non-scaling-stroke"
         />
@@ -42,7 +42,7 @@ export default function BrandIcon({ onLoginClick }: BrandIconProps) {
             opacity: 0;
           }
           to {
-            opacity: 0.8;
+            opacity: 1;
           }
         }
       `}</style>
