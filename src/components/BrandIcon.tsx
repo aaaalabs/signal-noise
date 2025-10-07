@@ -1,12 +1,18 @@
+import { useState } from 'react';
+
 interface BrandIconProps {
   onLoginClick?: () => void;
 }
 
 export default function BrandIcon({ onLoginClick }: BrandIconProps) {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <div
       className="brand-icon"
       onClick={onLoginClick}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       style={{
         position: 'absolute',
         top: '20px',
@@ -17,7 +23,8 @@ export default function BrandIcon({ onLoginClick }: BrandIconProps) {
         animation: 'fadeInBrand 2s ease-out 1s forwards',
         zIndex: 1,
         pointerEvents: onLoginClick ? 'auto' : 'none',
-        cursor: onLoginClick ? 'pointer' : 'default'
+        cursor: onLoginClick ? 'pointer' : 'default',
+        transition: 'transform 0.3s ease'
       }}
     >
       <svg
@@ -30,9 +37,10 @@ export default function BrandIcon({ onLoginClick }: BrandIconProps) {
         <path
           d="M1 557V1H553V317.562L312.41 557H1Z"
           fill="none"
-          stroke="rgba(0, 255, 136, 0.7)"
+          stroke={isHovered ? 'rgba(0, 255, 136, 0.8)' : 'rgba(255, 255, 255, 0.4)'}
           strokeWidth="1"
           vectorEffect="non-scaling-stroke"
+          style={{ transition: 'stroke 0.3s ease' }}
         />
       </svg>
 
@@ -42,7 +50,7 @@ export default function BrandIcon({ onLoginClick }: BrandIconProps) {
             opacity: 0;
           }
           to {
-            opacity: 1;
+            opacity: 0.7;
           }
         }
       `}</style>
