@@ -8,9 +8,10 @@ import { generatePatternInsights } from '../utils/patternAnalysis';
 interface AnalyticsProps {
   tasks: Task[];
   history: DayRatio[];
+  commitModeActivatedAt?: string | null;
 }
 
-export default function Analytics({ tasks }: AnalyticsProps) {
+export default function Analytics({ tasks, commitModeActivatedAt }: AnalyticsProps) {
   const t = useTranslation();
   const [isExpanded, setIsExpanded] = useState(() => {
     const stored = localStorage.getItem('analytics_expanded');
@@ -33,8 +34,20 @@ export default function Analytics({ tasks }: AnalyticsProps) {
       );
 
       if (dayTasks.length > 0) {
-        const signals = dayTasks.filter(task => task.type === 'signal').length;
-        ratios.push(Math.round((signals / dayTasks.length) * 100));
+        // Commitment Mode: Only signals matter (completed signals / total signals)
+        if (commitModeActivatedAt) {
+          const signalTasks = dayTasks.filter(task => task.type === 'signal');
+          if (signalTasks.length === 0) {
+            ratios.push(100); // No signals = perfect day
+          } else {
+            const completedSignals = signalTasks.filter(task => task.completed).length;
+            ratios.push(Math.round((completedSignals / signalTasks.length) * 100));
+          }
+        } else {
+          // Normal Mode: signals / total tasks
+          const signals = dayTasks.filter(task => task.type === 'signal').length;
+          ratios.push(Math.round((signals / dayTasks.length) * 100));
+        }
       } else {
         ratios.push(0);
       }
@@ -54,8 +67,23 @@ export default function Analytics({ tasks }: AnalyticsProps) {
       );
 
       if (dayTasks.length > 0) {
-        const signals = dayTasks.filter(task => task.type === 'signal').length;
-        const ratio = (signals / dayTasks.length) * 100;
+        let ratio: number;
+
+        // Commitment Mode: completed signals / total signals
+        if (commitModeActivatedAt) {
+          const signalTasks = dayTasks.filter(task => task.type === 'signal');
+          if (signalTasks.length === 0) {
+            ratio = 100; // No signals = perfect day
+          } else {
+            const completedSignals = signalTasks.filter(task => task.completed).length;
+            ratio = (completedSignals / signalTasks.length) * 100;
+          }
+        } else {
+          // Normal Mode: signals / total tasks
+          const signals = dayTasks.filter(task => task.type === 'signal').length;
+          ratio = (signals / dayTasks.length) * 100;
+        }
+
         if (ratio >= 80) {
           streak++;
         } else {
@@ -74,7 +102,7 @@ export default function Analytics({ tasks }: AnalyticsProps) {
     return streak;
   };
 
-  const dailyRatios = useMemo(() => calculateDailyRatios(), [tasks]);
+  const dailyRatios = useMemo(() => calculateDailyRatios(), [tasks, commitModeActivatedAt]);
   const activeDays = dailyRatios.filter(ratio => ratio > 0);
   const avgRatio = activeDays.length > 0
     ? Math.round(activeDays.reduce((a, b) => a + b, 0) / activeDays.length)

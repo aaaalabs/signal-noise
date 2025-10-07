@@ -1611,6 +1611,7 @@ function AppContent() {
         <Analytics
           tasks={data.tasks}
           history={data.history}
+          commitModeActivatedAt={data.settings.commitModeActivatedAt}
         />
 
         {/* Footer */}
