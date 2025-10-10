@@ -1,6 +1,7 @@
 /**
  * Simple post-build prerendering script
  * Generates static HTML for blog routes with correct canonical tags for SEO
+ * Saves to public/prerender/ for deployment (dist/ is gitignored)
  */
 
 import puppeteer from 'puppeteer';
@@ -13,6 +14,7 @@ import handler from 'serve-handler';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const distDir = path.join(__dirname, '..', 'dist');
+const prerenderDir = path.join(__dirname, '..', 'public', 'prerender');
 const PORT = 5555;
 
 // Published blog routes (keep in sync with BlogIndex.tsx)
@@ -29,6 +31,12 @@ const routes = [
 ];
 
 async function prerender() {
+  // Skip prerendering in Vercel CI environment (prerendered files already in git)
+  if (process.env.VERCEL || process.env.CI) {
+    console.log('⏭️  Skipping prerendering in CI environment (using committed prerendered files)\n');
+    return;
+  }
+
   console.log('🚀 Starting prerendering...\n');
 
   // Start local server
