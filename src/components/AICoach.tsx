@@ -61,6 +61,14 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
       const hasBetaFlag = checkAndActivatePersonalAI();
       const personalAIActive = hasBetaFlag || premiumStatus.isActive;
       setIsPersonalMode(personalAIActive);
+
+      if (personalAIActive) {
+        console.log('✅ Personal AI mode activated', {
+          reason: hasBetaFlag ? 'beta flag' : 'premium default',
+          isPremium: premiumStatus.isActive,
+          email: premiumStatus.email
+        });
+      }
     };
 
     // Initial check
