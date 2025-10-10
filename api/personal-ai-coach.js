@@ -48,6 +48,24 @@ export default async function handler(req, res) {
 
     console.log('🔍 PersonalAI Request Diagnostics:', JSON.stringify(diagnostics, null, 2));
 
+    // Fetch AI memory from separate Redis field (no race condition risk!)
+    const userKey = `sn:u:${userEmail}`;
+    const userData = await redis.hgetall(userKey);
+    let aiMemory = [];
+
+    if (userData?.app_ai_data) {
+      const aiData = typeof userData.app_ai_data === 'string'
+        ? JSON.parse(userData.app_ai_data)
+        : userData.app_ai_data;
+      aiMemory = aiData.aiMemory || [];
+      console.log('🧠 Loaded AI memory:', aiMemory.length, 'entries');
+    } else {
+      console.log('🧠 No AI memory yet - first session');
+    }
+
+    // Add aiMemory to payload for prompt builder
+    payload.aiMemory = aiMemory;
+
     // Verify premium access for PersonalAI
     const isDev = process.env.NODE_ENV === 'development' || process.env.VERCEL_ENV !== 'production';
     const isDevUser = userEmail === 'dev@signal-noise.test';
@@ -146,54 +164,51 @@ export default async function handler(req, res) {
       console.log('💾 Attempting to save AI memory:', personalAIResponse.newObservation);
       try {
         const userKey = `sn:u:${userEmail}`;
+
+        // Get current AI data (separate field - no race condition with app_data!)
         const userData = await redis.hgetall(userKey);
 
         console.log('💾 Retrieved user data for memory save:', {
           userKey,
-          hasUserData: !!userData,
-          hasAppData: !!(userData?.app_data)
+          hasUserData: !!userData
         });
 
-        if (userData && userData.app_data) {
-          // Upstash hgetall returns app_data as object, not string
-          const appData = typeof userData.app_data === 'string'
-            ? JSON.parse(userData.app_data)
-            : userData.app_data;
+        // Get existing AI data
+        let aiData = { aiMemory: [] };
+        if (userData?.app_ai_data) {
+          aiData = typeof userData.app_ai_data === 'string'
+            ? JSON.parse(userData.app_ai_data)
+            : userData.app_ai_data;
+        }
 
-          // Get current memory
-          if (!appData.settings) appData.settings = {};
-          const aiMemory = appData.settings.aiMemory || [];
+        const aiMemory = aiData.aiMemory || [];
+        console.log('💾 Current memory entries:', aiMemory.length);
 
-          console.log('💾 Current memory entries:', aiMemory.length);
+        // Add new observation with date
+        const newMemoryEntry = {
+          date: new Date().toISOString().split('T')[0],
+          ...personalAIResponse.newObservation
+        };
 
-          // Add new observation with date
-          const newMemoryEntry = {
-            date: new Date().toISOString().split('T')[0],
-            ...personalAIResponse.newObservation
-          };
-
-          // Prepend new observation and prune old ones
-          const updatedMemory = [newMemoryEntry, ...aiMemory]
-            .slice(0, 10) // Max 10 entries
-            .filter(m => {
-              // Auto-prune >30 days
-              const age = (Date.now() - new Date(m.date).getTime()) / (1000 * 60 * 60 * 24);
-              return age <= 30;
-            });
-
-          appData.settings.aiMemory = updatedMemory;
-
-          console.log('💾 Updated memory entries:', updatedMemory.length, 'New entry:', newMemoryEntry);
-
-          // Save back to Redis
-          await redis.hset(userKey, {
-            app_data: JSON.stringify(appData)
+        // Prepend new observation and prune old ones
+        const updatedMemory = [newMemoryEntry, ...aiMemory]
+          .slice(0, 10) // Max 10 entries
+          .filter(m => {
+            // Auto-prune >30 days
+            const age = (Date.now() - new Date(m.date).getTime()) / (1000 * 60 * 60 * 24);
+            return age <= 30;
           });
 
-          console.log('✅ AI memory saved successfully to Redis');
-        } else {
-          console.error('❌ Cannot save memory - user data or app_data missing');
-        }
+        aiData.aiMemory = updatedMemory;
+
+        console.log('💾 Updated memory entries:', updatedMemory.length, 'New entry:', newMemoryEntry);
+
+        // Save ONLY app_ai_data field (atomic, no race with app_data!)
+        await redis.hset(userKey, {
+          app_ai_data: JSON.stringify(aiData)
+        });
+
+        console.log('✅ AI memory saved successfully to Redis app_ai_data field');
       } catch (memoryError) {
         // Don't fail the whole request if memory save fails
         console.error('❌ AI memory save failed (non-critical):', memoryError);
