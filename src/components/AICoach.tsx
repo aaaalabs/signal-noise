@@ -199,7 +199,7 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
 
     try {
       // Smart AI Selection: Use Personal AI for premium users, Pattern AI for others
-      if (checkAndActivatePersonalAI()) {
+      if (isPersonalMode) {
         console.log('✨ Using Personal AI for enhanced insights');
         const personalResponse = await getPersonalCoaching(tasks, currentRatio, userName, data);
         if (personalResponse) {
