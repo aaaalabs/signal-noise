@@ -98,7 +98,7 @@ export const blogPosts: BlogPost[] = [
     readTime: '8 min',
     keywords: ['productivity tracking 90 day challenge', 'signal ratio experiment', 'personal productivity case study'],
     publishDate: '2025-10-20',
-    isPublished: false
+    isPublished: true
   },
   {
     slug: 'focus-age-distraction',
