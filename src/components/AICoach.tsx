@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { getCoachAdvice } from '../services/groqService';
 import type { CoachResponse } from '../services/groqService';
 import type { Task, CoachPayload } from '../types';
@@ -43,6 +43,9 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
   const [isPersonalMode, setIsPersonalMode] = useState(false);
   const [lastCoachingTimestamp, setLastCoachingTimestamp] = useState<number>(0);
 
+  // Use ref to track previous personal mode state (for logging changes only)
+  const previousPersonalModeRef = useRef<boolean>(false);
+
   // Check premium status and personal AI mode on mount and listen for changes
   useEffect(() => {
     const checkPremium = () => {
@@ -54,7 +57,6 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
       }
 
       const premiumStatus = checkPremiumStatus();
-      const wasPersonalMode = isPersonalMode;
 
       setIsPremium(premiumStatus.isActive);
 
@@ -64,13 +66,16 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
       const personalAIActive = hasBetaFlag || premiumStatus.isActive;
       setIsPersonalMode(personalAIActive);
 
-      // Only log when state CHANGES (not every interval tick)
-      if (personalAIActive && !wasPersonalMode) {
+      // Only log when mode CHANGES (use ref for reliable prev value)
+      if (personalAIActive && !previousPersonalModeRef.current) {
         console.log('✅ Personal AI mode activated', {
           reason: hasBetaFlag ? 'beta flag' : 'premium default',
           isPremium: premiumStatus.isActive,
           email: premiumStatus.email
         });
+        previousPersonalModeRef.current = true;
+      } else if (!personalAIActive && previousPersonalModeRef.current) {
+        previousPersonalModeRef.current = false;
       }
     };
 
