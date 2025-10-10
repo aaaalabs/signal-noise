@@ -46,17 +46,21 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
   // Check premium status and personal AI mode on mount and listen for changes
   useEffect(() => {
     const checkPremium = () => {
-      // Check for personal AI beta mode
-      const personalAIActive = checkAndActivatePersonalAI();
-      setIsPersonalMode(personalAIActive);
       // Check for beta premium hack (TODO: Remove in production)
       if (checkAndActivateBetaPremium()) {
         setIsPremium(true);
+        setIsPersonalMode(true); // Beta users get Personal AI
         return;
       }
 
       const premiumStatus = checkPremiumStatus();
       setIsPremium(premiumStatus.isActive);
+
+      // Personal AI is now DEFAULT for all premium users
+      // Beta flag can still override if needed
+      const hasBetaFlag = checkAndActivatePersonalAI();
+      const personalAIActive = hasBetaFlag || premiumStatus.isActive;
+      setIsPersonalMode(personalAIActive);
     };
 
     // Initial check
