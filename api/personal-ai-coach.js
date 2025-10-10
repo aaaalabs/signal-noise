@@ -448,7 +448,7 @@ YOUR MEMORY OF ${firstName.toUpperCase()}
 ═══════════════════════════════════════════════════════════════════
 
 ${(() => {
-  const aiMemory = payload.settings?.aiMemory || [];
+  const aiMemory = payload.aiMemory || [];
   if (aiMemory.length === 0) {
     return 'First session - no memory yet. Pay attention to patterns for future sessions.';
   }
