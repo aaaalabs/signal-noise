@@ -54,6 +54,9 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
       }
 
       const premiumStatus = checkPremiumStatus();
+      const wasPremium = isPremium;
+      const wasPersonalMode = isPersonalMode;
+
       setIsPremium(premiumStatus.isActive);
 
       // Personal AI is now DEFAULT for all premium users
@@ -62,7 +65,8 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
       const personalAIActive = hasBetaFlag || premiumStatus.isActive;
       setIsPersonalMode(personalAIActive);
 
-      if (personalAIActive) {
+      // Only log when state CHANGES (not every interval tick)
+      if (personalAIActive && !wasPersonalMode) {
         console.log('✅ Personal AI mode activated', {
           reason: hasBetaFlag ? 'beta flag' : 'premium default',
           isPremium: premiumStatus.isActive,
