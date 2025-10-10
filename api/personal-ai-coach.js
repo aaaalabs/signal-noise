@@ -155,7 +155,10 @@ export default async function handler(req, res) {
         });
 
         if (userData && userData.app_data) {
-          const appData = JSON.parse(userData.app_data);
+          // Upstash hgetall returns app_data as object, not string
+          const appData = typeof userData.app_data === 'string'
+            ? JSON.parse(userData.app_data)
+            : userData.app_data;
 
           // Get current memory
           if (!appData.settings) appData.settings = {};
