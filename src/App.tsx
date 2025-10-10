@@ -1058,10 +1058,26 @@ function AppContent() {
     };
   }, [isPremiumMode, sessionToken, isLoaded, isLoadingFromCloud]);
 
+  // Set canonical URL for homepage
+  useEffect(() => {
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute('href', 'https://signal-noise.app/');
+  }, []);
+
   const handleOnboardingComplete = () => {
     localStorage.setItem(ONBOARDING_KEY, 'true');
     setShowOnboarding(false);
     setIsLoaded(true);
+
+    // Signal prerenderer that page is ready
+    setTimeout(() => {
+      document.dispatchEvent(new Event('render-event'));
+    }, 100);
   };
 
   const triggerAchievementFeedback = (newBadges: any[]) => {

@@ -263,6 +263,11 @@ export default function BlogArticle() {
       script.id = 'article-schema';
       document.head.appendChild(script);
 
+      // Signal prerenderer that page is ready
+      setTimeout(() => {
+        document.dispatchEvent(new Event('render-event'));
+      }, 100);
+
       return () => {
         if (script.parentNode) {
           script.parentNode.removeChild(script);

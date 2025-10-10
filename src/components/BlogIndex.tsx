@@ -190,6 +190,20 @@ export default function BlogIndex() {
         : 'Discover the productivity methods of Steve Jobs, Elon Musk and other visionaries.'
       );
     }
+
+    // Set canonical URL
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute('href', 'https://signal-noise.app/blog');
+
+    // Signal prerenderer that page is ready
+    setTimeout(() => {
+      document.dispatchEvent(new Event('render-event'));
+    }, 100);
   }, [isGerman]);
 
   return (
