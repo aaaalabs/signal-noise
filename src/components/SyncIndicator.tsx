@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { vibrate } from '../utils/haptics';
 import { checkPremiumStatus } from '../services/premiumService';
 import { checkAchievements } from '../utils/achievements';
 import PremiumMenu from './PremiumMenu';
@@ -7,7 +8,6 @@ import type { AppData } from '../types';
 interface SyncIndicatorProps {
   data: AppData;
   onCommitmentModeClick?: () => void;
-}
 
 export default function SyncIndicator({ data, onCommitmentModeClick }: SyncIndicatorProps) {
   const [premiumStatus, setPremiumStatus] = useState(() => checkPremiumStatus());
@@ -20,9 +20,8 @@ export default function SyncIndicator({ data, onCommitmentModeClick }: SyncIndic
 
     if (state === 'success') {
       // Add haptic feedback on mobile
-      if (navigator.vibrate) {
-        navigator.vibrate(10);
-      }
+      vibrate(5);
+        vibrate(10);
 
       // Reset to idle after animation completes
       setTimeout(() => {
@@ -33,7 +32,6 @@ export default function SyncIndicator({ data, onCommitmentModeClick }: SyncIndic
       setTimeout(() => {
         setSyncState('idle');
       }, 3000);
-    }
     // 'syncing' state needs to be manually cleared
   };
 
@@ -71,11 +69,8 @@ export default function SyncIndicator({ data, onCommitmentModeClick }: SyncIndic
           const container = dot.parentElement;
           if (container.style.position !== 'relative') {
             container.style.position = 'relative';
-          }
           container.appendChild(whisper);
           setTimeout(() => whisper.remove(), 2000);
-        }
-      }
     };
 
     return () => {
@@ -125,13 +120,11 @@ export default function SyncIndicator({ data, onCommitmentModeClick }: SyncIndic
             if (syncState === 'idle') { // Only apply hover effects when not animating
               (e.target as HTMLElement).style.opacity = '0.4';
               (e.target as HTMLElement).style.transform = 'scale(1.2)';
-            }
           }}
           onMouseLeave={(e) => {
             if (syncState === 'idle') { // Only apply hover effects when not animating
               (e.target as HTMLElement).style.opacity = showPremiumMenu ? '0.6' : '0.2';
               (e.target as HTMLElement).style.transform = 'scale(1)';
-            }
           }}
         >
           ●
@@ -157,90 +150,67 @@ export default function SyncIndicator({ data, onCommitmentModeClick }: SyncIndic
           0%, 100% {
             opacity: 0.2;
             transform: scale(1);
-          }
           50% {
             opacity: 0.5;
             transform: scale(1.05);
-          }
-        }
 
         @keyframes syncGlow {
           0% {
             opacity: 0.8;
             transform: scale(1.1);
             box-shadow: 0 0 8px var(--signal);
-          }
           100% {
             opacity: 0.2;
             transform: scale(1);
             box-shadow: none;
-          }
-        }
 
         @keyframes syncError {
           0%, 100% { opacity: 0.2; }
           25%, 75% { opacity: 0.4; }
           50% { opacity: 0.2; }
-        }
 
         @keyframes syncChecking {
           0%, 100% {
             opacity: 0.3;
-          }
           50% {
             opacity: 0.4;
-          }
-        }
 
         @keyframes syncReceiving {
           0% {
             opacity: 0.3;
             transform: scale(1);
             box-shadow: none;
-          }
           30% {
             opacity: 0.6;
             transform: scale(1.2);
-          }
           100% {
             opacity: 1;
             transform: scale(1);
             box-shadow: 0 0 4px rgba(0, 255, 136, 0.3);
-          }
-        }
 
         @keyframes deviceWhisper {
           0%, 100% {
             opacity: 0;
             transform: translateX(-50%) translateY(0);
-          }
           50% {
             opacity: 0.3;
             transform: translateX(-50%) translateY(2px);
-          }
-        }
 
         /* Sync state classes for premium dot */
         .premium-dot.sync-syncing {
           animation: syncPulse 1.5s ease-in-out infinite;
-        }
 
         .premium-dot.sync-success {
           animation: syncGlow 2s ease-out forwards;
-        }
 
         .premium-dot.sync-error {
           animation: syncError 1s ease-in-out 3;
-        }
 
         .premium-dot.sync-checking {
           animation: syncChecking 2s ease-in-out infinite;
-        }
 
         .premium-dot.sync-receiving {
           animation: syncReceiving 0.8s ease forwards;
-        }
       `}</style>
     </>
   );
-}

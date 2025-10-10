@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from '../contexts/LanguageContext';
 import type { Task } from '../types';
+import { vibrate } from '../utils/haptics';
 
 interface TaskInputProps {
   onAdd: (text: string, type: 'signal' | 'noise') => void;
@@ -71,17 +72,13 @@ export default function TaskInput({ onAdd, todaySignalCount, tasks }: TaskInputP
         setShowButtons(!isLocked); // Show buttons if not locked
 
         // Haptic feedback
-        if (navigator.vibrate) {
-          navigator.vibrate(5);
-        }
+        vibrate(5);
       } else if (showButtons) {
         // Switch selection with single Tab
         setSelectedType(prev => prev === 'signal' ? 'noise' : 'signal');
 
         // Haptic feedback
-        if (navigator.vibrate) {
-          navigator.vibrate(5);
-        }
+        vibrate(5);
       }
     } else if (e.key === 'ArrowLeft' && showButtons) {
       // Navigate to Signal
@@ -113,9 +110,7 @@ export default function TaskInput({ onAdd, todaySignalCount, tasks }: TaskInputP
       }, 300);
 
       // Haptic feedback
-      if (navigator.vibrate) {
-        navigator.vibrate(10);
-      }
+      vibrate(10);
     }
   };
 

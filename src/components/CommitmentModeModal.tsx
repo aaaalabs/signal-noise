@@ -3,7 +3,6 @@ interface CommitmentModeModalProps {
   show: boolean;
   onClose: () => void;
   onActivate: () => void;
-}
 
 export default function CommitmentModeModal({ show, onClose, onActivate }: CommitmentModeModalProps) {
 
@@ -11,9 +10,8 @@ export default function CommitmentModeModal({ show, onClose, onActivate }: Commi
 
   const handleActivate = () => {
     // Haptic feedback
-    if (navigator.vibrate) {
-      navigator.vibrate(15);
-    }
+    vibrate(5);
+      vibrate(15);
     onActivate();
   };
 
@@ -190,4 +188,3 @@ export default function CommitmentModeModal({ show, onClose, onActivate }: Commi
       </div>
     </div>
   );
-}

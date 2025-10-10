@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { vibrate } from '../utils/haptics';
 import type { AppData } from '../types';
 import AchievementDots from './AchievementDots';
 import { checkPremiumStatus } from '../services/premiumService';
@@ -12,7 +13,6 @@ interface RatioDisplayProps {
   earnedCount: number;
   hasAchievement?: boolean;
   onDataUpdate?: (newData: AppData) => void;
-}
 
 export default function RatioDisplay({ ratio, totalTasks, data, earnedCount, hasAchievement, onDataUpdate }: RatioDisplayProps) {
   const [isManualSyncing, setIsManualSyncing] = useState(false);
@@ -22,11 +22,9 @@ export default function RatioDisplay({ ratio, totalTasks, data, earnedCount, has
 
     if (!premiumStatus.isActive) {
       // Subtle haptic feedback for non-premium users
-      if (navigator.vibrate) {
-        navigator.vibrate(5);
-      }
+      vibrate(5);
+
       return;
-    }
 
     if (isManualSyncing) return; // Prevent double-tap
 
@@ -42,13 +40,11 @@ export default function RatioDisplay({ ratio, totalTasks, data, earnedCount, has
       if (!sessionData.sessionToken) {
         syncError();
         return;
-      }
 
       // Check cloud metadata
       const response = await fetch('/api/sync-meta', {
         headers: {
           'Authorization': `Bearer ${sessionData.sessionToken}`
-        }
       });
 
       if (response.ok) {
@@ -66,7 +62,6 @@ export default function RatioDisplay({ ratio, totalTasks, data, earnedCount, has
         const dataResponse = await fetch('/api/tasks', {
           headers: {
             'Authorization': `Bearer ${sessionData.sessionToken}`
-          }
         });
 
         if (dataResponse.ok) {
@@ -86,22 +81,18 @@ export default function RatioDisplay({ ratio, totalTasks, data, earnedCount, has
           // Update parent component with new data
           if (onDataUpdate) {
             onDataUpdate(cloudData);
-          }
 
           syncSuccess();
 
           // Haptic feedback for success
-          if (navigator.vibrate) {
-            navigator.vibrate(10);
-          }
+          vibrate(5);
+            vibrate(10);
         } else {
           console.error('❌ Manual sync failed to fetch data');
           syncError();
-        }
       } else {
         console.error('❌ Manual sync failed to get metadata');
         syncError();
-      }
     } catch (error) {
       console.error('❌ Manual sync error:', error);
       syncError();
@@ -109,7 +100,6 @@ export default function RatioDisplay({ ratio, totalTasks, data, earnedCount, has
       setIsManualSyncing(false);
       // Return to idle after 2 seconds
       setTimeout(() => syncIdle(), 2000);
-    }
   };
 
   const getRatioClass = () => {
@@ -127,7 +117,6 @@ export default function RatioDisplay({ ratio, totalTasks, data, earnedCount, has
       if (ratio >= 80) return 'optimal';   // Green - reward good choices even without noise
       if (ratio >= 50) return 'warning';   // Orange - encourage progress at 50%+
       return 'neutral';                    // Grey - starting state, no punishment
-    }
 
     // Standard ratio colors when actual choices between signal/noise were made
     if (ratio >= 80) return 'optimal';   // Green
@@ -207,4 +196,3 @@ export default function RatioDisplay({ ratio, totalTasks, data, earnedCount, has
       </div>
     </div>
   );
-}

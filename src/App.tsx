@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import type { Task, AppData } from './types';
 import { useTranslation } from './contexts/LanguageContext';
+import { vibrate } from './utils/haptics';
 import BlogIndex from './components/BlogIndex';
 import BlogArticle from './components/BlogArticle';
 import RatioDisplay from './components/RatioDisplay';
@@ -1133,9 +1134,7 @@ function AppContent() {
     setShowWhisper(true);
 
     // Haptic feedback
-    if (navigator.vibrate) {
-      navigator.vibrate(20);
-    }
+    vibrate(20);
   };
 
   const handleOneTimeSyncToCloud = async (sessionData: SessionData) => {
@@ -1311,9 +1310,7 @@ function AppContent() {
     });
 
     // Haptic feedback on mobile
-    if (navigator.vibrate) {
-      navigator.vibrate(10);
-    }
+    vibrate(10);
   };
 
   const transferTask = (id: number) => {
@@ -1377,9 +1374,7 @@ function AppContent() {
     });
 
     // Haptic feedback on completion toggle
-    if (navigator.vibrate) {
-      navigator.vibrate(8);
-    }
+    vibrate(8);
   };
 
   const getTodayTasks = (): Task[] => {
