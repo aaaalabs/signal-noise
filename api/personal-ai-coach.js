@@ -143,9 +143,16 @@ export default async function handler(req, res) {
 
     // Save AI memory if new observation provided
     if (personalAIResponse.newObservation) {
+      console.log('💾 Attempting to save AI memory:', personalAIResponse.newObservation);
       try {
         const userKey = `sn:u:${userEmail}`;
         const userData = await redis.hgetall(userKey);
+
+        console.log('💾 Retrieved user data for memory save:', {
+          userKey,
+          hasUserData: !!userData,
+          hasAppData: !!(userData?.app_data)
+        });
 
         if (userData && userData.app_data) {
           const appData = JSON.parse(userData.app_data);
@@ -153,6 +160,8 @@ export default async function handler(req, res) {
           // Get current memory
           if (!appData.settings) appData.settings = {};
           const aiMemory = appData.settings.aiMemory || [];
+
+          console.log('💾 Current memory entries:', aiMemory.length);
 
           // Add new observation with date
           const newMemoryEntry = {
@@ -171,17 +180,23 @@ export default async function handler(req, res) {
 
           appData.settings.aiMemory = updatedMemory;
 
+          console.log('💾 Updated memory entries:', updatedMemory.length, 'New entry:', newMemoryEntry);
+
           // Save back to Redis
           await redis.hset(userKey, {
             app_data: JSON.stringify(appData)
           });
 
-          console.log('✅ AI memory saved:', newMemoryEntry);
+          console.log('✅ AI memory saved successfully to Redis');
+        } else {
+          console.error('❌ Cannot save memory - user data or app_data missing');
         }
       } catch (memoryError) {
         // Don't fail the whole request if memory save fails
-        console.error('AI memory save failed (non-critical):', memoryError);
+        console.error('❌ AI memory save failed (non-critical):', memoryError);
       }
+    } else {
+      console.log('ℹ️ No new observation in this response - no memory to save');
     }
 
     res.status(200).json(personalAIResponse);
