@@ -54,7 +54,6 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
       }
 
       const premiumStatus = checkPremiumStatus();
-      const wasPremium = isPremium;
       const wasPersonalMode = isPersonalMode;
 
       setIsPremium(premiumStatus.isActive);
