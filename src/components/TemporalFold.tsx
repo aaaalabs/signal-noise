@@ -1,14 +1,15 @@
 import { useState, useRef } from 'react';
-import { vibrate } from '../utils/haptics';
 import type { Task } from '../types';
 import { useTranslation } from '../contexts/LanguageContext';
 
 interface TemporalFoldProps {
   tasks: Task[];
+}
 
 interface HistoricalTask extends Task {
   daysAgo: number;
   dateLabel: string;
+}
 
 export default function TemporalFold({ tasks }: TemporalFoldProps) {
   const t = useTranslation();
@@ -30,6 +31,7 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
       // Skip today's tasks (they appear in main TaskGrid)
       if (taskDateString === today) {
         return;
+      }
 
       const daysDiff = Math.floor((now.getTime() - taskDate.getTime()) / (1000 * 60 * 60 * 24));
 
@@ -41,12 +43,14 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
           dateLabel = `${daysDiff} ${t.daysAgo || 'days ago'}`;
         } else {
           dateLabel = taskDate.toLocaleDateString();
+        }
 
         historicalTasks.push({
           ...task,
           daysAgo: daysDiff,
           dateLabel
         });
+      }
     });
 
     return historicalTasks.sort((a, b) => a.daysAgo - b.daysAgo);
@@ -54,9 +58,6 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
-    // Optional haptic feedback on mobile
-    vibrate(5);
-
   };
 
   const handleClose = () => {
@@ -69,6 +70,7 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
   historicalTasks.forEach(task => {
     if (!groupedTasks[task.dateLabel]) {
       groupedTasks[task.dateLabel] = [];
+    }
     groupedTasks[task.dateLabel].push(task);
   });
 
@@ -154,3 +156,4 @@ export default function TemporalFold({ tasks }: TemporalFoldProps) {
       </div>
     </div>
   );
+}

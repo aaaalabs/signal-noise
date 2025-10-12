@@ -2,13 +2,13 @@ import { useState, useRef, useEffect } from 'react';
 import type { Task } from '../types';
 import { useTranslation } from '../contexts/LanguageContext';
 import { formatTime } from '../i18n/translations';
-import { vibrate } from '../utils/haptics';
 
 interface TaskGridProps {
   tasks: Task[];
   onTransfer: (id: number) => void;
   onDelete: (id: number) => void;
   onToggleComplete: (id: number) => void;
+}
 
 function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task; onTransfer: (id: number) => void; onDelete: (id: number) => void; onToggleComplete: (id: number) => void }) {
   const t = useTranslation();
@@ -69,18 +69,12 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
   const startDeleteProgress = () => {
     // Don't allow deletion if task is locked
     if (taskLocked) {
-      // Vibrate to indicate locked
-      vibrate(5);
-        vibrate([50, 30, 50]); // Double vibrate pattern
       return;
+    }
     deleteStartTime.current = performance.now();
     setIsDeleting(true);
     setDeleteProgress(0);
     hasMilestoneVibrated.current = false;
-
-    // Initial vibration feedback
-    vibrate(5);
-      vibrate(10);
 
     const updateProgress = () => {
       const elapsed = performance.now() - deleteStartTime.current;
@@ -91,17 +85,14 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
       // Milestone vibration at 50%
       if (progress >= 50 && !hasMilestoneVibrated.current) {
         hasMilestoneVibrated.current = true;
-        vibrate(5);
-
+      }
 
       if (progress >= 100) {
-        // Deletion complete - strong vibration
-        vibrate(5);
-          vibrate(20);
         onDelete(task.id);
         resetDeleteState();
       } else {
         deleteAnimationId.current = requestAnimationFrame(updateProgress);
+      }
     };
 
     deleteAnimationId.current = requestAnimationFrame(updateProgress);
@@ -111,6 +102,7 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
     if (deleteAnimationId.current) {
       cancelAnimationFrame(deleteAnimationId.current);
       deleteAnimationId.current = null;
+    }
     setIsDeleting(false);
     setDeleteProgress(0);
     setIsPressed(false);
@@ -121,6 +113,7 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
     if (tapTimeoutId.current) {
       clearTimeout(tapTimeoutId.current);
       tapTimeoutId.current = null;
+    }
     setTapCount(0);
     setShowTapFeedback(false);
     lastTapTime.current = 0;
@@ -141,13 +134,10 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
     setIsPressed(true);
     setTimeout(() => setIsPressed(false), currentTapCount === 1 ? 150 : currentTapCount === 2 ? 200 : 300);
 
-    // Progressive haptic feedback
-    vibrate(5);
-      navigator.vibrate(currentTapCount === 1 ? 5 : currentTapCount === 2 ? 8 : 15);
-
     // Clear existing timeout
     if (tapTimeoutId.current) {
       clearTimeout(tapTimeoutId.current);
+    }
 
     // Handle double tap for completion
     if (currentTapCount === 2) {
@@ -163,6 +153,7 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
     } else {
       // Set timeout to reset tap count
       tapTimeoutId.current = window.setTimeout(resetTapState, 1000);
+    }
   };
 
   const handlePressStart = (e: React.MouseEvent | React.TouchEvent) => {
@@ -173,6 +164,7 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
       // Don't start deletion or swipe for locked tasks
       setIsPressed(true);
       return;
+    }
 
     // Record touch start position for swipe detection
     if (e.type === 'touchstart') {
@@ -183,6 +175,7 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
       const mouse = e as React.MouseEvent;
       touchStartX.current = mouse.clientX;
       touchStartY.current = mouse.clientY;
+    }
 
     isDragging.current = false;
     setSwipeOffset(0);
@@ -198,6 +191,7 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
       // Only start deletion if THIS SPECIFIC press is still active and not swiping
       if (currentPressId.current === pressId && !isDeleting && !isTransferring && !isDragging.current) {
         startDeleteProgress();
+      }
     }, 150); // 150ms delay before deletion mode starts
   };
 
@@ -214,6 +208,7 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
       // For mouse events, only process if mouse button is down
       if ((e as React.MouseEvent).buttons === 0) return;
       currentX = (e as React.MouseEvent).clientX;
+    }
 
     const deltaX = currentX - touchStartX.current;
     const absDeltaX = Math.abs(deltaX);
@@ -225,6 +220,7 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
         (task.type === 'noise' && deltaX < 0);      // Noise → left only
 
       if (!isValidDirection) return; // Ignore wrong direction swipes
+    }
 
     // Start dragging mode if moved more than 10px horizontally (unless locked)
     if (absDeltaX > 10 && !isDragging.current && !taskLocked) {
@@ -234,11 +230,14 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
       // Cancel deletion if we start swiping
       if (isDeleting) {
         resetDeleteState();
+      }
+    }
 
     if (isDragging.current) {
       // Update swipe offset with some resistance
       const resistance = Math.min(absDeltaX / 100, 1);
       setSwipeOffset(deltaX * resistance);
+    }
   };
 
   const handlePressEnd = (e: React.MouseEvent | React.TouchEvent) => {
@@ -279,6 +278,7 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
     } else {
       // Just reset pressed state if transferring
       setIsPressed(false);
+    }
   };
 
   const handlePressCancel = () => {
@@ -500,6 +500,7 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
       </div>
     </div>
   );
+}
 
 export default function TaskGrid({ tasks, onTransfer, onDelete, onToggleComplete }: TaskGridProps) {
   const t = useTranslation();
@@ -552,57 +553,79 @@ export default function TaskGrid({ tasks, onTransfer, onDelete, onToggleComplete
       <style>{`
         .task-item.pressing {
           opacity: 0.9;
+        }
 
         /* Desktop arrows (horizontal) */
         .arrow-desktop {
           display: inline;
+        }
         .arrow-mobile {
           display: none;
+        }
 
         /* Mobile arrows (vertical) */
         @media (max-width: 600px) {
           .arrow-desktop {
             display: none;
+          }
           .arrow-mobile {
             display: inline;
+          }
+        }
 
         @keyframes pulseArrow {
           0% {
             opacity: 0;
             transform: translateY(-50%) scale(0.8);
+          }
           50% {
             opacity: 1;
             transform: translateY(-50%) scale(1.1);
+          }
           100% {
             opacity: 1;
             transform: translateY(-50%) scale(1);
+          }
+        }
 
         @keyframes elegantFadeCheck {
           0% {
             opacity: 0;
             transform: translateY(-50%) scale(0.6);
+          }
           40% {
             opacity: 1;
             transform: translateY(-50%) scale(1.1);
+          }
           60% {
             opacity: 1;
             transform: translateY(-50%) scale(1);
+          }
           100% {
             opacity: 0;
             transform: translateY(-50%) scale(0.9);
+          }
+        }
 
         /* Subtle directional drift animations - Jony Ive inspired */
         @keyframes subtleUpward {
           0%, 100% {
             transform: translateY(0px);
+          }
           50% {
             transform: translateY(-3px);
+          }
+        }
 
         @keyframes subtleDownward {
           0%, 100% {
             transform: translateY(0px);
+          }
           50% {
             transform: translateY(3px);
+          }
+        }
       `}</style>
     </>
   );
+}

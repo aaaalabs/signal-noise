@@ -2,7 +2,6 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import type { Task, AppData } from './types';
 import { useTranslation } from './contexts/LanguageContext';
-import { vibrate } from './utils/haptics';
 import BlogIndex from './components/BlogIndex';
 import BlogArticle from './components/BlogArticle';
 import RatioDisplay from './components/RatioDisplay';
@@ -1132,9 +1131,6 @@ function AppContent() {
     // Show success whisper
     setWhisperMessage('Commitment Mode activated!');
     setShowWhisper(true);
-
-    // Haptic feedback
-    vibrate(20);
   };
 
   const handleOneTimeSyncToCloud = async (sessionData: SessionData) => {
@@ -1308,9 +1304,6 @@ function AppContent() {
 
       return newData;
     });
-
-    // Haptic feedback on mobile
-    vibrate(10);
   };
 
   const transferTask = (id: number) => {
@@ -1372,9 +1365,6 @@ function AppContent() {
 
       return newData;
     });
-
-    // Haptic feedback on completion toggle
-    vibrate(8);
   };
 
   const getTodayTasks = (): Task[] => {
