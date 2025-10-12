@@ -1103,22 +1103,10 @@ function AppContent() {
 
   const handleCommitmentModeActivation = () => {
     const activationTimestamp = new Date().toISOString();
-    const today = new Date().toDateString();
 
     setData(prev => {
-      // Auto-complete today's noise tasks
-      const updatedTasks = prev.tasks.map(task => {
-        if (task.type === 'noise' &&
-            new Date(task.timestamp).toDateString() === today &&
-            !task.completed) {
-          return { ...task, completed: true };
-        }
-        return task;
-      });
-
       return {
         ...prev,
-        tasks: updatedTasks,
         settings: {
           ...prev.settings,
           commitModeActivatedAt: activationTimestamp
@@ -1275,7 +1263,7 @@ function AppContent() {
       text: text.trim(),
       type,
       timestamp: new Date().toISOString(),
-      completed: type === 'noise' // Auto-complete noise tasks
+      completed: type === 'noise' && !data.settings.commitModeActivatedAt // Auto-complete noise only in normal mode
     };
 
     setData(prev => {
@@ -1308,13 +1296,42 @@ function AppContent() {
 
   const transferTask = (id: number) => {
     setData(prev => {
+      const task = prev.tasks.find(t => t.id === id);
+      if (!task) return prev;
+
+      const now = new Date();
+      const isCommitmentMode = prev.settings.commitModeActivatedAt !== null;
+
+      // Asymmetric lock logic (only in Commitment Mode)
+      if (isCommitmentMode && task.type === 'noise') {
+        // Noise → Signal: Only allowed within 60 seconds of transfer
+        if (task.transferredAt) {
+          const transferTime = new Date(task.transferredAt);
+          const secondsSinceTransfer = (now.getTime() - transferTime.getTime()) / 1000;
+
+          if (secondsSinceTransfer > 60) {
+            // Locked: Can't convert noise back to signal after 60s
+            console.log('🔒 Noise→Signal blocked: More than 60 seconds elapsed');
+            return prev;
+          }
+        }
+      }
+
       const newData = {
         ...prev,
-        tasks: prev.tasks.map(task =>
-          task.id === id ? {
-            ...task,
-            type: (task.type === 'signal' ? 'noise' : 'signal') as 'signal' | 'noise'
-          } : task
+        tasks: prev.tasks.map(t =>
+          t.id === id ? {
+            ...t,
+            type: (t.type === 'signal' ? 'noise' : 'signal') as 'signal' | 'noise',
+            // Signal → Noise: Set transferredAt timestamp & unmark completion (honest accounting)
+            ...(t.type === 'signal' ? {
+              transferredAt: now.toISOString(),
+              completed: false
+            } : {
+              // Noise → Signal: Clear transferredAt (back to normal)
+              transferredAt: undefined
+            })
+          } : t
         )
       };
 

@@ -4,6 +4,7 @@ export interface Task {
   type: 'signal' | 'noise';
   timestamp: string;
   completed: boolean;
+  transferredAt?: string; // Timestamp when Signal→Noise transfer happened (for 60s undo window)
 }
 
 export interface Badge {

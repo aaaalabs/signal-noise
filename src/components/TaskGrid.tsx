@@ -222,8 +222,8 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
       if (!isValidDirection) return; // Ignore wrong direction swipes
     }
 
-    // Start dragging mode if moved more than 10px horizontally (unless locked)
-    if (absDeltaX > 10 && !isDragging.current && !taskLocked) {
+    // Start dragging mode if moved more than 10px horizontally
+    if (absDeltaX > 10 && !isDragging.current) {
       isDragging.current = true;
       setIsSwipingData(true);
 
@@ -251,8 +251,8 @@ function TaskItem({ task, onTransfer, onDelete, onToggleComplete }: { task: Task
       (task.type === 'signal' && swipeOffset > 0) ||
       (task.type === 'noise' && swipeOffset < 0);
 
-    if (isDragging.current && Math.abs(swipeOffset) > 50 && isValidSwipe && !taskLocked) {
-      // Swipe completed - trigger transfer (unless locked)
+    if (isDragging.current && Math.abs(swipeOffset) > 50 && isValidSwipe) {
+      // Swipe completed - trigger transfer (asymmetric lock handled in App.tsx)
       setIsTransferring(true);
 
       setTimeout(() => {
