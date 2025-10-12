@@ -304,6 +304,40 @@ export default function FeedbackModal({ show, onClose }: FeedbackModalProps) {
               />
             </a>
           </div>
+
+          {/* LaunchIgniter Badge */}
+          <div style={{
+            marginTop: '1rem',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '0.75rem'
+          }}>
+            <a
+              href="https://launchigniter.com/product/signal-noise?ref=badge-signal-noise"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-block',
+                transition: 'transform 0.2s ease, opacity 0.2s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'scale(1.05)';
+                e.currentTarget.style.opacity = '0.9';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'scale(1)';
+                e.currentTarget.style.opacity = '1';
+              }}
+            >
+              <img
+                src="https://launchigniter.com/api/badge/signal-noise?theme=dark"
+                alt="Featured on LaunchIgniter"
+                width="212"
+                height="55"
+              />
+            </a>
+          </div>
         </div>
       </div>
     </div>
