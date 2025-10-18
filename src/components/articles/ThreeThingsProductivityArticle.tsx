@@ -362,29 +362,44 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
         flexDirection: 'row'
       }}
       className="image-with-text-layout">
-        <img
-          src="/blog-research/photos/claude-shannon-portrait.jpg"
-          alt={isGerman ? 'Historisches Portrait aus der Ära der frühen Produktivitätswissenschaft' : 'Historical portrait representing the era of early productivity science'}
-          style={{
-            width: '280px',
-            maxWidth: '35%',
-            height: 'auto',
-            borderRadius: '8px',
-            flexShrink: 0,
-            border: '1px solid #333'
-          }}
-          className="portrait-image"
-        />
-        <div style={{ flex: 1, minWidth: 0 }}>
+        <div style={{ width: '280px', maxWidth: '35%', flexShrink: 0 }}>
+          <img
+            src="/blog-research/photos/claude-shannon-portrait.jpg"
+            alt={isGerman ? 'Historisches Portrait aus der Ära der frühen Produktivitätswissenschaft' : 'Historical portrait representing the era of early productivity science'}
+            style={{
+              width: '100%',
+              height: 'auto',
+              borderRadius: '8px',
+              border: '1px solid #333'
+            }}
+            className="portrait-image"
+          />
           <p style={{
-            fontSize: '0.9rem',
+            fontSize: '0.85rem',
             color: '#999',
-            marginTop: 0,
-            marginBottom: '1rem',
-            fontStyle: 'italic'
+            marginTop: '0.75rem',
+            marginBottom: 0,
+            fontStyle: 'italic',
+            lineHeight: '1.5'
           }}>
             {isGerman ? 'Die Ära von 1918, als systematische Produktivitätsmethoden erstmals in der amerikanischen Geschäftswelt auftauchten' : 'The 1918 era when systematic productivity methods first emerged in American business'}
           </p>
+          <p style={{
+            fontSize: '0.85rem',
+            lineHeight: '1.5',
+            color: '#999',
+            marginTop: '1rem',
+            marginBottom: 0,
+            fontWeight: '300'
+          }}>
+            {isGerman ? (
+              <>Das Ergebnis: Nach drei Monaten schickte Schwab Lee einen Scheck über <strong>$25.000</strong> (entspricht heute etwa <strong>$400.000</strong>) und nannte es "die profitabelste Lektion seines Geschäftslebens."</>
+            ) : (
+              <>The result: After three months, Schwab sent Lee a check for <strong>$25,000</strong> (equivalent to approximately <strong>$400,000 today</strong>), calling it "the most profitable lesson of his business life."</>
+            )}
+          </p>
+        </div>
+        <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{
             padding: '1.5rem',
             backgroundColor: 'rgba(0, 255, 136, 0.05)',
@@ -428,20 +443,6 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
               )}
             </ol>
           </div>
-          <p style={{
-            fontSize: '1rem',
-            lineHeight: '1.7',
-            color: '#ddd',
-            marginTop: '1.5rem',
-            marginBottom: 0,
-            fontWeight: '300'
-          }}>
-            {isGerman ? (
-              <>Das Ergebnis: Nach drei Monaten schickte Schwab Lee einen Scheck über <strong>$25.000</strong> (entspricht heute etwa <strong>$400.000</strong>) und nannte es "die profitabelste Lektion seines Geschäftslebens."</>
-            ) : (
-              <>The result: After three months, Schwab sent Lee a check for <strong>$25,000</strong> (equivalent to approximately <strong>$400,000 today</strong>), calling it "the most profitable lesson of his business life."</>
-            )}
-          </p>
         </div>
       </div>
 
