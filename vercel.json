@@ -5,7 +5,7 @@
       "destination": "/api/$1"
     },
     {
-      "source": "/((?!api/.*|downloads/.*|blog-images/.*|sitemap\\.xml|robots\\.txt).*)",
+      "source": "/((?!api/.*|downloads/.*|blog-images/.*|blog-research/.*|sitemap\\.xml|robots\\.txt|.*\\.pdf).*)",
       "destination": "/index.html"
     }
   ],
