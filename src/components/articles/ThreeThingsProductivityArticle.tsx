@@ -10,11 +10,65 @@ interface ArticleProps {
 
 export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProps) {
   const [modalImage, setModalImage] = useState<{src: string, alt: string, caption?: string} | null>(null);
+  const [hoursWorked, setHoursWorked] = useState<string>('8');
+  const [transformationalHours, setTransformationalHours] = useState<string>('');
+  const [showResult, setShowResult] = useState(false);
+  const [ratio, setRatio] = useState(0);
+  const [comparisonText, setComparisonText] = useState('');
+  const [comparisonColor, setComparisonColor] = useState('');
 
   // Navigation logic - determine previous/next articles
   const currentSlug = 'three-things-productivity-system';
   const previousArticle = getPreviousArticle(currentSlug);
   const nextArticle = getNextArticle(currentSlug);
+
+  // Calculator logic
+  const calculateRatio = () => {
+    const worked = parseFloat(hoursWorked) || 0;
+    const transformational = parseFloat(transformationalHours) || 0;
+
+    if (worked === 0) {
+      alert(isGerman ? 'Bitte geben Sie die gearbeiteten Stunden ein' : 'Please enter hours worked');
+      return;
+    }
+
+    if (transformational > worked) {
+      alert(isGerman ? 'Transformationale Stunden können die Gesamtstunden nicht überschreiten' : 'Transformational hours cannot exceed total hours worked');
+      return;
+    }
+
+    const calculatedRatio = (transformational / worked) * 100;
+    setRatio(calculatedRatio);
+
+    let comparison = '';
+    let color = '';
+
+    if (calculatedRatio < 20) {
+      comparison = isGerman
+        ? '⚠️ Unter dem Durchschnitt (typisch: 30%). Fokus auf die tägliche Identifikation Ihrer Drei Dinge.'
+        : '⚠️ Below average (typical: 30%). Focus on identifying your Three Things daily.';
+      color = '#ff6b6b';
+    } else if (calculatedRatio >= 20 && calculatedRatio < 50) {
+      comparison = isGerman
+        ? '📊 Durchschnittsbereich (30-50%). Guter Start—streben Sie 70%+ an, indem Sie Fokuszeit schützen.'
+        : '📊 Average range (30-50%). Good start—aim for 70%+ by protecting focus time.';
+      color = '#ddd';
+    } else if (calculatedRatio >= 50 && calculatedRatio < 70) {
+      comparison = isGerman
+        ? '✨ Überdurchschnittlich (50-70%). Sie sind auf dem richtigen Weg—schützen Sie weiter Ihre Drei Dinge.'
+        : "✨ Above average (50-70%). You're on track—keep protecting your Three Things.";
+      color = '#00ff88';
+    } else {
+      comparison = isGerman
+        ? '🚀 Außergewöhnlich (70%+)! Sie arbeiten mit der optimalen Drei-Dinge-Ratio.'
+        : "🚀 Exceptional (70%+)! You're operating at the Three Things target ratio.";
+      color = '#00ff88';
+    }
+
+    setComparisonText(comparison);
+    setComparisonColor(color);
+    setShowResult(true);
+  };
 
   return (
     <>
@@ -1507,6 +1561,169 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
         }}>
           {isGerman ? 'Video: Wie man das Drei-Dinge-System mit Time Blocking für maximale Produktivität umsetzt' : 'Video: How to implement the Three Things system with time blocking for maximum productivity'}
         </p>
+      </div>
+
+      {/* Interactive Calculator Widget */}
+      <div style={{
+        background: 'rgb(15, 15, 15)',
+        border: '2px solid #00ff88',
+        borderRadius: '12px',
+        padding: '2rem',
+        margin: '3rem 0',
+        textAlign: 'center'
+      }}>
+        <h3 style={{
+          color: '#00ff88',
+          marginBottom: '1.5rem',
+          fontSize: '1.3rem',
+          fontWeight: '300'
+        }}>
+          {isGerman ? '📊 Berechnen Sie Ihre Transformationale Task-Ratio' : '📊 Calculate Your Transformational Task Ratio'}
+        </h3>
+
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '1rem',
+          maxWidth: '400px',
+          margin: '0 auto 1.5rem'
+        }}>
+          <div>
+            <label style={{
+              display: 'block',
+              color: '#999',
+              fontSize: '0.9rem',
+              marginBottom: '0.5rem',
+              textAlign: 'left'
+            }}>
+              {isGerman ? 'Heute gearbeitete Stunden:' : 'Hours worked today:'}
+            </label>
+            <input
+              type="number"
+              min="0"
+              max="24"
+              step="0.5"
+              value={hoursWorked}
+              onChange={(e) => setHoursWorked(e.target.value)}
+              placeholder={isGerman ? 'z.B. 8' : 'e.g. 8'}
+              style={{
+                width: '100%',
+                padding: '0.75rem',
+                background: 'rgb(26, 26, 26)',
+                border: '1px solid #333',
+                borderRadius: '6px',
+                color: '#fff',
+                fontSize: '1rem'
+              }}
+            />
+          </div>
+          <div>
+            <label style={{
+              display: 'block',
+              color: '#999',
+              fontSize: '0.9rem',
+              marginBottom: '0.5rem',
+              textAlign: 'left'
+            }}>
+              {isGerman ? 'Stunden für transformationale Aufgaben (Level 3):' : 'Hours on transformational tasks (Level 3):'}
+            </label>
+            <input
+              type="number"
+              min="0"
+              max="24"
+              step="0.5"
+              value={transformationalHours}
+              onChange={(e) => setTransformationalHours(e.target.value)}
+              placeholder={isGerman ? 'z.B. 5' : 'e.g. 5'}
+              style={{
+                width: '100%',
+                padding: '0.75rem',
+                background: 'rgb(26, 26, 26)',
+                border: '1px solid #333',
+                borderRadius: '6px',
+                color: '#fff',
+                fontSize: '1rem'
+              }}
+            />
+          </div>
+          <button
+            onClick={calculateRatio}
+            style={{
+              background: '#00ff88',
+              color: '#000',
+              border: 'none',
+              borderRadius: '6px',
+              padding: '0.75rem 1.5rem',
+              fontSize: '1rem',
+              fontWeight: '500',
+              cursor: 'pointer',
+              marginTop: '0.5rem',
+              transition: 'transform 0.2s'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
+            onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+          >
+            {isGerman ? 'Ratio Berechnen' : 'Calculate Ratio'}
+          </button>
+        </div>
+
+        {showResult && (
+          <div style={{
+            marginTop: '2rem',
+            padding: '1.5rem',
+            background: 'rgba(0, 255, 136, 0.1)',
+            borderRadius: '8px'
+          }}>
+            <div style={{
+              fontSize: '3rem',
+              fontWeight: '100',
+              color: '#00ff88',
+              marginBottom: '0.5rem'
+            }}>
+              {ratio.toFixed(1)}%
+            </div>
+            <div style={{
+              color: '#999',
+              fontSize: '0.9rem',
+              marginBottom: '1rem'
+            }}>
+              {isGerman ? 'Ihre Transformationale Task-Ratio' : 'Your Transformational Task Ratio'}
+            </div>
+            <div style={{
+              color: comparisonColor,
+              fontSize: '0.95rem',
+              lineHeight: '1.6'
+            }}>
+              {comparisonText}
+            </div>
+          </div>
+        )}
+
+        <div style={{
+          marginTop: '1.5rem',
+          padding: '1rem',
+          background: 'rgba(0, 255, 136, 0.05)',
+          borderRadius: '6px',
+          fontSize: '0.85rem',
+          color: '#999',
+          lineHeight: '1.5',
+          textAlign: 'left'
+        }}>
+          <strong style={{ color: '#00ff88' }}>
+            {isGerman ? 'Transformational (Level 3) = ' : 'Transformational (Level 3) = '}
+          </strong>
+          {isGerman ? 'Aufgaben, die exponentiellen Wert schaffen und Ihre Hauptziele vorantreiben' : 'Tasks that create exponential value and move your primary goals forward'}
+          <br />
+          <strong style={{ color: '#ff6b6b', marginTop: '0.5rem', display: 'inline-block' }}>
+            {isGerman ? 'Maintenance (Level 1) = ' : 'Maintenance (Level 1) = '}
+          </strong>
+          {isGerman ? 'Notwendige operative Arbeit (E-Mail, Meetings, Admin)' : 'Necessary operational work (email, meetings, admin)'}
+          <br />
+          <strong style={{ color: '#ddd', marginTop: '0.5rem', display: 'inline-block' }}>
+            {isGerman ? 'Optimization (Level 2) = ' : 'Optimization (Level 2) = '}
+          </strong>
+          {isGerman ? 'Prozessverbesserungen und Effizienzgewinne' : 'Process improvements and efficiency gains'}
+        </div>
       </div>
 
       <h3 style={{
