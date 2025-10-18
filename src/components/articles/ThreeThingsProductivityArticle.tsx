@@ -299,46 +299,96 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
         )}
       </p>
 
+      {/* Image with text layout - Portrait and Method */}
       <div style={{
-        padding: '2rem',
-        backgroundColor: 'rgba(0, 255, 136, 0.05)',
-        border: '1px solid rgba(0, 255, 136, 0.2)',
-        marginBottom: '2rem'
-      }}>
-        <h4 style={{
-          color: '#00ff88',
-          fontSize: '1.1rem',
-          fontWeight: '300',
-          marginBottom: '1rem'
-        }}>
-          {isGerman ? 'Die Ivy Lee-Methode:' : 'The Ivy Lee Method:'}
-        </h4>
-        <ol style={{
-          fontSize: '0.95rem',
-          lineHeight: '1.8',
-          color: '#ddd',
-          paddingLeft: '1.5rem'
-        }}>
-          {isGerman ? (
-            <>
-              <li>Schreiben Sie am Ende jedes Arbeitstages die <strong>sechs wichtigsten Aufgaben</strong> für morgen auf</li>
-              <li>Priorisieren Sie diese sechs Aufgaben nach wahrer Wichtigkeit</li>
-              <li>Konzentrieren Sie sich am nächsten Tag nur auf die erste Aufgabe, bis sie erledigt ist</li>
-              <li>Gehen Sie zur zweiten Aufgabe über, dann zur dritten und so weiter</li>
-              <li>Übertragen Sie unerledigte Aufgaben auf die Liste von morgen</li>
-              <li>Wiederholen Sie diesen Prozess täglich</li>
-            </>
-          ) : (
-            <>
-              <li>At the end of each workday, write down the <strong>six most important tasks</strong> for tomorrow</li>
-              <li>Prioritize these six tasks by true importance</li>
-              <li>The next day, concentrate only on the first task until it's finished</li>
-              <li>Move to the second task, then the third, and so on</li>
-              <li>Transfer any unfinished tasks to tomorrow's list</li>
-              <li>Repeat this process daily</li>
-            </>
-          )}
-        </ol>
+        display: 'flex',
+        gap: '2rem',
+        alignItems: 'flex-start',
+        margin: '2rem 0',
+        flexDirection: 'row'
+      }}
+      className="image-with-text-layout">
+        <img
+          src="/blog-research/photos/claude-shannon-portrait.jpg"
+          alt={isGerman ? 'Historisches Portrait aus der Ära der frühen Produktivitätswissenschaft' : 'Historical portrait representing the era of early productivity science'}
+          style={{
+            width: '280px',
+            maxWidth: '35%',
+            height: 'auto',
+            borderRadius: '8px',
+            flexShrink: 0,
+            border: '1px solid #333'
+          }}
+          className="portrait-image"
+        />
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <p style={{
+            fontSize: '0.9rem',
+            color: '#999',
+            marginTop: 0,
+            marginBottom: '1rem',
+            fontStyle: 'italic'
+          }}>
+            {isGerman ? 'Die Ära von 1918, als systematische Produktivitätsmethoden erstmals in der amerikanischen Geschäftswelt auftauchten' : 'The 1918 era when systematic productivity methods first emerged in American business'}
+          </p>
+          <div style={{
+            padding: '1.5rem',
+            backgroundColor: 'rgba(0, 255, 136, 0.05)',
+            border: '1px solid rgba(0, 255, 136, 0.2)',
+            borderRadius: '8px'
+          }}>
+            <h4 style={{
+              color: '#00ff88',
+              fontSize: '1.1rem',
+              fontWeight: '300',
+              marginTop: 0,
+              marginBottom: '1rem'
+            }}>
+              {isGerman ? 'Die Ivy Lee-Methode:' : 'The Ivy Lee Method:'}
+            </h4>
+            <ol style={{
+              fontSize: '0.95rem',
+              lineHeight: '1.8',
+              color: '#ddd',
+              paddingLeft: '1.5rem',
+              marginBottom: 0
+            }}>
+              {isGerman ? (
+                <>
+                  <li>Schreiben Sie am Ende jedes Arbeitstages die <strong>sechs wichtigsten Aufgaben</strong> für morgen auf</li>
+                  <li>Priorisieren Sie diese sechs Aufgaben nach wahrer Wichtigkeit</li>
+                  <li>Konzentrieren Sie sich am nächsten Tag nur auf die erste Aufgabe, bis sie erledigt ist</li>
+                  <li>Gehen Sie zur zweiten Aufgabe über, dann zur dritten und so weiter</li>
+                  <li>Übertragen Sie unerledigte Aufgaben auf die Liste von morgen</li>
+                  <li>Wiederholen Sie diesen Prozess täglich</li>
+                </>
+              ) : (
+                <>
+                  <li>At the end of each workday, write down the <strong>six most important tasks</strong> for tomorrow</li>
+                  <li>Prioritize these six tasks by true importance</li>
+                  <li>The next day, concentrate only on the first task until it's finished</li>
+                  <li>Move to the second task, then the third, and so on</li>
+                  <li>Transfer any unfinished tasks to tomorrow's list</li>
+                  <li>Repeat this process daily</li>
+                </>
+              )}
+            </ol>
+          </div>
+          <p style={{
+            fontSize: '1rem',
+            lineHeight: '1.7',
+            color: '#ddd',
+            marginTop: '1.5rem',
+            marginBottom: 0,
+            fontWeight: '300'
+          }}>
+            {isGerman ? (
+              <>Das Ergebnis: Nach drei Monaten schickte Schwab Lee einen Scheck über <strong>$25.000</strong> (entspricht heute etwa <strong>$400.000</strong>) und nannte es "die profitabelste Lektion seines Geschäftslebens."</>
+            ) : (
+              <>The result: After three months, Schwab sent Lee a check for <strong>$25,000</strong> (equivalent to approximately <strong>$400,000 today</strong>), calling it "the most profitable lesson of his business life."</>
+            )}
+          </p>
+        </div>
       </div>
 
       {/* Ivy Lee Method Video */}
@@ -379,20 +429,6 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
           {isGerman ? 'Video: Die Ivy Lee Methode erklärt - der Produktivitätsdurchbruch von 1918, der alles begann' : 'Video: The Ivy Lee Method explained - the 1918 productivity breakthrough that started it all'}
         </p>
       </div>
-
-      <p style={{
-        fontSize: '1rem',
-        lineHeight: '1.7',
-        color: '#ddd',
-        marginBottom: '2rem',
-        fontWeight: '300'
-      }}>
-        {isGerman ? (
-          <>Das Ergebnis: Nach drei Monaten schickte Schwab Lee einen Scheck über <strong>$25.000</strong> (entspricht heute etwa <strong>$400.000</strong>) und nannte es "die profitabelste Lektion seines Geschäftslebens."</>
-        ) : (
-          <>The result: After three months, Schwab sent Lee a check for <strong>$25,000</strong> (equivalent to approximately <strong>$400,000 today</strong>), calling it "the most profitable lesson of his business life."</>
-        )}
-      </p>
 
       <h3 style={{
         fontSize: '1.2rem',
