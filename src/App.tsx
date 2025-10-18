@@ -19,6 +19,7 @@ import SuccessModal from './components/SuccessModal';
 import InvoicePage from './components/InvoicePage';
 import FoundationModal from './components/FoundationModal';
 import CommitmentModeModal from './components/CommitmentModeModal';
+import MorningReviewModal from './components/MorningReviewModal';
 import VerifyMagicLink from './components/VerifyMagicLink';
 import Footer from './components/Footer';
 import BrandIcon from './components/BrandIcon';
@@ -90,6 +91,8 @@ function AppContent() {
   const [showAboutModal, setShowAboutModal] = useState(false);
   const [showPrivacyModal, setShowPrivacyModal] = useState(false);
   const [showCommitmentModal, setShowCommitmentModal] = useState(false);
+  const [showMorningReview, setShowMorningReview] = useState(false);
+  const [unfinishedTasks, setUnfinishedTasks] = useState<Task[]>([]);
 
   // Load data from localStorage on mount
   useEffect(() => {
@@ -1069,6 +1072,44 @@ function AppContent() {
     canonical.setAttribute('href', 'https://signal-noise.app/');
   }, []);
 
+  // Morning Review: Check for unfinished Signal tasks from yesterday
+  useEffect(() => {
+    // Only run when data is loaded and user is in Commitment Mode
+    if (!isLoaded || !data.settings.commitModeActivatedAt) {
+      return;
+    }
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Start of today
+
+    const todayDateString = today.toISOString().split('T')[0]; // YYYY-MM-DD
+
+    // Check if we already reviewed today
+    if (data.settings.lastReviewedDate === todayDateString) {
+      return; // Already reviewed today
+    }
+
+    // Get yesterday's date
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
+    const yesterdayDateString = yesterday.toDateString();
+
+    // Find unfinished Signal tasks from yesterday
+    const yesterdayUnfinishedSignals = data.tasks.filter(task => {
+      const taskDate = new Date(task.timestamp);
+      return (
+        task.type === 'signal' &&
+        !task.completed &&
+        taskDate.toDateString() === yesterdayDateString
+      );
+    });
+
+    if (yesterdayUnfinishedSignals.length > 0) {
+      setUnfinishedTasks(yesterdayUnfinishedSignals);
+      setShowMorningReview(true);
+    }
+  }, [isLoaded, data.tasks, data.settings.commitModeActivatedAt, data.settings.lastReviewedDate]);
+
   const handleOnboardingComplete = () => {
     localStorage.setItem(ONBOARDING_KEY, 'true');
     setShowOnboarding(false);
@@ -1119,6 +1160,74 @@ function AppContent() {
     // Show success whisper
     setWhisperMessage('Commitment Mode activated!');
     setShowWhisper(true);
+  };
+
+  // Morning Review Handlers
+  const handleMorningReviewRollover = (taskId: number) => {
+    // Update task timestamp to today
+    setData(prev => {
+      const newData = {
+        ...prev,
+        tasks: prev.tasks.map(task =>
+          task.id === taskId
+            ? { ...task, timestamp: new Date().toISOString() }
+            : task
+        )
+      };
+
+      // Update ratio after rollover
+      newData.signal_ratio = getTodayRatio(newData.tasks);
+      return newData;
+    });
+  };
+
+  const handleMorningReviewReclassify = (taskId: number) => {
+    // Reclassify as Noise
+    setData(prev => {
+      const newData = {
+        ...prev,
+        tasks: prev.tasks.map(task =>
+          task.id === taskId
+            ? { ...task, type: 'noise' as const, completed: false }
+            : task
+        )
+      };
+
+      // Update ratio after reclassification
+      newData.signal_ratio = getTodayRatio(newData.tasks);
+      return newData;
+    });
+  };
+
+  const handleMorningReviewArchive = (taskId: number) => {
+    // Simply delete the task
+    setData(prev => {
+      const newData = {
+        ...prev,
+        tasks: prev.tasks.filter(task => task.id !== taskId)
+      };
+
+      // Update ratio after archiving
+      newData.signal_ratio = getTodayRatio(newData.tasks);
+      return newData;
+    });
+  };
+
+  const handleMorningReviewClose = () => {
+    // Mark today as reviewed
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const todayDateString = today.toISOString().split('T')[0]; // YYYY-MM-DD
+
+    setData(prev => ({
+      ...prev,
+      settings: {
+        ...prev.settings,
+        lastReviewedDate: todayDateString
+      }
+    }));
+
+    setShowMorningReview(false);
   };
 
   const handleOneTimeSyncToCloud = async (sessionData: SessionData) => {
@@ -1528,6 +1637,30 @@ function AppContent() {
         show={showCommitmentModal}
         onClose={() => setShowCommitmentModal(false)}
         onActivate={handleCommitmentModeActivation}
+      />
+
+      {/* Morning Review Modal */}
+      <MorningReviewModal
+        show={showMorningReview}
+        unfinishedTasks={unfinishedTasks}
+        yesterdayCompleted={data.tasks.filter(task => {
+          const yesterday = new Date();
+          yesterday.setDate(yesterday.getDate() - 1);
+          const yesterdayDate = yesterday.toDateString();
+          const taskDate = new Date(task.timestamp).toDateString();
+          return task.type === 'signal' && task.completed && taskDate === yesterdayDate;
+        }).length}
+        yesterdayTotal={data.tasks.filter(task => {
+          const yesterday = new Date();
+          yesterday.setDate(yesterday.getDate() - 1);
+          const yesterdayDate = yesterday.toDateString();
+          const taskDate = new Date(task.timestamp).toDateString();
+          return task.type === 'signal' && taskDate === yesterdayDate;
+        }).length}
+        onRollover={handleMorningReviewRollover}
+        onReclassifyAsNoise={handleMorningReviewReclassify}
+        onArchive={handleMorningReviewArchive}
+        onClose={handleMorningReviewClose}
       />
 
       {/* Main app content - only show when both loading and splash are complete */}

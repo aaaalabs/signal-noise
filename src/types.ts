@@ -49,6 +49,7 @@ export interface AppData {
     notifications: boolean;
     firstName?: string;
     commitModeActivatedAt?: string | null;
+    lastReviewedDate?: string;  // ISO date string (YYYY-MM-DD) when Morning Review was last completed
   };
   signal_ratio?: number;
 }
