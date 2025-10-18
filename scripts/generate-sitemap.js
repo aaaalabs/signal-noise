@@ -60,8 +60,8 @@ const blogPosts = [
     isPublished: false
   },
   {
-    slug: 'three-things-productivity',
-    publishDate: '2025-10-04',
+    slug: 'three-things-productivity-system',
+    publishDate: '2025-10-18',
     isPublished: true
   }
 ];
