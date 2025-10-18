@@ -376,19 +376,9 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
           />
           <p style={{
             fontSize: '0.85rem',
-            color: '#999',
-            marginTop: '0.75rem',
-            marginBottom: 0,
-            fontStyle: 'italic',
-            lineHeight: '1.5'
-          }}>
-            {isGerman ? 'Die Ära von 1918, als systematische Produktivitätsmethoden erstmals in der amerikanischen Geschäftswelt auftauchten' : 'The 1918 era when systematic productivity methods first emerged in American business'}
-          </p>
-          <p style={{
-            fontSize: '0.85rem',
             lineHeight: '1.5',
             color: '#999',
-            marginTop: '1rem',
+            marginTop: '0.75rem',
             marginBottom: 0,
             fontWeight: '300'
           }}>
@@ -400,6 +390,15 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
           </p>
         </div>
         <div style={{ flex: 1, minWidth: 0 }}>
+          <p style={{
+            fontSize: '0.9rem',
+            color: '#999',
+            marginTop: 0,
+            marginBottom: '1rem',
+            fontStyle: 'italic'
+          }}>
+            {isGerman ? 'Die Ära von 1918, als systematische Produktivitätsmethoden erstmals in der amerikanischen Geschäftswelt auftauchten' : 'The 1918 era when systematic productivity methods first emerged in American business'}
+          </p>
           <div style={{
             padding: '1.5rem',
             backgroundColor: 'rgba(0, 255, 136, 0.05)',
