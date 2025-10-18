@@ -137,7 +137,7 @@ export const blogPosts: BlogPost[] = [
     isPublished: false
   },
   {
-    slug: 'three-things-productivity',
+    slug: 'three-things-productivity-system',
     title: 'The Three Things Productivity System: Do Less, Achieve More',
     titleDe: 'Das Drei-Dinge-Produktivitätssystem: Weniger tun, mehr erreichen',
     description: 'Science-backed productivity method: Focus on 3 transformational tasks daily for 37× improvement. Based on 100+ years of research from Ivy Lee to James Clear.',

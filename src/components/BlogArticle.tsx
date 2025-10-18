@@ -120,7 +120,7 @@ const articles: Record<string, ArticleContent> = {
     keywords: ['startup story', 'app development', 'founder journey', 'productivity crisis', 'signal noise app creation'],
     publishDate: '2025-11-10'
   },
-  'three-things-productivity': {
+  'three-things-productivity-system': {
     component: ThreeThingsProductivityArticle,
     title: 'The Three Things Productivity System: The Science of Doing Less to Achieve More',
     titleDe: 'Das Drei-Dinge-Produktivitätssystem: Die Wissenschaft, weniger zu tun und mehr zu erreichen',
@@ -252,7 +252,7 @@ export default function BlogArticle() {
       };
 
       // Add additional schemas for article-11
-      if (slug === 'three-things-productivity') {
+      if (slug === 'three-things-productivity-system') {
         structuredData.wordCount = 5200;
         structuredData.articleBody = "The Three Things Productivity System is a science-backed method for achieving exponential results by focusing on 3 transformational tasks daily instead of 20 maintenance tasks.";
       }

@@ -7,7 +7,7 @@ interface ArticleSchemasProps {
 export default function ArticleSchemas({ slug }: ArticleSchemasProps) {
   useEffect(() => {
     // Only add extra schemas for article-11
-    if (slug !== 'three-things-productivity') return;
+    if (slug !== 'three-things-productivity-system') return;
 
     // FAQ Schema for People Also Ask
     const faqSchema = {

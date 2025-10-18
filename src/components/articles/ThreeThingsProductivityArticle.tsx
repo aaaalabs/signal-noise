@@ -12,7 +12,7 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
   const [modalImage, setModalImage] = useState<{src: string, alt: string, caption?: string} | null>(null);
 
   // Navigation logic - determine previous/next articles
-  const currentSlug = 'three-things-productivity';
+  const currentSlug = 'three-things-productivity-system';
   const previousArticle = getPreviousArticle(currentSlug);
   const nextArticle = getNextArticle(currentSlug);
 
@@ -176,10 +176,21 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
         fontWeight: '300',
         paddingLeft: '1.5rem'
       }}>
-        <li>Workers toggle between applications roughly <strong>1,200 times each day</strong></li>
-        <li>This costs nearly <strong>4 hours per week</strong> just reorienting after switching</li>
-        <li>Context switching can reduce productivity by <strong>40%</strong> (American Psychological Association)</li>
-        <li>The U.S. economy loses an estimated <strong>$450 billion annually</strong> to multitasking inefficiency</li>
+        {isGerman ? (
+          <>
+            <li>Mitarbeiter wechseln etwa <strong>1.200 Mal täglich</strong> zwischen Anwendungen</li>
+            <li>Dies kostet fast <strong>4 Stunden pro Woche</strong> nur für die Neuorientierung nach dem Wechseln</li>
+            <li>Kontextwechsel können die Produktivität um <strong>40%</strong> reduzieren (American Psychological Association)</li>
+            <li>Die US-Wirtschaft verliert schätzungsweise <strong>450 Milliarden Dollar jährlich</strong> durch Multitasking-Ineffizienz</li>
+          </>
+        ) : (
+          <>
+            <li>Workers toggle between applications roughly <strong>1,200 times each day</strong></li>
+            <li>This costs nearly <strong>4 hours per week</strong> just reorienting after switching</li>
+            <li>Context switching can reduce productivity by <strong>40%</strong> (American Psychological Association)</li>
+            <li>The U.S. economy loses an estimated <strong>$450 billion annually</strong> to multitasking inefficiency</li>
+          </>
+        )}
       </ul>
 
       <blockquote style={{
@@ -308,13 +319,65 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
           color: '#ddd',
           paddingLeft: '1.5rem'
         }}>
-          <li>At the end of each workday, write down the <strong>six most important tasks</strong> for tomorrow</li>
-          <li>Prioritize these six tasks by true importance</li>
-          <li>The next day, concentrate only on the first task until it's finished</li>
-          <li>Move to the second task, then the third, and so on</li>
-          <li>Transfer any unfinished tasks to tomorrow's list</li>
-          <li>Repeat this process daily</li>
+          {isGerman ? (
+            <>
+              <li>Schreiben Sie am Ende jedes Arbeitstages die <strong>sechs wichtigsten Aufgaben</strong> für morgen auf</li>
+              <li>Priorisieren Sie diese sechs Aufgaben nach wahrer Wichtigkeit</li>
+              <li>Konzentrieren Sie sich am nächsten Tag nur auf die erste Aufgabe, bis sie erledigt ist</li>
+              <li>Gehen Sie zur zweiten Aufgabe über, dann zur dritten und so weiter</li>
+              <li>Übertragen Sie unerledigte Aufgaben auf die Liste von morgen</li>
+              <li>Wiederholen Sie diesen Prozess täglich</li>
+            </>
+          ) : (
+            <>
+              <li>At the end of each workday, write down the <strong>six most important tasks</strong> for tomorrow</li>
+              <li>Prioritize these six tasks by true importance</li>
+              <li>The next day, concentrate only on the first task until it's finished</li>
+              <li>Move to the second task, then the third, and so on</li>
+              <li>Transfer any unfinished tasks to tomorrow's list</li>
+              <li>Repeat this process daily</li>
+            </>
+          )}
         </ol>
+      </div>
+
+      {/* Ivy Lee Method Video */}
+      <div style={{
+        margin: '3rem 0',
+        maxWidth: '800px'
+      }}>
+        <div style={{
+          position: 'relative',
+          paddingBottom: '56.25%',
+          height: 0,
+          overflow: 'hidden',
+          borderRadius: '12px',
+          border: '1px solid #333'
+        }}>
+          <iframe
+            src="https://www.youtube.com/embed/H9xZvAmEQIY"
+            title="The Ivy Lee Method - Historical Foundation of Task Prioritization"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%'
+            }}
+          />
+        </div>
+        <p style={{
+          fontSize: '0.9rem',
+          color: '#999',
+          marginTop: '0.75rem',
+          textAlign: 'center',
+          fontStyle: 'italic'
+        }}>
+          {isGerman ? 'Video: Die Ivy Lee Methode erklärt - der Produktivitätsdurchbruch von 1918, der alles begann' : 'Video: The Ivy Lee Method explained - the 1918 productivity breakthrough that started it all'}
+        </p>
       </div>
 
       <p style={{
@@ -363,9 +426,19 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
         fontWeight: '300',
         paddingLeft: '1.5rem'
       }}>
-        <li><strong>Focus capacity is more limited</strong> than Ivy Lee understood in 1918</li>
-        <li><strong>Deep work</strong> (Cal Newport's research) requires extended, uninterrupted focus blocks — learn more in our article on <Link to="/blog/focus-age-distraction" style={{ color: '#00ff88', textDecoration: 'underline' }}>focus in the age of distraction</Link></li>
-        <li><strong>Decision fatigue</strong> increases with every choice—fewer priority tasks preserve mental energy</li>
+        {isGerman ? (
+          <>
+            <li><strong>Die Fokuskapazität ist begrenzter</strong> als Ivy Lee 1918 verstand</li>
+            <li><strong>Deep Work</strong> (Cal Newports Forschung) erfordert ausgedehnte, ununterbrochene Fokusblöcke — erfahren Sie mehr in unserem Artikel über <Link to="/blog/focus-age-distraction" style={{ color: '#00ff88', textDecoration: 'underline' }}>Fokus im Zeitalter der Ablenkung</Link></li>
+            <li><strong>Entscheidungsmüdigkeit</strong> nimmt mit jeder Wahl zu—weniger Prioritätsaufgaben bewahren mentale Energie</li>
+          </>
+        ) : (
+          <>
+            <li><strong>Focus capacity is more limited</strong> than Ivy Lee understood in 1918</li>
+            <li><strong>Deep work</strong> (Cal Newport's research) requires extended, uninterrupted focus blocks — learn more in our article on <Link to="/blog/focus-age-distraction" style={{ color: '#00ff88', textDecoration: 'underline' }}>focus in the age of distraction</Link></li>
+            <li><strong>Decision fatigue</strong> increases with every choice—fewer priority tasks preserve mental energy</li>
+          </>
+        )}
       </ul>
 
       {/* The Science Section */}
@@ -449,10 +522,21 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
         fontWeight: '300',
         paddingLeft: '1.5rem'
       }}>
-        <li>It takes <strong>25+ minutes</strong> to fully resume a task after an interruption</li>
-        <li>Heavy multitasking can temporarily drop IQ by <strong>10 points</strong></li>
-        <li>We're truly focused on deep work only <strong>6 hours per week</strong> (Dr. David Rock, NeuroLeadership Institute)</li>
-        <li>The average knowledge worker checks email <strong>36 times per hour</strong> (McKinsey)</li>
+        {isGerman ? (
+          <>
+            <li>Es dauert <strong>mehr als 25 Minuten</strong>, um nach einer Unterbrechung vollständig zu einer Aufgabe zurückzukehren</li>
+            <li>Starkes Multitasking kann den IQ vorübergehend um <strong>10 Punkte</strong> senken</li>
+            <li>Wir sind wirklich nur <strong>6 Stunden pro Woche</strong> auf Deep Work fokussiert (Dr. David Rock, NeuroLeadership Institute)</li>
+            <li>Der durchschnittliche Wissensarbeiter prüft E-Mails <strong>36 Mal pro Stunde</strong> (McKinsey)</li>
+          </>
+        ) : (
+          <>
+            <li>It takes <strong>25+ minutes</strong> to fully resume a task after an interruption</li>
+            <li>Heavy multitasking can temporarily drop IQ by <strong>10 points</strong></li>
+            <li>We're truly focused on deep work only <strong>6 hours per week</strong> (Dr. David Rock, NeuroLeadership Institute)</li>
+            <li>The average knowledge worker checks email <strong>36 times per hour</strong> (McKinsey)</li>
+          </>
+        )}
       </ul>
 
       {/* Context Switching Cost Image */}
@@ -540,9 +624,19 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
           color: '#ddd',
           paddingLeft: '1.5rem'
         }}>
-          <li><strong>1% better daily</strong> = 37.78× improvement in 1 year</li>
-          <li><strong>1% worse daily</strong> = 0.03 (decline to nearly zero) in 1 year</li>
-          <li>This is compound interest applied to self-improvement</li>
+          {isGerman ? (
+            <>
+              <li><strong>1% besser täglich</strong> = 37,78-fache Verbesserung in 1 Jahr</li>
+              <li><strong>1% schlechter täglich</strong> = 0,03 (Rückgang auf nahezu Null) in 1 Jahr</li>
+              <li>Das ist Zinseszins angewendet auf Selbstverbesserung</li>
+            </>
+          ) : (
+            <>
+              <li><strong>1% better daily</strong> = 37.78× improvement in 1 year</li>
+              <li><strong>1% worse daily</strong> = 0.03 (decline to nearly zero) in 1 year</li>
+              <li>This is compound interest applied to self-improvement</li>
+            </>
+          )}
         </ul>
       </div>
 
@@ -623,7 +717,11 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
             lineHeight: '1.6',
             marginBottom: '0.5rem'
           }}>
-            <strong>Definition:</strong> Daily operational work that keeps systems running
+            {isGerman ? (
+              <><strong>Definition:</strong> Tägliche operative Arbeit, die Systeme am Laufen hält</>
+            ) : (
+              <><strong>Definition:</strong> Daily operational work that keeps systems running</>
+            )}
           </p>
           <p style={{
             color: '#ddd',
@@ -631,7 +729,11 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
             lineHeight: '1.6',
             marginBottom: '0.5rem'
           }}>
-            <strong>Examples:</strong> Email responses, admin tasks, routine meetings, filing reports
+            {isGerman ? (
+              <><strong>Beispiele:</strong> E-Mail-Antworten, Verwaltungsaufgaben, Routinemeetings, Berichte einreichen</>
+            ) : (
+              <><strong>Examples:</strong> Email responses, admin tasks, routine meetings, filing reports</>
+            )}
           </p>
           <p style={{
             color: '#ddd',
@@ -639,14 +741,22 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
             lineHeight: '1.6',
             marginBottom: '0.5rem'
           }}>
-            <strong>Impact:</strong> Necessary but create zero new value
+            {isGerman ? (
+              <><strong>Auswirkung:</strong> Notwendig, aber schaffen keinen neuen Wert</>
+            ) : (
+              <><strong>Impact:</strong> Necessary but create zero new value</>
+            )}
           </p>
           <p style={{
             color: '#ff4444',
             fontSize: '0.95rem',
             lineHeight: '1.6'
           }}>
-            <strong>Time trap:</strong> Can easily consume 70-80% of your day if unmanaged
+            {isGerman ? (
+              <><strong>Zeitfalle:</strong> Kann leicht 70-80% Ihres Tages verbrauchen, wenn nicht verwaltet</>
+            ) : (
+              <><strong>Time trap:</strong> Can easily consume 70-80% of your day if unmanaged</>
+            )}
           </p>
         </div>
 
@@ -670,7 +780,11 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
             lineHeight: '1.6',
             marginBottom: '0.5rem'
           }}>
-            <strong>Definition:</strong> Improvements to existing processes and systems
+            {isGerman ? (
+              <><strong>Definition:</strong> Verbesserungen bestehender Prozesse und Systeme</>
+            ) : (
+              <><strong>Definition:</strong> Improvements to existing processes and systems</>
+            )}
           </p>
           <p style={{
             color: '#ddd',
@@ -678,7 +792,11 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
             lineHeight: '1.6',
             marginBottom: '0.5rem'
           }}>
-            <strong>Examples:</strong> Workflow tweaks, efficiency gains, incremental improvements
+            {isGerman ? (
+              <><strong>Beispiele:</strong> Workflow-Optimierungen, Effizienzgewinne, schrittweise Verbesserungen</>
+            ) : (
+              <><strong>Examples:</strong> Workflow tweaks, efficiency gains, incremental improvements</>
+            )}
           </p>
           <p style={{
             color: '#ddd',
@@ -686,14 +804,22 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
             lineHeight: '1.6',
             marginBottom: '0.5rem'
           }}>
-            <strong>Impact:</strong> Create marginal improvements (10-20% gains)
+            {isGerman ? (
+              <><strong>Auswirkung:</strong> Schaffen marginale Verbesserungen (10-20% Gewinne)</>
+            ) : (
+              <><strong>Impact:</strong> Create marginal improvements (10-20% gains)</>
+            )}
           </p>
           <p style={{
             color: '#ff8800',
             fontSize: '0.95rem',
             lineHeight: '1.6'
           }}>
-            <strong>Value:</strong> Important but subject to diminishing returns
+            {isGerman ? (
+              <><strong>Wert:</strong> Wichtig, aber unterliegen abnehmenden Erträgen</>
+            ) : (
+              <><strong>Value:</strong> Important but subject to diminishing returns</>
+            )}
           </p>
         </div>
 
@@ -717,7 +843,11 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
             lineHeight: '1.6',
             marginBottom: '0.5rem'
           }}>
-            <strong>Definition:</strong> Game-changing work that creates exponential results
+            {isGerman ? (
+              <><strong>Definition:</strong> Bahnbrechende Arbeit, die exponentielle Ergebnisse schafft</>
+            ) : (
+              <><strong>Definition:</strong> Game-changing work that creates exponential results</>
+            )}
           </p>
           <p style={{
             color: '#ddd',
@@ -725,7 +855,11 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
             lineHeight: '1.6',
             marginBottom: '0.5rem'
           }}>
-            <strong>Examples:</strong> Strategic decisions, breakthrough innovations, key relationships, major skills development
+            {isGerman ? (
+              <><strong>Beispiele:</strong> Strategische Entscheidungen, Durchbruchsinnovationen, Schlüsselbeziehungen, wichtige Fähigkeitsentwicklung</>
+            ) : (
+              <><strong>Examples:</strong> Strategic decisions, breakthrough innovations, key relationships, major skills development</>
+            )}
           </p>
           <p style={{
             color: '#ddd',
@@ -733,14 +867,22 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
             lineHeight: '1.6',
             marginBottom: '0.5rem'
           }}>
-            <strong>Impact:</strong> Move the needle on your most important goals
+            {isGerman ? (
+              <><strong>Auswirkung:</strong> Bewegen Sie die Nadel bei Ihren wichtigsten Zielen</>
+            ) : (
+              <><strong>Impact:</strong> Move the needle on your most important goals</>
+            )}
           </p>
           <p style={{
             color: '#00ff88',
             fontSize: '0.95rem',
             lineHeight: '1.6'
           }}>
-            <strong>Requirement:</strong> Deep focus and strategic thinking
+            {isGerman ? (
+              <><strong>Anforderung:</strong> Tiefer Fokus und strategisches Denken</>
+            ) : (
+              <><strong>Requirement:</strong> Deep focus and strategic thinking</>
+            )}
           </p>
         </div>
       </div>
@@ -1110,11 +1252,23 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
           color: '#ddd',
           paddingLeft: '1.5rem'
         }}>
-          <li>Would completing this task alone make today worthwhile?</li>
-          <li>Does this move me toward a major goal or breakthrough?</li>
-          <li>Will this matter in a month? A year?</li>
-          <li>Does this require deep, strategic thinking?</li>
-          <li>Could anyone else do this with the same impact? (If yes, delegate it—it's not your transformational work)</li>
+          {isGerman ? (
+            <>
+              <li>Würde die Erledigung dieser Aufgabe allein den heutigen Tag lohnenswert machen?</li>
+              <li>Bewegt mich das zu einem wichtigen Ziel oder Durchbruch?</li>
+              <li>Wird das in einem Monat wichtig sein? In einem Jahr?</li>
+              <li>Erfordert dies tiefes, strategisches Denken?</li>
+              <li>Könnte jemand anderes das mit der gleichen Wirkung tun? (Wenn ja, delegieren Sie es—es ist nicht Ihre transformative Arbeit)</li>
+            </>
+          ) : (
+            <>
+              <li>Would completing this task alone make today worthwhile?</li>
+              <li>Does this move me toward a major goal or breakthrough?</li>
+              <li>Will this matter in a month? A year?</li>
+              <li>Does this require deep, strategic thinking?</li>
+              <li>Could anyone else do this with the same impact? (If yes, delegate it—it's not your transformational work)</li>
+            </>
+          )}
         </ul>
       </div>
 
@@ -1166,9 +1320,19 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
             color: '#ddd',
             paddingLeft: '1.5rem'
           }}>
-            <li>Schedule 2-3 hour blocks for each task</li>
-            <li>Treat these blocks as sacred as client meetings</li>
-            <li>Use your peak energy hours (typically morning for most people)</li>
+            {isGerman ? (
+              <>
+                <li>Planen Sie 2-3 Stunden Blöcke für jede Aufgabe</li>
+                <li>Behandeln Sie diese Blöcke so heilig wie Kundenmeetings</li>
+                <li>Nutzen Sie Ihre Höchstenergiezeiten (normalerweise morgens für die meisten Menschen)</li>
+              </>
+            ) : (
+              <>
+                <li>Schedule 2-3 hour blocks for each task</li>
+                <li>Treat these blocks as sacred as client meetings</li>
+                <li>Use your peak energy hours (typically morning for most people)</li>
+              </>
+            )}
           </ul>
         </div>
 
@@ -1191,9 +1355,19 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
             color: '#ddd',
             paddingLeft: '1.5rem'
           }}>
-            <li>Close email and messaging apps during deep work</li>
-            <li>Set status to "Focus Mode" or "Do Not Disturb"</li>
-            <li>Let your team know when you're available vs. in deep work</li>
+            {isGerman ? (
+              <>
+                <li>Schließen Sie E-Mail- und Messaging-Apps während Deep Work</li>
+                <li>Setzen Sie den Status auf "Fokus-Modus" oder "Nicht stören"</li>
+                <li>Informieren Sie Ihr Team, wann Sie verfügbar sind vs. in Deep Work</li>
+              </>
+            ) : (
+              <>
+                <li>Close email and messaging apps during deep work</li>
+                <li>Set status to "Focus Mode" or "Do Not Disturb"</li>
+                <li>Let your team know when you're available vs. in deep work</li>
+              </>
+            )}
           </ul>
         </div>
 
@@ -1216,9 +1390,19 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
             color: '#ddd',
             paddingLeft: '1.5rem'
           }}>
-            <li>Remove physical distractions (phone in another room)</li>
-            <li>Use website blockers if needed (Freedom, Cold Turkey)</li>
-            <li>Optimize your workspace for the specific task</li>
+            {isGerman ? (
+              <>
+                <li>Entfernen Sie physische Ablenkungen (Telefon in einem anderen Raum)</li>
+                <li>Verwenden Sie Website-Blocker bei Bedarf (Freedom, Cold Turkey)</li>
+                <li>Optimieren Sie Ihren Arbeitsplatz für die spezifische Aufgabe</li>
+              </>
+            ) : (
+              <>
+                <li>Remove physical distractions (phone in another room)</li>
+                <li>Use website blockers if needed (Freedom, Cold Turkey)</li>
+                <li>Optimize your workspace for the specific task</li>
+              </>
+            )}
           </ul>
         </div>
       </div>
@@ -1248,6 +1432,45 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
           onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
           onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
         />
+      </div>
+
+      {/* Time Blocking & Three Things Implementation Video */}
+      <div style={{
+        margin: '3rem 0',
+        maxWidth: '800px'
+      }}>
+        <div style={{
+          position: 'relative',
+          paddingBottom: '56.25%',
+          height: 0,
+          overflow: 'hidden',
+          borderRadius: '12px',
+          border: '1px solid #333'
+        }}>
+          <iframe
+            src="https://www.youtube.com/embed/x9K80nyTltU"
+            title="Three Things and Time Blocking - Implementation Tutorial"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%'
+            }}
+          />
+        </div>
+        <p style={{
+          fontSize: '0.9rem',
+          color: '#999',
+          marginTop: '0.75rem',
+          textAlign: 'center',
+          fontStyle: 'italic'
+        }}>
+          {isGerman ? 'Video: Wie man das Drei-Dinge-System mit Time Blocking für maximale Produktivität umsetzt' : 'Video: How to implement the Three Things system with time blocking for maximum productivity'}
+        </p>
       </div>
 
       <h3 style={{
@@ -1296,9 +1519,19 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
         fontWeight: '300',
         paddingLeft: '1.5rem'
       }}>
-        <li><strong>Task switching</strong> reduces quality by 40% (University of Michigan)</li>
-        <li><strong>Completion momentum</strong> builds motivation (Zeigarnik Effect)</li>
-        <li><strong>Single-tasking</strong> preserves cognitive resources for quality work</li>
+        {isGerman ? (
+          <>
+            <li><strong>Aufgabenwechsel</strong> reduziert die Qualität um 40% (University of Michigan)</li>
+            <li><strong>Abschlussmomentum</strong> baut Motivation auf (Zeigarnik-Effekt)</li>
+            <li><strong>Einzelaufgabenarbeit</strong> bewahrt kognitive Ressourcen für qualitativ hochwertige Arbeit</li>
+          </>
+        ) : (
+          <>
+            <li><strong>Task switching</strong> reduces quality by 40% (University of Michigan)</li>
+            <li><strong>Completion momentum</strong> builds motivation (Zeigarnik Effect)</li>
+            <li><strong>Single-tasking</strong> preserves cognitive resources for quality work</li>
+          </>
+        )}
       </ul>
 
       <h3 style={{
@@ -1331,9 +1564,19 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
           color: '#ddd',
           paddingLeft: '1.5rem'
         }}>
-          <li>Did I complete my Three Things? (Track your percentage)</li>
-          <li>What interrupted me? (Identify patterns to eliminate)</li>
-          <li>What are tomorrow's Three Things? (Never start a day without knowing)</li>
+          {isGerman ? (
+            <>
+              <li>Habe ich meine Drei Dinge erledigt? (Verfolgen Sie Ihren Prozentsatz)</li>
+              <li>Was hat mich unterbrochen? (Identifizieren Sie Muster, die zu eliminieren sind)</li>
+              <li>Was sind die Drei Dinge von morgen? (Beginnen Sie niemals einen Tag, ohne es zu wissen)</li>
+            </>
+          ) : (
+            <>
+              <li>Did I complete my Three Things? (Track your percentage)</li>
+              <li>What interrupted me? (Identify patterns to eliminate)</li>
+              <li>What are tomorrow's Three Things? (Never start a day without knowing)</li>
+            </>
+          )}
         </ul>
         <p style={{
           fontSize: '0.95rem',
@@ -1341,7 +1584,11 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
           color: '#ddd',
           marginTop: '1rem'
         }}>
-          <strong>Keep a 30-day log:</strong> You'll notice patterns in your productivity, energy, and what truly constitutes transformational work for you.
+          {isGerman ? (
+            <><strong>Führen Sie ein 30-Tage-Protokoll:</strong> Sie werden Muster in Ihrer Produktivität, Energie und dem, was wirklich transformative Arbeit für Sie ausmacht, bemerken.</>
+          ) : (
+            <><strong>Keep a 30-day log:</strong> You'll notice patterns in your productivity, energy, and what truly constitutes transformational work for you.</>
+          )}
         </p>
       </div>
 
@@ -1806,20 +2053,188 @@ export default function ThreeThingsProductivityArticle({ isGerman }: ArticleProp
             <strong style={{ color: '#fff' }}>MLA Format:</strong><br/>
             <span style={{ fontFamily: 'monospace', fontSize: '0.85rem', color: '#999' }}>
               "The Three Things Productivity System: The Science of Doing Less to Achieve More."
-              Signal/Noise, 4 Oct. 2025, signal-noise.app/blog/three-things-productivity.
+              Signal/Noise, 4 Oct. 2025, signal-noise.app/blog/three-things-productivity-system.
             </span>
           </p>
           <p style={{ marginBottom: 0 }}>
             <strong style={{ color: '#fff' }}>APA Format:</strong><br/>
             <span style={{ fontFamily: 'monospace', fontSize: '0.85rem', color: '#999' }}>
               Signal/Noise. (2025, October 4). The Three Things Productivity System:
-              The Science of Doing Less to Achieve More. https://signal-noise.app/blog/three-things-productivity
+              The Science of Doing Less to Achieve More. https://signal-noise.app/blog/three-things-productivity-system
             </span>
           </p>
         </div>
       </div>
 
       {/* Sources */}
+      {/* FAQ Section */}
+      <div style={{
+        marginTop: '4rem',
+        padding: '2rem',
+        backgroundColor: 'rgba(0, 255, 136, 0.03)',
+        border: '1px solid rgba(0, 255, 136, 0.1)',
+        borderRadius: '12px'
+      }}>
+        <h2 style={{
+          fontSize: '1.5rem',
+          fontWeight: '300',
+          color: '#fff',
+          marginBottom: '2rem'
+        }}>
+          {isGerman ? 'Häufig gestellte Fragen' : 'Frequently Asked Questions'}
+        </h2>
+
+        <div style={{ marginBottom: '2rem' }}>
+          <h3 style={{
+            fontSize: '1.1rem',
+            fontWeight: '300',
+            color: '#00ff88',
+            marginBottom: '0.75rem'
+          }}>
+            {isGerman ?
+              'Aber ich habe 20 dringende Dinge heute zu tun – wie kann ich mich nur auf 3 fokussieren?' :
+              'But I have 20 urgent things to do today—how can I focus on only 3?'}
+          </h3>
+          <p style={{
+            fontSize: '0.95rem',
+            lineHeight: '1.7',
+            color: '#ddd',
+            marginBottom: '1.5rem'
+          }}>
+            {isGerman ? (
+              <>Die meiste "dringende" Arbeit ist künstlich dringend – entstanden durch schlechte Planung oder die schlechte Planung anderer wird zu Ihrem Notfall. Nutzen Sie die Eisenhower-Matrix: Dringend + Wichtig = echte Krisen (selten); Nicht Dringend + Wichtig = Ihre Drei Dinge (transformative Arbeit); Dringend + Nicht Wichtig = Ablenkungen (delegieren oder bündeln); Nicht Dringend + Nicht Wichtig = Zeitverschwendung (eliminieren). Strategie: Bündeln Sie alle Level-1-Wartungsaufgaben in einen einzigen 60-90 Minuten Block NACH Ihren Drei Dingen.</>
+            ) : (
+              <>Most "urgent" work is artificially urgent—created by poor planning or other people's poor planning becoming your emergency. Use the Eisenhower Matrix: Urgent + Important = true crises (rare); Not Urgent + Important = your Three Things (transformational work); Urgent + Not Important = distractions (delegate or batch); Not Urgent + Not Important = time wasters (eliminate). Strategy: Batch all Level 1 maintenance tasks into a single 60-90 minute block AFTER your Three Things.</>
+            )}
+          </p>
+        </div>
+
+        <div style={{ marginBottom: '2rem' }}>
+          <h3 style={{
+            fontSize: '1.1rem',
+            fontWeight: '300',
+            color: '#00ff88',
+            marginBottom: '0.75rem'
+          }}>
+            {isGerman ?
+              'Mein Chef erwartet ständige Erreichbarkeit – wie kann ich geschützte Fokuszeit haben?' :
+              'My boss expects constant availability—how can I have protected focus time?'}
+          </h3>
+          <p style={{
+            fontSize: '0.95rem',
+            lineHeight: '1.7',
+            color: '#ddd',
+            marginBottom: '1.5rem'
+          }}>
+            {isGerman ? (
+              <>Ergebnisse verschaffen Ihnen Autonomie. "Immer erreichbar" zu sein trainiert Ihre Organisation, Sie zu unterbrechen. Kommunikationsstrategie: Morgen – "Um maximalen Wert bei [Projekt X] zu liefern, bin ich im Fokus-Modus 9-11 Uhr. Danach verfügbar." Erwartungen setzen: "Ich prüfe E-Mails um 11 Uhr, 14 Uhr und 16 Uhr. Bei Notfällen rufen Sie mein Telefon an." Ergebnisse liefern: Wenn Ihre Drei Dinge sichtbare Ergebnisse produzieren, erhalten Sie geschützte Zeit. Microsoft-Forschung zeigt, dass Top-Performer 50% weniger unterbrochen werden – nicht weil sie ignoriert werden, sondern weil sie ihre Umgebung durch Grenzen und Ergebnisse trainiert haben.</>
+            ) : (
+              <>Results earn you autonomy. Being "always available" trains your organization to interrupt you. Communication strategy: Morning—"To deliver maximum value on [Project X], I'm in focus mode 9-11am. Available after." Set expectations: "I check email at 11am, 2pm, and 4pm. For emergencies, call my phone." Deliver results: When your Three Things produce visible outcomes, you'll earn protected time. Microsoft research shows top performers are interrupted 50% less—not because they're ignored, but because they've trained their environment through boundaries and results.</>
+            )}
+          </p>
+        </div>
+
+        <div style={{ marginBottom: '2rem' }}>
+          <h3 style={{
+            fontSize: '1.1rem',
+            fontWeight: '300',
+            color: '#00ff88',
+            marginBottom: '0.75rem'
+          }}>
+            {isGerman ?
+              'Drei Aufgaben scheinen zu einfach – ist das nicht nur Prokrastination?' :
+              "Three tasks seems too simple—isn't this just procrastination?"}
+          </h3>
+          <p style={{
+            fontSize: '0.95rem',
+            lineHeight: '1.7',
+            color: '#ddd',
+            marginBottom: '1.5rem'
+          }}>
+            {isGerman ? (
+              <>Drei transformative Aufgaben erfordern exponentiell mehr mentale Energie als 20 Wartungsaufgaben. Betrachten Sie: 20 E-Mails = geringe kognitive Last, hohes Volumen, null strategisches Denken. 1 strategische Produktentscheidung = hohe kognitive Last, tiefe Analyse, transformative Wirkung. Sie machen nicht weniger Arbeit – Sie machen härtere, wertvollere Arbeit, die Ihre volle Kapazität erfordert. Forschung zeigt, dass Wissensarbeiter für Qualität des Denkens bezahlt werden, nicht für Quantität der Aufgaben. Drei tiefe Gedanken schlagen 20 oberflächliche.</>
+            ) : (
+              <>Three transformational tasks require exponentially more mental energy than 20 maintenance tasks. Consider: 20 emails = low cognitive load, high volume, zero strategic thinking. 1 strategic product decision = high cognitive load, deep analysis, transformational impact. You're not doing less work—you're doing harder, more valuable work that requires your full capacity. Research shows knowledge workers are paid for quality of thought, not quantity of tasks. Three deep thoughts beat 20 shallow ones.</>
+            )}
+          </p>
+        </div>
+
+        <div style={{ marginBottom: '2rem' }}>
+          <h3 style={{
+            fontSize: '1.1rem',
+            fontWeight: '300',
+            color: '#00ff88',
+            marginBottom: '0.75rem'
+          }}>
+            {isGerman ?
+              'Was ist der Unterschied zwischen dem Drei-Dinge-System und der Ivy Lee-Methode?' :
+              "What's the difference between the Three Things system and the Ivy Lee Method?"}
+          </h3>
+          <p style={{
+            fontSize: '0.95rem',
+            lineHeight: '1.7',
+            color: '#ddd',
+            marginBottom: '1.5rem'
+          }}>
+            {isGerman ? (
+              <>Das Drei-Dinge-System ist eine moderne Weiterentwicklung der Ivy Lee-Methode von 1918. Ivy Lee empfahl 6 Aufgaben pro Tag. Moderne Neurowissenschaft zeigt: (1) Fokuskapazität ist begrenzter als 1918 verstanden – wir haben nur ~6 Stunden/Woche echte Deep Work (Dr. David Rock, NeuroLeadership Institute); (2) Deep Work erfordert ausgedehnte ununterbrochene Blöcke (Cal Newports Forschung); (3) Entscheidungsmüdigkeit nimmt mit jeder Wahl zu – weniger Prioritätsaufgaben bewahren mentale Energie. Drei transformative Aufgaben maximieren begrenzte kognitive Kapazität bei Beibehaltung des Kernprinzips sequentieller Ausführung.</>
+            ) : (
+              <>The Three Things system is a modern evolution of the 1918 Ivy Lee Method. Ivy Lee recommended 6 tasks per day. Modern neuroscience shows: (1) Focus capacity is more limited than understood in 1918—we have only ~6 hours/week of true deep work (Dr. David Rock, NeuroLeadership Institute); (2) Deep work requires extended uninterrupted blocks (Cal Newport's research); (3) Decision fatigue increases with every choice—fewer priority tasks preserve mental energy. Three transformational tasks maximize limited cognitive capacity while maintaining the core principle of sequential execution.</>
+            )}
+          </p>
+        </div>
+
+        <div style={{ marginBottom: '2rem' }}>
+          <h3 style={{
+            fontSize: '1.1rem',
+            fontWeight: '300',
+            color: '#00ff88',
+            marginBottom: '0.75rem'
+          }}>
+            {isGerman ?
+              'Kann ich dieses System nutzen, wenn ich nicht selbstständig bin?' :
+              "Can I use this system if I'm not self-employed?"}
+          </h3>
+          <p style={{
+            fontSize: '0.95rem',
+            lineHeight: '1.7',
+            color: '#ddd',
+            marginBottom: '1.5rem'
+          }}>
+            {isGerman ? (
+              <>Absolut. Das Drei-Dinge-System funktioniert für Angestellte, Manager und Führungskräfte. Der Schlüssel liegt darin, zu identifizieren, welche Aufgaben in Ihrem Job wirklich transformativ sind (strategische Ziele voranbringen, kritische Fähigkeiten aufbauen, Durchbruchwert schaffen) versus Wartung (Dinge am Laufen halten). Selbst in strukturierten Umgebungen haben Sie mehr Kontrolle über Aufgabenpriorisierung als Sie denken. Beginnen Sie damit, täglich 2-3 Stunden für Ihre wirkungsvollste Arbeit zu schützen.</>
+            ) : (
+              <>Absolutely. The Three Things system works for employees, managers, and leaders. The key is identifying which tasks at your job are truly transformational (advancing strategic objectives, building critical skills, creating breakthrough value) versus maintenance (keeping things running). Even in structured environments, you have more control over task prioritization than you think. Start by protecting 2-3 hours daily for your highest-impact work.</>
+            )}
+          </p>
+        </div>
+
+        <div style={{ marginBottom: 0 }}>
+          <h3 style={{
+            fontSize: '1.1rem',
+            fontWeight: '300',
+            color: '#00ff88',
+            marginBottom: '0.75rem'
+          }}>
+            {isGerman ?
+              'Was ist, wenn eines meiner "Drei Dinge" mehrere Tage dauert?' :
+              'What if one of my "Three Things" takes multiple days?'}
+          </h3>
+          <p style={{
+            fontSize: '0.95rem',
+            lineHeight: '1.7',
+            color: '#ddd',
+            marginBottom: 0
+          }}>
+            {isGerman ? (
+              <>Brechen Sie es in transformative Teilaufgaben auf. Zum Beispiel, wenn "Neues Produkt launchen" Ihr Ziel ist, könnten Ihre Drei Dinge sein: Tag 1 – Feature-Priorisierung mit Team finalisieren; Tag 2 – Technisches Architekturdokument fertigstellen; Tag 3 – Engineering-Ressourcen sichern. Jeder Tag bringt die größere Initiative mit konkreter, abschließbarer transformativer Arbeit voran.</>
+            ) : (
+              <>Break it into transformational sub-tasks. For example, if "Launch new product" is your goal, your Three Things might be: Day 1—Finalize feature prioritization with team; Day 2—Complete technical architecture document; Day 3—Secure engineering resources. Each day moves the larger initiative forward with concrete, completable transformational work.</>
+            )}
+          </p>
+        </div>
+      </div>
+
       <div style={{
         borderTop: '1px solid #222',
         marginTop: '4rem',

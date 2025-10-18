@@ -26,7 +26,7 @@ const routes = [
   { path: '/blog/elon-musk-100-signal', file: 'blog/elon-musk-100-signal.html' },
   { path: '/blog/founder-productivity-paradox', file: 'blog/founder-productivity-paradox.html' },
   { path: '/blog/signal-vs-noise-philosophy', file: 'blog/signal-vs-noise-philosophy.html' },
-  { path: '/blog/three-things-productivity', file: 'blog/three-things-productivity.html' },
+  { path: '/blog/three-things-productivity-system', file: 'blog/three-things-productivity-system.html' },
   { path: '/blog/90-day-tracking-experiment', file: 'blog/90-day-tracking-experiment.html' }
 ];
 
