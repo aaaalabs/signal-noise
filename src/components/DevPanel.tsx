@@ -185,15 +185,19 @@ export default function DevPanel() {
     localStorage.setItem(DATA_KEY, JSON.stringify(scenario));
     localStorage.setItem('userFirstName', 'Thomas');
 
-    // Simulate Premium status for AI Coach
+    // Simulate Premium status for AI Coach (matches SessionData interface)
+    const sessionNow = Date.now();
     const fakeSession = {
       email: 'dev@signal-noise.test',
-      sessionToken: 'dev-token-' + Date.now(),
-      subscriptionId: 'dev-subscription-' + Date.now(),
+      token: 'dev-token-' + sessionNow,
+      sessionToken: 'dev-session-' + sessionNow,
+      created: sessionNow,
+      lastActive: sessionNow,
+      expires: sessionNow + (365 * 24 * 60 * 60 * 1000), // 1 year from now
       firstName: 'Thomas',
       tier: 'foundation',
-      isActive: true,
-      expiresAt: Date.now() + (365 * 24 * 60 * 60 * 1000) // 1 year
+      paymentType: 'lifetime',
+      syncedFromLocal: null
     };
     localStorage.setItem('sessionData', JSON.stringify(fakeSession));
 
