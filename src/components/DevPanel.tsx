@@ -21,10 +21,10 @@ export default function DevPanel() {
     import.meta.env.DEV || localStorage.getItem('dev_panel_enabled') === 'true'
   );
 
-  // Keyboard shortcut: Cmd+Shift+T (secret shortcut in production)
+  // Keyboard shortcut: Cmd+K (secret shortcut in production)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key === 'T') {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
 
         // Secret shortcut: Enable panel in production on first press
@@ -255,7 +255,7 @@ export default function DevPanel() {
     localStorage.removeItem('dev_panel_enabled');
     setEnabled(false);
     setIsOpen(false);
-    console.log('✅ Dev Panel disabled - reload to re-enable with Cmd+Shift+T');
+    console.log('✅ Dev Panel disabled - reload to re-enable with Cmd+K');
   };
 
   return (
@@ -290,7 +290,7 @@ export default function DevPanel() {
           e.currentTarget.style.backgroundColor = '#111';
           e.currentTarget.style.transform = 'scale(1)';
         }}
-        title="Dev Panel (Cmd+Shift+T)"
+        title="Dev Panel (Cmd+K)"
       >
         🧪
       </button>
@@ -510,7 +510,7 @@ export default function DevPanel() {
             color: '#444',
             textAlign: 'center'
           }}>
-            {import.meta.env.DEV ? 'DEV Mode' : 'Secret Mode'} · Cmd+Shift+T
+            {import.meta.env.DEV ? 'DEV Mode' : 'Secret Mode'} · Cmd+K
           </div>
         </div>
       )}
