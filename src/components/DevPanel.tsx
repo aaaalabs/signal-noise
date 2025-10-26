@@ -185,12 +185,25 @@ export default function DevPanel() {
     localStorage.setItem(DATA_KEY, JSON.stringify(scenario));
     localStorage.setItem('userFirstName', 'Thomas');
 
+    // Simulate Premium status for AI Coach
+    const fakeSession = {
+      email: 'dev@signal-noise.test',
+      sessionToken: 'dev-token-' + Date.now(),
+      subscriptionId: 'dev-subscription-' + Date.now(),
+      firstName: 'Thomas',
+      tier: 'foundation',
+      isActive: true,
+      expiresAt: Date.now() + (365 * 24 * 60 * 60 * 1000) // 1 year
+    };
+    localStorage.setItem('sessionData', JSON.stringify(fakeSession));
+
     console.log('✅ AI Coach Debug scenario loaded. Reloading app...');
     console.log('📊 Scenario details:', {
       totalTasks: scenario.tasks.length,
       abandonedSignals: 3,
       repeatingTask: 'Lead Outreach (appears 2x)',
       firstName: 'Thomas',
+      premiumStatus: 'Simulated',
       readyForAICoach: true
     });
 
@@ -220,6 +233,7 @@ export default function DevPanel() {
     localStorage.setItem(DATA_KEY, JSON.stringify(cleanState));
     localStorage.removeItem('userFirstName');
     localStorage.removeItem('dev_verbose_ai_logging');
+    localStorage.removeItem('sessionData'); // Clear premium simulation
 
     console.log('✅ Reset complete. Reloading app...');
     window.location.reload();
