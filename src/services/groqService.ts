@@ -103,6 +103,16 @@ Return a personalized coaching message.`);
       { role: 'user', content: userPrompt }
     ];
 
+    // DEV: Verbose logging if enabled
+    const verboseLogging = import.meta.env.DEV && localStorage.getItem('dev_verbose_ai_logging') === 'true';
+    if (verboseLogging) {
+      console.log('🤖 === AI COACH REQUEST ===');
+      console.log('Mode:', options?.isPersonalMode ? 'Personal AI' : 'Pattern AI');
+      console.log('System Prompt:', systemPrompt);
+      console.log('User Prompt:', userPrompt);
+      console.log('Payload Hash:', JSON.stringify(payload).substring(0, 100) + '...');
+    }
+
     // Call different API endpoint based on mode
     const apiEndpoint = options?.isPersonalMode
       ? '/api/personal-ai-coach'  // Enhanced AI with full task analysis
@@ -132,6 +142,13 @@ Return a personalized coaching message.`);
       hasChoices: !!data.choices,
       fullResponse: data
     });
+
+    // DEV: Verbose logging
+    if (verboseLogging) {
+      console.log('🤖 === AI COACH RESPONSE ===');
+      console.log('Raw Response:', data);
+      console.log('Message:', data.message || data.choices?.[0]?.message?.content);
+    }
 
     // Try to parse the coach response as JSON (especially important for Personal AI)
     try {

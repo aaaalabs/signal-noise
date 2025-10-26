@@ -308,6 +308,19 @@ export default function AICoach({ tasks, currentRatio, firstName, onNameUpdate, 
         ...personalAIData
       };
 
+      // DEV: Log payload for debugging
+      if (import.meta.env.DEV) {
+        const payloadHash = JSON.stringify(payload).substring(0, 50);
+        console.log('🎯 AI Coach Payload:', {
+          mode: isPersonalMode ? 'Personal AI' : 'Pattern AI',
+          firstName: userName,
+          currentRatio,
+          taskCount: tasks.length,
+          payloadPreview: payloadHash + '...',
+          timestamp: new Date().toISOString()
+        });
+      }
+
       const response = await getCoachAdvice(payload, { isPersonalMode });
       setCoachResponse(response);
     } catch (error) {

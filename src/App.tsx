@@ -30,6 +30,7 @@ import LoadingSplash from './components/LoadingSplash';
 import AboutModal from './components/AboutModal';
 import PrivacyModal from './components/PrivacyModal';
 import Demo from './components/Demo';
+import DevPanel from './components/DevPanel';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { checkAchievements, getTodayRatio } from './utils/achievements';
 import { handleStripeReturn, getSessionData, type SessionData } from './services/premiumService';
@@ -1104,10 +1105,13 @@ function AppContent() {
       );
     });
 
-    if (yesterdayUnfinishedSignals.length > 0) {
-      setUnfinishedTasks(yesterdayUnfinishedSignals);
-      setShowMorningReview(true);
+    // SLC: Skip modal if no unfinished signals (nothing to review)
+    if (yesterdayUnfinishedSignals.length === 0) {
+      return;
     }
+
+    setUnfinishedTasks(yesterdayUnfinishedSignals);
+    setShowMorningReview(true);
   }, [isLoaded, data.tasks, data.settings.commitModeActivatedAt, data.settings.lastReviewedDate]);
 
   const handleOnboardingComplete = () => {
@@ -1208,6 +1212,24 @@ function AppContent() {
       };
 
       // Update ratio after archiving
+      newData.signal_ratio = getTodayRatio(newData.tasks);
+      return newData;
+    });
+  };
+
+  const handleMorningReviewMarkDone = (taskId: number) => {
+    // Mark as completed, keep yesterday's timestamp (honest data)
+    setData(prev => {
+      const newData = {
+        ...prev,
+        tasks: prev.tasks.map(task =>
+          task.id === taskId
+            ? { ...task, completed: true }
+            : task
+        )
+      };
+
+      // Update ratio after marking done
       newData.signal_ratio = getTodayRatio(newData.tasks);
       return newData;
     });
@@ -1658,6 +1680,7 @@ function AppContent() {
           return task.type === 'signal' && taskDate === yesterdayDate;
         }).length}
         onRollover={handleMorningReviewRollover}
+        onMarkDone={handleMorningReviewMarkDone}
         onReclassifyAsNoise={handleMorningReviewReclassify}
         onArchive={handleMorningReviewArchive}
         onClose={handleMorningReviewClose}
@@ -1772,6 +1795,9 @@ function AppContent() {
         }} />
         </div>
       )}
+
+      {/* Dev Panel - only visible in DEV mode */}
+      <DevPanel />
     </>
   );
 }

@@ -1,4 +1,4 @@
-import { Task } from '../types';
+import type { Task } from '../types';
 import { useState } from 'react';
 
 interface MorningReviewModalProps {
@@ -7,6 +7,7 @@ interface MorningReviewModalProps {
   yesterdayCompleted: number;
   yesterdayTotal: number;
   onRollover: (taskId: number) => void;
+  onMarkDone: (taskId: number) => void;
   onReclassifyAsNoise: (taskId: number) => void;
   onArchive: (taskId: number) => void;
   onClose: () => void;
@@ -18,6 +19,7 @@ export default function MorningReviewModal({
   yesterdayCompleted,
   yesterdayTotal,
   onRollover,
+  onMarkDone,
   onReclassifyAsNoise,
   onArchive,
   onClose
@@ -26,25 +28,37 @@ export default function MorningReviewModal({
 
   if (!show) return null;
 
-  const handleAction = (taskId: number, action: 'rollover' | 'noise' | 'archive') => {
-    // Add to processed set
+  const handleAction = (taskId: number, action: 'rollover' | 'markDone' | 'noise' | 'archive') => {
+    // Add to processed set immediately
     setProcessedTasks(prev => new Set(prev).add(taskId));
 
     // Execute action with slight delay for visual feedback
     setTimeout(() => {
       if (action === 'rollover') {
         onRollover(taskId);
+      } else if (action === 'markDone') {
+        onMarkDone(taskId);
       } else if (action === 'noise') {
         onReclassifyAsNoise(taskId);
       } else {
         onArchive(taskId);
       }
-
-      // Check if all tasks are processed
-      if (processedTasks.size + 1 === unfinishedTasks.length) {
-        setTimeout(onClose, 300);
-      }
     }, 200);
+  };
+
+  // Dynamic "Tag starten" button
+  const unreviewedCount = unfinishedTasks.length - processedTasks.size;
+  const allProcessed = unreviewedCount === 0;
+
+  const handleClose = () => {
+    // Auto-rollover unprocessed tasks
+    unfinishedTasks.forEach(task => {
+      if (!processedTasks.has(task.id)) {
+        onRollover(task.id);
+      }
+    });
+
+    onClose();
   };
 
   return (
@@ -105,20 +119,62 @@ export default function MorningReviewModal({
           {unfinishedTasks.map((task) => {
             const isProcessed = processedTasks.has(task.id);
 
+            // Collapsed view for processed tasks
+            if (isProcessed) {
+              return (
+                <div
+                  key={task.id}
+                  style={{
+                    marginBottom: '8px',
+                    padding: '8px 12px',
+                    backgroundColor: '#0a0a0a',
+                    border: '1px solid #222',
+                    borderRadius: '6px',
+                    opacity: 0.5,
+                    height: '32px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    fontSize: '12px',
+                    color: '#666',
+                    transition: 'all 200ms ease',
+                    overflow: 'hidden'
+                  }}
+                >
+                  ✓ {task.text}
+                </div>
+              );
+            }
+
+            // Full view for unprocessed tasks
             return (
               <div
                 key={task.id}
                 style={{
                   marginBottom: '20px',
                   padding: '16px',
-                  backgroundColor: isProcessed ? '#0a0a0a' : '#111',
+                  backgroundColor: '#111',
                   border: '1px solid #222',
                   borderRadius: '8px',
-                  opacity: isProcessed ? 0.5 : 1,
-                  transition: 'all 400ms cubic-bezier(0.4, 0, 0.2, 1)',
-                  pointerEvents: isProcessed ? 'none' : 'auto'
+                  transition: 'all 200ms ease'
                 }}
               >
+                {/* Optional: "War eigentlich erledigt" - tiny, above task */}
+                <div
+                  onClick={() => handleAction(task.id, 'markDone')}
+                  style={{
+                    fontSize: '10px',
+                    color: '#555',
+                    marginBottom: '8px',
+                    cursor: 'pointer',
+                    transition: 'color 0.2s ease',
+                    userSelect: 'none'
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = '#888'}
+                  onMouseLeave={(e) => e.currentTarget.style.color = '#555'}
+                >
+                  ✓ War eigentlich erledigt
+                </div>
+
                 {/* Task Text */}
                 <p style={{
                   color: '#fff',
@@ -130,126 +186,122 @@ export default function MorningReviewModal({
                   {task.text}
                 </p>
 
-                {/* Action Buttons */}
+                {/* Primary Button: "Heute Signal" */}
+                <button
+                  onClick={() => handleAction(task.id, 'rollover')}
+                  style={{
+                    width: '100%',
+                    backgroundColor: 'var(--signal)',
+                    color: '#000',
+                    border: 'none',
+                    padding: '12px',
+                    borderRadius: '6px',
+                    fontSize: '14px',
+                    fontWeight: 500,
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease',
+                    marginBottom: '12px'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = '#00ff88';
+                    e.currentTarget.style.transform = 'scale(1.02)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'var(--signal)';
+                    e.currentTarget.style.transform = 'scale(1)';
+                  }}
+                >
+                  Heute Signal
+                </button>
+
+                {/* Secondary Options: War Noise • Erledigt sich */}
                 <div style={{
                   display: 'flex',
-                  gap: '8px',
-                  flexWrap: 'wrap'
+                  gap: '12px',
+                  justifyContent: 'center',
+                  fontSize: '13px'
                 }}>
-                  {/* Rollover to Today */}
-                  <button
-                    onClick={() => handleAction(task.id, 'rollover')}
-                    style={{
-                      flex: '1 1 auto',
-                      backgroundColor: 'var(--signal)',
-                      color: '#000',
-                      border: 'none',
-                      padding: '8px 12px',
-                      borderRadius: '6px',
-                      fontSize: '12px',
-                      fontWeight: 500,
-                      cursor: 'pointer',
-                      transition: 'all 0.2s ease',
-                      minWidth: '120px'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = '#00ff88';
-                      e.currentTarget.style.transform = 'scale(1.02)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = 'var(--signal)';
-                      e.currentTarget.style.transform = 'scale(1)';
-                    }}
-                  >
-                    Heute Signal
-                  </button>
-
-                  {/* Reclassify as Noise */}
-                  <button
+                  <span
                     onClick={() => handleAction(task.id, 'noise')}
                     style={{
-                      flex: '1 1 auto',
-                      backgroundColor: 'transparent',
-                      color: '#888',
-                      border: '1px solid #333',
-                      padding: '8px 12px',
-                      borderRadius: '6px',
-                      fontSize: '12px',
-                      fontWeight: 300,
+                      color: '#666',
                       cursor: 'pointer',
-                      transition: 'all 0.2s ease',
-                      minWidth: '120px'
+                      transition: 'color 0.2s ease',
+                      fontWeight: 300
                     }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor = '#555';
-                      e.currentTarget.style.color = '#aaa';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.borderColor = '#333';
-                      e.currentTarget.style.color = '#888';
-                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.color = '#aaa'}
+                    onMouseLeave={(e) => e.currentTarget.style.color = '#666'}
                   >
                     War Noise
-                  </button>
+                  </span>
 
-                  {/* Archive */}
-                  <button
+                  <span style={{ color: '#333' }}>•</span>
+
+                  <span
                     onClick={() => handleAction(task.id, 'archive')}
                     style={{
-                      flex: '1 1 auto',
-                      backgroundColor: 'transparent',
-                      color: '#555',
-                      border: '1px solid #222',
-                      padding: '8px 12px',
-                      borderRadius: '6px',
-                      fontSize: '12px',
-                      fontWeight: 100,
+                      color: '#666',
                       cursor: 'pointer',
-                      transition: 'all 0.2s ease',
-                      minWidth: '120px'
+                      transition: 'color 0.2s ease',
+                      fontWeight: 300
                     }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor = '#333';
-                      e.currentTarget.style.color = '#666';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.borderColor = '#222';
-                      e.currentTarget.style.color = '#555';
-                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.color = '#aaa'}
+                    onMouseLeave={(e) => e.currentTarget.style.color = '#666'}
                   >
-                    Archivieren
-                  </button>
+                    Erledigt sich
+                  </span>
                 </div>
               </div>
             );
           })}
         </div>
 
-        {/* Skip for Now Button */}
+        {/* Dynamic "Tag starten" Button */}
         <button
-          onClick={onClose}
+          onClick={handleClose}
           style={{
             width: '100%',
-            backgroundColor: 'transparent',
-            color: '#444',
-            border: '1px solid #222',
-            padding: '12px 24px',
+            backgroundColor: allProcessed ? 'var(--signal)' : '#222',
+            color: allProcessed ? '#000' : '#fff',
+            border: 'none',
+            padding: '16px 24px',
             borderRadius: '6px',
             fontSize: '14px',
-            fontWeight: 300,
+            fontWeight: allProcessed ? 500 : 300,
             cursor: 'pointer',
-            transition: 'all 0.2s ease'
+            transition: 'all 0.2s ease',
+            textAlign: 'center',
+            animation: allProcessed ? 'pulse 2s ease-in-out infinite' : 'none'
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.borderColor = '#333';
-            e.currentTarget.style.color = '#666';
+            if (allProcessed) {
+              e.currentTarget.style.backgroundColor = '#00ff88';
+              e.currentTarget.style.transform = 'scale(1.02)';
+            } else {
+              e.currentTarget.style.backgroundColor = '#333';
+            }
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.borderColor = '#222';
-            e.currentTarget.style.color = '#444';
+            if (allProcessed) {
+              e.currentTarget.style.backgroundColor = 'var(--signal)';
+              e.currentTarget.style.transform = 'scale(1)';
+            } else {
+              e.currentTarget.style.backgroundColor = '#222';
+            }
           }}
         >
-          Später
+          {allProcessed ? (
+            <div>Tag starten</div>
+          ) : (
+            <div>
+              <div style={{ fontWeight: 500 }}>
+                {unreviewedCount} Signal{unreviewedCount > 1 ? 's' : ''} übernehmen
+              </div>
+              <div style={{ fontWeight: 100, fontSize: '12px', marginTop: '4px' }}>
+                & Tag starten
+              </div>
+            </div>
+          )}
         </button>
       </div>
 
@@ -260,6 +312,15 @@ export default function MorningReviewModal({
           }
           to {
             opacity: 1;
+          }
+        }
+
+        @keyframes pulse {
+          0%, 100% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.01);
           }
         }
       `}</style>
