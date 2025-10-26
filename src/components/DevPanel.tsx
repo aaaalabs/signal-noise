@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import type { AppData } from '../types';
+import { checkPremiumStatus } from '../services/premiumService';
 
 /**
  * DevPanel - SLC Development Testing Panel
@@ -21,13 +22,32 @@ export default function DevPanel() {
     import.meta.env.DEV || localStorage.getItem('dev_panel_enabled') === 'true'
   );
 
-  // Keyboard shortcut: Cmd+K (secret shortcut in production)
+  // Check if user is Premium
+  const isPremium = checkPremiumStatus().isActive;
+
+  // Keyboard shortcut: Cmd+K (secret shortcut for Premium users only)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
 
-        // Secret shortcut: Enable panel in production on first press
+        // DEV mode: Always allow
+        if (import.meta.env.DEV) {
+          if (!enabled) {
+            setEnabled(true);
+            localStorage.setItem('dev_panel_enabled', 'true');
+          }
+          setIsOpen(prev => !prev);
+          return;
+        }
+
+        // Production: Only Premium users
+        if (!isPremium) {
+          console.log('🔒 DevPanel requires Premium access');
+          return;
+        }
+
+        // Secret shortcut: Enable panel for Premium users
         if (!enabled) {
           setEnabled(true);
           localStorage.setItem('dev_panel_enabled', 'true');
@@ -39,10 +59,10 @@ export default function DevPanel() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [enabled]);
+  }, [enabled, isPremium]);
 
-  // Only render if enabled
-  if (!enabled) {
+  // Only render if enabled AND (DEV mode OR Premium)
+  if (!enabled || (!import.meta.env.DEV && !isPremium)) {
     return null;
   }
 
