@@ -341,6 +341,11 @@ function AppContent() {
                 }
 
                 setData(parsedData);
+
+                // SLC FIX: Delete localStorage for premium users (one source of truth = Redis)
+                localStorage.removeItem(DATA_KEY);
+                console.log('🗑️ Cleared localStorage - Redis is now the only source of truth');
+
                 setIsLoaded(true);
                 setIsLoadingFromCloud(false); // CRITICAL: Re-enable auto-sync after cloud load success
                 setHasAttemptedCloudLoad(true); // Mark that we've attempted cloud loading
@@ -473,6 +478,20 @@ function AppContent() {
       }
     };
 
+    // SLC FIX: Check for interrupted sync (browser crash detection)
+    const interruptedSync = sessionStorage.getItem('SYNC_IN_PROGRESS');
+    if (interruptedSync) {
+      const syncTime = parseInt(interruptedSync);
+      const timeSinceCrash = Date.now() - syncTime;
+      console.warn('⚠️ INTERRUPTED SYNC DETECTED', {
+        syncStartedAt: new Date(syncTime).toISOString(),
+        timeSinceCrash: `${(timeSinceCrash / 1000).toFixed(0)}s ago`,
+        action: 'Will reload from Redis to ensure data consistency'
+      });
+      sessionStorage.removeItem('SYNC_IN_PROGRESS');
+      // Crash detected - premium users will reload from Redis automatically
+    }
+
     checkPremiumSession();
 
     // Listen for premium session updates (from magic link login)
@@ -553,11 +572,15 @@ function AppContent() {
       const requestPayload = {
         email,
         data: appData,
-        firstName: appData.settings.firstName || ''
+        firstName: appData.settings.firstName || '',
+        clientVersion: syncTracker.current.version // SLC FIX: Send client version for conflict detection
       };
 
       // 🔄 Start sync feedback animation
       syncStart();
+
+      // SLC FIX: Mark sync as in-progress (for crash detection)
+      sessionStorage.setItem('SYNC_IN_PROGRESS', Date.now().toString());
 
       const response = await fetch('/api/sync', {
         method: 'POST',
@@ -585,6 +608,9 @@ function AppContent() {
         // ✅ Success sync feedback animation with haptic
         syncSuccess();
 
+        // SLC FIX: Clear crash detection flag (sync completed successfully)
+        sessionStorage.removeItem('SYNC_IN_PROGRESS');
+
         // Increment local version to match what server just saved
         syncTracker.current.version++;
         setLocalVersion(syncTracker.current.version);
@@ -600,9 +626,28 @@ function AppContent() {
           totalResponseTime: `${(performance.now() - startTime).toFixed(2)}ms`,
           redisOperationSuccess: true
         });
+      } else if (response.status === 409) {
+        // SLC FIX: Version conflict detected - server has newer data
+        syncError();
+        sessionStorage.removeItem('SYNC_IN_PROGRESS'); // Clear flag
+
+        const conflictData = await response.json();
+        console.error('🚨 VERSION CONFLICT DETECTED', {
+          clientVersion: syncTracker.current.version,
+          serverVersion: conflictData.serverVersion,
+          versionDelta: conflictData.serverVersion - syncTracker.current.version,
+          message: conflictData.error
+        });
+
+        // Simple solution: Reload page to get latest data from server
+        console.log('🔄 Reloading page to sync with server version...');
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       } else {
         // ❌ Error sync feedback animation
         syncError();
+        sessionStorage.removeItem('SYNC_IN_PROGRESS'); // Clear flag
 
         console.error('❌ CLOUD SYNC FAILED - SERVER ERROR', {
           httpStatus: response.status,
@@ -633,6 +678,7 @@ function AppContent() {
 
       // ❌ Network error sync feedback animation
       syncError();
+      sessionStorage.removeItem('SYNC_IN_PROGRESS'); // Clear flag
 
       console.error('❌ CLOUD SYNC NETWORK ERROR', {
         error: error instanceof Error ? error.message : 'Unknown error',
@@ -644,11 +690,20 @@ function AppContent() {
     }
   }, [sessionToken, isPremiumMode]);
 
+  // SLC FIX: Debounce timer to prevent sync spam
+  const syncDebounceTimer = useRef<NodeJS.Timeout | null>(null);
+
   // Save data to localStorage or cloud whenever data changes
   useEffect(() => {
     // CRITICAL: Don't auto-sync until we've attempted to load from cloud first!
     if (isLoaded && data && !isLoadingFromCloud && hasAttemptedCloudLoad) {
-      const currentTime = Date.now();
+      // SLC FIX: Clear previous timer and debounce sync by 2 seconds
+      if (syncDebounceTimer.current) {
+        clearTimeout(syncDebounceTimer.current);
+      }
+
+      syncDebounceTimer.current = setTimeout(() => {
+        const currentTime = Date.now();
 
       const dataSize = JSON.stringify(data).length;
       const dataSizeKB = (dataSize / 1024).toFixed(2);
@@ -719,7 +774,15 @@ function AppContent() {
       } catch (e) {
         // Widget update not available in browser
       }
+      }, 2000); // SLC FIX: 2-second debounce
     }
+
+    // Cleanup: Clear timer on unmount
+    return () => {
+      if (syncDebounceTimer.current) {
+        clearTimeout(syncDebounceTimer.current);
+      }
+    };
   }, [data, isLoaded, isPremiumMode, sessionToken, saveToCloud, hasAttemptedCloudLoad]);
 
   // Comprehensive state verification utility

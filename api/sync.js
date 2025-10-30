@@ -116,7 +116,7 @@ export default async function handler(req, res) {
     // For premium users with access tokens
     if (authHeader && authHeader.startsWith('Bearer ')) {
       const accessToken = authHeader.substring(7);
-      const { email, data, firstName, syncType } = body;
+      const { email, data, firstName, syncType, clientVersion } = body;
 
       if (!email || !accessToken) {
         return res.status(400).json({ error: 'Email and access token required for authenticated sync' });
@@ -225,6 +225,26 @@ export default async function handler(req, res) {
         // Get current version and increment
         const currentVersion = parseInt(user.version || '0');
         const newVersion = currentVersion + 1;
+
+        // SLC FIX: Check for version conflict (client version < server version)
+        const clientVer = parseInt(clientVersion || '0');
+        if (clientVer > 0 && clientVer < currentVersion) {
+          console.error('🚨 VERSION CONFLICT DETECTED', {
+            clientVersion: clientVer,
+            serverVersion: currentVersion,
+            versionDelta: currentVersion - clientVer,
+            userKey: userKey,
+            timestamp: new Date().toISOString()
+          });
+
+          return res.status(409).json({
+            error: 'Version conflict - server has newer data',
+            conflict: true,
+            serverVersion: currentVersion,
+            clientVersion: clientVer,
+            message: 'Client data is outdated. Please reload to get latest version.'
+          });
+        }
 
         // Get device info from user agent
         const userAgent = req.headers['user-agent'] || '';
