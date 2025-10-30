@@ -263,6 +263,129 @@ export default function DevPanel() {
     window.location.reload();
   };
 
+  // SLC: Inject Missing Tasks (Oct 25-27)
+  const injectMissingTasks = async () => {
+    console.log('🚀 Injecting missing tasks from Oct 25-27...');
+
+    // Check if premium user
+    if (!isPremium) {
+      console.log('❌ This function requires Premium access (uses API)');
+      alert('This function requires Premium access');
+      return;
+    }
+
+    try {
+      // Get session token
+      const sessionData = JSON.parse(localStorage.getItem('sessionData') || '{}');
+      const sessionToken = sessionData.sessionToken;
+      const email = sessionData.email;
+
+      if (!sessionToken || !email) {
+        console.error('❌ No session found');
+        alert('No session found. Please log in.');
+        return;
+      }
+
+      console.log('✅ Session found:', email);
+
+      // Fetch current data from Redis
+      console.log('📥 Fetching current data from Redis...');
+      const response = await fetch('/api/tasks', {
+        headers: { 'Authorization': `Bearer ${sessionToken}` }
+      });
+
+      if (!response.ok) {
+        console.error('❌ Failed to fetch:', response.status);
+        alert('Failed to fetch current data');
+        return;
+      }
+
+      const { data: cloudData } = await response.json();
+      console.log('✅ Current tasks:', cloudData.tasks.length);
+
+      // Get highest task ID
+      const maxId = Math.max(...cloudData.tasks.map((t: any) => t.id), 0);
+
+      // Define missing tasks
+      const missingTasks = [
+        {date: '2025-10-25T10:00:00Z', text: 'Förderunterlagen finalisiert'},
+        {date: '2025-10-25T14:00:00Z', text: 'WG-Anzeige ausarbeiten'},
+        {date: '2025-10-25T16:00:00Z', text: 'VoiceLoop BPMN Breakthrough'},
+        {date: '2025-10-25T18:00:00Z', text: 'Visitenkarten Design gestartet'},
+        {date: '2025-10-26T10:00:00Z', text: 'VoiceLoop MVP Validation'},
+        {date: '2025-10-26T12:00:00Z', text: 'Digital-Lotsen Pipeline CRM'},
+        {date: '2025-10-26T14:00:00Z', text: 'Visitenkarten entworfen'},
+        {date: '2025-10-26T16:00:00Z', text: 'Buchhaltungs-Check Innsbruck'},
+        {date: '2025-10-27T09:00:00Z', text: 'Digital Lotsen System verfeinert'},
+        {date: '2025-10-27T11:00:00Z', text: 'Visitenkarten bestellt'},
+        {date: '2025-10-27T14:00:00Z', text: 'KI Stammtisch Launch-Post'},
+        {date: '2025-10-27T16:00:00Z', text: 'EEG Mockup vorbereitet'}
+      ];
+
+      console.log('📦 Creating', missingTasks.length, 'tasks...\n');
+
+      // Create task objects
+      const newTasks = missingTasks.map((task, i) => ({
+        id: maxId + i + 1,
+        text: task.text,
+        type: 'signal' as const,
+        completed: true,
+        timestamp: task.date,
+        important: false
+      }));
+
+      // Log tasks
+      newTasks.forEach(t => {
+        console.log(`  ✅ [${t.timestamp.slice(0, 10)}] ${t.text}`);
+      });
+
+      // Merge and sort
+      const allTasks = [...cloudData.tasks, ...newTasks];
+      allTasks.sort((a, b) => {
+        const dateA = new Date(a.timestamp);
+        const dateB = new Date(b.timestamp);
+        return dateB.getTime() - dateA.getTime();
+      });
+
+      console.log('\n📊 Total:', allTasks.length, '(was', cloudData.tasks.length, ')');
+
+      // Update data
+      const updatedData = { ...cloudData, tasks: allTasks };
+
+      // Upload to Redis
+      console.log('📤 Uploading to Redis...');
+      const uploadResponse = await fetch('/api/sync', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${sessionToken}`
+        },
+        body: JSON.stringify({
+          email,
+          data: updatedData,
+          firstName: cloudData.settings?.firstName || '',
+          clientVersion: 0 // Force accept
+        })
+      });
+
+      if (uploadResponse.ok) {
+        console.log('✅ SUCCESS! Reloading in 2 seconds...');
+        alert(`Success! Added ${newTasks.length} tasks. Page will reload.`);
+        setTimeout(() => window.location.reload(), 2000);
+      } else if (uploadResponse.status === 409) {
+        console.log('⚠️ Version conflict - reloading...');
+        alert('Version conflict detected. Reloading...');
+        setTimeout(() => window.location.reload(), 1000);
+      } else {
+        console.error('❌ Upload failed:', uploadResponse.status);
+        alert('Upload failed: ' + uploadResponse.status);
+      }
+    } catch (error) {
+      console.error('❌ Error:', error);
+      alert('Error: ' + (error instanceof Error ? error.message : 'Unknown'));
+    }
+  };
+
   // Export current state
   const exportCurrentState = () => {
     const data = localStorage.getItem(DATA_KEY);
@@ -479,6 +602,41 @@ export default function DevPanel() {
                 Factory defaults
               </div>
             </button>
+
+            {/* SLC: Inject Missing Tasks */}
+            {isPremium && (
+              <button
+                onClick={injectMissingTasks}
+                style={{
+                  backgroundColor: '#111',
+                  color: '#00ff88',
+                  border: '1px solid #00ff88',
+                  padding: '12px',
+                  borderRadius: '6px',
+                  fontSize: '13px',
+                  fontWeight: '300',
+                  cursor: 'pointer',
+                  textAlign: 'left',
+                  transition: 'all 0.2s ease',
+                  marginTop: '12px'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#1a1a1a';
+                  e.currentTarget.style.borderColor = '#00ffaa';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = '#111';
+                  e.currentTarget.style.borderColor = '#00ff88';
+                }}
+              >
+                <div style={{ fontWeight: '500', marginBottom: '4px' }}>
+                  💉 Inject Missing Tasks
+                </div>
+                <div style={{ fontSize: '11px', color: '#666' }}>
+                  Oct 25-27 (12 completed signals)
+                </div>
+              </button>
+            )}
 
             {/* Export State */}
             <button
