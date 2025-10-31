@@ -297,15 +297,22 @@ function AppContent() {
               });
 
               if (cloudResponse.ok) {
-                const { data: cloudData } = await cloudResponse.json();
+                const { data: cloudData, version: serverVersion } = await cloudResponse.json();
 
                 // Parse cloudData if it's a string (Redis returns JSON strings)
                 const parsedData = typeof cloudData === 'string' ? JSON.parse(cloudData) : cloudData;
 
+                // CRITICAL FIX: Set version atomically from same response as data (prevents race conditions)
+                const version = serverVersion || 0;
+                syncTracker.current.version = version;
+                setLocalVersion(version);
+                console.log('🔄 Sync version initialized atomically with data:', version);
+
                 console.log('✅ Premium data loaded from cloud:', {
                   taskCount: parsedData.tasks?.length || 0,
                   premium: true,
-                  email: user.firstName || 'Unknown'
+                  email: user.firstName || 'Unknown',
+                  version: version
                 });
 
                 // Migrate cloud data structure if needed
@@ -320,24 +327,6 @@ function AppContent() {
                     ...task,
                     completed: task.completed !== undefined ? task.completed : (task.type === 'noise')
                   }));
-                }
-
-                // CRITICAL: Get server version to sync client tracking
-                try {
-                  const metaResponse = await fetch('/api/sync-meta', {
-                    headers: {
-                      'Authorization': `Bearer ${sessionData.sessionToken}`
-                    }
-                  });
-
-                  if (metaResponse.ok) {
-                    const metadata = await metaResponse.json();
-                    syncTracker.current.version = metadata.version || 0;
-                    setLocalVersion(metadata.version || 0);
-                    console.log('🔄 Sync version initialized from server:', metadata.version);
-                  }
-                } catch (error) {
-                  console.log('⚠️ Could not get initial server version:', error);
                 }
 
                 setData(parsedData);

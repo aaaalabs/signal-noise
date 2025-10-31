@@ -101,10 +101,16 @@ export default async function handler(req, res) {
     // Handle GET request - retrieve tasks
     if (req.method === 'GET') {
       console.log('✅ Tasks retrieved for user:', user.email);
+
+      // CRITICAL FIX: Return version atomically with data to prevent race conditions
+      const version = parseInt(user.version || '0');
+      console.log('📦 Including version in response:', version);
+
       return res.json({
         success: true,
         data: appData,
-        premium: true
+        premium: true,
+        version: version  // ATOMIC: Version matches the data being returned
       });
     }
 
