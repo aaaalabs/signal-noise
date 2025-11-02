@@ -15,10 +15,13 @@ export default async function handler(req, res) {
     url: process.env.KV_REST_API_URL,
     token: process.env.KV_REST_API_TOKEN
   });
-  console.log('📋 Tasks endpoint called:', {
-    method: req.method,
-    timestamp: new Date().toISOString()
-  });
+
+  console.log('🔍 === TASKS ENDPOINT DEBUG START ===');
+  console.log('🔍 Timestamp:', new Date().toISOString());
+  console.log('🔍 Method:', req.method);
+  console.log('🔍 Redis URL:', process.env.KV_REST_API_URL?.substring(0, 30) + '...');
+  console.log('🔍 Vercel Commit:', process.env.VERCEL_GIT_COMMIT_SHA || 'local');
+  console.log('🔍 Vercel Env:', process.env.VERCEL_ENV || 'local');
 
   const authHeader = req.headers.authorization;
 
@@ -61,7 +64,16 @@ export default async function handler(req, res) {
         if (userData.access_token === accessToken && userData.status === 'active') {
           userKey = key;
           user = userData;
-          console.log('✅ Access token validated for user:', userData.email);
+
+          console.log('🔍 === USER MATCH FOUND ===');
+          console.log('🔍 Matched Key:', key);
+          console.log('🔍 User Email:', userData.email);
+          console.log('🔍 User Version:', userData.version);
+          console.log('🔍 User Tasks Count:', userData.app_data?.tasks?.length || 0);
+          console.log('🔍 User Last Active:', userData.last_active ? new Date(parseInt(userData.last_active)).toISOString() : 'never');
+          console.log('🔍 User Status:', userData.status);
+          console.log('🔍 === END USER MATCH ===');
+
           break;
         }
       }
@@ -69,7 +81,9 @@ export default async function handler(req, res) {
       console.log('🔍 Access token search result:', {
         userFound: !!user,
         userKey: userKey,
-        userEmail: user?.email
+        userEmail: user?.email,
+        userVersion: user?.version,
+        userTasks: user?.app_data?.tasks?.length
       });
     }
 
@@ -111,6 +125,14 @@ export default async function handler(req, res) {
       res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
       res.setHeader('Pragma', 'no-cache');
       res.setHeader('Expires', '0');
+
+      console.log('🔍 === FINAL RESPONSE ===');
+      console.log('🔍 Response Version:', version);
+      console.log('🔍 Response Tasks:', appData?.tasks?.length || 0);
+      console.log('🔍 Response Data Type:', typeof appData);
+      console.log('🔍 First Task:', appData?.tasks?.[0]?.text || 'none');
+      console.log('🔍 First Timestamp:', appData?.tasks?.[0]?.timestamp || 'none');
+      console.log('🔍 === TASKS ENDPOINT DEBUG END ===');
 
       return res.json({
         success: true,
