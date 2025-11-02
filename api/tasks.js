@@ -59,6 +59,7 @@ export default async function handler(req, res) {
 
       for (const key of userKeys) {
         if (key.includes(':sessions')) continue; // Skip session lists
+        if (key.includes('dev@') || key.includes('.test')) continue; // Skip dev/test keys with production tokens
 
         const userData = await redis.hgetall(key);
         if (userData.access_token === accessToken && userData.status === 'active') {

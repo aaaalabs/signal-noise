@@ -8,7 +8,13 @@
 
 **Problem:** 1182 version gap between Redis reality and API response
 **Impact:** Data loss, sync failures, user frustration
-**Status:** ROOT CAUSE NOT YET IDENTIFIED despite 7+ attempted fixes
+**Status:** ✅ ROOT CAUSE IDENTIFIED AND FIXED
+
+**Root Cause:** Duplicate access_token in TWO Redis keys:
+- `sn:u:dev@signal-noise.test` (v11180, 275 tasks) ← Found FIRST
+- `sn:u:thomas.seiger@gmail.com` (v12362, 277 tasks) ← Correct but found SECOND
+
+**Solution:** Skip dev/test keys in production token validation loop
 
 ---
 
