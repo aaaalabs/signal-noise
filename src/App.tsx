@@ -68,6 +68,9 @@ function AppContent() {
     version: 0
   });
 
+  // CRITICAL FIX: Skip first sync after cloud load (data is fresh from server)
+  const skipNextSync = useRef(false);
+
   // Flag to prevent auto-sync during cloud data loading
   const [isLoadingFromCloud, setIsLoadingFromCloud] = useState(false);
   const [hasAttemptedCloudLoad, setHasAttemptedCloudLoad] = useState(false);
@@ -328,6 +331,12 @@ function AppContent() {
                     completed: task.completed !== undefined ? task.completed : (task.type === 'noise')
                   }));
                 }
+
+                // CRITICAL FIX: Skip the next auto-sync (data is fresh from server)
+                skipNextSync.current = true;
+                syncTracker.current.lastSyncTime = Date.now(); // Mark as just synced
+                syncTracker.current.lastDataSize = JSON.stringify(parsedData).length;
+                console.log('⏭️ Skipping next auto-sync - data fresh from cloud');
 
                 setData(parsedData);
 
@@ -692,6 +701,13 @@ function AppContent() {
       }
 
       syncDebounceTimer.current = setTimeout(() => {
+        // CRITICAL FIX: Skip sync if data was just loaded from cloud
+        if (skipNextSync.current) {
+          skipNextSync.current = false;
+          console.log('⏭️ SYNC SKIPPED - Data fresh from cloud (prevents version conflict)');
+          return;
+        }
+
         const currentTime = Date.now();
 
       const dataSize = JSON.stringify(data).length;
