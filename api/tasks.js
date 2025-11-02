@@ -106,6 +106,11 @@ export default async function handler(req, res) {
       const version = parseInt(user.version || '0');
       console.log('📦 Including version in response:', version);
 
+      // CRITICAL: Disable ALL caching for dynamic user data
+      res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+      res.setHeader('Pragma', 'no-cache');
+      res.setHeader('Expires', '0');
+
       return res.json({
         success: true,
         data: appData,
