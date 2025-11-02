@@ -87,6 +87,11 @@ function mergeTasks(localTasks: Task[], serverTasks: Task[], lastSyncTime: numbe
 function AppContent() {
   const t = useTranslation();
   const [data, setData] = useState<AppData>(initialData);
+
+  // FORCE NEW BUILD - Critical cache bust
+  useEffect(() => {
+    console.log('🚀 Build: 2025-11-02-10:30 - Cache fix deployed');
+  }, []);
   const [isLoaded, setIsLoaded] = useState(false);
   const [splashCompleted, setSplashCompleted] = useState(false);
   const [_localVersion, setLocalVersion] = useState(0);
