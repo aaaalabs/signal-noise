@@ -202,7 +202,34 @@ export default async function handler(req, res) {
 
       if (!appData.tasks) appData.tasks = [];
 
-      // Filter out the task
+      // SLC FIX: Find task and validate 30-minute deletion window
+      const taskToDelete = appData.tasks.find(task => task.id === parseInt(taskId));
+
+      if (!taskToDelete) {
+        return res.status(404).json({ error: 'Task not found' });
+      }
+
+      // 30-MINUTE DELETION WINDOW CHECK (Backend enforcement)
+      const taskDate = new Date(taskToDelete.timestamp);
+      const now = new Date();
+      const diffMinutes = Math.floor((now.getTime() - taskDate.getTime()) / 60000);
+
+      if (diffMinutes >= 30) {
+        console.log('⛔ Task deletion blocked - outside 30min window:', {
+          taskId: taskToDelete.id,
+          taskAge: diffMinutes,
+          lockWindow: 30
+        });
+
+        return res.status(403).json({
+          error: 'Task is locked - cannot delete after 30 minutes',
+          taskAge: diffMinutes,
+          lockWindow: 30,
+          taskText: taskToDelete.text
+        });
+      }
+
+      // Filter out the task (deletion allowed within 30 minutes)
       const originalLength = appData.tasks.length;
       appData.tasks = appData.tasks.filter(task => task.id !== parseInt(taskId));
 

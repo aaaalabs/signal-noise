@@ -53,6 +53,33 @@ const initialData: AppData = {
   signal_ratio: 0
 };
 
+/**
+ * Merge local and server tasks intelligently
+ * Strategy: Keep newest version of each task by timestamp
+ * Preserves tasks added recently (last 5 seconds) that haven't synced yet
+ */
+function mergeTasks(localTasks: Task[], serverTasks: Task[]): Task[] {
+  const taskMap = new Map<number, Task>();
+
+  // Add all server tasks first (baseline)
+  serverTasks.forEach(task => taskMap.set(task.id, task));
+
+  // Add/override with local tasks if they're newer (added in last 5 seconds)
+  const now = Date.now();
+  localTasks.forEach(task => {
+    const taskAge = now - new Date(task.timestamp).getTime();
+    const isVeryRecent = taskAge < 5000; // 5 seconds
+
+    if (isVeryRecent || !taskMap.has(task.id)) {
+      taskMap.set(task.id, task);
+      console.log('🔄 Keeping local task (recent):', task.text.substring(0, 30));
+    }
+  });
+
+  return Array.from(taskMap.values())
+    .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+}
+
 function AppContent() {
   const t = useTranslation();
   const [data, setData] = useState<AppData>(initialData);
@@ -65,7 +92,8 @@ function AppContent() {
     counter: 0,
     lastSyncTime: 0,
     lastDataSize: 0,
-    version: 0
+    version: 0,
+    lastDataChangeTime: 0  // NEW: Track when data last changed locally
   });
 
   // CRITICAL FIX: Skip first sync after cloud load (data is fresh from server)
@@ -340,9 +368,9 @@ function AppContent() {
 
                 setData(parsedData);
 
-                // SLC FIX: Delete localStorage for premium users (one source of truth = Redis)
-                localStorage.removeItem(DATA_KEY);
-                console.log('🗑️ Cleared localStorage - Redis is now the only source of truth');
+                // SLC PRINCIPLE: localStorage = Safety Net (ALWAYS backup, even for Premium)
+                localStorage.setItem(DATA_KEY, JSON.stringify(parsedData));
+                console.log('💾 localStorage backup created - safe even if Redis fails');
 
                 setIsLoaded(true);
                 setIsLoadingFromCloud(false); // CRITICAL: Re-enable auto-sync after cloud load success
@@ -526,6 +554,10 @@ function AppContent() {
     const payloadSize = JSON.stringify(appData).length;
     const payloadSizeKB = (payloadSize / 1024).toFixed(2);
 
+    // 🔐 CRITICAL: ALWAYS save to localStorage FIRST (instant safety net)
+    localStorage.setItem(DATA_KEY, JSON.stringify(appData));
+    console.log('💾 localStorage backup saved before cloud sync');
+
     console.log('🚀 CLOUD SYNC INITIATED', {
       timestamp: new Date().toISOString(),
       syncAttempt: syncTracker.current.counter,
@@ -625,23 +657,57 @@ function AppContent() {
           redisOperationSuccess: true
         });
       } else if (response.status === 409) {
-        // SLC FIX: Version conflict detected - server has newer data
+        // SLC FIX: Merge with server instead of destructive reload
         syncError();
         sessionStorage.removeItem('SYNC_IN_PROGRESS'); // Clear flag
 
         const conflictData = await response.json();
-        console.error('🚨 VERSION CONFLICT DETECTED', {
+        console.warn('⚠️ VERSION CONFLICT DETECTED - Merging with server data', {
           clientVersion: syncTracker.current.version,
           serverVersion: conflictData.serverVersion,
           versionDelta: conflictData.serverVersion - syncTracker.current.version,
           message: conflictData.error
         });
 
-        // Simple solution: Reload page to get latest data from server
-        console.log('🔄 Reloading page to sync with server version...');
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
+        try {
+          // Fetch latest from server
+          const freshResponse = await fetch('/api/tasks', {
+            headers: { 'Authorization': `Bearer ${sessionToken}` }
+          });
+
+          if (freshResponse.ok) {
+            const { data: serverData, version: serverVersion } = await freshResponse.json();
+            const parsedServerData = typeof serverData === 'string'
+              ? JSON.parse(serverData)
+              : serverData;
+
+            // Merge strategy: Server wins for version, but keep local unsaved changes
+            const mergedData = {
+              ...parsedServerData,
+              // Preserve any tasks added in last 5 seconds (not yet synced)
+              tasks: mergeTasks(appData.tasks, parsedServerData.tasks)
+            };
+
+            // Update state with merged data
+            setData(mergedData);
+            syncTracker.current.version = serverVersion;
+            setLocalVersion(serverVersion);
+
+            // Save merged result to localStorage
+            localStorage.setItem(DATA_KEY, JSON.stringify(mergedData));
+
+            console.log('✅ Conflict resolved via merge - no data lost', {
+              totalTasks: mergedData.tasks.length,
+              serverVersion: serverVersion
+            });
+          } else {
+            console.error('❌ Failed to fetch fresh data for merge');
+            // Keep local data safe in localStorage - better than losing it
+          }
+        } catch (mergeError) {
+          console.error('❌ Merge failed, keeping local data safe:', mergeError);
+          // Keep local data - better than losing it
+        }
       } else {
         // ❌ Error sync feedback animation
         syncError();
@@ -779,7 +845,7 @@ function AppContent() {
       } catch (e) {
         // Widget update not available in browser
       }
-      }, 2000); // SLC FIX: 2-second debounce
+      }, 500); // SLC FIX: 500ms debounce (fast sync, low data loss window)
     }
 
     // Cleanup: Clear timer on unmount
@@ -988,9 +1054,42 @@ function AppContent() {
                   syncMethod: isCloudNewer ? 'version' : 'timestamp'
                 });
 
-                // Update local data with cloud data
-                setData(cloudData);
-                syncTracker.current.version = cloudVersion;
+                // SLC FIX: Check for pending local changes before applying cloud data
+                const hasPendingChanges = syncTracker.current.lastDataChangeTime >
+                                         syncTracker.current.lastSyncTime;
+
+                if (hasPendingChanges) {
+                  console.log('⚠️ Merging cloud data with pending local changes', {
+                    lastLocalChange: new Date(syncTracker.current.lastDataChangeTime).toISOString(),
+                    lastSync: new Date(syncTracker.current.lastSyncTime).toISOString(),
+                    timeDiff: `${syncTracker.current.lastDataChangeTime - syncTracker.current.lastSyncTime}ms`
+                  });
+
+                  // Merge instead of overwrite
+                  const mergedData = {
+                    ...cloudData,
+                    tasks: mergeTasks(data.tasks, cloudData.tasks)
+                  };
+
+                  setData(mergedData);
+                  syncTracker.current.version = cloudVersion;
+
+                  // Save merged result to localStorage
+                  localStorage.setItem(DATA_KEY, JSON.stringify(mergedData));
+
+                  console.log('✅ Cloud merge complete', {
+                    totalTasks: mergedData.tasks.length,
+                    mergeStrategy: 'keep-recent-local-tasks'
+                  });
+                } else {
+                  // No local changes - safe to apply cloud data directly
+                  console.log('✅ No pending changes - applying cloud data directly');
+                  setData(cloudData);
+                  syncTracker.current.version = cloudVersion;
+
+                  // Save to localStorage
+                  localStorage.setItem(DATA_KEY, JSON.stringify(cloudData));
+                }
                 syncTracker.current.lastSyncTime = Date.now();
                 setLocalVersion(cloudVersion);
 
@@ -1457,6 +1556,9 @@ function AppContent() {
   };
 
   const addTask = (text: string, type: 'signal' | 'noise') => {
+    // Track local data change for multi-device conflict resolution
+    syncTracker.current.lastDataChangeTime = Date.now();
+
     const newTask: Task = {
       id: Date.now(),
       text: text.trim(),
@@ -1494,6 +1596,9 @@ function AppContent() {
   };
 
   const transferTask = (id: number) => {
+    // Track local data change for multi-device conflict resolution
+    syncTracker.current.lastDataChangeTime = Date.now();
+
     setData(prev => {
       const task = prev.tasks.find(t => t.id === id);
       if (!task) return prev;
@@ -1546,6 +1651,9 @@ function AppContent() {
   };
 
   const deleteTask = (id: number) => {
+    // Track local data change for multi-device conflict resolution
+    syncTracker.current.lastDataChangeTime = Date.now();
+
     setData(prev => {
       const newData = {
         ...prev,
