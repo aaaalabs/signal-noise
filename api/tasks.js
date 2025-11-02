@@ -85,7 +85,7 @@ export default async function handler(req, res) {
       appData = { tasks: [], history: [], badges: [], patterns: {}, settings: { targetRatio: 80, notifications: false } };
 
       // Initialize app_data for new user (skip for dev sessions)
-      if (!sessionToken.startsWith('dev-session-token-')) {
+      if (!accessToken.startsWith('dev-session-token-')) {
         await redis.hset(userKey, {
           app_data: JSON.stringify(appData),
           app_data_initialized: new Date().toISOString()
@@ -135,7 +135,7 @@ export default async function handler(req, res) {
       appData.tasks.unshift(newTask);
 
       // Update user data in Redis (skip for dev sessions)
-      if (!sessionToken.startsWith('dev-session-token-')) {
+      if (!accessToken.startsWith('dev-session-token-')) {
         await redis.hset(userKey, {
           app_data: JSON.stringify(appData),
           last_active: Date.now().toString()
@@ -175,7 +175,7 @@ export default async function handler(req, res) {
       };
 
       // Update user data in Redis (skip for dev sessions)
-      if (!sessionToken.startsWith('dev-session-token-')) {
+      if (!accessToken.startsWith('dev-session-token-')) {
         await redis.hset(userKey, {
           app_data: JSON.stringify(appData),
           last_active: Date.now().toString()
@@ -238,7 +238,7 @@ export default async function handler(req, res) {
       }
 
       // Update user data in Redis (skip for dev sessions)
-      if (!sessionToken.startsWith('dev-session-token-')) {
+      if (!accessToken.startsWith('dev-session-token-')) {
         await redis.hset(userKey, {
           app_data: JSON.stringify(appData),
           last_active: Date.now().toString()

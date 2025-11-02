@@ -55,24 +55,28 @@ const initialData: AppData = {
 
 /**
  * Merge local and server tasks intelligently
- * Strategy: Keep newest version of each task by timestamp
- * Preserves tasks added recently (last 5 seconds) that haven't synced yet
+ * Strategy: Keep tasks that haven't been synced yet (created after last successful sync)
+ * SLC FIX: Use lastSyncTime instead of 5-second window to prevent data loss
  */
-function mergeTasks(localTasks: Task[], serverTasks: Task[]): Task[] {
+function mergeTasks(localTasks: Task[], serverTasks: Task[], lastSyncTime: number): Task[] {
   const taskMap = new Map<number, Task>();
 
   // Add all server tasks first (baseline)
   serverTasks.forEach(task => taskMap.set(task.id, task));
 
-  // Add/override with local tasks if they're newer (added in last 5 seconds)
-  const now = Date.now();
+  // Add/override with local tasks if they were created after last successful sync
   localTasks.forEach(task => {
-    const taskAge = now - new Date(task.timestamp).getTime();
-    const isVeryRecent = taskAge < 5000; // 5 seconds
+    const taskTimestamp = new Date(task.timestamp).getTime();
+    const isUnsynced = taskTimestamp > lastSyncTime;
 
-    if (isVeryRecent || !taskMap.has(task.id)) {
+    if (isUnsynced || !taskMap.has(task.id)) {
       taskMap.set(task.id, task);
-      console.log('🔄 Keeping local task (recent):', task.text.substring(0, 30));
+      console.log('🔄 Keeping local task (unsynced):', {
+        text: task.text.substring(0, 30),
+        taskTime: new Date(taskTimestamp).toISOString(),
+        lastSync: new Date(lastSyncTime).toISOString(),
+        delta: `${((taskTimestamp - lastSyncTime) / 1000).toFixed(1)}s ago`
+      });
     }
   });
 
@@ -684,8 +688,8 @@ function AppContent() {
             // Merge strategy: Server wins for version, but keep local unsaved changes
             const mergedData = {
               ...parsedServerData,
-              // Preserve any tasks added in last 5 seconds (not yet synced)
-              tasks: mergeTasks(appData.tasks, parsedServerData.tasks)
+              // SLC FIX: Preserve tasks created after last successful sync
+              tasks: mergeTasks(appData.tasks, parsedServerData.tasks, syncTracker.current.lastSyncTime)
             };
 
             // CRITICAL FIX: Use ACTUAL server version from 409 response, not data version
@@ -1077,7 +1081,8 @@ function AppContent() {
                   // Merge instead of overwrite
                   const mergedData = {
                     ...cloudData,
-                    tasks: mergeTasks(data.tasks, cloudData.tasks)
+                    // SLC FIX: Preserve tasks created after last successful sync
+                    tasks: mergeTasks(data.tasks, cloudData.tasks, syncTracker.current.lastSyncTime)
                   };
 
                   setData(mergedData);
