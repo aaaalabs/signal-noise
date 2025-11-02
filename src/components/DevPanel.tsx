@@ -300,8 +300,9 @@ export default function DevPanel() {
         return;
       }
 
-      const { data: cloudData } = await response.json();
+      const { data: cloudData, version: serverVersion } = await response.json();
       console.log('✅ Current tasks:', cloudData.tasks.length);
+      console.log('📦 Server version:', serverVersion);
 
       // Get highest task ID
       const maxId = Math.max(...cloudData.tasks.map((t: any) => t.id), 0);
@@ -353,7 +354,7 @@ export default function DevPanel() {
       const updatedData = { ...cloudData, tasks: allTasks };
 
       // Upload to Redis
-      console.log('📤 Uploading to Redis...');
+      console.log('📤 Uploading to Redis with version:', serverVersion);
       const uploadResponse = await fetch('/api/sync', {
         method: 'POST',
         headers: {
@@ -364,7 +365,7 @@ export default function DevPanel() {
           email,
           data: updatedData,
           firstName: cloudData.settings?.firstName || '',
-          clientVersion: 0 // Force accept
+          clientVersion: serverVersion // SLC FIX: Use actual version (not force bypass)
         })
       });
 
