@@ -1,10 +1,5 @@
 import { Redis } from '@upstash/redis';
 
-const redis = new Redis({
-  url: process.env.KV_REST_API_URL,
-  token: process.env.KV_REST_API_TOKEN
-});
-
 // Helper function to calculate size of app_data (handles both object and string types)
 function getDataSize(appData) {
   if (!appData) return 0;
@@ -14,6 +9,12 @@ function getDataSize(appData) {
 }
 
 export default async function handler(req, res) {
+  // CRITICAL: Create FRESH Redis client for EVERY request
+  // Prevents Vercel Function Container from caching stale connections
+  const redis = new Redis({
+    url: process.env.KV_REST_API_URL,
+    token: process.env.KV_REST_API_TOKEN
+  });
   console.log('🔄 Sync endpoint called:', {
     method: req.method,
     timestamp: new Date().toISOString()
