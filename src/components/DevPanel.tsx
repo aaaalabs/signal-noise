@@ -143,32 +143,6 @@ export default function DevPanel() {
     window.location.reload();
   };
 
-  // Scenario 2: Reset to Clean State
-  const resetToClean = () => {
-    console.log('🧪 Resetting to clean state...');
-
-    const cleanState: AppData = {
-      tasks: [],
-      history: [],
-      badges: [],
-      patterns: {},
-      settings: {
-        targetRatio: 80,
-        notifications: false,
-        firstName: ''
-      },
-      signal_ratio: 0
-    };
-
-    localStorage.setItem(DATA_KEY, JSON.stringify(cleanState));
-    localStorage.removeItem('userFirstName');
-    localStorage.removeItem('dev_verbose_ai_logging');
-    localStorage.removeItem('sessionData'); // Clear premium simulation
-
-    console.log('✅ Reset complete. Reloading app...');
-    window.location.reload();
-  };
-
   // Custom JSON Injection
   const [showJsonInput, setShowJsonInput] = useState(false);
   const [jsonInput, setJsonInput] = useState('');
@@ -446,37 +420,6 @@ export default function DevPanel() {
               </div>
               <div style={{ fontSize: '11px', color: '#666' }}>
                 Commitment Mode + unfinished tasks
-              </div>
-            </button>
-
-            <button
-              onClick={resetToClean}
-              style={{
-                backgroundColor: '#111',
-                color: '#fff',
-                border: '1px solid #333',
-                padding: '12px',
-                borderRadius: '6px',
-                fontSize: '13px',
-                fontWeight: '300',
-                cursor: 'pointer',
-                textAlign: 'left',
-                transition: 'all 0.2s ease'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#1a1a1a';
-                e.currentTarget.style.borderColor = '#444';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = '#111';
-                e.currentTarget.style.borderColor = '#333';
-              }}
-            >
-              <div style={{ fontWeight: '500', marginBottom: '4px' }}>
-                🔄 Reset to Clean
-              </div>
-              <div style={{ fontSize: '11px', color: '#666' }}>
-                Factory defaults
               </div>
             </button>
 
