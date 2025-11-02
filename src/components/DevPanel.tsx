@@ -387,6 +387,131 @@ export default function DevPanel() {
     }
   };
 
+  // Custom JSON Injection
+  const [showJsonInput, setShowJsonInput] = useState(false);
+  const [jsonInput, setJsonInput] = useState('');
+
+  const injectCustomJsonTasks = async () => {
+    console.log('🚀 Injecting custom JSON tasks...');
+
+    if (!isPremium) {
+      console.log('❌ This function requires Premium access');
+      alert('This function requires Premium access');
+      return;
+    }
+
+    try {
+      // Parse JSON input
+      const customTasks = JSON.parse(jsonInput);
+
+      if (!Array.isArray(customTasks)) {
+        alert('JSON must be an array of tasks');
+        return;
+      }
+
+      console.log('✅ Parsed', customTasks.length, 'tasks from JSON');
+
+      // Get session token
+      const sessionData = JSON.parse(localStorage.getItem('sessionData') || '{}');
+      const sessionToken = sessionData.sessionToken;
+      const email = sessionData.email;
+
+      if (!sessionToken || !email) {
+        console.error('❌ No session found');
+        alert('No session found. Please log in.');
+        return;
+      }
+
+      // Fetch current data from Redis
+      console.log('📥 Fetching current data from Redis...');
+      const response = await fetch('/api/tasks', {
+        headers: { 'Authorization': `Bearer ${sessionToken}` }
+      });
+
+      if (!response.ok) {
+        console.error('❌ Failed to fetch:', response.status);
+        alert('Failed to fetch current data');
+        return;
+      }
+
+      const { data: cloudData, version: serverVersion } = await response.json();
+      console.log('✅ Current tasks:', cloudData.tasks.length);
+      console.log('📦 Server version:', serverVersion);
+
+      // Get highest task ID
+      const maxId = Math.max(...cloudData.tasks.map((t: any) => t.id), 0);
+
+      // Create task objects with validation
+      const newTasks = customTasks.map((task: any, i: number) => {
+        if (!task.date || !task.text) {
+          throw new Error('Each task must have "date" and "text" fields');
+        }
+
+        return {
+          id: maxId + i + 1,
+          text: task.text,
+          type: task.type || 'signal',
+          completed: task.completed !== undefined ? task.completed : true,
+          timestamp: task.date,
+          important: task.important || false
+        };
+      });
+
+      // Log tasks
+      console.log('📦 Creating', newTasks.length, 'tasks:\n');
+      newTasks.forEach(t => {
+        console.log(`  ${t.completed ? '✅' : '⏳'} [${t.timestamp.slice(0, 10)}] ${t.text} (${t.type})`);
+      });
+
+      // Merge and sort
+      const allTasks = [...cloudData.tasks, ...newTasks];
+      allTasks.sort((a, b) => {
+        const dateA = new Date(a.timestamp);
+        const dateB = new Date(b.timestamp);
+        return dateB.getTime() - dateA.getTime();
+      });
+
+      console.log('\n📊 Total:', allTasks.length, '(was', cloudData.tasks.length, ')');
+
+      // Update data
+      const updatedData = { ...cloudData, tasks: allTasks };
+
+      // Upload to Redis
+      console.log('📤 Uploading to Redis with version:', serverVersion);
+      const uploadResponse = await fetch('/api/sync', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${sessionToken}`
+        },
+        body: JSON.stringify({
+          email,
+          data: updatedData,
+          firstName: cloudData.settings?.firstName || '',
+          clientVersion: serverVersion
+        })
+      });
+
+      if (uploadResponse.ok) {
+        console.log('✅ SUCCESS! Reloading in 2 seconds...');
+        alert(`Success! Added ${newTasks.length} tasks. Page will reload.`);
+        setJsonInput('');
+        setShowJsonInput(false);
+        setTimeout(() => window.location.reload(), 2000);
+      } else if (uploadResponse.status === 409) {
+        console.log('⚠️ Version conflict - reloading...');
+        alert('Version conflict detected. Reloading...');
+        setTimeout(() => window.location.reload(), 1000);
+      } else {
+        console.error('❌ Upload failed:', uploadResponse.status);
+        alert('Upload failed: ' + uploadResponse.status);
+      }
+    } catch (error) {
+      console.error('❌ Error:', error);
+      alert('Error: ' + (error instanceof Error ? error.message : 'Unknown'));
+    }
+  };
+
   // Export current state
   const exportCurrentState = () => {
     const data = localStorage.getItem(DATA_KEY);
@@ -637,6 +762,132 @@ export default function DevPanel() {
                   Oct 25-27 (12 completed signals)
                 </div>
               </button>
+            )}
+
+            {/* Custom JSON Injection */}
+            {isPremium && (
+              <>
+                <button
+                  onClick={() => setShowJsonInput(!showJsonInput)}
+                  style={{
+                    backgroundColor: '#111',
+                    color: '#ff8800',
+                    border: '1px solid #ff8800',
+                    padding: '12px',
+                    borderRadius: '6px',
+                    fontSize: '13px',
+                    fontWeight: '300',
+                    cursor: 'pointer',
+                    textAlign: 'left',
+                    transition: 'all 0.2s ease',
+                    marginTop: '8px'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = '#1a1a1a';
+                    e.currentTarget.style.borderColor = '#ffaa00';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = '#111';
+                    e.currentTarget.style.borderColor = '#ff8800';
+                  }}
+                >
+                  <div style={{ fontWeight: '500', marginBottom: '4px' }}>
+                    📝 Custom JSON Inject
+                  </div>
+                  <div style={{ fontSize: '11px', color: '#666' }}>
+                    {showJsonInput ? 'Hide input' : 'Paste JSON array of tasks'}
+                  </div>
+                </button>
+
+                {showJsonInput && (
+                  <div style={{ marginTop: '8px' }}>
+                    <textarea
+                      value={jsonInput}
+                      onChange={(e) => setJsonInput(e.target.value)}
+                      placeholder='[
+  {"date": "2025-10-28T10:00:00Z", "text": "Task 1", "type": "signal", "completed": true},
+  {"date": "2025-10-29T14:00:00Z", "text": "Task 2", "type": "signal", "completed": true}
+]'
+                      style={{
+                        width: '100%',
+                        height: '200px',
+                        backgroundColor: '#0a0a0a',
+                        border: '1px solid #333',
+                        borderRadius: '6px',
+                        padding: '8px',
+                        fontSize: '11px',
+                        fontFamily: 'monospace',
+                        color: '#fff',
+                        resize: 'vertical'
+                      }}
+                    />
+                    <div style={{
+                      display: 'flex',
+                      gap: '8px',
+                      marginTop: '8px'
+                    }}>
+                      <button
+                        onClick={injectCustomJsonTasks}
+                        style={{
+                          flex: 1,
+                          backgroundColor: '#ff8800',
+                          color: '#000',
+                          border: 'none',
+                          padding: '10px',
+                          borderRadius: '6px',
+                          fontSize: '12px',
+                          fontWeight: '500',
+                          cursor: 'pointer',
+                          transition: 'all 0.2s ease'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = '#ffaa00';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = '#ff8800';
+                        }}
+                      >
+                        🚀 Inject Tasks
+                      </button>
+                      <button
+                        onClick={() => {
+                          setJsonInput('');
+                          setShowJsonInput(false);
+                        }}
+                        style={{
+                          flex: 0,
+                          backgroundColor: 'transparent',
+                          color: '#666',
+                          border: '1px solid #333',
+                          padding: '10px 16px',
+                          borderRadius: '6px',
+                          fontSize: '12px',
+                          fontWeight: '300',
+                          cursor: 'pointer',
+                          transition: 'all 0.2s ease'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.borderColor = '#444';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.borderColor = '#333';
+                        }}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                    <div style={{
+                      marginTop: '8px',
+                      fontSize: '10px',
+                      color: '#444',
+                      lineHeight: '1.4'
+                    }}>
+                      Required: <span style={{ color: '#666' }}>date, text</span><br/>
+                      Optional: <span style={{ color: '#666' }}>type (signal/noise), completed (true/false)</span>
+                    </div>
+                  </div>
+                )}
+              </>
             )}
 
             {/* Export State */}

@@ -1,0 +1,32 @@
+[
+  {
+    "date": "2025-10-28T10:00:00Z",
+    "text": "Task from Oct 28",
+    "type": "signal",
+    "completed": true
+  },
+  {
+    "date": "2025-10-29T14:00:00Z",
+    "text": "Task from Oct 29",
+    "type": "signal",
+    "completed": true
+  },
+  {
+    "date": "2025-10-30T09:00:00Z",
+    "text": "Task from Oct 30",
+    "type": "signal",
+    "completed": true
+  },
+  {
+    "date": "2025-10-31T16:00:00Z",
+    "text": "Task from Oct 31",
+    "type": "signal",
+    "completed": true
+  },
+  {
+    "date": "2025-11-01T11:00:00Z",
+    "text": "Task from Nov 1",
+    "type": "signal",
+    "completed": true
+  }
+]
