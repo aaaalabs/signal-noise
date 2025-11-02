@@ -2032,6 +2032,7 @@ function AppRoutes() {
           <Route path="/*" element={<AppContent />} />
         </Routes>
         <VercelAnalytics />
+        <DevPanel />
       </LanguageProvider>
     </div>
   );
