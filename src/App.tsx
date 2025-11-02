@@ -688,17 +688,26 @@ function AppContent() {
               tasks: mergeTasks(appData.tasks, parsedServerData.tasks)
             };
 
+            // CRITICAL FIX: Use ACTUAL server version from 409 response, not data version
+            const actualServerVersion = conflictData.serverVersion;
+
             // Update state with merged data
             setData(mergedData);
-            syncTracker.current.version = serverVersion;
-            setLocalVersion(serverVersion);
+            syncTracker.current.version = actualServerVersion; // FIXED: Use 409 response version
+            setLocalVersion(actualServerVersion);
+            syncTracker.current.lastSyncTime = Date.now(); // Mark as just synced
+
+            // CRITICAL: Skip next auto-sync (data is fresh after merge)
+            skipNextSync.current = true;
 
             // Save merged result to localStorage
             localStorage.setItem(DATA_KEY, JSON.stringify(mergedData));
 
             console.log('✅ Conflict resolved via merge - no data lost', {
               totalTasks: mergedData.tasks.length,
-              serverVersion: serverVersion
+              dataVersion: serverVersion,
+              actualServerVersion: actualServerVersion,
+              skipNextSync: true
             });
           } else {
             console.error('❌ Failed to fetch fresh data for merge');
