@@ -307,7 +307,7 @@ export default function DevPanel() {
       // Get highest task ID
       const maxId = Math.max(...cloudData.tasks.map((t: any) => t.id), 0);
 
-      // Define missing tasks
+      // Define missing tasks (Oct 25-27, 2025)
       const missingTasks = [
         {date: '2025-10-25T10:00:00Z', text: 'Förderunterlagen finalisiert'},
         {date: '2025-10-25T14:00:00Z', text: 'WG-Anzeige ausarbeiten'},
