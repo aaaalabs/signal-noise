@@ -31,6 +31,7 @@ import AboutModal from './components/AboutModal';
 import PrivacyModal from './components/PrivacyModal';
 import Demo from './components/Demo';
 import DevPanel from './components/DevPanel';
+import WeeklyInsight from './components/WeeklyInsight';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { checkAchievements, getTodayRatio } from './utils/achievements';
 import { handleStripeReturn, getSessionData, type SessionData } from './services/premiumService';
@@ -1962,6 +1963,30 @@ function AppContent() {
           onTransfer={transferTask}
           onDelete={deleteTask}
           onToggleComplete={toggleTaskCompletion}
+        />
+
+        {/* Weekly Insight - Premium feature */}
+        <WeeklyInsight
+          email={getSessionData()?.email || null}
+          sessionToken={sessionToken}
+          isPremium={isPremiumMode}
+          onAddTask={(taskText) => {
+            // Add as signal task
+            const newTask: Task = {
+              id: Date.now(),
+              text: taskText,
+              type: 'signal',
+              timestamp: new Date().toISOString(),
+              completed: false
+            };
+            const updatedData = { ...data, tasks: [newTask, ...data.tasks] };
+            setData(updatedData);
+
+            // CRITICAL: Sync to cloud immediately (don't lose Quick Win task!)
+            if (isPremiumMode && sessionToken) {
+              saveToCloud(updatedData);
+            }
+          }}
         />
 
         {/* AI Coach */}
