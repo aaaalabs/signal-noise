@@ -62,7 +62,8 @@ async function testDirectRestAPI() {
     console.log('   API /api/tasks returns: v11180, 275 tasks');
     console.log('');
 
-    if (hash.version === '12362') {
+    // removed hard coded hash version
+    if (hash.version === process.env.HASH_VERSION) {
       console.log('✅ REST API returns FRESH data - SDK might be caching!');
     } else {
       console.log('❌ REST API also returns stale data - problem is in Redis itself');
