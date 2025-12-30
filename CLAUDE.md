@@ -29,6 +29,67 @@ Signal/Noise is a minimalistic React-based productivity application implementing
 - **Modal-First**: All interactions stay within app context (no page redirects)
 - **Font Hierarchy**: font-weight: 100 for numbers, 300 for text, 500 for CTAs
 
+## Waitlist Mode (Beta Testing Phase)
+
+### Overview
+Signal/Noise supports a **Waitlist Mode** that replaces the payment system with a beta tester waitlist. This allows collecting interested users before full launch while using the SAME UI components.
+
+### Activation
+Set environment variable:
+```bash
+# .env (local)
+VITE_WAITLIST_MODE=true
+
+# Vercel (production)
+Add VITE_WAITLIST_MODE=true in environment variables
+```
+
+### What Changes in Waitlist Mode
+
+#### FoundationModal.tsx Transformations
+- **Title**: "Join 15 Beta Testers" instead of premium tagline
+- **Price**: "Free Beta" instead of "€29"
+- **Features**: Beta benefits instead of premium features
+- **Button**: "Join Beta Waitlist" instead of "Get Premium Access"
+- **Success**: "You're on the list! #X of 15" instead of payment confirmation
+
+#### Hidden Elements
+- Foundation member counter (X of 100)
+- Promo code input field
+- Foundation pricing timeline
+- All payment-related UI elements
+
+#### API Changes
+- `/api/waitlist-join` endpoint handles signups instead of Stripe
+- Stores in Redis with `wl:` prefix (waitlist namespace)
+- Tracks position (1-15 beta testers)
+- No payment processing
+
+### Redis Keys for Waitlist
+```
+wl:count          → Current number of signups
+wl:u:{email}      → Individual waitlist user data
+wl:full           → Set to 'true' when limit (15) reached
+```
+
+### Reverting to Payment Mode
+Simply set `VITE_WAITLIST_MODE=false` or remove the variable. All original payment functionality returns immediately.
+
+### Implementation Details
+The implementation uses **conditional rendering** based on `import.meta.env.VITE_WAITLIST_MODE`:
+```javascript
+// Example from FoundationModal.tsx
+{import.meta.env.VITE_WAITLIST_MODE === 'true'
+  ? 'Join Beta Waitlist'
+  : t.continuePurchase}
+```
+
+This approach ensures:
+- No new components needed
+- Instant rollback capability
+- Same user flow, different backend
+- Clean separation of concerns
+
 ## Core Components
 
 ### Data Structure (`src/types.ts`)
@@ -72,19 +133,28 @@ interface AppData {
 
 ## API Endpoints
 
-### `/api/create-checkout.js`
+### `/api/waitlist-join.js` (Waitlist Mode)
+- Handles beta waitlist signups when `VITE_WAITLIST_MODE=true`
+- Stores email and position in Redis (`wl:` namespace)
+- Limits to 15 beta testers
+- Returns position in queue
+
+### `/api/create-checkout.js` (Payment Mode)
 - Creates Stripe checkout sessions
 - Handles Foundation vs Early Adopter pricing logic
 - Checks Foundation member availability in Redis
+- Disabled in waitlist mode
 
-### `/api/stripe-webhook.js`
+### `/api/stripe-webhook.js` (Payment Mode)
 - Processes Stripe payment confirmations
 - Increments Foundation member counter
 - Stores user tier data in Redis
+- Not used in waitlist mode
 
 ### `/api/foundation-stats.js`
 - Returns current Foundation member count
 - Used for "X of 100 Foundation members" display
+- Data hidden in waitlist mode
 
 ## Development Workflow
 
@@ -124,7 +194,8 @@ npm run test:all         # Run Redis + Stripe tests
 ### Environment Variables
 ```bash
 VITE_GROQ_API_KEY=       # Groq AI API key
-STRIPE_SECRET_KEY=       # Stripe payments
+VITE_WAITLIST_MODE=      # 'true' to enable beta waitlist mode (optional)
+STRIPE_SECRET_KEY=       # Stripe payments (not used in waitlist mode)
 UPSTASH_REDIS_URL=       # Redis database
 UPSTASH_REDIS_TOKEN=     # Redis authentication
 ```

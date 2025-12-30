@@ -305,7 +305,7 @@ export default function Footer({ onFoundationClick }: { onFoundationClick?: () =
             </button>
           </div>
 
-          {/* Foundation Member - Only show when not logged in */}
+          {/* Foundation Member / Beta Tester - Only show when not logged in */}
           {!isPremium && (
             <div
               style={{
@@ -318,7 +318,7 @@ export default function Footer({ onFoundationClick }: { onFoundationClick?: () =
               onMouseEnter={(e) => onFoundationClick && (e.currentTarget.style.color = '#888')}
               onMouseLeave={(e) => onFoundationClick && (e.currentTarget.style.color = '#555')}
             >
-              Foundation Member
+              {import.meta.env.VITE_WAITLIST_MODE === 'true' ? 'Join Beta' : 'Foundation Member'}
             </div>
           )}
         </div>

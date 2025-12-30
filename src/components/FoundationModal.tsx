@@ -219,6 +219,47 @@ export default function FoundationModal({ show, onClose, startInLoginMode = fals
 
     setLoading(true);
 
+    // Check if in waitlist mode
+    const isWaitlistMode = import.meta.env.VITE_WAITLIST_MODE === 'true';
+
+    if (isWaitlistMode) {
+      // Waitlist mode: Join beta list
+      try {
+        const response = await fetch('/api/waitlist-join', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: email.trim(),
+            firstName: firstName.trim() || ''
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        // Show success state
+        setMagicLinkSent(true);
+        setLoading(false);
+
+        // Store position for display
+        if (data.position) {
+          localStorage.setItem('waitlistPosition', data.position.toString());
+        }
+
+      } catch (error) {
+        console.error('Waitlist join error:', error);
+        setLoading(false);
+        alert('Failed to join waitlist. Please try again.');
+      }
+      return;
+    }
+
+    // Original payment flow
     try {
       const response = await fetch('/api/create-checkout', {
         method: 'POST',
@@ -302,7 +343,7 @@ export default function FoundationModal({ show, onClose, startInLoginMode = fals
             marginBottom: '32px',
             letterSpacing: '1px'
           }}>
-            Check Your Email
+            {import.meta.env.VITE_WAITLIST_MODE === 'true' ? `You're on the list!` : 'Check Your Email'}
           </div>
 
           {/* User's email confirmation */}
@@ -326,8 +367,17 @@ export default function FoundationModal({ show, onClose, startInLoginMode = fals
             lineHeight: '1.5',
             marginBottom: '32px'
           }}>
-            We sent your premium access link.<br/>
-            Click it to activate your Signal/Noise cloud account.
+            {import.meta.env.VITE_WAITLIST_MODE === 'true' ? (
+              <>
+                You're #{localStorage.getItem('waitlistPosition') || '?'} of 15 beta testers.<br/>
+                We'll reach out when beta testing begins.
+              </>
+            ) : (
+              <>
+                We sent your premium access link.<br/>
+                Click it to activate your Signal/Noise cloud account.
+              </>
+            )}
           </div>
 
           {/* Clean close */}
@@ -437,27 +487,43 @@ export default function FoundationModal({ show, onClose, startInLoginMode = fals
                 fontWeight: 300
               }}
             >
-              {t.foundationTagline}
+              {import.meta.env.VITE_WAITLIST_MODE === 'true' ? 'Join 15 Beta Testers' : t.foundationTagline}
             </div>
           )}
         </div>
 
-        {/* Features - Only show in purchase mode */}
+        {/* Features / Beta Benefits - Only show in purchase mode */}
         {!isLoginMode && (
           <div style={{ marginBottom: '32px' }}>
-            <div style={{ fontSize: '14px', color: '#ccc', fontWeight: 300, marginBottom: '8px' }}>
-              {t.foundationFeature1}
-            </div>
-            <div style={{ fontSize: '14px', color: '#ccc', fontWeight: 300, marginBottom: '8px' }}>
-              {t.foundationFeature2}
-            </div>
-            <div style={{ fontSize: '14px', color: '#ccc', fontWeight: 300 }}>
-              {t.foundationFeature3}
-            </div>
+            {import.meta.env.VITE_WAITLIST_MODE === 'true' ? (
+              <>
+                <div style={{ fontSize: '14px', color: '#ccc', fontWeight: 300, marginBottom: '8px' }}>
+                  ✓ Shape the future of Signal/Noise
+                </div>
+                <div style={{ fontSize: '14px', color: '#ccc', fontWeight: 300, marginBottom: '8px' }}>
+                  ✓ Free lifetime access after beta
+                </div>
+                <div style={{ fontSize: '14px', color: '#ccc', fontWeight: 300 }}>
+                  ✓ Direct feedback channel with founders
+                </div>
+              </>
+            ) : (
+              <>
+                <div style={{ fontSize: '14px', color: '#ccc', fontWeight: 300, marginBottom: '8px' }}>
+                  {t.foundationFeature1}
+                </div>
+                <div style={{ fontSize: '14px', color: '#ccc', fontWeight: 300, marginBottom: '8px' }}>
+                  {t.foundationFeature2}
+                </div>
+                <div style={{ fontSize: '14px', color: '#ccc', fontWeight: 300 }}>
+                  {t.foundationFeature3}
+                </div>
+              </>
+            )}
           </div>
         )}
 
-        {/* Pricing - Only show in purchase mode */}
+        {/* Pricing / Waitlist Counter - Only show in purchase mode */}
         {!isLoginMode && (
           <div style={{ marginBottom: '32px' }}>
             <div
@@ -468,7 +534,7 @@ export default function FoundationModal({ show, onClose, startInLoginMode = fals
                 marginBottom: '4px'
               }}
             >
-              €{stats.currentPrice}
+              {import.meta.env.VITE_WAITLIST_MODE === 'true' ? 'Free Beta' : `€${stats.currentPrice}`}
             </div>
             <div
               style={{
@@ -566,8 +632,8 @@ export default function FoundationModal({ show, onClose, startInLoginMode = fals
             />
           )}
 
-          {/* Promo Code Section - only show in purchase mode for new users */}
-          {!isLoginMode && (!userStatus?.exists || !userStatus.isActive) && !magicLinkSent && (
+          {/* Promo Code Section - only show in purchase mode for new users (not in waitlist mode) */}
+          {!isLoginMode && import.meta.env.VITE_WAITLIST_MODE !== 'true' && (!userStatus?.exists || !userStatus.isActive) && !magicLinkSent && (
             <div style={{ marginBottom: '16px' }}>
               <input
                 type="text"
@@ -708,12 +774,12 @@ export default function FoundationModal({ show, onClose, startInLoginMode = fals
               marginBottom: '20px'
             }}
           >
-            {loading ? t.processing : isLoginMode ? t.accessAccount : t.continuePurchase}
+            {loading ? t.processing : isLoginMode ? t.accessAccount : (import.meta.env.VITE_WAITLIST_MODE === 'true' ? 'Join Beta Waitlist' : t.continuePurchase)}
           </button>
         )}
 
-        {/* Foundation Counter - Only show in purchase mode */}
-        {!isLoginMode && (
+        {/* Foundation Counter / Beta Counter - Only show in purchase mode */}
+        {!isLoginMode && import.meta.env.VITE_WAITLIST_MODE !== 'true' && (
           <div style={{ fontSize: '11px', color: '#555', fontWeight: 300 }}>
             {stats.isAvailable ? (
               <div>
@@ -744,15 +810,15 @@ export default function FoundationModal({ show, onClose, startInLoginMode = fals
           </div>
         )}
 
-        {/* Timeline info - Only show in purchase mode */}
-        {!isLoginMode && stats.isAvailable && (
+        {/* Timeline info - Only show in purchase mode (not in waitlist mode) */}
+        {!isLoginMode && import.meta.env.VITE_WAITLIST_MODE !== 'true' && stats.isAvailable && (
           <div style={{ fontSize: '10px', color: '#444', fontWeight: 300, marginTop: '12px' }}>
             {t.foundationTimeline}
           </div>
         )}
 
-        {/* Foundation Member identifier - Only show in login mode */}
-        {isLoginMode && (
+        {/* Foundation Member / Beta identifier - Only show in login mode */}
+        {isLoginMode && import.meta.env.VITE_WAITLIST_MODE !== 'true' && (
           <div style={{
             fontSize: '11px',
             color: '#555',
