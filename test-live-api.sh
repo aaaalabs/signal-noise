@@ -4,7 +4,7 @@ echo "🧪 Testing LIVE /api/tasks endpoint..."
 echo ""
 
 # Get token from sessionData
-TOKEN="snk_c4748043431db571b9da61338152fdd56edbcc7ebddce23c550617"
+TOKEN="<your token here>" # removed hard coded token from here for better security measure
 
 echo "📡 Calling https://signal-noise.app/api/tasks"
 echo ""
